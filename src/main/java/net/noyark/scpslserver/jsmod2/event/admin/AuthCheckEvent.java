@@ -1,6 +1,6 @@
 package net.noyark.scpslserver.jsmod2.event.admin;
 
-import net.noyark.scpslserver.jsmod2.entity.AuthType;
+import net.noyark.scpslserver.jsmod2.utils.AuthType;
 import net.noyark.scpslserver.jsmod2.entity.Player;
 import net.noyark.scpslserver.jsmod2.event.Event;
 

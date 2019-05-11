@@ -1,4 +1,4 @@
-package net.noyark.scpslserver.jsmod2.entity;
+package net.noyark.scpslserver.jsmod2.utils;
 
 public enum AuthType {
 
