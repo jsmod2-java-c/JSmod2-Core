@@ -2,6 +2,7 @@ package net.noyark.scpslserver.jsmod2;
 
 import net.noyark.scpslserver.jsmod2.inferf.log.ILogger;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.*;
 import java.util.Properties;
@@ -34,7 +35,8 @@ public class Server {
     private static CommandConsoleSender sender;
 
     public static final int MAX_LENGTH = 65535;
-    
+
+    public String serverfolder;
 
     Server(ILogger log, Properties lang) {
 
@@ -48,7 +50,7 @@ public class Server {
 
         pool.execute(new ListenerThread());
 
-
+        serverfolder = new File(System.getProperty("user.dir")).getParent();
     }
 
     public static CommandConsoleSender getSender(){
@@ -61,6 +63,34 @@ public class Server {
         DatagramSocket socket = new DatagramSocket(port);
 
         return socket;
+    }
+
+    public static void setScanner(Scanner scanner) {
+        Server.scanner = scanner;
+    }
+
+    public ILogger getLogger() {
+        return log;
+    }
+
+
+    public Properties getLang() {
+        return lang;
+    }
+
+
+
+    public Server getServer() {
+        return server;
+    }
+
+
+    public String getServerfolder() {
+        return serverfolder;
+    }
+
+    public void setServerfolder(String serverfolder) {
+        this.serverfolder = serverfolder;
     }
 
     public void close(){
