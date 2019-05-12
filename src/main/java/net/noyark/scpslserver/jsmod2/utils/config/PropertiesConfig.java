@@ -13,17 +13,19 @@ public class PropertiesConfig implements Config{
 
     private OutputStream out;
 
+    private String fileName;
+
     public PropertiesConfig(String fileName,boolean getClass) {
         try{
             if(getClass){
-                in = Utils.getClassStream(fileName);
                 out = new FileOutputStream(Utils.getClassFileName(fileName));
+                this.fileName = Utils.getClassFileName(fileName);
             }else{
-                in = new FileInputStream(fileName);
                 out = new FileOutputStream(fileName);
+                this.fileName = fileName;
             }
             properties = new Properties();
-            properties.load(in);
+
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -37,6 +39,8 @@ public class PropertiesConfig implements Config{
 
     @Override
     public Object get(String key) throws IOException {
+        in = new FileInputStream(fileName);
+        properties.load(in);
         return properties.get(key);
     }
 
