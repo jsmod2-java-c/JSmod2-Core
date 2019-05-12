@@ -37,7 +37,8 @@ public class Jsmod2 {
     public static void main(String[]args){
         try{
             //lang properties
-            Properties langProperties = FileSystem.LangProperties(log);
+            Properties langProperties = FileSystem.getFileSystem().langProperties(log);
+            //plugin dir
             long start = System.currentTimeMillis();
             for(String info:startInfo){
                 log.info(langProperties.getProperty(info));

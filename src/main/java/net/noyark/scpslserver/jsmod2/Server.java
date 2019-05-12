@@ -2,13 +2,13 @@ package net.noyark.scpslserver.jsmod2;
 
 import net.noyark.scpslserver.jsmod2.inferf.log.ILogger;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.*;
-import java.util.Properties;
-import java.util.Scanner;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import static net.noyark.scpslserver.jsmod2.FileSystem.getFileSystem;
 
 /**
  * jsmod2 server class
@@ -18,9 +18,17 @@ import java.util.concurrent.Executors;
  */
 
 public class Server {
+
+
+    static {
+        commandInfo = new HashMap<>();
+        registerCommand();
+    }
     // 开辟线程
     // 监听线程 和 一个输入线程
     // 输入线程负责输入命令等
+
+    public static final String PROP = "prop:";
 
     private static Scanner scanner = new Scanner(System.in);
 
@@ -34,9 +42,17 @@ public class Server {
 
     private static CommandConsoleSender sender;
 
+    private static Map<String,String> commandInfo;
+
     public static final int MAX_LENGTH = 65535;
 
-    public String serverfolder;
+    public final File serverfolder;
+
+
+    public Properties serverProp;
+
+    public File pluginDir;
+
 
     Server(ILogger log, Properties lang) {
 
@@ -46,54 +62,25 @@ public class Server {
 
         this.server = this;
 
+        this.serverfolder = new File(System.getProperty("user.dir")).getParentFile();
+
+        //创建plugin文件夹
+        this.pluginDir = getFileSystem().pluginDir(server);
+
+        this.serverProp = getFileSystem().serverProperties(server);
+
         sender = new CommandConsoleSender(server);
 
-        pool.execute(new ListenerThread());
-
-        serverfolder = new File(System.getProperty("user.dir")).getParent();
+        start();
     }
 
-    public static CommandConsoleSender getSender(){
-        return sender;
+    public void start(){
+        this.pool.execute(new ListenerThread());
     }
 
-    //监听Smod2转发端接口
-    public DatagramSocket getSocket(int port) throws SocketException {
-
-        DatagramSocket socket = new DatagramSocket(port);
-
-        return socket;
-    }
-
-    public static void setScanner(Scanner scanner) {
-        Server.scanner = scanner;
-    }
-
-    public ILogger getLogger() {
-        return log;
-    }
-
-
-    public Properties getLang() {
-        return lang;
-    }
-
-
-
-    public Server getServer() {
-        return server;
-    }
-
-
-    public String getServerfolder() {
-        return serverfolder;
-    }
-
-    public void setServerfolder(String serverfolder) {
-        this.serverfolder = serverfolder;
-    }
 
     public void close(){
+        closeStream();
         log.info(lang.getProperty("end.finish"));
         System.exit(0);
     }
@@ -102,6 +89,28 @@ public class Server {
         return scanner;
     }
 
+    private void closeStream(){
+        try{
+            List<InputStream> oStreams = FileSystem.getFileSystem().getInputStreams();
+            for(InputStream stream : oStreams){
+                stream.close();
+            }
+            List<OutputStream> iStreams = FileSystem.getFileSystem().getOutputStreams();
+            for(OutputStream stream : iStreams){
+                stream.close();
+            }
+            List<BufferedReader> readers = FileSystem.getFileSystem().getReaders();
+            for(BufferedReader reader:readers){
+                reader.close();
+            }
+            List<PrintWriter> writers = FileSystem.getFileSystem().getWriters();
+            for(PrintWriter writer:writers){
+                writer.close();
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 
     /**
      * 服务器监听线程启动
@@ -110,7 +119,7 @@ public class Server {
         @Override
         public void run() {
             try{
-                DatagramSocket socket = getSocket(19935);
+                DatagramSocket socket = getSocket(Integer.parseInt(serverProp.getProperty("port")));
 
                 while (true) {
 
@@ -135,5 +144,56 @@ public class Server {
                 e.printStackTrace();
             }
         }
+    }
+    public ILogger getLogger() {
+        return log;
+    }
+
+
+    public Properties getLang() {
+        return lang;
+    }
+
+
+    public Server getServer() {
+        return server;
+    }
+
+    public File getServerFolder(){
+        return serverfolder;
+    }
+    public static CommandConsoleSender getSender(){
+        return sender;
+    }
+
+    public void help(){
+        System.out.println("++++++++++++HELP++++++++++");
+        Set<Map.Entry<String,String>> cmdSet = commandInfo.entrySet();
+        for(Map.Entry<String,String> entry:cmdSet){
+            String key = entry.getKey();
+            String value = entry.getValue();
+            if(value.startsWith(PROP)){
+                StringBuilder builder = new StringBuilder(value);
+                value = builder.substring(PROP.length());
+                value = lang.getProperty(value);
+            }
+            System.out.println(key+": "+value);
+        }
+    }
+
+    public static void registerCommand(){
+        /**
+         * prop:指向当前的lang文件
+         */
+        commandInfo.put("help","prop:cmd.help");
+        commandInfo.put("stop","prop:cmd.stop");
+    }
+
+    //监听Smod2转发端接口
+    public DatagramSocket getSocket(int port) throws SocketException {
+
+        DatagramSocket socket = new DatagramSocket(port);
+
+        return socket;
     }
 }

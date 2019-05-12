@@ -2,14 +2,13 @@ package net.noyark.scpslserver.jsmod2.plugin;
 
 import net.noyark.scpslserver.jsmod2.Plugin;
 
-import java.io.InputStream;
+import java.io.File;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.net.URLStreamHandlerFactory;
 
 public class PluginClassLoader extends URLClassLoader {
 
-    public static final String PLUGIN_FILE = "plugins";
 
     public PluginClassLoader(URL[] urls, ClassLoader parent) {
         super(urls, parent);
@@ -23,8 +22,7 @@ public class PluginClassLoader extends URLClassLoader {
         super(urls, parent, factory);
     }
 
-    public Plugin loadPlugin(){
-
+    public Plugin loadPlugin(File pluginDir){
 
         return null;
     }
