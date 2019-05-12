@@ -16,7 +16,7 @@ import java.util.Properties;
 
 public class FileSystem {
 
-    private static List<String> registerLang = new ArrayList<>();
+    private static List<String> registerLang;
 
 
     static {
