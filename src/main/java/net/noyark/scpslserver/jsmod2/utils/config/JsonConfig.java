@@ -4,6 +4,8 @@ package net.noyark.scpslserver.jsmod2.utils.config;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import net.noyark.oaml.DocumentFactory;
+import net.noyark.oaml.exception.AmbiguousTypeException;
 import net.noyark.oaml.tree.Document;
 import net.noyark.scpslserver.jsmod2.utils.Utils;
 
@@ -107,16 +109,19 @@ public class JsonConfig implements Config {
 
     @Override
     public String[] getArray(String key) throws IOException {
-        return new String[0];
+        String str = get(key).toString();
+        if(!(str.startsWith("[")&&str.endsWith("]"))){
+            throw new AmbiguousTypeException("this type is not array!");
+        }else{
+            str = str.substring(str.indexOf("[")+1,str.indexOf("]"));
+        }
+        return str.split(",");
     }
 
     @Override
     public List<?> getList(String key) throws IOException {
         return null;
     }
-
-
-
 
     @Override
     public String getArrayValue(String key, int index) throws IOException {
