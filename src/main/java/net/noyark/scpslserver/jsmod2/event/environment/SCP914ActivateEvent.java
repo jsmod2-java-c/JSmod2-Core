@@ -5,6 +5,12 @@ import net.noyark.scpslserver.jsmod2.entity.Player;
 import net.noyark.scpslserver.jsmod2.event.Event;
 import net.noyark.scpslserver.jsmod2.math.Vector;
 
+
+/**
+ * @author magiclu550 #(code) jsmod2
+ */
+
+
 public class SCP914ActivateEvent extends Event {
 
     private Player user;

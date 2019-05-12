@@ -4,6 +4,11 @@ import net.noyark.scpslserver.jsmod2.utils.AuthType;
 import net.noyark.scpslserver.jsmod2.entity.Player;
 import net.noyark.scpslserver.jsmod2.event.Event;
 
+
+/**
+ * @author magiclu550 #(code) jsmod2
+ */
+
 public class AuthCheckEvent extends Event {
 
     private Player requester;

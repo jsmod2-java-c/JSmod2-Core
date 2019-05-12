@@ -1,5 +1,11 @@
 package net.noyark.scpslserver.jsmod2.event.config;
 
+
+/**
+ * @author magiclu550 #(code) jsmod2
+ */
+
+
 public class SetConfigEvent {
 
     private String key;

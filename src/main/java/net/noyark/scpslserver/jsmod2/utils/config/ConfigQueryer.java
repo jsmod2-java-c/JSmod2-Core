@@ -15,7 +15,8 @@
  */
 package net.noyark.scpslserver.jsmod2.utils.config;
 
-import net.noyark.scpslserver.jsmod2.utils.config.OamlConfig;
+
+import net.noyark.scpslserver.jsmod2.ex.TypeErrorException;
 
 import java.io.FileNotFoundException;
 import java.util.HashMap;
@@ -43,13 +44,27 @@ public class ConfigQueryer {
 	 * can guarantee the object unique and save memory
 	 * @param filename the config filename
 	 * @param getClass Whether to get the classpath
+	 * @param type the config type
 	 * @return the OamlConfig object
 	 * @throws FileNotFoundException
 	 */
-	public static IConfig getInstance(String filename, boolean getClass) throws FileNotFoundException {
+	public static IConfig getInstance(String filename, boolean getClass,ConfigType... type) throws FileNotFoundException {
 		IConfig oc = configPool.get(filename);
 		if(oc == null) {
-			oc = new OamlConfig(filename,getClass);
+			if(type.length<1){
+				throw new TypeErrorException("if the config instance does not exist,the type can not be null");
+			}
+			switch (type[0]){
+				case JSON:
+					break;
+				case OAML:
+					oc = new OamlConfig(filename,getClass);
+					break;
+				case YAML:
+					break;
+				case PROPERTIES:
+					break;
+			}
 			configPool.put(filename,oc);
 			return oc;
 		}else {
