@@ -64,6 +64,7 @@ public class ConfigQueryer {
 				case YAML:
 					break;
 				case PROPERTIES:
+					oc = new PropertiesConfig(filename,getClass);
 
 			}
 			configPool.put(filename,oc);
