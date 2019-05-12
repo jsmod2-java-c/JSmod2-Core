@@ -21,6 +21,7 @@ import net.noyark.oaml.OamlWriter;
 import net.noyark.oaml.tree.Document;
 import net.noyark.oaml.tree.Node;
 import net.noyark.oaml.utils.CollectionFactory;
+import net.noyark.scpslserver.jsmod2.utils.Utils;
 
 import java.io.*;
 import java.text.ParseException;
@@ -42,7 +43,7 @@ import java.util.Map.Entry;
  *
  */
 
-public class OamlConfig implements IConfig {
+public class OamlConfig implements Config {
 	/** the oaml reader stream*/
 	private OamlReader reader;
 	/** the oaml writer stream*/
@@ -58,7 +59,7 @@ public class OamlConfig implements IConfig {
 	}
 	public OamlConfig(String fileName, Document doc, boolean getClassPath) throws FileNotFoundException {
 		if(getClassPath) {
-			fileName = this.getClass().getResource("/").getPath()+fileName;
+			fileName = Utils.getClassFileName(fileName);
 		}
 		this.fileName = fileName;
 		this.doc = doc;

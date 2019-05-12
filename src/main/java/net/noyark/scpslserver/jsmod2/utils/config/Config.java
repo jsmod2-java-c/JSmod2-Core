@@ -17,10 +17,9 @@ package net.noyark.scpslserver.jsmod2.utils.config;
 
 import net.noyark.oaml.tree.Document;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -40,7 +39,7 @@ import java.util.Map;
  * @since JDK1.8
  *
  */
-public interface IConfig {
+public interface Config extends Closeable,Cloneable, Serializable {
 
    /**
     * This method can put all basic types and string
@@ -101,7 +100,9 @@ public interface IConfig {
     * @throws IOException #{@link IOException}
     */
 
-   int getInt(String key) throws IOException;
+   default int getInt(String key) throws IOException{
+        return Integer.parseInt(get(key).toString());
+   }
 
    /**
     * It can byte type data,the premise data is in line
@@ -113,7 +114,9 @@ public interface IConfig {
     * @throws IOException #{@link IOException}
     */
 
-   byte getByte(String key) throws IOException;
+   default byte getByte(String key) throws IOException{
+        return Byte.parseByte(get(key).toString());
+   }
 
    /**
     * <P>You can convert a normal type array to a string
@@ -150,7 +153,9 @@ public interface IConfig {
     * @throws IOException #{@link IOException}
     */
 
-   short getShort(String key) throws IOException;
+   default short getShort(String key) throws IOException{
+       return Short.parseShort(get(key).toString());
+   }
 
    /**
     * It can boolean type data,the premise data is in line
@@ -162,7 +167,9 @@ public interface IConfig {
     */
 
 
-   boolean getBoolean(String key) throws IOException;
+   default boolean getBoolean(String key) throws IOException{
+       return Boolean.parseBoolean(get(key).toString());
+   }
 
    /**
     * It can long type data,the premise data is in line
@@ -173,7 +180,9 @@ public interface IConfig {
     * @throws IOException #{@link IOException}
     */
 
-   long getLong(String key) throws IOException;
+   default long getLong(String key) throws IOException{
+       return Long.getLong(get(key).toString());
+   }
 
    /**
     * It can double type data,the premise data is in line
@@ -185,7 +194,9 @@ public interface IConfig {
     */
 
 
-   double getDouble(String key) throws IOException;
+   default double getDouble(String key) throws IOException{
+       return Double.parseDouble(get(key).toString());
+   }
 
    /**
     * It can float type data,the premise data is in line
@@ -197,7 +208,9 @@ public interface IConfig {
     */
 
 
-   float getFloat(String key) throws IOException;
+   default float getFloat(String key) throws IOException{
+       return Float.parseFloat(get(key).toString());
+   }
 
    /**
     * It can char type data,the premise data is in line
@@ -209,7 +222,9 @@ public interface IConfig {
     */
 
 
-   char getChar(String key) throws IOException;
+   default char getChar(String key) throws IOException{
+       return get(key).toString().charAt(0);
+   }
 
    /**
     * You can split the value of the [value,value]
@@ -236,7 +251,10 @@ public interface IConfig {
     * @throws IOException #{@link IOException}
     */
 
-   Date getDate(String key, String format) throws ParseException, IOException;
+   default Date getDate(String key, String format) throws ParseException, IOException{
+       SimpleDateFormat dateFormat = new SimpleDateFormat(format);
+       return dateFormat.parse(get(key).toString());
+   }
 
    /**
     * This method can remove the target entry

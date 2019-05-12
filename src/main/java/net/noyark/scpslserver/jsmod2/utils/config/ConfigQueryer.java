@@ -34,7 +34,7 @@ import java.util.Map;
  */
 public class ConfigQueryer {
 	/** the config object pool */
-	private static Map<String,IConfig> configPool;
+	private static Map<String, Config> configPool;
 	static {
 		configPool = new HashMap<>();
 	}
@@ -48,8 +48,8 @@ public class ConfigQueryer {
 	 * @return the OamlConfig object
 	 * @throws FileNotFoundException
 	 */
-	public static IConfig getInstance(String filename, boolean getClass,ConfigType... type) throws FileNotFoundException {
-		IConfig oc = configPool.get(filename);
+	public static Config getInstance(String filename, boolean getClass, ConfigType... type) throws FileNotFoundException {
+		Config oc = configPool.get(filename);
 		if(oc == null) {
 			if(type.length<1){
 				throw new TypeErrorException("if the config instance does not exist,the type can not be null");
