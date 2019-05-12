@@ -4,6 +4,7 @@ import net.noyark.scpslserver.jsmod2.FileSystem;
 import net.noyark.scpslserver.jsmod2.Server;
 
 import java.io.*;
+import java.util.Arrays;
 
 public class Utils {
 
@@ -81,5 +82,9 @@ public class Utils {
             levelStr.append("\t");
         }
         return levelStr.toString();
+    }
+
+    public static String[] getParentArray(String[] keys){
+        return Arrays.copyOf(keys,keys.length-1);
     }
 }

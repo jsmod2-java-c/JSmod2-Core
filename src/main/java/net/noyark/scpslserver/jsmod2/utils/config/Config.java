@@ -48,10 +48,10 @@ public interface Config extends Closeable,Cloneable, Serializable {
     * uses point splitting,such as a.b.c
     * @param key the entry key
     * @param value the entry value
-    * @throws FileNotFoundException #{@link FileNotFoundException}
+    * @throws IOException #{@link IOException}
     */
 
-   void put(String key, Object value) throws FileNotFoundException;
+   void put(String key, Object value) throws IOException;
 
    /**
     * It can get some basic data,such as strings,etc.,can
@@ -79,7 +79,7 @@ public interface Config extends Closeable,Cloneable, Serializable {
     *  read-only file for writing.
     */
 
-   void save() throws UnsupportedEncodingException, FileNotFoundException;
+   void save() throws IOException;
 
    /**
     * Add a linked hashmap structure,the key-value pair of
@@ -320,7 +320,7 @@ public interface Config extends Closeable,Cloneable, Serializable {
     * @return the document object
     */
 
-   Document getDocument();
+   Object getDocument();
 
    /**
     * This method can get all the key-value pairs in

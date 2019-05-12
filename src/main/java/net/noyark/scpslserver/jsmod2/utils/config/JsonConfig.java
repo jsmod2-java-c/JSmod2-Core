@@ -4,13 +4,15 @@ package net.noyark.scpslserver.jsmod2.utils.config;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import net.noyark.oaml.DocumentFactory;
 import net.noyark.oaml.exception.AmbiguousTypeException;
-import net.noyark.oaml.tree.Document;
 import net.noyark.scpslserver.jsmod2.utils.Utils;
 
 import java.io.*;
 import java.util.*;
+
+/**
+ * @author magiclu550 #(code) smod2
+ */
 
 public class JsonConfig implements Config {
 
@@ -28,7 +30,7 @@ public class JsonConfig implements Config {
 
     private Map<String,JSONObject> exist = new HashMap<>();
 
-    public JsonConfig(String fileName,boolean getClass) throws IOException{
+    public JsonConfig(String fileName,boolean getClass){
        if(getClass){
            this.fileName = Utils.getClassFileName(fileName);
        }else{
@@ -73,25 +75,10 @@ public class JsonConfig implements Config {
 
     @Override
     public Object get(String key) throws IOException {
-        inputStream = new FileInputStream(fileName);
-        BufferedReader reader = Utils.getReader(inputStream);
-        StringBuilder builder = new StringBuilder();
-        String line;
-        while((line = reader.readLine())!=null){
-            builder.append(line);
-        }
-        JSONObject obj = JSON.parseObject(builder.toString());
         String[] keys = key.split("\\.");
-        for(String one:keys){
-            Object o = obj.get(one);
-            if(o instanceof JSONObject){
-                obj = ((JSONObject)o);
-            }else{
-                return obj.get(one);
-            }
-        }
-        return obj.get(keys[keys.length-1]);
+        return getJSONObject(keys).get(keys[keys.length-1]);
     }
+
 
     @Override
     public void save() throws UnsupportedEncodingException, FileNotFoundException {
@@ -119,29 +106,33 @@ public class JsonConfig implements Config {
     }
 
     @Override
-    public List<?> getList(String key) throws IOException {
-        return null;
+    public List<String> getList(String key) throws IOException {
+        return Arrays.asList(getArray(key));
     }
 
     @Override
     public String getArrayValue(String key, int index) throws IOException {
-        return null;
+        return getArray(key)[index];
     }
-
 
     @Override
     public void remove(String key) throws IOException {
-
+        String[] keys = key.split("\\.");
+        keys = Utils.getParentArray(keys);
+        JSONObject obj = getJSONObject(keys);
+        obj.remove(key);
     }
 
     @Override
     public Object getObject(String key, Class<?> type) throws InstantiationException, IllegalAccessException, IOException {
-        return null;
+        return getJSONObject(key.split("\\.")).getObject(key,type);
     }
 
     @Override
     public void setObject(String key, Object obj) throws IOException {
-
+        String[] keys = Utils.getParentArray(key.split("\\."));
+        JSONObject json = getJSONObject(keys);
+        json.put(key,obj);
     }
 
     @Override
@@ -150,37 +141,61 @@ public class JsonConfig implements Config {
     }
 
     @Override
-    public void setEncoding(String cdn) {
-
-    }
+    public void setEncoding(String cdn) {}
 
     @Override
     public String getEncoding() {
-        return null;
+        return "default";
     }
 
     @Override
-    public Document getDocument() {
-        return null;
+    public JSONObject getDocument() {
+        return jsonObject;
     }
 
     @Override
     public Map<String, Object> getAll(String parentPath) throws IOException {
-        return null;
+        return getJSONObject(parentPath.split("\\."));
     }
 
     @Override
-    public void setNote(String key, String note) throws IOException {
-
-    }
+    public void setNote(String key, String note) {}
 
     @Override
     public Object[] getObjectArray(String key, Class<?> defaultType, Class<?>... type) throws IllegalArgumentException, IllegalAccessException, InstantiationException, IOException {
-        return new Object[0];
+        JSONArray array = getJSONObject(key.split("\\.")).getJSONArray(key);
+        Object[] objs = new Object[array.size()];
+        int i = 0;
+        for(Object obj:array){
+            objs[i] = obj;
+            i++;
+        }
+        return objs;
     }
 
     @Override
     public List<Object> getObjectList(String key, Class<?> defaultType, Class<?>... type) throws IllegalArgumentException, IllegalAccessException, InstantiationException, IOException {
-        return null;
+        return Arrays.asList(getObjectArray(key,defaultType,type));
+    }
+
+    private JSONObject getJSONObject(String[] keys) throws IOException{
+        inputStream = new FileInputStream(fileName);
+        BufferedReader reader = Utils.getReader(inputStream);
+        StringBuilder builder = new StringBuilder();
+        String line;
+        while((line = reader.readLine())!=null){
+            builder.append(line);
+        }
+        JSONObject obj = JSON.parseObject(builder.toString());
+
+        for(String one:keys){
+            Object o = obj.get(one);
+            if(o instanceof JSONObject){
+                obj = ((JSONObject)o);
+            }else{
+                return obj;
+            }
+        }
+        return obj;
     }
 }

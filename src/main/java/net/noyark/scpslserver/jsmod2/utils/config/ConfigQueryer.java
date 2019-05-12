@@ -56,6 +56,7 @@ public class ConfigQueryer {
 			}
 			switch (type[0]){
 				case JSON:
+					oc = new JsonConfig(filename,getClass);
 					break;
 				case OAML:
 					oc = new OamlConfig(filename,getClass);
@@ -63,7 +64,7 @@ public class ConfigQueryer {
 				case YAML:
 					break;
 				case PROPERTIES:
-					break;
+
 			}
 			configPool.put(filename,oc);
 			return oc;

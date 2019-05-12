@@ -53,7 +53,6 @@ public class Jsmod2 {
             log.error("this is a exception!!!");
             e.printStackTrace();
         }
-
     }
 
     public static void registerStartInfo(){
