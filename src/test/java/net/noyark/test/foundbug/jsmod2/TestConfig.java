@@ -4,6 +4,7 @@ import net.noyark.scpslserver.jsmod2.utils.config.Config;
 import net.noyark.scpslserver.jsmod2.utils.config.JsonConfig;
 import net.noyark.scpslserver.jsmod2.utils.config.PropertiesConfig;
 import org.junit.Test;
+import org.yaml.snakeyaml.Yaml;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -24,5 +25,11 @@ public class TestConfig {
         config.put("cn.ol","test");
         config.save();
         System.out.println(config.get("cn.ol"));
+    }
+
+    @Test
+    public void yaml(){
+        Yaml yaml = new Yaml();
+        
     }
 }

@@ -1,6 +1,8 @@
 package net.noyark.scpslserver.jsmod2.utils.config;
 
 
+import org.yaml.snakeyaml.Yaml;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.LinkedHashMap;
@@ -9,6 +11,12 @@ import java.util.Map;
 
 public class YamlConfig implements Config {
 
+    private Yaml yaml;
+
+    public YamlConfig(String fileName,boolean getClass){
+        this.yaml = new Yaml();
+
+    }
 
 
     @Override
