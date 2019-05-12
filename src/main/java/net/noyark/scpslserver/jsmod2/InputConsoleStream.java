@@ -1,5 +1,9 @@
 package net.noyark.scpslserver.jsmod2;
 
+/**
+ * @author magiclu550 #(code)jsmod2
+ */
+
 public class InputConsoleStream {
 
     public static void commandInput(){

@@ -13,7 +13,7 @@
  *		 ****************************************************
  * 
  */
-package net.noyark.oaml;
+package net.noyark.scpslserver.jsmod2.utils.config;
 
 import net.noyark.scpslserver.jsmod2.utils.config.OamlConfig;
 
@@ -33,7 +33,7 @@ import java.util.Map;
  */
 public class ConfigQueryer {
 	/** the config object pool */
-	private static Map<String, net.noyark.oaml.simple.OamlConfig> configPool;
+	private static Map<String,IConfig> configPool;
 	static {
 		configPool = new HashMap<>();
 	}
@@ -46,8 +46,8 @@ public class ConfigQueryer {
 	 * @return the OamlConfig object
 	 * @throws FileNotFoundException
 	 */
-	public static net.noyark.oaml.simple.OamlConfig getInstance(String filename, boolean getClass) throws FileNotFoundException {
-		net.noyark.oaml.simple.OamlConfig oc = configPool.get(filename);
+	public static IConfig getInstance(String filename, boolean getClass) throws FileNotFoundException {
+		IConfig oc = configPool.get(filename);
 		if(oc == null) {
 			oc = new OamlConfig(filename,getClass);
 			configPool.put(filename,oc);
