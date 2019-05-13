@@ -21,7 +21,6 @@ import net.noyark.oaml.OamlWriter;
 import net.noyark.oaml.tree.Document;
 import net.noyark.oaml.tree.Node;
 import net.noyark.oaml.utils.CollectionFactory;
-import net.noyark.scpslserver.jsmod2.utils.Utils;
 
 import java.io.*;
 import java.text.ParseException;
