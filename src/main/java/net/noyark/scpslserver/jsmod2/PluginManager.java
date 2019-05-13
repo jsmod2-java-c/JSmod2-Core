@@ -74,6 +74,7 @@ public class PluginManager {
             if(i%5==0){
                 Utils.getMessageSender().newLine();
             }
+            i++;
         }
     }
 

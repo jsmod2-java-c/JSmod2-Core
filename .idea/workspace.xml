@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="903d6ce5-6282-4b7a-9be7-14af381194b4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/ex/EventException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/PluginManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/PluginManager.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -70,8 +68,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/PluginManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="145" column="40" selection-start-line="145" selection-start-column="40" selection-end-line="145" selection-end-column="40" />
+            <state relative-caret-position="2266">
+              <caret line="141" column="26" lean-forward="true" selection-start-line="141" selection-start-column="26" selection-end-line="141" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#5048#5049#0" expanded="true" />
@@ -330,7 +328,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557741466202" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557741665873" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -378,7 +376,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1557725481238</updated>
-      <workItem from="1557725482490" duration="15917000" />
+      <workItem from="1557725482490" duration="16160000" />
     </task>
     <task id="LOCAL-00001" summary="PluginManager初步架构">
       <created>1557728269911</created>
@@ -415,11 +413,18 @@
       <option name="project" value="LOCAL" />
       <updated>1557739232692</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="监听器注册完成">
+      <created>1557741573318</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1557741573318</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15917000" />
+    <option name="totallyTimeSpent" value="16160000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -866,8 +871,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/PluginManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="145" column="40" selection-start-line="145" selection-start-column="40" selection-end-line="145" selection-end-column="40" />
+        <state relative-caret-position="2266">
+          <caret line="141" column="26" lean-forward="true" selection-start-line="141" selection-start-column="26" selection-end-line="141" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#5048#5049#0" expanded="true" />
