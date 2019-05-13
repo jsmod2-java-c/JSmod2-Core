@@ -3,8 +3,10 @@ package net.noyark.scpslserver.jsmod2;
 
 import net.noyark.scpslserver.jsmod2.command.Command;
 import net.noyark.scpslserver.jsmod2.command.NativeCommand;
+import net.noyark.scpslserver.jsmod2.event.Event;
 import net.noyark.scpslserver.jsmod2.event.EventManager;
 import net.noyark.scpslserver.jsmod2.event.Listener;
+import net.noyark.scpslserver.jsmod2.ex.EventException;
 import net.noyark.scpslserver.jsmod2.ex.NoSuchPluginNameException;
 import net.noyark.scpslserver.jsmod2.ex.PluginException;
 import net.noyark.scpslserver.jsmod2.plugin.PluginClassLoader;
@@ -12,10 +14,7 @@ import net.noyark.scpslserver.jsmod2.utils.MethodInvokeMapper;
 import net.noyark.scpslserver.jsmod2.utils.Utils;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -26,7 +25,7 @@ import java.util.Map;
 
 public class PluginManager {
 
-    private Map<Object, List<MethodInvokeMapper>> listenerMapper = new HashMap<>();
+    private Map<Listener, List<MethodInvokeMapper>> listenerMapper = new HashMap<>();
 
     private Server server;
 
@@ -127,6 +126,32 @@ public class PluginManager {
         }
     }
 
+    public void callEvent(Event event){
+        try{
+            Set<Map.Entry<Listener,List<MethodInvokeMapper>>> set = listenerMapper.entrySet();
+            for(Map.Entry<Listener,List<MethodInvokeMapper>> entry:set){
+                Listener listener = entry.getKey();
+                List<MethodInvokeMapper> methods = entry.getValue();
+                List<MethodInvokeMapper> invoker = new ArrayList<>();
+                for(MethodInvokeMapper mapper:methods){
+                    Class[] classes = mapper.getMethod().getParameterTypes();
+                    if(classes.length == 1){
+                        if(classes[0].getName().equals(event.getEventName())){
+                            invoker.add(mapper);
+                        }
+                    }else{
+                        throw new EventException("the event method must have one parameter");
+                    }
+                }
+                invoker.sort(Comparator.comparing(MethodInvokeMapper::getPriority));
+                for(MethodInvokeMapper method:invoker){
+                    method.getMethod().invoke(listener,event);
+                }
+            }
+        }catch (Exception e){
+           e.printStackTrace();
+        }
+    }
     public List<NativeCommand> getCommands(){
         return commands;
     }
