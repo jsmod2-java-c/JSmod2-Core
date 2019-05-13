@@ -14,15 +14,12 @@ import java.util.*;
  * @author magiclu550 #(code) smod2
  */
 
-public class JsonConfig implements Config {
+public class JsonConfig extends Config {
+
 
     private String fileName;
 
     private JSONObject jsonObject;
-    //读取
-    private InputStream inputStream;
-    //写入
-    private OutputStream outputStream;
 
     private JSONObject nowObject;
 
@@ -31,11 +28,7 @@ public class JsonConfig implements Config {
     private Map<String,JSONObject> exist = new HashMap<>();
 
     public JsonConfig(String fileName,boolean getClass){
-       if(getClass){
-           this.fileName = Utils.getClassFileName(fileName);
-       }else{
-           this.fileName = fileName;
-       }
+       super(fileName,getClass);
        this.jsonObject = new JSONObject();
     }
 
@@ -82,10 +75,10 @@ public class JsonConfig implements Config {
 
     @Override
     public void save() throws UnsupportedEncodingException, FileNotFoundException {
-        if(outputStream == null){
-            outputStream = new FileOutputStream(fileName);
+        if(out == null){
+            out = new FileOutputStream(fileName);
         }
-        writer = new PrintWriter(outputStream,true);
+        writer = new PrintWriter(out,true);
         writer.println(Utils.format(nowObject.toJSONString()));
     }
 
@@ -178,9 +171,19 @@ public class JsonConfig implements Config {
         return Arrays.asList(getObjectArray(key,defaultType,type));
     }
 
+    @Override
+    public Object get(String key,InputStream in) throws IOException{
+        String[] keys = key.split("\\.");
+        return getJSONObject(keys,in).get(keys[keys.length-1]);
+    }
+
     private JSONObject getJSONObject(String[] keys) throws IOException{
-        inputStream = new FileInputStream(fileName);
-        BufferedReader reader = Utils.getReader(inputStream);
+        return getJSONObject(keys,new FileInputStream(fileName));
+    }
+
+    private JSONObject getJSONObject(String[] keys,InputStream in) throws IOException{
+        this.in = in;
+        BufferedReader reader = Utils.getReader(in);
         StringBuilder builder = new StringBuilder();
         String line;
         while((line = reader.readLine())!=null){

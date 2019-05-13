@@ -10,31 +10,21 @@ import java.util.*;
  * @author magiclu550 #(code) jsmod2
  */
 
-public class YamlConfig implements Config {
+public class YamlConfig extends Config {
 
     private Yaml yaml;
 
-    private InputStream in;
-
     private PrintWriter writer;
-
-    private OutputStream out;
 
     private Map<String,Object> rootMap;
 
     private Map<String,Map<String,Object>> exist;
 
-    private String fileName;
-
     public YamlConfig(String fileName,boolean getClass){
+        super(fileName,getClass);
         this.yaml = new Yaml();
         this.rootMap = new LinkedHashMap<>();
         exist = new HashMap<>();
-        if(getClass){
-            this.fileName = Utils.getClassFileName(fileName);
-        }else{
-            this.fileName = fileName;
-        }
     }
 
     @Override
@@ -72,6 +62,14 @@ public class YamlConfig implements Config {
         return get(keys).get(keys[keys.length-1]);
     }
 
+    @Override
+    public Object get(String key,InputStream in) throws IOException{
+        if(key.equals(".")){
+            return yaml.load(in);
+        }
+        String[] keys = key.split("\\.");
+        return get(keys,in).get(keys[keys.length-1]);
+    }
 
     @Override
     public void save() throws IOException {
@@ -161,7 +159,11 @@ public class YamlConfig implements Config {
         return (List) get(key);
     }
     private Map get(String[] keys) throws IOException{
-        in = new FileInputStream(fileName);
+        return get(keys,new FileInputStream(fileName));
+    }
+
+    private Map get(String[] keys,InputStream in) throws IOException{
+        this.in = in;
         Map map = yaml.loadAs(in,LinkedHashMap.class);
         for(String one:keys){
             Object obj = map.get(one);

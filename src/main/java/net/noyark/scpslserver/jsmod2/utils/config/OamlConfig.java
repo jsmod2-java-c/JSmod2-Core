@@ -43,25 +43,20 @@ import java.util.Map.Entry;
  *
  */
 
-public class OamlConfig implements Config {
+public class OamlConfig extends Config {
 	/** the oaml reader stream*/
 	private OamlReader reader;
 	/** the oaml writer stream*/
 	private OamlWriter writer;
 	/** the document object*/
 	private Document doc;
-	private InputStream inputStream;
-	private OutputStream outputStream;
+
 	private Map<String, Node> haveExistPath;
-	private String fileName;
 	public OamlConfig(String fileName, boolean getClassPath) throws FileNotFoundException {
 		this(fileName, DocumentFactory.getDocument(), getClassPath);
 	}
 	public OamlConfig(String fileName, Document doc, boolean getClassPath) throws FileNotFoundException {
-		if(getClassPath) {
-			fileName = Utils.getClassFileName(fileName);
-		}
-		this.fileName = fileName;
+		super(fileName,getClassPath);
 		this.doc = doc;
 		this.haveExistPath = CollectionFactory.getLinkedMap(String.class,Node.class);
 	}
@@ -112,9 +107,9 @@ public class OamlConfig implements Config {
 	 */
 	
 	public Map<String,Object> getAll(String parentPath) throws IOException {
-		this.inputStream = new FileInputStream(fileName);
+		this.in = new FileInputStream(fileName);
 		this.reader = new OamlReader(); 
-		this.doc = reader.read(inputStream);
+		this.doc = reader.read(in);
 		if(parentPath.equals("")) {
 			Map<String, Object> map = CollectionFactory.getLinkedMap(String.class,Object.class);
 			Collection<Node> nodes = doc.getEntrys();
@@ -148,6 +143,10 @@ public class OamlConfig implements Config {
 	
 	public Object get(String key) throws IOException {
 		return getNode(key).getValue();
+	}
+
+	public Object get(String key,InputStream in) throws IOException{
+		return getNode(key,in).getValue();
 	}
 	
 	/**
@@ -444,9 +443,9 @@ public class OamlConfig implements Config {
 	 */
 	
 	public void save() throws UnsupportedEncodingException, FileNotFoundException {
-		if(outputStream==null) {
-			this.outputStream = new FileOutputStream(fileName);
-			this.writer = new OamlWriter(outputStream);
+		if(out==null) {
+			this.out = new FileOutputStream(fileName);
+			this.writer = new OamlWriter(out);
 		}
 		writer.write(doc);
 		doc.getPool().clear();
@@ -525,8 +524,8 @@ public class OamlConfig implements Config {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((doc == null) ? 0 : doc.hashCode());
-		result = prime * result + ((inputStream == null) ? 0 : inputStream.hashCode());
-		result = prime * result + ((outputStream == null) ? 0 : outputStream.hashCode());
+		result = prime * result + ((in == null) ? 0 : in.hashCode());
+		result = prime * result + ((out == null) ? 0 : out.hashCode());
 		result = prime * result + ((reader == null) ? 0 : reader.hashCode());
 		result = prime * result + ((writer == null) ? 0 : writer.hashCode());
 		return result;
@@ -560,15 +559,15 @@ Note that it is generally necessary to override the hashCode method whenever thi
 				return false;
 		} else if (!doc.equals(other.doc))
 			return false;
-		if (inputStream == null) {
-			if (other.inputStream != null)
+		if (in == null) {
+			if (other.in != null)
 				return false;
-		} else if (!inputStream.equals(other.inputStream))
+		} else if (!in.equals(other.in))
 			return false;
-		if (outputStream == null) {
-			if (other.outputStream != null)
+		if (out == null) {
+			if (other.out != null)
 				return false;
-		} else if (!outputStream.equals(other.outputStream))
+		} else if (!out.equals(other.out))
 			return false;
 		if (reader == null) {
 			if (other.reader != null)
@@ -623,9 +622,13 @@ Note that it is generally necessary to override the hashCode method whenever thi
 	 */
 	
 	private Node getNode(String key) throws IOException {
-		this.inputStream = new FileInputStream(fileName);
-		this.reader = new OamlReader(); 
-		this.doc = reader.read(inputStream);
+		return getNode(key,new FileInputStream(fileName));
+	}
+
+	private Node getNode(String key,InputStream in) throws IOException{
+		this.in = in;
+		this.reader = new OamlReader();
+		this.doc = reader.read(in);
 		String[] keys = key.split("\\.");
 		Node node = doc.getEntry(keys[0]);
 		for(int i = 1;i<keys.length;i++) {

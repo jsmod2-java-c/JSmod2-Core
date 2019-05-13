@@ -5,27 +5,22 @@ import net.noyark.scpslserver.jsmod2.utils.Utils;
 import java.io.*;
 import java.util.*;
 
-public class PropertiesConfig implements Config{
+public class PropertiesConfig extends Config{
 
     private Properties properties;
 
-    private InputStream in;
-
-    private OutputStream out;
 
     private String fileName;
 
     public PropertiesConfig(String fileName,boolean getClass) {
+        super(fileName, getClass);
         try{
+            properties = new Properties();
             if(getClass){
                 out = new FileOutputStream(Utils.getClassFileName(fileName));
-                this.fileName = Utils.getClassFileName(fileName);
             }else{
                 out = new FileOutputStream(fileName);
-                this.fileName = fileName;
             }
-            properties = new Properties();
-
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -39,7 +34,12 @@ public class PropertiesConfig implements Config{
 
     @Override
     public Object get(String key) throws IOException {
-        in = new FileInputStream(fileName);
+        return get(key,new FileInputStream(fileName));
+    }
+
+    @Override
+    public Object get(String key,InputStream in) throws IOException{
+        this.in = in;
         properties.load(in);
         return properties.get(key);
     }

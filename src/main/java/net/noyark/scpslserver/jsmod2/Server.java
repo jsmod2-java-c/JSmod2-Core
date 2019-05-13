@@ -1,6 +1,7 @@
 package net.noyark.scpslserver.jsmod2;
 
 import net.noyark.scpslserver.jsmod2.inferf.log.ILogger;
+import net.noyark.scpslserver.jsmod2.plugin.PluginClassLoader;
 
 import java.io.*;
 import java.net.*;
@@ -44,10 +45,11 @@ public class Server {
 
     private static Map<String,String> commandInfo;
 
+    private List<Plugin> plugins;
+
     public static final int MAX_LENGTH = 65535;
 
     public final File serverfolder;
-
 
     public Properties serverProp;
 
@@ -71,18 +73,31 @@ public class Server {
 
         sender = new CommandConsoleSender(server);
 
+        /**
+         * 加载插件
+         */
+        this.plugins = PluginClassLoader.getClassLoader().loadPlugins(pluginDir);
+
         start();
     }
 
     public void start(){
         this.pool.execute(new ListenerThread());
+        this.log.info("the listener thread is start!!!!");
     }
 
 
     public void close(){
+        disable();
         closeStream();
         log.info(lang.getProperty("end.finish"));
         System.exit(0);
+    }
+
+    private void disable(){
+        for(Plugin plugin:plugins){
+            plugin.onDisable();
+        }
     }
 
     public static Scanner getScanner(){
