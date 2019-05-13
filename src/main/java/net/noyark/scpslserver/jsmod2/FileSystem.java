@@ -126,6 +126,10 @@ public class FileSystem {
         return properties;
     }
 
+    /**
+     * 语言注册
+     */
+
     public static void registerLang(){
         registerLang.add("zh");
         registerLang.add("en");

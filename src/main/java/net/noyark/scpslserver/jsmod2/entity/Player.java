@@ -1,4 +1,6 @@
 package net.noyark.scpslserver.jsmod2.entity;
 
-public class Player {
+import net.noyark.ICommandSender;
+
+public class Player implements ICommandSender {
 }

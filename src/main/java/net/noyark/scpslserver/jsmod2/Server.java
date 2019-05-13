@@ -1,5 +1,6 @@
 package net.noyark.scpslserver.jsmod2;
 
+import net.noyark.PluginManager;
 import net.noyark.scpslserver.jsmod2.inferf.log.ILogger;
 import net.noyark.scpslserver.jsmod2.plugin.PluginClassLoader;
 
@@ -20,6 +21,7 @@ import static net.noyark.scpslserver.jsmod2.FileSystem.getFileSystem;
 
 public class Server {
 
+    public static final String STOP = "end";
 
     static {
         commandInfo = new HashMap<>();
@@ -55,6 +57,9 @@ public class Server {
 
     public File pluginDir;
 
+    public PluginManager pluginManager;
+
+
 
     Server(ILogger log, Properties lang) {
 
@@ -78,19 +83,22 @@ public class Server {
          */
         this.plugins = PluginClassLoader.getClassLoader().loadPlugins(pluginDir);
 
+        this.pluginManager = new PluginManager();
+
+
         start();
     }
 
     public void start(){
         this.pool.execute(new ListenerThread());
-        this.log.info("the listener thread is start!!!!");
+        this.log.info("the listener thread is starting!!!!");
     }
 
 
     public void close(){
         disable();
         closeStream();
-        log.info(lang.getProperty("end.finish"));
+        log.info(lang.getProperty(STOP+".finish"));
         System.exit(0);
     }
 
@@ -182,7 +190,7 @@ public class Server {
     }
 
     public void help(){
-        System.out.println("++++++++++++HELP++++++++++");
+        log.info("+================HELP========================+");
         Set<Map.Entry<String,String>> cmdSet = commandInfo.entrySet();
         for(Map.Entry<String,String> entry:cmdSet){
             String key = entry.getKey();
@@ -192,7 +200,7 @@ public class Server {
                 value = builder.substring(PROP.length());
                 value = lang.getProperty(value);
             }
-            System.out.println(key+": "+value);
+            log.info(key+": "+value);
         }
     }
 
@@ -204,11 +212,22 @@ public class Server {
         commandInfo.put("stop","prop:cmd.stop");
     }
 
+    public Map<String, String> getCommandInfo(){
+        return commandInfo;
+    }
+
     //监听Smod2转发端接口
     public DatagramSocket getSocket(int port) throws SocketException {
 
         DatagramSocket socket = new DatagramSocket(port);
 
         return socket;
+    }
+
+    /**
+     * plugin manager
+     */
+    public PluginManager getPluginManager(){
+        return pluginManager;
     }
 }

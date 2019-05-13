@@ -19,7 +19,8 @@ public class InputConsoleStream {
             }if(command.equals("help")){
                 Server.getSender().getServer().help();
             }else{
-                System.out.println(ansi().eraseScreen().fg(RED).a("Unkown command,please input '/help'").fg(DEFAULT));
+
+                System.out.println(ansi().eraseScreen().fg(RED).a("Unkown command,please input 'help'").fg(DEFAULT));
             }
         }
     }
