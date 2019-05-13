@@ -2,6 +2,12 @@ package net.noyark.scpslserver.jsmod2.command;
 
 import net.noyark.CommandSender;
 
+/**
+ * The native command(server command)
+ *
+ * @author magiclu550 #(code) jsmod2
+ */
+
 public abstract class NativeCommand {
 
     private String commandName;

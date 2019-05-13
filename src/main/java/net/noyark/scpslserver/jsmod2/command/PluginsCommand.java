@@ -3,6 +3,10 @@ package net.noyark.scpslserver.jsmod2.command;
 import net.noyark.CommandSender;
 import net.noyark.scpslserver.jsmod2.Server;
 
+/**
+ * @author magiclu550 #(code) jsmod2
+ */
+
 public class PluginsCommand extends NativeCommand{
 
     public PluginsCommand() {
