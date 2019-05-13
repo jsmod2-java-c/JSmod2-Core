@@ -21,7 +21,7 @@ import static net.noyark.scpslserver.jsmod2.FileSystem.getFileSystem;
 
 public class Server {
 
-    public static final String STOP = "end";
+    private static final String STOP = "end";
 
     static {
         commandInfo = new HashMap<>();
@@ -31,7 +31,7 @@ public class Server {
     // 监听线程 和 一个输入线程
     // 输入线程负责输入命令等
 
-    public static final String PROP = "prop:";
+    private static final String PROP = "prop:";
 
     private static Scanner scanner = new Scanner(System.in);
 
@@ -49,15 +49,15 @@ public class Server {
 
     private List<Plugin> plugins;
 
-    public static final int MAX_LENGTH = 65535;
+    private static final int MAX_LENGTH = 65535;
 
     public final File serverfolder;
 
-    public Properties serverProp;
+    public final Properties serverProp;
 
     public File pluginDir;
 
-    public PluginManager pluginManager;
+    private PluginManager pluginManager;
 
 
 
