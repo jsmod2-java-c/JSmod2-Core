@@ -48,7 +48,7 @@ public class Jsmod2 {
             for(String success:successInfo){
                 log.info(MessageFormat.format(langProperties.getProperty(success),(startSuccess-start)+""));
             }
-            InputConsoleStream.commandInput();
+            Console.getConsole().commandInput();
         }catch (Exception e){
             log.error("this is a exception!!!");
             e.printStackTrace();

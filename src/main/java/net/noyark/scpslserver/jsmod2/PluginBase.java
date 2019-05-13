@@ -32,10 +32,12 @@ public abstract class PluginBase implements Plugin {
 
     private PluginClassLoader classLoader;
 
+    private String version;
+
     public PluginBase(){
     }
 
-    public void init(ILogger logger,Server server,String pluginName,File serverFile,String description,PluginClassLoader classLoader,File dataFolder){
+    public void init(ILogger logger,Server server,String pluginName,File serverFile,String description,PluginClassLoader classLoader,File dataFolder,String version){
         if(!haveInit){
             this.logger = logger;
             this.server = server;
@@ -44,6 +46,7 @@ public abstract class PluginBase implements Plugin {
             this.dataFolder = dataFolder;
             this.description = description;
             this.classLoader = classLoader;
+            this.version = version;
             this.haveInit = true;
         }
     }
@@ -89,5 +92,9 @@ public abstract class PluginBase implements Plugin {
 
     public PluginClassLoader getClassLoader() {
         return classLoader;
+    }
+
+    public String getVersion(){
+        return version;
     }
 }

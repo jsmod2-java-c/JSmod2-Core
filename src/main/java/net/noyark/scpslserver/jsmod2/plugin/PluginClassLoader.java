@@ -51,8 +51,8 @@ public class PluginClassLoader {
                 Server server = Server.getSender().getServer();
                 ILogger logger = server.getLogger();
                 Plugin pluginObject = ((PluginBase) plugin);
+                pluginObject.init(logger,server,vo.getPluginName(),server.serverfolder,vo.getDescription(),this,new File(server.pluginDir+"/"+vo.getPluginName()),vo.getVersion());
                 pluginObject.onLoad();
-                pluginObject.init(logger,server,vo.getPluginName(),server.serverfolder,vo.getDescription(),this,new File(server.pluginDir+"/"+vo.getPluginName()));
                 pluginObject.setEnabled(true);
                 Server.getSender().getServer().getLogger().info("the plugin named:"+vo.getPluginName()+" is loading.. version: "+vo.getVersion());
                 return pluginObject;

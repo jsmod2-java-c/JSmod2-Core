@@ -1,6 +1,6 @@
 package net.noyark.scpslserver.jsmod2.command;
 
-import net.noyark.ICommandSender;
+import net.noyark.scpslserver.jsmod2.Plugin;
 
 /**
  * all command must extend it
@@ -8,32 +8,20 @@ import net.noyark.ICommandSender;
  * @author magiclu550 #(code) jsmod2
  */
 
-public abstract class Command {
+public abstract class Command extends NativeCommand{
 
-    private String commandName;
+    private Plugin plugin;
 
-    private String power;
 
-    private String description;
-
-    public Command(String commandName, String power, String description) {
-        this.commandName = commandName;
-        this.power = power;
-        this.description = description;
+    public Command(String commandName, String power, String description,Plugin plugin) {
+        super(commandName, power, description);
+        this.plugin = plugin;
     }
 
-    public String getCommandName() {
-        return commandName;
+
+    public Plugin getPlugin(){
+        return plugin;
     }
 
-    public String getPower() {
-        return power;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public abstract boolean execute(ICommandSender commandSender,String[] args);
 
 }

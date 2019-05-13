@@ -19,7 +19,7 @@ public interface Plugin {
 
     }
 
-    void init(ILogger logger, Server server, String pluginName, File serverFile, String description, PluginClassLoader classLoader, File dataFolder);
+    void init(ILogger logger, Server server, String pluginName, File serverFile, String description, PluginClassLoader classLoader, File dataFolder,String version);
 
     boolean isHaveInit();
 
@@ -40,4 +40,6 @@ public interface Plugin {
     String getDescription();
 
     PluginClassLoader getClassLoader();
+
+    String getVersion();
 }

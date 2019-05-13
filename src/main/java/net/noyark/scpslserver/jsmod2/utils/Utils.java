@@ -1,5 +1,6 @@
 package net.noyark.scpslserver.jsmod2.utils;
 
+import net.noyark.Message;
 import net.noyark.scpslserver.jsmod2.FileSystem;
 import net.noyark.scpslserver.jsmod2.Server;
 
@@ -7,6 +8,13 @@ import java.io.*;
 import java.util.Arrays;
 
 public class Utils {
+
+    private static Message messageSender;
+
+    static {
+        messageSender = new Message();
+    }
+
 
     public static BufferedReader getReader(InputStream in) throws IOException{
         BufferedReader reader = new BufferedReader(new InputStreamReader(in,"utf-8"));
@@ -86,5 +94,9 @@ public class Utils {
 
     public static String[] getParentArray(String[] keys){
         return Arrays.copyOf(keys,keys.length-1);
+    }
+
+    public static Message getMessageSender(){
+        return messageSender;
     }
 }

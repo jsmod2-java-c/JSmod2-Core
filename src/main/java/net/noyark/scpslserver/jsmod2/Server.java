@@ -1,6 +1,10 @@
 package net.noyark.scpslserver.jsmod2;
 
 import net.noyark.PluginManager;
+import net.noyark.scpslserver.jsmod2.command.HelpCommand;
+import net.noyark.scpslserver.jsmod2.command.NativeCommand;
+import net.noyark.scpslserver.jsmod2.command.PluginsCommand;
+import net.noyark.scpslserver.jsmod2.command.StopCommand;
 import net.noyark.scpslserver.jsmod2.inferf.log.ILogger;
 import net.noyark.scpslserver.jsmod2.plugin.PluginClassLoader;
 
@@ -23,10 +27,7 @@ public class Server {
 
     private static final String STOP = "end";
 
-    static {
-        commandInfo = new HashMap<>();
-        registerCommand();
-    }
+
     // 开辟线程
     // 监听线程 和 一个输入线程
     // 输入线程负责输入命令等
@@ -45,7 +46,9 @@ public class Server {
 
     private static CommandConsoleSender sender;
 
-    private static Map<String,String> commandInfo;
+    private Map<String,String> commandInfo;
+
+    private Map<String, NativeCommand> nativeCommandMap;
 
     private List<Plugin> plugins;
 
@@ -78,12 +81,17 @@ public class Server {
 
         sender = new CommandConsoleSender(server);
 
+        this.pluginManager = new PluginManager(this);
+
+        nativeCommandMap = new HashMap<>();
+        commandInfo = new HashMap<>();
+        registerNativeCommand();
+        registerNativeInfo();
+
         /**
          * 加载插件
          */
         this.plugins = PluginClassLoader.getClassLoader().loadPlugins(pluginDir);
-
-        this.pluginManager = new PluginManager();
 
 
         start();
@@ -104,6 +112,7 @@ public class Server {
 
     private void disable(){
         for(Plugin plugin:plugins){
+            log.info("unload the plugin named "+plugin.getPluginName());
             plugin.onDisable();
         }
     }
@@ -204,13 +213,23 @@ public class Server {
         }
     }
 
-    public static void registerCommand(){
+    public void registerNativeCommand(){
+        nativeCommandMap.put("stop",new StopCommand());
+        nativeCommandMap.put("help",new HelpCommand());
+        nativeCommandMap.put("plugins",new PluginsCommand());
+    }
+
+    public void registerNativeInfo(){
         /**
          * prop:指向当前的lang文件
          */
-        commandInfo.put("help","prop:cmd.help");
-        commandInfo.put("stop","prop:cmd.stop");
+        Set<Map.Entry<String,NativeCommand>> command = nativeCommandMap.entrySet();
+        for(Map.Entry<String,NativeCommand> entry:command){
+            commandInfo.put(entry.getKey(),entry.getValue().getDescription());
+            pluginManager.getCommands().add(entry.getValue());
+        }
     }
+
 
     public Map<String, String> getCommandInfo(){
         return commandInfo;
