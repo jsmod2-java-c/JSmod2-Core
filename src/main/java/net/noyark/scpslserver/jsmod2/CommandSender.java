@@ -1,4 +1,9 @@
-package net.noyark;
+package net.noyark.scpslserver.jsmod2;
+
+/**
+ * Player,Console is command sender
+ * @author magiclu550 #(code) jsmod2
+ */
 
 public abstract class CommandSender {
 

@@ -1,6 +1,6 @@
 package net.noyark.scpslserver.jsmod2.entity;
 
-import net.noyark.CommandSender;
+import net.noyark.scpslserver.jsmod2.CommandSender;
 
 public class Player extends CommandSender implements IPlayer {
 

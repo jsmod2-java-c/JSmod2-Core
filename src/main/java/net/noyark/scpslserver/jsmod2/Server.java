@@ -1,6 +1,5 @@
 package net.noyark.scpslserver.jsmod2;
 
-import net.noyark.PluginManager;
 import net.noyark.scpslserver.jsmod2.command.HelpCommand;
 import net.noyark.scpslserver.jsmod2.command.NativeCommand;
 import net.noyark.scpslserver.jsmod2.command.PluginsCommand;

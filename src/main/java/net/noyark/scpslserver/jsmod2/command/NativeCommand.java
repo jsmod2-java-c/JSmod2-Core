@@ -1,6 +1,6 @@
 package net.noyark.scpslserver.jsmod2.command;
 
-import net.noyark.CommandSender;
+import net.noyark.scpslserver.jsmod2.CommandSender;
 
 /**
  * The native command(server command)

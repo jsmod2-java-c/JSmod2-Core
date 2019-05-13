@@ -1,4 +1,4 @@
-package net.noyark;
+package net.noyark.scpslserver.jsmod2;
 
 import org.fusesource.jansi.Ansi;
 
