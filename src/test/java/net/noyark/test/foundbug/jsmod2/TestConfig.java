@@ -1,8 +1,6 @@
 package net.noyark.test.foundbug.jsmod2;
 
-import net.noyark.scpslserver.jsmod2.utils.config.Config;
-import net.noyark.scpslserver.jsmod2.utils.config.JsonConfig;
-import net.noyark.scpslserver.jsmod2.utils.config.PropertiesConfig;
+import net.noyark.scpslserver.jsmod2.utils.config.*;
 import org.junit.Test;
 import org.yaml.snakeyaml.Yaml;
 
@@ -28,8 +26,10 @@ public class TestConfig {
     }
 
     @Test
-    public void yaml(){
-        Yaml yaml = new Yaml();
-        
+    public void yaml() throws IOException{
+        YamlConfig config = new YamlConfig("test.yml",false);
+        config.put("a.b.c.d",new int[]{1,2,3,4,5});
+        config.save();
+        System.out.println(config.get("a.b.c.d"));
     }
 }

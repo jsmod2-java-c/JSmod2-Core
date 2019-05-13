@@ -62,10 +62,10 @@ public class ConfigQueryer {
 					oc = new OamlConfig(filename,getClass);
 					break;
 				case YAML:
+					oc = new YamlConfig(filename,getClass);
 					break;
 				case PROPERTIES:
 					oc = new PropertiesConfig(filename,getClass);
-
 			}
 			configPool.put(filename,oc);
 			return oc;

@@ -196,6 +196,7 @@ public class JsonConfig implements Config {
                 return obj;
             }
         }
+        reader.close();
         return obj;
     }
 }
