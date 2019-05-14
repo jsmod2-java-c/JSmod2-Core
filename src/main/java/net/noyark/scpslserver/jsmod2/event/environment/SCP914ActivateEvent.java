@@ -3,7 +3,7 @@ package net.noyark.scpslserver.jsmod2.event.environment;
 import net.noyark.scpslserver.jsmod2.entity.KnobSetting;
 import net.noyark.scpslserver.jsmod2.entity.Player;
 import net.noyark.scpslserver.jsmod2.event.Event;
-import net.noyark.scpslserver.jsmod2.math.Vector;
+import net.noyark.scpslserver.jsmod2.math.SCPVector;
 
 
 /**
@@ -19,11 +19,11 @@ public class SCP914ActivateEvent extends Event {
 
     public Object[] inputs;
 
-    public Vector intakePos;
+    public SCPVector intakePos;
 
-    public Vector outputPos;
+    public SCPVector outputPos;
 
-    public SCP914ActivateEvent(Player user, KnobSetting knobSetting, Object[] inputs, Vector intakePos, Vector outputPos) {
+    public SCP914ActivateEvent(Player user, KnobSetting knobSetting, Object[] inputs, SCPVector intakePos, SCPVector outputPos) {
         this.user = user;
         this.knobSetting = knobSetting;
         this.inputs = inputs;
@@ -55,19 +55,19 @@ public class SCP914ActivateEvent extends Event {
         this.inputs = inputs;
     }
 
-    public Vector getIntakePos() {
+    public SCPVector getIntakePos() {
         return intakePos;
     }
 
-    public void setIntakePos(Vector intakePos) {
+    public void setIntakePos(SCPVector intakePos) {
         this.intakePos = intakePos;
     }
 
-    public Vector getOutputPos() {
+    public SCPVector getOutputPos() {
         return outputPos;
     }
 
-    public void setOutputPos(Vector outputPos) {
+    public void setOutputPos(SCPVector outputPos) {
         this.outputPos = outputPos;
     }
 

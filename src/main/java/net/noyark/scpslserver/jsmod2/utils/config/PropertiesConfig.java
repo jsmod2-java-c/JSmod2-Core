@@ -10,7 +10,6 @@ public class PropertiesConfig extends Config{
     private Properties properties;
 
 
-    private String fileName;
 
     public PropertiesConfig(String fileName,boolean getClass) {
         super(fileName, getClass);
