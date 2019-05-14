@@ -56,8 +56,5 @@ public class BinaryStream {
         return (T)o;
     }
 
-
     //TODO 其他数据类型的写入
-    
-
 }
