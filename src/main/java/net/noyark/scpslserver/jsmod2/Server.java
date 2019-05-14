@@ -1,7 +1,9 @@
 package net.noyark.scpslserver.jsmod2;
 
+import net.noyark.Smod2Server;
 import net.noyark.scpslserver.jsmod2.command.*;
 import net.noyark.scpslserver.jsmod2.inferf.log.ILogger;
+import net.noyark.scpslserver.jsmod2.network.DataPacket;
 import net.noyark.scpslserver.jsmod2.plugin.PluginClassLoader;
 import net.noyark.scpslserver.jsmod2.utils.Utils;
 
@@ -58,6 +60,9 @@ public class Server {
 
     private PluginManager pluginManager;
 
+    private volatile DatagramSocket socket;
+
+    private Smod2Server smod2Server;
 
 
     Server(ILogger log, Properties lang) {
@@ -106,7 +111,7 @@ public class Server {
         public void run() {
             Utils.TryCatch(()->{
                 log.info("Listener-Thread:EXECUTOR_SERVICE->start");
-                DatagramSocket socket = getSocket(Integer.parseInt(serverProp.getProperty("port")));
+                socket = getSocket(Integer.parseInt(serverProp.getProperty("port")));
 
                 while (true) {
 
@@ -116,8 +121,11 @@ public class Server {
 
                     socket.receive(request);
 
+
+
                     String message = new String(request.getData(), 0 , request.getLength());
 
+                    //TODO 在这里根据编号分包
 
                     if(message.startsWith("[2]")){
                         //停止服务端
@@ -129,6 +137,12 @@ public class Server {
                 }
             });
         }
+    }
+
+    //TODO address和port通过数据包获取
+    public void sendPacket(DataPacket packet){
+        byte[] encode = packet.encode();
+        DatagramPacket pack = new DatagramPacket(encode,encode.length,smod2Server.getAddress(),smod2Server.getPort());
     }
 
     public ILogger getLogger() {

@@ -60,6 +60,8 @@ public class FileSystem {
                 FileOutputStream stream = new FileOutputStream(serverProp);
                 outputStreams.add(stream);
                 properties.setProperty("port","19938");
+                properties.setProperty("decode","utf-8");
+                properties.setProperty("encode","utf-8");
                 properties.store(stream,"this is the server's properties");
                 stream.flush();
                 properties.load(new FileInputStream(serverProp));

@@ -4,6 +4,7 @@ import net.noyark.Code;
 import net.noyark.scpslserver.jsmod2.Message;
 import net.noyark.scpslserver.jsmod2.FileSystem;
 import net.noyark.scpslserver.jsmod2.Server;
+import net.noyark.scpslserver.jsmod2.network.DataPacket;
 
 import java.io.*;
 import java.util.Arrays;
@@ -108,4 +109,5 @@ public class Utils {
             e.printStackTrace();
         }
     }
+
 }

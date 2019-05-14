@@ -14,7 +14,9 @@ public class Generator {
     public Room room;
 
     public void unlock(){
-
+        if(locked){
+            locked = false;
+        }
     }
     public Object getComponent(){
           return null;
