@@ -14,18 +14,12 @@ import java.util.Properties;
 
 public class Jsmod2 {
 
-    private static List<String> startInfo;
-
-    private static List<String> successInfo;
-
     public static final String START = "start";
 
 
     static {
-        startInfo = new ArrayList<>();
-        registerStartInfo();
-        successInfo = new ArrayList<>();
-        registerSuccessInfo();
+        Register.getInstance().registerStartInfo();
+        Register.getInstance().registerSuccessInfo();
     }
 
     private static ILogger log = new ServerLogger();
@@ -42,7 +36,7 @@ public class Jsmod2 {
             startMessage(langProperties);
             new Server(log,langProperties);
             long startSuccess = System.currentTimeMillis();
-            for(String success:successInfo){
+            for(String success:Register.getInstance().getSuccessInfo()){
                 log.info(MessageFormat.format(langProperties.getProperty(success),(startSuccess-start)+""));
             }
             Console.getConsole().commandInput();
@@ -52,20 +46,13 @@ public class Jsmod2 {
         }
     }
 
-    public static void registerStartInfo(){
-        startInfo.add(START+".info");
-        startInfo.add(START+".thanks");
-        startInfo.add(START+".warn");
-        startInfo.add(START+".connect");
-    }
 
-    public static void registerSuccessInfo(){
-        successInfo.add("start.finish");
-    }
+
+
 
     public static void startMessage(Properties langProperties){
         //plugin dir
-        for(String info:startInfo){
+        for(String info:Register.getInstance().getStartInfo()){
             log.info(langProperties.getProperty(info));
         }
     }

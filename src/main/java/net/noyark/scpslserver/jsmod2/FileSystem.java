@@ -20,7 +20,7 @@ public class FileSystem {
 
     public static final String SERVER_PROPERTIES = "/server.properties";
 
-    private static List<String> registerLang;
+
 
 
     private List<OutputStream> outputStreams = new ArrayList<>();
@@ -39,8 +39,7 @@ public class FileSystem {
     }
 
     static {
-        registerLang = new ArrayList<>();
-        registerLang();
+        Register.getInstance().registerLang();
     }
 
     private FileSystem(){
@@ -96,7 +95,7 @@ public class FileSystem {
             PrintWriter writer = new PrintWriter(file);
 
             properties.load(Utils.getClassStream("lang.properties"));
-            for(String lang:registerLang){
+            for(String lang:Register.getInstance().getRegisterLang()){
                 log.info(properties.getProperty(lang));
             }
             String langType = Server.getScanner().nextLine();
@@ -126,14 +125,6 @@ public class FileSystem {
         return properties;
     }
 
-    /**
-     * 语言注册
-     */
-
-    public static void registerLang(){
-        registerLang.add("zh");
-        registerLang.add("en");
-    }
 
     public List<OutputStream> getOutputStreams() {
         return outputStreams;

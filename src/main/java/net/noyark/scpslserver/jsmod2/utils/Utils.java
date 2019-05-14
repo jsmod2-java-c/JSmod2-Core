@@ -86,7 +86,7 @@ public class Utils {
     }
 
     private static String getLevelStr(int level){
-        StringBuffer levelStr = new StringBuffer();
+        StringBuilder levelStr = new StringBuilder();
         for(int levelI = 0;levelI<level ; levelI++){
             levelStr.append("\t");
         }
@@ -108,5 +108,4 @@ public class Utils {
             e.printStackTrace();
         }
     }
-
 }

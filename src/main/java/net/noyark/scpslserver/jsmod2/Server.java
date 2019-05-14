@@ -48,8 +48,6 @@ public class Server {
 
     private Map<String,String> commandInfo;
 
-    private Map<String, NativeCommand> nativeCommandMap;
-
     private List<Plugin> plugins;
 
     public final File serverfolder;
@@ -81,9 +79,8 @@ public class Server {
 
         this.pluginManager = new PluginManager(server);
 
-        nativeCommandMap = new HashMap<>();
         commandInfo = new HashMap<>();
-        registerNativeCommand();
+        Register.getInstance().registerNativeCommand();
         registerNativeInfo();
 
         /**
@@ -171,12 +168,7 @@ public class Server {
         }
     }
 
-    public void registerNativeCommand(){
-        nativeCommandMap.put("stop",new StopCommand());
-        nativeCommandMap.put("help",new HelpCommand());
-        nativeCommandMap.put("plugins",new PluginsCommand());
-        nativeCommandMap.put("reboot",new RebootCommand());
-    }
+
 
 
 
@@ -201,19 +193,17 @@ public class Server {
     }
 
     public void reboot(){
-        try{
+        Utils.TryCatch(()->{
             Jsmod2.startMessage(FileSystem.getFileSystem().langProperties(log));
             pluginManager.clear();
             pluginManager.getPluginClassLoader().loadPlugins(new File(PLUGIN_DIR));
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+        });
     }
     private void registerNativeInfo(){
         /*
          * prop:指向当前的lang文件
          */
-        Set<Map.Entry<String,NativeCommand>> command = nativeCommandMap.entrySet();
+        Set<Map.Entry<String,NativeCommand>> command = Register.getInstance().getNativeCommandMap().entrySet();
         for(Map.Entry<String,NativeCommand> entry:command){
             commandInfo.put(entry.getKey(),entry.getValue().getDescription());
             pluginManager.getCommands().add(entry.getValue());
@@ -263,5 +253,4 @@ public class Server {
             e.printStackTrace();
         }
     }
-
 }
