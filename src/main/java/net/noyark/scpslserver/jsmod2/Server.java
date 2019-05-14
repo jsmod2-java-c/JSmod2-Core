@@ -3,6 +3,7 @@ package net.noyark.scpslserver.jsmod2;
 import net.noyark.scpslserver.jsmod2.command.*;
 import net.noyark.scpslserver.jsmod2.inferf.log.ILogger;
 import net.noyark.scpslserver.jsmod2.plugin.PluginClassLoader;
+import net.noyark.scpslserver.jsmod2.utils.Utils;
 
 import java.io.*;
 import java.net.*;
@@ -50,8 +51,6 @@ public class Server {
     private Map<String, NativeCommand> nativeCommandMap;
 
     private List<Plugin> plugins;
-
-
 
     public final File serverfolder;
 
@@ -102,50 +101,7 @@ public class Server {
     }
 
 
-    public void close(){
-       closeAll();
-       System.exit(0);
-    }
 
-    public void closeAll(){
-        disable();
-        closeStream();
-        log.info(lang.getProperty(STOP+".finish"));
-    }
-
-    private void disable(){
-        for(Plugin plugin:plugins){
-            log.info("unload the plugin named "+plugin.getPluginName());
-            plugin.onDisable();
-        }
-    }
-
-    public static Scanner getScanner(){
-        return scanner;
-    }
-
-    private void closeStream(){
-        try{
-            List<InputStream> oStreams = FileSystem.getFileSystem().getInputStreams();
-            for(InputStream stream : oStreams){
-                stream.close();
-            }
-            List<OutputStream> iStreams = FileSystem.getFileSystem().getOutputStreams();
-            for(OutputStream stream : iStreams){
-                stream.close();
-            }
-            List<BufferedReader> readers = FileSystem.getFileSystem().getReaders();
-            for(BufferedReader reader:readers){
-                reader.close();
-            }
-            List<PrintWriter> writers = FileSystem.getFileSystem().getWriters();
-            for(PrintWriter writer:writers){
-                writer.close();
-            }
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-    }
 
     /**
      * 服务器监听线程启动
@@ -153,7 +109,7 @@ public class Server {
     private class ListenerThread implements Runnable{
         @Override
         public void run() {
-            try{
+            Utils.TryCatch(()->{
                 DatagramSocket socket = getSocket(Integer.parseInt(serverProp.getProperty("port")));
 
                 while (true) {
@@ -175,9 +131,7 @@ public class Server {
                     //发出数据包部分由C#插件决定，C#插件的Server中央处理java发出的请求
                     //专门设立发包的api
                 }
-            }catch (Exception e){
-                e.printStackTrace();
-            }
+            });
         }
     }
 
@@ -224,16 +178,7 @@ public class Server {
         nativeCommandMap.put("reboot",new RebootCommand());
     }
 
-    public void registerNativeInfo(){
-        /**
-         * prop:指向当前的lang文件
-         */
-        Set<Map.Entry<String,NativeCommand>> command = nativeCommandMap.entrySet();
-        for(Map.Entry<String,NativeCommand> entry:command){
-            commandInfo.put(entry.getKey(),entry.getValue().getDescription());
-            pluginManager.getCommands().add(entry.getValue());
-        }
-    }
+
 
 
     public Map<String, String> getCommandInfo(){
@@ -241,7 +186,7 @@ public class Server {
     }
 
     //监听Smod2转发端接口
-    public DatagramSocket getSocket(int port) throws SocketException {
+    private DatagramSocket getSocket(int port) throws SocketException {
 
         DatagramSocket socket = new DatagramSocket(port);
 
@@ -264,4 +209,59 @@ public class Server {
             e.printStackTrace();
         }
     }
+    private void registerNativeInfo(){
+        /*
+         * prop:指向当前的lang文件
+         */
+        Set<Map.Entry<String,NativeCommand>> command = nativeCommandMap.entrySet();
+        for(Map.Entry<String,NativeCommand> entry:command){
+            commandInfo.put(entry.getKey(),entry.getValue().getDescription());
+            pluginManager.getCommands().add(entry.getValue());
+        }
+    }
+
+    public void close(){
+        closeAll();
+        System.exit(0);
+    }
+
+    public void closeAll(){
+        disable();
+        closeStream();
+        log.info(lang.getProperty(STOP+".finish"));
+    }
+    private void disable(){
+        for(Plugin plugin:plugins){
+            log.info("unload the plugin named "+plugin.getPluginName());
+            plugin.onDisable();
+        }
+    }
+
+    public static Scanner getScanner(){
+        return scanner;
+    }
+
+    private void closeStream(){
+        try{
+            List<InputStream> oStreams = FileSystem.getFileSystem().getInputStreams();
+            for(InputStream stream : oStreams){
+                stream.close();
+            }
+            List<OutputStream> iStreams = FileSystem.getFileSystem().getOutputStreams();
+            for(OutputStream stream : iStreams){
+                stream.close();
+            }
+            List<BufferedReader> readers = FileSystem.getFileSystem().getReaders();
+            for(BufferedReader reader:readers){
+                reader.close();
+            }
+            List<PrintWriter> writers = FileSystem.getFileSystem().getWriters();
+            for(PrintWriter writer:writers){
+                writer.close();
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
 }

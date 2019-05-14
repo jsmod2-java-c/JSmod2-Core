@@ -1,5 +1,6 @@
 package net.noyark.scpslserver.jsmod2.utils;
 
+import net.noyark.Code;
 import net.noyark.scpslserver.jsmod2.Message;
 import net.noyark.scpslserver.jsmod2.FileSystem;
 import net.noyark.scpslserver.jsmod2.Server;
@@ -99,4 +100,13 @@ public class Utils {
     public static Message getMessageSender(){
         return messageSender;
     }
+
+    public static void TryCatch(Code code){
+        try{
+            code.code();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 }

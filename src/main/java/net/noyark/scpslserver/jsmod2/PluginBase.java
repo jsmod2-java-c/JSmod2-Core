@@ -2,6 +2,10 @@ package net.noyark.scpslserver.jsmod2;
 
 import net.noyark.scpslserver.jsmod2.inferf.log.ILogger;
 import net.noyark.scpslserver.jsmod2.plugin.PluginClassLoader;
+import net.noyark.scpslserver.jsmod2.utils.Utils;
+import net.noyark.scpslserver.jsmod2.utils.config.Config;
+import net.noyark.scpslserver.jsmod2.utils.config.ConfigQueryer;
+import net.noyark.scpslserver.jsmod2.utils.config.ConfigType;
 
 import java.io.File;
 
@@ -96,5 +100,12 @@ public abstract class PluginBase implements Plugin {
 
     public String getVersion(){
         return version;
+    }
+
+    public void initConfig(){
+        Utils.TryCatch(()->{
+            Config config = ConfigQueryer.getInstance(this.dataFolder+"/config.yml",false, ConfigType.YAML);
+            config.save();
+        });
     }
 }

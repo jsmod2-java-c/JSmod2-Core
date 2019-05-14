@@ -85,32 +85,28 @@ public class PluginManager {
      * @param listener
      */
 
-    public void registerEvents(Listener listener,Plugin plugin){
+    public void registerEvents(final Listener listener,Plugin plugin){
         if(!plugin.isEnabled()){
             throw new PluginException("the plugin is not enabled");
         }
-        try{
+        Utils.TryCatch(()->{
             Class<?> type = listener.getClass();
             Listener listenerInstance = (Listener)type.newInstance();
             Method[] methods = type.getDeclaredMethods();
             for(Method method:methods) {
                 addMethod(method,listenerInstance);
             }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        });
     }
 
-    public void registerEvent(Method method,Plugin plugin){
+    public void registerEvent(final Method method,Plugin plugin){
         if(!plugin.isEnabled()){
             throw new PluginException("the plugin is not enabled");
         }
-        try{
+        Utils.TryCatch(()->{
             Class<?> type = method.getDeclaringClass();
             addMethod(method,(Listener)(type.newInstance()));
-        }catch (Exception e){
-
-        }
+        });
     }
 
     private void addMethod(Method method,Listener listenerInstance){
@@ -129,8 +125,8 @@ public class PluginManager {
         }
     }
 
-    public void callEvent(Event event){
-        try{
+    public void callEvent(final Event event){
+        Utils.TryCatch(()->{
             Set<Map.Entry<Listener,List<MethodInvokeMapper>>> set = listenerMapper.entrySet();
             for(Map.Entry<Listener,List<MethodInvokeMapper>> entry:set){
                 Listener listener = entry.getKey();
@@ -151,9 +147,7 @@ public class PluginManager {
                     method.getMethod().invoke(listener,event);
                 }
             }
-        }catch (Exception e){
-           e.printStackTrace();
-        }
+        });
     }
 
 
