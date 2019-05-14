@@ -98,8 +98,6 @@ public class Server {
     }
 
 
-
-
     /**
      * 服务器监听线程启动
      */
@@ -107,6 +105,7 @@ public class Server {
         @Override
         public void run() {
             Utils.TryCatch(()->{
+                log.info("Listener-Thread:EXECUTOR_SERVICE->start");
                 DatagramSocket socket = getSocket(Integer.parseInt(serverProp.getProperty("port")));
 
                 while (true) {
@@ -169,10 +168,6 @@ public class Server {
     }
 
 
-
-
-
-
     public Map<String, String> getCommandInfo(){
         return commandInfo;
     }
@@ -232,7 +227,7 @@ public class Server {
     }
 
     private void closeStream(){
-        try{
+        Utils.TryCatch(()->{
             List<InputStream> oStreams = FileSystem.getFileSystem().getInputStreams();
             for(InputStream stream : oStreams){
                 stream.close();
@@ -249,8 +244,6 @@ public class Server {
             for(PrintWriter writer:writers){
                 writer.close();
             }
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+        });
     }
 }
