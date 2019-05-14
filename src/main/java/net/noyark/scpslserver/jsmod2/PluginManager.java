@@ -27,13 +27,15 @@ public class PluginManager {
 
     private Map<Listener, List<MethodInvokeMapper>> listenerMapper = new HashMap<>();
 
+    private List<NativeCommand> commands = new ArrayList<>();
+
     private Server server;
 
     public PluginManager(Server server){
         this.server = server;
     }
 
-    private List<NativeCommand> commands = new ArrayList<>();
+
 
 
     public PluginClassLoader getPluginClassLoader(){
@@ -153,7 +155,24 @@ public class PluginManager {
            e.printStackTrace();
         }
     }
+
+
     public List<NativeCommand> getCommands(){
         return commands;
+    }
+
+    public List<NativeCommand> getPluginCommands(){
+        List<NativeCommand> pluginCommands = new ArrayList<>();
+        for(NativeCommand cmd:commands){
+            if(cmd instanceof Command){
+                pluginCommands.add(cmd);
+            }
+        }
+        return pluginCommands;
+    }
+    public void clear(){
+        commands.removeAll(getPluginCommands());
+        listenerMapper.clear();
+        this.getPlugins().clear();
     }
 }

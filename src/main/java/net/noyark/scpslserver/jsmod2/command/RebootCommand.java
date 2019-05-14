@@ -3,19 +3,15 @@ package net.noyark.scpslserver.jsmod2.command;
 import net.noyark.scpslserver.jsmod2.CommandSender;
 import net.noyark.scpslserver.jsmod2.Server;
 
-/**
- * @author magiclu550 #(code) jsmod2
- */
+public class RebootCommand extends NativeCommand{
 
-public class PluginsCommand extends NativeCommand{
-
-    public PluginsCommand() {
-        super("plugins","admin","prop:cmd.plugins");
+    public RebootCommand() {
+        super("reboot","admin","prop:cmd.reboot");
     }
 
     @Override
     public boolean execute(CommandSender commandSender, String[] args) {
-        Server.getSender().getServer().getPluginManager().plugins();
+        Server.getSender().getServer().reboot();
         return true;
     }
 }

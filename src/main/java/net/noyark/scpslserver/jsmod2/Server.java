@@ -1,9 +1,6 @@
 package net.noyark.scpslserver.jsmod2;
 
-import net.noyark.scpslserver.jsmod2.command.HelpCommand;
-import net.noyark.scpslserver.jsmod2.command.NativeCommand;
-import net.noyark.scpslserver.jsmod2.command.PluginsCommand;
-import net.noyark.scpslserver.jsmod2.command.StopCommand;
+import net.noyark.scpslserver.jsmod2.command.*;
 import net.noyark.scpslserver.jsmod2.inferf.log.ILogger;
 import net.noyark.scpslserver.jsmod2.plugin.PluginClassLoader;
 
@@ -13,6 +10,7 @@ import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import static net.noyark.scpslserver.jsmod2.FileSystem.PLUGIN_DIR;
 import static net.noyark.scpslserver.jsmod2.FileSystem.getFileSystem;
 
 /**
@@ -23,6 +21,8 @@ import static net.noyark.scpslserver.jsmod2.FileSystem.getFileSystem;
  */
 
 public class Server {
+
+    private static final int MAX_LENGTH = 65535;
 
     private static final String STOP = "end";
 
@@ -51,7 +51,7 @@ public class Server {
 
     private List<Plugin> plugins;
 
-    private static final int MAX_LENGTH = 65535;
+
 
     public final File serverfolder;
 
@@ -80,7 +80,7 @@ public class Server {
 
         sender = new CommandConsoleSender(server);
 
-        this.pluginManager = new PluginManager(this);
+        this.pluginManager = new PluginManager(server);
 
         nativeCommandMap = new HashMap<>();
         commandInfo = new HashMap<>();
@@ -103,10 +103,14 @@ public class Server {
 
 
     public void close(){
+       closeAll();
+       System.exit(0);
+    }
+
+    public void closeAll(){
         disable();
         closeStream();
         log.info(lang.getProperty(STOP+".finish"));
-        System.exit(0);
     }
 
     private void disable(){
@@ -176,6 +180,7 @@ public class Server {
             }
         }
     }
+
     public ILogger getLogger() {
         return log;
     }
@@ -216,6 +221,7 @@ public class Server {
         nativeCommandMap.put("stop",new StopCommand());
         nativeCommandMap.put("help",new HelpCommand());
         nativeCommandMap.put("plugins",new PluginsCommand());
+        nativeCommandMap.put("reboot",new RebootCommand());
     }
 
     public void registerNativeInfo(){
@@ -247,5 +253,15 @@ public class Server {
      */
     public PluginManager getPluginManager(){
         return pluginManager;
+    }
+
+    public void reboot(){
+        try{
+            Jsmod2.startMessage(FileSystem.getFileSystem().langProperties(log));
+            pluginManager.clear();
+            pluginManager.getPluginClassLoader().loadPlugins(new File(PLUGIN_DIR));
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 }

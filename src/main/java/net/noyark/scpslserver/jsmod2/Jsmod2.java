@@ -38,11 +38,8 @@ public class Jsmod2 {
         try{
             //lang properties
             Properties langProperties = FileSystem.getFileSystem().langProperties(log);
-            //plugin dir
             long start = System.currentTimeMillis();
-            for(String info:startInfo){
-                log.info(langProperties.getProperty(info));
-            }
+            startMessage(langProperties);
             new Server(log,langProperties);
             long startSuccess = System.currentTimeMillis();
             for(String success:successInfo){
@@ -64,5 +61,12 @@ public class Jsmod2 {
 
     public static void registerSuccessInfo(){
         successInfo.add("start.finish");
+    }
+
+    public static void startMessage(Properties langProperties){
+        //plugin dir
+        for(String info:startInfo){
+            log.info(langProperties.getProperty(info));
+        }
     }
 }
