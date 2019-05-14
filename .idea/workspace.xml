@@ -2,8 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="903d6ce5-6282-4b7a-9be7-14af381194b4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/utils/player/AmmoType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/utils/player/DamageType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/utils/player/ExperienceType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/utils/player/RadioStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/utils/player/UserRank.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/utils/player/WeaponType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/Register.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/entity/IPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/entity/IPlayer.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -15,122 +22,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/Register.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="25" column="17" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#516#517#0" expanded="true" />
-                <element signature="e#550#551#0" expanded="true" />
-                <element signature="e#1056#1057#0" expanded="true" />
-                <element signature="e#1094#1095#0" expanded="true" />
-                <element signature="e#1609#1610#0" expanded="true" />
-                <element signature="e#1641#1642#0" expanded="true" />
-                <element signature="e#1783#1784#0" expanded="true" />
-                <element signature="e#1817#1818#0" expanded="true" />
-                <element signature="e#1727#1728#0" expanded="true" />
-                <element signature="e#1758#1759#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/utils/ConfigGetter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="293">
-              <caret line="17" column="27" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/Server.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/entity/IPlayer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="190" column="28" selection-start-line="190" selection-start-column="28" selection-end-line="190" selection-end-column="28" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/Message.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="56">
-              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#315#316#0" expanded="true" />
-                <element signature="e#352#353#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/Jsmod2.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1">
-              <caret line="15" selection-start-line="15" selection-end-line="15" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/FileSystem.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-981">
-              <caret line="41" column="46" selection-start-line="41" selection-start-column="46" selection-end-line="41" selection-end-column="46" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/PluginManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1847">
-              <caret line="170" column="5" lean-forward="true" selection-start-line="170" selection-start-column="5" selection-end-line="170" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/utils/AuthType.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="56">
-              <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/PluginBase.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2379">
-              <caret line="107" column="26" selection-start-line="107" selection-start-column="26" selection-end-line="107" selection-end-column="26" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/Plugin.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1120">
-              <caret line="43" column="24" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
+            <state relative-caret-position="84">
+              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
             </state>
           </provider>
         </entry>
@@ -141,9 +37,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="AnnotationType" />
-        <option value="Enum" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -155,7 +51,6 @@
       <list>
         <option value="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/ex/NoSuchPluginNameException.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/noyark/Console.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/entity/IPlayer.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/ex/PluginException.java" />
         <option value="$PROJECT_DIR$/target/classes/en.properties" />
         <option value="$PROJECT_DIR$/target/classes/zh.properties" />
@@ -192,9 +87,16 @@
         <option value="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/Console.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/FileSystem.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/utils/ConfigGetter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/Register.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/Jsmod2.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/Server.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/Register.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/utils/DamageType.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/utils/player/UserRank.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/utils/player/AmmoType.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/utils/player/RadioStatus.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/utils/player/ExperienceType.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/utils/player/WeaponType.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/entity/IPlayer.java" />
       </list>
     </option>
   </component>
@@ -358,6 +260,17 @@
               <item name="github" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="noyark" type="462c0819:PsiDirectoryNode" />
+              <item name="jsmod2" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+              <item name="player" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="github" type="b2602c69:ProjectViewProjectNode" />
+              <item name="github" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -369,7 +282,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557807489291" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557811495614" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -390,7 +303,7 @@
   <component name="RunManager">
     <configuration name="Jsmod2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="net.noyark.scpslserver.jsmod2.Jsmod2" />
-      <module name="jsmod2" />
+      <module name="github" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="net.noyark.scpslserver.jsmod2.*" />
@@ -418,7 +331,7 @@
       <option name="presentableId" value="Default" />
       <updated>1557725481238</updated>
       <workItem from="1557725482490" duration="16537000" />
-      <workItem from="1557794627997" duration="12847000" />
+      <workItem from="1557794627997" duration="15388000" />
     </task>
     <task id="LOCAL-00001" summary="PluginManager初步架构">
       <created>1557728269911</created>
@@ -497,16 +410,24 @@
       <option name="project" value="LOCAL" />
       <updated>1557806588906</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="添加注册类，统一添加">
+      <created>1557807531265</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1557807531265</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29384000" />
+    <option name="totallyTimeSpent" value="31925000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8051948" visible="true" weight="0.24869792" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8051948" visible="true" weight="0.24869792" />
       <window_info id="Structure" order="1" sideWeight="0.19480519" side_tool="true" weight="0.269437" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -515,7 +436,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.37362638" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.30357143" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -581,51 +502,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="添加注册类，统一添加" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/admin/AuthCheckEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/admin/BanEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/ex/MainClassErrorException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/ex/NoSuchPluginNameException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="5" column="43" selection-start-line="5" selection-start-column="43" selection-end-line="5" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/ex/PluginException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="4" column="44" selection-start-line="4" selection-start-column="44" selection-end-line="4" selection-end-column="44" />
-          <folding>
-            <element signature="e#173#174#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/admin/AdminQueryEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/utils/EventPriority.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="203">
@@ -756,13 +632,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
           <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/entity/IPlayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
-          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -988,26 +857,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/Register.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="25" column="17" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#516#517#0" expanded="true" />
-            <element signature="e#550#551#0" expanded="true" />
-            <element signature="e#1056#1057#0" expanded="true" />
-            <element signature="e#1094#1095#0" expanded="true" />
-            <element signature="e#1609#1610#0" expanded="true" />
-            <element signature="e#1641#1642#0" expanded="true" />
-            <element signature="e#1783#1784#0" expanded="true" />
-            <element signature="e#1817#1818#0" expanded="true" />
-            <element signature="e#1727#1728#0" expanded="true" />
-            <element signature="e#1758#1759#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/utils/ConfigGetter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="293">
@@ -1017,11 +866,112 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
+        <state relative-caret-position="3416">
           <caret line="190" column="28" selection-start-line="190" selection-start-column="28" selection-end-line="190" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/Register.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#923#924#0" expanded="true" />
+            <element signature="e#970#971#0" expanded="true" />
+            <element signature="e#1016#1017#0" expanded="true" />
+            <element signature="e#1051#1052#0" expanded="true" />
+            <element signature="e#1113#1114#0" expanded="true" />
+            <element signature="e#1152#1153#0" expanded="true" />
+            <element signature="e#1194#1195#0" expanded="true" />
+            <element signature="e#1226#1227#0" expanded="true" />
+            <element signature="e#1271#1272#0" expanded="true" />
+            <element signature="e#1305#1306#0" expanded="true" />
+            <element signature="e#1348#1349#0" expanded="true" />
+            <element signature="e#1379#1380#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/utils/player/DamageType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="56">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/utils/player/RadioStatus.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
+          <folding>
+            <element signature="e#234#235#0" expanded="true" />
+            <element signature="e#262#263#0" expanded="true" />
+            <element signature="e#235#236#0" expanded="true" />
+            <element signature="e#271#272#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/utils/player/AmmoType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="10" column="20" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
+          <folding>
+            <element signature="e#272#273#0" expanded="true" />
+            <element signature="e#298#299#0" expanded="true" />
+            <element signature="e#265#266#0" expanded="true" />
+            <element signature="e#296#297#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/utils/player/ExperienceType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="532">
+          <caret line="19" column="20" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
+          <folding>
+            <element signature="e#411#412#0" expanded="true" />
+            <element signature="e#438#439#0" expanded="true" />
+            <element signature="e#415#416#0" expanded="true" />
+            <element signature="e#446#447#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/utils/player/UserRank.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
+          <folding>
+            <element signature="e#248#249#0" expanded="true" />
+            <element signature="e#274#275#0" expanded="true" />
+            <element signature="e#299#300#0" expanded="true" />
+            <element signature="e#331#332#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/utils/player/WeaponType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="65">
+          <caret line="14" column="20" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
+          <folding>
+            <element signature="e#227#228#0" expanded="true" />
+            <element signature="e#253#254#0" expanded="true" />
+            <element signature="e#227#228#0" expanded="true" />
+            <element signature="e#258#259#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/entity/IPlayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>

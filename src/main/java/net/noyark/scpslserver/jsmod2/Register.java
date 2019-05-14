@@ -11,10 +11,16 @@ import static net.noyark.scpslserver.jsmod2.Jsmod2.START;
 
 public class Register {
 
+    /**
+     * 注册语言时，首先按照标准格式添加语言
+     * 参考resources格式
+     */
+
     public void registerLang(){
         registerLang.add("zh");
         registerLang.add("en");
     }
+
 
     public void registerNativeCommand(){
         nativeCommandMap.put("stop",new StopCommand());
