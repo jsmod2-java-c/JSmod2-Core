@@ -19,6 +19,7 @@ public class Register {
     public void registerLang(){
         registerLang.add("zh");
         registerLang.add("en");
+        registerLang.add("ru");
     }
 
 
