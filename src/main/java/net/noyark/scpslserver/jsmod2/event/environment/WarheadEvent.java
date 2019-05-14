@@ -3,6 +3,10 @@ package net.noyark.scpslserver.jsmod2.event.environment;
 import net.noyark.scpslserver.jsmod2.entity.Player;
 import net.noyark.scpslserver.jsmod2.event.Event;
 
+/**
+ * @author Kevinj
+ */
+
 public class WarheadEvent extends Event {
     public float TimeLeft;
     private Player player;

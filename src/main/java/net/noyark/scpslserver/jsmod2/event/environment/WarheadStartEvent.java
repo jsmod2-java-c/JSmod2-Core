@@ -5,6 +5,10 @@ import org.apache.logging.log4j.core.tools.picocli.CommandLine;
 
 import java.awt.event.InputEvent;
 
+/**
+ * @author Kevinj
+ */
+
 public class WarheadStartEvent extends WarheadEvent {
     public boolean IsResumed;
     public boolean OpenDoorsAfter;

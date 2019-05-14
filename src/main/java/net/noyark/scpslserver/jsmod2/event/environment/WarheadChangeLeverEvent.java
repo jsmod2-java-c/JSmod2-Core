@@ -3,6 +3,10 @@ package net.noyark.scpslserver.jsmod2.event.environment;
 import net.noyark.scpslserver.jsmod2.entity.Player;
 import net.noyark.scpslserver.jsmod2.event.Event;
 
+/**
+ * @author Kevinj
+ */
+
 public class WarheadChangeLeverEvent extends Event {
     public Player player;
     public boolean Allow;
