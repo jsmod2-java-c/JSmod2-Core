@@ -1,0 +1,4 @@
+package net.noyark.scpslserver.jsmod2.utils.api;
+
+public class Generator {
+}

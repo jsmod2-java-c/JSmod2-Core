@@ -8,6 +8,7 @@ import net.noyark.scpslserver.jsmod2.math.SCPVector;
 
 /**
  * @author magiclu550 #(code) jsmod2
+ * @author kevinj
  */
 
 
