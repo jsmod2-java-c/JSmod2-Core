@@ -20,6 +20,9 @@ public class Register {
         registerLang.add("zh");
         registerLang.add("en");
         registerLang.add("ru");
+        registerLang.add("jap");
+        registerLang.add("ar");
+        registerLang.add("sp");
     }
 
 
