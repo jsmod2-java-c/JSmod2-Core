@@ -44,8 +44,7 @@ public class BinaryStream {
         String json = JSON.toJSONString(o);
         String packet = id+json;
         byte[] bytes = packet.getBytes(properties.getProperty("encode"));
-        byte[] base64 = Base64.getEncoder().encode(bytes);
-        return base64;
+        return Base64.getEncoder().encode(bytes);
     }
 
 
@@ -56,6 +55,7 @@ public class BinaryStream {
         Object o = JSONObject.parseObject(json,clz);
         return (T)o;
     }
+
 
     //TODO 其他数据类型的写入
 

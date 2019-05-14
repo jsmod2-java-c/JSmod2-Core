@@ -5,8 +5,10 @@ package net.noyark;
 import java.net.InetAddress;
 
 public class Smod2Server {
+
     /** TODO 通过数据包获取 */
     private InetAddress address;
+
     /** TODO 通过数据包获取 */
     private int port;
 
