@@ -9,6 +9,6 @@ public abstract class DataPacket extends BinaryStream{
 
     public abstract byte[] encode();
 
-    public abstract Object decode();
+    public abstract Object decode(byte[] bytes);
 
 }

@@ -1,6 +1,7 @@
 package net.noyark.scpslserver.jsmod2;
 
 import net.noyark.Smod2Server;
+import net.noyark.scpslserver.jsmod2.annotations.PacketCMD;
 import net.noyark.scpslserver.jsmod2.command.*;
 import net.noyark.scpslserver.jsmod2.inferf.log.ILogger;
 import net.noyark.scpslserver.jsmod2.network.DataPacket;
@@ -25,7 +26,9 @@ import static net.noyark.scpslserver.jsmod2.FileSystem.getFileSystem;
 
 public class Server {
 
-    private static final int MAX_LENGTH = 65535;
+    @PacketCMD private static final int CLOSE_COMMAND = 0x02;
+
+    private static final int MAX_LENGTH = 0xffff;
 
     private static final String STOP = "end";
 
@@ -66,6 +69,7 @@ public class Server {
 
 
     Server(ILogger log, Properties lang) {
+        Register.getInstance().registerPacket();
 
         this.log = log;
 
@@ -121,15 +125,11 @@ public class Server {
 
                     socket.receive(request);
 
-
-
                     String message = new String(request.getData(), 0 , request.getLength());
 
                     //TODO 在这里根据编号分包
-
-                    if(message.startsWith("[2]")){
-                        //停止服务端
-                        socket.close();
+                    int id = Utils.getResponsePacketId(message);
+                    if(id == CLOSE_COMMAND){
                         close();
                     }
                     //发出数据包部分由C#插件决定，C#插件的Server中央处理java发出的请求

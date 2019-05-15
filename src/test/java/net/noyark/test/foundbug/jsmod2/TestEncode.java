@@ -15,7 +15,6 @@ public class TestEncode{
     public void encode() throws Exception{
         System.out.println(JSON.toJSONString("11"));
         byte[] bytes = Base64.getEncoder().encode("1-{stop}".getBytes());
-        System.out.println(Utils.getResponsePacketId(bytes));
         System.out.println(dataObjectDecode(Base64.getEncoder().encode("1-{\"SaaLo\":\"1\"}".getBytes()),ObjectC.class));
     }
 

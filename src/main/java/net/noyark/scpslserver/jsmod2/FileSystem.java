@@ -59,7 +59,7 @@ public class FileSystem {
             if(!serverProp.exists()){
                 FileOutputStream stream = new FileOutputStream(serverProp);
                 outputStreams.add(stream);
-                properties.setProperty("port","19938");
+                properties.setProperty("port","19935");
                 properties.setProperty("decode","utf-8");
                 properties.setProperty("encode","utf-8");
                 properties.store(stream,"this is the server's properties");
