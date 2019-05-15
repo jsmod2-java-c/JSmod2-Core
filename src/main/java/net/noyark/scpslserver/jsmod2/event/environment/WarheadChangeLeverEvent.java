@@ -5,27 +5,28 @@ import net.noyark.scpslserver.jsmod2.event.Event;
 
 /**
  * @author Kevinj
+ * @author magiclu550
  */
 
 public class WarheadChangeLeverEvent extends Event {
-    public Player player;
-    public boolean Allow;
+    private Player player;
+    private boolean allow;
 
     public Player getPlayer() {
         return player;
     }
 
     public boolean isAllow() {
-        return Allow;
+        return allow;
     }
 
     public void setAllow(boolean allow) {
-        Allow = allow;
+        this.allow = allow;
     }
 
     public WarheadChangeLeverEvent(Player player, boolean allow) {
         this.player = player;
-        Allow = allow;
+        this.allow = allow;
     }
 
 }

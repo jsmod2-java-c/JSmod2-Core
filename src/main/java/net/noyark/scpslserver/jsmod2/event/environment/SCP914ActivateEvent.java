@@ -18,11 +18,11 @@ public class SCP914ActivateEvent extends Event {
 
     private KnobSetting knobSetting;
 
-    public Object[] inputs;
+    private Object[] inputs;
 
-    public SCPVector intakePos;
+    private SCPVector intakePos;
 
-    public SCPVector outputPos;
+    private SCPVector outputPos;
 
     public SCP914ActivateEvent(Player user, KnobSetting knobSetting, Object[] inputs, SCPVector intakePos, SCPVector outputPos) {
         this.user = user;

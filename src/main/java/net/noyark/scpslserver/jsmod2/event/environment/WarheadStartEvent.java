@@ -7,30 +7,31 @@ import java.awt.event.InputEvent;
 
 /**
  * @author Kevinj
+ * @author magiclu550
  */
 
 public class WarheadStartEvent extends WarheadEvent {
-    public boolean IsResumed;
-    public boolean OpenDoorsAfter;
+    public boolean isResumed;
+    public boolean openDoorsAfter;
 
     public WarheadStartEvent(Player player, float timeLeft) {
         super(player, timeLeft);
     }
 
     public boolean isResumed() {
-        return IsResumed;
+        return isResumed;
     }
 
     public void setResumed(boolean resumed) {
-        IsResumed = resumed;
+        isResumed = resumed;
     }
 
     public boolean isOpenDoorsAfter() {
-        return OpenDoorsAfter;
+        return openDoorsAfter;
     }
 
     public void setOpenDoorsAfter(boolean openDoorsAfter) {
-        OpenDoorsAfter = openDoorsAfter;
+        this.openDoorsAfter = openDoorsAfter;
     }
 
 }

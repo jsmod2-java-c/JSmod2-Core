@@ -6,12 +6,17 @@ import sun.nio.cs.Surrogate;
 
 /**
  * @author Kevinj
+ * @author magiclu550
  */
 
 public class GeneratorFinishEvent extends Event {
-    public Generator generator;
+    private Generator generator;
 
     public GeneratorFinishEvent(Generator generator) {
         this.generator = generator;
+    }
+
+    public Generator getGenerator() {
+        return generator;
     }
 }

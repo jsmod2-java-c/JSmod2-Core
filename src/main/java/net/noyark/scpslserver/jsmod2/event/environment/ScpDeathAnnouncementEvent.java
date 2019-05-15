@@ -6,33 +6,34 @@ import net.noyark.scpslserver.jsmod2.utils.api.Role;
 
 /**
  * @author Kevinj
+ * @author magiclu550
  */
 
 public class ScpDeathAnnouncementEvent extends Event {
-    public boolean ShouldPlay;
-    public Player DeadPlayer;
-    public Role PlayerRole;
+    private boolean shouldPlay;
+    private Player deadPlayer;
+    private Role playerRole;
 
     public boolean isShouldPlay() {
-        return ShouldPlay;
+        return shouldPlay;
     }
 
     public void setShouldPlay(boolean shouldPlay) {
-        ShouldPlay = shouldPlay;
+        this.shouldPlay = shouldPlay;
     }
 
     public Player getDeadPlayer() {
-        return DeadPlayer;
+        return deadPlayer;
     }
 
     public Role getPlayerRole() {
-        return PlayerRole;
+        return playerRole;
     }
 
     public ScpDeathAnnouncementEvent(boolean shouldPlay, Player deadPlayer, Role playerRole) {
-        ShouldPlay = shouldPlay;
-        DeadPlayer = deadPlayer;
-        PlayerRole = playerRole;
+        this.shouldPlay = shouldPlay;
+        this.deadPlayer = deadPlayer;
+        this.playerRole = playerRole;
     }
 
 

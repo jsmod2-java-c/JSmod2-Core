@@ -4,12 +4,13 @@ import net.noyark.scpslserver.jsmod2.event.Event;
 
 /**
  * @author Kevinj
+ * @author magiclu550
  */
 
 public class SummonVehicleEvent extends Event {
-    public boolean IsCI;
+    private boolean IsCI;
 
-    public boolean AllowSummon;
+    private boolean allowSummon;
 
     public boolean isCI() {
         return IsCI;
@@ -20,16 +21,16 @@ public class SummonVehicleEvent extends Event {
     }
 
     public boolean isAllowSummon() {
-        return AllowSummon;
+        return allowSummon;
     }
 
     public void setAllowSummon(boolean allowSummon) {
-        AllowSummon = allowSummon;
+        this.allowSummon = allowSummon;
     }
 
     public SummonVehicleEvent(boolean isCI, boolean allowSummon) {
         IsCI = isCI;
-        AllowSummon = allowSummon;
+        this.allowSummon = allowSummon;
     }
 
 

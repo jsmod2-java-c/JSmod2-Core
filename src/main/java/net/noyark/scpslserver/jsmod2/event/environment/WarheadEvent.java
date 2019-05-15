@@ -5,37 +5,47 @@ import net.noyark.scpslserver.jsmod2.event.Event;
 
 /**
  * @author Kevinj
+ * @author magiclu550
  */
 
 public class WarheadEvent extends Event {
-    public float TimeLeft;
+    private float timeLeft;
     private Player player;
-    public Player Activator;
-    public boolean Cancel;
+    private Player activator;
+    private boolean cancel;
 
     public float getTimeLeft() {
-        return TimeLeft;
+        return timeLeft;
     }
 
     public void setTimeLeft(float timeLeft) {
-        TimeLeft = timeLeft;
+        timeLeft = timeLeft;
     }
 
     public boolean isCancel() {
-        return Cancel;
+        return cancel;
     }
 
     public void setCancel(boolean cancel) {
-        Cancel = cancel;
+        cancel = cancel;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+
+    public void setActivator(Player activator) {
+        this.activator = activator;
     }
 
     public Player getActivator() {
-        return Activator;
+        return activator;
     }
 
     public WarheadEvent(Player player, float timeLeft){
         this.player = player;
-        this.TimeLeft = timeLeft;
-        this.Cancel = false;
+        this.timeLeft = timeLeft;
+        this.cancel = false;
     }
 }

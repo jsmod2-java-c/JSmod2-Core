@@ -5,26 +5,27 @@ import net.noyark.scpslserver.jsmod2.event.Event;
 
 /**
  * @author Kevinj
+ * @author magiclu550
  */
 
 public class WarheadKeycardAccessEvent extends Event {
     public Player player;
-    public boolean Allow;
+    public boolean allow;
 
     public Player getPlayer() {
         return player;
     }
 
     public boolean isAllow() {
-        return Allow;
+        return allow;
     }
 
     public void setAllow(boolean allow) {
-        Allow = allow;
+        this.allow = allow;
     }
 
     public WarheadKeycardAccessEvent(Player player, boolean allow) {
         this.player = player;
-        Allow = allow;
+        allow = allow;
     }
 }
