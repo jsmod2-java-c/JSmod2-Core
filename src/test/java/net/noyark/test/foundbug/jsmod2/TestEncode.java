@@ -32,4 +32,9 @@ public class TestEncode{
         Object o = JSONObject.parseObject(json,clz);
         return (T)o;
     }
+
+    @Test
+    public void mem() throws Exception{
+
+    }
 }
