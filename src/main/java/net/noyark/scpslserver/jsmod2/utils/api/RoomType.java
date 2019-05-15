@@ -43,4 +43,8 @@ public enum RoomType {
     RoomType(int type){
         this.type = type;
     }
+
+    public int getType() {
+        return type;
+    }
 }

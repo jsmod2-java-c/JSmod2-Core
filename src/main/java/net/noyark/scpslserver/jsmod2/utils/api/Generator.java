@@ -2,6 +2,10 @@ package net.noyark.scpslserver.jsmod2.utils.api;
 
 import net.noyark.scpslserver.jsmod2.math.SCPVector;
 
+/**
+ * @author magiclu550
+ */
+
 public class Generator {
 
     private boolean open;
@@ -27,5 +31,47 @@ public class Generator {
           return null;
     }
 
+    public boolean isOpen() {
+        return open;
+    }
 
+    public boolean isLocked() {
+        return locked;
+    }
+
+    public boolean isHasTablet() {
+        return hasTablet;
+    }
+
+    public boolean isEngaged() {
+        return engaged;
+    }
+
+    public float getStartTime() {
+        return startTime;
+    }
+
+    public float getTimeLeft() {
+        return timeLeft;
+    }
+
+    public SCPVector getPosition() {
+        return position;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setLocked(boolean locked) {
+        this.locked = locked;
+    }
+
+    public void setHasTablet(boolean hasTablet) {
+        this.hasTablet = hasTablet;
+    }
+
+    public void setStartTime(float startTime) {
+        this.startTime = startTime;
+    }
 }
