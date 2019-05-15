@@ -9,6 +9,12 @@ public class Item implements Cloneable, Serializable {
     private boolean inWord;
 
     private ItemType itemType;
-    
 
+    public boolean isInWord() {
+        return inWord;
+    }
+
+    public ItemType getItemType() {
+        return itemType;
+    }
 }
