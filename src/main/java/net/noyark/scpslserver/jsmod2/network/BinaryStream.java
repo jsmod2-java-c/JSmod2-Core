@@ -42,7 +42,7 @@ public class BinaryStream {
 
     public byte[] dataObjectEncode(Object o) throws UnsupportedEncodingException {
         String json = JSON.toJSONString(o);
-        String packet = id+json;
+        String packet = id+"-"+json;
         byte[] bytes = packet.getBytes(properties.getProperty("encode"));
         return Base64.getEncoder().encode(bytes);
     }
@@ -51,10 +51,9 @@ public class BinaryStream {
     public <T> T dataObjectDecode(byte[] data,Class<T> clz) throws UnsupportedEncodingException {
         byte[] packetBytes = Base64.getDecoder().decode(data);
         String json = new String(packetBytes,properties.getProperty("decode"));
-        json = json.substring((id+"").length());
+        json = json.substring((id+"-").length());
         Object o = JSONObject.parseObject(json,clz);
         return (T)o;
     }
 
-    //TODO 其他数据类型的写入
 }

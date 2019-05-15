@@ -8,6 +8,7 @@ import net.noyark.scpslserver.jsmod2.network.DataPacket;
 
 import java.io.*;
 import java.util.Arrays;
+import java.util.Base64;
 
 public class Utils {
 
@@ -110,4 +111,14 @@ public class Utils {
         }
     }
 
+    /**
+     * 获取数据包id，进行匹配数据包
+     * @param bytes
+     * @return
+     */
+    public static Integer getResponsePacketId(byte[] bytes){
+        byte[] decodes = Base64.getDecoder().decode(bytes);
+        String str = new String(decodes);
+        return Integer.parseInt(str.substring(0,str.indexOf("-")));
+    }
 }

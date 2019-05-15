@@ -140,9 +140,11 @@ public class Server {
     }
 
     //TODO address和port通过数据包获取
-    public void sendPacket(DataPacket packet){
-        byte[] encode = packet.encode();
-        DatagramPacket pack = new DatagramPacket(encode,encode.length,smod2Server.getAddress(),smod2Server.getPort());
+    public void sendPacket(final DataPacket packet){
+        Utils.TryCatch(()->{
+            byte[] encode = packet.encode();
+            DatagramPacket pack = new DatagramPacket(encode,encode.length,InetAddress.getByName(smod2Server.getAddress()),smod2Server.getPort());
+        });
     }
 
     public ILogger getLogger() {
