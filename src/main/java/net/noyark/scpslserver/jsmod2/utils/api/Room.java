@@ -4,15 +4,15 @@ import net.noyark.scpslserver.jsmod2.math.SCPVector;
 
 public class Room {
 
-    public ZoneType zoneType;
-    public RoomType roomType;
-    public int genericID;
-    public SCPVector position;
-    public SCPVector forward;
-    public SCPVector speakerPosition;
+    private ZoneType zoneType;
+    private RoomType roomType;
+    private int genericID;
+    private SCPVector position;
+    private SCPVector forward;
+    private SCPVector speakerPosition;
 
     public void flickerLights(){
-
+        
     }
     public String[] getObjectName(){
         return null;
