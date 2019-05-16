@@ -262,6 +262,7 @@ public class Server {
                     }
                     //发出数据包部分由C#插件决定，C#插件的Server中央处理java发出的请求
                     //专门设立发包的api
+                    PacketManager.getManager().manageMethod(message,id);
                 }
             });
         }
