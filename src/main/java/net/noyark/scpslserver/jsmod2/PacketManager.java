@@ -8,6 +8,11 @@ public class PacketManager {
         manager = new PacketManager();
     }
 
+
+    private PacketManager(){
+        
+    }
+
     /**
      * 处理包的逻辑写在这里
      */
