@@ -33,5 +33,8 @@ public class SummonVehicleEvent extends Event {
         this.allowSummon = allowSummon;
     }
 
+    public SummonVehicleEvent(){
+
+    }
 
 }

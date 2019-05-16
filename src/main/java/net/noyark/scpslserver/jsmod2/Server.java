@@ -133,6 +133,10 @@ public class Server {
         return server;
     }
 
+    public Smod2Server getSmod2Server(){
+        return smod2Server;
+    }
+
     public File getServerFolder(){
         return serverfolder;
     }
@@ -236,12 +240,15 @@ public class Server {
     }
     /**
      * 服务器监听线程启动
+     * 目前一个java服务器支持一个smod2服
      */
     private class ListenerThread implements Runnable{
         @Override
         public void run() {
             Utils.TryCatch(()->{
                 log.info("Listener-Thread:EXECUTOR_SERVICE->start");
+                //注意，一个jsmod2目前只支持一个smod2连接，不支持多个连接
+                //在未来版本可能会加入支持多个smod2连接一个服务器
                 socket = getSocket(Integer.parseInt(serverProp.getProperty("this.port")));
 
                 while (true) {
@@ -259,6 +266,12 @@ public class Server {
 
                     if(id == CLOSE_COMMAND){
                         close();
+                    }
+
+                    Class<?> packet = Register.getInstance().getPackets().get(id);
+                    if(packet == null){
+                        log.error("no such type packet");
+                        continue;
                     }
                     //发出数据包部分由C#插件决定，C#插件的Server中央处理java发出的请求
                     //专门设立发包的api

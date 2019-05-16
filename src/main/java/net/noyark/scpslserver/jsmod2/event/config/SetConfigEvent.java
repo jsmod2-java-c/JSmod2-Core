@@ -20,6 +20,10 @@ public class SetConfigEvent {
         this.defaultValue = defaultValue;
     }
 
+    public SetConfigEvent(){
+
+    }
+
     public String getKey() {
         return key;
     }
@@ -43,4 +47,6 @@ public class SetConfigEvent {
     public void setDefaultValue(Object defaultValue) {
         this.defaultValue = defaultValue;
     }
+
+
 }

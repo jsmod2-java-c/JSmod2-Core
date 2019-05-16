@@ -58,4 +58,5 @@ public class AdminQueryEvent extends Event {
     public void setSuccessful(boolean successful) {
         this.successful = successful;
     }
+
 }

@@ -36,5 +36,15 @@ public class ScpDeathAnnouncementEvent extends Event {
         this.playerRole = playerRole;
     }
 
+    public ScpDeathAnnouncementEvent(){
 
+    }
+
+    public void setDeadPlayer(Player deadPlayer) {
+        this.deadPlayer = deadPlayer;
+    }
+
+    public void setPlayerRole(Role playerRole) {
+        this.playerRole = playerRole;
+    }
 }

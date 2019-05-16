@@ -4,9 +4,7 @@ import net.noyark.scpslserver.jsmod2.inferf.log.ILogger;
 import net.noyark.scpslserver.jsmod2.utils.Utils;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * FileSystem create the server file
@@ -40,6 +38,7 @@ public class FileSystem {
 
     static {
         Register.getInstance().registerLang();
+        Register.getInstance().registerServerProperties();
     }
 
     private FileSystem(){
@@ -59,11 +58,11 @@ public class FileSystem {
             if(!serverProp.exists()){
                 FileOutputStream stream = new FileOutputStream(serverProp);
                 outputStreams.add(stream);
-                properties.setProperty("this.port","19935");//本机端口
-                properties.setProperty("data.network.plugin.port","19938");//插件端口
-                properties.setProperty("decode","utf-8");//解码的字符集
-                properties.setProperty("encode","utf-8");//编码的字符集
-                properties.store(stream,"this is the server's properties");
+                Set<Map.Entry<String,String>> propertiesInfo = Register.getInstance().getServerProperties().entrySet();
+                for(Map.Entry<String,String> info:propertiesInfo) {
+                    properties.setProperty(info.getKey(), info.getValue());
+                }
+                properties.store(stream,"this is the server's properties\n data.network.plugin.port is the jsmod2_dataNetwork plugin's port \n the this.port is java server port \n it will support more ports");
                 stream.flush();
                 properties.load(new FileInputStream(serverProp));
                 return properties;

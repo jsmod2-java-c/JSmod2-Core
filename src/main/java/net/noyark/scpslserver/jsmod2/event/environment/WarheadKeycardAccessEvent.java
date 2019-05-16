@@ -28,4 +28,12 @@ public class WarheadKeycardAccessEvent extends Event {
         this.player = player;
         allow = allow;
     }
+
+    public WarheadKeycardAccessEvent(){
+
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
 }
