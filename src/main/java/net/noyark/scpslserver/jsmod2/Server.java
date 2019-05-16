@@ -144,6 +144,7 @@ public class Server {
         Utils.TryCatch(()->{
             byte[] encode = packet.encode();
             DatagramPacket pack = new DatagramPacket(encode,encode.length,InetAddress.getByName(smod2Server.getAddress()),smod2Server.getPort());
+            socket.send(pack);
         });
     }
 
