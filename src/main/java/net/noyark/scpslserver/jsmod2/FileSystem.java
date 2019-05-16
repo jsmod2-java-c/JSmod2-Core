@@ -59,9 +59,10 @@ public class FileSystem {
             if(!serverProp.exists()){
                 FileOutputStream stream = new FileOutputStream(serverProp);
                 outputStreams.add(stream);
-                properties.setProperty("port","19935");
-                properties.setProperty("decode","utf-8");
-                properties.setProperty("encode","utf-8");
+                properties.setProperty("this.port","19935");//本机端口
+                properties.setProperty("data.network.plugin.port","19938");//插件端口
+                properties.setProperty("decode","utf-8");//解码的字符集
+                properties.setProperty("encode","utf-8");//编码的字符集
                 properties.store(stream,"this is the server's properties");
                 stream.flush();
                 properties.load(new FileInputStream(serverProp));

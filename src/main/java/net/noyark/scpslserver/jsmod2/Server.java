@@ -107,43 +107,14 @@ public class Server {
     }
 
 
-    /**
-     * 服务器监听线程启动
-     */
-    private class ListenerThread implements Runnable{
-        @Override
-        public void run() {
-            Utils.TryCatch(()->{
-                log.info("Listener-Thread:EXECUTOR_SERVICE->start");
-                socket = getSocket(Integer.parseInt(serverProp.getProperty("port")));
 
-                while (true) {
-
-                    //接收数据包
-
-                    DatagramPacket request = new DatagramPacket(new byte[MAX_LENGTH], MAX_LENGTH);
-
-                    socket.receive(request);
-
-                    String message = new String(request.getData(), 0 , request.getLength());
-
-                    //TODO 在这里根据编号分包
-                    int id = Utils.getResponsePacketId(message);
-                    if(id == CLOSE_COMMAND){
-                        close();
-                    }
-                    //发出数据包部分由C#插件决定，C#插件的Server中央处理java发出的请求
-                    //专门设立发包的api
-                }
-            });
-        }
-    }
 
     //TODO address和port通过数据包获取
     public void sendPacket(final DataPacket packet){
         Utils.TryCatch(()->{
             byte[] encode = packet.encode();
-            DatagramPacket pack = new DatagramPacket(encode,encode.length,InetAddress.getByName(smod2Server.getAddress()),smod2Server.getPort());
+            //发送端口为插件的端口
+            DatagramPacket pack = new DatagramPacket(encode,encode.length,InetAddress.getByName(smod2Server.getAddress()),Integer.parseInt(serverProp.getProperty("data.network.plugin.port")));
             socket.send(pack);
         });
     }
@@ -262,5 +233,37 @@ public class Server {
                 writer.close();
             }
         });
+    }
+    /**
+     * 服务器监听线程启动
+     */
+    private class ListenerThread implements Runnable{
+        @Override
+        public void run() {
+            Utils.TryCatch(()->{
+                log.info("Listener-Thread:EXECUTOR_SERVICE->start");
+                socket = getSocket(Integer.parseInt(serverProp.getProperty("this.port")));
+
+                while (true) {
+
+                    //接收数据包
+
+                    DatagramPacket request = new DatagramPacket(new byte[MAX_LENGTH], MAX_LENGTH);
+
+                    socket.receive(request);
+
+                    String message = new String(request.getData(), 0 , request.getLength());
+
+                    //TODO 在这里根据编号分包
+                    int id = Utils.getResponsePacketId(message);
+
+                    if(id == CLOSE_COMMAND){
+                        close();
+                    }
+                    //发出数据包部分由C#插件决定，C#插件的Server中央处理java发出的请求
+                    //专门设立发包的api
+                }
+            });
+        }
     }
 }
