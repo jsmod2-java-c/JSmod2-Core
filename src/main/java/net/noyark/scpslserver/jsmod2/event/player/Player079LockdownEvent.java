@@ -3,6 +3,10 @@ package net.noyark.scpslserver.jsmod2.event.player;
 import net.noyark.scpslserver.jsmod2.entity.Player;
 import net.noyark.scpslserver.jsmod2.utils.api.Room;
 
+/**
+ * @author kevinj
+ */
+
 public class Player079LockdownEvent extends PlayerEvent {
     private Room room;
     private boolean allow;
@@ -13,6 +17,10 @@ public class Player079LockdownEvent extends PlayerEvent {
         this.room = room;
         this.allow = allow;
         this.apDrain = apDrain;
+    }
+
+    public Player079LockdownEvent(){
+
     }
 
     public Room getRoom() {
@@ -33,5 +41,9 @@ public class Player079LockdownEvent extends PlayerEvent {
 
     public void setApDrain(float apDrain) {
         this.apDrain = apDrain;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
     }
 }

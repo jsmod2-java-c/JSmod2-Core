@@ -3,6 +3,10 @@ package net.noyark.scpslserver.jsmod2.event.player;
 import net.noyark.scpslserver.jsmod2.entity.Player;
 import net.noyark.scpslserver.jsmod2.utils.api.Generator;
 
+/**
+ * @author kevinj
+ */
+
 public class PlayerGeneratorInsertTabletEvent extends PlayerEvent{
     private Generator generator;
     private boolean allow;
@@ -13,6 +17,10 @@ public class PlayerGeneratorInsertTabletEvent extends PlayerEvent{
         this.generator = generator;
         this.allow = allow;
         this.removeTablet = removeTablet;
+    }
+
+    public PlayerGeneratorInsertTabletEvent(){
+
     }
 
     public Generator getGenerator() {
@@ -33,5 +41,9 @@ public class PlayerGeneratorInsertTabletEvent extends PlayerEvent{
 
     public void setRemoveTablet(boolean removeTablet) {
         this.removeTablet = removeTablet;
+    }
+
+    public void setGenerator(Generator generator) {
+        this.generator = generator;
     }
 }

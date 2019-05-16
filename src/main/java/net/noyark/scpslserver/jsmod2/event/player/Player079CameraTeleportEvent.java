@@ -1,6 +1,11 @@
 package net.noyark.scpslserver.jsmod2.event.player;
 
 import net.noyark.scpslserver.jsmod2.entity.Player;
+import net.noyark.scpslserver.jsmod2.math.Vector;
+
+/**
+ * @author kevinj
+ */
 
 public class Player079CameraTeleportEvent extends PlayerEvent {
     private Vector camera;
@@ -12,6 +17,10 @@ public class Player079CameraTeleportEvent extends PlayerEvent {
         this.camera = camera;
         this.allow = allow;
         this.apDrain = apDrain;
+    }
+
+    public Player079CameraTeleportEvent(){
+
     }
 
     public Vector getCamera() {
@@ -37,4 +46,6 @@ public class Player079CameraTeleportEvent extends PlayerEvent {
     public void setApDrain(float apDrain) {
         this.apDrain = apDrain;
     }
+
+
 }

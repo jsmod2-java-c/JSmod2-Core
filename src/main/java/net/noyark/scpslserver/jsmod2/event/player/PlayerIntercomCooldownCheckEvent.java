@@ -9,4 +9,16 @@ public class PlayerIntercomCooldownCheckEvent extends PlayerEvent{
         super(player);
         this.currentCooldown = currentCooldown;
     }
+
+    public PlayerIntercomCooldownCheckEvent(){
+
+    }
+
+    public float getCurrentCooldown() {
+        return currentCooldown;
+    }
+
+    public void setCurrentCooldown(float currentCooldown) {
+        this.currentCooldown = currentCooldown;
+    }
 }

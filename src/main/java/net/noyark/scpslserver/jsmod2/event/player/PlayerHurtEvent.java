@@ -4,6 +4,10 @@ import net.noyark.scpslserver.jsmod2.entity.Player;
 import net.noyark.scpslserver.jsmod2.event.Event;
 import net.noyark.scpslserver.jsmod2.utils.player.DamageType;
 
+/**
+ * @author kevinj
+ */
+
 public class PlayerHurtEvent extends PlayerEvent {
 
     private Player attacker;
@@ -17,6 +21,14 @@ public class PlayerHurtEvent extends PlayerEvent {
         this.attacker = attacker;
         this.damage = damage;
         this.damageType = damageType;
+    }
+
+    public PlayerHurtEvent(){
+
+    }
+
+    public void setAttacker(Player attacker) {
+        this.attacker = attacker;
     }
 
     public Player getAttacker() {

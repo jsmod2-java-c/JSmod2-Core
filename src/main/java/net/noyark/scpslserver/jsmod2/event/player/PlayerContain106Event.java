@@ -2,6 +2,10 @@ package net.noyark.scpslserver.jsmod2.event.player;
 
 import net.noyark.scpslserver.jsmod2.entity.Player;
 
+/**
+ * @author kevinj
+ */
+
 public class PlayerContain106Event extends PlayerEvent {
     private Player[] scp106s;
     private boolean activateContainment;
@@ -18,9 +22,17 @@ public class PlayerContain106Event extends PlayerEvent {
         this.activateContainment = activateContainment;
     }
 
+    public void setScp106s(Player[] scp106s) {
+        this.scp106s = scp106s;
+    }
+
     public PlayerContain106Event(Player player, Player[] scp106s, boolean activateContainment) {
         super(player);
         this.scp106s = scp106s;
         this.activateContainment = activateContainment;
+    }
+
+    public PlayerContain106Event(){
+
     }
 }

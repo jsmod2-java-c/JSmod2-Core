@@ -1,6 +1,11 @@
 package net.noyark.scpslserver.jsmod2.event.player;
 
+import net.noyark.scpslserver.jsmod2.entity.Door;
 import net.noyark.scpslserver.jsmod2.entity.Player;
+
+/**
+ * @author kevinj
+ */
 
 public class Player079LockEvent extends PlayerEvent {
     private Door door;
@@ -27,10 +32,18 @@ public class Player079LockEvent extends PlayerEvent {
         return door;
     }
 
+    public void setDoor(Door door) {
+        this.door = door;
+    }
+
     public Player079LockEvent(Player player, Door door, boolean allow, float apDrain) {
         super(player);
         this.door = door;
         this.allow = allow;
         this.apDrain = apDrain;
+    }
+
+    public Player079LockEvent(){
+
     }
 }

@@ -3,6 +3,10 @@ package net.noyark.scpslserver.jsmod2.event.player;
 import net.noyark.scpslserver.jsmod2.entity.Player;
 import net.noyark.scpslserver.jsmod2.utils.api.Room;
 
+/**
+ * @author kevinj
+ */
+
 public class Player079StartSpeakerEvent extends PlayerEvent {
     private Room room;
     private boolean allow;
@@ -28,10 +32,18 @@ public class Player079StartSpeakerEvent extends PlayerEvent {
         this.apDrain = apDrain;
     }
 
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
     public Player079StartSpeakerEvent(Player player, Room room, boolean allow, float apDrain) {
         super(player);
         this.room = room;
         this.allow = allow;
         this.apDrain = apDrain;
+    }
+
+    public Player079StartSpeakerEvent(){
+
     }
 }

@@ -3,6 +3,10 @@ package net.noyark.scpslserver.jsmod2.event.player;
 import net.noyark.scpslserver.jsmod2.entity.Player;
 import net.noyark.scpslserver.jsmod2.utils.item.ItemType;
 
+/**
+ * @author kevinj
+ */
+
 public class PlayerReloadEvent extends PlayerEvent {
     private ItemType weapon;
     private int ammoRemoved;
@@ -51,5 +55,23 @@ public class PlayerReloadEvent extends PlayerEvent {
 
     public int getCurrentAmmoTotal() {
         return CurrentAmmoTotal;
+    }
+
+
+    /** just do javabean */
+    public void setWeapon(ItemType weapon) {
+        this.weapon = weapon;
+    }
+
+    public void setNormalMaxClipSize(int normalMaxClipSize) {
+        NormalMaxClipSize = normalMaxClipSize;
+    }
+
+    public void setCurrentClipAmmoCount(int currentClipAmmoCount) {
+        CurrentClipAmmoCount = currentClipAmmoCount;
+    }
+
+    public void setCurrentAmmoTotal(int currentAmmoTotal) {
+        CurrentAmmoTotal = currentAmmoTotal;
     }
 }

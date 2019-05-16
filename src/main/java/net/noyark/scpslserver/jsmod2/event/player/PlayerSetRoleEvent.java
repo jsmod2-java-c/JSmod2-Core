@@ -1,9 +1,15 @@
 package net.noyark.scpslserver.jsmod2.event.player;
 
 import net.noyark.scpslserver.jsmod2.entity.Player;
+import net.noyark.scpslserver.jsmod2.entity.TeamRole;
 import net.noyark.scpslserver.jsmod2.utils.api.Role;
+import net.noyark.scpslserver.jsmod2.utils.item.ItemType;
 
 import java.util.List;
+
+/**
+ * @author kevinj
+ */
 
 public class PlayerSetRoleEvent extends PlayerEvent {
     private List<ItemType> items;
@@ -39,11 +45,19 @@ public class PlayerSetRoleEvent extends PlayerEvent {
         return teamRole;
     }
 
+    public void setTeamRole(TeamRole teamRole) {
+        this.teamRole = teamRole;
+    }
+
     public PlayerSetRoleEvent(Player player, List<ItemType> items, boolean usingDefaultItem, Role role, TeamRole teamRole) {
         super(player);
         this.items = items;
         this.usingDefaultItem = usingDefaultItem;
         this.role = role;
         this.teamRole = teamRole;
+    }
+
+    public PlayerSetRoleEvent(){
+
     }
 }

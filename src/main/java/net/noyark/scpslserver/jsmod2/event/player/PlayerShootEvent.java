@@ -1,16 +1,20 @@
 package net.noyark.scpslserver.jsmod2.event.player;
 
 import net.noyark.scpslserver.jsmod2.entity.Player;
+import net.noyark.scpslserver.jsmod2.math.Vector;
 import net.noyark.scpslserver.jsmod2.utils.player.DamageType;
-
+import net.noyark.scpslserver.jsmod2.utils.player.WeaponType;
+/**
+ * @author kevinj
+ */
 public class PlayerShootEvent extends PlayerEvent {
     private Player target;
     private DamageType weapon;
     private boolean shouldSpawnHitmarker;
-    private bool ShouldSpawnBloodDecal;
+    private boolean ShouldSpawnBloodDecal;
     private Vector SourcePosition;
     private Vector TargetPosition;
-    private string TargetHitbox;
+    private String TargetHitbox;
     private WeaponType WeaponSound;//????
     private Vector Direction;
 
@@ -22,11 +26,11 @@ public class PlayerShootEvent extends PlayerEvent {
         this.shouldSpawnHitmarker = shouldSpawnHitmarker;
     }
 
-    public bool getShouldSpawnBloodDecal() {
+    public boolean getShouldSpawnBloodDecal() {
         return ShouldSpawnBloodDecal;
     }
 
-    public void setShouldSpawnBloodDecal(bool shouldSpawnBloodDecal) {
+    public void setShouldSpawnBloodDecal(boolean shouldSpawnBloodDecal) {
         ShouldSpawnBloodDecal = shouldSpawnBloodDecal;
     }
 
@@ -54,11 +58,45 @@ public class PlayerShootEvent extends PlayerEvent {
         return TargetPosition;
     }
 
-    public string getTargetHitbox() {
+    public String getTargetHitbox() {
         return TargetHitbox;
     }
 
-    public PlayerShootEvent(Player player, Player target, DamageType weapon, boolean shouldSpawnHitmarker, bool shouldSpawnBloodDecal, Vector sourcePosition, Vector targetPosition, string targetHitbox, WeaponType weaponSound, Vector direction) {
+
+    /** just for javabean */
+    public void setTarget(Player target) {
+        this.target = target;
+    }
+
+    public void setWeapon(DamageType weapon) {
+        this.weapon = weapon;
+    }
+
+    public boolean isShouldSpawnBloodDecal() {
+        return ShouldSpawnBloodDecal;
+    }
+
+    public void setSourcePosition(Vector sourcePosition) {
+        SourcePosition = sourcePosition;
+    }
+
+    public void setTargetPosition(Vector targetPosition) {
+        TargetPosition = targetPosition;
+    }
+
+    public void setTargetHitbox(String targetHitbox) {
+        TargetHitbox = targetHitbox;
+    }
+
+    public WeaponType getWeaponSound() {
+        return WeaponSound;
+    }
+
+    public void setWeaponSound(WeaponType weaponSound) {
+        WeaponSound = weaponSound;
+    }
+
+    public PlayerShootEvent(Player player, Player target, DamageType weapon, boolean shouldSpawnHitmarker, boolean shouldSpawnBloodDecal, Vector sourcePosition, Vector targetPosition, String targetHitbox, WeaponType weaponSound, Vector direction) {
         super(player);
         this.target = target;
         this.weapon = weapon;
@@ -69,5 +107,9 @@ public class PlayerShootEvent extends PlayerEvent {
         TargetHitbox = targetHitbox;
         WeaponSound = weaponSound;
         Direction = direction;
+    }
+
+    public PlayerShootEvent(){
+
     }
 }

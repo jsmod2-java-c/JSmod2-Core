@@ -1,15 +1,24 @@
 package net.noyark.scpslserver.jsmod2.event.player;
 
 import net.noyark.scpslserver.jsmod2.entity.Player;
+import net.noyark.scpslserver.jsmod2.entity.TeslaGate;
+
+/**
+ * @author kevinj
+ */
 
 public class PlayerTriggerTeslaEvent extends PlayerEvent {
-    public TeslaGate TeslaGate;
-    public boolean Triggerable;
+    private TeslaGate TeslaGate;
+    private boolean Triggerable;
 
     public PlayerTriggerTeslaEvent(Player player, TeslaGate teslaGate, boolean triggerable) {
         super(player);
         TeslaGate = teslaGate;
         Triggerable = triggerable;
+    }
+
+    public PlayerTriggerTeslaEvent(){
+
     }
 
     public void setTriggerable(boolean triggerable) {
@@ -22,5 +31,9 @@ public class PlayerTriggerTeslaEvent extends PlayerEvent {
 
     public boolean isTriggerable() {
         return Triggerable;
+    }
+
+    public void setTeslaGate(net.noyark.scpslserver.jsmod2.entity.TeslaGate teslaGate) {
+        TeslaGate = teslaGate;
     }
 }

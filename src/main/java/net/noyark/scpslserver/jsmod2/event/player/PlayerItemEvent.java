@@ -1,6 +1,8 @@
 package net.noyark.scpslserver.jsmod2.event.player;
 
+import net.noyark.scpslserver.jsmod2.entity.Item;
 import net.noyark.scpslserver.jsmod2.entity.Player;
+import net.noyark.scpslserver.jsmod2.utils.item.ItemType;
 
 public class PlayerItemEvent extends PlayerEvent {
     private Item item;
@@ -14,6 +16,10 @@ public class PlayerItemEvent extends PlayerEvent {
         this.item = item;
         this.changeTo = changeTo;
         this.allow = allow;
+    }
+
+    public PlayerItemEvent(){
+
     }
 
     public Item getItem() {
@@ -39,4 +45,6 @@ public class PlayerItemEvent extends PlayerEvent {
     public void setAllow(boolean allow) {
         this.allow = allow;
     }
+
+
 }

@@ -3,6 +3,10 @@ package net.noyark.scpslserver.jsmod2.event.player;
 import net.noyark.scpslserver.jsmod2.entity.Player;
 import net.noyark.scpslserver.jsmod2.utils.player.DamageType;
 
+/**
+ * @author kevinj
+ */
+
 public class PlayerDeathEvent extends PlayerEvent{
     private Player killer;
 
@@ -30,10 +34,19 @@ public class PlayerDeathEvent extends PlayerEvent{
         return damageType;
     }
 
+    public void setKiller(Player killer) {
+        this.killer = killer;
+    }
+
     public PlayerDeathEvent(Player player, Player killer, boolean spawnRagdoll, DamageType damageType) {
         super(player);
         this.killer = killer;
         SpawnRagdoll = spawnRagdoll;
         this.damageType = damageType;
     }
+
+    public PlayerDeathEvent(){
+
+    }
+
 }

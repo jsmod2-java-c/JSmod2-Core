@@ -1,6 +1,12 @@
 package net.noyark.scpslserver.jsmod2.event.player;
 
 import net.noyark.scpslserver.jsmod2.entity.Player;
+import net.noyark.scpslserver.jsmod2.entity.TeslaGate;
+
+
+/**
+ * @author kevinj
+ */
 
 public class Player079TeslaGateEvent extends PlayerEvent {
     private TeslaGate teslaGate;
@@ -12,6 +18,10 @@ public class Player079TeslaGateEvent extends PlayerEvent {
         this.teslaGate = teslaGate;
         this.allow = allow;
         this.apDrain = apDrain;
+    }
+
+    public Player079TeslaGateEvent(){
+
     }
 
     public TeslaGate getTeslaGate() {
@@ -32,5 +42,9 @@ public class Player079TeslaGateEvent extends PlayerEvent {
 
     public void setApDrain(float apDrain) {
         this.apDrain = apDrain;
+    }
+
+    public void setTeslaGate(TeslaGate teslaGate) {
+        this.teslaGate = teslaGate;
     }
 }

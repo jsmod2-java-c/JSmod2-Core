@@ -1,7 +1,9 @@
 package net.noyark.scpslserver.jsmod2.event.player;
 
 import net.noyark.scpslserver.jsmod2.entity.Player;
-
+/**
+ * @author kevinj
+ */
 public class Scp096CooldownEndEvent extends PlayerEvent {
     private boolean allow;
 
@@ -13,8 +15,14 @@ public class Scp096CooldownEndEvent extends PlayerEvent {
         this.allow = allow;
     }
 
+
+
     public Scp096CooldownEndEvent(Player player, boolean allow) {
         super(player);
         this.allow = allow;
+    }
+
+    public Scp096CooldownEndEvent(){
+
     }
 }

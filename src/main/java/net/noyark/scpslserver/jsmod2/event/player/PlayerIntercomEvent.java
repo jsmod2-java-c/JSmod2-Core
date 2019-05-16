@@ -2,6 +2,10 @@ package net.noyark.scpslserver.jsmod2.event.player;
 
 import net.noyark.scpslserver.jsmod2.entity.Player;
 
+/**
+ * @author kevinj
+ */
+
 public class PlayerIntercomEvent extends PlayerEvent {
     private float speechTime;
     private float cooldownTime;
@@ -26,5 +30,9 @@ public class PlayerIntercomEvent extends PlayerEvent {
         super(player);
         this.speechTime = speechTime;
         this.cooldownTime = cooldownTime;
+    }
+
+    public PlayerIntercomEvent(){
+
     }
 }

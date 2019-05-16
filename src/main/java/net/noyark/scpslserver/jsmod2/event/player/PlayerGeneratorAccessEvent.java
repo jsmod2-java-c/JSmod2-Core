@@ -3,6 +3,10 @@ package net.noyark.scpslserver.jsmod2.event.player;
 import net.noyark.scpslserver.jsmod2.entity.Player;
 import net.noyark.scpslserver.jsmod2.utils.api.Generator;
 
+/**
+ * @author kevinj
+ */
+
 public class PlayerGeneratorAccessEvent extends PlayerEvent {
     private Generator generator;
     private boolean allow;
@@ -11,6 +15,14 @@ public class PlayerGeneratorAccessEvent extends PlayerEvent {
         super(player);
         this.generator = generator;
         this.allow = allow;
+    }
+
+    public PlayerGeneratorAccessEvent(){
+
+    }
+
+    public void setGenerator(Generator generator) {
+        this.generator = generator;
     }
 
     public boolean isAllow() {

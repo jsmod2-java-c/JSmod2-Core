@@ -1,7 +1,9 @@
 package net.noyark.scpslserver.jsmod2.event.player;
 
 import net.noyark.scpslserver.jsmod2.entity.Player;
-
+/**
+ * @author kevinj
+ */
 public class PlayerRecallZombieEvent extends PlayerEvent{
     private Player target;
 
@@ -11,6 +13,10 @@ public class PlayerRecallZombieEvent extends PlayerEvent{
         super(player);
         this.target = target;
         this.allowRecall = allowRecall;
+    }
+
+    public PlayerRecallZombieEvent(){
+
     }
 
     public boolean isAllowRecall() {
@@ -24,4 +30,10 @@ public class PlayerRecallZombieEvent extends PlayerEvent{
     public Player getTarget() {
         return target;
     }
+
+    public void setTarget(Player target) {
+        this.target = target;
+    }
+
+
 }

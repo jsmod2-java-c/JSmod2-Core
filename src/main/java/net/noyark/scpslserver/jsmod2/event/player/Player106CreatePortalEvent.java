@@ -1,6 +1,11 @@
 package net.noyark.scpslserver.jsmod2.event.player;
 
 import net.noyark.scpslserver.jsmod2.entity.Player;
+import net.noyark.scpslserver.jsmod2.math.Vector;
+
+/**
+ * @author kevinj
+ */
 
 public class Player106CreatePortalEvent extends PlayerEvent {
     private Vector position;
@@ -16,5 +21,9 @@ public class Player106CreatePortalEvent extends PlayerEvent {
     public Player106CreatePortalEvent(Player player, Vector position) {
         super(player);
         this.position = position;
+    }
+
+    public Player106CreatePortalEvent(){
+
     }
 }

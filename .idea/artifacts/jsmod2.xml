@@ -8,7 +8,7 @@
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apache/logging/log4j/log4j-core/2.11.1/log4j-core-2.11.1.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/fusesource/jansi/jansi/1.18/jansi-1.18.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/yaml/snakeyaml/1.16/snakeyaml-1.16.jar" path-in-jar="/" />
-      <element id="module-output" name="github" />
+      <element id="module-output" name="jsmod2" />
     </root>
   </artifact>
 </component>

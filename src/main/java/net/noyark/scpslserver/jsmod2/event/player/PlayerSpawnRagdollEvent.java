@@ -1,9 +1,12 @@
 package net.noyark.scpslserver.jsmod2.event.player;
 
 import net.noyark.scpslserver.jsmod2.entity.Player;
+import net.noyark.scpslserver.jsmod2.math.Vector;
 import net.noyark.scpslserver.jsmod2.utils.api.Role;
 import net.noyark.scpslserver.jsmod2.utils.player.DamageType;
-
+/**
+ * @author kevinj
+ */
 public class PlayerSpawnRagdollEvent {
     private Role role;
     private Vector position;
@@ -56,6 +59,10 @@ public class PlayerSpawnRagdollEvent {
         return attacker;
     }
 
+    public void setAttacker(Player attacker) {
+        this.attacker = attacker;
+    }
+
     public PlayerSpawnRagdollEvent(Role role, Vector position, Vector rotation, Player attacker, DamageType damageType, boolean allowRecall) {
         this.role = role;
         this.position = position;
@@ -63,5 +70,9 @@ public class PlayerSpawnRagdollEvent {
         this.attacker = attacker;
         this.damageType = damageType;
         this.allowRecall = allowRecall;
+    }
+
+    public PlayerSpawnRagdollEvent(){
+
     }
 }

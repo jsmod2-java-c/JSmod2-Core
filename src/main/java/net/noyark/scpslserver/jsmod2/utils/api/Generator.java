@@ -1,6 +1,6 @@
 package net.noyark.scpslserver.jsmod2.utils.api;
 
-import net.noyark.scpslserver.jsmod2.math.SCPVector;
+import net.noyark.scpslserver.jsmod2.math.Vector;
 
 /**
  * @author magiclu550
@@ -14,7 +14,7 @@ public class Generator {
     private boolean engaged;
     private float startTime;
     private float timeLeft;
-    private SCPVector position;
+    private Vector position;
     private Room room;
 
     //TODO 解锁发包
@@ -55,7 +55,7 @@ public class Generator {
         return timeLeft;
     }
 
-    public SCPVector getPosition() {
+    public Vector getPosition() {
         return position;
     }
 

@@ -1,6 +1,11 @@
 package net.noyark.scpslserver.jsmod2.event.player;
 
+import net.noyark.scpslserver.jsmod2.entity.Elevator;
 import net.noyark.scpslserver.jsmod2.entity.Player;
+
+/**
+ * @author kevinj
+ */
 
 public class Player079ElevatorEvent extends PlayerEvent {
     private Elevator elevator;
@@ -27,10 +32,18 @@ public class Player079ElevatorEvent extends PlayerEvent {
         this.apDrain = apDrain;
     }
 
+    public void setElevator(Elevator elevator) {
+        this.elevator = elevator;
+    }
+
     public Player079ElevatorEvent(Player player, Elevator elevator, boolean allow, float apDrain) {
         super(player);
         this.elevator = elevator;
         this.allow = allow;
         this.apDrain = apDrain;
+    }
+
+    public Player079ElevatorEvent(){
+
     }
 }

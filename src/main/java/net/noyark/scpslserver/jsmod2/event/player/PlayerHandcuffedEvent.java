@@ -2,6 +2,10 @@ package net.noyark.scpslserver.jsmod2.event.player;
 
 import net.noyark.scpslserver.jsmod2.entity.Player;
 
+/**
+ * @author kevinj
+ */
+
 public class PlayerHandcuffedEvent extends PlayerEvent {
     public boolean Handcuffed;
 
@@ -23,9 +27,15 @@ public class PlayerHandcuffedEvent extends PlayerEvent {
         Owner = owner;
     }
 
+
+
     public PlayerHandcuffedEvent(Player player, boolean handcuffed, Player owner) {
         super(player);
         Handcuffed = handcuffed;
         Owner = owner;
+    }
+
+    public PlayerHandcuffedEvent(){
+
     }
 }

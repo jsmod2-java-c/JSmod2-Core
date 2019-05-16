@@ -1,6 +1,6 @@
 package net.noyark.scpslserver.jsmod2.utils.api;
 
-import net.noyark.scpslserver.jsmod2.math.SCPVector;
+import net.noyark.scpslserver.jsmod2.math.Vector;
 
 /**
  * @author magiclu550
@@ -11,9 +11,9 @@ public class Room {
     private ZoneType zoneType;
     private RoomType roomType;
     private int genericID;
-    private SCPVector position;
-    private SCPVector forward;
-    private SCPVector speakerPosition;
+    private Vector position;
+    private Vector forward;
+    private Vector speakerPosition;
 
     public void flickerLights(){
 
@@ -37,17 +37,17 @@ public class Room {
 
 
 
-    public SCPVector getPosition() {
+    public Vector getPosition() {
         return position;
     }
 
 
 
-    public SCPVector getForward() {
+    public Vector getForward() {
         return forward;
     }
 
-    public SCPVector getSpeakerPosition() {
+    public Vector getSpeakerPosition() {
         return speakerPosition;
     }
 

@@ -1,6 +1,6 @@
 package net.noyark.scpslserver.jsmod2.event.team;
 
-import net.noyark.scpslserver.jsmod2.entity.Team;
+import net.noyark.scpslserver.jsmod2.utils.team.Team;
 import net.noyark.scpslserver.jsmod2.event.Event;
 
 public class DecideRespawnQueueEvent extends Event {

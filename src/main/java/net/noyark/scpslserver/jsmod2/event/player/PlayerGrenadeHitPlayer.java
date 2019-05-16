@@ -2,6 +2,10 @@ package net.noyark.scpslserver.jsmod2.event.player;
 
 import net.noyark.scpslserver.jsmod2.entity.Player;
 
+/**
+ * @author kevinj
+ */
+
 public class PlayerGrenadeHitPlayer extends PlayerEvent {
     private Player victim;
 
@@ -13,4 +17,14 @@ public class PlayerGrenadeHitPlayer extends PlayerEvent {
         super(player);
         this.victim = victim;
     }
+
+    public PlayerGrenadeHitPlayer(){
+
+    }
+
+    public void setVictim(Player victim) {
+        this.victim = victim;
+    }
+
+
 }

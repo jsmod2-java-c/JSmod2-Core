@@ -1,12 +1,18 @@
 package net.noyark.scpslserver.jsmod2.event.player;
 
 
+import net.noyark.scpslserver.jsmod2.entity.Elevator;
 import net.noyark.scpslserver.jsmod2.entity.Player;
+import net.noyark.scpslserver.jsmod2.math.Vector;
+
+/**
+ * @author kevinj
+ */
 
 public class PlayerElevatorUseEvent extends PlayerEvent {
     private Elevator Elevator;
     private Vector ElevatorPosition;
-    private bool AllowUse;
+    private boolean AllowUse;
 
     public Elevator getElevator() {
         return Elevator;
@@ -16,18 +22,34 @@ public class PlayerElevatorUseEvent extends PlayerEvent {
         return ElevatorPosition;
     }
 
-    public bool getAllowUse() {
+    public boolean getAllowUse() {
         return AllowUse;
     }
 
-    public PlayerElevatorUseEvent(Player player, Elevator elevator, Vector elevatorPosition, bool allowUse) {
+    public PlayerElevatorUseEvent(Player player, Elevator elevator, Vector elevatorPosition, boolean allowUse) {
         super(player);
         Elevator = elevator;
         ElevatorPosition = elevatorPosition;
         AllowUse = allowUse;
     }
 
-    public void setAllowUse(bool allowUse) {
+    public PlayerElevatorUseEvent(){
+
+    }
+
+    public void setAllowUse(boolean allowUse) {
         AllowUse = allowUse;
+    }
+
+    public void setElevator(net.noyark.scpslserver.jsmod2.entity.Elevator elevator) {
+        Elevator = elevator;
+    }
+
+    public void setElevatorPosition(Vector elevatorPosition) {
+        ElevatorPosition = elevatorPosition;
+    }
+
+    public boolean isAllowUse() {
+        return AllowUse;
     }
 }

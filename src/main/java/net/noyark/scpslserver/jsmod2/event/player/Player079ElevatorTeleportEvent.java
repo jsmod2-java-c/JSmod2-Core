@@ -1,8 +1,13 @@
 package net.noyark.scpslserver.jsmod2.event.player;
 
+import net.noyark.scpslserver.jsmod2.entity.Elevator;
 import net.noyark.scpslserver.jsmod2.entity.Player;
 
 import java.util.Vector;
+
+/**
+ * @author kevinj
+ */
 
 public class Player079ElevatorTeleportEvent extends PlayerEvent {
     private Vector camera;
@@ -34,11 +39,23 @@ public class Player079ElevatorTeleportEvent extends PlayerEvent {
         this.apDrain = apDrain;
     }
 
+    public void setCamera(Vector camera) {
+        this.camera = camera;
+    }
+
+    public void setElevator(Elevator elevator) {
+        this.elevator = elevator;
+    }
+
     public Player079ElevatorTeleportEvent(Player player, Vector camera, Elevator elevator, boolean allow, float apDrain) {
         super(player);
         this.camera = camera;
         this.elevator = elevator;
         this.allow = allow;
         this.apDrain = apDrain;
+    }
+
+    public Player079ElevatorTeleportEvent(){
+
     }
 }
