@@ -10,7 +10,7 @@ import net.noyark.scpslserver.jsmod2.utils.config.ConfigType;
 import java.io.File;
 
 /**
- * all of the plugin main-class must extends it
+ * all of the plugin main-classes must extend it
  *
  * @author magiclu550 #(code) jsmod2
  */

@@ -16,7 +16,15 @@ public class GeneratorFinishEvent extends Event {
         this.generator = generator;
     }
 
+    public GeneratorFinishEvent(){
+
+    }
+
     public Generator getGenerator() {
         return generator;
+    }
+
+    public void setGenerator(Generator generator) {
+        this.generator = generator;
     }
 }

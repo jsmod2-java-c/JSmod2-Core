@@ -69,4 +69,6 @@ public class BanEvent extends Event {
     public void setAllowBan(boolean allowBan) {
         this.allowBan = allowBan;
     }
+
+
 }

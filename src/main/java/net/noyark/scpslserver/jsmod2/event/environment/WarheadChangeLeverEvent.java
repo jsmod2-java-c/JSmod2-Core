@@ -29,4 +29,11 @@ public class WarheadChangeLeverEvent extends Event {
         this.allow = allow;
     }
 
+    public WarheadChangeLeverEvent(){
+
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
 }

@@ -48,4 +48,12 @@ public class WarheadEvent extends Event {
         this.timeLeft = timeLeft;
         this.cancel = false;
     }
+
+    public WarheadEvent(){
+
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
 }

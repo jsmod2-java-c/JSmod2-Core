@@ -32,6 +32,10 @@ public class SCP914ActivateEvent extends Event {
         this.outputPos = outputPos;
     }
 
+    public SCP914ActivateEvent(){
+
+    }
+
     public Player getUser() {
         return user;
     }

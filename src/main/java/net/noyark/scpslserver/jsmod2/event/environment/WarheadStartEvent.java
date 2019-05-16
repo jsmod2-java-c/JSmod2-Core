@@ -34,4 +34,7 @@ public class WarheadStartEvent extends WarheadEvent {
         this.openDoorsAfter = openDoorsAfter;
     }
 
+    public WarheadStartEvent(){
+
+    }
 }

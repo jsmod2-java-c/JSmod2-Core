@@ -3,6 +3,10 @@ package net.noyark.scpslserver.jsmod2.command;
 import net.noyark.scpslserver.jsmod2.CommandSender;
 import net.noyark.scpslserver.jsmod2.Server;
 
+/**
+ * @author magiclu550 #(code) jsmod2
+ */
+
 public class RebootCommand extends NativeCommand{
 
     public RebootCommand() {

@@ -58,6 +58,12 @@ public class Register {
         successInfo.add("start.finish");
     }
 
+    public void registerServerProperties(){
+        serverProperties.put("this.port","19935");//java端ip
+        serverProperties.put("data.network.plugin.port","19938");//插件端ip
+        serverProperties.put("decode","utf-8");//解码字符集
+        serverProperties.put("encode","utf-8");//编码字符集
+    }
 
 
     public List<String> getRegisterLang(){
@@ -86,7 +92,6 @@ public class Register {
     }
 
 
-
     private static Register register;
 
     private static List<String> registerLang = new ArrayList<>();
@@ -98,6 +103,12 @@ public class Register {
     private List<String> successInfo = new ArrayList<>();
 
     private Map<Integer,Class<? extends DataPacket>> packets = new HashMap<>();
+
+    private Map<String,String> serverProperties = new HashMap<>();
+
+    public Map<String, String> getServerProperties() {
+        return serverProperties;
+    }
 
     static {
         register = new Register();
