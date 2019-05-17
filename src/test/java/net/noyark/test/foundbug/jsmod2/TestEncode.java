@@ -2,8 +2,7 @@ package net.noyark.test.foundbug.jsmod2;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import net.noyark.scpslserver.jsmod2.network.DataPacket;
-import net.noyark.scpslserver.jsmod2.utils.Utils;
+
 import org.junit.Test;
 
 import java.io.UnsupportedEncodingException;
@@ -15,9 +14,17 @@ public class TestEncode{
 
     @Test
     public void encode() throws Exception{
-        System.out.println(JSON.toJSONString("11"));
-        byte[] bytes = Base64.getEncoder().encode("1-{stop}".getBytes());
-        System.out.println(dataObjectDecode(Base64.getEncoder().encode("1-{\"SaaLo\":\"1\"}".getBytes()),ObjectC.class));
+//        System.out.println(JSON.toJSONString("11"));
+//        byte[] bytes = Base64.getEncoder().encode("1-{stop}".getBytes());
+//        System.out.println(dataObjectDecode(Base64.getEncoder().encode("1-{\"SaaLo\":\"1\"}".getBytes()),ObjectC.class));
+        ObjectC c = new ObjectC();
+        c.test = net.noyark.test.foundbug.jsmod2.Test.TEST;
+        String json = JSON.toJSONString(c);
+
+        System.out.println(json);
+        ObjectC o = JSONObject.parseObject("{\"saalo\":12,\"test\":0}",ObjectC.class);
+
+        System.out.println(o);
     }
 
     public byte[] dataObjectEncode(Object o) throws UnsupportedEncodingException {
