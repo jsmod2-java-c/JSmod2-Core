@@ -3,6 +3,7 @@ package net.noyark.scpslserver.jsmod2;
 import net.noyark.scpslserver.jsmod2.command.NativeCommand;
 import net.noyark.scpslserver.jsmod2.utils.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.fusesource.jansi.Ansi.ansi;
@@ -14,7 +15,7 @@ import static org.fusesource.jansi.Ansi.ansi;
 public class Console extends CommandSender {
 
     private Console(){
-        super("CONSOLE");
+        super("CONSOLE","all","console","admin","player","nobody");
     }
 
     private static Console console;
@@ -44,18 +45,27 @@ public class Console extends CommandSender {
             boolean find = false;
             /**
              * 级别
-             * all
-             * console
-             * admin
-             * player
-             * nobody
-             * noconsole
+             * all 所有人
+             * console 控制台
+             * admin 管理员
+             * player 玩家
+             * nobody 任何人不可以
+             * noconsole 控制台不可以
              *
+             * 权限类型
+             * 控制台可以操作的指令有以下权限
+             * ！noconsole
+             * 允许普通玩家使用的指令权限
+             * player all
              */
             for(NativeCommand cmd:commands){
                 if(command.equals(cmd.getCommandName())){
-                    if(!cmd.getPower().equals("noconsole"))
+                    //如果含有这个权限
+                    if(getPowers().contains(cmd.getPower())){
                         cmd.execute(this,args);
+                    }else{
+                        Utils.getMessageSender().error("you do not have this power");
+                    }
                     find = true;
                 }
             }

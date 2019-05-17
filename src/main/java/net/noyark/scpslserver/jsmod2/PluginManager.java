@@ -1,6 +1,7 @@
 package net.noyark.scpslserver.jsmod2;
 
 
+import net.noyark.scpslserver.jsmod2.annotations.NativeListener;
 import net.noyark.scpslserver.jsmod2.command.Command;
 import net.noyark.scpslserver.jsmod2.command.NativeCommand;
 import net.noyark.scpslserver.jsmod2.event.Event;
@@ -164,9 +165,59 @@ public class PluginManager {
         }
         return pluginCommands;
     }
+
+    public boolean excuteCommand(String commandName,String[] args,CommandSender sender){
+        for(NativeCommand command:commands){
+            if(command.getCommandName().equals(commandName)){
+                //指令发送者所拥有的权限是否包含指令允许的权限
+                if(sender.getPowers().contains(command.getPower())){
+                    return command.execute(sender,args);
+                }else{
+                    Utils.getMessageSender().error("do not have this power");
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 控制台执行指令
+     *
+     */
+    public boolean consoleExcuteCommand(String commandName,String[] args){
+        for(NativeCommand command:commands){
+            if(command.getCommandName().equals(commandName)){
+                CommandSender commandSender = Console.getConsole();
+                if(commandSender.getPowers().contains(command.getPower())){
+                    return command.execute(commandSender,args);
+                }else{
+                    Utils.getMessageSender().error("the power is no console");
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
+
+    public List<Listener> getAllListener(){
+        List<Listener> listeners = new LinkedList<>();
+        Set<Map.Entry<Listener,List<MethodInvokeMapper>>> sets = listenerMapper.entrySet();
+        for(Map.Entry<Listener,List<MethodInvokeMapper>> entry:sets){
+            Listener listener = entry.getKey();
+            if(listener.getClass().getDeclaredAnnotation(NativeListener.class)==null){
+                listeners.add(listener);
+            }
+        }
+        return listeners;
+    }
+
     public void clear(){
         commands.removeAll(getPluginCommands());
-        listenerMapper.clear();
+        List<Listener> commonListeners = getAllListener();
+        for(Listener listener:commonListeners){
+            listenerMapper.remove(listener);
+        }
         this.getPlugins().clear();
     }
 }

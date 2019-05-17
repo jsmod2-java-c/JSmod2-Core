@@ -62,11 +62,13 @@ public class Register {
     }
 
     public void registerPacket(){
+
         packets.put(0x00, ServerInitPacket.class);
-        packets.put(0x01, AdminQueryPacket.class);
+        packets.put(0x01, AdminQueryPacket.class);//@Deprecated
         packets.put(0x02,null);//ClosePacket no response
-        packets.put(0x03, AuthCheckPacket.class);
-        packets.put(0x04, BanPacket.class);
+        packets.put(0x03, AuthCheckPacket.class);//@Deprecated
+        packets.put(0x04, BanPacket.class);//@Deprecated
+
     }
 
     public void registerSuccessInfo(){
