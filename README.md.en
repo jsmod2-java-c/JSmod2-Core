@@ -8,25 +8,25 @@
 
 JSmod2 requires Smod2, it can connect two clients together with the C# plugin "SCPDataNetwork".
 
-With this client, you can write your plugin not only in C# way, but also in Java way.
+With this client, you can write your plugin not only in C#, but also in Java.
 
 > How to get the latest version?
 
-View MagicLu's blog: http://magic.noyark.net/
+See MagicLu's blog: http://magic.noyark.net/
 
-Or, download the source directly.
+Or download the source directly and compile.
 
 We don't provide compiled version.
 
 (Maybe we will.)
 
-> Can I join to contribute the project?
+> Can I join to contribute?
 
 Absolutely! Please mail to 84398372@qq.com,.
 
-Or just make a pull request! 
+Why not make a pull request? Feel free to join us!
 
-We'll reply you as soon as possible.
+We'll reply you as soon as possible if you have sent an email.
 
 
 >Framework:
