@@ -2,8 +2,7 @@ package net.noyark.scpslserver.jsmod2;
 
 import net.noyark.scpslserver.jsmod2.event.Event;
 import net.noyark.scpslserver.jsmod2.ex.EventException;
-import net.noyark.scpslserver.jsmod2.network.DataPacket;
-import net.noyark.scpslserver.jsmod2.utils.Utils;
+import net.noyark.scpslserver.jsmod2.network.EventBinaryStream;
 
 import java.util.Properties;
 
@@ -23,15 +22,20 @@ public class PacketManager {
     private PacketManager(){
     }
 
+
     /**
      * 处理包的逻辑写在这里
      */
     public void manageMethod(String message,int id){
-        Utils.TryCatch(()->{
+        try{
             Properties properties = FileSystem.getFileSystem().serverProperties(Server.getSender().getServer());
             byte[] bytes = message.getBytes(properties.getProperty("encode"));//通过utf-8形式获取byte字节数组
+            if(id == 1||(0x03<=id&&id<=0x52)){
+                callEventByPacket(id,bytes);
+            }
+        }catch (Exception e){
 
-        });
+        }
     }
 
 
@@ -40,14 +44,15 @@ public class PacketManager {
      * 通过数据包调用event
      * @param id
      * @param bytes
-     * @param packet
      */
 
-    public void callEventByPacket(int id, byte[] bytes, DataPacket packet){
+    public void callEventByPacket(int id, byte[] bytes){
+
+        EventBinaryStream stream = new EventBinaryStream();
 
         Class<? extends Event> eventClass = getInstance().getEvents().get(id);
         if(eventClass != null){
-            Event event = eventClass.cast(packet.decode(bytes));
+            Event event = stream.encode(eventClass,bytes);
 
             Server.getSender().getServer().getPluginManager().callEvent(event);
         }else{

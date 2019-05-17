@@ -13,9 +13,10 @@ import net.noyark.scpslserver.jsmod2.event.team.DecideRespawnQueueEvent;
 import net.noyark.scpslserver.jsmod2.event.team.SetNTFUnitNameEvent;
 import net.noyark.scpslserver.jsmod2.event.team.SetSCPConfigEvent;
 import net.noyark.scpslserver.jsmod2.event.team.TeamRespawnEvent;
-import net.noyark.scpslserver.jsmod2.network.AdminQueryPacket;
-import net.noyark.scpslserver.jsmod2.network.DataPacket;
-import net.noyark.scpslserver.jsmod2.network.ServerInitPacket;
+import net.noyark.scpslserver.jsmod2.network.*;
+import net.noyark.scpslserver.jsmod2.network.event.AdminQueryPacket;
+import net.noyark.scpslserver.jsmod2.network.event.AuthCheckPacket;
+import net.noyark.scpslserver.jsmod2.network.event.BanPacket;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -64,6 +65,8 @@ public class Register {
         packets.put(0x00, ServerInitPacket.class);
         packets.put(0x01, AdminQueryPacket.class);
         packets.put(0x02,null);//ClosePacket no response
+        packets.put(0x03, AuthCheckPacket.class);
+        packets.put(0x04, BanPacket.class);
     }
 
     public void registerSuccessInfo(){
@@ -83,21 +86,21 @@ public class Register {
      * 事件id对应数据包id
      */
     public void registerEvents(){
-        events.put(0x01, AdminQueryEvent.class);
-        events.put(0x03, AuthCheckEvent.class);
-        events.put(0x04, BanEvent.class);
-        events.put(0x05, SetConfigEvent.class);
-        events.put(0x06, GeneratorFinishEvent.class);
-        events.put(0x07, LCZDecontaminateEvent.class);
-        events.put(0x08, SCP914ActivateEvent.class);
-        events.put(0x09, ScpDeathAnnouncementEvent.class);
-        events.put(0x0a, SummonVehicleEvent.class);
-        events.put(0x0b,WarheadChangeLeverEvent.class);
-        events.put(0x0c,WarheadDetonateEvent.class);
-        events.put(0x0d,WarheadKeycardAccessEvent.class);
-        events.put(0x0e,WarheadStartEvent.class);
-        events.put(0x0f, Player079AddExpEvent.class);
-        events.put(0x10, Player079CameraTeleportEvent.class);
+        events.put(0x01, AdminQueryEvent.class);//packet
+        events.put(0x03, AuthCheckEvent.class);//packet
+        events.put(0x04, BanEvent.class);//packet
+        events.put(0x05, SetConfigEvent.class);//packet
+        events.put(0x06, GeneratorFinishEvent.class);//p
+        events.put(0x07, LCZDecontaminateEvent.class);//p
+        events.put(0x08, SCP914ActivateEvent.class);//p
+        events.put(0x09, ScpDeathAnnouncementEvent.class);//p
+        events.put(0x0a, SummonVehicleEvent.class);//p
+        events.put(0x0b,WarheadChangeLeverEvent.class);//p
+        events.put(0x0c,WarheadDetonateEvent.class);//p
+        events.put(0x0d,WarheadKeycardAccessEvent.class);//p
+        events.put(0x0e,WarheadStartEvent.class);//p
+        events.put(0x0f, Player079AddExpEvent.class);//p
+        events.put(0x10, Player079CameraTeleportEvent.class);//p
         events.put(0x11, Player079DoorEvent.class);
         events.put(0x12, Player079ElevatorTeleportEvent.class);
         events.put(0x13, Player079LevelUpEvent.class);

@@ -40,20 +40,28 @@ public class BinaryStream {
      * @throws UnsupportedEncodingException
      */
 
-    public byte[] dataObjectEncode(Object o) throws UnsupportedEncodingException {
-        String json = JSON.toJSONString(o);
-        String packet = id+"-"+json;
-        byte[] bytes = packet.getBytes(properties.getProperty("encode"));
-        return Base64.getEncoder().encode(bytes);
+    public byte[] dataObjectEncode(Object o) {
+        try{
+            String json = JSON.toJSONString(o);
+            String packet = id+"-"+json;
+            byte[] bytes = packet.getBytes(properties.getProperty("encode"));
+            return Base64.getEncoder().encode(bytes);
+        }catch (Exception e){
+            return null;
+        }
     }
 
 
-    public <T> T dataObjectDecode(byte[] data,Class<T> clz) throws UnsupportedEncodingException {
-        byte[] packetBytes = Base64.getDecoder().decode(data);
-        String json = new String(packetBytes,properties.getProperty("decode"));
-        json = json.substring((id+"-").length());
-        Object o = JSONObject.parseObject(json,clz);
-        return (T)o;
+    public <T> T dataObjectDecode(byte[] data,Class<T> clz){
+        try{
+            byte[] packetBytes = Base64.getDecoder().decode(data);
+            String json = new String(packetBytes,properties.getProperty("decode"));
+            json = json.substring((id+"-").length());
+            Object o = JSONObject.parseObject(json,clz);
+            return clz.cast(o);
+        }catch (Exception e){
+            return null;
+        }
     }
 
 }
