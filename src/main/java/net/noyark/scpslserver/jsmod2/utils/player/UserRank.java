@@ -17,4 +17,8 @@ public enum  UserRank {
     UserRank(int rank){
         this.rank = rank;
     }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
 }

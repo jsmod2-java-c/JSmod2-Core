@@ -25,4 +25,6 @@ public enum DamageType {
     SCP_106,
     SCP_173,
     SCP_939;
+
+
 }

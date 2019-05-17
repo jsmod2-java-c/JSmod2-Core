@@ -10,9 +10,8 @@ import net.noyark.Smod2Server;
 public class ServerInitPacket extends DataPacket{
 
 
-
     public ServerInitPacket(){
-        super(0x0);
+        super(0x00);
     }
 
     @Override
@@ -21,8 +20,8 @@ public class ServerInitPacket extends DataPacket{
     }
 
     @Override
-    public Object decode(byte[] bytes) {
-        Object o = null;
+    public Smod2Server decode(byte[] bytes) {
+        Smod2Server o = null;
         try {
             o = dataObjectDecode(bytes, Smod2Server.class);
         }catch(Exception e){}

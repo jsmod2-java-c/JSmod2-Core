@@ -14,4 +14,8 @@ public enum AmmoType {
     AmmoType(int ammo){
         this.ammo = ammo;
     }
+
+    public void setAmmo(int ammo) {
+        this.ammo = ammo;
+    }
 }

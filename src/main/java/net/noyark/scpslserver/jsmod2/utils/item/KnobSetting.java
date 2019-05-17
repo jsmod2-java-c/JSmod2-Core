@@ -17,4 +17,8 @@ public enum KnobSetting {
     public int getSetting() {
         return setting;
     }
+
+    public void setSetting(int setting) {
+        this.setting = setting;
+    }
 }

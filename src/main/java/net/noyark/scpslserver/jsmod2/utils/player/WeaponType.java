@@ -19,4 +19,7 @@ public enum WeaponType {
         this.type = type;
     }
 
+    public void setType(int type) {
+        this.type = type;
+    }
 }

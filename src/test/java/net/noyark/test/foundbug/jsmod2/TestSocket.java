@@ -19,14 +19,13 @@ public class TestSocket {
         DatagramSocket socket = new DatagramSocket(19937);
         while (true){
             sendPacket(socket);
-            Thread.sleep(10000);
         }
     }
 
     public void sendPacket(DatagramSocket socket){
 
         Utils.TryCatch(()->{
-            byte[] encode = Base64.getEncoder().encode("1111".getBytes());
+            byte[] encode = Base64.getEncoder().encode("1-你好世界".getBytes());
             DatagramPacket pack = new DatagramPacket(encode,encode.length, InetAddress.getByName("127.0.0.1"),19938);
             socket.send(pack);
         });

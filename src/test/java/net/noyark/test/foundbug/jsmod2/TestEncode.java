@@ -7,6 +7,8 @@ import net.noyark.scpslserver.jsmod2.utils.Utils;
 import org.junit.Test;
 
 import java.io.UnsupportedEncodingException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
 import java.util.Base64;
 
 public class TestEncode{
@@ -30,11 +32,22 @@ public class TestEncode{
         String json = new String(packetBytes);
         json = json.substring(("1-").length());
         Object o = JSONObject.parseObject(json,clz);
+        System.out.println(o);
         return (T)o;
     }
 
     @Test
     public void mem() throws Exception{
 
+        DatagramSocket socket = new DatagramSocket(19937);
+
+        DatagramPacket request = new DatagramPacket(new byte[65535], 65535);
+
+        socket.receive(request);
+        String message = new String(request.getData(), 0 , request.getLength());
+
+        System.out.println(message);
+
+        dataObjectDecode(message.getBytes("utf-8"),String.class);
     }
 }

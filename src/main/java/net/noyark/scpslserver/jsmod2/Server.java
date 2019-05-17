@@ -3,8 +3,10 @@ package net.noyark.scpslserver.jsmod2;
 import net.noyark.Smod2Server;
 import net.noyark.scpslserver.jsmod2.annotations.PacketCMD;
 import net.noyark.scpslserver.jsmod2.command.*;
+import net.noyark.scpslserver.jsmod2.event.packet.ServerPacketEvent;
 import net.noyark.scpslserver.jsmod2.inferf.log.ILogger;
 import net.noyark.scpslserver.jsmod2.network.DataPacket;
+import net.noyark.scpslserver.jsmod2.network.ServerInitPacket;
 import net.noyark.scpslserver.jsmod2.plugin.PluginClassLoader;
 import net.noyark.scpslserver.jsmod2.utils.Utils;
 
@@ -25,6 +27,8 @@ import static net.noyark.scpslserver.jsmod2.FileSystem.getFileSystem;
  */
 
 public class Server {
+
+    @PacketCMD private static final int INIT_COMMAND = 0x00;
 
     @PacketCMD private static final int CLOSE_COMMAND = 0x02;
 
@@ -241,6 +245,8 @@ public class Server {
     /**
      * 服务器监听线程启动
      * 目前一个java服务器支持一个smod2服
+     * 如果要重启smod2服务器 建议先重启java服务器
+     * 开启顺序->先开启java服务器->开启smod2
      */
     private class ListenerThread implements Runnable{
         @Override
@@ -268,13 +274,21 @@ public class Server {
                         close();
                     }
 
+                    //初始化服务器，第一个数据包
+
+                    if(id == INIT_COMMAND){
+                        ServerInitPacket packet = new ServerInitPacket();
+                        ServerPacketEvent event = new ServerPacketEvent(packet);
+                        pluginManager.callEvent(event);
+                        smod2Server = packet.decode(message.getBytes(serverProp.getProperty("encode")));
+                    }
+
                     Class<?> packet = Register.getInstance().getPackets().get(id);
                     if(packet == null){
                         log.error("no such type packet");
                         continue;
                     }
-                    //发出数据包部分由C#插件决定，C#插件的Server中央处理java发出的请求
-                    //专门设立发包的api
+                    //接收包
                     PacketManager.getManager().manageMethod(message,id);
                 }
             });

@@ -18,4 +18,7 @@ public enum RadioStatus {
         this.status = status;
     }
 
+    public void setStatus(int status) {
+        this.status = status;
+    }
 }

@@ -24,4 +24,7 @@ public enum ExperienceType {
         this.type = type;
     }
 
+    public void setType(int type) {
+        this.type = type;
+    }
 }

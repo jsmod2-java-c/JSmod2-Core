@@ -33,4 +33,8 @@ public enum Role {
     public int getRole() {
         return role;
     }
+
+    public void setRole(int role) {
+        this.role = role;
+    }
 }

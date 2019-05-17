@@ -1,6 +1,7 @@
 package net.noyark.scpslserver.jsmod2;
 
 import net.noyark.scpslserver.jsmod2.command.*;
+import net.noyark.scpslserver.jsmod2.event.Event;
 import net.noyark.scpslserver.jsmod2.network.AdminQueryPacket;
 import net.noyark.scpslserver.jsmod2.network.DataPacket;
 import net.noyark.scpslserver.jsmod2.network.ServerInitPacket;
@@ -65,6 +66,13 @@ public class Register {
         serverProperties.put("encode","utf-8");//编码字符集
     }
 
+    /**
+     * 格式:
+     * put(事件id,事件名.class)
+     * 事件id对应数据包id
+     */
+    public void registerEvents(){
+    }
 
     public List<String> getRegisterLang(){
         return registerLang;
@@ -106,8 +114,18 @@ public class Register {
 
     private Map<String,String> serverProperties = new HashMap<>();
 
+    private Map<Integer, Class<? extends Event>> events = new HashMap<>();
+
     public Map<String, String> getServerProperties() {
         return serverProperties;
+    }
+
+    public Map<Integer, Class<? extends Event>> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Map<Integer,Class<? extends Event>> events) {
+        this.events = events;
     }
 
     static {
