@@ -1,12 +1,14 @@
 package net.noyark.scpslserver.jsmod2.event.config;
 
 
+import net.noyark.scpslserver.jsmod2.event.Event;
+
 /**
  * @author magiclu550 #(code) jsmod2
  */
 
 
-public class SetConfigEvent {
+public class SetConfigEvent extends Event {
 
     private String key;
 

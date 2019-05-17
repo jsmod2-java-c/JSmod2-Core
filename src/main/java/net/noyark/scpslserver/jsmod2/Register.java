@@ -2,6 +2,17 @@ package net.noyark.scpslserver.jsmod2;
 
 import net.noyark.scpslserver.jsmod2.command.*;
 import net.noyark.scpslserver.jsmod2.event.Event;
+import net.noyark.scpslserver.jsmod2.event.admin.AdminQueryEvent;
+import net.noyark.scpslserver.jsmod2.event.admin.AuthCheckEvent;
+import net.noyark.scpslserver.jsmod2.event.admin.BanEvent;
+import net.noyark.scpslserver.jsmod2.event.config.SetConfigEvent;
+import net.noyark.scpslserver.jsmod2.event.environment.*;
+import net.noyark.scpslserver.jsmod2.event.player.*;
+import net.noyark.scpslserver.jsmod2.event.server.*;
+import net.noyark.scpslserver.jsmod2.event.team.DecideRespawnQueueEvent;
+import net.noyark.scpslserver.jsmod2.event.team.SetNTFUnitNameEvent;
+import net.noyark.scpslserver.jsmod2.event.team.SetSCPConfigEvent;
+import net.noyark.scpslserver.jsmod2.event.team.TeamRespawnEvent;
 import net.noyark.scpslserver.jsmod2.network.AdminQueryPacket;
 import net.noyark.scpslserver.jsmod2.network.DataPacket;
 import net.noyark.scpslserver.jsmod2.network.ServerInitPacket;
@@ -72,6 +83,89 @@ public class Register {
      * 事件id对应数据包id
      */
     public void registerEvents(){
+        events.put(0x01, AdminQueryEvent.class);
+        events.put(0x03, AuthCheckEvent.class);
+        events.put(0x04, BanEvent.class);
+        events.put(0x05, SetConfigEvent.class);
+        events.put(0x06, GeneratorFinishEvent.class);
+        events.put(0x07, LCZDecontaminateEvent.class);
+        events.put(0x08, SCP914ActivateEvent.class);
+        events.put(0x09, ScpDeathAnnouncementEvent.class);
+        events.put(0x0a, SummonVehicleEvent.class);
+        events.put(0x0b,WarheadChangeLeverEvent.class);
+        events.put(0x0c,WarheadDetonateEvent.class);
+        events.put(0x0d,WarheadKeycardAccessEvent.class);
+        events.put(0x0e,WarheadStartEvent.class);
+        events.put(0x0f, Player079AddExpEvent.class);
+        events.put(0x10, Player079CameraTeleportEvent.class);
+        events.put(0x11, Player079DoorEvent.class);
+        events.put(0x12, Player079ElevatorTeleportEvent.class);
+        events.put(0x13, Player079LevelUpEvent.class);
+        events.put(0x14,Player079LockdownEvent.class);
+        events.put(0x15,Player079LockEvent.class);
+        events.put(0x16,Player079StartSpeakerEvent.class);
+        events.put(0x17,Player079StopSpeakerEvent.class);
+        events.put(0x18,Player079TeslaGateEvent.class);
+        events.put(0x19,Player079UnlockDoorsEvent.class);
+        events.put(0x1a,Player106CreatePortalEvent.class);
+        events.put(0x1b,Player106TeleportEvent.class);
+        events.put(0x1c,PlayerCallCommandEvent.class);
+        events.put(0x1d,PlayerCheckEscapeEvent.class);
+        events.put(0x1e,PlayerContain106Event.class);
+        events.put(0x1f,PlayerDeathEvent.class);
+        events.put(0x20,PlayerDropItemEvent.class);
+        events.put(0x21,PlayerElevatorUseEvent.class);
+        events.put(0x22,PlayerGeneratorAccessEvent.class);
+        events.put(0x23,PlayerGeneratorEjectTabletEvent.class);
+        events.put(0x24,PlayerGeneratorInsertTabletEvent.class);
+        events.put(0x25,PlayerGeneratorUnlockEvent.class);
+        events.put(0x26,PlayerGrenadeExplosion.class);
+        events.put(0x27,PlayerGrenadeHitPlayer.class);
+        events.put(0x28,PlayerHandcuffedEvent.class);
+        events.put(0x29,PlayerHurtEvent.class);
+        events.put(0x2a,PlayerInitialAssignTeamEvent.class);
+        events.put(0x2b,PlayerIntercomCooldownCheckEvent.class);
+        events.put(0x2c,PlayerIntercomEvent.class);
+        events.put(0x2d,PlayerJoinEvent.class);
+        events.put(0x2e,PlayerLureEvent.class);
+        events.put(0x2f,PlayerMakeNoiseEvent.class);
+        events.put(0x30,PlayerMedkitUseEvent.class);
+        events.put(0x31,PlayerPickupItemEvent.class);
+        events.put(0x32,PlayerPickupItemLateEvent.class);
+        events.put(0x33,PlayerPocketDimensionEnterEvent.class);
+        events.put(0x34,PlayerPocketDimensionExitEvent.class);
+        events.put(0x35,PlayerRadioSwitchEvent.class);
+        events.put(0x36,PlayerRecallZombieEvent.class);
+        events.put(0x37,PlayerReloadEvent.class);
+        events.put(0x38,PlayerSCP914ChangeKnobEvent.class);
+        events.put(0x39,PlayerSetRoleEvent.class);
+        events.put(0x3a,PlayerShootEvent.class);
+        events.put(0x3b,PlayerSpawnEvent.class);
+        events.put(0x3c,PlayerSpawnRagdollEvent.class);
+        events.put(0x3d,PlayerThrowGrenade.class);
+        events.put(0x3e,PlayerTriggerTeslaEvent.class);
+        events.put(0x3f,Scp096CooldownEndEvent.class);
+        events.put(0x40,Scp096CooldownStartEvent.class);
+        events.put(0x41,Scp096EnrageEvent.class);
+        events.put(0x42,Scp096PanicEvent.class);
+        events.put(0x43, ConnectEvent.class);
+        events.put(0x44, DisconnectEvent.class);
+        events.put(0x45, FixedEvent.class);
+        events.put(0x46, LateDisconnectionEvent.class);
+        events.put(0x47, LateUpEvent.class);
+        events.put(0x48,RoundEndEvent.class);
+        events.put(0x49,RoundReStartEvent.class);
+        events.put(0x4a,RoundStartEvent.class);
+        events.put(0x4b,SceneChangedEvent.class);
+        events.put(0x4c,SetServerNameEvent.class);
+        events.put(0x4d,UpdateEvent.class);
+        events.put(0x4e,WaitingForPlayersEvent.class);
+        events.put(0x4f, DecideRespawnQueueEvent.class);
+        events.put(0x50, SetNTFUnitNameEvent.class);
+        events.put(0x51, SetSCPConfigEvent.class);
+        events.put(0x52, TeamRespawnEvent.class);
+        //82 events
+
     }
 
     public List<String> getRegisterLang(){
@@ -122,10 +216,6 @@ public class Register {
 
     public Map<Integer, Class<? extends Event>> getEvents() {
         return events;
-    }
-
-    public void setEvents(Map<Integer,Class<? extends Event>> events) {
-        this.events = events;
     }
 
     static {

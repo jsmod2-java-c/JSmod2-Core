@@ -1,13 +1,14 @@
 package net.noyark.scpslserver.jsmod2.event.player;
 
 import net.noyark.scpslserver.jsmod2.entity.Player;
+import net.noyark.scpslserver.jsmod2.event.Event;
 import net.noyark.scpslserver.jsmod2.math.Vector;
 import net.noyark.scpslserver.jsmod2.utils.api.Role;
 import net.noyark.scpslserver.jsmod2.utils.player.DamageType;
 /**
  * @author kevinj
  */
-public class PlayerSpawnRagdollEvent {
+public class PlayerSpawnRagdollEvent extends Event {
     private Role role;
     private Vector position;
     private Vector Rotation;

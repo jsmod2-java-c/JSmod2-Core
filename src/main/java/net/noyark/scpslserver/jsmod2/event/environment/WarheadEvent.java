@@ -8,7 +8,7 @@ import net.noyark.scpslserver.jsmod2.event.Event;
  * @author magiclu550
  */
 
-public class WarheadEvent extends Event {
+public abstract class WarheadEvent extends Event {
     private float timeLeft;
     private Player player;
     private Player activator;

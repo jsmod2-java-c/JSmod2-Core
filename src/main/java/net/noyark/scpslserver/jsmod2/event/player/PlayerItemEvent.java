@@ -4,7 +4,7 @@ import net.noyark.scpslserver.jsmod2.entity.Item;
 import net.noyark.scpslserver.jsmod2.entity.Player;
 import net.noyark.scpslserver.jsmod2.utils.item.ItemType;
 
-public class PlayerItemEvent extends PlayerEvent {
+public abstract class PlayerItemEvent extends PlayerEvent {
     private Item item;
 
     private ItemType changeTo;

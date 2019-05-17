@@ -7,7 +7,7 @@ import net.noyark.scpslserver.jsmod2.event.Event;
  * @author kevinj
  */
 
-public class PlayerEvent extends Event {
+public abstract class PlayerEvent extends Event {
     private Player player;
 
     public PlayerEvent(Player player){
