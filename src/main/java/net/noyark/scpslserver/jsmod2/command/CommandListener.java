@@ -9,7 +9,7 @@ import net.noyark.scpslserver.jsmod2.event.player.PlayerCallCommandEvent;
 @NativeListener
 public class CommandListener implements Listener {
 
-    //TODO 指令问题
+    //TODO 指令问题，待注册
     @EventManager
     public void handleCommand(PlayerCallCommandEvent event){
         String command = event.getCommand();
