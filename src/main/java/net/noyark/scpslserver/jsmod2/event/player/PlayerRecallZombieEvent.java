@@ -30,7 +30,7 @@ public class PlayerRecallZombieEvent extends PlayerEvent{
     public Player getTarget() {
         return target;
     }
-
+    /** java-bean */
     public void setTarget(Player target) {
         this.target = target;
     }

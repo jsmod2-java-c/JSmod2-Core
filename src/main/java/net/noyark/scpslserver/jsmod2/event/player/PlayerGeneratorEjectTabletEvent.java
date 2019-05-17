@@ -23,6 +23,8 @@ public class PlayerGeneratorEjectTabletEvent extends PlayerEvent {
 
     }
 
+
+
     public Generator getGenerator() {
         return generator;
     }
@@ -43,6 +45,7 @@ public class PlayerGeneratorEjectTabletEvent extends PlayerEvent {
         this.spawnTablet = spawnTablet;
     }
 
+    /** java-bean */
     public void setGenerator(Generator generator) {
         this.generator = generator;
     }

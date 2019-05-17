@@ -19,6 +19,7 @@ public class Player079StopSpeakerEvent extends PlayerEvent {
         return allow;
     }
 
+    /** java-bean */
     public void setRoom(Room room) {
         this.room = room;
     }

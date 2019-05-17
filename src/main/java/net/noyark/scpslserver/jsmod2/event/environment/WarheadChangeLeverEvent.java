@@ -33,6 +33,8 @@ public class WarheadChangeLeverEvent extends Event {
 
     }
 
+
+    /** java-bean */
     public void setPlayer(Player player) {
         this.player = player;
     }

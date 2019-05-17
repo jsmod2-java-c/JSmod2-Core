@@ -18,7 +18,6 @@ public class TestEncode{
 //        byte[] bytes = Base64.getEncoder().encode("1-{stop}".getBytes());
 //        System.out.println(dataObjectDecode(Base64.getEncoder().encode("1-{\"SaaLo\":\"1\"}".getBytes()),ObjectC.class));
         ObjectC c = new ObjectC();
-        c.test = net.noyark.test.foundbug.jsmod2.Test.TEST;
         String json = JSON.toJSONString(c);
 
         System.out.println(json);

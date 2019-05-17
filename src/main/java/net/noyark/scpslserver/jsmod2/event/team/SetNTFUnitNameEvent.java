@@ -13,4 +13,12 @@ public class SetNTFUnitNameEvent extends Event {
     public SetNTFUnitNameEvent(){
 
     }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
 }

@@ -33,7 +33,8 @@ public class PlayerTriggerTeslaEvent extends PlayerEvent {
         return Triggerable;
     }
 
-    public void setTeslaGate(net.noyark.scpslserver.jsmod2.entity.TeslaGate teslaGate) {
+    /** java-bean */
+    public void setTeslaGate(TeslaGate teslaGate) {
         TeslaGate = teslaGate;
     }
 }

@@ -1,20 +1,15 @@
 package net.noyark.scpslserver.jsmod2.network;
 
-/**
- * @author magiclu550
- */
-
-public class AdminQueryPacket extends DataPacket {
+public class AuthCheckPacket extends DataPacket{
 
 
-
-    public AdminQueryPacket(){
-        super(0x01);
+    public AuthCheckPacket() {
+        super(0x03);
     }
 
     @Override
     public byte[] encode() {
-        return new byte[0];
+        return null;
     }
 
     @Override

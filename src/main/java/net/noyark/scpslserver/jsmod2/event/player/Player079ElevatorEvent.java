@@ -32,6 +32,7 @@ public class Player079ElevatorEvent extends PlayerEvent {
         this.apDrain = apDrain;
     }
 
+    /** java-bean */
     public void setElevator(Elevator elevator) {
         this.elevator = elevator;
     }

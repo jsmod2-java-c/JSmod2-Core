@@ -22,6 +22,7 @@ public abstract class PlayerEvent extends Event {
         return player;
     }
 
+    /** java-bean */
     public void setPlayer(Player player) {
         this.player = player;
     }

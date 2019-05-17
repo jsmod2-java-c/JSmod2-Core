@@ -19,6 +19,7 @@ public class PlayerPickupItemLateEvent extends PlayerEvent{
         return item;
     }
 
+    /** java-bean */
     public void setItem(Item item) {
         this.item = item;
     }

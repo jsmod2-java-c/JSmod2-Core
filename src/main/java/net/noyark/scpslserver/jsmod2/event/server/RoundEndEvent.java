@@ -20,6 +20,7 @@ public class RoundEndEvent extends ServerEvent {
         return round;
     }
 
+    /** java-bean */
     public void setRound(Round round) {
         this.round = round;
     }
@@ -31,8 +32,7 @@ public class RoundEndEvent extends ServerEvent {
     public RoundEndEvent(){
 
     }
-
-
+    /** java-bean */
     public void setStatus(ROUND_END_STATUS status) {
         this.status = status;
     }

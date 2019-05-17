@@ -32,6 +32,7 @@ public class Player079StartSpeakerEvent extends PlayerEvent {
         this.apDrain = apDrain;
     }
 
+    /** java-bean */
     public void setRoom(Room room) {
         this.room = room;
     }

@@ -21,6 +21,7 @@ public class PlayerGeneratorAccessEvent extends PlayerEvent {
 
     }
 
+    /** java-bean */
     public void setGenerator(Generator generator) {
         this.generator = generator;
     }

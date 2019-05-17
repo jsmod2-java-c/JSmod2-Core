@@ -43,6 +43,7 @@ public class PlayerGeneratorInsertTabletEvent extends PlayerEvent{
         this.removeTablet = removeTablet;
     }
 
+    /** java-bean */
     public void setGenerator(Generator generator) {
         this.generator = generator;
     }

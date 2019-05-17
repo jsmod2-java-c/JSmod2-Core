@@ -39,10 +39,13 @@ public class Player079ElevatorTeleportEvent extends PlayerEvent {
         this.apDrain = apDrain;
     }
 
+    /** java-bean */
     public void setCamera(Vector camera) {
         this.camera = camera;
     }
 
+
+    /** java-bean */
     public void setElevator(Elevator elevator) {
         this.elevator = elevator;
     }

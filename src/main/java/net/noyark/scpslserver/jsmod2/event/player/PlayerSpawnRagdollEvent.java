@@ -59,7 +59,7 @@ public class PlayerSpawnRagdollEvent extends Event {
     public Player getAttacker() {
         return attacker;
     }
-
+    /** java-bean */
     public void setAttacker(Player attacker) {
         this.attacker = attacker;
     }

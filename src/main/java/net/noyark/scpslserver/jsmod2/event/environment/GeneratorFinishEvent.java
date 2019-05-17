@@ -24,6 +24,8 @@ public class GeneratorFinishEvent extends Event {
         return generator;
     }
 
+
+    /** java-bean */
     public void setGenerator(Generator generator) {
         this.generator = generator;
     }

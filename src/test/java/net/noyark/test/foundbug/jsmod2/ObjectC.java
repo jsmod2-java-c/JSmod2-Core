@@ -4,23 +4,9 @@ public class ObjectC{
 
     private int Saalo = 12;
 
-    public int getSaalo() {
-        return Saalo;
-    }
+    private Test test;
 
-    public Test test;
 
-    public void setSaalo(int saalo) {
-        Saalo = saalo;
-    }
-
-    public Test getTest() {
-        return test;
-    }
-
-    public void setTest(Test test) {
-        this.test = test;
-    }
 
     @Override
     public String toString() {

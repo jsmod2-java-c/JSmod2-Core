@@ -23,6 +23,7 @@ public class Player079LockdownEvent extends PlayerEvent {
 
     }
 
+
     public Room getRoom() {
         return room;
     }
@@ -43,6 +44,7 @@ public class Player079LockdownEvent extends PlayerEvent {
         this.apDrain = apDrain;
     }
 
+    /** java-bean */
     public void setRoom(Room room) {
         this.room = room;
     }

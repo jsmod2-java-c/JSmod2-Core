@@ -62,15 +62,15 @@ public class PlayerReloadEvent extends PlayerEvent {
     public void setWeapon(ItemType weapon) {
         this.weapon = weapon;
     }
-
+    /** java-bean */
     public void setNormalMaxClipSize(int normalMaxClipSize) {
         NormalMaxClipSize = normalMaxClipSize;
     }
-
+    /** java-bean */
     public void setCurrentClipAmmoCount(int currentClipAmmoCount) {
         CurrentClipAmmoCount = currentClipAmmoCount;
     }
-
+    /** java-bean */
     public void setCurrentAmmoTotal(int currentAmmoTotal) {
         CurrentAmmoTotal = currentAmmoTotal;
     }

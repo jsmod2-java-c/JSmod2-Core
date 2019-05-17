@@ -27,6 +27,7 @@ public class Player079CameraTeleportEvent extends PlayerEvent {
         return camera;
     }
 
+    /** java-bean */
     public void setCamera(Vector camera) {
         this.camera = camera;
     }

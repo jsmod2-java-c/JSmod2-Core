@@ -22,6 +22,7 @@ public class PlayerCallCommandEvent extends PlayerEvent {
         return command;
     }
 
+    /** java-bean */
     public void setCommand(String command) {
         this.command = command;
     }

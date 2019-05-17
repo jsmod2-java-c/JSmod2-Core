@@ -15,6 +15,7 @@ public class PlayerGeneratorUnlockEvent extends PlayerEvent {
         return generator;
     }
 
+    /** java-bean */
     public void setGenerator(Generator generator) {
         this.generator = generator;
     }

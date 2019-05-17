@@ -18,4 +18,9 @@ public abstract class ServerEvent extends Event {
     public Smod2Server getServer() {
         return server;
     }
+
+    /** java-bean */
+    public void setServer(Smod2Server server) {
+        this.server = server;
+    }
 }

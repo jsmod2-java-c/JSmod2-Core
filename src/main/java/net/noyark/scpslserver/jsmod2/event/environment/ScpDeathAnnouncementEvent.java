@@ -40,9 +40,13 @@ public class ScpDeathAnnouncementEvent extends Event {
 
     }
 
+    /** java-bean */
+
     public void setDeadPlayer(Player deadPlayer) {
         this.deadPlayer = deadPlayer;
     }
+
+    /** java-bean */
 
     public void setPlayerRole(Role playerRole) {
         this.playerRole = playerRole;

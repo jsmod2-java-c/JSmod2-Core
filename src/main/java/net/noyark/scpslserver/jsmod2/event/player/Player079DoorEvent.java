@@ -31,6 +31,8 @@ public class Player079DoorEvent extends PlayerEvent {
         return allow;
     }
 
+
+
     public void setAllow(boolean allow) {
         this.allow = allow;
     }
@@ -43,6 +45,7 @@ public class Player079DoorEvent extends PlayerEvent {
         this.apDrain = apDrain;
     }
 
+    /** java-bean */
     public void setDoor(Door door) {
         this.door = door;
     }

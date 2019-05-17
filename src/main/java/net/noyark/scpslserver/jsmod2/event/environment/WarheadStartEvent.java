@@ -1,9 +1,7 @@
 package net.noyark.scpslserver.jsmod2.event.environment;
 
 import net.noyark.scpslserver.jsmod2.entity.Player;
-import org.apache.logging.log4j.core.tools.picocli.CommandLine;
 
-import java.awt.event.InputEvent;
 
 /**
  * @author Kevinj
@@ -11,8 +9,8 @@ import java.awt.event.InputEvent;
  */
 
 public class WarheadStartEvent extends WarheadEvent {
-    public boolean isResumed;
-    public boolean openDoorsAfter;
+    private boolean isResumed;
+    private boolean openDoorsAfter;
 
     public WarheadStartEvent(Player player, float timeLeft) {
         super(player, timeLeft);

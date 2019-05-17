@@ -40,11 +40,11 @@ public class PlayerElevatorUseEvent extends PlayerEvent {
     public void setAllowUse(boolean allowUse) {
         AllowUse = allowUse;
     }
-
+    /** java-bean */
     public void setElevator(net.noyark.scpslserver.jsmod2.entity.Elevator elevator) {
         Elevator = elevator;
     }
-
+    /** java-bean */
     public void setElevatorPosition(Vector elevatorPosition) {
         ElevatorPosition = elevatorPosition;
     }

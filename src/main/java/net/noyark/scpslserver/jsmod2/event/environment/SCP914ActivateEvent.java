@@ -40,6 +40,8 @@ public class SCP914ActivateEvent extends Event {
         return user;
     }
 
+
+    /** java-bean */
     public void setUser(Player user) {
         this.user = user;
     }

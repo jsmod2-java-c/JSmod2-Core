@@ -14,6 +14,7 @@ public class Player106TeleportEvent extends PlayerEvent {
         return position;
     }
 
+    /** java-bean */
     public void setPosition(Vector position) {
         this.position = position;
     }

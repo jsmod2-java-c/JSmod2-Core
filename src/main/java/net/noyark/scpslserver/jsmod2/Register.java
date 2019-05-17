@@ -165,7 +165,6 @@ public class Register {
         events.put(0x51, SetSCPConfigEvent.class);
         events.put(0x52, TeamRespawnEvent.class);
         //82 events
-
     }
 
     public List<String> getRegisterLang(){

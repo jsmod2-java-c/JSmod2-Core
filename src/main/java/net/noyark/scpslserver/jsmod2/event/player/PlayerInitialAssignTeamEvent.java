@@ -19,6 +19,7 @@ public class PlayerInitialAssignTeamEvent extends PlayerEvent {
         return team;
     }
 
+    /** java-bean */
     public void setTeam(Team team) {
         this.team = team;
     }

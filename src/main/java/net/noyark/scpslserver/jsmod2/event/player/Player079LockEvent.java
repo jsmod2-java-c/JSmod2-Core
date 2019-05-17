@@ -32,6 +32,7 @@ public class Player079LockEvent extends PlayerEvent {
         return door;
     }
 
+    /** java-bean */
     public void setDoor(Door door) {
         this.door = door;
     }

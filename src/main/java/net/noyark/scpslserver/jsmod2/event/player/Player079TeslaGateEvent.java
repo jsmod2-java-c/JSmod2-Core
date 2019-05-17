@@ -44,6 +44,7 @@ public class Player079TeslaGateEvent extends PlayerEvent {
         this.apDrain = apDrain;
     }
 
+    /** java-bean */
     public void setTeslaGate(TeslaGate teslaGate) {
         this.teslaGate = teslaGate;
     }

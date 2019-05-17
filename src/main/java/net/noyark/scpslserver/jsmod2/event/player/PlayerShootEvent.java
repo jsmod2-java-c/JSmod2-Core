@@ -67,7 +67,7 @@ public class PlayerShootEvent extends PlayerEvent {
     public void setTarget(Player target) {
         this.target = target;
     }
-
+    /** java-bean */
     public void setWeapon(DamageType weapon) {
         this.weapon = weapon;
     }
@@ -75,15 +75,15 @@ public class PlayerShootEvent extends PlayerEvent {
     public boolean isShouldSpawnBloodDecal() {
         return ShouldSpawnBloodDecal;
     }
-
+    /** java-bean */
     public void setSourcePosition(Vector sourcePosition) {
         SourcePosition = sourcePosition;
     }
-
+    /** java-bean */
     public void setTargetPosition(Vector targetPosition) {
         TargetPosition = targetPosition;
     }
-
+    /** java-bean */
     public void setTargetHitbox(String targetHitbox) {
         TargetHitbox = targetHitbox;
     }
@@ -91,7 +91,6 @@ public class PlayerShootEvent extends PlayerEvent {
     public WeaponType getWeaponSound() {
         return WeaponSound;
     }
-
     public void setWeaponSound(WeaponType weaponSound) {
         WeaponSound = weaponSound;
     }

@@ -19,6 +19,8 @@ public class PacketEvent extends Event {
         return packet;
     }
 
+
+    /** java-bean */
     public void setPacket(DataPacket packet) {
         this.packet = packet;
     }

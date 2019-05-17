@@ -23,6 +23,8 @@ public class Player079AddExpEvent extends PlayerEvent {
         this.expToAdd = expToAdd;
     }
 
+
+    /** java-bean */
     public void setExperienceType(ExperienceType experienceType) {
         this.experienceType = experienceType;
     }

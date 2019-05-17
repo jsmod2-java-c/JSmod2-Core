@@ -38,10 +38,12 @@ public class PlayerPocketDimensionEnterEvent extends PlayerEvent {
         return attacker;
     }
 
+    /** java-bean */
     public void setLastPosition(Vector lastPosition) {
         this.lastPosition = lastPosition;
     }
 
+    /** java-bean */
     public void setAttacker(Player attacker) {
         this.attacker = attacker;
     }

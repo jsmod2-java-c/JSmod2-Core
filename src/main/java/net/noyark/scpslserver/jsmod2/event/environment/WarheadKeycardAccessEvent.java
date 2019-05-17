@@ -33,6 +33,7 @@ public class WarheadKeycardAccessEvent extends Event {
 
     }
 
+    /** java-bean */
     public void setPlayer(Player player) {
         this.player = player;
     }

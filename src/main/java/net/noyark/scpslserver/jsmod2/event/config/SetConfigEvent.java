@@ -46,6 +46,8 @@ public class SetConfigEvent extends Event {
         return defaultValue;
     }
 
+
+    /** java-bean */
     public void setDefaultValue(Object defaultValue) {
         this.defaultValue = defaultValue;
     }

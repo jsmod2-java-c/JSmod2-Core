@@ -21,7 +21,7 @@ public class SetRoleMaxHPEvent extends Event {
     public Role getRole() {
         return role;
     }
-
+    /** java-bean */
     public void setRole(Role role) {
         this.role = role;
     }

@@ -7,9 +7,9 @@ import net.noyark.scpslserver.jsmod2.entity.Player;
  */
 
 public class PlayerHandcuffedEvent extends PlayerEvent {
-    public boolean Handcuffed;
+    private boolean Handcuffed;
 
-    public Player Owner;
+    private Player Owner;
 
     public boolean isHandcuffed() {
         return Handcuffed;
@@ -23,6 +23,7 @@ public class PlayerHandcuffedEvent extends PlayerEvent {
         return Owner;
     }
 
+    /** java-bean */
     public void setOwner(Player owner) {
         Owner = owner;
     }

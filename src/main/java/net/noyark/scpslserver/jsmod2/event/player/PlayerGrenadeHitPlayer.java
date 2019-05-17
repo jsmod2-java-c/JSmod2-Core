@@ -22,6 +22,7 @@ public class PlayerGrenadeHitPlayer extends PlayerEvent {
 
     }
 
+    /** java-bean */
     public void setVictim(Player victim) {
         this.victim = victim;
     }
