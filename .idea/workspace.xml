@@ -2,23 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="903d6ce5-6282-4b7a-9be7-14af381194b4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/network/command/CommandRegisterPacket.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/network/command/CommandVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/network/command/PlayerCommandPacket.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/network/command/PlayerVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/network/command/ServerCommandPacket.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/network/command/ServerVO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/Smod2Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/Smod2Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/Console.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/Console.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/PacketManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/PacketManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/PluginManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/PluginManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/Register.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/command/CommandListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/entity/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/network/BinaryStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/network/BinaryStream.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/network/DataPacket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/network/DataPacket.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -33,10 +18,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/PacketManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1094">
-              <caret line="84" lean-forward="true" selection-start-line="84" selection-end-line="84" />
+            <state relative-caret-position="111">
+              <caret line="4" column="49" selection-start-line="4" selection-start-column="49" selection-end-line="4" selection-end-column="49" />
               <folding>
-                <element signature="e#2991#2992#0" expanded="true" />
+                <element signature="e#2922#2923#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -343,7 +328,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558171764825" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558171859969" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -472,14 +457,7 @@
       <workItem from="1557839834499" duration="7782000" />
       <workItem from="1557898829999" duration="75462000" />
       <workItem from="1558141192783" duration="594000" />
-      <workItem from="1558142545141" duration="20822000" />
-    </task>
-    <task id="LOCAL-00001" summary="PluginManager初步架构">
-      <created>1557728269911</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1557728269911</updated>
+      <workItem from="1558142545141" duration="21455000" />
     </task>
     <task id="LOCAL-00002" summary="PluginManager初步架构">
       <created>1557728880308</created>
@@ -817,7 +795,14 @@
       <option name="project" value="LOCAL" />
       <updated>1558151856928</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="指令执行完成">
+      <created>1558171881204</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1558171881205</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -853,7 +838,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="151374000" />
+    <option name="totallyTimeSpent" value="152007000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -925,7 +910,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="更新俄罗斯语" />
     <MESSAGE value="支持西班牙语，阿拉伯语，日语&#10;Spanish，Arabic，Japanese supported~~" />
     <MESSAGE value="BinaryStream" />
     <MESSAGE value="改了下访问权限" />
@@ -950,7 +934,8 @@
     <MESSAGE value="修改了个错误的指令" />
     <MESSAGE value="jsmod2 协议2.0&#10;可以传输非官方字段" />
     <MESSAGE value="实现分请求注入" />
-    <option name="LAST_COMMIT_MESSAGE" value="实现分请求注入" />
+    <MESSAGE value="指令执行完成" />
+    <option name="LAST_COMMIT_MESSAGE" value="指令执行完成" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/server/LateDisconnectionEvent.java">
@@ -1395,10 +1380,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/PacketManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1094">
-          <caret line="84" lean-forward="true" selection-start-line="84" selection-end-line="84" />
+        <state relative-caret-position="111">
+          <caret line="4" column="49" selection-start-line="4" selection-start-column="49" selection-end-line="4" selection-end-column="49" />
           <folding>
-            <element signature="e#2991#2992#0" expanded="true" />
+            <element signature="e#2922#2923#0" expanded="true" />
           </folding>
         </state>
       </provider>
