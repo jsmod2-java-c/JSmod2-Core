@@ -7,15 +7,15 @@ import net.noyark.scpslserver.jsmod2.Server;
  * @author magiclu550 #(code) jsmod2
  */
 
-public class RebootCommand extends NativeCommand{
+public class ReloadCommand extends NativeCommand{
 
-    public RebootCommand() {
-        super("reboot","admin","prop:cmd.reboot");
+    public ReloadCommand() {
+        super("reload","admin","prop:cmd.reload");
     }
 
     @Override
     public boolean execute(CommandSender commandSender, String[] args) {
-        Server.getSender().getServer().reboot();
+        Server.getSender().getServer().reload();
         return true;
     }
 }

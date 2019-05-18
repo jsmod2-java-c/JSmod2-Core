@@ -51,7 +51,7 @@ public class Register {
         nativeCommandMap.put("stop",new StopCommand());
         nativeCommandMap.put("help",new HelpCommand());
         nativeCommandMap.put("plugins",new PluginsCommand());
-        nativeCommandMap.put("reboot",new RebootCommand());
+        nativeCommandMap.put("reload",new ReloadCommand());
     }
 
     public void registerStartInfo(){

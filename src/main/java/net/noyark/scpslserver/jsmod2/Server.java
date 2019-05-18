@@ -184,7 +184,7 @@ public class Server {
         return pluginManager;
     }
 
-    public void reboot(){
+    public void reload(){
         Utils.TryCatch(()->{
             Jsmod2.startMessage(FileSystem.getFileSystem().langProperties(log));
             pluginManager.clear();

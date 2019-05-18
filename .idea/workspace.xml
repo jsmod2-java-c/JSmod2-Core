@@ -2,61 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="903d6ce5-6282-4b7a-9be7-14af381194b4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/annotations/UseForServerInit.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/utils/player/Scp079Data.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsmod2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsmod2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/CommandSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/CommandSender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/PluginManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/PluginManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/Register.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/entity/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/entity/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/Event.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/config/SetConfigEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/config/SetConfigEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/environment/GeneratorFinishEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/environment/GeneratorFinishEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/environment/SCP914ActivateEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/environment/SCP914ActivateEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/environment/ScpDeathAnnouncementEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/environment/ScpDeathAnnouncementEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/environment/WarheadChangeLeverEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/environment/WarheadChangeLeverEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/environment/WarheadEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/environment/WarheadEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/environment/WarheadKeycardAccessEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/environment/WarheadKeycardAccessEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/packet/PacketEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/packet/PacketEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/Player079AddExpEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/Player079AddExpEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/Player079CameraTeleportEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/Player079CameraTeleportEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/Player079DoorEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/Player079DoorEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/Player079ElevatorEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/Player079ElevatorEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/Player079ElevatorTeleportEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/Player079ElevatorTeleportEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/Player079LockEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/Player079LockEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/Player079LockdownEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/Player079LockdownEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/Player079StartSpeakerEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/Player079StartSpeakerEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/Player079StopSpeakerEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/Player079StopSpeakerEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/Player079TeslaGateEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/Player079TeslaGateEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/Player106TeleportEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/Player106TeleportEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerCallCommandEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerCallCommandEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerContain106Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerContain106Event.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerDeathEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerDeathEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerElevatorUseEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerElevatorUseEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerGeneratorAccessEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerGeneratorAccessEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerGeneratorEjectTabletEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerGeneratorEjectTabletEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerGeneratorInsertTabletEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerGeneratorInsertTabletEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerGeneratorUnlockEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerGeneratorUnlockEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerGrenadeHitPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerGrenadeHitPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerHandcuffedEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerHandcuffedEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerInitialAssignTeamEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerInitialAssignTeamEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerPickupItemLateEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerPickupItemLateEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerPocketDimensionEnterEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerPocketDimensionEnterEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerRecallZombieEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerRecallZombieEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerReloadEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerReloadEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerShootEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerShootEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerSpawnEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerSpawnEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerSpawnRagdollEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerSpawnRagdollEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerThrowGrenade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerThrowGrenade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerTriggerTeslaEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerTriggerTeslaEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/server/ConnectionEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/server/ConnectionEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/server/RoundEndEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/server/RoundEndEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/server/ServerEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/server/ServerEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/team/DecideRespawnQueueEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/team/DecideRespawnQueueEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/team/SetRoleMaxHPEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/team/SetRoleMaxHPEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/command/RebootCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/command/ReloadCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/zh.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/zh.properties" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -67,7 +17,44 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/zh.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="70">
+              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/Register.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="149">
+              <caret line="53" column="36" selection-start-line="53" selection-start-column="36" selection-end-line="53" selection-end-column="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/command/ReloadCommand.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="392">
+              <caret line="17" column="45" selection-start-line="17" selection-start-column="45" selection-end-line="17" selection-end-column="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/Server.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="226">
+              <caret line="186" column="22" selection-start-line="186" selection-start-column="22" selection-end-line="186" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -85,11 +72,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/PluginManager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/command/CommandListener.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/CommandSender.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/entity/Player.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/config/SetConfigEvent.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/annotations/UseForServerInit.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/environment/GeneratorFinishEvent.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/environment/SCP914ActivateEvent.java" />
@@ -136,6 +118,11 @@
         <option value="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/team/DecideRespawnQueueEvent.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/team/SetRoleMaxHPEvent.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/Event.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/Server.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/command/RebootCommand.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/command/ReloadCommand.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/zh.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/Register.java" />
       </list>
     </option>
   </component>
@@ -213,6 +200,16 @@
               <item name="jsmod2" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="noyark" type="462c0819:PsiDirectoryNode" />
+              <item name="jsmod2" type="462c0819:PsiDirectoryNode" />
+              <item name="command" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jsmod2" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jsmod2" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -237,7 +234,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558144995841" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558145865998" />
     <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -351,7 +348,7 @@
       <workItem from="1557839834499" duration="7782000" />
       <workItem from="1557898829999" duration="75462000" />
       <workItem from="1558141192783" duration="594000" />
-      <workItem from="1558142545141" duration="3072000" />
+      <workItem from="1558142545141" duration="3315000" />
     </task>
     <task id="LOCAL-00001" summary="PluginManager初步架构">
       <created>1557728269911</created>
@@ -668,7 +665,14 @@
       <option name="project" value="LOCAL" />
       <updated>1558084180614</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="添加了UserForServerInit注解，代表该方法是不可以被插件开发者调用的">
+      <created>1558145691248</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1558145691249</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -704,10 +708,11 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="133624000" />
+    <option name="totallyTimeSpent" value="133867000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.26550868" visible="true" weight="0.20107238" />
       <window_info id="Image Layers" order="1" />
@@ -717,7 +722,7 @@
       <window_info id="Favorites" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.80775714" weight="0.3286119" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.80775714" visible="true" weight="0.3286119" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -775,7 +780,6 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="添加注册类，统一添加" />
     <MESSAGE value="添加一些实体类" />
     <MESSAGE value="更新README" />
     <MESSAGE value="~" />
@@ -800,50 +804,10 @@
     <MESSAGE value="register the events" />
     <MESSAGE value="标记了下哪些方法仅仅用于java-bean" />
     <MESSAGE value="完成事件数据包接收" />
-    <option name="LAST_COMMIT_MESSAGE" value="完成事件数据包接收" />
+    <MESSAGE value="添加了UserForServerInit注解，代表该方法是不可以被插件开发者调用的" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加了UserForServerInit注解，代表该方法是不可以被插件开发者调用的" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerGrenadeExplosion.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerGrenadeHitPlayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="26" column="21" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerHandcuffedEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="27" column="21" selection-start-line="27" selection-start-column="21" selection-end-line="27" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerHurtEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-394">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerInitialAssignTeamEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="23" column="21" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/event/player/PlayerIntercomCooldownCheckEvent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="112">
@@ -1166,6 +1130,37 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
           <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/jp.properties">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/Server.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="186" column="22" selection-start-line="186" selection-start-column="22" selection-end-line="186" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/command/ReloadCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="17" column="45" selection-start-line="17" selection-start-column="45" selection-end-line="17" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/zh.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="70">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/noyark/scpslserver/jsmod2/Register.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="53" column="36" selection-start-line="53" selection-start-column="36" selection-end-line="53" selection-end-column="36" />
         </state>
       </provider>
     </entry>
