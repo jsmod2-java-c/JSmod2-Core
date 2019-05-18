@@ -1,5 +1,6 @@
 package net.noyark.scpslserver.jsmod2.event.environment;
 
+import net.noyark.scpslserver.jsmod2.annotations.UseForServerInit;
 import net.noyark.scpslserver.jsmod2.entity.Player;
 import net.noyark.scpslserver.jsmod2.event.Event;
 
@@ -54,6 +55,7 @@ public abstract class WarheadEvent extends Event {
     }
 
     /** java-bean */
+    @UseForServerInit
     public void setPlayer(Player player) {
         this.player = player;
     }

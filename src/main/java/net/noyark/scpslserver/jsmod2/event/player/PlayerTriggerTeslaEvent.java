@@ -1,5 +1,6 @@
 package net.noyark.scpslserver.jsmod2.event.player;
 
+import net.noyark.scpslserver.jsmod2.annotations.UseForServerInit;
 import net.noyark.scpslserver.jsmod2.entity.Player;
 import net.noyark.scpslserver.jsmod2.entity.TeslaGate;
 
@@ -34,6 +35,7 @@ public class PlayerTriggerTeslaEvent extends PlayerEvent {
     }
 
     /** java-bean */
+    @UseForServerInit
     public void setTeslaGate(TeslaGate teslaGate) {
         TeslaGate = teslaGate;
     }

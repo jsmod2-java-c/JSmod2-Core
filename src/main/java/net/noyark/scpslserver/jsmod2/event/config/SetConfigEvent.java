@@ -1,6 +1,7 @@
 package net.noyark.scpslserver.jsmod2.event.config;
 
 
+import net.noyark.scpslserver.jsmod2.annotations.UseForServerInit;
 import net.noyark.scpslserver.jsmod2.event.Event;
 
 /**
@@ -48,6 +49,7 @@ public class SetConfigEvent extends Event {
 
 
     /** java-bean */
+    @UseForServerInit
     public void setDefaultValue(Object defaultValue) {
         this.defaultValue = defaultValue;
     }

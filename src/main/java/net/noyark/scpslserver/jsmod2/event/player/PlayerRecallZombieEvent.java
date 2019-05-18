@@ -1,5 +1,6 @@
 package net.noyark.scpslserver.jsmod2.event.player;
 
+import net.noyark.scpslserver.jsmod2.annotations.UseForServerInit;
 import net.noyark.scpslserver.jsmod2.entity.Player;
 /**
  * @author kevinj
@@ -31,6 +32,7 @@ public class PlayerRecallZombieEvent extends PlayerEvent{
         return target;
     }
     /** java-bean */
+    @UseForServerInit
     public void setTarget(Player target) {
         this.target = target;
     }

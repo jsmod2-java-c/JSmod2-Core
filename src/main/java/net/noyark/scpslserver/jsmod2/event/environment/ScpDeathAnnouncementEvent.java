@@ -1,5 +1,6 @@
 package net.noyark.scpslserver.jsmod2.event.environment;
 
+import net.noyark.scpslserver.jsmod2.annotations.UseForServerInit;
 import net.noyark.scpslserver.jsmod2.entity.Player;
 import net.noyark.scpslserver.jsmod2.event.Event;
 import net.noyark.scpslserver.jsmod2.utils.api.Role;
@@ -41,13 +42,13 @@ public class ScpDeathAnnouncementEvent extends Event {
     }
 
     /** java-bean */
-
+    @UseForServerInit
     public void setDeadPlayer(Player deadPlayer) {
         this.deadPlayer = deadPlayer;
     }
 
     /** java-bean */
-
+    @UseForServerInit
     public void setPlayerRole(Role playerRole) {
         this.playerRole = playerRole;
     }

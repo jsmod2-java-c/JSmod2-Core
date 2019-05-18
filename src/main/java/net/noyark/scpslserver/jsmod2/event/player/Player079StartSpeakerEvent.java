@@ -1,5 +1,6 @@
 package net.noyark.scpslserver.jsmod2.event.player;
 
+import net.noyark.scpslserver.jsmod2.annotations.UseForServerInit;
 import net.noyark.scpslserver.jsmod2.entity.Player;
 import net.noyark.scpslserver.jsmod2.utils.api.Room;
 
@@ -33,6 +34,7 @@ public class Player079StartSpeakerEvent extends PlayerEvent {
     }
 
     /** java-bean */
+    @UseForServerInit
     public void setRoom(Room room) {
         this.room = room;
     }

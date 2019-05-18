@@ -1,5 +1,6 @@
 package net.noyark.scpslserver.jsmod2.event.player;
 
+import net.noyark.scpslserver.jsmod2.annotations.UseForServerInit;
 import net.noyark.scpslserver.jsmod2.entity.Player;
 import net.noyark.scpslserver.jsmod2.math.Vector;
 import net.noyark.scpslserver.jsmod2.utils.player.DamageType;
@@ -64,10 +65,12 @@ public class PlayerShootEvent extends PlayerEvent {
 
 
     /** just for javabean */
+    @UseForServerInit
     public void setTarget(Player target) {
         this.target = target;
     }
     /** java-bean */
+    @UseForServerInit
     public void setWeapon(DamageType weapon) {
         this.weapon = weapon;
     }
@@ -76,14 +79,17 @@ public class PlayerShootEvent extends PlayerEvent {
         return ShouldSpawnBloodDecal;
     }
     /** java-bean */
+    @UseForServerInit
     public void setSourcePosition(Vector sourcePosition) {
         SourcePosition = sourcePosition;
     }
     /** java-bean */
+    @UseForServerInit
     public void setTargetPosition(Vector targetPosition) {
         TargetPosition = targetPosition;
     }
     /** java-bean */
+    @UseForServerInit
     public void setTargetHitbox(String targetHitbox) {
         TargetHitbox = targetHitbox;
     }

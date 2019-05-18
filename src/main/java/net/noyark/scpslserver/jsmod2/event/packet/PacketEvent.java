@@ -1,5 +1,6 @@
 package net.noyark.scpslserver.jsmod2.event.packet;
 
+import net.noyark.scpslserver.jsmod2.annotations.UseForServerInit;
 import net.noyark.scpslserver.jsmod2.event.Event;
 import net.noyark.scpslserver.jsmod2.network.DataPacket;
 
@@ -21,6 +22,7 @@ public class PacketEvent extends Event {
 
 
     /** java-bean */
+    @UseForServerInit
     public void setPacket(DataPacket packet) {
         this.packet = packet;
     }

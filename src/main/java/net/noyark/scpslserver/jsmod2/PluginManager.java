@@ -87,8 +87,10 @@ public class PluginManager {
      */
 
     public void registerEvents(final Listener listener,Plugin plugin){
-        if(!plugin.isEnabled()){
-            throw new PluginException("the plugin is not enabled");
+        if(plugin!=null){
+            if(!plugin.isEnabled()){
+                throw new PluginException("the plugin is not enabled");
+            }
         }
         Utils.TryCatch(()->{
             Class<?> type = listener.getClass();

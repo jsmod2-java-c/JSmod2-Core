@@ -13,18 +13,29 @@ public abstract class CommandSender {
 
     private List<String> powers = new LinkedList<>();//powers
 
-    private String senderName;
+    private String name;
 
-    protected CommandSender(String senderName,String... defaultPowers){
-        this.senderName = senderName;
+    protected CommandSender(String name,String... defaultPowers){
+        this.name = name;
         this.powers.addAll(Arrays.asList(defaultPowers));
     }
 
-    public String getSenderName() {
-        return senderName;
+
+    public String getName() {
+        return name;
     }
 
     public List<String> getPowers(){
         return powers;
+    }
+
+    /** java bean */
+    public void setPowers(List<String> powers) {
+        this.powers = powers;
+    }
+
+    /** java bean */
+    public void setName(String name) {
+        this.name = name;
     }
 }

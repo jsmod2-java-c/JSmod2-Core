@@ -102,6 +102,7 @@ public class Server {
         this.plugins = PluginClassLoader.getClassLoader().loadPlugins(pluginDir);
 
 
+        this.getPluginManager().registerEvents(new CommandListener(),null);
         start();
     }
 

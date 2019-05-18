@@ -1,6 +1,7 @@
 package net.noyark.scpslserver.jsmod2.event.player;
 
 
+import net.noyark.scpslserver.jsmod2.annotations.UseForServerInit;
 import net.noyark.scpslserver.jsmod2.entity.Elevator;
 import net.noyark.scpslserver.jsmod2.entity.Player;
 import net.noyark.scpslserver.jsmod2.math.Vector;
@@ -41,10 +42,12 @@ public class PlayerElevatorUseEvent extends PlayerEvent {
         AllowUse = allowUse;
     }
     /** java-bean */
+    @UseForServerInit
     public void setElevator(net.noyark.scpslserver.jsmod2.entity.Elevator elevator) {
         Elevator = elevator;
     }
     /** java-bean */
+    @UseForServerInit
     public void setElevatorPosition(Vector elevatorPosition) {
         ElevatorPosition = elevatorPosition;
     }

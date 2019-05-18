@@ -1,5 +1,6 @@
 package net.noyark.scpslserver.jsmod2.event.server;
 
+import net.noyark.scpslserver.jsmod2.annotations.UseForServerInit;
 import net.noyark.scpslserver.jsmod2.event.Event;
 import net.noyark.scpslserver.jsmod2.utils.server.Connection;
 
@@ -19,6 +20,7 @@ public abstract class ConnectionEvent extends Event {
         return connection;
     }
     /** java-bean */
+    @UseForServerInit
     public void setConnection(Connection connection) {
         this.connection = connection;
     }

@@ -1,5 +1,6 @@
 package net.noyark.scpslserver.jsmod2.event.player;
 
+import net.noyark.scpslserver.jsmod2.annotations.UseForServerInit;
 import net.noyark.scpslserver.jsmod2.entity.Player;
 import net.noyark.scpslserver.jsmod2.event.Event;
 
@@ -23,6 +24,7 @@ public abstract class PlayerEvent extends Event {
     }
 
     /** java-bean */
+    @UseForServerInit
     public void setPlayer(Player player) {
         this.player = player;
     }

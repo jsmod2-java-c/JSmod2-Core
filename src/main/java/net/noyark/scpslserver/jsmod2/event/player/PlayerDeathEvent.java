@@ -1,5 +1,6 @@
 package net.noyark.scpslserver.jsmod2.event.player;
 
+import net.noyark.scpslserver.jsmod2.annotations.UseForServerInit;
 import net.noyark.scpslserver.jsmod2.entity.Player;
 import net.noyark.scpslserver.jsmod2.utils.player.DamageType;
 
@@ -35,6 +36,7 @@ public class PlayerDeathEvent extends PlayerEvent{
     }
 
     /** java-bean */
+    @UseForServerInit
     public void setKiller(Player killer) {
         this.killer = killer;
     }

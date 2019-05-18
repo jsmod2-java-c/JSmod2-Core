@@ -1,5 +1,6 @@
 package net.noyark.scpslserver.jsmod2.event.player;
 
+import net.noyark.scpslserver.jsmod2.annotations.UseForServerInit;
 import net.noyark.scpslserver.jsmod2.entity.Player;
 import net.noyark.scpslserver.jsmod2.utils.item.ItemType;
 
@@ -59,18 +60,22 @@ public class PlayerReloadEvent extends PlayerEvent {
 
 
     /** just do javabean */
+    @UseForServerInit
     public void setWeapon(ItemType weapon) {
         this.weapon = weapon;
     }
     /** java-bean */
+    @UseForServerInit
     public void setNormalMaxClipSize(int normalMaxClipSize) {
         NormalMaxClipSize = normalMaxClipSize;
     }
     /** java-bean */
+    @UseForServerInit
     public void setCurrentClipAmmoCount(int currentClipAmmoCount) {
         CurrentClipAmmoCount = currentClipAmmoCount;
     }
     /** java-bean */
+    @UseForServerInit
     public void setCurrentAmmoTotal(int currentAmmoTotal) {
         CurrentAmmoTotal = currentAmmoTotal;
     }

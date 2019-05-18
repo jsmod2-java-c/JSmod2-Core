@@ -1,5 +1,6 @@
 package net.noyark.scpslserver.jsmod2.event.player;
 
+import net.noyark.scpslserver.jsmod2.annotations.UseForServerInit;
 import net.noyark.scpslserver.jsmod2.entity.Door;
 import net.noyark.scpslserver.jsmod2.entity.Player;
 /**
@@ -20,6 +21,7 @@ public class PlayerSpawnEvent extends PlayerEvent {
     }
 
     /** java-bean */
+    @UseForServerInit
     public void setDoor(Door door) {
         this.door = door;
     }

@@ -1,5 +1,6 @@
 package net.noyark.scpslserver.jsmod2.event.player;
 
+import net.noyark.scpslserver.jsmod2.annotations.UseForServerInit;
 import net.noyark.scpslserver.jsmod2.entity.Player;
 import net.noyark.scpslserver.jsmod2.event.Event;
 import net.noyark.scpslserver.jsmod2.math.Vector;
@@ -60,6 +61,7 @@ public class PlayerSpawnRagdollEvent extends Event {
         return attacker;
     }
     /** java-bean */
+    @UseForServerInit
     public void setAttacker(Player attacker) {
         this.attacker = attacker;
     }

@@ -1,5 +1,6 @@
 package net.noyark.scpslserver.jsmod2.event.environment;
 
+import net.noyark.scpslserver.jsmod2.annotations.UseForServerInit;
 import net.noyark.scpslserver.jsmod2.utils.item.KnobSetting;
 import net.noyark.scpslserver.jsmod2.entity.Player;
 import net.noyark.scpslserver.jsmod2.event.Event;
@@ -42,6 +43,7 @@ public class SCP914ActivateEvent extends Event {
 
 
     /** java-bean */
+    @UseForServerInit
     public void setUser(Player user) {
         this.user = user;
     }

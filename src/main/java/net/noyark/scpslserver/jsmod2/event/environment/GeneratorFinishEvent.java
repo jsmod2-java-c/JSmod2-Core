@@ -1,5 +1,6 @@
 package net.noyark.scpslserver.jsmod2.event.environment;
 
+import net.noyark.scpslserver.jsmod2.annotations.UseForServerInit;
 import net.noyark.scpslserver.jsmod2.event.Event;
 import net.noyark.scpslserver.jsmod2.utils.api.Generator;
 import sun.nio.cs.Surrogate;
@@ -26,6 +27,7 @@ public class GeneratorFinishEvent extends Event {
 
 
     /** java-bean */
+    @UseForServerInit
     public void setGenerator(Generator generator) {
         this.generator = generator;
     }

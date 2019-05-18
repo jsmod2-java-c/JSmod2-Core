@@ -1,5 +1,6 @@
 package net.noyark.scpslserver.jsmod2.event.player;
 
+import net.noyark.scpslserver.jsmod2.annotations.UseForServerInit;
 import net.noyark.scpslserver.jsmod2.entity.Elevator;
 import net.noyark.scpslserver.jsmod2.entity.Player;
 
@@ -33,6 +34,7 @@ public class Player079ElevatorEvent extends PlayerEvent {
     }
 
     /** java-bean */
+    @UseForServerInit
     public void setElevator(Elevator elevator) {
         this.elevator = elevator;
     }

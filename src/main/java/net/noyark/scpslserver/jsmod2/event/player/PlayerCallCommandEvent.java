@@ -1,5 +1,6 @@
 package net.noyark.scpslserver.jsmod2.event.player;
 
+import net.noyark.scpslserver.jsmod2.annotations.UseForServerInit;
 import net.noyark.scpslserver.jsmod2.entity.Player;
 
 /**
@@ -23,6 +24,7 @@ public class PlayerCallCommandEvent extends PlayerEvent {
     }
 
     /** java-bean */
+    @UseForServerInit
     public void setCommand(String command) {
         this.command = command;
     }

@@ -1,5 +1,6 @@
 package net.noyark.scpslserver.jsmod2.event.team;
 
+import net.noyark.scpslserver.jsmod2.annotations.UseForServerInit;
 import net.noyark.scpslserver.jsmod2.event.Event;
 import net.noyark.scpslserver.jsmod2.utils.api.Role;
 
@@ -22,6 +23,7 @@ public class SetRoleMaxHPEvent extends Event {
         return role;
     }
     /** java-bean */
+    @UseForServerInit
     public void setRole(Role role) {
         this.role = role;
     }
