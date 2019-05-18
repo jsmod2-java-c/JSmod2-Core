@@ -1,6 +1,7 @@
 package net.noyark.scpslserver.jsmod2.entity;
 
 import net.noyark.scpslserver.jsmod2.CommandSender;
+import net.noyark.scpslserver.jsmod2.annotations.UseForServerInit;
 import net.noyark.scpslserver.jsmod2.utils.player.DamageType;
 import net.noyark.scpslserver.jsmod2.utils.player.RadioStatus;
 import net.noyark.scpslserver.jsmod2.utils.player.Scp079Data;
@@ -113,6 +114,7 @@ public class Player extends CommandSender implements IPlayer {
         return 0;
     }
     /** java-bean 用于调接赋值 */
+    @UseForServerInit
     public void setHealth(int health){
 
     }
@@ -120,8 +122,5 @@ public class Player extends CommandSender implements IPlayer {
     public void addHealth(int amount){
 
     }
-
-
-
 
 }

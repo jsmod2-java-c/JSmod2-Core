@@ -6,6 +6,7 @@ import net.noyark.scpslserver.jsmod2.FileSystem;
 import net.noyark.scpslserver.jsmod2.Server;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Field;
 import java.util.Base64;
 import java.util.Properties;
 
@@ -61,13 +62,35 @@ public class BinaryStream {
             byte[] packetBytes = Base64.getDecoder().decode(data);
             String json = new String(packetBytes,properties.getProperty("decode"));
             json = json.substring((id+"-").length());
-            //{main-object},{"player-xxx":"xxx"},{"team-class":"xxx"}
-            json = splitJson(json)[0];
+            //{main-object},player-xxx:xxx,team-class:xxx
+            String[] props = splitJson(json);
+            json = props[0];
             Object o = JSONObject.parseObject(json,clz);
+            for(int i = 0;i<props.length;i++){
+                String[] key_value = props[i].split(":");
+                String[] fields = key_value[0].split("-");
+                Object field = o;
+                for(int j = 0;j<fields.length-1;j++){
+                    field = invokeGetMethod(field,fields[j]);
+                }
+                invokeSetMethod(field,fields[fields.length-1],key_value[1]);
+            }
             return clz.cast(o);
         }catch (Exception e){
             return null;
         }
     }
 
+    private Object invokeGetMethod(Object o,String field) throws Exception{
+        StringBuilder builder = new StringBuilder((field.charAt(0)+"").toUpperCase());
+        String first = "get"+builder.append(field.substring(1));
+        return o.getClass().getMethod(first).invoke(o);
+    }
+    private void invokeSetMethod(Object o,String field,String value) throws Exception{
+        Field field1 = o.getClass().getDeclaredField(field);
+        field1.setAccessible(true);
+        Class<?> clz = field1.getType();
+        Object object = JSON.parseObject(value,clz);
+        field1.set(o,object);
+    }
 }
