@@ -7,9 +7,11 @@ import net.noyark.scpslserver.jsmod2.command.NativeCommand;
 import net.noyark.scpslserver.jsmod2.event.Event;
 import net.noyark.scpslserver.jsmod2.event.EventManager;
 import net.noyark.scpslserver.jsmod2.event.Listener;
+import net.noyark.scpslserver.jsmod2.event.packet.ServerPacketEvent;
 import net.noyark.scpslserver.jsmod2.ex.EventException;
 import net.noyark.scpslserver.jsmod2.ex.NoSuchPluginNameException;
 import net.noyark.scpslserver.jsmod2.ex.PluginException;
+import net.noyark.scpslserver.jsmod2.network.command.CommandRegisterPacket;
 import net.noyark.scpslserver.jsmod2.plugin.PluginClassLoader;
 import net.noyark.scpslserver.jsmod2.utils.MethodInvokeMapper;
 import net.noyark.scpslserver.jsmod2.utils.Utils;
@@ -63,6 +65,11 @@ public class PluginManager {
         if(plugin.isEnabled()){
             commands.add(command);
             server.getCommandInfo().put(command.getCommandName(),command.getDescription());
+            CommandRegisterPacket packet = new CommandRegisterPacket();
+            packet.command = command;
+            ServerPacketEvent event = new ServerPacketEvent(packet);
+            callEvent(event);
+            server.sendPacket(packet);//发包
         }else{
             throw new PluginException("the plugin is not enabled");
         }

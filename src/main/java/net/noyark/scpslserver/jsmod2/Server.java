@@ -102,7 +102,6 @@ public class Server {
         this.plugins = PluginClassLoader.getClassLoader().loadPlugins(pluginDir);
 
 
-        this.getPluginManager().registerEvents(new CommandListener(),null);
         start();
     }
 
@@ -278,21 +277,42 @@ public class Server {
                     //初始化服务器，第一个数据包
 
                     if(id == INIT_COMMAND){
-                        ServerInitPacket packet = new ServerInitPacket();
-                        ServerPacketEvent event = new ServerPacketEvent(packet);
-                        pluginManager.callEvent(event);
-                        smod2Server = packet.decode(message.getBytes(serverProp.getProperty("encode")));
+                        setServer(message);
                     }
 
-                    Class<?> packet = Register.getInstance().getPackets().get(id);
-                    if(packet == null){
+                    Class<?> packet = Register.getInstance().getGetPackets().get(id);
+                    if(((Register.SECOND_START_EVENT<=id&&id<Register.MAX_EVENT_ID)||id==Register.FRIST_EVENT)&&packet == null){
                         log.error("no such type packet");
                         continue;
                     }
+
+
                     //接收包
                     PacketManager.getManager().manageMethod(message,id);
                 }
             });
         }
+    }
+
+    /**
+     * 监听服务器更新的数据包
+     */
+    private class ServerThread implements Runnable{
+        @Override
+        public void run() {
+            Utils.TryCatch(()->{
+                DatagramPacket request = new DatagramPacket(new byte[MAX_LENGTH], MAX_LENGTH);
+                DatagramSocket socket = getSocket(Integer.parseInt(serverProp.getProperty("server.init.port")));
+                socket.receive(request);
+                setServer(new String(request.getData(), 0 , request.getLength()));
+            });
+        }
+    }
+
+    private void setServer(String message) throws Exception{
+        ServerInitPacket packet = new ServerInitPacket();
+        ServerPacketEvent event = new ServerPacketEvent(packet);
+        pluginManager.callEvent(event);
+        smod2Server = packet.decode(message.getBytes(serverProp.getProperty("encode")));
     }
 }

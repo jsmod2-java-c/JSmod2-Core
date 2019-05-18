@@ -3,7 +3,9 @@ package net.noyark;
 //TODO Smod2Server 计划5.15完成
 
 
-public class Smod2Server {
+import net.noyark.scpslserver.jsmod2.CommandSender;
+
+public class Smod2Server extends CommandSender {
 
     /** TODO 通过数据包获取 */
     private String address;
@@ -11,9 +13,8 @@ public class Smod2Server {
     /** TODO 通过数据包获取 */
     private int port;
 
-    public Smod2Server(String address, int port) {
-        this.address = address;
-        this.port = port;
+    public Smod2Server() {
+        super("CONSOLE","all","console","admin","player","nobody");
     }
 
     public String getAddress() {

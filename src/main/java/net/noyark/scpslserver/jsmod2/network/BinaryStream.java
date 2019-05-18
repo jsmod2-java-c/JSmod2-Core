@@ -3,11 +3,13 @@ package net.noyark.scpslserver.jsmod2.network;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import net.noyark.scpslserver.jsmod2.FileSystem;
+import net.noyark.scpslserver.jsmod2.Register;
 import net.noyark.scpslserver.jsmod2.Server;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.util.Base64;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -19,7 +21,9 @@ import java.util.Properties;
  * @author magiclu550 #(code) binary packet
  */
 
-public class BinaryStream {
+public abstract class BinaryStream {
+
+    public Map<Class<? extends DataPacket>,Integer> dataPackets = Register.getInstance().getPackets();
 
     private Properties properties;
 
@@ -27,6 +31,11 @@ public class BinaryStream {
 
     public BinaryStream(int id){
         this.id = id;
+        properties = FileSystem.getFileSystem().serverProperties(Server.getSender().getServer());
+    }
+
+    public BinaryStream(){
+        this.id = dataPackets.get(this.getClass());
         properties = FileSystem.getFileSystem().serverProperties(Server.getSender().getServer());
     }
 

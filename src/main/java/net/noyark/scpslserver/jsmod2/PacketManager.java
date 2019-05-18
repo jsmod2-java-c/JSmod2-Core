@@ -1,8 +1,15 @@
 package net.noyark.scpslserver.jsmod2;
 
+import net.noyark.Smod2Server;
+import net.noyark.scpslserver.jsmod2.entity.Player;
 import net.noyark.scpslserver.jsmod2.event.Event;
+import net.noyark.scpslserver.jsmod2.event.packet.ServerPacketEvent;
 import net.noyark.scpslserver.jsmod2.ex.EventException;
 import net.noyark.scpslserver.jsmod2.network.EventBinaryStream;
+import net.noyark.scpslserver.jsmod2.network.command.PlayerCommandPacket;
+import net.noyark.scpslserver.jsmod2.network.command.PlayerVO;
+import net.noyark.scpslserver.jsmod2.network.command.ServerCommandPacket;
+import net.noyark.scpslserver.jsmod2.network.command.ServerVO;
 
 import java.util.Properties;
 
@@ -33,8 +40,25 @@ public class PacketManager {
             if(id == 1||(0x03<=id&&id<=0x52)){
                 callEventByPacket(id,bytes);
             }
+            /* 执行指令的部分 */
+            if(id == 0x55){
+                ServerCommandPacket serverCommandPacket = new ServerCommandPacket();
+                ServerVO vo = serverCommandPacket.decode(bytes);
+                Smod2Server sender = vo.getServer();
+                String[] args = vo.getArgs();
+                String commandName = vo.getCommandName();
+                Server.getSender().getServer().getPluginManager().excuteCommand(commandName,args,sender);
+            }
+            if(id == 0x56){
+                PlayerCommandPacket playerCommandPacket = new PlayerCommandPacket();
+                PlayerVO vo = playerCommandPacket.decode(bytes);
+                Player player = vo.getPlayer();
+                String commandName = vo.getCommandName();
+                String[] args = vo.getArgs();
+                Server.getSender().getServer().getPluginManager().excuteCommand(commandName,args,player);
+            }
         }catch (Exception e){
-
+            e.printStackTrace();
         }
     }
 
@@ -53,7 +77,6 @@ public class PacketManager {
         Class<? extends Event> eventClass = getInstance().getEvents().get(id);
         if(eventClass != null){
             Event event = stream.encode(eventClass,bytes);
-
             Server.getSender().getServer().getPluginManager().callEvent(event);
         }else{
             throw new EventException("No such type of events");

@@ -1,5 +1,6 @@
 package net.noyark.scpslserver.jsmod2;
 
+import net.noyark.Smod2Server;
 import net.noyark.scpslserver.jsmod2.command.NativeCommand;
 import net.noyark.scpslserver.jsmod2.utils.Utils;
 
@@ -12,10 +13,9 @@ import static org.fusesource.jansi.Ansi.ansi;
  * @author magiclu550 #(code)jsmod2
  */
 
-public class Console extends CommandSender {
+public class Console extends Smod2Server {
 
     private Console(){
-        super("CONSOLE","all","console","admin","player","nobody");
     }
 
     private static Console console;

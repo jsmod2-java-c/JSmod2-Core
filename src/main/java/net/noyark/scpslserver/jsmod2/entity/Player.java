@@ -45,6 +45,7 @@ public class Player extends CommandSender implements IPlayer {
     }
 
     /** java bean */
+    @UseForServerInit
     public void setIpAddress(String ipAddress) {
         this.ipAddress = ipAddress;
     }
@@ -54,6 +55,7 @@ public class Player extends CommandSender implements IPlayer {
     }
 
     /** java bean */
+    @UseForServerInit
     public void setPlayerId(int playerId) {
         this.playerId = playerId;
     }
@@ -63,6 +65,7 @@ public class Player extends CommandSender implements IPlayer {
     }
 
     /** java bean */
+    @UseForServerInit
     public void setStreamId(String streamId) {
         this.streamId = streamId;
     }
@@ -80,6 +83,7 @@ public class Player extends CommandSender implements IPlayer {
     }
 
     /** java bean */
+    @UseForServerInit
     public void setOverwatchMode(boolean overwatchMode) {
         this.overwatchMode = overwatchMode;
     }
@@ -89,6 +93,7 @@ public class Player extends CommandSender implements IPlayer {
     }
 
     /** java bean */
+    @UseForServerInit
     public void setDoNotTrack(boolean doNotTrack) {
         this.doNotTrack = doNotTrack;
     }
@@ -98,6 +103,7 @@ public class Player extends CommandSender implements IPlayer {
     }
 
     /** java bean */
+    @UseForServerInit
     public void setScp079Data(Scp079Data scp079Data) {
         this.scp079Data = scp079Data;
     }
@@ -108,19 +114,17 @@ public class Player extends CommandSender implements IPlayer {
 
     public void kill(){
         //default NUKE
+        //发json数据包。远程调用方法
+        //C#数据包拥有参数数据字段
     }
 
     public int getHealth(){
-        return 0;
-    }
-    /** java-bean 用于调接赋值 */
-    @UseForServerInit
-    public void setHealth(int health){
-
+        return health;
     }
 
     public void addHealth(int amount){
-
+        health += amount;
+        //发包
     }
 
 }

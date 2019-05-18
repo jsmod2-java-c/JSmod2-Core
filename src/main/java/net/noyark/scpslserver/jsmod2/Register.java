@@ -14,14 +14,14 @@ import net.noyark.scpslserver.jsmod2.event.team.SetNTFUnitNameEvent;
 import net.noyark.scpslserver.jsmod2.event.team.SetSCPConfigEvent;
 import net.noyark.scpslserver.jsmod2.event.team.TeamRespawnEvent;
 import net.noyark.scpslserver.jsmod2.network.*;
+import net.noyark.scpslserver.jsmod2.network.command.CommandRegisterPacket;
+import net.noyark.scpslserver.jsmod2.network.command.PlayerCommandPacket;
+import net.noyark.scpslserver.jsmod2.network.command.ServerCommandPacket;
 import net.noyark.scpslserver.jsmod2.network.event.AdminQueryPacket;
 import net.noyark.scpslserver.jsmod2.network.event.AuthCheckPacket;
 import net.noyark.scpslserver.jsmod2.network.event.BanPacket;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static net.noyark.scpslserver.jsmod2.Jsmod2.START;
 
@@ -31,6 +31,12 @@ import static net.noyark.scpslserver.jsmod2.Jsmod2.START;
  */
 
 public class Register {
+
+    public static final int MAX_EVENT_ID = 0x52;
+
+    public static final int FRIST_EVENT = 0x01;
+
+    public static final int SECOND_START_EVENT = 0x03;
 
     /**
      * 注册语言时，首先按照标准格式添加语言
@@ -62,13 +68,19 @@ public class Register {
     }
 
     public void registerPacket(){
+        packets.put(ServerInitPacket.class,0x00);
+        packets.put(CommandRegisterPacket.class,0x53);
+        packets.put(ServerCommandPacket.class,0x55);
+        packets.put(PlayerCommandPacket.class,0x56);
+        putPackets();
+    }
 
-        packets.put(0x00, ServerInitPacket.class);
-        packets.put(0x01, AdminQueryPacket.class);//@Deprecated
-        packets.put(0x02,null);//ClosePacket no response
-        packets.put(0x03, AuthCheckPacket.class);//@Deprecated
-        packets.put(0x04, BanPacket.class);//@Deprecated
 
+    public void putPackets(){
+        Set<Map.Entry<Class<? extends DataPacket>,Integer>> dataPackets = packets.entrySet();
+        for(Map.Entry<Class<? extends DataPacket>,Integer> packet:dataPackets){
+            getPackets.put(packet.getValue(),packet.getKey());
+        }
     }
 
     public void registerSuccessInfo(){
@@ -78,6 +90,7 @@ public class Register {
     public void registerServerProperties(){
         serverProperties.put("this.port","19935");//java端ip
         serverProperties.put("data.network.plugin.port","19938");//插件端ip
+        serverProperties.put("server.init.port","19939");//服务端初始化的端口，传输server信息
         serverProperties.put("decode","utf-8");//解码字符集
         serverProperties.put("encode","utf-8");//编码字符集
     }
@@ -189,14 +202,21 @@ public class Register {
         return successInfo;
     }
 
-    public Map<Integer,Class<? extends DataPacket>> getPackets(){
+    public Map<Class<? extends DataPacket>,Integer> getPackets(){
         return packets;
+    }
+
+    public Map<Integer, Class<? extends Event>> getEvents() {
+        return events;
     }
 
     public static Register getInstance(){
         return register;
     }
 
+    public Map<String, String> getServerProperties() {
+        return serverProperties;
+    }
 
     private static Register register;
 
@@ -208,18 +228,20 @@ public class Register {
 
     private List<String> successInfo = new ArrayList<>();
 
-    private Map<Integer,Class<? extends DataPacket>> packets = new HashMap<>();
+    private Map<Class<? extends DataPacket>,Integer> packets = new HashMap<>();
 
     private Map<String,String> serverProperties = new HashMap<>();
 
     private Map<Integer, Class<? extends Event>> events = new HashMap<>();
 
-    public Map<String, String> getServerProperties() {
-        return serverProperties;
+    private Map<Integer,Class<? extends DataPacket>> getPackets = new HashMap<>();
+
+    public Map<Integer, Class<? extends DataPacket>> getGetPackets() {
+        return getPackets;
     }
 
-    public Map<Integer, Class<? extends Event>> getEvents() {
-        return events;
+    public void setGetPackets(Map<Integer, Class<? extends DataPacket>> getPackets) {
+        this.getPackets = getPackets;
     }
 
     static {

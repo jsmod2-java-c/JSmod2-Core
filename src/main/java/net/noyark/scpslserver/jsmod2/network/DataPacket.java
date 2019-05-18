@@ -1,9 +1,6 @@
 package net.noyark.scpslserver.jsmod2.network;
 
-import net.noyark.scpslserver.jsmod2.Register;
-import net.noyark.scpslserver.jsmod2.event.Event;
 
-import java.util.Map;
 
 /**
  *
@@ -26,8 +23,16 @@ public abstract class DataPacket extends BinaryStream{
         super(id);
     }
 
-    public abstract byte[] encode();
+    public DataPacket(){
+        super();
+    }
 
-    public abstract Object decode(byte[] bytes);
+    public byte[] encode(){
+        return null;
+    }
+
+    public Object decode(byte[] bytes){
+        return null;
+    }
 
 }
