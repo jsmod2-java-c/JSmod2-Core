@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import net.noyark.scpslserver.jsmod2.FileSystem;
 import net.noyark.scpslserver.jsmod2.Register;
 import net.noyark.scpslserver.jsmod2.Server;
+import net.noyark.scpslserver.jsmod2.ex.ProtocolException;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
@@ -86,7 +87,7 @@ public abstract class BinaryStream {
             }
             return clz.cast(o);
         }catch (Exception e){
-            return null;
+            throw new ProtocolException("The jsmod2 protocol is error",e);
         }
     }
 

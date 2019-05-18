@@ -17,9 +17,6 @@ import net.noyark.scpslserver.jsmod2.network.*;
 import net.noyark.scpslserver.jsmod2.network.command.CommandRegisterPacket;
 import net.noyark.scpslserver.jsmod2.network.command.PlayerCommandPacket;
 import net.noyark.scpslserver.jsmod2.network.command.ServerCommandPacket;
-import net.noyark.scpslserver.jsmod2.network.event.AdminQueryPacket;
-import net.noyark.scpslserver.jsmod2.network.event.AuthCheckPacket;
-import net.noyark.scpslserver.jsmod2.network.event.BanPacket;
 
 import java.util.*;
 
