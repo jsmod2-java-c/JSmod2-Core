@@ -36,11 +36,11 @@ public class PacketManager {
         try{
             Properties properties = FileSystem.getFileSystem().serverProperties(Server.getSender().getServer());
             byte[] bytes = message.getBytes(properties.getProperty("encode"));//通过utf-8形式获取byte字节数组
-            if(id == 1||(0x03<=id&&id<=0x52)){
+            if(id == Register.FRIST_EVENT||(Register.SECOND_START_EVENT<=id&&id<Register.MAX_EVENT_ID)){
                 callEventByPacket(id,bytes);
             }
             /* 执行指令的部分 */
-            if(id == 0x55){
+            if(id == Register.SERVER_COMMAND){
                 ServerCommandPacket serverCommandPacket = new ServerCommandPacket();
                 ServerVO vo = serverCommandPacket.decode(bytes);
                 Smod2Server sender = vo.getServer();
@@ -48,7 +48,7 @@ public class PacketManager {
                 String commandName = vo.getCommandName();
                 Server.getSender().getServer().getPluginManager().excuteCommand(commandName,args,sender);
             }
-            if(id == 0x56){
+            if(id == Register.PLAYER_COMMAND){
                 PlayerCommandPacket playerCommandPacket = new PlayerCommandPacket();
                 PlayerVO vo = playerCommandPacket.decode(bytes);
                 Player player = vo.getPlayer();

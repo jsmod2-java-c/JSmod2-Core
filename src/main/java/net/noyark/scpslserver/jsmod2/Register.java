@@ -38,6 +38,10 @@ public class Register {
 
     public static final int SECOND_START_EVENT = 0x03;
 
+    public static final int SERVER_COMMAND = 0x55;
+
+    public static final int PLAYER_COMMAND = 0x56;
+
     /**
      * 注册语言时，首先按照标准格式添加语言
      * 参考resources格式
@@ -70,8 +74,8 @@ public class Register {
     public void registerPacket(){
         packets.put(ServerInitPacket.class,0x00);
         packets.put(CommandRegisterPacket.class,0x53);
-        packets.put(ServerCommandPacket.class,0x55);
-        packets.put(PlayerCommandPacket.class,0x56);
+        packets.put(ServerCommandPacket.class,Register.SERVER_COMMAND);
+        packets.put(PlayerCommandPacket.class,Register.PLAYER_COMMAND);
         putPackets();
     }
 
