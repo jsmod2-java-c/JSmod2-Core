@@ -33,6 +33,10 @@ public class BinaryStream {
         return id;
     }
 
+
+    public String[] splitJson(String json){
+        return json.split(",");
+    }
     /**
      * 编码一个对象
      * @param o
@@ -57,6 +61,8 @@ public class BinaryStream {
             byte[] packetBytes = Base64.getDecoder().decode(data);
             String json = new String(packetBytes,properties.getProperty("decode"));
             json = json.substring((id+"-").length());
+            //{main-object},{"player-xxx":"xxx"},{"team-class":"xxx"}
+            json = splitJson(json)[0];
             Object o = JSONObject.parseObject(json,clz);
             return clz.cast(o);
         }catch (Exception e){

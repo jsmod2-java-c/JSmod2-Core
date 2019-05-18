@@ -117,9 +117,10 @@ public class Player extends CommandSender implements IPlayer {
 
     }
 
-    public void addHealth(){
+    public void addHealth(int amount){
 
     }
+
 
 
 
