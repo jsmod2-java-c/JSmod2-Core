@@ -1,4 +1,4 @@
-![avatar](timg.jpg)
+![avatar](jsmod2.png)
 # jsmod2
 ###### java server mod2 for SCP:Secret Lab.
 
