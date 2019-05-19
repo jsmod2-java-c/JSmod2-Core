@@ -107,6 +107,7 @@ public class Server {
 
     public void start(){
         this.pool.execute(new ListenerThread());
+        this.pool.execute(new ServerThread());
         this.log.info("the listener thread is starting!!!!");
     }
 
@@ -285,8 +286,6 @@ public class Server {
                         log.error("no such type packet");
                         continue;
                     }
-
-
                     //接收包
                     PacketManager.getManager().manageMethod(message,id);
                 }
@@ -300,12 +299,14 @@ public class Server {
     private class ServerThread implements Runnable{
         @Override
         public void run() {
-            Utils.TryCatch(()->{
-                DatagramPacket request = new DatagramPacket(new byte[MAX_LENGTH], MAX_LENGTH);
-                DatagramSocket socket = getSocket(Integer.parseInt(serverProp.getProperty("server.init.port")));
-                socket.receive(request);
-                setServer(new String(request.getData(), 0 , request.getLength()));
-            });
+            while(true){
+                Utils.TryCatch(()->{
+                    DatagramPacket request = new DatagramPacket(new byte[MAX_LENGTH], MAX_LENGTH);
+                    DatagramSocket socket = getSocket(Integer.parseInt(serverProp.getProperty("server.init.port")));
+                    socket.receive(request);
+                    setServer(new String(request.getData(), 0 , request.getLength()));
+                });
+            }
         }
     }
 
