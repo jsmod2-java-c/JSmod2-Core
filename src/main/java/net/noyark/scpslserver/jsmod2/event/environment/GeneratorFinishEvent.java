@@ -3,8 +3,6 @@ package net.noyark.scpslserver.jsmod2.event.environment;
 import net.noyark.scpslserver.jsmod2.annotations.UseForServerInit;
 import net.noyark.scpslserver.jsmod2.event.Event;
 import net.noyark.scpslserver.jsmod2.utils.api.Generator;
-import sun.nio.cs.Surrogate;
-
 /**
  * @author Kevinj
  * @author magiclu550
