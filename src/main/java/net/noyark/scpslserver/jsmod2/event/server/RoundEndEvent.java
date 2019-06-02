@@ -1,6 +1,6 @@
 package net.noyark.scpslserver.jsmod2.event.server;
 
-import net.noyark.Smod2Server;
+import net.noyark.scpslserver.jsmod2.Smod2Server;
 import net.noyark.scpslserver.jsmod2.annotations.UseForServerInit;
 import net.noyark.scpslserver.jsmod2.utils.server.ROUND_END_STATUS;
 import net.noyark.scpslserver.jsmod2.utils.server.Round;

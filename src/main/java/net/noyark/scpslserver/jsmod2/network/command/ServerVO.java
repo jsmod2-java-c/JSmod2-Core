@@ -1,7 +1,6 @@
 package net.noyark.scpslserver.jsmod2.network.command;
 
-import net.noyark.Smod2Server;
-import net.noyark.scpslserver.jsmod2.Server;
+import net.noyark.scpslserver.jsmod2.Smod2Server;
 
 public class ServerVO extends CommandVO{
 

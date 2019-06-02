@@ -1,6 +1,5 @@
 package net.noyark.scpslserver.jsmod2;
 
-import net.noyark.Smod2Server;
 import net.noyark.scpslserver.jsmod2.entity.Player;
 import net.noyark.scpslserver.jsmod2.event.Event;
 import net.noyark.scpslserver.jsmod2.ex.EventException;

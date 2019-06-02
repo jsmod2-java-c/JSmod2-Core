@@ -1,10 +1,9 @@
 package net.noyark.scpslserver.jsmod2.utils;
 
-import net.noyark.Code;
+import net.noyark.scpslserver.jsmod2.Code;
 import net.noyark.scpslserver.jsmod2.Message;
 import net.noyark.scpslserver.jsmod2.FileSystem;
 import net.noyark.scpslserver.jsmod2.Server;
-import net.noyark.scpslserver.jsmod2.network.DataPacket;
 
 import java.io.*;
 import java.util.Arrays;

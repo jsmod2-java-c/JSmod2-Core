@@ -1,10 +1,8 @@
 package net.noyark.scpslserver.jsmod2;
 
-import net.noyark.Smod2Server;
 import net.noyark.scpslserver.jsmod2.command.NativeCommand;
 import net.noyark.scpslserver.jsmod2.utils.Utils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.fusesource.jansi.Ansi.ansi;

@@ -1,6 +1,6 @@
 package net.noyark.scpslserver.jsmod2.network;
 
-import net.noyark.Smod2Server;
+import net.noyark.scpslserver.jsmod2.Smod2Server;
 
 /**
  * 用于初始化服务端信息的数据包

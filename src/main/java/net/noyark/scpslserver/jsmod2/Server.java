@@ -1,6 +1,5 @@
 package net.noyark.scpslserver.jsmod2;
 
-import net.noyark.Smod2Server;
 import net.noyark.scpslserver.jsmod2.annotations.PacketCMD;
 import net.noyark.scpslserver.jsmod2.command.*;
 import net.noyark.scpslserver.jsmod2.event.packet.ServerPacketEvent;

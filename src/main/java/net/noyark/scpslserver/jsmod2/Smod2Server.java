@@ -1,4 +1,4 @@
-package net.noyark;
+package net.noyark.scpslserver.jsmod2;
 
 //TODO Smod2Server 计划5.15完成
 

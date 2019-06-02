@@ -1,6 +1,6 @@
 package net.noyark.scpslserver.jsmod2.event.server;
 
-import net.noyark.Smod2Server;
+import net.noyark.scpslserver.jsmod2.Smod2Server;
 
 
 public class RoundReStartEvent extends ServerEvent{
