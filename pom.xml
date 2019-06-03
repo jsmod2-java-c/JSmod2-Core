@@ -62,5 +62,10 @@
             <artifactId>commons-codec</artifactId>
             <version>1.11</version>
         </dependency>
+        <dependency>
+            <groupId>jline</groupId>
+            <artifactId>jline</artifactId>
+            <version>2.9</version>
+        </dependency>
     </dependencies>
 </project>

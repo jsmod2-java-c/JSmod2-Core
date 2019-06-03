@@ -1,5 +1,6 @@
 package net.noyark.scpslserver.jsmod2;
 
+import jline.console.ConsoleReader;
 import net.noyark.scpslserver.jsmod2.annotations.PacketCMD;
 import net.noyark.scpslserver.jsmod2.command.*;
 import net.noyark.scpslserver.jsmod2.event.packet.ServerPacketEvent;
@@ -69,6 +70,8 @@ public class Server {
     private volatile DatagramSocket socket;
 
     private Smod2Server smod2Server;
+
+    private static ConsoleReader lineReader;
 
 
     Server(ILogger log, Properties lang) {
@@ -218,8 +221,13 @@ public class Server {
         }
     }
 
+    @Deprecated
     public static Scanner getScanner(){
         return scanner;
+    }
+    //new line reader
+    public static ConsoleReader getLineReader() {
+        return lineReader;
     }
 
     private void closeStream(){
