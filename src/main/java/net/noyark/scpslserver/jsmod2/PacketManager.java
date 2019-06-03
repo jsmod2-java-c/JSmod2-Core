@@ -45,7 +45,7 @@ public class PacketManager {
                 Smod2Server sender = vo.getServer();
                 String[] args = vo.getArgs();
                 String commandName = vo.getCommandName();
-                Server.getSender().getServer().getPluginManager().excuteCommand(commandName,args,sender);
+                Server.getSender().getServer().getPluginManager().executeCommand(commandName,args,sender);
             }
             if(id == Register.PLAYER_COMMAND){
                 PlayerCommandPacket playerCommandPacket = new PlayerCommandPacket();
@@ -53,7 +53,7 @@ public class PacketManager {
                 Player player = vo.getPlayer();
                 String commandName = vo.getCommandName();
                 String[] args = vo.getArgs();
-                Server.getSender().getServer().getPluginManager().excuteCommand(commandName,args,player);
+                Server.getSender().getServer().getPluginManager().executeCommand(commandName,args,player);
             }
         }catch (Exception e){
             e.printStackTrace();

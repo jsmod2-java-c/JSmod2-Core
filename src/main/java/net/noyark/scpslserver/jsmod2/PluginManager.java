@@ -175,7 +175,7 @@ public class PluginManager {
         return pluginCommands;
     }
 
-    public boolean excuteCommand(String commandName,String[] args,CommandSender sender){
+    public boolean executeCommand(String commandName,String[] args,CommandSender sender){
         for(NativeCommand command:commands){
             if(command.getCommandName().equals(commandName)){
                 //指令发送者所拥有的权限是否包含指令允许的权限
@@ -194,7 +194,7 @@ public class PluginManager {
      * 控制台执行指令
      *
      */
-    public boolean consoleExcuteCommand(String commandName,String[] args){
+    public boolean consoleExecuteCommand(String commandName,String[] args){
         for(NativeCommand command:commands){
             if(command.getCommandName().equals(commandName)){
                 CommandSender commandSender = Console.getConsole();
