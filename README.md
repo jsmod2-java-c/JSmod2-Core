@@ -2,6 +2,12 @@
 # jsmod2
 ###### java server mod2 for SCP:Secret Lab.
 
+JSMOD2项目目前还差以下几项功能:
+
+SCPDataNetwork(Proxy端)->差远端方法调用，数据包定义(包括特殊值注入)，事件驱动发送数据包
+
+JSMOD2(java主端)->差数据包和实体类定义，实体类等方法发包 
+
 #### JSMOD2介绍
 
 > 什么是jsmod2
