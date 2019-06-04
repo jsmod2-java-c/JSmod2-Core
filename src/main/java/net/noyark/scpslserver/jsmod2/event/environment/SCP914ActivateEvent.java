@@ -1,10 +1,10 @@
 package net.noyark.scpslserver.jsmod2.event.environment;
 
 import net.noyark.scpslserver.jsmod2.annotations.UseForServerInit;
+import net.noyark.scpslserver.jsmod2.math.Vector;
 import net.noyark.scpslserver.jsmod2.utils.item.KnobSetting;
 import net.noyark.scpslserver.jsmod2.entity.Player;
 import net.noyark.scpslserver.jsmod2.event.Event;
-import net.noyark.scpslserver.jsmod2.math.Vector;
 
 
 /**
