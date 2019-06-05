@@ -3,7 +3,7 @@ package net.noyark.scpslserver.jsmod2;
 //TODO Smod2Server 计划5.15完成
 
 
-import net.noyark.scpslserver.jsmod2.CommandSender;
+
 
 public class Smod2Server extends CommandSender {
 
