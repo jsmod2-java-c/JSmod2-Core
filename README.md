@@ -34,7 +34,7 @@ information.
 
 * JRE
 
-use jre 12:
+use jre 8:
 https://www.oracle.com/technetwork/java/javase/downloads/index.html
 
 * use `jsmod2`
