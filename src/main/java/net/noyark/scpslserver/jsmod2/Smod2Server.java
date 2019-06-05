@@ -25,4 +25,9 @@ public class Smod2Server extends CommandSender {
         return port;
     }
 
+    public Server getRuntimeServer(){
+        return Server.getSender().getServer();
+    }
+
+
 }
