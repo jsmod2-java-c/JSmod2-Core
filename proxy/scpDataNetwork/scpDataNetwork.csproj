@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>netcoreapp2.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Content Include="Newtonsoft.Json.sln" />
+      <Content Include="Smod2\Smod2.sln" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="Smod2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <HintPath>C:\Users\lenovo\RiderProjects\depend\Smod2-lib.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    </ItemGroup>
+
+</Project>
