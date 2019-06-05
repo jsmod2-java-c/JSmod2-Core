@@ -1,2 +1,5 @@
-# jsmod2_SCPDataNetwork
-jsmod2的数据周转端，负责java端和c#端的数据交换
+# jsmod2_SCPDataNetwork Proxy
+
+Jsmod2 data turnover end, responsible for data exchange between java and c#
+
+as a smod2 plugin
