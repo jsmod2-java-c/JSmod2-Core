@@ -26,7 +26,7 @@ If you want to participate in the development of jsmod2,
 you can refer to README_design.md for architectural 
 information.
 
-![avatar](jsmod2-banner.png)
+![avatar](github_info/jsmod2-banner.png)
 > How to start JDMOD2
 * windows and linux
 
