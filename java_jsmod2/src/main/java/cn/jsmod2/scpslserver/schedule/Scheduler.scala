@@ -2,7 +2,6 @@ package cn.jsmod2.scpslserver.schedule
 
 import java.util.concurrent.{Callable, Executors}
 
-import net.noyark.scpslserver.jsmod2.Server
 
 /**
   * 中央线程处理器

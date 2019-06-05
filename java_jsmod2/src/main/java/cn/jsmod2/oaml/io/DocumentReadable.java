@@ -53,7 +53,7 @@ public interface DocumentReadable {
 	 * @throws IOException
 	 */
 	
-	public Document read(File file) throws FileNotFoundException, IOException;
+	Document read(File file) throws FileNotFoundException, IOException;
 	
 	/**
 	 * When the file name is passed in,the parser converts
@@ -67,7 +67,7 @@ public interface DocumentReadable {
 	 * @throws IOException #{@link IOException}
 	 */
 	
-	public Document read(String file) throws FileNotFoundException, IOException;
+	Document read(String file) throws FileNotFoundException, IOException;
 	
 	/**
 	 * When the stream is passed in,the parser converts
@@ -75,12 +75,12 @@ public interface DocumentReadable {
 	 * information.This method is an overloaded method.When 
 	 * reading ,you need to specify the file or its corresponding
 	 * stream
-	 * @param inputstream the inputstream
+	 * @param inputStream the inputstream
 	 * @return the document object
 	 * @throws IOException #{@link IOException}
 	 */
 	
-	public Document read(InputStream inputStream) throws IOException;
+	Document read(InputStream inputStream) throws IOException;
 	
 	/**
 	 * When the Reader object is passed in,the parser converts
@@ -88,10 +88,10 @@ public interface DocumentReadable {
 	 * information.This method is an overloaded method.When 
 	 * reading ,you need to specify the file or its corresponding
 	 * stream
-	 * @param reader the reader stream
+	 * @param read the reader stream
 	 * @return the document object
 	 * @throws IOException #{@link IOException}
 	 */
 	
-	public Document read(Reader read) throws IOException;
+	Document read(Reader read) throws IOException;
 }

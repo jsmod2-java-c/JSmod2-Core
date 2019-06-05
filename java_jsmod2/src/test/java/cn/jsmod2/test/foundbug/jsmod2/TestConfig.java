@@ -4,7 +4,6 @@ import cn.jsmod2.scpslserver.utils.config.Config;
 import cn.jsmod2.scpslserver.utils.config.JsonConfig;
 import cn.jsmod2.scpslserver.utils.config.PropertiesConfig;
 import cn.jsmod2.scpslserver.utils.config.YamlConfig;
-import net.noyark.scpslserver.jsmod2.utils.config.*;
 import org.junit.Test;
 
 import java.io.FileInputStream;

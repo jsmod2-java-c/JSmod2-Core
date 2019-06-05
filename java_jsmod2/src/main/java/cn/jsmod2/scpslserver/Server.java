@@ -8,7 +8,6 @@ import cn.jsmod2.scpslserver.network.ServerInitPacket;
 import cn.jsmod2.scpslserver.plugin.PluginClassLoader;
 import cn.jsmod2.scpslserver.utils.Utils;
 import jline.console.ConsoleReader;
-import net.noyark.scpslserver.jsmod2.command.*;
 import cn.jsmod2.scpslserver.network.DataPacket;
 import cn.jsmod2.scpslserver.schedule.Scheduler;
 
