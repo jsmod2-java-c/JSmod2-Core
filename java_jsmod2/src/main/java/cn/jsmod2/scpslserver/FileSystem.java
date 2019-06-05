@@ -1,0 +1,150 @@
+package cn.jsmod2.scpslserver;
+
+import cn.jsmod2.scpslserver.inferf.log.ILogger;
+import cn.jsmod2.scpslserver.utils.Utils;
+
+import java.io.*;
+import java.util.*;
+
+/**
+ * FileSystem create the server file
+ *
+ * @author magiclu550 #(code) jsmod2
+ */
+
+public class FileSystem {
+
+    public static final String PLUGIN_DIR = "/plugins";
+
+    public static final String SERVER_PROPERTIES = "/server.properties";
+
+
+
+
+    private List<OutputStream> outputStreams = new ArrayList<>();
+
+    private List<InputStream> inputStreams = new ArrayList<>();
+
+    private List<BufferedReader> readers = new ArrayList<>();
+
+    private List<PrintWriter> writers = new ArrayList<>();
+
+
+    private static FileSystem system;
+
+    static {
+        system = new FileSystem();
+    }
+
+    static {
+        Register.getInstance().registerLang();
+        Register.getInstance().registerServerProperties();
+    }
+
+    private FileSystem(){
+
+    }
+
+    public static final String PROPERTIES = ".properties";
+
+    /**
+     * the server.properties
+     */
+
+    public Properties serverProperties(Server server){
+        try{
+            Properties properties = new Properties();
+            File serverProp = new File(server.serverfolder+SERVER_PROPERTIES);
+            if(!serverProp.exists()){
+                FileOutputStream stream = new FileOutputStream(serverProp);
+                outputStreams.add(stream);
+                Set<Map.Entry<String,String>> propertiesInfo = Register.getInstance().getServerProperties().entrySet();
+                for(Map.Entry<String,String> info:propertiesInfo) {
+                    properties.setProperty(info.getKey(), info.getValue());
+                }
+                properties.store(stream,"this is the server's properties\n data.network.plugin.port is the jsmod2_dataNetwork plugin's port \n the this.port is java server port \n it will support more ports");
+                stream.flush();
+                properties.load(new FileInputStream(serverProp));
+                return properties;
+            }else{
+                properties.load(new FileInputStream(serverProp));
+                return properties;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * plugin dir
+     */
+    public File pluginDir(Server server){
+        File file = new File(server.serverfolder+PLUGIN_DIR);
+        if(!file.exists()) {
+            file.mkdirs();
+        }
+        return file;
+    }
+
+
+    public Properties langProperties(ILogger log) throws IOException {
+        File file = new File("../init.lang");
+
+        Properties properties = new Properties();
+
+        if(!file.exists()){
+            PrintWriter writer = new PrintWriter(file);
+
+            properties.load(Utils.getClassStream("lang.properties"));
+            for(String lang:Register.getInstance().getRegisterLang()){
+                log.info(properties.getProperty(lang));
+            }
+            String langType = Server.getScanner().nextLine();
+            try{
+                properties.load(Utils.getClassStream(langType+PROPERTIES));
+                writer.println(langType);
+            }catch (Exception e1){
+                log.error("sorry,no such language,default: chinese");
+                log.error("不好意思，没有这样的语言，默认为:中文");
+                try{
+                    properties.load(Utils.getClassStream("zh"+PROPERTIES));
+                }catch (Exception e2){
+                    e2.printStackTrace();
+                }
+                writer.println("zh");
+            }
+            writer.close();
+        }else{
+            BufferedReader reader = Utils.getReader(file);
+            String lang = reader.readLine();
+            try{
+                properties.load(Utils.getClassStream(lang+PROPERTIES));
+            }catch (IOException e){
+                properties.load(Utils.getClassStream("zh"+PROPERTIES));
+            }
+        }
+        return properties;
+    }
+
+
+    public List<OutputStream> getOutputStreams() {
+        return outputStreams;
+    }
+
+    public List<InputStream> getInputStreams() {
+        return inputStreams;
+    }
+
+    public static FileSystem getFileSystem(){
+        return system;
+    }
+
+    public List<BufferedReader> getReaders(){
+        return readers;
+    }
+
+    public List<PrintWriter> getWriters(){
+        return writers;
+    }
+}

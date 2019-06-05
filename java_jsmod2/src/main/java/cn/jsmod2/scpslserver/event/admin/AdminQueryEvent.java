@@ -1,0 +1,62 @@
+package cn.jsmod2.scpslserver.event.admin;
+
+import cn.jsmod2.scpslserver.entity.Player;
+import cn.jsmod2.scpslserver.event.Event;
+
+/**
+ * @author magiclu550 #(code) jsmod2
+ */
+
+public class AdminQueryEvent extends Event {
+
+    private Player admin;
+
+    private String query;
+
+    private String output;
+
+    private boolean handled;
+
+    private boolean successful;
+
+    public Player getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Player admin) {
+        this.admin = admin;
+    }
+
+    public String getQuery() {
+        return query;
+    }
+
+    public void setQuery(String query) {
+        this.query = query;
+    }
+
+    public String getOutput() {
+        return output;
+    }
+
+    public void setOutput(String output) {
+        this.output = output;
+    }
+
+    public boolean isHandled() {
+        return handled;
+    }
+
+    public void setHandled(boolean handled) {
+        this.handled = handled;
+    }
+
+    public boolean isSuccessful() {
+        return successful;
+    }
+
+    public void setSuccessful(boolean successful) {
+        this.successful = successful;
+    }
+
+}

@@ -1,0 +1,28 @@
+package cn.jsmod2.scpslserver.event.player;
+
+import cn.jsmod2.scpslserver.entity.Player;
+/**
+ * @author kevinj
+ */
+public class Scp096CooldownEndEvent extends PlayerEvent {
+    private boolean allow;
+
+    public boolean isAllow() {
+        return allow;
+    }
+
+    public void setAllow(boolean allow) {
+        this.allow = allow;
+    }
+
+
+
+    public Scp096CooldownEndEvent(Player player, boolean allow) {
+        super(player);
+        this.allow = allow;
+    }
+
+    public Scp096CooldownEndEvent(){
+
+    }
+}
