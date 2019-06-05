@@ -18,10 +18,16 @@ public abstract class Command extends NativeCommand{
         this.plugin = plugin;
     }
 
+    public Command(String commandName,String description,Plugin plugin){
+        super(commandName,description);
+        this.plugin = plugin;
+    }
+
 
     public Plugin getPlugin(){
         return plugin;
     }
+
 
 
 }

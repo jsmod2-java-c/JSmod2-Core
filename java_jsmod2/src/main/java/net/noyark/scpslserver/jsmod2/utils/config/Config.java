@@ -15,16 +15,9 @@
  */
 package net.noyark.scpslserver.jsmod2.utils.config;
 
-import net.noyark.oaml.tree.Document;
 import net.noyark.scpslserver.jsmod2.utils.Utils;
 
 import java.io.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * This configuration file class simplifies the

@@ -21,13 +21,18 @@ public abstract class NativeCommand {
         this.power = power;
         this.description = description;
     }
+    public NativeCommand(String commandName,String description){
+        this.commandName = commandName;
+        this.power = "all";
+        this.description = description;
+    }
 
     public String getCommandName() {
         return commandName;
     }
 
     public String getPower() {
-        return power;
+        return power.toLowerCase();
     }
 
     public String getDescription() {

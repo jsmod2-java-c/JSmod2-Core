@@ -1,6 +1,5 @@
 package net.noyark.scpslserver.jsmod2.utils;
 
-import net.noyark.scpslserver.jsmod2.Register;
 import net.noyark.scpslserver.jsmod2.utils.config.YamlConfig;
 
 import java.io.IOException;

@@ -8,6 +8,7 @@ import net.noyark.scpslserver.jsmod2.inferf.log.ILogger;
 import net.noyark.scpslserver.jsmod2.network.DataPacket;
 import net.noyark.scpslserver.jsmod2.network.ServerInitPacket;
 import net.noyark.scpslserver.jsmod2.plugin.PluginClassLoader;
+import net.noyark.scpslserver.jsmod2.schedule.Scheduler;
 import net.noyark.scpslserver.jsmod2.utils.Utils;
 
 import java.io.*;
@@ -71,7 +72,9 @@ public class Server {
 
     private Smod2Server smod2Server;
 
-    private static ConsoleReader lineReader;
+    private ConsoleReader lineReader;
+
+    private Scheduler scheduler;
 
 
     Server(ILogger log, Properties lang) {
@@ -82,6 +85,8 @@ public class Server {
         this.lang = lang;
 
         this.server = this;
+
+        this.scheduler = new Scheduler();
 
         this.serverfolder = new File(System.getProperty("user.dir")).getParentFile();
 
@@ -109,7 +114,7 @@ public class Server {
 
     public void start(){
         this.pool.execute(new ListenerThread());
-        this.pool.execute(new ServerThread());
+        //this.pool.execute(new ServerThread());
         this.log.info("the listener thread is starting!!!!");
     }
 
@@ -144,6 +149,14 @@ public class Server {
         return smod2Server;
     }
 
+    public Scheduler getScheduler() {
+        return scheduler;
+    }
+
+    public void setScheduler(Scheduler scheduler) {
+        this.scheduler = scheduler;
+    }
+
     public File getServerFolder(){
         return serverfolder;
     }
@@ -173,10 +186,7 @@ public class Server {
 
     //监听Smod2转发端接口
     private DatagramSocket getSocket(int port) throws SocketException {
-
-        DatagramSocket socket = new DatagramSocket(port);
-
-        return socket;
+        return new DatagramSocket(port);
     }
 
     /**
@@ -226,7 +236,7 @@ public class Server {
         return scanner;
     }
     //new line reader
-    public static ConsoleReader getLineReader() {
+    public ConsoleReader getLineReader() {
         return lineReader;
     }
 
@@ -302,7 +312,9 @@ public class Server {
 
     /**
      * 监听服务器更新的数据包
+     * 该线程以及和监听线程合并
      */
+    @Deprecated
     private class ServerThread implements Runnable{
         @Override
         public void run() {

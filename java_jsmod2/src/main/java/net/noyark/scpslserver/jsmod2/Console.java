@@ -31,7 +31,7 @@ public class Console extends Smod2Server {
                 //@Deprecated
                 //Utils.getMessageSender().info(">");
                 //String command = Server.getScanner().nextLine();
-                String command = Server.getLineReader().readLine(">");
+                String command = Server.getSender().getServer().getLineReader().readLine(">");
                 String[] strs = command.split(" ");
                 String[] args = new String[strs.length-1];
                 for(int i = 1;i<strs.length-1;i++){

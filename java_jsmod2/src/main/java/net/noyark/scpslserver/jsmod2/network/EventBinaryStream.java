@@ -1,7 +1,5 @@
 package net.noyark.scpslserver.jsmod2.network;
 
-import net.noyark.scpslserver.jsmod2.event.Event;
-
 public class EventBinaryStream extends BinaryStream {
 
 

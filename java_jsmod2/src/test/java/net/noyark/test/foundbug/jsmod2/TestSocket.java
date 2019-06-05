@@ -1,8 +1,6 @@
 package net.noyark.test.foundbug.jsmod2;
 
 
-import net.noyark.scpslserver.jsmod2.network.DataPacket;
-import net.noyark.scpslserver.jsmod2.network.ServerInitPacket;
 import net.noyark.scpslserver.jsmod2.utils.Utils;
 
 import org.junit.Test;
