@@ -53,7 +53,7 @@ description: description
 version: plugin-version
 
 ```
-2. Create a jsmod2 main class, and the main class of plugin.yml...
+2 . Create a jsmod2 main class, and the main class of plugin.yml...
 ```java
 package Package;
 /**
@@ -76,7 +76,7 @@ public class MainClass extends PluginBase{
 } 
 
 ```
-3. Create a listener
+3  . Create a listener
 ```java
 package Package;
 
@@ -89,7 +89,7 @@ public class TestListener implements Listener{
     
 }
 ```
-4. Create a Command
+4 . Create a Command
 ```java
 package Package;
 
@@ -106,7 +106,7 @@ public class TestCommand extends Command{
 }
 
 ```
-5. Register Command and Listener
+5 . Register Command and Listener
 ```java
 package Package;
 /**
