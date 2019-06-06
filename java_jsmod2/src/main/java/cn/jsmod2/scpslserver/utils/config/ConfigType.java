@@ -4,11 +4,11 @@ public enum ConfigType {
 
     JSON(0),
 
-    YAML(1),
+    YAML(1<<1),
 
-    OAML(2),
+    OAML(1<<2),
 
-    PROPERTIES(3);
+    PROPERTIES(1<<2+1);
 
     private int type;
 
