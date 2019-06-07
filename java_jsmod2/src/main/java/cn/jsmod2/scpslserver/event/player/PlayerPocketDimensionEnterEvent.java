@@ -41,6 +41,7 @@ public class PlayerPocketDimensionEnterEvent extends PlayerEvent {
     }
 
     /** java-bean */
+    @UseForServerInit
     public void setLastPosition(Vector lastPosition) {
         this.lastPosition = lastPosition;
     }

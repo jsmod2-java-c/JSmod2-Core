@@ -35,6 +35,7 @@ public class RoundEndEvent extends ServerEvent {
 
     }
     /** java-bean */
+    @UseForServerInit
     public void setStatus(ROUND_END_STATUS status) {
         this.status = status;
     }
