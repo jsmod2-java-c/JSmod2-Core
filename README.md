@@ -1,3 +1,4 @@
+![LICENSE](https://img.shields.io/badge/license-GPL-blue.svg)
 # JSMOD2
 ###### smod2 java edition [based on smod2]
 > about
