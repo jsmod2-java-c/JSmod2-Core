@@ -13,6 +13,9 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 
 使用bat和shell脚本可以安装python的库
 
+Created by MagicLu550 on 6.6,2019
+
+:author Scc
 """
 
 
