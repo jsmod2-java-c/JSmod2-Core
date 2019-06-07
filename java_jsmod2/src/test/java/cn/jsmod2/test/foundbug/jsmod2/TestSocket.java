@@ -1,7 +1,7 @@
 package cn.jsmod2.test.foundbug.jsmod2;
 
 
-import cn.jsmod2.scpslserver.utils.Utils;
+import cn.jsmod2.utils.Utils;
 
 import org.junit.Test;
 

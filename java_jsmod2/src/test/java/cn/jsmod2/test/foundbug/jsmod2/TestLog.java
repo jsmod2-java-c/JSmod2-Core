@@ -1,8 +1,8 @@
 package cn.jsmod2.test.foundbug.jsmod2;
 
-import cn.jsmod2.scpslserver.impl.log.ServerLogger;
-import cn.jsmod2.scpslserver.inferf.log.ILogger;
-import cn.jsmod2.scpslserver.utils.LogType;
+import cn.jsmod2.log.ServerLogger;
+import cn.jsmod2.log.ILogger;
+import cn.jsmod2.utils.LogType;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
