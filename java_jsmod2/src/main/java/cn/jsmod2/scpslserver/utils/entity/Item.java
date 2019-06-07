@@ -6,9 +6,23 @@ the GNU open source license before using the software. To understand
 the appropriateness, if infringement, will be handled in accordance
 with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">that<a>
  */
-package cn.jsmod2.scpslserver.entity;
+package cn.jsmod2.scpslserver.utils.entity;
 
-public interface IPlayer {
+import cn.jsmod2.scpslserver.utils.item.ItemType;
 
+import java.io.Serializable;
 
+public class Item implements Cloneable, Serializable {
+
+    private boolean inWord;
+
+    private ItemType itemType;
+
+    public boolean isInWord() {
+        return inWord;
+    }
+
+    public ItemType getItemType() {
+        return itemType;
+    }
 }

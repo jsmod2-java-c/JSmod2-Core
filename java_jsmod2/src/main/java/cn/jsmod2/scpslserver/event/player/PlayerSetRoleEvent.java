@@ -8,10 +8,10 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.scpslserver.event.player;
 
-import cn.jsmod2.scpslserver.entity.TeamRole;
+import cn.jsmod2.scpslserver.utils.entity.TeamRole;
 import cn.jsmod2.scpslserver.utils.api.Role;
 import cn.jsmod2.scpslserver.utils.item.ItemType;
-import cn.jsmod2.scpslserver.entity.Player;
+import cn.jsmod2.scpslserver.utils.entity.Player;
 
 import java.util.List;
 

@@ -6,7 +6,7 @@ the GNU open source license before using the software. To understand
 the appropriateness, if infringement, will be handled in accordance
 with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">that<a>
  */
-package cn.jsmod2.scpslserver.entity;
+package cn.jsmod2.scpslserver.utils.entity;
 
-public class TeslaGate {
+public class Elevator {
 }

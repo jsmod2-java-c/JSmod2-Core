@@ -8,7 +8,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.scpslserver.event.player;
 
-import cn.jsmod2.scpslserver.entity.Player;
+import cn.jsmod2.scpslserver.utils.entity.Player;
 
 public class PlayerIntercomCooldownCheckEvent extends PlayerEvent{
     private float currentCooldown;

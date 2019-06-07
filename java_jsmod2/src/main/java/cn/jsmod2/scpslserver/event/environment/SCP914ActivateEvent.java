@@ -11,7 +11,7 @@ package cn.jsmod2.scpslserver.event.environment;
 import cn.jsmod2.scpslserver.annotations.UseForServerInit;
 import cn.jsmod2.scpslserver.utils.item.KnobSetting;
 import cn.jsmod2.scpslserver.math.Vector;
-import cn.jsmod2.scpslserver.entity.Player;
+import cn.jsmod2.scpslserver.utils.entity.Player;
 import cn.jsmod2.scpslserver.event.Event;
 
 

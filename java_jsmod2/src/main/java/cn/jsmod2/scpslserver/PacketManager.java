@@ -13,7 +13,7 @@ package cn.jsmod2.scpslserver;
 import cn.jsmod2.scpslserver.ex.EventException;
 import cn.jsmod2.scpslserver.network.command.PlayerCommandPacket;
 import cn.jsmod2.scpslserver.network.command.ServerCommandPacket;
-import cn.jsmod2.scpslserver.entity.Player;
+import cn.jsmod2.scpslserver.utils.entity.Player;
 import cn.jsmod2.scpslserver.event.Event;
 import cn.jsmod2.scpslserver.network.EventBinaryStream;
 import cn.jsmod2.scpslserver.network.command.PlayerVO;

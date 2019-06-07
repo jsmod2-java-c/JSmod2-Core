@@ -10,7 +10,7 @@ package cn.jsmod2.scpslserver.event.player;
 
 import cn.jsmod2.scpslserver.annotations.UseForServerInit;
 import cn.jsmod2.scpslserver.utils.team.Team;
-import cn.jsmod2.scpslserver.entity.Player;
+import cn.jsmod2.scpslserver.utils.entity.Player;
 
 public class PlayerInitialAssignTeamEvent extends PlayerEvent {
     private Team team;

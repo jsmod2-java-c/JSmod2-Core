@@ -9,7 +9,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.scpslserver.network.command;
 
 import cn.jsmod2.scpslserver.annotations.UseForServerInit;
-import cn.jsmod2.scpslserver.entity.Player;
+import cn.jsmod2.scpslserver.utils.entity.Player;
 
 public class PlayerVO extends CommandVO{
 

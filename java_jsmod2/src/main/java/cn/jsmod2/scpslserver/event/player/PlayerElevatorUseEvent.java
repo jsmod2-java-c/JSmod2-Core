@@ -10,8 +10,8 @@ package cn.jsmod2.scpslserver.event.player;
 
 
 import cn.jsmod2.scpslserver.annotations.UseForServerInit;
-import cn.jsmod2.scpslserver.entity.Elevator;
-import cn.jsmod2.scpslserver.entity.Player;
+import cn.jsmod2.scpslserver.utils.entity.Elevator;
+import cn.jsmod2.scpslserver.utils.entity.Player;
 import cn.jsmod2.scpslserver.math.Vector;
 
 /**
@@ -19,7 +19,7 @@ import cn.jsmod2.scpslserver.math.Vector;
  */
 
 public class PlayerElevatorUseEvent extends PlayerEvent {
-    private cn.jsmod2.scpslserver.entity.Elevator Elevator;
+    private cn.jsmod2.scpslserver.utils.entity.Elevator Elevator;
     private Vector ElevatorPosition;
     private boolean AllowUse;
 
@@ -51,7 +51,7 @@ public class PlayerElevatorUseEvent extends PlayerEvent {
     }
     /** java-bean */
     @UseForServerInit
-    public void setElevator(cn.jsmod2.scpslserver.entity.Elevator elevator) {
+    public void setElevator(cn.jsmod2.scpslserver.utils.entity.Elevator elevator) {
         Elevator = elevator;
     }
     /** java-bean */

@@ -11,7 +11,7 @@ package cn.jsmod2.scpslserver.event.player;
 import cn.jsmod2.scpslserver.annotations.UseForServerInit;
 import cn.jsmod2.scpslserver.utils.api.Role;
 import cn.jsmod2.scpslserver.utils.player.DamageType;
-import cn.jsmod2.scpslserver.entity.Player;
+import cn.jsmod2.scpslserver.utils.entity.Player;
 import cn.jsmod2.scpslserver.event.Event;
 import cn.jsmod2.scpslserver.math.Vector;
 

@@ -9,15 +9,15 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.scpslserver.event.player;
 
 import cn.jsmod2.scpslserver.annotations.UseForServerInit;
-import cn.jsmod2.scpslserver.entity.TeslaGate;
-import cn.jsmod2.scpslserver.entity.Player;
+import cn.jsmod2.scpslserver.utils.entity.TeslaGate;
+import cn.jsmod2.scpslserver.utils.entity.Player;
 
 /**
  * @author kevinj
  */
 
 public class PlayerTriggerTeslaEvent extends PlayerEvent {
-    private cn.jsmod2.scpslserver.entity.TeslaGate TeslaGate;
+    private cn.jsmod2.scpslserver.utils.entity.TeslaGate TeslaGate;
     private boolean Triggerable;
 
     public PlayerTriggerTeslaEvent(Player player, TeslaGate teslaGate, boolean triggerable) {

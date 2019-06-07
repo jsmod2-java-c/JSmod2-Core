@@ -10,7 +10,7 @@ package cn.jsmod2.scpslserver.event.player;
 
 
 import cn.jsmod2.scpslserver.utils.item.KnobSetting;
-import cn.jsmod2.scpslserver.entity.Player;
+import cn.jsmod2.scpslserver.utils.entity.Player;
 
 /**
  * @author kevinj
