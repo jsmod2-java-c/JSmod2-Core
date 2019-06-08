@@ -8,7 +8,44 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.api.player;
 
+import cn.jsmod2.api.team.TeamRole;
+
 public interface IPlayer {
 
+    TeamRole getTeamRole();
+
+    void setTeamRole(TeamRole teamRole);
+
+
+    String getIpAddress();
+
+
+    int getPlayerId();
+
+
+    String getStreamId();
+
+
+    RadioStatus getRadioStatus();
+
+    void setRadioStatus(RadioStatus radioStatus);
+
+
+    boolean isOverwatchMode();
+
+
+    boolean isDoNotTrack();
+
+    Scp079Data getScp079Data();
+
+    void kill(DamageType type);
+
+    void kill();
+
+    int getHealth();
+
+    void addHealth(int amount);
+
+    void personalBroadcast(int duration, String message, boolean isMonoSpaced);
 
 }
