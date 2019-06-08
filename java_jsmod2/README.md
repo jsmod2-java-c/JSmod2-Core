@@ -59,5 +59,8 @@ public byte[] itemNameSet(String name,String playerName)
 
 将数据转化为标准修改请求，放在encode作为返回值
 
+发过去请求后，c#端通过id识别，调用对应的方法
+
+
 # 对于权限的修改
 一般当基于玩家管理员权限，发出请求，将会在请求池里进行修改
