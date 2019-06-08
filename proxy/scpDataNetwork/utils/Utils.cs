@@ -21,7 +21,9 @@ namespace scpDataNetwork.utils
         public static String getEnd(string message)
         {
             string str = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(message));
-            return str.Substring(str.IndexOf("~") + 1);
+            if(str.Contains("~"))
+                return str.Substring(str.IndexOf("~") + 1);
+            return str;
         }
     }
 }
