@@ -1,10 +1,10 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "/Users/lushuzhi/IdeaProjects/jfound/proxy/scpDataNetwork/scpDataNetwork.csproj",
+    "projectUniqueName": "/Users/lushuzhi/IdeaProjects/jfound3/proxy/scpDataNetwork/scpDataNetwork.csproj",
     "projectName": "scpDataNetwork",
-    "projectPath": "/Users/lushuzhi/IdeaProjects/jfound/proxy/scpDataNetwork/scpDataNetwork.csproj",
-    "outputPath": "/Users/lushuzhi/IdeaProjects/jfound/proxy/scpDataNetwork/obj/",
+    "projectPath": "/Users/lushuzhi/IdeaProjects/jfound3/proxy/scpDataNetwork/scpDataNetwork.csproj",
+    "outputPath": "/Users/lushuzhi/IdeaProjects/jfound3/proxy/scpDataNetwork/obj/",
     "projectStyle": "PackageReference",
     "originalTargetFrameworks": [
       "netcoreapp2.1"

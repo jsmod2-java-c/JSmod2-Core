@@ -17,5 +17,11 @@ namespace scpDataNetwork.utils
             int.TryParse(str,out id);
             return id;
         }
+
+        public static String getEnd(string message)
+        {
+            string str = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(message));
+            return str.Substring(str.IndexOf("~") + 1);
+        }
     }
 }

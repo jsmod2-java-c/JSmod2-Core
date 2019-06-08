@@ -13,9 +13,8 @@ namespace scpDataNetwork.network
             this.id = id;
         }
 
-        public byte[] dataObjectEncode(object o,params string[] things)
+        public byte[] dataObjectEncodeWithEnd(object o, string end, params string[] things)
         {
-            
             string json = JsonConvert.SerializeObject(o);
             StringBuilder builder = new StringBuilder(id+"-"+json);
             //id-{},{"objectName-field":"value"}
@@ -23,14 +22,28 @@ namespace scpDataNetwork.network
             {
                 builder.Append(","+str);
             }
+
+            if (!end.Equals(""))
+            {
+                builder.Append("~");
+                builder.Append(end); 
+            }
+            
             byte[] byteArray = System.Text.Encoding.UTF8.GetBytes (builder.ToString());
             string base64 = Convert.ToBase64String(byteArray);
             return System.Text.Encoding.UTF8.GetBytes(base64);
+        }
+        
+        public byte[] dataObjectEncode(object o,params string[] things)
+        {
+            return dataObjectEncodeWithEnd(o, "", things);
         }
 
         public object dataObjectDecode(byte[] bytes,Type type)
         {
             string str = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(System.Text.Encoding.UTF8.GetString(bytes)));
+            if(str.Contains("~"))
+                str = str.Substring(0, str.IndexOf("~"));
             object o = JsonConvert.DeserializeObject(str.Substring((id+"-").Length),type);
             return o;
         }
