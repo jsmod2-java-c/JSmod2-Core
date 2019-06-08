@@ -12,7 +12,9 @@ package cn.jsmod2;
 //TODO Smod2Server 计划5.15完成
 
 
+import cn.jsmod2.api.player.Player;
 
+import java.util.List;
 
 public class Smod2Server extends CommandSender {
 
@@ -21,6 +23,8 @@ public class Smod2Server extends CommandSender {
 
     /** TODO 通过数据包获取 */
     private int port;
+
+    private List<Player> players;
 
     public Smod2Server() {
         super("CONSOLE","all","console","admin","player","nobody");
@@ -39,4 +43,7 @@ public class Smod2Server extends CommandSender {
     }
 
 
+    public List<Player> getPlayers() {
+        return players;
+    }
 }

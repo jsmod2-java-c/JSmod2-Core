@@ -85,6 +85,7 @@ public class Server {
 
     private Scheduler scheduler;
 
+    private OpsFile opsFile;
 
     Server(ILogger log, Properties lang) {
         Register.getInstance().registerPacket();
@@ -108,9 +109,13 @@ public class Server {
 
         this.pluginManager = new PluginManager(server);
 
-        commandInfo = new HashMap<>();
+        this.commandInfo = new HashMap<>();
+
         Register.getInstance().registerNativeCommand();
-        registerNativeInfo();
+
+        this.registerNativeInfo();
+
+        this.opsFile = OpsFile.getOpsFile();
 
         /**
          * 加载插件
@@ -171,6 +176,10 @@ public class Server {
     }
     public static CommandConsoleSender getSender(){
         return sender;
+    }
+
+    public OpsFile getOpsFile() {
+        return opsFile;
     }
 
     public void help(){

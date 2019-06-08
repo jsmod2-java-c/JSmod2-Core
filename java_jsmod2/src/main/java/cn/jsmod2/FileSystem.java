@@ -10,6 +10,7 @@ package cn.jsmod2;
 
 import cn.jsmod2.log.ILogger;
 import cn.jsmod2.utils.Utils;
+import org.apache.commons.io.FileUtils;
 
 import java.io.*;
 import java.util.*;
@@ -38,6 +39,8 @@ public class FileSystem {
     public static final String PLUGIN_DIR = "/plugins";
 
     public static final String SERVER_PROPERTIES = "/server.properties";
+
+    public static final String OPS_FILE = "/ops.txt";
 
     private List<OutputStream> outputStreams = new ArrayList<>();
 
