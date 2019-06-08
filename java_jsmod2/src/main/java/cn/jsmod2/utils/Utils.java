@@ -16,6 +16,7 @@ import cn.jsmod2.Server;
 import java.io.*;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.Properties;
 
 public class Utils {
 
@@ -123,8 +124,30 @@ public class Utils {
      * @return
      */
     public static Integer getResponsePacketId(String str){
-        byte[] decodes = Base64.getDecoder().decode(str);
-        str = new String(decodes);
+        try{
+            byte[] decodes = Base64.getDecoder().decode(str);
+            Properties properties = FileSystem.getFileSystem().serverProperties(Server.getSender().getServer());
+            str = new String(decodes,properties.getProperty(FileSystem.SERVER_DECODE));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return Integer.parseInt(str.substring(0,str.indexOf("-")));
+    }
+
+    /**
+     * 获取尾部请求
+     * @param str
+     * @return
+     */
+    public static String getEndRequest(String str){
+        try{
+            byte[] decodes = Base64.getDecoder().decode(str);
+            Properties properties = FileSystem.getFileSystem().serverProperties(Server.getSender().getServer());
+            str = new String(decodes,properties.getProperty(FileSystem.SERVER_DECODE));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        if(str.contains("~")) return str.substring(str.indexOf("~")+1);
+        return str;
     }
 }

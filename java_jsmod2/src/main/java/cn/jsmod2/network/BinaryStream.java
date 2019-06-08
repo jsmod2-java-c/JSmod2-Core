@@ -66,8 +66,12 @@ public abstract class BinaryStream {
      */
 
     public byte[] dataObjectEncode(Object o) {
+        return dataObjectEncodeWithEnd(o,"");
+    }
+
+    public byte[] dataObjectEncodeWithEnd(Object o,String end){
         try{
-            String json = JSON.toJSONString(o);
+            String json = JSON.toJSONString(o)+end;
             String packet = id+"-"+json;
             byte[] bytes = packet.getBytes(properties.getProperty("encode"));
             return Base64.getEncoder().encode(bytes);
@@ -82,6 +86,7 @@ public abstract class BinaryStream {
             byte[] packetBytes = Base64.getDecoder().decode(data);
             String json = new String(packetBytes,properties.getProperty("decode"));
             json = json.substring((id+"-").length());
+            json = json.substring(0,json.indexOf("~"));
             //{main-object},player-xxx:xxx,team-class:xxx
             String[] props = splitJson(json);
             json = props[0];

@@ -134,8 +134,8 @@ public class Server {
     public void sendPacket(final DataPacket packet){
         Utils.TryCatch(()->{
             byte[] encode = packet.encode();
-            //发送端口为插件的端口
-            DatagramPacket pack = new DatagramPacket(encode,encode.length,InetAddress.getByName(smod2Server.getAddress()),Integer.parseInt(serverProp.getProperty("data.network.plugin.port")));
+            //发送端口为插件的端口,ip写死为jsmod2的
+            DatagramPacket pack = new DatagramPacket(encode,encode.length,InetAddress.getByName(serverProp.getProperty(FileSystem.SMOD2_IP)),Integer.parseInt(serverProp.getProperty("data.network.plugin.port")));
             socket.send(pack);
         });
     }
@@ -282,7 +282,7 @@ public class Server {
                 log.info("Listener-Thread:EXECUTOR_SERVICE->start");
                 //注意，一个jsmod2目前只支持一个smod2连接，不支持多个连接
                 //在未来版本可能会加入支持多个smod2连接一个服务器
-                socket = getSocket(Integer.parseInt(serverProp.getProperty("this.port")));
+                socket = getSocket(Integer.parseInt(serverProp.getProperty(FileSystem.THIS_PORT)));
 
                 while (true) {
 
@@ -322,6 +322,7 @@ public class Server {
     /**
      * 监听服务器更新的数据包
      * 该线程以及和监听线程合并
+     * @Deprecated
      */
     @Deprecated
     private class ServerThread implements Runnable{

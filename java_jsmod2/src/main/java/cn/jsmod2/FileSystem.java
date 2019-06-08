@@ -22,12 +22,22 @@ import java.util.*;
 
 public class FileSystem {
 
+    public static final String SERVER_ENCODE = "encode";
+
+    public static final String SERVER_DECODE = "decode";
+
+    public static final String THIS_PORT = "this.port";
+
+    public static final String SMOD2_IP = "smod2.ip";
+
+    @Deprecated
+    public static final String SERVER_INIT_PORT = "server.init.port";
+
+    public static final String PLUGIN_PORT = "data.network.plugin.port";
+
     public static final String PLUGIN_DIR = "/plugins";
 
     public static final String SERVER_PROPERTIES = "/server.properties";
-
-
-
 
     private List<OutputStream> outputStreams = new ArrayList<>();
 

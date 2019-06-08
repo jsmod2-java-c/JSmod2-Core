@@ -26,6 +26,7 @@ import cn.jsmod2.event.team.TeamRespawnEvent;
 import cn.jsmod2.network.command.CommandRegisterPacket;
 import cn.jsmod2.network.command.PlayerCommandPacket;
 import cn.jsmod2.network.command.ServerCommandPacket;
+import scala.reflect.io.File;
 
 import java.util.*;
 
@@ -98,11 +99,12 @@ public class Register {
     }
 
     public void registerServerProperties(){
-        serverProperties.put("this.port","19935");//java端ip
-        serverProperties.put("data.network.plugin.port","19938");//插件端ip
-        serverProperties.put("server.init.port","19939");//服务端初始化的端口，传输server信息
-        serverProperties.put("decode","utf-8");//解码字符集
-        serverProperties.put("encode","utf-8");//编码字符集
+        serverProperties.put(FileSystem.PLUGIN_PORT,"19938");//插件端port
+        //serverProperties.put(FileSystem.SERVER_INIT_PORT,"19939");//服务端初始化的端口，传输server信息
+        serverProperties.put(FileSystem.SERVER_DECODE,"utf-8");//解码字符集
+        serverProperties.put(FileSystem.SERVER_ENCODE,"utf-8");//编码字符集
+        serverProperties.put(FileSystem.THIS_PORT,"19935");//本服务端的port
+        serverProperties.put(FileSystem.SMOD2_IP,Server.getSender().getServer().getSmod2Server().getAddress());
     }
 
     /**
