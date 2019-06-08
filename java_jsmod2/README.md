@@ -4,7 +4,7 @@ packetId-mainJson,name:json,name:json... ~ request
 头请求可有可无，特定数据包会标记
 为了描述这个对象的归属
 如a物品归属于b玩家
-0x95-{物品对象的json串},附加特殊字段的json和字段链名~b
+0x95-{物品对象的json串},附加特殊字段的json和字段链名 ~ b
 未来有时间会发一套完整的jsmod2协议库
 之后写一下处理尾请求的部分
 c#和java都写
