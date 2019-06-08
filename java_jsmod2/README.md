@@ -1,5 +1,6 @@
 # jsmod2.协议第三版，加入请求尾
-packetId-mainJson,name:json,name:json...~request
+
+packetId-mainJson,name:json,name:json... ~ request
 头请求可有可无，特定数据包会标记
 为了描述这个对象的归属
 如a物品归属于b玩家
