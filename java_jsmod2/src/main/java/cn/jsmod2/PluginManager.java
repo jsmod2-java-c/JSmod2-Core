@@ -10,7 +10,9 @@ package cn.jsmod2;
 
 
 import cn.jsmod2.annotations.NativeListener;
+import cn.jsmod2.api.player.Player;
 import cn.jsmod2.command.NativeCommand;
+import cn.jsmod2.command.PowerPool;
 import cn.jsmod2.event.Listener;
 import cn.jsmod2.event.packet.ServerPacketEvent;
 import cn.jsmod2.ex.EventException;
@@ -187,10 +189,13 @@ public class PluginManager {
         for(NativeCommand command:commands){
             if(command.getCommandName().equals(commandName)){
                 //指令发送者所拥有的权限是否包含指令允许的权限
-                if(sender.getPowers().contains(command.getPower())){
+                if(PowerPool.poolMapping().get(sender.getName()).contains(command.getPower())){
                     return command.execute(sender,args);
                 }else{
                     Utils.getMessageSender().error("do not have this power");
+                    if(sender instanceof Player){
+                        ((Player) sender).personalBroadcast(1,"do not have "+command.getPower(),true);
+                    }
                     return false;
                 }
             }

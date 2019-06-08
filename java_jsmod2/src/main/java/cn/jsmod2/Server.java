@@ -37,8 +37,7 @@ import static cn.jsmod2.FileSystem.getFileSystem;
 
 public class Server {
 
-    @PacketCMD
-    private static final int INIT_COMMAND = 0x00;
+    @PacketCMD private static final int INIT_COMMAND = 0x00;
 
     @PacketCMD private static final int CLOSE_COMMAND = 0x02;
 

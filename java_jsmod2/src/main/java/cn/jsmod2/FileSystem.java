@@ -10,7 +10,6 @@ package cn.jsmod2;
 
 import cn.jsmod2.log.ILogger;
 import cn.jsmod2.utils.Utils;
-import org.apache.commons.io.FileUtils;
 
 import java.io.*;
 import java.util.*;

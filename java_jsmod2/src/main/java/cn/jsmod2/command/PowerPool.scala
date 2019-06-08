@@ -15,6 +15,7 @@ import scala.collection.mutable
  */
 object PowerPool {
 
+  //名字-权限
   final var poolMapping = new mutable.HashMap[String,util.List[String]]()
 
   var ops = OpsFile.getOpsFile.getOps

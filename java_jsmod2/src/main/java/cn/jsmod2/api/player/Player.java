@@ -133,4 +133,8 @@ public class Player extends CommandSender implements IPlayer {
         //发包
     }
 
+    public void personalBroadcast(int duration, String message, boolean isMonoSpaced){
+
+    }
+
 }
