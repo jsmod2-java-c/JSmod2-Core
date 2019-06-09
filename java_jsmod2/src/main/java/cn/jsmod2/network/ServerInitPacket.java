@@ -8,7 +8,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.network;
 
-import cn.jsmod2.Smod2Server;
+import cn.jsmod2.api.server.Smod2Server;
 
 /**
  * 用于初始化服务端信息的数据包

@@ -9,6 +9,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2;
 
 import cn.jsmod2.annotations.PacketCMD;
+import cn.jsmod2.api.server.Smod2Server;
 import cn.jsmod2.event.packet.ServerPacketEvent;
 import cn.jsmod2.log.ILogger;
 import cn.jsmod2.network.ServerInitPacket;
@@ -351,6 +352,6 @@ public class Server {
         ServerInitPacket packet = new ServerInitPacket();
         ServerPacketEvent event = new ServerPacketEvent(packet);
         pluginManager.callEvent(event);
-        smod2Server = packet.decode(message.getBytes(serverProp.getProperty("encode")));
+        smod2Server.updateServer(packet.decode(message.getBytes(serverProp.getProperty("encode"))));
     }
 }

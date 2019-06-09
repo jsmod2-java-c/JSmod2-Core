@@ -8,6 +8,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2;
 
+import cn.jsmod2.api.server.Smod2Server;
 import cn.jsmod2.utils.Utils;
 import jline.console.completer.Completer;
 import cn.jsmod2.command.NativeCommand;

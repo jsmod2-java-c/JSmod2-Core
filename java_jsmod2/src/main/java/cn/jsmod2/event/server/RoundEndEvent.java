@@ -11,7 +11,7 @@ package cn.jsmod2.event.server;
 import cn.jsmod2.annotations.UseForServerInit;
 import cn.jsmod2.api.server.ROUND_END_STATUS;
 import cn.jsmod2.api.server.Round;
-import cn.jsmod2.Smod2Server;
+import cn.jsmod2.api.server.Smod2Server;
 
 
 public class RoundEndEvent extends ServerEvent {

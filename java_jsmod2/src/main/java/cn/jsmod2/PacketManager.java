@@ -10,6 +10,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 
 package cn.jsmod2;
 
+import cn.jsmod2.api.server.Smod2Server;
 import cn.jsmod2.ex.EventException;
 import cn.jsmod2.network.command.PlayerCommandPacket;
 import cn.jsmod2.network.command.ServerCommandPacket;

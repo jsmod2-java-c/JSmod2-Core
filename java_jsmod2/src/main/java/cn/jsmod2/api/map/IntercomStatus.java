@@ -8,5 +8,5 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.api.map;
 
-public enum Scp079IteractionType {
+public class IntercomStatus {
 }

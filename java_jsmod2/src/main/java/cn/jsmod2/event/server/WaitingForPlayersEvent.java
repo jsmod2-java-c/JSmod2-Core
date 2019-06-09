@@ -8,7 +8,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.event.server;
 
-import cn.jsmod2.Smod2Server;
+import cn.jsmod2.api.server.Smod2Server;
 
 public class WaitingForPlayersEvent extends ServerEvent{
 
