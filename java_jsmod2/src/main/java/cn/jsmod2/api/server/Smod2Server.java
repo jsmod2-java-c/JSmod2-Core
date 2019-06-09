@@ -40,6 +40,7 @@ public class Smod2Server extends CommandSender {
 
 
     public Smod2Server updateServer(Smod2Server server){
+        Server.getSender().getServer().getLock().lock();
         this.ipAddress = server.ipAddress;
         this.map = server.map;
         this.maxPlayers = server.maxPlayers;
@@ -47,6 +48,7 @@ public class Smod2Server extends CommandSender {
         this.name = server.name;
         this.round = server.round;
         this.port = server.port;
+        Server.getSender().getServer().getLock().unlock();
         return this;
     }
 

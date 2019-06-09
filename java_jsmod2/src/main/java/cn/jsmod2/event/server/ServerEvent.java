@@ -8,29 +8,28 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.event.server;
 
+import cn.jsmod2.Server;
 import cn.jsmod2.annotations.UseForServerInit;
 import cn.jsmod2.api.server.Smod2Server;
 import cn.jsmod2.event.Event;
 
 public abstract class ServerEvent extends Event {
 
-    private Smod2Server server;
 
-    public ServerEvent(Smod2Server server){
-        this.server = server;
+    public ServerEvent(Smod2Server server) {
+        Server.getSender().getServer().getSmod2Server().updateServer(server);
     }
-
     public ServerEvent(){
 
     }
 
     public Smod2Server getServer() {
-        return server;
+        return Server.getSender().getServer().getSmod2Server();
     }
 
     /** java-bean */
     @UseForServerInit
     public void setServer(Smod2Server server) {
-        this.server = server;
+        Server.getSender().getServer().getSmod2Server().updateServer(server);
     }
 }

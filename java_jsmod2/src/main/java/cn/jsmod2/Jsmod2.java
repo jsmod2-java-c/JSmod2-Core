@@ -53,10 +53,6 @@ public class Jsmod2 {
         }
     }
 
-
-
-
-
     public static void startMessage(Properties langProperties){
         //plugin dir
         for(String info:Register.getInstance().getStartInfo()){

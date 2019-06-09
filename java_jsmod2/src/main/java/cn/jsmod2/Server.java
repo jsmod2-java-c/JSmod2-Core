@@ -25,6 +25,8 @@ import java.net.*;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import static cn.jsmod2.FileSystem.PLUGIN_DIR;
 import static cn.jsmod2.FileSystem.getFileSystem;
@@ -87,8 +89,12 @@ public class Server {
 
     private OpsFile opsFile;
 
+    private Lock lock;
+
     Server(ILogger log, Properties lang) {
         Register.getInstance().registerPacket();
+
+        this.lock = new ReentrantLock();
 
         this.log = log;
 
@@ -133,7 +139,9 @@ public class Server {
     }
 
 
-
+    public Lock getLock() {
+        return lock;
+    }
 
     //TODO address和port通过数据包获取
     public void sendPacket(final DataPacket packet){
