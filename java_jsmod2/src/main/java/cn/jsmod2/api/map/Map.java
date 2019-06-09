@@ -8,5 +8,28 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.api.map;
 
+import cn.jsmod2.annotations.FieldInsert;
+import cn.jsmod2.api.item.Item;
+import cn.jsmod2.api.item.ItemType;
+import cn.jsmod2.api.team.Role;
+
+import java.util.List;
+
 public class Map {
+
+    //全部物品
+    @FieldInsert
+    private List<Item> allItems;
+
+    //对于条件获得物品，将全部物品穷举出来，之后进行逻辑判断
+    //C#端完成
+    public List<Item> getItems(ItemType type,boolean world_only){
+        return null;
+    }
+
+
+
+
+
+
 }

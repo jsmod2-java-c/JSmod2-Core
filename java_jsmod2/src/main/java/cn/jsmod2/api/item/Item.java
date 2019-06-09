@@ -8,21 +8,29 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.api.item;
 
+import cn.jsmod2.annotations.FieldInsert;
 import cn.jsmod2.math.Vector;
 
 import java.io.Serializable;
 
 public class Item implements Cloneable, Serializable {
 
+    //在字段注入使用
+    @FieldInsert
+    private String playerName;
+
+    @FieldInsert
+    private Object component;
+
+    @FieldInsert
+    private Vector position;
+
+    @FieldInsert
+    private boolean kinematic;
+
     private boolean inWord;
 
     private ItemType itemType;
-
-    private Object component;
-
-    private Vector position;
-
-    private boolean kinematic;
 
     public boolean isInWord() {
         return inWord;
@@ -58,4 +66,11 @@ public class Item implements Cloneable, Serializable {
     public void setKinematic(boolean kinematic) {
         this.kinematic = kinematic;
     }
+
+    public void setInWord(boolean inWord) {
+        this.inWord = inWord;
+    }
+
+
+
 }

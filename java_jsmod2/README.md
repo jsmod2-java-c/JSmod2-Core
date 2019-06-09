@@ -64,3 +64,6 @@ public byte[] itemNameSet(String name,String playerName)
 
 # 对于权限的修改
 一般当基于玩家管理员权限，发出请求，将会在请求池里进行修改
+
+# 对于既有返回值又有参数的
+首先C#通过全部情况获取所有的对象，然后java端进行相应逻辑处理，来获取

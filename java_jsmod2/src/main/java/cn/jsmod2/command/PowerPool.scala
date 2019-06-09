@@ -32,7 +32,7 @@ object PowerPool {
     * 把全部op信息加载进去
     */
   for(i <- 0 until ops.size()){
-    val powers = poolMapping.get(ops(i))
+    val powers = poolMapping.get(ops.get(i))
     if(powers != null){
       powers.get.add("admin")
     }

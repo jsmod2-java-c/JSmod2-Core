@@ -3,5 +3,5 @@
  * 用于修改权限，具体参见
  * java_jsmod2/README.md
  */
-package cn.jsmod2.protocol;
+package cn.jsmod2.network.protocol;
 
