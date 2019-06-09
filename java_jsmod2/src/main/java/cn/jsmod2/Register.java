@@ -104,7 +104,7 @@ public class Register {
         serverProperties.put(FileSystem.SERVER_DECODE,"utf-8");//解码字符集
         serverProperties.put(FileSystem.SERVER_ENCODE,"utf-8");//编码字符集
         serverProperties.put(FileSystem.THIS_PORT,"19935");//本服务端的port
-        serverProperties.put(FileSystem.SMOD2_IP,Server.getSender().getServer().getSmod2Server().getAddress());
+        serverProperties.put(FileSystem.SMOD2_IP,Server.getSender().getServer().getSmod2Server().getIpAddress());
     }
 
     /**
