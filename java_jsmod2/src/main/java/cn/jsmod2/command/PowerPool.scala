@@ -18,7 +18,7 @@ object PowerPool {
   //名字-权限
   final var poolMapping = new mutable.HashMap[String,util.List[String]]()
 
-  var ops = OpsFile.getOpsFile.getOps
+  var ops = OpsFile.getInstance().getOps
 
   var players = Server.getSender.getServer.getSmod2Server.getPlayers
 
@@ -39,11 +39,11 @@ object PowerPool {
   }
 
   def addAdmin(name:String): Unit ={
-    OpsFile.getOpsFile.addOp(name)
+    OpsFile.getInstance.addOp(name)
   }
 
   def removeAdmin(name:String): Unit={
-    OpsFile.getOpsFile.removeOp(name)
+    OpsFile.getInstance.removeOp(name)
   }
 
   def addAdminMemory(name:String): Unit ={

@@ -18,8 +18,8 @@ public class OpsFile {
 
     private File file;
 
-    public OpsFile() throws IOException{
-        this.file = new File(Server.getSender().getServer().serverfolder+ OPS_FILE);
+    public OpsFile(Server server) throws IOException{
+        this.file = new File(server.getServer().serverfolder+ OPS_FILE);
         if(!file.exists()) file.createNewFile();
     }
 
@@ -41,13 +41,17 @@ public class OpsFile {
        return FileUtils.readLines(new File(Server.getSender().getServer().serverfolder+OPS_FILE),System.getProperty("file.encoding"));
     }
 
-    public static OpsFile getOpsFile() {
+    public static OpsFile getOpsFile(Server server) {
         try{
             if(opsFile==null)
-                opsFile = new OpsFile();
+                opsFile = new OpsFile(server);
         }catch (IOException e){
             e.printStackTrace();
         }
+        return opsFile;
+    }
+
+    public static OpsFile getInstance(){
         return opsFile;
     }
 }

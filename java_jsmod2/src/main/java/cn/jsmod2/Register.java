@@ -69,6 +69,7 @@ public class Register {
         nativeCommandMap.put("help",new HelpCommand());
         nativeCommandMap.put("plugins",new PluginsCommand());
         nativeCommandMap.put("reload",new ReloadCommand());
+        nativeCommandMap.put("tab",new TabCommand());
     }
 
     public void registerStartInfo(){
@@ -104,7 +105,7 @@ public class Register {
         serverProperties.put(FileSystem.SERVER_DECODE,"utf-8");//解码字符集
         serverProperties.put(FileSystem.SERVER_ENCODE,"utf-8");//编码字符集
         serverProperties.put(FileSystem.THIS_PORT,"19935");//本服务端的port
-        serverProperties.put(FileSystem.SMOD2_IP,Server.getSender().getServer().getSmod2Server().getIpAddress());
+        serverProperties.put(FileSystem.SMOD2_IP,"127.0.0.1");
     }
 
     /**

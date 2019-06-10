@@ -38,7 +38,7 @@ import static cn.jsmod2.FileSystem.getFileSystem;
  *
  */
 
-public class Server {
+public class Server implements Closeable,Reloadable{
 
     @PacketCMD private static final int INIT_COMMAND = 0x00;
 
@@ -65,7 +65,6 @@ public class Server {
     /**用于将服务器对象传递给插件对象*/
     private Server server;
 
-    private static CommandConsoleSender sender;
 
     private Map<String,String> commandInfo;
 
@@ -83,7 +82,7 @@ public class Server {
 
     private Smod2Server smod2Server;
 
-    private ConsoleReader lineReader;
+    private static ConsoleReader lineReader;
 
     private Scheduler scheduler;
 
@@ -91,8 +90,9 @@ public class Server {
 
     private Lock lock;
 
+    private static CommandConsoleSender sender;
+
     Server(ILogger log, Properties lang) {
-        Register.getInstance().registerPacket();
 
         this.lock = new ReentrantLock();
 
@@ -101,6 +101,11 @@ public class Server {
         this.lang = lang;
 
         this.server = this;
+
+        this.sender = new CommandConsoleSender(server);
+
+
+        Register.getInstance().registerPacket();
 
         this.scheduler = new Scheduler();
 
@@ -111,8 +116,6 @@ public class Server {
 
         this.serverProp = getFileSystem().serverProperties(server);
 
-        sender = new CommandConsoleSender(server);
-
         this.pluginManager = new PluginManager(server);
 
         this.commandInfo = new HashMap<>();
@@ -121,7 +124,7 @@ public class Server {
 
         this.registerNativeInfo();
 
-        this.opsFile = OpsFile.getOpsFile();
+        this.opsFile = OpsFile.getOpsFile(server);
 
         /**
          * 加载插件
@@ -257,12 +260,15 @@ public class Server {
         }
     }
 
-    @Deprecated
-    public static Scanner getScanner(){
+
+    static Scanner getScanner(){
         return scanner;
     }
     //new line reader
-    public ConsoleReader getLineReader() {
+    static ConsoleReader getLineReader() throws IOException{
+        if(lineReader == null) {
+            lineReader = new ConsoleReader();
+        }
         return lineReader;
     }
 
@@ -296,7 +302,6 @@ public class Server {
         @Override
         public void run() {
             Utils.TryCatch(()->{
-                log.info("Listener-Thread:EXECUTOR_SERVICE->start");
                 //注意，一个jsmod2目前只支持一个smod2连接，不支持多个连接
                 //在未来版本可能会加入支持多个smod2连接一个服务器
                 socket = getSocket(Integer.parseInt(serverProp.getProperty(FileSystem.THIS_PORT)));

@@ -124,13 +124,7 @@ public class Utils {
      * @return
      */
     public static Integer getResponsePacketId(String str){
-        try{
-            byte[] decodes = Base64.getDecoder().decode(str);
-            Properties properties = FileSystem.getFileSystem().serverProperties(Server.getSender().getServer());
-            str = new String(decodes,properties.getProperty(FileSystem.SERVER_DECODE));
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        str = toGetString(str);
         return Integer.parseInt(str.substring(0,str.indexOf("-")));
     }
 
@@ -140,6 +134,12 @@ public class Utils {
      * @return
      */
     public static String getEndRequest(String str){
+        str = toGetString(str);
+        if(str.contains("~")) return str.substring(str.indexOf("~")+1);
+        return str;
+    }
+
+    private static String toGetString(String str){
         try{
             byte[] decodes = Base64.getDecoder().decode(str);
             Properties properties = FileSystem.getFileSystem().serverProperties(Server.getSender().getServer());
@@ -147,7 +147,6 @@ public class Utils {
         }catch (Exception e){
             e.printStackTrace();
         }
-        if(str.contains("~")) return str.substring(str.indexOf("~")+1);
         return str;
     }
 }

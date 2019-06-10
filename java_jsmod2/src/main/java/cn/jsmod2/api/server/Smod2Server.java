@@ -14,6 +14,7 @@ package cn.jsmod2.api.server;
 
 import cn.jsmod2.CommandSender;
 import cn.jsmod2.Server;
+import cn.jsmod2.annotations.FieldInsert;
 import cn.jsmod2.annotations.UseForServerInit;
 import cn.jsmod2.api.map.Map;
 import cn.jsmod2.api.player.Player;
@@ -29,6 +30,9 @@ public class Smod2Server extends CommandSender {
     private cn.jsmod2.api.map.Map map;
     private int numPlayers;
     private int maxPlayers;
+
+    @FieldInsert
+    private List<Player> players;
 
     public Smod2Server() {
         super("CONSOLE","all","console","admin","player","nobody");
@@ -109,4 +113,14 @@ public class Smod2Server extends CommandSender {
     public void setMaxPlayers(int maxPlayers) {
         this.maxPlayers = maxPlayers;
     }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    @Override
+    public List<String> getPowers() {
+        return super.getPowers();
+    }
+
 }
