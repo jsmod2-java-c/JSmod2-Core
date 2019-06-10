@@ -8,6 +8,8 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2;
 
+import cn.jsmod2.annotations.UseForServerInit;
+
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -38,11 +40,13 @@ public abstract class CommandSender {
     }
 
     /** java bean */
+    @UseForServerInit
     public void setPowers(List<String> powers) {
         this.powers = powers;
     }
 
     /** java bean */
+    @UseForServerInit
     public void setName(String name) {
         this.name = name;
     }
