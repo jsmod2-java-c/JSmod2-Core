@@ -15,10 +15,12 @@ import cn.jsmod2.log.ILogger;
 import cn.jsmod2.network.ServerInitPacket;
 import cn.jsmod2.plugin.PluginClassLoader;
 import cn.jsmod2.command.NativeCommand;
+import cn.jsmod2.utils.LogFormat;
 import cn.jsmod2.utils.Utils;
 import jline.console.ConsoleReader;
 import cn.jsmod2.network.DataPacket;
 import cn.jsmod2.schedule.Scheduler;
+import org.fusesource.jansi.Ansi;
 
 import java.io.*;
 import java.net.*;
@@ -194,7 +196,7 @@ public class Server implements Closeable,Reloadable{
     }
 
     public void help(){
-        log.info("+================HELP========================+");
+        log.info(LogFormat.textFormat("+================HELP========================+", Ansi.Color.GREEN).toString());
         Set<Map.Entry<String,String>> cmdSet = commandInfo.entrySet();
         for(Map.Entry<String,String> entry:cmdSet){
             String key = entry.getKey();
@@ -204,7 +206,7 @@ public class Server implements Closeable,Reloadable{
                 value = builder.substring(PROP.length());
                 value = lang.getProperty(value);
             }
-            log.info(key+": "+value);
+            log.info(LogFormat.textFormat(key+": "+value, Ansi.Color.GREEN).toString());
         }
     }
 

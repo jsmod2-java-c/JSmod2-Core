@@ -29,4 +29,8 @@ public class LogFormat {
     public static Ansi format(String message, String type, Ansi.Color color){
         return ansi().eraseScreen().fg(MAGENTA).a(format.format(new Date())).fg(DEFAULT).a("[").fg(color).a(type).fg(DEFAULT).a("\t]").fg(BLUE).a(" "+message).reset();
     }
+
+    public static Ansi textFormat(String message, Ansi.Color color){
+        return ansi().eraseScreen().fg(color).a(message).reset();
+    }
 }
