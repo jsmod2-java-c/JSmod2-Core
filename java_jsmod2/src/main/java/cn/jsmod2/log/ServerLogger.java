@@ -34,8 +34,13 @@ import static org.fusesource.jansi.Ansi.Color.*;
  */
 
 
-public class ServerLogger extends ErrorLogger implements ILogger{
+public class ServerLogger implements ILogger{
 
+    private static ServerLogger logger;
+
+    static {
+        logger = new ServerLogger();
+    }
 
     public void log(LogType logType, String message) {
         Integer level = logType.getLevel();
@@ -64,6 +69,11 @@ public class ServerLogger extends ErrorLogger implements ILogger{
         }
     }
 
+    @Override
+    public void error(String message) {
+        logger.error(LogFormat.format(message,"ERROR",RED)+"\n");
+    }
+
     public void debug(String message) {
         logger.debug(LogFormat.format(message,"DEBUG",GREEN)+"\n");
     }
@@ -74,5 +84,9 @@ public class ServerLogger extends ErrorLogger implements ILogger{
 
     public void warn(String message) {
         logger.warn(LogFormat.format(message,"WARN",RED)+"\n");
+    }
+
+    public static ServerLogger getLogger() {
+        return logger;
     }
 }

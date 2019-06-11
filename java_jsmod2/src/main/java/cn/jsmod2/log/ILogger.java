@@ -33,6 +33,4 @@ public interface ILogger extends IErrorLogger{
 
     void warn(String message);
 
-
-
 }

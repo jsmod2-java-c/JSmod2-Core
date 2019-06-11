@@ -12,6 +12,7 @@ import cn.jsmod2.annotations.PacketCMD;
 import cn.jsmod2.api.server.Smod2Server;
 import cn.jsmod2.event.packet.ServerPacketEvent;
 import cn.jsmod2.log.ILogger;
+import cn.jsmod2.log.ServerLogger;
 import cn.jsmod2.network.ServerInitPacket;
 import cn.jsmod2.plugin.Plugin;
 import cn.jsmod2.plugin.PluginClassLoader;
@@ -102,7 +103,7 @@ public class Server implements Closeable,Reloadable{
 
         this.lock = new ReentrantLock();
 
-        this.log = log;
+        this.log = ServerLogger.getLogger();
 
         this.lang = lang;
 

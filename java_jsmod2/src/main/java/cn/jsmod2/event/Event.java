@@ -8,11 +8,13 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.event;
 
+import java.io.Serializable;
+
 /**
  * @author magiclu550
  */
 
-public abstract class Event {
+public abstract class Event implements Serializable,Cloneable {
 
     private String eventName;
 

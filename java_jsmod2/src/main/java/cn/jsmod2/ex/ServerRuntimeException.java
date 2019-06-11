@@ -1,13 +1,13 @@
 package cn.jsmod2.ex;
 
-import cn.jsmod2.log.ErrorLogger;
 import cn.jsmod2.log.IErrorLogger;
+import cn.jsmod2.log.ServerLogger;
 
 public abstract class ServerRuntimeException extends RuntimeException {
 
     private String method;
 
-    private IErrorLogger eLogger = new ErrorLogger();
+    private IErrorLogger eLogger = ServerLogger.getLogger();
 
     public ServerRuntimeException() {
     }
