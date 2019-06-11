@@ -1,0 +1,29 @@
+#未来将开发jsmod2脚本
+define {
+    plugin&[
+        "name":""
+        "description":""
+        "author":{name1,name2}
+        "version":""
+    ]
+    def func={
+        
+    }
+}
+start{
+    load:
+    enable:
+}
+event{
+    case: PlayerJoinEvent e{
+        e.player.send(hello,world)
+        $a = 0;
+        plugin.server.log.error($a)
+        execute help
+
+    }
+
+}
+end{
+
+}
