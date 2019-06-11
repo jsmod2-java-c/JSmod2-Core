@@ -1,6 +1,6 @@
 # jsmod2.协议第三版，加入请求尾
 
-packetId-mainJson,name:json,name:json... ~ request
+*packetId-mainJson,name:json,name:json... ~ request
 头请求可有可无，特定数据包会标记
 为了描述这个对象的归属
 如a物品归属于b玩家
@@ -16,10 +16,9 @@ c#发到java的整请求，把整个对象发过来，一般没有尾请求
 {
 未来对指令进行更多的细化，如权限池
 指令发来时，判断CommandSender，获取名，通过权限池映射到权限，然后和指令的权限比较，权限不足则返回需要xx权限，权限可以则执行
-
 而commandSender定义的是默认权限
 给予管理员后，会保存在ops.txt,重新启动服务器时，读取到权限池，在取消管理员时，先删除掉ops文件的名字，再在权限池内存删掉权限
-}
+}*
 java发到c#的修改请求，把修改值发过来，一般有尾请求
 实体类修改发出的请求
 c#
@@ -67,3 +66,6 @@ public byte[] itemNameSet(String name,String playerName)
 
 # 对于既有返回值又有参数的
 首先C#通过全部情况获取所有的对象，然后java端进行相应逻辑处理，来获取
+
+# 对于实体定义
+目前正在定义
