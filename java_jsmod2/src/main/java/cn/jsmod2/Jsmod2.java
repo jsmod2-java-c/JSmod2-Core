@@ -39,6 +39,7 @@ public class Jsmod2 {
         try{
             //lang properties
             Properties langProperties = FileSystem.getFileSystem().langProperties(log);
+            FileSystem.getFileSystem().initLang(langProperties);
             long start = System.currentTimeMillis();
             startMessage(langProperties);
             new Server(log,langProperties);

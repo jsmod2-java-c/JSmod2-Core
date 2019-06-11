@@ -23,7 +23,7 @@ import cn.jsmod2.utils.LogType;
  * jsmod2 @noyark-sys
  */
 
-public interface ILogger {
+public interface ILogger extends IErrorLogger{
 
     void log(LogType logType, String message);
 
@@ -33,7 +33,6 @@ public interface ILogger {
 
     void warn(String message);
 
-    void error(String message);
 
 
 }

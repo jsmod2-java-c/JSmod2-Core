@@ -10,6 +10,7 @@ package cn.jsmod2;
 
 import cn.jsmod2.log.ILogger;
 import cn.jsmod2.utils.Utils;
+import scala.sys.Prop;
 
 import java.io.*;
 import java.util.*;
@@ -49,6 +50,7 @@ public class FileSystem {
 
     private List<PrintWriter> writers = new ArrayList<>();
 
+    private Properties lang;
 
     private static FileSystem system;
 
@@ -107,8 +109,15 @@ public class FileSystem {
         return file;
     }
 
+    public String getLangProperties(String key){
+        return lang.getProperty(key);
+    }
 
-    public Properties langProperties(ILogger log) throws IOException {
+    void initLang(Properties lang){
+        this.lang = lang;
+    }
+
+    Properties langProperties(ILogger log) throws IOException {
         File file = new File("../init.lang");
 
         Properties properties = new Properties();

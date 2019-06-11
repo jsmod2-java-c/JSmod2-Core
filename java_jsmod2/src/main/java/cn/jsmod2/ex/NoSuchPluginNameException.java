@@ -8,7 +8,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.ex;
 
-public class NoSuchPluginNameException extends RuntimeException{
+public class NoSuchPluginNameException extends ServerRuntimeException{
 
     public NoSuchPluginNameException(String name) {
         super("no such plugin named "+name);

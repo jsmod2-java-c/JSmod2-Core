@@ -34,10 +34,7 @@ import static org.fusesource.jansi.Ansi.Color.*;
  */
 
 
-public class ServerLogger implements ILogger {
-
-
-    private static Logger logger = Logger.getLogger(ServerLogger.class);
+public class ServerLogger extends ErrorLogger implements ILogger{
 
 
     public void log(LogType logType, String message) {
@@ -77,9 +74,5 @@ public class ServerLogger implements ILogger {
 
     public void warn(String message) {
         logger.warn(LogFormat.format(message,"WARN",RED)+"\n");
-    }
-
-    public void error(String message) {
-        logger.error(LogFormat.format(message,"ERROR",RED)+"\n");
     }
 }
