@@ -94,7 +94,7 @@ public class Server implements Closeable,Reloadable{
 
     private Lock lock;
 
-    private static CommandConsoleSender sender;
+    private static RuntimeServer sender;
 
     Server(ILogger log, Properties lang) {
 
@@ -106,8 +106,7 @@ public class Server implements Closeable,Reloadable{
 
         this.server = this;
 
-        this.sender = new CommandConsoleSender(server);
-
+        sender = new RuntimeServer(server);
 
         Register.getInstance().registerPacket();
 
@@ -189,7 +188,7 @@ public class Server implements Closeable,Reloadable{
     public File getServerFolder(){
         return serverfolder;
     }
-    public static CommandConsoleSender getSender(){
+    public static RuntimeServer getSender(){
         return sender;
     }
 

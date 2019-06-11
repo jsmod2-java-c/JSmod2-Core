@@ -8,15 +8,15 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2;
 
-public class CommandConsoleSender {
+public class RuntimeServer {
 
-    private Server commandConsoleServer;
+    private Server runtime;
 
-    public CommandConsoleSender(Server server){
-        this.commandConsoleServer = server;
+    public RuntimeServer(Server runtime){
+        this.runtime = runtime;
     }
 
     public Server getServer(){
-        return commandConsoleServer;
+        return runtime;
     }
 }
