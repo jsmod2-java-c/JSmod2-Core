@@ -8,6 +8,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.network.command;
 
+import cn.jsmod2.Server;
 import cn.jsmod2.api.server.Smod2Server;
 
 public class ServerVO extends CommandVO{
@@ -16,13 +17,11 @@ public class ServerVO extends CommandVO{
         super();
     }
 
-    private Smod2Server server;
-
     public Smod2Server getServer() {
-        return server;
+        return Server.getSender().getServer().getSmod2Server();
     }
 
     public void setServer(Smod2Server server) {
-        this.server = server;
+        Server.getSender().getServer().getSmod2Server().updateServer(server);
     }
 }

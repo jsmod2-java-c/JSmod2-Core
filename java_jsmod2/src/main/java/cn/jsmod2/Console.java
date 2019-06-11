@@ -45,46 +45,7 @@ public class Console extends Smod2Server {
             Utils.getMessageSender().info("\n>");
             String command = Server.getScanner().nextLine();
             //String command = reader.readLine(">");
-            String[] strs = command.split(" ");
-            String[] args = new String[strs.length-1];
-            System.arraycopy(strs,1,args,0,args.length);
-            List<NativeCommand> commands =
-                    Server
-                            .getSender()
-                            .getServer()
-                            .getPluginManager()
-                            .getCommands();
-            boolean find = false;
-            /**
-             * 级别
-             * all 所有人
-             * console 控制台
-             * admin 管理员
-             * player 玩家
-             * nobody 任何人不可以
-             * noconsole 控制台不可以
-             *
-             * 权限类型
-             * 控制台可以操作的指令有以下权限
-             * ！noconsole
-             * 允许普通玩家使用的指令权限
-             * player all
-             */
-            for(NativeCommand cmd:commands){
-                if(strs[0].equals(cmd.getCommandName())){
-                    //如果含有这个权限
-                    if(getPowers().contains(cmd.getPower())){
-                        cmd.execute(this,args);
-                    }else{
-                        Utils.getMessageSender().error("you do not have this power");
-                    }
-                    find = true;
-                }
-            }
-            if(!find){
-                Utils.getMessageSender().error("Unkown command,please input 'help'");
-            }
-
+            runConsoleCommand(command);
         }
     }
 
@@ -117,6 +78,48 @@ public class Console extends Smod2Server {
                             .collect(Collectors.toList());
             list.addAll(entries);
             return i-s.length();
+        }
+    }
+
+    public void runConsoleCommand(String command){
+        String[] strs = command.split(" ");
+        String[] args = new String[strs.length-1];
+        System.arraycopy(strs,1,args,0,args.length);
+        List<NativeCommand> commands =
+                Server
+                        .getSender()
+                        .getServer()
+                        .getPluginManager()
+                        .getCommands();
+        boolean find = false;
+        /**
+         * 级别
+         * all 所有人
+         * console 控制台
+         * admin 管理员
+         * player 玩家
+         * nobody 任何人不可以
+         * noconsole 控制台不可以
+         *
+         * 权限类型
+         * 控制台可以操作的指令有以下权限
+         * ！noconsole
+         * 允许普通玩家使用的指令权限
+         * player all
+         */
+        for(NativeCommand cmd:commands){
+            if(strs[0].equals(cmd.getCommandName())){
+                //如果含有这个权限
+                if(getPowers().contains(cmd.getPower())){
+                    cmd.execute(this,args);
+                }else{
+                    Utils.getMessageSender().error("you do not have this power");
+                }
+                find = true;
+            }
+        }
+        if(!find){
+            Utils.getMessageSender().error("Unkown command,please input 'help'");
         }
     }
 }

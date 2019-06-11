@@ -48,6 +48,8 @@ public class Server implements Closeable,Reloadable{
 
     @PacketCMD private static final int CLOSE_COMMAND = 0x02;
 
+    //@PacketCMD private static final int EXECUTE_COMMAND = 0xff;
+
     private static final int MAX_LENGTH = 0xffff;
 
     private static final String STOP = "end";
@@ -318,6 +320,8 @@ public class Server implements Closeable,Reloadable{
                     socket.receive(request);
 
                     String message = new String(request.getData(), 0 , request.getLength());
+
+
 
                     //TODO 在这里根据编号分包
                     int id = Utils.getResponsePacketId(message);
