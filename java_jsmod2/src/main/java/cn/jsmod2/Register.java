@@ -41,6 +41,7 @@ import static cn.jsmod2.Jsmod2.START;
 public class Register {
     //注册
     static {
+        register = new Register();
         getInstance().registerEvents();
         getInstance().registerException();
         getInstance().registerLang();
@@ -285,7 +286,4 @@ public class Register {
         this.getPackets = getPackets;
     }
 
-    static {
-        register = new Register();
-    }
 }
