@@ -1,5 +1,6 @@
 package cn.jsmod2.ex;
 
+import cn.jsmod2.Register;
 import cn.jsmod2.log.IErrorLogger;
 import cn.jsmod2.log.ServerLogger;
 
@@ -37,8 +38,9 @@ public abstract class ServerRuntimeException extends RuntimeException {
     }
 
     private void printServerError(){
+        initMethodToFixed(Register.getInstance().getEx_methods().get(this.getClass()));
         eLogger.error("Server-Runtime-Exception:"+Thread.currentThread().getName()+":From Server-"+this.getClass());
-        eLogger.error("Parent-Exception"+this.getClass());
+        eLogger.error("Parent-Exception"+this.getClass().getSuperclass());
         eLogger.error("How to fix this exception?"+(method==null?this.getMessage():method));
     }
 

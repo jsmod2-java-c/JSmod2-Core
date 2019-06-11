@@ -111,8 +111,6 @@ public class Server implements Closeable,Reloadable{
 
         sender = new RuntimeServer(server);
 
-        Register.getInstance().registerPacket();
-
         this.scheduler = new Scheduler();
 
         this.serverfolder = new File(System.getProperty("user.dir")).getParentFile();
@@ -125,8 +123,6 @@ public class Server implements Closeable,Reloadable{
         this.pluginManager = new PluginManager(server);
 
         this.commandInfo = new HashMap<>();
-
-        Register.getInstance().registerNativeCommand();
 
         this.registerNativeInfo();
 

@@ -24,10 +24,6 @@ public class Jsmod2 {
     public static final String START = "start";
 
 
-    static {
-        Register.getInstance().registerStartInfo();
-        Register.getInstance().registerSuccessInfo();
-    }
 
     private static ILogger log = new ServerLogger();
 

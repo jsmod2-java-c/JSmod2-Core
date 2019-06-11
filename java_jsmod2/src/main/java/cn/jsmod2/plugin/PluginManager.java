@@ -52,9 +52,6 @@ public class PluginManager {
         this.server = server;
     }
 
-
-
-
     public PluginClassLoader getPluginClassLoader(){
         return PluginClassLoader.getClassLoader();
     }

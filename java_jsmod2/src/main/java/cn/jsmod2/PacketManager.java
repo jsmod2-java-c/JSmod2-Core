@@ -29,7 +29,6 @@ public class PacketManager {
 
     static {
         manager = new PacketManager();
-        Register.getInstance().registerEvents();
     }
 
 

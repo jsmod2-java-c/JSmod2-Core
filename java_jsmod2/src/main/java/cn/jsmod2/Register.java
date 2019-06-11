@@ -18,6 +18,7 @@ import cn.jsmod2.event.player.*;
 import cn.jsmod2.event.server.*;
 import cn.jsmod2.event.team.DecideRespawnQueueEvent;
 import cn.jsmod2.event.team.SetSCPConfigEvent;
+import cn.jsmod2.ex.*;
 import cn.jsmod2.network.ServerInitPacket;
 import cn.jsmod2.network.DataPacket;
 import cn.jsmod2.event.Event;
@@ -38,6 +39,17 @@ import static cn.jsmod2.Jsmod2.START;
  */
 
 public class Register {
+    //注册
+    static {
+        getInstance().registerEvents();
+        getInstance().registerException();
+        getInstance().registerLang();
+        getInstance().registerNativeCommand();
+        getInstance().registerPacket();
+        getInstance().registerServerProperties();
+        getInstance().registerStartInfo();
+        getInstance().registerSuccessInfo();
+    }
 
     public static final int MAX_EVENT_ID = 0x52;
 
@@ -106,6 +118,16 @@ public class Register {
         serverProperties.put(FileSystem.SERVER_ENCODE,"utf-8");//编码字符集
         serverProperties.put(FileSystem.THIS_PORT,"19935");//本服务端的port
         serverProperties.put(FileSystem.SMOD2_IP,"127.0.0.1");
+    }
+
+    public void registerException(){
+        ex_methods.put (TypeErrorException.class,"* your configuration file type may have some problems, please see your configuration file type*\n\t refer to cn.jsmod2.utils.config.ConfigQueryer class\n\t or cn.jsmod2.configs.ConfigType class");
+        ex_methods.put (ProtocolException.class,"* when transferring protocol, you did not transfer data in accordance with an accurate or correct jsmod2 * \n \t reference grammar ID - {main json}, field chain: {mapping JSON value} ~ tail request (optional, to mark subsidiary information, or ownership information");
+        ex_methods.put (PluginException.class, "*There is a serious problem in initializing plug-in objects. Please check that the main class of your configuration file is filled in correctly*");
+        ex_methods.put (NoSuchPluginNameException. class, "* when using the PluginManager. getPlugin method, there is no plug-in name caused by *");
+        ex_methods.put (NoSuchPlayerException. class, "* can't find this object *when the PowerPool class of administrative permissions has problems, deletes or adds permissions");
+        ex_methods.put (MainClassErrorException. class, "* main class name error, if there is no such class *");
+        ex_methods.put (EventException. class, "* caused by a problem with the name of the event method parameter, or there is no event *");
     }
 
     /**
@@ -211,6 +233,10 @@ public class Register {
     }
 
 
+    public Map<Class<? extends Exception>, String> getEx_methods() {
+        return ex_methods;
+    }
+
     public List<String> getSuccessInfo() {
         return successInfo;
     }
@@ -248,6 +274,8 @@ public class Register {
     private Map<Integer, Class<? extends Event>> events = new HashMap<>();
 
     private Map<Integer,Class<? extends DataPacket>> getPackets = new HashMap<>();
+
+    private Map<Class<? extends Exception>,String> ex_methods = new HashMap<>();
 
     public Map<Integer, Class<? extends DataPacket>> getGetPackets() {
         return getPackets;

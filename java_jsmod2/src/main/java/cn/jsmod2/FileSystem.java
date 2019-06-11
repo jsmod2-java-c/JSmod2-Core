@@ -58,11 +58,6 @@ public class FileSystem {
         system = new FileSystem();
     }
 
-    static {
-        Register.getInstance().registerLang();
-        Register.getInstance().registerServerProperties();
-    }
-
     private FileSystem(){
 
     }
