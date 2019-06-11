@@ -6,9 +6,12 @@ the GNU open source license before using the software. To understand
 the appropriateness, if infringement, will be handled in accordance
 with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">that<a>
  */
-package cn.jsmod2;
+package cn.jsmod2.plugin;
 
 
+import cn.jsmod2.CommandSender;
+import cn.jsmod2.Console;
+import cn.jsmod2.Server;
 import cn.jsmod2.annotations.NativeListener;
 import cn.jsmod2.api.player.Player;
 import cn.jsmod2.command.NativeCommand;
@@ -18,6 +21,7 @@ import cn.jsmod2.event.packet.ServerPacketEvent;
 import cn.jsmod2.ex.EventException;
 import cn.jsmod2.ex.NoSuchPluginNameException;
 import cn.jsmod2.ex.PluginException;
+import cn.jsmod2.plugin.Plugin;
 import cn.jsmod2.plugin.PluginClassLoader;
 import cn.jsmod2.utils.MethodInvokeMapper;
 import cn.jsmod2.utils.Utils;
@@ -185,7 +189,7 @@ public class PluginManager {
         return pluginCommands;
     }
 
-    public boolean executeCommand(String commandName,String[] args,CommandSender sender){
+    public boolean executeCommand(String commandName, String[] args, CommandSender sender){
         for(NativeCommand command:commands){
             if(command.getCommandName().equals(commandName)){
                 //指令发送者所拥有的权限是否包含指令允许的权限

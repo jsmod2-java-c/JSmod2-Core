@@ -6,8 +6,9 @@ the GNU open source license before using the software. To understand
 the appropriateness, if infringement, will be handled in accordance
 with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">that<a>
  */
-package cn.jsmod2;
+package cn.jsmod2.plugin;
 
+import cn.jsmod2.Server;
 import cn.jsmod2.log.ILogger;
 import cn.jsmod2.plugin.PluginClassLoader;
 

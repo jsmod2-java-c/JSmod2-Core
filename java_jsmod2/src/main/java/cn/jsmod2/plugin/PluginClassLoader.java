@@ -8,8 +8,6 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.plugin;
 
-import cn.jsmod2.Plugin;
-import cn.jsmod2.PluginBase;
 import cn.jsmod2.Server;
 import cn.jsmod2.ex.MainClassErrorException;
 import cn.jsmod2.log.ILogger;
