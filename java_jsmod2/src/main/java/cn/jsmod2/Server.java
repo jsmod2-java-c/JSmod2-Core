@@ -344,11 +344,7 @@ public class Server implements Closeable,Reloadable{
         }
     }
 
-    /**
-     * 监听服务器更新的数据包
-     * 该线程以及和监听线程合并
-     * @Deprecated
-     */
+    /** @deprecated  */
     @Deprecated
     private class ServerThread implements Runnable{
         @Override
