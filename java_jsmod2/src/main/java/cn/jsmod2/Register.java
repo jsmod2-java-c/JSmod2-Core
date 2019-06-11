@@ -39,18 +39,7 @@ import static cn.jsmod2.Jsmod2.START;
  */
 
 public class Register {
-    //注册
-    static {
-        register = new Register();
-        getInstance().registerEvents();
-        getInstance().registerException();
-        getInstance().registerLang();
-        getInstance().registerNativeCommand();
-        getInstance().registerPacket();
-        getInstance().registerServerProperties();
-        getInstance().registerStartInfo();
-        getInstance().registerSuccessInfo();
-    }
+
 
     public static final int MAX_EVENT_ID = 0x52;
 
@@ -286,4 +275,17 @@ public class Register {
         this.getPackets = getPackets;
     }
 
+
+    //注册
+    static {
+        register = new Register();
+        getInstance().registerEvents();
+        getInstance().registerException();
+        getInstance().registerLang();
+        getInstance().registerNativeCommand();
+        getInstance().registerPacket();
+        getInstance().registerServerProperties();
+        getInstance().registerStartInfo();
+        getInstance().registerSuccessInfo();
+    }
 }
