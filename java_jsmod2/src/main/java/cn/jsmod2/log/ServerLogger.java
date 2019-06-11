@@ -36,10 +36,12 @@ import static org.fusesource.jansi.Ansi.Color.*;
 
 public class ServerLogger implements ILogger{
 
-    private static ServerLogger logger;
+    private static ServerLogger log;
+
+    private Logger logger = Logger.getLogger(ServerLogger.class);
 
     static {
-        logger = new ServerLogger();
+        log = new ServerLogger();
     }
 
     public void log(LogType logType, String message) {
@@ -87,6 +89,6 @@ public class ServerLogger implements ILogger{
     }
 
     public static ServerLogger getLogger() {
-        return logger;
+        return log;
     }
 }
