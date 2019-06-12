@@ -144,7 +144,7 @@ public class FileSystem {
             String lang = reader.readLine();
             try{
                 properties.load(Utils.getClassStream(lang+PROPERTIES));
-            }catch (IOException e){
+            }catch (IOException|NullPointerException e){
                 properties.load(Utils.getClassStream("zh"+PROPERTIES));
             }
         }
