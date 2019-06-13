@@ -57,7 +57,7 @@ public class PropertiesConfig extends Config{
     }
 
     @Override
-    public void putAll(LinkedHashMap<String, Object> map) throws FileNotFoundException {
+    public void putAll(LinkedHashMap<String, Object> map) {
         properties.putAll(map);
     }
 
@@ -84,12 +84,12 @@ public class PropertiesConfig extends Config{
 
 
     @Override
-    public void remove(String key) throws IOException {
+    public void remove(String key) {
         properties.remove(key);
     }
 
     @Override
-    public Object getObject(String key, Class<?> type) throws InstantiationException, IllegalAccessException, IOException {
+    public Object getObject(String key, Class<?> type) throws IOException {
         return get(key);
     }
 
@@ -104,6 +104,7 @@ public class PropertiesConfig extends Config{
             out.close();
             in.close();
         }catch (IOException e){
+            e.printStackTrace();
         }
     }
 
@@ -121,7 +122,7 @@ public class PropertiesConfig extends Config{
     }
 
     @Override
-    public Map<String, Object> getAll(String parentPath) throws IOException {
+    public Map<String, Object> getAll(String parentPath) {
         Set<Map.Entry<Object,Object>> set = properties.entrySet();
         Map<String,Object> map = new HashMap<>();
         for(Map.Entry<Object,Object> entry:set){
@@ -136,12 +137,12 @@ public class PropertiesConfig extends Config{
     }
 
     @Override
-    public Object[] getObjectArray(String key, Class<?> defaultType, Class<?>... type) throws IllegalArgumentException, IllegalAccessException, InstantiationException, IOException {
+    public Object[] getObjectArray(String key, Class<?> defaultType, Class<?>... type) throws IllegalArgumentException, IOException {
         return new Object[]{getObject(key,defaultType)};
     }
 
     @Override
-    public List<Object> getObjectList(String key, Class<?> defaultType, Class<?>... type) throws IllegalArgumentException, IllegalAccessException, InstantiationException, IOException {
+    public List<Object> getObjectList(String key, Class<?> defaultType, Class<?>... type) throws IllegalArgumentException, IOException {
         return Arrays.asList(getObjectArray(key,defaultType));
     }
 }

@@ -25,8 +25,6 @@ import java.util.*;
 public class JsonConfig extends Config {
 
 
-    private String fileName;
-
     private JSONObject jsonObject;
 
     private JSONObject nowObject;
@@ -41,9 +39,9 @@ public class JsonConfig extends Config {
     }
 
     @Override
-    public void put(String key, Object value) throws FileNotFoundException {
+    public void put(String key, Object value)  {
         String[] keys = key.split("\\.");
-        JSONObject object = jsonObject;
+        JSONObject object;
         StringBuilder builder = new StringBuilder(keys[0]);
         JSONObject obj = exist.get(builder.toString());
         if(obj != null){
@@ -53,7 +51,8 @@ public class JsonConfig extends Config {
             jsonObject.put(builder.toString(),obj);
             object = obj;
             for(int i =1;i<keys.length-1;i++){
-                builder.append("."+keys[i]);
+                builder.append(".");
+                builder.append(keys[i]);
                 obj = exist.get(builder.toString());
                 JSONObject jsonObject;
                 if(obj != null){
@@ -82,7 +81,7 @@ public class JsonConfig extends Config {
 
 
     @Override
-    public void save() throws UnsupportedEncodingException, FileNotFoundException {
+    public void save() throws FileNotFoundException {
         if(out == null){
             out = new FileOutputStream(fileName);
         }
@@ -91,7 +90,7 @@ public class JsonConfig extends Config {
     }
 
     @Override
-    public void putAll(LinkedHashMap<String, Object> map) throws FileNotFoundException {
+    public void putAll(LinkedHashMap<String, Object> map) {
         jsonObject.putAll(map);
     }
 
@@ -125,7 +124,7 @@ public class JsonConfig extends Config {
     }
 
     @Override
-    public Object getObject(String key, Class<?> type) throws InstantiationException, IllegalAccessException, IOException {
+    public Object getObject(String key, Class<?> type) throws IOException {
         return getJSONObject(key.split("\\.")).getObject(key,type);
     }
 
@@ -163,7 +162,7 @@ public class JsonConfig extends Config {
     public void setNote(String key, String note) {}
 
     @Override
-    public Object[] getObjectArray(String key, Class<?> defaultType, Class<?>... type) throws IllegalArgumentException, IllegalAccessException, InstantiationException, IOException {
+    public Object[] getObjectArray(String key, Class<?> defaultType, Class<?>... type) throws IllegalArgumentException,  IOException {
         JSONArray array = getJSONObject(key.split("\\.")).getJSONArray(key);
         Object[] objs = new Object[array.size()];
         int i = 0;
@@ -175,7 +174,7 @@ public class JsonConfig extends Config {
     }
 
     @Override
-    public List<Object> getObjectList(String key, Class<?> defaultType, Class<?>... type) throws IllegalArgumentException, IllegalAccessException, InstantiationException, IOException {
+    public List<Object> getObjectList(String key, Class<?> defaultType, Class<?>... type) throws IllegalArgumentException, IOException {
         return Arrays.asList(getObjectArray(key,defaultType,type));
     }
 

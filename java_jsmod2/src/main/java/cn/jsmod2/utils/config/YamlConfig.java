@@ -36,9 +36,9 @@ public class YamlConfig extends Config {
     }
 
     @Override
-    public void put(String key, Object value) throws IOException {
+    public void put(String key, Object value) {
         String[] keys = key.split("\\.");
-        Map<String,Object> object = rootMap;
+        Map<String,Object> object;
         StringBuilder builder = new StringBuilder(keys[0]);
         Map<String,Object> obj = exist.get(builder.toString());
         if(obj != null){
@@ -48,7 +48,8 @@ public class YamlConfig extends Config {
             rootMap.put(builder.toString(),obj);
             object = obj;
             for(int i =1;i<keys.length-1;i++){
-                builder.append("."+keys[i]);
+                builder.append(".");
+                builder.append(keys[i]);
                 obj = exist.get(builder.toString());
                 Map<String,Object> mapObject;
                 if(obj != null){
@@ -89,7 +90,7 @@ public class YamlConfig extends Config {
     }
 
     @Override
-    public void putAll(LinkedHashMap<String, Object> map) throws FileNotFoundException {
+    public void putAll(LinkedHashMap<String, Object> map) {
         rootMap.putAll(map);
     }
 
@@ -99,7 +100,7 @@ public class YamlConfig extends Config {
 
         if(obj instanceof List){
             List object = ((List) obj);
-            return (String[])(object.toArray(new String[object.size()]));
+            return (String[])(object.toArray());
         }
         return new String[0];
     }
@@ -121,12 +122,12 @@ public class YamlConfig extends Config {
     }
 
     @Override
-    public Object getObject(String key, Class<?> type) throws InstantiationException, IllegalAccessException, IOException {
+    public Object getObject(String key, Class<?> type) throws IOException {
         return get(key);
     }
 
     @Override
-    public void setObject(String key, Object obj) throws IOException {
+    public void setObject(String key, Object obj) {
         put(key, obj);
     }
 
@@ -154,7 +155,7 @@ public class YamlConfig extends Config {
     }
 
     @Override
-    public void setNote(String key, String note) throws IOException {}
+    public void setNote(String key, String note){}
 
     @Override
     public Object[] getObjectArray(String key, Class<?> defaultType, Class<?>... type) throws IllegalArgumentException, IllegalAccessException, InstantiationException, IOException {
@@ -164,7 +165,7 @@ public class YamlConfig extends Config {
 
     @Override
     public List<Object> getObjectList(String key, Class<?> defaultType, Class<?>... type) throws IllegalArgumentException, IllegalAccessException, InstantiationException, IOException {
-        return (List) get(key);
+        return (List<Object>) get(key);
     }
     private Map get(String[] keys) throws IOException{
         return get(keys,new FileInputStream(fileName));
