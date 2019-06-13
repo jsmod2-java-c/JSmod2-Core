@@ -4,7 +4,7 @@ import cn.jsmod2.Register;
 import cn.jsmod2.log.IErrorLogger;
 import cn.jsmod2.log.ServerLogger;
 
-public abstract class ServerRuntimeException extends RuntimeException {
+public class ServerRuntimeException extends RuntimeException {
 
     private String method;
 

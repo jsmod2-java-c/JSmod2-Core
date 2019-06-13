@@ -72,6 +72,7 @@ public class Register {
         nativeCommandMap.put("plugins",new PluginsCommand());
         nativeCommandMap.put("reload",new ReloadCommand());
         nativeCommandMap.put("tab",new TabCommand());
+        nativeCommandMap.put("see",new SeeCommand());
     }
 
     public void registerStartInfo(){

@@ -54,6 +54,8 @@ public class FileSystem {
 
     private List<PrintWriter> writers = new ArrayList<>();
 
+    private Properties nowInfo;
+
     private Properties lang;
 
     private static FileSystem system;
@@ -68,8 +70,12 @@ public class FileSystem {
 
     public static final String PROPERTIES = ".properties";
 
-
-    public Properties infoProperties(){
+    public Properties infoProperties(boolean newInfo){
+        if(!newInfo){
+            if(nowInfo != null){
+                return nowInfo;
+            }
+        }
         Properties info = new Properties();
         try{
             createGithubInfo();
@@ -90,6 +96,10 @@ public class FileSystem {
             e.printStackTrace();
         }
         return info;
+    }
+
+    public Properties infoProperties(){
+        return infoProperties(false);
     }
 
     private void createGithubInfo() throws IOException{
@@ -138,6 +148,8 @@ public class FileSystem {
         info.setProperty("fork-by",init.getProperty("fork-by"));
         info.setProperty("for",init.getProperty("for"));
         info.setProperty("project-name",init.getProperty("name"));
+
+        nowInfo = info;
     }
 
 

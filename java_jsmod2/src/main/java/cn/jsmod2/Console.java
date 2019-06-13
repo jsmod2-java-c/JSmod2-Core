@@ -9,8 +9,8 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2;
 
 import cn.jsmod2.api.server.Smod2Server;
+import cn.jsmod2.ex.ServerRuntimeException;
 import cn.jsmod2.utils.Utils;
-import jline.console.ConsoleReader;
 import jline.console.completer.Completer;
 import cn.jsmod2.command.NativeCommand;
 
@@ -48,7 +48,16 @@ public class Console extends Smod2Server {
             Utils.getMessageSender().info("\n>");
             String command = Server.getScanner().nextLine();
             //String command = reader.readLine(">");
-            runConsoleCommand(command);
+            try{
+                runConsoleCommand(command);
+            }catch (Exception e){
+                try{
+                    throw new ServerRuntimeException("the command have some problems,may no such command param",e);
+                }catch (ServerRuntimeException e1){
+                    e1.printStackTrace();
+                    e1.geteLogger().error("error, server exception");
+                }
+            }
         }
     }
 
