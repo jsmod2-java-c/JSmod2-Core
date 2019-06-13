@@ -15,7 +15,7 @@ import java.util.Set;
 public class SeeCommand extends NativeCommand{
 
     public SeeCommand() {
-        super("see", "CONSOLE", "see the github info:see property [old message] see new property [new message] see help [see all property key]");
+        super("see", "CONSOLE", "prop:cmd.see");
     }
 
     @Override
