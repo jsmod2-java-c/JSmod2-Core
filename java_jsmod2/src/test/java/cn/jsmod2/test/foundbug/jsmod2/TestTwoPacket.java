@@ -41,7 +41,7 @@ public class TestTwoPacket {
         public void run() {
             DatagramPacket pack;
             try{
-                for(int i = 0;i<5;i++)
+                for(int i = 0;i<1;i++)
                     socket.send(new DatagramPacket(("Thread1-"+i).getBytes(),("Thread1-"+i).getBytes().length, InetAddress.getByName("127.0.0.1"),8889));
                 Thread.sleep(10);
             }catch (Exception e){
@@ -58,9 +58,8 @@ public class TestTwoPacket {
         }
         @Override
         public void run() {
-            DatagramPacket pack;
             try{
-                for(int i = 0;i<1000;i++)
+                for(int i = 0;i<1;i++)
                     socket.send(new DatagramPacket(("Thread2-"+i).getBytes(),("Thread2-"+i).getBytes().length, InetAddress.getByName("127.0.0.1"),8889));
             }catch (Exception e){
                 e.printStackTrace();

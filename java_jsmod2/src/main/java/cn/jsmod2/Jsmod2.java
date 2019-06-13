@@ -38,7 +38,7 @@ public class Jsmod2 {
             FileSystem.getFileSystem().initLang(langProperties);
             long start = System.currentTimeMillis();
             startMessage(langProperties);
-            new Server(log,langProperties);
+            new Server(langProperties);
             long startSuccess = System.currentTimeMillis();
             for(String success:Register.getInstance().getSuccessInfo()){
                 log.info(MessageFormat.format(langProperties.getProperty(success),(startSuccess-start)+""));

@@ -128,6 +128,8 @@ public class Server implements Closeable,Reloadable{
 
         this.opsFile = OpsFile.getOpsFile(server);
 
+        this.smod2Server = new Smod2Server();
+
         /**
          * 加载插件
          */
