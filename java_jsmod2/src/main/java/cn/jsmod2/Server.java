@@ -10,6 +10,7 @@ package cn.jsmod2;
 
 import cn.jsmod2.annotations.PacketCMD;
 import cn.jsmod2.api.server.Smod2Server;
+import cn.jsmod2.event.NativeJoinListener;
 import cn.jsmod2.event.packet.ServerPacketEvent;
 import cn.jsmod2.log.ILogger;
 import cn.jsmod2.log.ServerLogger;
@@ -135,6 +136,7 @@ public class Server implements Closeable,Reloadable{
          */
         this.plugins = PluginClassLoader.getClassLoader().loadPlugins(pluginDir);
 
+        this.pluginManager.registerEvents(new NativeJoinListener(),null);
 
         start();
     }

@@ -88,7 +88,7 @@ public class Console extends Smod2Server {
         return simpleConsole;
     }
 
-    public void runConsoleCommand(String command){
+    public boolean runConsoleCommand(String command){
         String[] strs = command.split(" ");
         String[] args = new String[strs.length-1];
         System.arraycopy(strs,1,args,0,args.length);
@@ -128,5 +128,6 @@ public class Console extends Smod2Server {
         if(!find){
             Utils.getMessageSender().error("Unkown command,please input 'help'");
         }
+        return true;
     }
 }

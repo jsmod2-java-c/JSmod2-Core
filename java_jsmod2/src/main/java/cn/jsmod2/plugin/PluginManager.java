@@ -21,6 +21,7 @@ import cn.jsmod2.event.packet.ServerPacketEvent;
 import cn.jsmod2.ex.EventException;
 import cn.jsmod2.ex.NoSuchPluginNameException;
 import cn.jsmod2.ex.PluginException;
+import cn.jsmod2.ex.TypeErrorException;
 import cn.jsmod2.plugin.Plugin;
 import cn.jsmod2.plugin.PluginClassLoader;
 import cn.jsmod2.utils.MethodInvokeMapper;
@@ -108,6 +109,10 @@ public class PluginManager {
         if(plugin!=null){
             if(!plugin.isEnabled()){
                 throw new PluginException("the plugin is not enabled");
+            }
+        }else{
+            if(listener.getClass().getAnnotation(NativeListener.class)==null){
+                throw new TypeErrorException("the listener type must be native type");
             }
         }
         Utils.TryCatch(()->{
@@ -208,19 +213,8 @@ public class PluginManager {
      * 控制台执行指令
      *
      */
-    public boolean consoleExecuteCommand(String commandName,String[] args){
-        for(NativeCommand command:commands){
-            if(command.getCommandName().equals(commandName)){
-                CommandSender commandSender = Console.getConsole();
-                if(commandSender.getPowers().contains(command.getPower())){
-                    return command.execute(commandSender,args);
-                }else{
-                    Utils.getMessageSender().error("the power is no console");
-                    return false;
-                }
-            }
-        }
-        return false;
+    public boolean consoleExecuteCommand(String command){
+        return Console.getConsole().runConsoleCommand(command);
     }
 
     public List<Listener> getAllListener(){
