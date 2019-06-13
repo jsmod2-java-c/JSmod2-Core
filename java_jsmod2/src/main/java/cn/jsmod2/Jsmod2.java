@@ -8,6 +8,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2;
 
+import cn.jsmod2.ex.ServerRuntimeException;
 import cn.jsmod2.log.ILogger;
 import cn.jsmod2.log.ServerLogger;
 
@@ -46,7 +47,15 @@ public class Jsmod2 {
             Console.getConsole().commandInput();
         }catch (Exception e){
             log.error("this is a exception!!!");
-            e.printStackTrace();
+            if (e instanceof ServerRuntimeException){
+                e.printStackTrace();
+            }else{
+                try {
+                    throw new ServerRuntimeException("Sorry,Unknown Exception", e);
+                }catch (ServerRuntimeException e1){
+                    e1.printStackTrace();
+                }
+            }
         }
     }
 
