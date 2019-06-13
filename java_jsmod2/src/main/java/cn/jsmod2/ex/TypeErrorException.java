@@ -9,6 +9,8 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.ex;
 
 public class TypeErrorException extends ServerRuntimeException{
+    public TypeErrorException() {
+    }
 
     public TypeErrorException(String message) {
         super(message);

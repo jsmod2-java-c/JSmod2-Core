@@ -10,6 +10,10 @@ package cn.jsmod2.ex;
 
 public class MainClassErrorException extends ServerRuntimeException {
 
+    public MainClassErrorException() {
+        super();
+    }
+
     public MainClassErrorException(String message) {
         super(message);
     }

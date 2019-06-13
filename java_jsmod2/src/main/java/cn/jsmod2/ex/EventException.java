@@ -11,6 +11,9 @@ package cn.jsmod2.ex;
 
 public class EventException extends ServerRuntimeException{
 
+    public EventException() {
+    }
+
     public EventException(String message) {
         super(message);
     }

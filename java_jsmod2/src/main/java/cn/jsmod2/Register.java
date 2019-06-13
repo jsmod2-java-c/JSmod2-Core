@@ -73,6 +73,7 @@ public class Register {
         nativeCommandMap.put("reload",new ReloadCommand());
         nativeCommandMap.put("tab",new TabCommand());
         nativeCommandMap.put("see",new SeeCommand());
+        nativeCommandMap.put("throw",new ThrowCommand());
     }
 
     public void registerStartInfo(){

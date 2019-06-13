@@ -51,11 +51,16 @@ public class Console extends Smod2Server {
             try{
                 runConsoleCommand(command);
             }catch (Exception e){
-                try{
-                    throw new ServerRuntimeException("the command have some problems,may no such command param",e);
-                }catch (ServerRuntimeException e1){
-                    e1.printStackTrace();
-                    e1.geteLogger().error("error, server exception");
+                if(e instanceof ServerRuntimeException){
+                    e.printStackTrace();
+
+                }else{
+                    try{
+                        throw new ServerRuntimeException("the command have some problems,may no such command param",e);
+                    }catch (ServerRuntimeException e1){
+                        e1.printStackTrace();
+                        e1.geteLogger().error("error, server exception");
+                    }
                 }
             }
         }

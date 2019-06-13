@@ -10,6 +10,9 @@ package cn.jsmod2.ex;
 
 public class NoSuchPluginNameException extends ServerRuntimeException{
 
+    public NoSuchPluginNameException() {
+    }
+
     public NoSuchPluginNameException(String name) {
         super("no such plugin named "+name);
     }

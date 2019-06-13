@@ -11,6 +11,7 @@ public class ServerRuntimeException extends RuntimeException {
     private IErrorLogger eLogger = ServerLogger.getLogger();
 
     public ServerRuntimeException() {
+        printServerError();
     }
 
     public ServerRuntimeException(String message) {
