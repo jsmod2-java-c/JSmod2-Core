@@ -30,8 +30,11 @@ public class Console extends Smod2Server {
 
     private static Console console;
 
+    private static SimpleConsole simpleConsole;
+
     static {
         console = new Console();
+        simpleConsole = console.new SimpleConsole();
     }
     /**
      * 对于控制台的命令处理
@@ -79,6 +82,10 @@ public class Console extends Smod2Server {
             list.addAll(entries);
             return i-s.length();
         }
+    }
+
+    public static SimpleConsole getSimpleConsole() {
+        return simpleConsole;
     }
 
     public void runConsoleCommand(String command){

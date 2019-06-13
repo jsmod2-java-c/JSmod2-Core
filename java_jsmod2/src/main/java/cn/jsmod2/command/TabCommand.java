@@ -16,7 +16,7 @@ public class TabCommand extends NativeCommand {
     @Override
     public boolean execute(CommandSender commandSender, String[] args) {
         if(args.length !=0){
-            Console.SimpleConsole console = Console.getConsole().new SimpleConsole();
+            Console.SimpleConsole console = Console.getSimpleConsole();
             List<CharSequence> list = new ArrayList<>();
             console.complete(args[0],0,list);
             int count = 0;
