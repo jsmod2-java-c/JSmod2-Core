@@ -27,7 +27,7 @@ object PowerPool {
     val player = players.get(p)
     poolMapping.put(player.getName,player.getPowers)
   }
-  
+
   /**
     * 把全部op信息加载进去
     */
