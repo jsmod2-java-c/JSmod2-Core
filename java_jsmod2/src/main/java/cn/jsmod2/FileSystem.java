@@ -128,7 +128,7 @@ public class FileSystem {
         });
 
         info.setProperty("authors",builder.toString());
-        info.setProperty("last-update",commits.get(0).getAuthor()+"-"+commits.get(0).getCommitDate());
+        info.setProperty("last-update",commits.get(0).getAuthor().getLogin()+"-"+commits.get(0).getCommitDate());
         info.setProperty("stars",repository.getStargazersCount()+"");
         info.setProperty("forks",repository.getForks()+"");
         info.setProperty("version",init.getProperty("version"));
