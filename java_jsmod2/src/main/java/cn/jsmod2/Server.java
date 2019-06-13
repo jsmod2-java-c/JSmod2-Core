@@ -305,7 +305,7 @@ public class Server implements Closeable,Reloadable{
         @Override
         public void run() {
             Properties info = FileSystem.getFileSystem().infoProperties();
-            log.info(MessageFormat.format("last-format-sha:{0},last-format-info:{1}",info.getProperty("last-commit-sha"),info.getProperty("last-update")));
+            log.info(MessageFormat.format("last-format-sha:{0},last-format-info:{1}",info.getProperty("last-commit-sha"),info.getProperty("last-update")),"\n");
             log.info(MessageFormat.format("version:{0}",info.getProperty("version")));
             log.info(MessageFormat.format("thanks for authors:{0}",info.getProperty("authors")));
             log.info(MessageFormat.format("stars:{0},fork:{1}",info.getProperty("stars"),info.getProperty("forks")));

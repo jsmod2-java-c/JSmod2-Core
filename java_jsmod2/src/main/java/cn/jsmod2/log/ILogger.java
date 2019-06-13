@@ -23,14 +23,15 @@ import cn.jsmod2.utils.LogType;
  * jsmod2 @noyark-sys
  */
 
-public interface ILogger extends IErrorLogger{
+public interface ILogger extends IErrorLogger,IDebugLogger,IInfoLogger,IWarnLogger{
 
     void log(LogType logType, String message);
 
-    void debug(String message);
 
-    void info(String message);
 
-    void warn(String message);
+
+
+
+
 
 }
