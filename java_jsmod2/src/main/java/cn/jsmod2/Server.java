@@ -99,7 +99,7 @@ public class Server implements Closeable,Reloadable{
 
     private static RuntimeServer sender;
 
-    Server(ILogger log, Properties lang) {
+    Server(Properties lang) {
 
         this.lock = new ReentrantLock();
 
