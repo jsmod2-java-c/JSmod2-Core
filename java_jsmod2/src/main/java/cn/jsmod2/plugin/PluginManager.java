@@ -22,13 +22,11 @@ import cn.jsmod2.ex.EventException;
 import cn.jsmod2.ex.NoSuchPluginNameException;
 import cn.jsmod2.ex.PluginException;
 import cn.jsmod2.ex.TypeErrorException;
-import cn.jsmod2.plugin.Plugin;
-import cn.jsmod2.plugin.PluginClassLoader;
 import cn.jsmod2.utils.MethodInvokeMapper;
 import cn.jsmod2.utils.Utils;
 import cn.jsmod2.command.Command;
 import cn.jsmod2.event.Event;
-import cn.jsmod2.event.EventManager;
+import cn.jsmod2.annotations.EventManager;
 import cn.jsmod2.network.command.CommandRegisterPacket;
 
 import java.lang.reflect.Method;
