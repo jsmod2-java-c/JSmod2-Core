@@ -18,16 +18,16 @@ object PowerPool {
   //名字-权限
   final var poolMapping = new mutable.HashMap[String,util.List[String]]()
 
-  var ops = OpsFile.getInstance().getOps
+  private val ops = OpsFile.getInstance().getOps
 
-  var players = Server.getSender.getServer.getSmod2Server.getPlayers
+  private val players = Server.getSender.getServer.getSmod2Server.getPlayers
 
   //把全部权限加载进去
   for(p <- 0 until players.size){
     val player = players.get(p)
     poolMapping.put(player.getName,player.getPowers)
   }
-
+  
   /**
     * 把全部op信息加载进去
     */
