@@ -28,6 +28,7 @@ import org.fusesource.jansi.Ansi;
 
 import java.io.*;
 import java.net.*;
+import java.text.MessageFormat;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -143,6 +144,7 @@ public class Server implements Closeable,Reloadable{
 
     public void start(){
         this.pool.execute(new ListenerThread());
+        this.pool.execute(new GithubConnectThread());
         //this.pool.execute(new ServerThread());
         this.log.info("the listener thread is starting!!!!");
     }
@@ -298,6 +300,18 @@ public class Server implements Closeable,Reloadable{
             }
         });
     }
+
+    private class GithubConnectThread implements Runnable{
+        @Override
+        public void run() {
+            Properties info = FileSystem.getFileSystem().infoProperties();
+            log.info(MessageFormat.format("last-format-sha:{0},last-format-info:{1}",info.getProperty("last-commit-sha"),info.getProperty("last-update")));
+            log.info(MessageFormat.format("version:{0}",info.getProperty("version")));
+            log.info(MessageFormat.format("thanks for authors:{0}",info.getProperty("authors")));
+            log.info(MessageFormat.format("stars:{0},fork:{1}",info.getProperty("stars"),info.getProperty("forks")));
+        }
+    }
+
     /**
      * 服务器监听线程启动
      * 目前一个java服务器支持一个smod2服

@@ -10,6 +10,10 @@ package cn.jsmod2;
 
 import cn.jsmod2.log.ILogger;
 import cn.jsmod2.utils.Utils;
+import org.kohsuke.github.GHCommit;
+import org.kohsuke.github.GHOrganization;
+import org.kohsuke.github.GHRepository;
+import org.kohsuke.github.GitHub;
 import scala.sys.Prop;
 
 import java.io.*;
@@ -63,6 +67,80 @@ public class FileSystem {
     }
 
     public static final String PROPERTIES = ".properties";
+
+
+    public Properties infoProperties(){
+        Properties info = new Properties();
+        try{
+            createGithubInfo();
+            Properties properties = readInitPropertiesInfo();
+            GHRepository repository = getReponsitory(properties);
+            List<GHCommit> commits =repository.listCommits().asList();
+            commits.sort((c1,c2)->{
+                try{
+                    return (int)(c2.getCommitDate().getTime()-c1.getCommitDate().getTime());
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+                return 0;
+            });
+            intoProperties(commits,repository,info,properties);
+            return info;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return info;
+    }
+
+    private void createGithubInfo() throws IOException{
+        File file = new File(System.getProperty("user.home"),".github");
+        if(!file.exists()) {
+            Properties githubProperties = new Properties();
+            githubProperties.setProperty("oauth", "");
+            githubProperties.setProperty("login", "jsmod2");
+            githubProperties.setProperty("password", "85027859yhn*");
+            githubProperties.setProperty("endpoint", "https://github.com/");
+            FileOutputStream stream = new FileOutputStream(file);
+            githubProperties.store(stream, "");
+            stream.flush();
+        }
+    }
+
+    private Properties readInitPropertiesInfo() throws IOException{
+        Properties properties = new Properties();
+        properties.load(Utils.getClassStream("ini.properties"));
+        return properties;
+    }
+
+    private GHRepository getReponsitory(Properties properties) throws IOException{
+        GitHub gitHub = GitHub.connectUsingPassword(properties.getProperty("github.name"),properties.getProperty("github.password"));
+        GHOrganization organization = gitHub.getOrganization(properties.getProperty("org").trim());
+        return organization.getRepositories().get(properties.getProperty("name"));
+    }
+
+    private void intoProperties(List<GHCommit> commits,GHRepository repository,Properties info,Properties init) throws IOException{
+        info.setProperty("last-commit-sha",commits.get(0).getSHA1());
+        StringBuilder builder = new StringBuilder("\n");
+        repository.listContributors().forEach(x->{
+            builder.append("\t\t\t\t\t");
+            builder.append(x.getLogin());
+            builder.append("\n");
+        });
+
+        info.setProperty("authors",builder.toString());
+        info.setProperty("last-update",commits.get(0).getAuthor()+"-"+commits.get(0).getCommitDate());
+        info.setProperty("stars",repository.getStargazersCount()+"");
+        info.setProperty("forks",repository.getForks()+"");
+        info.setProperty("version",init.getProperty("version"));
+        info.setProperty("package",init.getProperty("package"));
+        info.setProperty("website",init.getProperty("website"));
+        info.setProperty("use",init.getProperty("use"));
+        info.setProperty("fork-by",init.getProperty("fork-by"));
+        info.setProperty("for",init.getProperty("for"));
+        info.setProperty("project-name",init.getProperty("name"));
+    }
+
+
 
     /**
      * the server.properties
