@@ -39,14 +39,25 @@ public class Jsmod2Script {
     public void importFile(String file) throws IOException {
         //utf-8
         //文件头部指定字符集
+        int comment = 0;
         BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
         String coding = reader.readLine();
         List<String> codes = FileUtils.readLines(new File(file),coding);
         for(int i = 1;i<codes.size();i++){
+            if(codes.get(i).startsWith("\"\"\"")){
+                comment++;
+                continue;
+            }
+            if(comment%2==1&&comment!=0){
+                continue;
+            }
+            if(codes.get(i).matches("#[\\s\\S]+")){
+                continue;
+            }
             StringBuilder getFunc = new StringBuilder(codes.get(i));
             if(codes.get(i).matches(Register.getInstance().getScriptPettern().get("startfunc"))){
                 while (!getFunc.toString().endsWith(":end")){
-                    getFunc.append(codes.get(i).replaceAll(" ",""));
+                    getFunc.append(codes.get(i).replaceAll(" ","").replaceAll("#[\\s\\S]+",""));
                     i++;
                 }
             }
