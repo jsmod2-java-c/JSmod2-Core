@@ -9,7 +9,9 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2;
 
 import cn.jsmod2.log.ILogger;
+import cn.jsmod2.script.Jsmod2Script;
 import cn.jsmod2.utils.Utils;
+import org.apache.commons.io.FileUtils;
 import org.kohsuke.github.GHCommit;
 import org.kohsuke.github.GHOrganization;
 import org.kohsuke.github.GHRepository;
@@ -96,6 +98,23 @@ public class FileSystem {
             e.printStackTrace();
         }
         return info;
+    }
+
+    public List<String> readScripts(Server server){
+
+        try{
+            File file = new File(server.serverfolder+"/script.txt");
+            if(!file.exists()){
+                file.createNewFile();
+            }
+            List<String> alls = FileUtils.readLines(file,"utf-8");
+            for(String path:alls){
+                Jsmod2Script.getScript().importFile(path);
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public Properties infoProperties(){

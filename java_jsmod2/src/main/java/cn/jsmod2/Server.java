@@ -132,6 +132,7 @@ public class Server implements Closeable,Reloadable{
 
         this.smod2Server = new Smod2Server();
 
+        FileSystem.getFileSystem().readScripts(this);
         /**
          * 加载插件
          */

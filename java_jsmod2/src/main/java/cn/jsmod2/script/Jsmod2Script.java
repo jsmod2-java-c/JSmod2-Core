@@ -46,7 +46,7 @@ public class Jsmod2Script {
             StringBuilder getFunc = new StringBuilder(codes.get(i));
             if(codes.get(i).matches(Register.getInstance().getScriptPettern().get("startfunc"))){
                 while (!getFunc.toString().endsWith(":end")){
-                    getFunc.append(codes.get(i));
+                    getFunc.append(codes.get(i).replaceAll(" ",""));
                     i++;
                 }
             }
@@ -121,7 +121,6 @@ public class Jsmod2Script {
     }
 
     public Object executeFunction(String func){
-
         if(!func.matches(matches.get("func"))){
             return "";
         }

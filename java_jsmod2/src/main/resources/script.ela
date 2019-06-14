@@ -1,3 +1,6 @@
 utf-8
 a=0
-f::echo(1)
+func test();start:
+    f::echo(1);
+    f::test();
+:end
