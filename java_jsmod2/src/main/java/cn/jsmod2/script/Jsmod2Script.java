@@ -138,7 +138,7 @@ public class Jsmod2Script {
             if(obj instanceof Var){
                 ((Var) obj).unset();
             }
-            script.parseVar(varName,o==null?"NULL":o.toString());
+            builder.append(script.parseVar(varName,o==null?"NULL":o.toString()));
         }
 
         return builder.toString();
