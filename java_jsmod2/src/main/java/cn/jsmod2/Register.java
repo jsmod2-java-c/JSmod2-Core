@@ -117,6 +117,7 @@ public class Register {
         scriptPettern.put("var","[a-z0-9A-Z_]+=[\\s\\S]+");
         scriptPettern.put("list","list");
         scriptPettern.put("unset","unset [a-z0-9A-Z_]+(=[\\s\\S]+)*");
+        scriptPettern.put("func","([a-z0-9A-Z_]=)*(f::)[\\s\\S]+\\(([\\s\\S]+|[\\s\\S]*)\\)");
     }
 
     public void registerException(){

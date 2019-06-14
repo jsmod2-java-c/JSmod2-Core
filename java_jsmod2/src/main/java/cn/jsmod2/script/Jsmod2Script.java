@@ -1,6 +1,9 @@
 package cn.jsmod2.script;
 
 import cn.jsmod2.Register;
+import cn.jsmod2.script.function.EchoFunction;
+import cn.jsmod2.script.function.Function;
+import cn.jsmod2.script.function.NativeFunction;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,32 +16,40 @@ public class Jsmod2Script {
 
     static {
         script = new Jsmod2Script();
+        getScript().functions.put("echo",new EchoFunction());
     }
 
     private static Jsmod2Script script;
 
     private Map<String,String> matches = Register.getInstance().getScriptPettern();
 
+    private Map<String, Function> functions = new HashMap<>();
+
 
     //全局变量
     private Map<String,Var> vars = new HashMap<>();
 
     //a=0
-    private String parseVar(String cmd){
+    private Object parseVar(String cmd){
         if(!cmd.matches(matches.get("var"))){
-            return cmd;
+            return "";
         }
         String[] key_value = cmd.split("=");
-        if(vars.get(key_value[0])!=null){
-            Var var = vars.get(key_value[0]);
-            var.setValue(key_value[1]);
-            return key_value[0]+var.toString();
+        return parseVar(key_value[0],key_value[1]);
+    }
+
+    private Var parseVar(String key,String value){
+        if(vars.get(key)!=null){
+            Var var = vars.get(key);
+            var.setValue(value);
+            return var;
         }else{
-            Var var = new Var(key_value[1]);
-            vars.put(key_value[0],var);
-            return cmd;
+            Var var = new Var(value);
+            vars.put(key,var);
+            return var;
         }
     }
+
     //list
     private String listVar(String cmd){
         if(cmd.matches(matches.get("list"))) {
@@ -84,10 +95,52 @@ public class Jsmod2Script {
         return command;
     }
 
+    private Object executeFunction(String func){
+        if(!func.matches(matches.get("func"))){
+            return "";
+        }
+        String[] strs = func.split("=");
+        String funcName= func;
+        if(strs.length==2){
+            funcName = strs[1];
+        }
+        String[] args = funcName.substring(funcName.indexOf("(")+1,funcName.lastIndexOf(")")).split(",");
+        args = setThat(args);
+        funcName = funcName.replace("f::","").replaceAll("\\(([\\s\\S]+|[\\s\\S]*)\\)","");
+        Function function = functions.get(funcName);
+        if(function instanceof NativeFunction){
+            return ((NativeFunction) function).execute(args);
+        }
+        //普通函数还没开始处理
+        return "";
+    }
+
+    public String getFunctionVarName(String func){
+        if(func.matches(matches.get("func"))){
+            String[] strs = func.split("=");
+            if(strs.length==2){
+                return strs[0];
+            }
+        }
+        return null;
+    }
+
     public static String parse(String command){
         StringBuilder builder = new StringBuilder();
-        builder.append(script.parseVar(script.unset(command)));
+        //执行函数可以返回值
+        //a=echo()
+        Object obj = script.parseVar(script.unset(command));
+        builder.append(obj);
         builder.append(script.listVar(command));
+        Object o = script.executeFunction(command);
+        String varName = script.getFunctionVarName(command);
+        if(varName!=null){
+            if(obj instanceof Var){
+                ((Var) obj).unset();
+            }
+            script.parseVar(varName,o==null?"NULL":o.toString());
+        }
+
         return builder.toString();
     }
 
