@@ -1,12 +1,12 @@
 package cn.jsmod2.script;
 
 import cn.jsmod2.Register;
-import cn.jsmod2.script.function.EchoFunction;
-import cn.jsmod2.script.function.Function;
-import cn.jsmod2.script.function.NativeFunction;
-import cn.jsmod2.script.function.TypeOfFunction;
+import cn.jsmod2.script.function.*;
+import org.apache.commons.io.FileUtils;
 
+import java.io.*;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,6 +19,8 @@ public class Jsmod2Script {
         script = new Jsmod2Script();
         getScript().functions.put("echo",new EchoFunction());
         getScript().functions.put("typeof",new TypeOfFunction());
+        getScript().functions.put("import",new ImportFunction());
+        getScript().functions.put("register",new RegisterNativeFunction());
     }
 
     private static Jsmod2Script script;
@@ -27,9 +29,30 @@ public class Jsmod2Script {
 
     private Map<String, Function> functions = new HashMap<>();
 
-
     //全局变量
     private Map<String,Var> vars = new HashMap<>();
+
+    public Map<String, Function> getFunctions() {
+        return functions;
+    }
+
+    public void importFile(String file) throws IOException {
+        //utf-8
+        //文件头部指定字符集
+        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+        String coding = reader.readLine();
+        List<String> codes = FileUtils.readLines(new File(file),coding);
+        for(int i = 1;i<codes.size();i++){
+            StringBuilder getFunc = new StringBuilder(codes.get(i));
+            if(codes.get(i).matches(Register.getInstance().getScriptPettern().get("startfunc"))){
+                while (!getFunc.toString().endsWith(":end")){
+                    getFunc.append(codes.get(i));
+                    i++;
+                }
+            }
+            parse(getFunc.toString());
+        }
+    }
 
     //a=0
     private Object parseVar(String cmd,Map<String,Var> vars){
