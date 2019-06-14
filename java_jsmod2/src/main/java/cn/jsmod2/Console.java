@@ -10,6 +10,7 @@ package cn.jsmod2;
 
 import cn.jsmod2.api.server.Smod2Server;
 import cn.jsmod2.ex.ServerRuntimeException;
+import cn.jsmod2.script.Jsmod2Script;
 import cn.jsmod2.utils.Utils;
 import jline.console.completer.Completer;
 import cn.jsmod2.command.NativeCommand;
@@ -49,7 +50,11 @@ public class Console extends Smod2Server {
             String command = Server.getScanner().nextLine();
             //String command = reader.readLine(">");
             try{
-                runConsoleCommand(command);
+                if(Jsmod2Script.matchPettern(command)){
+                    Utils.getMessageSender().info(Jsmod2Script.parse(command));
+                }else{
+                    runConsoleCommand(command);
+                }
             }catch (Exception e){
                 if(e instanceof ServerRuntimeException){
                     e.printStackTrace();
@@ -106,6 +111,7 @@ public class Console extends Smod2Server {
         String[] strs = command.split(" ");
         String[] args = new String[strs.length-1];
         System.arraycopy(strs,1,args,0,args.length);
+        args = Jsmod2Script.setThat(args);
         List<NativeCommand> commands =
                 Server
                         .getSender()

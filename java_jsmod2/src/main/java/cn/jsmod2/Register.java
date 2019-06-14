@@ -112,6 +112,13 @@ public class Register {
         serverProperties.put(FileSystem.SMOD2_IP,"127.0.0.1");
     }
 
+    public void registerScriptPettern(){
+        //关于变量的正则
+        scriptPettern.put("var","[a-z0-9A-Z_]+=[\\s\\S]+");
+        scriptPettern.put("list","list");
+        scriptPettern.put("unset","unset [a-z0-9A-Z_]+(=[\\s\\S]+)*");
+    }
+
     public void registerException(){
         ex_methods.put (TypeErrorException.class,"* your configuration file type may have some problems, please see your configuration file type*\n\t refer to cn.jsmod2.utils.config.ConfigQueryer class\n\t or cn.jsmod2.configs.ConfigType class");
         ex_methods.put (ProtocolException.class,"* when transferring protocol, you did not transfer data in accordance with an accurate or correct jsmod2 * \n \t reference grammar ID - {main json}, field chain: {mapping JSON value} ~ tail request (optional, to mark subsidiary information, or ownership information");
@@ -277,6 +284,12 @@ public class Register {
         this.getPackets = getPackets;
     }
 
+    public Map<String, String> getScriptPettern() {
+        return scriptPettern;
+    }
+
+    private Map<String,String> scriptPettern = new HashMap<>();
+
 
     //注册
     static {
@@ -289,5 +302,6 @@ public class Register {
         getInstance().registerServerProperties();
         getInstance().registerStartInfo();
         getInstance().registerSuccessInfo();
+        getInstance().registerScriptPettern();
     }
 }
