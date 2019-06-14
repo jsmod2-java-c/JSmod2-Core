@@ -32,15 +32,15 @@ public class Jsmod2Script {
     private Map<String,Var> vars = new HashMap<>();
 
     //a=0
-    private Object parseVar(String cmd){
+    private Object parseVar(String cmd,Map<String,Var> vars){
         if(!cmd.matches(matches.get("var"))){
             return "";
         }
         String[] key_value = cmd.split("=");
-        return parseVar(key_value[0],key_value[1]);
+        return parseVar(key_value[0],key_value[1],vars);
     }
 
-    private Var parseVar(String key,String value){
+    private Var parseVar(String key,String value,Map<String,Var> vars){
         if(vars.get(key)!=null){
             Var var = vars.get(key);
             var.setValue(value);
@@ -78,7 +78,7 @@ public class Jsmod2Script {
     }
     //unset a=0
 
-    private String unset(String command){
+    private String unset(String command,Map<String,Var> vars){
         if(command.matches(matches.get("unset"))){
             String[] unsets = command.split(" ");
             String name;
@@ -98,6 +98,7 @@ public class Jsmod2Script {
     }
 
     public Object executeFunction(String func){
+
         if(!func.matches(matches.get("func"))){
             return "";
         }
@@ -113,12 +114,36 @@ public class Jsmod2Script {
         }
         funcName = funcName.replace("f::","").replaceAll("\\(([\\s\\S]+|[\\s\\S]*)\\)","");
         Function function = functions.get(funcName);
+        if(function==null){
+            return "no such function!";
+        }
+
         if(function instanceof NativeFunction){
             Object object = ((NativeFunction) function).execute(args);
             return object==null?"NULL":object;
         }
         //普通函数还没开始处理
-        return "";
+        //形式参数作用域在方法，方法执行完则销毁
+        Map<String,Var> vars_func = new HashMap<>();
+
+        vars_func.putAll(vars);
+
+        //形式参数
+        String[] alls = function.getArgs();
+        //形式参数
+        for(int i =0;i<args.length;i++){
+            vars_func.put(alls[i],new Var(args[i]));
+        }
+
+        String code = function.getCode();
+
+        String[] codes =code.split(";");
+
+        for(int i = 0;i<codes.length-1;i++) {
+            Jsmod2Script.parse(codes[i],vars_func);
+        }
+
+        return Jsmod2Script.parse(codes[codes.length-1]);
     }
 
     private String getFunctionVarName(String func){
@@ -143,24 +168,21 @@ public class Jsmod2Script {
         String[] alls = func.split(" ");
         String[] name_start = alls[1].split(";");
         String name = name_start[0].replaceAll("\\([\\s\\S]+\\)","");
-        Function function = new Function("",func.replace(matches.get("startfunc"),"").replace(":end","")) {
-            @Override
-            public String getFunctionName() {
-                return super.getFunctionName();
-            }
-        };
+        Function function = new Function("",func.replaceAll(matches.get("startfunc"),"").replace(":end","")) {};
 
-        function.setArgs(name_start[0].substring(name_start[0].indexOf("(")+1,name_start[0].indexOf(")")).split(","));
-        functions.put(name,function);
+        String[] args = name_start[0].substring(name_start[0].indexOf("(")+1,name_start[0].indexOf(")")).split(",");
+        function.setArgs(args);
+        functions.put(name.replaceAll("\\(([\\s\\S]+|)\\)",""),function);
+
         return "create successfully";
     }
 
-    public static String parse(String command){
+    public static String parse(String command,Map<String,Var> vars){
         StringBuilder builder = new StringBuilder();
         //执行函数可以返回值
         //a=echo()
-        builder.append(getScript().defineFunction(command));
-        Object obj = script.parseVar(script.unset(command));
+        getScript().defineFunction(command);
+        Object obj = script.parseVar(script.unset(command,vars),vars);
         builder.append(obj);
         builder.append(script.listVar(command));
         Object o = script.executeFunction(command);
@@ -169,10 +191,14 @@ public class Jsmod2Script {
             if(obj instanceof Var){
                 ((Var) obj).unset();
             }
-            builder.append(script.parseVar(varName,o==null?"NULL":o.toString()));
+            builder.append(script.parseVar(varName,o==null?"NULL":o.toString(),vars).getValue());
         }
 
         return builder.toString();
+    }
+
+    public static String parse(String command){
+        return parse(command,script.vars);
     }
 
     public static String[] setThat(String[] args){

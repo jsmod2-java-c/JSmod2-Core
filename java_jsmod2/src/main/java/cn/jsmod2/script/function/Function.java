@@ -29,4 +29,7 @@ public abstract class Function {
         this.args = args;
     }
 
+    public String[] getArgs() {
+        return args;
+    }
 }
