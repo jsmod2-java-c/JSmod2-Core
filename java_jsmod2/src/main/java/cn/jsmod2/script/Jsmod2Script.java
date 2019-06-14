@@ -90,7 +90,7 @@ public class Jsmod2Script {
         return "";
     }
 
-    public static boolean matchPettern(String command){
+    public static boolean matchPattern(String command){
         Map<String,String> patterns = Register.getInstance().getScriptPettern();
         for(String pattern:patterns.values()){
             if(command.matches(pattern)){

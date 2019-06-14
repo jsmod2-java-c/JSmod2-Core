@@ -50,7 +50,7 @@ public class Console extends Smod2Server {
             String command = Server.getScanner().nextLine();
             //String command = reader.readLine(">");
             try{
-                if(Jsmod2Script.matchPettern(command)){
+                if(Jsmod2Script.matchPattern(command)){
                     StringBuilder builder = new StringBuilder(command);
                     if(command.matches(Register.getInstance().getScriptPettern().get("startfunc"))){
                         while(!builder.toString().endsWith(":end")){
