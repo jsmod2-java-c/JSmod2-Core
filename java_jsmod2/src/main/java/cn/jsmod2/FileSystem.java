@@ -80,7 +80,7 @@ public class FileSystem {
         try{
             createGithubInfo();
             Properties properties = readInitPropertiesInfo();
-            GHRepository repository = getReponsitory(properties);
+            GHRepository repository = getRepository(properties);
             List<GHCommit> commits =repository.listCommits().asList();
             commits.sort((c1,c2)->{
                 try{
@@ -122,7 +122,7 @@ public class FileSystem {
         return properties;
     }
 
-    private GHRepository getReponsitory(Properties properties) throws IOException{
+    private GHRepository getRepository(Properties properties) throws IOException{
         GitHub gitHub = GitHub.connectUsingPassword(properties.getProperty("github.name"),properties.getProperty("github.password"));
         GHOrganization organization = gitHub.getOrganization(properties.getProperty("org").trim());
         return organization.getRepositories().get(properties.getProperty("name"));
