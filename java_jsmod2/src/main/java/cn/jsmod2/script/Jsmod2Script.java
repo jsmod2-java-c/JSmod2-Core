@@ -97,7 +97,7 @@ public class Jsmod2Script {
         return command;
     }
 
-    private Object executeFunction(String func){
+    public Object executeFunction(String func){
         if(!func.matches(matches.get("func"))){
             return "";
         }
@@ -108,16 +108,20 @@ public class Jsmod2Script {
         }
         String[] args = funcName.substring(funcName.indexOf("(")+1,funcName.lastIndexOf(")")).split(",");
         args = setThat(args);
+        for(int i = 0;i<args.length;i++){
+            args[i] = executeFunction(args[i])==null?"NULL":args[i].toString();
+        }
         funcName = funcName.replace("f::","").replaceAll("\\(([\\s\\S]+|[\\s\\S]*)\\)","");
         Function function = functions.get(funcName);
         if(function instanceof NativeFunction){
-            return ((NativeFunction) function).execute(args);
+            Object object = ((NativeFunction) function).execute(args);
+            return object==null?"NULL":object;
         }
         //普通函数还没开始处理
         return "";
     }
 
-    public String getFunctionVarName(String func){
+    private String getFunctionVarName(String func){
         if(func.matches(matches.get("func"))){
             String[] strs = func.split("=");
             if(strs.length==2){

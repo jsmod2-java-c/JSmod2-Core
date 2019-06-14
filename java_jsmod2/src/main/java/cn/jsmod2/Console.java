@@ -112,6 +112,9 @@ public class Console extends Smod2Server {
         String[] args = new String[strs.length-1];
         System.arraycopy(strs,1,args,0,args.length);
         args = Jsmod2Script.setThat(args);
+        for(int i = 0;i<args.length;i++){
+           args[i] = Jsmod2Script.getScript().executeFunction(args[i]).toString();
+        }
         List<NativeCommand> commands =
                 Server
                         .getSender()
