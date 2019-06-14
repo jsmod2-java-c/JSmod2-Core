@@ -13,7 +13,7 @@ public class TypeOfFunction extends NativeFunction{
     @Override
     public Object execute(Object... objs) {
         Var var = Jsmod2Script.getScript().getVars().get(objs[0]==null?"NULL":objs[0].toString());
-        String type = var==null?(new Var(objs[0].toString()).getType()):var.getType();
+        String type = var==null?(Var.compile("nick"+"="+objs[0].toString()).getType()):var.getType();
         Utils.getMessageSender().info(type);
         return type;
     }

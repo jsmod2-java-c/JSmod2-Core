@@ -2,7 +2,7 @@ package cn.jsmod2.script;
 
 import cn.jsmod2.ex.TypeErrorException;
 
-public class Var {
+public class Var extends Memory{
 
     private String value;
 
@@ -10,7 +10,10 @@ public class Var {
 
     private boolean isNull;
 
-    public Var(String value){
+    private String name;
+
+    private Var(String name,String value){
+        this.name = name;
         this.value = value;
         this.type = parseType(value);
         if(value.matches("NULL")){
@@ -44,6 +47,10 @@ public class Var {
         return isNull;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public void setValue(String value) {
         String type = parseType(value);
         if(getType().equals("NULL")){
@@ -63,12 +70,16 @@ public class Var {
         this.value = "NULL";
     }
 
+    public static Var compile(String command){
+        String[] key_value = command.split("=");
+        if(Memory.command.contains(key_value[0])){
+            throw new TypeErrorException("the name is define in native");
+        }
+        return new Var(key_value[0],key_value[1]);
+    }
+
     @Override
     public String toString() {
-        return "Var{" +
-                "value='" + value + '\'' +
-                ", type='" + type + '\'' +
-                ", isNull=" + isNull +
-                '}';
+        return name+"="+value;
     }
 }

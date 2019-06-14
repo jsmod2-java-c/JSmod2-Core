@@ -3,7 +3,7 @@ package cn.jsmod2.script.function;
 public abstract class NativeFunction<T> extends Function {
 
 
-    public NativeFunction(String functionName,String code) {
+    NativeFunction(String functionName,String code) {
         super(functionName,code);
     }
 

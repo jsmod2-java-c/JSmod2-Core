@@ -2,6 +2,7 @@ package cn.jsmod2.script;
 
 import cn.jsmod2.Register;
 import cn.jsmod2.script.function.*;
+import com.sun.corba.se.spi.ior.ObjectKey;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
@@ -25,8 +26,6 @@ public class Jsmod2Script {
 
     private static Jsmod2Script script;
 
-    private Map<String,String> matches = Register.getInstance().getScriptPettern();
-
     private Map<String, Function> functions = new HashMap<>();
 
     //全局变量
@@ -36,6 +35,11 @@ public class Jsmod2Script {
         return functions;
     }
 
+    /**
+     * 导入文件(实际调用函数)
+     * @param file
+     * @throws IOException
+     */
     public void importFile(String file) throws IOException {
         //utf-8
         //文件头部指定字符集
@@ -65,30 +69,52 @@ public class Jsmod2Script {
         }
     }
 
+    /**
+     * 解析全局变量
+     * @param cmd
+     * @param vars
+     * @return
+     */
     //a=0
     private Object parseVar(String cmd,Map<String,Var> vars){
-        if(!cmd.matches(matches.get("var"))){
-            return "";
+        if(cmd.matches(Memory.matches.get("func"))){
+            return cmd;
+        }
+        if(!cmd.matches(Memory.matches.get("var"))){
+            return cmd;
         }
         String[] key_value = cmd.split("=");
-        return parseVar(key_value[0],key_value[1],vars);
+        Var var = parseVar(key_value[0],key_value[1],vars);
+        return var+"TYPE:"+var.getType();
     }
 
+    /**
+     * 解析局部变量
+     * @param key
+     * @param value
+     * @param vars
+     * @return
+     */
     private Var parseVar(String key,String value,Map<String,Var> vars){
         if(vars.get(key)!=null){
             Var var = vars.get(key);
             var.setValue(value);
             return var;
         }else{
-            Var var = new Var(value);
+            Var var = Var.compile(key+"="+value);
             vars.put(key,var);
             return var;
         }
     }
 
+    /**
+     * 列出内存的变量
+     * @param cmd
+     * @return
+     */
     //list
     private String listVar(String cmd){
-        if(cmd.matches(matches.get("list"))) {
+        if(cmd.matches(Memory.matches.get("list"))) {
             StringBuilder builder = new StringBuilder();
             for (Map.Entry<String, Var> var : vars.entrySet()) {
                 builder.append(var.getKey());
@@ -98,9 +124,14 @@ public class Jsmod2Script {
             }
             return builder.toString();
         }
-        return "";
+        return cmd;
     }
 
+    /**
+     * 检查是否符合语法
+     * @param command
+     * @return
+     */
     public static boolean matchPattern(String command){
         Map<String,String> patterns = Register.getInstance().getScriptPettern();
         for(String pattern:patterns.values()){
@@ -112,8 +143,14 @@ public class Jsmod2Script {
     }
     //unset a=0
 
+    /**
+     *执行重置指令
+     * @param command
+     * @param vars
+     * @return
+     */
     private String unset(String command,Map<String,Var> vars){
-        if(command.matches(matches.get("unset"))){
+        if(command.matches(Memory.matches.get("unset"))){
             String[] unsets = command.split(" ");
             String name;
             if(unsets[1].contains("=")){
@@ -131,9 +168,14 @@ public class Jsmod2Script {
         return command;
     }
 
+    /**
+     * 执行一个函数
+     * @param func
+     * @return
+     */
     public Object executeFunction(String func){
-        if(!func.matches(matches.get("func"))){
-            return "";
+        if(!func.matches(Memory.matches.get("func"))){
+            return func;
         }
         String[] strs = func.split("=");
         String funcName= func;
@@ -148,7 +190,7 @@ public class Jsmod2Script {
         funcName = funcName.replace("f::","").replaceAll("\\(([\\s\\S]+|[\\s\\S]*)\\)","");
         Function function = functions.get(funcName);
         if(function==null){
-            return "no such function!";
+            return "error:no such function!"+funcName+"on "+func.indexOf(funcName)+" error";
         }
 
         if(function instanceof NativeFunction){
@@ -165,7 +207,7 @@ public class Jsmod2Script {
         String[] alls = function.getArgs();
         //形式参数
         for(int i =0;i<args.length;i++){
-            vars_func.put(alls[i],new Var(args[i]));
+            vars_func.put(alls[i],Var.compile(alls[i]+"="+args[i]));
         }
 
         String code = function.getCode();
@@ -179,8 +221,13 @@ public class Jsmod2Script {
         return Jsmod2Script.parse(codes[codes.length-1]);
     }
 
+    /**
+     * 解析函数的返回变量
+     * @param func
+     * @return
+     */
     private String getFunctionVarName(String func){
-        if(func.matches(matches.get("func"))){
+        if(func.matches(Memory.matches.get("func"))){
             String[] strs = func.split("=");
             if(strs.length==2){
                 return strs[0];
@@ -194,46 +241,74 @@ public class Jsmod2Script {
     //  语句
     // :end
     //
+
+    /**
+     * 解析函数
+     * @param func
+     * @return
+     */
     private String defineFunction(String func){
-        if(!func.matches(matches.get("dfunc"))){
+        if(!func.matches(Memory.matches.get("dfunc"))){
             return func;
         }
-        String[] alls = func.split(" ");
-        String[] name_start = alls[1].split(";");
-        String name = name_start[0].replaceAll("\\([\\s\\S]+\\)","");
-        Function function = new Function("",func.replaceAll(matches.get("startfunc"),"").replace(":end","")) {};
-
-        String[] args = name_start[0].substring(name_start[0].indexOf("(")+1,name_start[0].indexOf(")")).split(",");
-        function.setArgs(args);
-        functions.put(name.replaceAll("\\(([\\s\\S]+|)\\)",""),function);
-
+        Function function = Function.compile(func);
+        functions.put(function.getFunctionName(),function);
         return "create successfully";
     }
 
-    public static String parse(String command,Map<String,Var> vars){
-        StringBuilder builder = new StringBuilder();
+
+    /**
+     * 解析局部变量的参数
+     * @param command
+     * @param vars
+     * @return
+     */
+    private static Object parse(String command, Map<String,Var> vars){
+        Object result = null;
         //执行函数可以返回值
         //a=echo()
-        getScript().defineFunction(command);
-        Object obj = script.parseVar(script.unset(command,vars),vars);
-        builder.append(obj);
-        builder.append(script.listVar(command));
-        Object o = script.executeFunction(command);
-        String varName = script.getFunctionVarName(command);
-        if(varName!=null){
-            if(obj instanceof Var){
-                ((Var) obj).unset();
-            }
-            builder.append(script.parseVar(varName,o==null?"NULL":o.toString(),vars).getValue());
+        /* 定义函数 */
+        result = getScript().defineFunction(command);
+        if(!result.equals(command)){
+            return result;
+        }
+        /* 将变量设置 */
+        result = script.parseVar(script.unset(command,vars),vars);
+        if(!result.equals(command)){
+            return result;
+        }
+        result = script.listVar(command);
+        if(!result.equals(command)){
+            return result;
+        }
+        /* 执行函数，并设置返回值 */
+        result = script.executeFunction(command);
+
+        if(result.equals(command)){
+            return "compile error";
+        }else if(result.toString().startsWith("error:")){
+            return result;
         }
 
-        return builder.toString();
+        /* 获取返回值 */
+        String varName = script.getFunctionVarName(command);
+        if(varName!=null){
+            //TODO
+            result = script.parseVar(varName,result.toString(),vars).getValue();
+        }
+
+        return result;
     }
 
     public static String parse(String command){
-        return parse(command,script.vars);
+        return parse(command,script.vars).toString();
     }
 
+    /**
+     * 给命令参数设置变量
+     * @param args
+     * @return
+     */
     public static String[] setThat(String[] args){
         String[] dArgs = new String[args.length];
         int i = 0;

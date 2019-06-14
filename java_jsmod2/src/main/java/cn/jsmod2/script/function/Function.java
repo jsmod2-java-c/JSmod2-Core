@@ -1,6 +1,10 @@
 package cn.jsmod2.script.function;
 
-public abstract class Function {
+import cn.jsmod2.script.Memory;
+
+import java.util.Arrays;
+
+public abstract class Function extends Memory {
 
     private String functionName;
 
@@ -8,7 +12,7 @@ public abstract class Function {
 
     private String[] args;
 
-    public Function(String functionName,String code) {
+    Function(String functionName,String code) {
         this.functionName = functionName;
         this.code = code;
     }
@@ -31,5 +35,23 @@ public abstract class Function {
 
     public String[] getArgs() {
         return args;
+    }
+
+
+    public static Function compile(String func){
+        String[] alls = func.split(" ");
+        String[] name_start = alls[1].split(";");
+        String name = name_start[0].replaceAll("\\([\\s\\S]+\\)","");
+        Function function = new Function("",func.replaceAll(matches.get("startfunc"),"").replace(":end","")) {};
+        function.functionName = name.replaceAll("\\(([\\s\\S]+|)\\)","");
+        String[] args = name_start[0].substring(name_start[0].indexOf("(")+1,name_start[0].indexOf(")")).split(",");
+        function.setArgs(args);
+        return function;
+    }
+
+    @Override
+    public String toString() {
+        String argsString =  Arrays.toString(args);
+        return "func "+functionName+"("+argsString.substring(argsString.indexOf("[")+1,argsString.indexOf("]"))+");start:"+code+":end";
     }
 }
