@@ -4,6 +4,7 @@ import cn.jsmod2.Register;
 import cn.jsmod2.script.function.EchoFunction;
 import cn.jsmod2.script.function.Function;
 import cn.jsmod2.script.function.NativeFunction;
+import cn.jsmod2.script.function.TypeOfFunction;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +18,7 @@ public class Jsmod2Script {
     static {
         script = new Jsmod2Script();
         getScript().functions.put("echo",new EchoFunction());
+        getScript().functions.put("typeof",new TypeOfFunction());
     }
 
     private static Jsmod2Script script;
@@ -165,4 +167,7 @@ public class Jsmod2Script {
         return script;
     }
 
+    public Map<String, Var> getVars() {
+        return vars;
+    }
 }
