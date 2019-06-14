@@ -38,9 +38,11 @@ public class Jsmod2 {
             Properties langProperties = FileSystem.getFileSystem().langProperties(log);
             FileSystem.getFileSystem().initLang(langProperties);
             long start = System.currentTimeMillis();
+            log.info("this server uses the Emerald v0.1 Engine By MagicLu550");
             startMessage(langProperties);
             new Server(langProperties);
             long startSuccess = System.currentTimeMillis();
+
             for(String success:Register.getInstance().getSuccessInfo()){
                 log.info(MessageFormat.format(langProperties.getProperty(success),(startSuccess-start)+""));
             }

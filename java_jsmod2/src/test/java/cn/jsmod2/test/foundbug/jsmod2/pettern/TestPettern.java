@@ -6,8 +6,8 @@ public class TestPettern {
 
     @Test
     public void testPattern(){
-        String var = "a=0";
-        System.out.println(var.matches("[a-z0-9A-Z_]+=[a-z0-9A-Z_]"));
+        String var = "func name();start:echo(1):end";
+        System.out.println(var.matches("func [\\s\\S]+\\(([\\s\\S]*|[\\s\\S]+)\\);start:[\\s\\S]+:end"));
     }
 
 }

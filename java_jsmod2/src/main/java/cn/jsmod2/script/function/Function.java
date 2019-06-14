@@ -6,6 +6,8 @@ public abstract class Function {
 
     private String code;
 
+    private String[] args;
+
     public Function(String functionName,String code) {
         this.functionName = functionName;
         this.code = code;
@@ -22,4 +24,9 @@ public abstract class Function {
     public String getCode() {
         return code;
     }
+
+    public void setArgs(String... args) {
+        this.args = args;
+    }
+
 }

@@ -130,11 +130,36 @@ public class Jsmod2Script {
         }
         return null;
     }
+    //定义函数是
+    // func name(a,b);start:
+    //  语句
+    //  语句
+    // :end
+    //
+    private String defineFunction(String func){
+        if(!func.matches(matches.get("dfunc"))){
+            return func;
+        }
+        String[] alls = func.split(" ");
+        String[] name_start = alls[1].split(";");
+        String name = name_start[0].replaceAll("\\([\\s\\S]+\\)","");
+        Function function = new Function("",func.replace(matches.get("startfunc"),"").replace(":end","")) {
+            @Override
+            public String getFunctionName() {
+                return super.getFunctionName();
+            }
+        };
+
+        function.setArgs(name_start[0].substring(name_start[0].indexOf("(")+1,name_start[0].indexOf(")")).split(","));
+        functions.put(name,function);
+        return "create successfully";
+    }
 
     public static String parse(String command){
         StringBuilder builder = new StringBuilder();
         //执行函数可以返回值
         //a=echo()
+        builder.append(getScript().defineFunction(command));
         Object obj = script.parseVar(script.unset(command));
         builder.append(obj);
         builder.append(script.listVar(command));

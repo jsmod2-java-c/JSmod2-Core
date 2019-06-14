@@ -51,7 +51,15 @@ public class Console extends Smod2Server {
             //String command = reader.readLine(">");
             try{
                 if(Jsmod2Script.matchPettern(command)){
-                    Utils.getMessageSender().info(Jsmod2Script.parse(command));
+                    StringBuilder builder = new StringBuilder(command);
+                    if(command.matches(Register.getInstance().getScriptPettern().get("startfunc"))){
+                        while(!builder.toString().endsWith(":end")){
+                            Utils.getMessageSender().info("\njsmod2-func>");
+                            String otherCommand = Server.getScanner().nextLine();
+                            builder.append(otherCommand);
+                        }
+                    }
+                    Utils.getMessageSender().info(Jsmod2Script.parse(builder.toString()));
                 }else{
                     runConsoleCommand(command);
                 }
