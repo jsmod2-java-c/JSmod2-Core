@@ -2,7 +2,6 @@ package cn.jsmod2.script;
 
 import cn.jsmod2.Register;
 import cn.jsmod2.script.function.*;
-import com.sun.corba.se.spi.ior.ObjectKey;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
@@ -92,7 +91,7 @@ public class Jsmod2Script {
         if(!cmd.matches(Memory.matches.get("if"))){
             return cmd;
         }
-        
+
 
 
         return null;
