@@ -2,7 +2,6 @@ package cn.jsmod2.script;
 
 import cn.jsmod2.ex.TypeErrorException;
 
-import java.util.Arrays;
 
 public class Var extends Memory{
 
@@ -74,6 +73,13 @@ public class Var extends Memory{
 
     public static Var compile(String command){
         String[] key_value = command.split("=");
+        if(key_value.length<2){
+            command = command+" ";
+            String key = key_value[0];
+            key_value = new String[2];
+            key_value[0] = key;
+            key_value[1] = " ";
+        }
         if(Memory.command.contains(key_value[0])){
             throw new TypeErrorException("the name is define in native");
         }
@@ -89,7 +95,6 @@ public class Var extends Memory{
         if(command.endsWith("=")){
             builder.append("=");
         }
-        System.out.println(builder.toString());
         return new Var(key_value[0],builder.toString());
     }
 

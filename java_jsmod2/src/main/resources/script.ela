@@ -5,6 +5,7 @@ a=0=01sa=
 test script
 """
 func test();start:
-    f::echo(1); #这是一个脚本
-    f::test();
+    #f::echo(1); 这是一个脚本
+    ${a}
 :end
+f::echo(f::test())

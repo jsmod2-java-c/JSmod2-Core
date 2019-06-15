@@ -4,6 +4,7 @@ import cn.jsmod2.script.function.*;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,6 +63,7 @@ public class EmeraldScript_JavaParser {
                     getFunc.append(codes.get(i).replaceAll(" ","").replaceAll("#[\\s\\S]+",""));
                     i++;
                 }
+                i--;
             }
             parse(getFunc.toString());
         }
@@ -137,7 +139,7 @@ public class EmeraldScript_JavaParser {
             return cmd;
         }
         String[] key_value = cmd.split("=");
-        Var var = parseVar(key_value[0],key_value[1],vars,cmd);
+        Var var = parseVar(key_value[0],setThat(key_value[1])[0],vars,setThat(cmd)[0]);
         return var+"TYPE:"+var.getType();
     }
 
@@ -238,7 +240,9 @@ public class EmeraldScript_JavaParser {
         String[] args = funcName.substring(funcName.indexOf("(")+1,funcName.lastIndexOf(")")).split(",");
         args = setThat(args);
         for(int i = 0;i<args.length;i++){
-            args[i] = executeFunction(args[i])==null?"NULL":args[i].toString();
+            if(!args[i].isEmpty()){
+                args[i] = executeFunction(args[i].trim()).toString();
+            }
         }
         funcName = funcName.replace("f::","").replaceAll("\\(([\\s\\S]+|[\\s\\S]*)\\)","");
         Function function = functions.get(funcName);
@@ -260,7 +264,9 @@ public class EmeraldScript_JavaParser {
         String[] alls = function.getArgs();
         //形式参数
         for(int i =0;i<args.length;i++){
-            vars_func.put(alls[i],Var.compile(alls[i]+"="+args[i]));
+            if(!alls[i].isEmpty()){
+                vars_func.put(alls[i],Var.compile(alls[i]+"="+args[i]));
+            }
         }
 
         String code = function.getCode();
@@ -270,8 +276,7 @@ public class EmeraldScript_JavaParser {
         for(int i = 0;i<codes.length-1;i++) {
             EmeraldScript_JavaParser.parse(codes[i],vars_func);
         }
-
-        return EmeraldScript_JavaParser.parse(codes[codes.length-1]);
+        return setThat(EmeraldScript_JavaParser.parse(codes[codes.length-1]))[0];
     }
 
     /**
@@ -317,6 +322,7 @@ public class EmeraldScript_JavaParser {
      * @return
      */
     private static Object parse(String command, Map<String,Var> vars){
+
         Object result = null;
         //执行函数可以返回值
         //a=echo()
@@ -325,11 +331,13 @@ public class EmeraldScript_JavaParser {
         if(!result.equals(command)){
             return result;
         }
+
         /* 将变量设置 */
         result = script.parseVar(script.unset(command,vars),vars);
         if(!result.equals(command)){
             return result;
         }
+
         result = script.listVar(command);
         if(!result.equals(command)){
             return result;
@@ -337,16 +345,13 @@ public class EmeraldScript_JavaParser {
         /* 执行函数，并设置返回值 */
         result = script.executeFunction(command);
 
-        if(result.equals(command)){
-            return "compile error";
-        }else if(result.toString().startsWith("error:")){
+        if(result.toString().startsWith("error:")){
             return result;
         }
 
         /* 获取返回值 */
         String varName = script.getFunctionVarName(command);
         if(varName!=null){
-            //TODO
             result = script.parseVar(varName,result.toString(),vars,varName+"="+result.toString()).getValue();
         }
 
@@ -362,7 +367,7 @@ public class EmeraldScript_JavaParser {
      * @param args
      * @return
      */
-    public static String[] setThat(String[] args){
+    public static String[] setThat(String... args){
         String[] dArgs = new String[args.length];
         int i = 0;
         //关于变量
