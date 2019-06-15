@@ -9,14 +9,13 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2;
 
 import cn.jsmod2.log.ILogger;
-import cn.jsmod2.script.Jsmod2Script;
+import cn.jsmod2.script.EmeraldScript_JavaParser;
 import cn.jsmod2.utils.Utils;
 import org.apache.commons.io.FileUtils;
 import org.kohsuke.github.GHCommit;
 import org.kohsuke.github.GHOrganization;
 import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GitHub;
-import scala.sys.Prop;
 
 import java.io.*;
 import java.util.*;
@@ -109,7 +108,7 @@ public class FileSystem {
             }
             List<String> alls = FileUtils.readLines(file,"utf-8");
             for(String path:alls){
-                Jsmod2Script.getScript().importFile(path);
+                EmeraldScript_JavaParser.getScript().importFile(path);
             }
         }catch (IOException e){
             e.printStackTrace();

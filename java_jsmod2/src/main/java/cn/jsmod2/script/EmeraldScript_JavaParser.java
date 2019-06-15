@@ -1,6 +1,5 @@
 package cn.jsmod2.script;
 
-import cn.jsmod2.Register;
 import cn.jsmod2.script.function.*;
 import org.apache.commons.io.FileUtils;
 
@@ -13,17 +12,17 @@ import java.util.Map;
  * Jsmod2服务器脚本的解析器
  * script进入脚本解析页面
  */
-public class Jsmod2Script {
+public class EmeraldScript_JavaParser {
 
     static {
-        script = new Jsmod2Script();
+        script = new EmeraldScript_JavaParser();
         getScript().functions.put("echo",new EchoFunction());
         getScript().functions.put("typeof",new TypeOfFunction());
         getScript().functions.put("import",new ImportFunction());
         getScript().functions.put("register",new RegisterNativeFunction());
     }
 
-    private static Jsmod2Script script;
+    private static EmeraldScript_JavaParser script;
 
     private Map<String, Function> functions = new HashMap<>();
 
@@ -58,7 +57,7 @@ public class Jsmod2Script {
                 continue;
             }
             StringBuilder getFunc = new StringBuilder(codes.get(i));
-            if(codes.get(i).matches(Register.getInstance().getScriptPettern().get("startfunc"))){
+            if(codes.get(i).matches(Memory.matches.get("startfunc"))){
                 while (!getFunc.toString().endsWith(":end")){
                     getFunc.append(codes.get(i).replaceAll(" ","").replaceAll("#[\\s\\S]+",""));
                     i++;
@@ -97,6 +96,27 @@ public class Jsmod2Script {
         return null;
     }
 
+    /**
+     * 计算运算表达式
+     * let a = (1+1+2+3/4)*2
+     * 先算乘除 后算加减
+     *
+     * @param expression
+     * @return
+     */
+    private String performCalculations(String expression){
+        if(!expression.matches(Memory.matches.get("pc"))){
+            return expression;
+        }
+
+        return "";
+    }
+
+    private String performBoolean(String expression){
+        return "";
+    }
+
+
 
 
     /**
@@ -107,6 +127,9 @@ public class Jsmod2Script {
      */
     //a=0
     private Object parseVar(String cmd,Map<String,Var> vars){
+        if(cmd.matches(Memory.matches.get("pc"))){
+            return cmd;
+        }
         if(cmd.matches(Memory.matches.get("func"))){
             return cmd;
         }
@@ -114,7 +137,7 @@ public class Jsmod2Script {
             return cmd;
         }
         String[] key_value = cmd.split("=");
-        Var var = parseVar(key_value[0],key_value[1],vars);
+        Var var = parseVar(key_value[0],key_value[1],vars,cmd);
         return var+"TYPE:"+var.getType();
     }
 
@@ -125,13 +148,13 @@ public class Jsmod2Script {
      * @param vars
      * @return
      */
-    private Var parseVar(String key,String value,Map<String,Var> vars){
+    private Var parseVar(String key,String value,Map<String,Var> vars,String cmd){
         if(vars.get(key)!=null){
             Var var = vars.get(key);
             var.setValue(value);
             return var;
         }else{
-            Var var = Var.compile(key+"="+value);
+            Var var = Var.compile(cmd);
             vars.put(key,var);
             return var;
         }
@@ -163,7 +186,7 @@ public class Jsmod2Script {
      * @return
      */
     public static boolean matchPattern(String command){
-        Map<String,String> patterns = Register.getInstance().getScriptPettern();
+        Map<String,String> patterns = Memory.matches;
         for(String pattern:patterns.values()){
             if(command.matches(pattern)){
                 return true;
@@ -245,10 +268,10 @@ public class Jsmod2Script {
         String[] codes =code.split(";");
 
         for(int i = 0;i<codes.length-1;i++) {
-            Jsmod2Script.parse(codes[i],vars_func);
+            EmeraldScript_JavaParser.parse(codes[i],vars_func);
         }
 
-        return Jsmod2Script.parse(codes[codes.length-1]);
+        return EmeraldScript_JavaParser.parse(codes[codes.length-1]);
     }
 
     /**
@@ -324,7 +347,7 @@ public class Jsmod2Script {
         String varName = script.getFunctionVarName(command);
         if(varName!=null){
             //TODO
-            result = script.parseVar(varName,result.toString(),vars).getValue();
+            result = script.parseVar(varName,result.toString(),vars,varName+"="+result.toString()).getValue();
         }
 
         return result;
@@ -356,7 +379,7 @@ public class Jsmod2Script {
 
 
 
-    public static Jsmod2Script getScript() {
+    public static EmeraldScript_JavaParser getScript() {
         return script;
     }
 

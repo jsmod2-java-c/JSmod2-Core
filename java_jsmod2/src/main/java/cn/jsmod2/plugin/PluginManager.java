@@ -22,7 +22,7 @@ import cn.jsmod2.ex.EventException;
 import cn.jsmod2.ex.NoSuchPluginNameException;
 import cn.jsmod2.ex.PluginException;
 import cn.jsmod2.ex.TypeErrorException;
-import cn.jsmod2.script.Jsmod2Script;
+import cn.jsmod2.script.EmeraldScript_JavaParser;
 import cn.jsmod2.utils.MethodInvokeMapper;
 import cn.jsmod2.utils.Utils;
 import cn.jsmod2.command.Command;
@@ -195,7 +195,7 @@ public class PluginManager {
             if(command.getCommandName().equals(commandName)){
                 //指令发送者所拥有的权限是否包含指令允许的权限
                 if(PowerPool.poolMapping().get(sender.getName()).contains(command.getPower())){
-                    args = Jsmod2Script.setThat(args);
+                    args = EmeraldScript_JavaParser.setThat(args);
                     return command.execute(sender,args);
                 }else{
                     Utils.getMessageSender().error("do not have this power");

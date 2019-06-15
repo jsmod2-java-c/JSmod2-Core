@@ -10,7 +10,8 @@ package cn.jsmod2;
 
 import cn.jsmod2.api.server.Smod2Server;
 import cn.jsmod2.ex.ServerRuntimeException;
-import cn.jsmod2.script.Jsmod2Script;
+import cn.jsmod2.script.EmeraldScript_JavaParser;
+import cn.jsmod2.script.Memory;
 import cn.jsmod2.utils.Utils;
 import jline.console.completer.Completer;
 import cn.jsmod2.command.NativeCommand;
@@ -50,16 +51,16 @@ public class Console extends Smod2Server {
             String command = Server.getScanner().nextLine();
             //String command = reader.readLine(">");
             try{
-                if(Jsmod2Script.matchPattern(command)){
+                if(EmeraldScript_JavaParser.matchPattern(command)){
                     StringBuilder builder = new StringBuilder(command);
-                    if(command.matches(Register.getInstance().getScriptPettern().get("startfunc"))){
+                    if(command.matches(Memory.matches.get("startfunc"))){
                         while(!builder.toString().endsWith(":end")){
                             Utils.getMessageSender().info("\njsmod2-func>");
                             String otherCommand = Server.getScanner().nextLine();
                             builder.append(otherCommand);
                         }
                     }
-                    Utils.getMessageSender().info(Jsmod2Script.parse(builder.toString()));
+                    Utils.getMessageSender().info(EmeraldScript_JavaParser.parse(builder.toString()));
                 }else{
                     runConsoleCommand(command);
                 }
@@ -119,9 +120,9 @@ public class Console extends Smod2Server {
         String[] strs = command.split(" ");
         String[] args = new String[strs.length-1];
         System.arraycopy(strs,1,args,0,args.length);
-        args = Jsmod2Script.setThat(args);
+        args = EmeraldScript_JavaParser.setThat(args);
         for(int i = 0;i<args.length;i++){
-           args[i] = Jsmod2Script.getScript().executeFunction(args[i]).toString();
+           args[i] = EmeraldScript_JavaParser.getScript().executeFunction(args[i]).toString();
         }
         List<NativeCommand> commands =
                 Server

@@ -112,16 +112,7 @@ public class Register {
         serverProperties.put(FileSystem.SMOD2_IP,"127.0.0.1");
     }
 
-    public void registerScriptPattern(){
-        //关于变量的正则
-        scriptPettern.put("var","[a-z0-9A-Z_]+=[\\s\\S]+");
-        scriptPettern.put("list","list");
-        scriptPettern.put("unset","unset [a-z0-9A-Z_]+(=[\\s\\S]+)*");
-        scriptPettern.put("func","([a-z0-9A-Z_]=)*(f::)[\\s\\S]+\\(([\\s\\S]+|[\\s\\S]*)\\)");
-        scriptPettern.put("dfunc","func [\\s\\S]+\\(([\\s\\S]*|[\\s\\S]+)\\);start:[\\s\\S]+:end");
-        scriptPettern.put("startfunc","func [\\s\\S]+\\(([\\s\\S]+|)\\);start:");
-        scriptPettern.put("if","if\\[[\\s\\S]+\\](([\\s\\S]+)|\\{[.]+\\})((elif\\[[\\s\\S]+\\]([\\s\\S]+)|else\\{([\\s\\S]+;)+\\})+|elif\\[[\\s\\S]+\\]\\{([\\s\\S]+)+\\}|)");
-    }
+
 
     public void registerException(){
         ex_methods.put (TypeErrorException.class,"* your configuration file type may have some problems, please see your configuration file type*\n\t refer to cn.jsmod2.utils.config.ConfigQueryer class\n\t or cn.jsmod2.configs.ConfigType class");
@@ -288,11 +279,9 @@ public class Register {
         this.getPackets = getPackets;
     }
 
-    public Map<String, String> getScriptPettern() {
-        return scriptPettern;
-    }
 
-    private Map<String,String> scriptPettern = new HashMap<>();
+
+
 
 
     //注册
@@ -306,6 +295,5 @@ public class Register {
         getInstance().registerServerProperties();
         getInstance().registerStartInfo();
         getInstance().registerSuccessInfo();
-        getInstance().registerScriptPattern();
     }
 }

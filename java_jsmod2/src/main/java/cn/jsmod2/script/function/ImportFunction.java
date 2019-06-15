@@ -1,6 +1,6 @@
 package cn.jsmod2.script.function;
 
-import cn.jsmod2.script.Jsmod2Script;
+import cn.jsmod2.script.EmeraldScript_JavaParser;
 
 import java.io.IOException;
 
@@ -13,7 +13,7 @@ public class ImportFunction extends NativeFunction {
     @Override
     public Object execute(Object... objs) {
         try{
-            Jsmod2Script.getScript().importFile(objs[0].toString());
+            EmeraldScript_JavaParser.getScript().importFile(objs[0].toString());
         }catch (IOException e){
             e.printStackTrace();
         }
