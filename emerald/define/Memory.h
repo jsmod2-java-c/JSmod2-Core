@@ -1,5 +1,5 @@
 //
-// Created by 卢恕志 on 2019-06-16.
+// Created by mgl on 2019-06-16.
 //
 
 #ifndef EMERALD_MEMORY_H

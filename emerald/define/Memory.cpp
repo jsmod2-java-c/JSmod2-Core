@@ -1,10 +1,11 @@
 //
-// Created by 卢恕志 on 2019-06-16.
+// Created by mgl on 2019-06-16.
 //
 
 #include "Memory.h"
 #include <map>
 
+using namespace std;
 
 int Memory::registerScriptMatches() {
     matches->insert(pair<string,string>("var","[a-z0-9A-Z_]+=[\\s\\S]+"));

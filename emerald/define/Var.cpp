@@ -6,6 +6,8 @@
 #include <regex>
 #include "Util.cpp"
 
+using namespace std;
+
 Var::Var(string name, string value):name(name),value(value) {
     this->type = this->parseType(value);
     if(value == "NULL"){
@@ -65,6 +67,19 @@ void Var::unset() {
     this->value= "NULL";
 }
 Var* Var::compile(string command) {
+    vector<string> strs = split(command,'=');
+    if(strs.size()<2){
+        command = command+"";
+        string key = strs[0];
+        strs.clear();
+        strs[0] = key;
+        strs[1] = " ";
+    }
+    if(matches->count(strs[0])==1){
+        cout<< "the name is define in native";
+        return NULL;
+    }
+    vector<string> values(strs.size()-1);
 
 }
 

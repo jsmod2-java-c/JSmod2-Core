@@ -18,6 +18,7 @@ int main(int argc,char* args[]) {
                 EmeraldScript::parse(args[i]);
             }
         }else if(strcmp(args[0],"-i")==0){
+
         }else{
 
         }
