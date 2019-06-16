@@ -10,6 +10,9 @@ package cn.jsmod2.network.command;
 
 import cn.jsmod2.annotations.UseForServerInit;
 
+/**
+ * command vo
+ */
 public class CommandVO {
     private String commandName;
 
