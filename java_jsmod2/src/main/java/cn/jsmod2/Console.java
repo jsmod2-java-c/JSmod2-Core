@@ -67,7 +67,7 @@ public class Console extends Smod2Server {
                             builder.append(otherCommand);
                         }
                     }
-                    Utils.getMessageSender().info(EmeraldScript_JavaParser.parse(builder.toString()));
+                    Utils.getMessageSender().info("RETURN_THAT:emerald."+EmeraldScript_JavaParser.parse(builder.toString()));
                 }else{
                     runConsoleCommand(command);
                 }

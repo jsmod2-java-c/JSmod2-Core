@@ -19,13 +19,12 @@ public class IfFunction extends NativeFunction{
         if(expression.equals("1")){
             resultBoolean = true;
         }
-        String code = objs[0].toString();
+        String code = objs[1].toString();
         HashMap<String, Var> vars = new HashMap<>();
         vars.putAll(EmeraldScript_JavaParser.getScript().getVars());
         String[] codes = code.split(";");
         if(resultBoolean){
             for(String c:codes) {
-                System.out.println(c);
                 EmeraldScript_JavaParser.parse(c, vars);
             }
         }

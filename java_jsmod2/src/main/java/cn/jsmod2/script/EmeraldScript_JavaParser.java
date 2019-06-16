@@ -261,7 +261,7 @@ public class EmeraldScript_JavaParser {
         String funcCode = "";
         //native方法提供了funcCode
         if(before.matches(Memory.matches.get("ffunc"))){
-            funcCode = funcName.substring(funcName.indexOf("{")+1,funcName.indexOf("}"));
+            funcCode = before.substring(before.indexOf("{")+1,before.indexOf("}"));
             funcName = before.substring(0,before.indexOf("{")).replaceAll("\\(([\\s\\S]+|[\\s\\S]*)\\)","");
             args = Arrays.copyOf(args,args.length+1);
             args[args.length-1] = funcCode;

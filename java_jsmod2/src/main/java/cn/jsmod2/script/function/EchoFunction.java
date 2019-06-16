@@ -11,7 +11,11 @@ public class EchoFunction extends NativeFunction {
 
     @Override
     public Void execute(Object... objects) {
-        System.out.println(Arrays.toString(objects));
+        StringBuilder builder = new StringBuilder();
+        for(Object o:objects){
+            builder.append(o.toString());
+        }
+        System.out.println(builder.toString());
         return null;
     }
 }
