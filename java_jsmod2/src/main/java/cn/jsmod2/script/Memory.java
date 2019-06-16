@@ -20,11 +20,13 @@ public abstract class Memory {
         scriptPattern.put("var","[a-z0-9A-Z_]+=[\\s\\S]+");
         scriptPattern.put("list","list");
         scriptPattern.put("unset","unset [a-z0-9A-Z_]+(=[\\s\\S]+)*");
-        scriptPattern.put("func","([a-z0-9A-Z_]=)*(f::)[\\s\\S]+\\(([\\s\\S]+|[\\s\\S]*)\\)");
+        scriptPattern.put("func","([a-z0-9A-Z_]=)*[\\s\\S]+\\(([\\s\\S]+|[\\s\\S]*)\\)(\\{([\\s\\S]+|)\\})*");
         scriptPattern.put("dfunc","func [\\s\\S]+\\(([\\s\\S]*|[\\s\\S]+)\\);start:[\\s\\S]+:end");
         scriptPattern.put("startfunc","func [\\s\\S]+\\(([\\s\\S]+|)\\);start:");
         scriptPattern.put("pc","let [a-zA-Z0-9_]+=[\\s\\S]+");
-        scriptPattern.put("if","if\\[[\\s\\S]+\\](([\\s\\S]+)|\\{[.]+\\})((elif\\[[\\s\\S]+\\]([\\s\\S]+)|else\\{([\\s\\S]+;)+\\})+|elif\\[[\\s\\S]+\\]\\{([\\s\\S]+)+\\}|)");
+        scriptPattern.put("ffunc","([a-z0-9A-Z_]=)*[\\s\\S]+\\(([\\s\\S]+|[\\s\\S]*)\\)\\{([\\s\\S]+|)\\}");
+        scriptPattern.put("start","([\\s\\S]+|)\\{");
+        //scriptPattern.put("if","if\\[[\\s\\S]+\\](([\\s\\S]+)|\\{[.]+\\})((elif\\[[\\s\\S]+\\]([\\s\\S]+)|else\\{([\\s\\S]+;)+\\})+|elif\\[[\\s\\S]+\\]\\{([\\s\\S]+)+\\}|)");
     }
 
     static {
@@ -32,7 +34,6 @@ public abstract class Memory {
         command.add("func");
         command.add("start");
         command.add("end");
-        command.add("nick");
         command.add("NULL");
         command.add("unset");
         command.add("list");

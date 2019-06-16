@@ -21,6 +21,7 @@ public class EmeraldScript_JavaParser {
         getScript().functions.put("typeof",new TypeOfFunction());
         getScript().functions.put("import",new ImportFunction());
         getScript().functions.put("register",new RegisterNativeFunction());
+        getScript().functions.put("if",new IfFunction());
     }
 
     private static EmeraldScript_JavaParser script;
@@ -61,6 +62,13 @@ public class EmeraldScript_JavaParser {
             if(codes.get(i).matches(Memory.matches.get("startfunc"))){
                 while (!getFunc.toString().endsWith(":end")){
                     getFunc.append(codes.get(i).replaceAll(" ","").replaceAll("#[\\s\\S]+",""));
+                    i++;
+                }
+                i--;
+            }
+            if(codes.get(i).matches(Memory.matches.get("start"))){
+                while (!getFunc.toString().endsWith("}")){
+                    getFunc.append(codes.get(i));
                     i++;
                 }
                 i--;
@@ -237,14 +245,27 @@ public class EmeraldScript_JavaParser {
         if(strs.length==2){
             funcName = strs[1];
         }
-        String[] args = funcName.substring(funcName.indexOf("(")+1,funcName.lastIndexOf(")")).split(",");
+        String last = ")";
+        if(funcName.contains("{")&&funcName.contains("}")){
+            last = "){";
+        }
+        String[] args = funcName.substring(funcName.indexOf("(")+1,funcName.lastIndexOf(last)).split(",");
         args = setThat(args);
         for(int i = 0;i<args.length;i++){
             if(!args[i].isEmpty()){
                 args[i] = executeFunction(args[i].trim()).toString();
             }
         }
-        funcName = funcName.replace("f::","").replaceAll("\\(([\\s\\S]+|[\\s\\S]*)\\)","");
+        String before = funcName;
+        funcName = funcName.replaceAll("\\(([\\s\\S]+|[\\s\\S]*)\\)","");
+        String funcCode = "";
+        //native方法提供了funcCode
+        if(before.matches(Memory.matches.get("ffunc"))){
+            funcCode = funcName.substring(funcName.indexOf("{")+1,funcName.indexOf("}"));
+            funcName = before.substring(0,before.indexOf("{")).replaceAll("\\(([\\s\\S]+|[\\s\\S]*)\\)","");
+            args = Arrays.copyOf(args,args.length+1);
+            args[args.length-1] = funcCode;
+        }
         Function function = functions.get(funcName);
         if(function==null){
             return "error:no such function!"+funcName+"on "+func.indexOf(funcName)+" error";
@@ -321,7 +342,7 @@ public class EmeraldScript_JavaParser {
      * @param vars
      * @return
      */
-    private static Object parse(String command, Map<String,Var> vars){
+    public static Object parse(String command, Map<String,Var> vars){
 
         Object result = null;
         //执行函数可以返回值

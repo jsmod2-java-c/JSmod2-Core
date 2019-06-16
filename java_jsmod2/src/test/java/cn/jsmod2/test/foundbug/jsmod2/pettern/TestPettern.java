@@ -28,4 +28,10 @@ public class TestPettern {
         System.out.println(var.matches(pattern));
     }
 
+    @Test
+    public void test2(){
+        String val = "([a-z0-9A-Z_]=)*[\\s\\S]+\\(([\\s\\S]+|[\\s\\S]*)\\)\\{([\\s\\S]+|)\\}";
+        System.out.println("if(1){echo(1)}".matches(val));
+    }
+
 }
