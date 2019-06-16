@@ -123,13 +123,10 @@ public class Console extends Smod2Server {
         return simpleConsole;
     }
 
-    public boolean runConsoleCommand(String command){
-        String[] strs = command.split(" ");
-        String[] args = new String[strs.length-1];
-        System.arraycopy(strs,1,args,0,args.length);
+    public boolean runConsoleCommand(String commandName,String[] args){
         args = EmeraldScript_JavaParser.setThat(args);
         for(int i = 0;i<args.length;i++){
-           args[i] = EmeraldScript_JavaParser.getScript().executeFunction(args[i]).toString();
+            args[i] = EmeraldScript_JavaParser.getScript().executeFunction(args[i]).toString();
         }
         List<NativeCommand> commands =
                 Server
@@ -154,7 +151,7 @@ public class Console extends Smod2Server {
          * player all
          */
         for(NativeCommand cmd:commands){
-            if(strs[0].equals(cmd.getCommandName())){
+            if(commandName.equals(cmd.getCommandName())){
                 //如果含有这个权限
                 if(getPowers().contains(cmd.getPower())){
                     cmd.execute(this,args);
@@ -168,5 +165,12 @@ public class Console extends Smod2Server {
             Utils.getMessageSender().error("Unkown command,please input 'help'");
         }
         return true;
+    }
+
+    public boolean runConsoleCommand(String command){
+        String[] strs = command.split(" ");
+        String[] args = new String[strs.length-1];
+        System.arraycopy(strs,1,args,0,args.length);
+        return runConsoleCommand(strs[0],args);
     }
 }
