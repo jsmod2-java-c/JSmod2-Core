@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../define/Parser.h
+
+../define/Util.cpp
+regex
+../define/regex
+
+../define/Var.cpp
+Var.h
+../define/Var.h
+String.h
+../define/String.h
+regex
+-
+Util.cpp
+../define/Util.cpp
+
+../define/Var.h
+
+/Users/lushuzhi/CLionProjects/emerald/main.cpp
+iostream
+-
+Var.h
+/Users/lushuzhi/CLionProjects/emerald/Var.h
+Var.cpp
+/Users/lushuzhi/CLionProjects/emerald/Var.cpp
+Parser.h
+/Users/lushuzhi/CLionProjects/emerald/Parser.h
+

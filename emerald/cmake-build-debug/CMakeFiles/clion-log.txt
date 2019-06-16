@@ -1,0 +1,4 @@
+/private/var/folders/_4/r29m_wnn1wg993ctj3k4dgvr0000gn/T/AppTranslocation/EAEBB994-8403-4816-972C-176999E13845/d/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=/usr/bin/g++ -G "CodeBlocks - Unix Makefiles" /Users/lushuzhi/CLionProjects/emerald
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/lushuzhi/CLionProjects/emerald/cmake-build-debug
