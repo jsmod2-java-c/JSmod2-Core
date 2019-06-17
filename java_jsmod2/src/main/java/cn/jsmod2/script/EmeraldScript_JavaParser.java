@@ -24,6 +24,23 @@ import java.util.Map;
  *
  *     }
  * }
+ * while语法
+ * while(boolean b){
+ *
+ * }
+ * do{
+ *
+ * }while(boolean b)
+ *
+ * for语法
+ * for(a in range(10)){
+ *
+ * }
+ * 数组
+ * [1,2,3]
+ * 映射
+ * [1=>2,2=>3,3=>4]
+ *
  */
 public class EmeraldScript_JavaParser {
 
