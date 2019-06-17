@@ -124,9 +124,9 @@ public class Console extends Smod2Server {
     }
 
     public boolean runConsoleCommand(String commandName,String[] args){
-        args = EmeraldScript_JavaParser.setThat(args);
+        args = EmeraldScript_JavaParser.setThat(EmeraldScript_JavaParser.getScript().getVars(),args);
         for(int i = 0;i<args.length;i++){
-            args[i] = EmeraldScript_JavaParser.getScript().executeFunction(args[i]).toString();
+            args[i] = EmeraldScript_JavaParser.getScript().executeFunction(args[i],EmeraldScript_JavaParser.getScript().getVars(),EmeraldScript_JavaParser.getScript().getVars()).toString();
         }
         List<NativeCommand> commands =
                 Server

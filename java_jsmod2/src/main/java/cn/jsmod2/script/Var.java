@@ -66,6 +66,10 @@ public class Var extends Memory{
         }
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void unset(){
         this.type = "NULL";
         this.value = "NULL";

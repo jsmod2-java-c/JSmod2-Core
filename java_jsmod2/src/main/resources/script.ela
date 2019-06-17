@@ -1,11 +1,43 @@
 utf-8
-a=0=01sa=
-#test script
-"""
-test script
-"""
-func test();start:
-    #echo(1); 这是一个脚本
-    ${a}
+
+a=12
+
+func test1(a);start:
+    a=3;
+    echo(${a})
 :end
-echo(test())
+
+func test2(a);start:
+    # a=2;
+    echo(${a});
+    test1(${a});
+:end
+"""
+emerald-lang的语法
+定义变量:
+key=value
+变量一旦定义，数据类型已经确定
+数据类型:int double boolean null string
+可以使用unset key=value强制变换类型
+typeof(变量名)查看变量的类型
+定义函数
+func name(arg1,arg2...);start:
+    函数体
+:end
+函数形式参数的规定:形式参数当被改变时，会改变其上级作用域同名的值
+如a=12
+在函数1中有
+func name(a)
+a=1
+那么调用时，a会变1，但是如果不改变值，a不会变
+如果是这样
+func name2(a)
+a=3
+然后name中调用
+func name(a)
+name2(a)
+echo(${a})
+那么在name这个函数名的域内，a值会改变，但是出了name域，函数值依然不变
+调用函数:
+name(1)即可
+"""

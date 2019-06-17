@@ -107,7 +107,7 @@ public class EmeraldScript_JavaParser {
      * @return
      */
     //a=0
-    private Object parseVar(String cmd,Map<String,Var> vars){
+    private Object parseVar(String cmd,Map<String,Var> vars,Map<String,Var> parent){
         if(cmd.matches(Memory.matches.get("pc"))){
             return cmd;
         }
@@ -118,7 +118,10 @@ public class EmeraldScript_JavaParser {
             return cmd;
         }
         String[] key_value = cmd.split("=");
-        Var var = parseVar(key_value[0],setThat(key_value[1])[0],vars,setThat(cmd)[0]);
+        Var var = parseVar(key_value[0],setThat(vars,key_value[1])[0],vars,setThat(vars,cmd)[0],parent);
+        if(parent.containsKey(key_value[0])){
+            parent.get(key_value[0]).setValue(var.getValue());
+        }
         return var+"TYPE:"+var.getType();
     }
 
@@ -129,7 +132,7 @@ public class EmeraldScript_JavaParser {
      * @param vars
      * @return
      */
-    private Var parseVar(String key,String value,Map<String,Var> vars,String cmd){
+    private Var parseVar(String key,String value,Map<String,Var> vars,String cmd,Map<String,Var> parent){
         if(vars.get(key)!=null){
             Var var = vars.get(key);
             var.setValue(value);
@@ -207,7 +210,7 @@ public class EmeraldScript_JavaParser {
      * @param func
      * @return
      */
-    public Object executeFunction(String func){
+    public Object executeFunction(String func,Map<String,Var> vars,Map<String,Var> parent){
         if(!func.matches(Memory.matches.get("func"))){
             return func;
         }
@@ -217,14 +220,14 @@ public class EmeraldScript_JavaParser {
             funcName = strs[1];
         }
         String last = ")";
-        if(funcName.contains("{")&&funcName.contains("}")){
+        if(funcName.contains("){")&&funcName.contains("}")){
             last = "){";
         }
         String[] args = funcName.substring(funcName.indexOf("(")+1,funcName.lastIndexOf(last)).split(",");
-        args = setThat(args);
+        args = setThat(vars,args);
         for(int i = 0;i<args.length;i++){
             if(!args[i].isEmpty()){
-                args[i] = executeFunction(args[i].trim()).toString();
+                args[i] = executeFunction(args[i].trim(),vars,vars).toString();
             }
         }
         String before = funcName;
@@ -249,9 +252,7 @@ public class EmeraldScript_JavaParser {
         //普通函数还没开始处理
         //形式参数作用域在方法，方法执行完则销毁
         Map<String,Var> vars_func = new HashMap<>();
-
         vars_func.putAll(vars);
-
         //形式参数
         String[] alls = function.getArgs();
         //形式参数
@@ -260,15 +261,14 @@ public class EmeraldScript_JavaParser {
                 vars_func.put(alls[i],Var.compile(alls[i]+"="+args[i]));
             }
         }
-
         String code = function.getCode();
 
         String[] codes =code.split(";");
 
         for(int i = 0;i<codes.length-1;i++) {
-            EmeraldScript_JavaParser.parse(codes[i],vars_func);
+            EmeraldScript_JavaParser.parse(codes[i],vars_func,vars);
         }
-        return setThat(EmeraldScript_JavaParser.parse(codes[codes.length-1]))[0];
+        return setThat(vars_func,EmeraldScript_JavaParser.parse(codes[codes.length-1],vars_func,vars).toString())[0];
     }
 
     /**
@@ -313,8 +313,7 @@ public class EmeraldScript_JavaParser {
      * @param vars
      * @return
      */
-    public static Object parse(String command, Map<String,Var> vars){
-
+    public static Object parse(String command, Map<String,Var> vars,Map<String,Var> parent){
         Object result = null;
         //执行函数可以返回值
         //a=echo()
@@ -323,9 +322,8 @@ public class EmeraldScript_JavaParser {
         if(!result.equals(command)){
             return result;
         }
-
         /* 将变量设置 */
-        result = script.parseVar(script.unset(command,vars),vars);
+        result = script.parseVar(script.unset(command,vars),vars,parent);
         if(!result.equals(command)){
             return result;
         }
@@ -335,7 +333,7 @@ public class EmeraldScript_JavaParser {
             return result;
         }
         /* 执行函数，并设置返回值 */
-        result = script.executeFunction(command);
+        result = script.executeFunction(command,vars,parent);
 
         if(result.toString().startsWith("error:")){
             return result;
@@ -344,14 +342,14 @@ public class EmeraldScript_JavaParser {
         /* 获取返回值 */
         String varName = script.getFunctionVarName(command);
         if(varName!=null){
-            result = script.parseVar(varName,result.toString(),vars,varName+"="+result.toString()).getValue();
+            result = script.parseVar(varName,result.toString(),vars,varName+"="+result.toString(),parent).getValue();
         }
 
         return result;
     }
 
     public static String parse(String command){
-        return parse(command,script.vars).toString();
+        return parse(command,script.vars,script.vars).toString();
     }
 
     /**
@@ -359,13 +357,13 @@ public class EmeraldScript_JavaParser {
      * @param args
      * @return
      */
-    public static String[] setThat(String... args){
+    public static String[] setThat(Map<String,Var> vars,String... args){
         String[] dArgs = new String[args.length];
         int i = 0;
         //关于变量
         for(String arg:args){
             String lo = arg;
-            for(Map.Entry<String,Var> var:getScript().vars.entrySet()){
+            for(Map.Entry<String,Var> var:vars.entrySet()){
                 lo = lo.replace("${"+var.getKey()+"}",var.getValue().getValue());
             }
             dArgs[i] = lo;

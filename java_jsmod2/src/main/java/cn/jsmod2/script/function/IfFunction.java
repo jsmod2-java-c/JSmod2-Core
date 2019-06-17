@@ -3,7 +3,6 @@ package cn.jsmod2.script.function;
 import cn.jsmod2.script.EmeraldScript_JavaParser;
 import cn.jsmod2.script.Var;
 
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class IfFunction extends NativeFunction{
@@ -25,7 +24,7 @@ public class IfFunction extends NativeFunction{
         String[] codes = code.split(";");
         if(resultBoolean){
             for(String c:codes) {
-                EmeraldScript_JavaParser.parse(c, vars);
+                EmeraldScript_JavaParser.parse(c, vars,EmeraldScript_JavaParser.getScript().getVars());
             }
         }
         return resultBoolean;
