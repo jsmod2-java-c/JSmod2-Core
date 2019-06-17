@@ -187,6 +187,7 @@ public class EmeraldScript_JavaParser {
         if(vars.get(name)!=null){
             Var var;
             if(key.matches("\\*+[\\s\\S]+")){
+
                 var = findVar(key);
             }else{
                 var = vars.get(name);
@@ -275,7 +276,7 @@ public class EmeraldScript_JavaParser {
         if(!func.matches(Memory.matches.get("func"))){
             return func;
         }
-        String[] strs = func.split("=");
+        String[] strs = func.split("=|:\\*");
         String funcName= func;
         if(strs.length==2){
             funcName = strs[1];
@@ -329,7 +330,7 @@ public class EmeraldScript_JavaParser {
         for(int i = 0;i<codes.length;i++) {
             Object result = EmeraldScript_JavaParser.parse(codes[i],vars_func,vars);
             if(result.toString().startsWith("returned")){
-                return setThat(vars_func,result.toString().split(":")[1])[0];
+                return setThat(vars_func,result.toString().substring("return:".length()))[0];
             }
         }
         return "NULL";
@@ -342,7 +343,7 @@ public class EmeraldScript_JavaParser {
      */
     private String getFunctionVarName(String func){
         if(func.matches(Memory.matches.get("func"))){
-            String[] strs = func.split("=");
+            String[] strs = func.split("=|:\\*");
             if(strs.length==2){
                 return strs[0];
             }
@@ -406,7 +407,13 @@ public class EmeraldScript_JavaParser {
         /* 获取返回值 */
         String varName = script.getFunctionVarName(command);
         if(varName!=null){
-            result = script.parseVar(varName,result.toString(),vars,varName+"="+result.toString()).getValue();
+            String cmd;
+            if(command.matches(Memory.matches.get("ptr"))){
+                cmd=varName+":*"+result;
+            }else{
+                cmd=varName+"="+result;
+            }
+            result = script.parseVar(varName,result.toString(),vars,cmd).getValue();
         }
 
         return result;
@@ -435,6 +442,7 @@ public class EmeraldScript_JavaParser {
                 lo = lo.replace(group,value);
             }
             for(Map.Entry<String,Var> var:vars.entrySet()){
+                lo = lo.replace("${global::"+var.getKey()+"}",script.getVars().get(var.getKey()).getValue());
                 lo = lo.replace("${"+var.getKey()+"}",var.getValue().getValue());
             }
             dArgs[i] = lo;

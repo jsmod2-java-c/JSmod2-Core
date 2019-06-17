@@ -23,7 +23,7 @@ public abstract class Memory {
         scriptPattern.put("dfunc","func [\\s\\S]+\\(([\\s\\S]*|[\\s\\S]+)\\);start:[\\s\\S]+:end");
         scriptPattern.put("startfunc","func [\\s\\S]+\\(([\\s\\S]+|)\\);start:");
         scriptPattern.put("pc","let [a-zA-Z0-9_]+=[\\s\\S]+");
-        scriptPattern.put("ffunc","([a-z0-9A-Z_]=)*[\\s\\S]+\\(([\\s\\S]+|[\\s\\S]*)\\)\\{([\\s\\S]+|)\\}");
+        scriptPattern.put("ffunc","(([\\*]+|)[a-z0-9A-Z_]=)*[\\s\\S]+\\(([\\s\\S]+|[\\s\\S]*)\\)\\{([\\s\\S]+|)\\}");
         scriptPattern.put("start","([\\s\\S]+|)\\{");
         scriptPattern.put("ptr","(global::)*[a-z0-9A-Z_]+:\\*[\\s\\S]+");
         //scriptPattern.put("if","if\\[[\\s\\S]+\\](([\\s\\S]+)|\\{[.]+\\})((elif\\[[\\s\\S]+\\]([\\s\\S]+)|else\\{([\\s\\S]+;)+\\})+|elif\\[[\\s\\S]+\\]\\{([\\s\\S]+)+\\}|)");

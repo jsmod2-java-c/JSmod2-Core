@@ -105,7 +105,12 @@ public class Var extends Memory{
             String[] right_left = command.split(":\\*");
             String right = right_left[0].trim();
             String left = right_left[1].trim();
-            Var var = getScript().getVars().get(left);
+            Var var;
+            if(left.startsWith("d:")){
+                var = (Var) (getScript().getMemory_address_mapping().get(Integer.parseInt(left.substring("d:".length()))));
+            }else{
+                var = getScript().getVars().get(left);
+            }
             Var var_ptr = new Var(right,var.hashCode()+"");
             var_ptr.setPointerType(var.getType());
             return var_ptr;
