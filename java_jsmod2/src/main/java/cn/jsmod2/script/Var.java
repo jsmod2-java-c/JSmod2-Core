@@ -1,7 +1,7 @@
 package cn.jsmod2.script;
 
 import cn.jsmod2.ex.TypeErrorException;
-import scala.Int;
+
 
 
 import static cn.jsmod2.script.EmeraldScript_JavaParser.*;
