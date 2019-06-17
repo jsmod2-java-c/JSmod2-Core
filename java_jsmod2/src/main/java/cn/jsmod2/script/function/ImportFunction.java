@@ -12,8 +12,9 @@ public class ImportFunction extends NativeFunction {
 
     @Override
     public Object execute(Object... objs) {
+
         try{
-            EmeraldScript_JavaParser.getScript().importFile(objs[0].toString());
+            EmeraldScript_JavaParser.getScript().importFile(EmeraldScript_JavaParser.getScript().getVars().get("ENV_FILE").getValue()+"/"+objs[0].toString());
         }catch (IOException e){
             e.printStackTrace();
         }

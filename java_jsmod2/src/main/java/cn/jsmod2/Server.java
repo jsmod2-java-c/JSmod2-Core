@@ -19,6 +19,7 @@ import cn.jsmod2.plugin.Plugin;
 import cn.jsmod2.plugin.PluginClassLoader;
 import cn.jsmod2.command.NativeCommand;
 import cn.jsmod2.plugin.PluginManager;
+import cn.jsmod2.script.EnvPage;
 import cn.jsmod2.utils.LogFormat;
 import cn.jsmod2.utils.Utils;
 import jline.console.ConsoleReader;
@@ -131,6 +132,8 @@ public class Server implements Closeable,Reloadable{
         this.opsFile = OpsFile.getOpsFile(server);
 
         this.smod2Server = new Smod2Server();
+
+        EnvPage.loadConf(serverfolder.toString(),serverfolder+"/emerald");
 
         FileSystem.getFileSystem().readScripts(this);
         /**
