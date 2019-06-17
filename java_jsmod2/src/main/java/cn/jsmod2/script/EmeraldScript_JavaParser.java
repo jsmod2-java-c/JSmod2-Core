@@ -102,7 +102,7 @@ public class EmeraldScript_JavaParser {
             StringBuilder getFunc = new StringBuilder(codes.get(i));
             if(codes.get(i).matches(Memory.matches.get("startfunc"))){
                 while (!getFunc.toString().endsWith(":end")){
-                    getFunc.append(codes.get(i).replaceAll(" ","").replaceAll("#[\\s\\S]+",""));
+                    getFunc.append(codes.get(i).replaceAll(" ","").replaceAll("\\t","").replaceAll("#[\\s\\S]+",""));
                     i++;
                 }
                 i--;
