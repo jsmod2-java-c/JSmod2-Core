@@ -1,6 +1,5 @@
 package cn.jsmod2.script.function;
 
-import java.util.Arrays;
 
 public class EchoFunction extends NativeFunction {
 

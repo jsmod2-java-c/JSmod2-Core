@@ -16,7 +16,7 @@ public abstract class Memory {
 
     public static void registerScriptPattern(){
         //关于变量的正则
-        scriptPattern.put("var","[a-z0-9A-Z_]+=[\\s\\S]+");
+        scriptPattern.put("var","(global::)*[a-z0-9A-Z_]+=[\\s\\S]+");
         scriptPattern.put("list","list");
         scriptPattern.put("unset","unset [a-z0-9A-Z_]+(=[\\s\\S]+)*");
         scriptPattern.put("func","([a-z0-9A-Z_]=)*[\\s\\S]+\\(([\\s\\S]+|[\\s\\S]*)\\)(\\{([\\s\\S]+|)\\})*");

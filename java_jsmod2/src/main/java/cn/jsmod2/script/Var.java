@@ -74,7 +74,7 @@ public class Var extends Memory{
         this.type = "NULL";
         this.value = "NULL";
     }
-
+    // var c=1
     public static Var compile(String command){
         String[] key_value = command.split("=");
         if(key_value.length<2){
