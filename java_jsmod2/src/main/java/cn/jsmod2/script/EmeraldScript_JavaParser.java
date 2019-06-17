@@ -76,36 +76,7 @@ public class EmeraldScript_JavaParser {
             parse(getFunc.toString());
         }
     }
-
-    /*
-     * if[表达式]{
-     *
-     * }elif[表达式]{
-     *
-     * }else{
-     *
-     * }
-     * while[表达式]{
-     * }
-     *
-     * do{
-     * }while[表达式];
-     *
-     * for[i in range(10)]{
-     * }
-     *
-     *
-     */
-    private Object parseIf(String cmd){
-        if(!cmd.matches(Memory.matches.get("if"))){
-            return cmd;
-        }
-
-
-
-        return null;
-    }
-
+    
     /**
      * 计算运算表达式
      * let a = (1+1+2+3/4)*2

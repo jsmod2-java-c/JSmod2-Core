@@ -1,34 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
-  <component name="FacetManager">
-    <facet type="Python" name="Python">
-      <configuration sdkName="" />
-    </facet>
-  </component>
-  <component name="NewModuleRootManager">
-    <output url="file://$MODULE_DIR$/java_jsmod2/target" />
-    <output-test url="file://$MODULE_DIR$/out/test/jsmod2" />
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/java_jsmod2/src/test/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/java_jsmod2/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/java_jsmod2/src/main/java" isTestSource="false" />
-      <excludeFolder url="file://$MODULE_DIR$/out" />
     </content>
-    <orderEntry type="jdk" jdkName="12" jdkType="JavaSDK" />
+    <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="Maven: com.alibaba:fastjson:1.2.47" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.apache.logging.log4j:log4j-api:2.11.2" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.apache.logging.log4j:log4j-core:2.11.1" level="project" />
-    <orderEntry type="library" exported="" name="Maven: log4j:log4j:1.2.17" level="project" />
-    <orderEntry type="library" exported="" name="Maven: junit:junit:4.12" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.fusesource.jansi:jansi:1.18" level="project" />
-    <orderEntry type="library" exported="" name="Maven: org.yaml:snakeyaml:1.16" level="project" />
-    <orderEntry type="library" exported="" name="Maven: commons-codec:commons-codec:1.11" level="project" />
-    <orderEntry type="library" exported="" name="Maven: jline:jline:2.9" level="project" />
-    <orderEntry type="library" exported="" name="scala-sdk-2.12.8" level="application" />
-    <orderEntry type="library" exported="" name="R User Library" level="project" />
-    <orderEntry type="library" name="R Skeletons" level="application" />
   </component>
 </module>

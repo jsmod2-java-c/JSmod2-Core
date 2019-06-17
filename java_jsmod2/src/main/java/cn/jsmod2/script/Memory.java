@@ -1,6 +1,5 @@
 package cn.jsmod2.script;
 
-import cn.jsmod2.Register;
 
 import java.util.ArrayList;
 import java.util.HashMap;
