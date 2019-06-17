@@ -107,7 +107,7 @@ public class Var extends Memory{
             String left = right_left[1].trim();
             Var var;
             if(left.startsWith("d:")){
-                var = (Var) (getScript().getMemory_address_mapping().get(Integer.parseInt(left.substring("d:".length()))));
+                var = (Var) (getScript().getMemory_address_mapping().get(Integer.parseInt(left.replaceAll("(d:)+",""))));
             }else{
                 var = getScript().getVars().get(left);
             }

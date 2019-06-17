@@ -188,7 +188,7 @@ public class EmeraldScript_JavaParser {
             Var var;
             if(key.matches("\\*+[\\s\\S]+")){
 
-                var = findVar(key);
+                var = findVar(key,vars);
             }else{
                 var = vars.get(name);
             }
@@ -320,7 +320,20 @@ public class EmeraldScript_JavaParser {
         //形式参数
         for(int i =0;i<args.length;i++){
             if(!alls[i].isEmpty()){
-                vars_func.put(alls[i],Var.compile(alls[i]+"="+args[i]));
+                String name = alls[i];
+                String get = "=";
+                if(name.startsWith("*")){
+                    get=":*";
+                    name=getPtrName(name);
+                    for(Map.Entry<Integer,Memory> entry:memory_address_mapping.entrySet()){
+                        Var var = (Var) (entry.getValue());
+                        if(var.getName().equals(name)){
+                            args[i] = "d:"+entry.getKey();
+                            break;
+                        }
+                    }
+                }
+                vars_func.put(name,Var.compile(name+get+args[i]));
             }
         }
         String code = function.getCode();
@@ -438,7 +451,7 @@ public class EmeraldScript_JavaParser {
             Matcher matcher = pattern.matcher(arg);
             while (matcher.find()){
                 String group = matcher.group();
-                String value = script.getPtrValue(group.substring(group.indexOf("{")+1,group.lastIndexOf("}")));
+                String value = script.getPtrValue(group.substring(group.indexOf("{")+1,group.lastIndexOf("}")),vars);
                 lo = lo.replace(group,value);
             }
             for(Map.Entry<String,Var> var:vars.entrySet()){
@@ -460,14 +473,14 @@ public class EmeraldScript_JavaParser {
      * @param name
      * @return
      */
-    public String getPtrValue(String name){
+    public String getPtrValue(String name,Map<String,Var> vars){
         if(!name.matches("[\\*]+[a-zA-Z_$]+")){
             return name;
         }
-        return findVar(name).getValue();
+        return findVar(name,vars).getValue();
     }
 
-    public Var findVar(String name){
+    public Var findVar(String name,Map<String,Var> vars){
         int len = getPtrLen(name);
         name = getPtrName(name);
         Var nowValue = null;
