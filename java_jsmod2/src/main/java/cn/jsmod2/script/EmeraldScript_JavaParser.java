@@ -1,15 +1,22 @@
 package cn.jsmod2.script;
 
+import cn.jsmod2.ex.TypeErrorException;
 import cn.jsmod2.script.function.*;
 import org.apache.commons.io.FileUtils;
+import scala.Int;
 
 import java.io.*;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
+ * 定义指针
+ * key ptr ${val}
+ * ptr
  * Jsmod2服务器脚本的解析器
  * script进入脚本解析页面
  * if语法
@@ -61,9 +68,13 @@ public class EmeraldScript_JavaParser {
     //全局变量
     private Map<String,Var> vars = new HashMap<>();
 
+    //指针support
+    private Map<Integer,Memory> memory_address_mapping = new HashMap<>();
+
     public Map<String, Function> getFunctions() {
         return functions;
     }
+
 
     /**
      * 导入文件(实际调用函数)
@@ -128,7 +139,9 @@ public class EmeraldScript_JavaParser {
     }
 
 
-
+    public Map<Integer, Memory> getMemory_address_mapping() {
+        return memory_address_mapping;
+    }
 
     /**
      * 解析全局变量
@@ -148,32 +161,46 @@ public class EmeraldScript_JavaParser {
         if(!cmd.matches(Memory.matches.get("var"))){
             return cmd;
         }
+
         if(cmd.startsWith("global::")){
             cmd = cmd.substring("global::".length());
-            String[] key_value = cmd.split("=");
-            Var var = parseVar(key_value[0],setThat(vars,key_value[1])[0],this.vars,setThat(vars,cmd)[0]);
+            String[] key_value = cmd.split("=|:\\*");
+            Var var = parseVar(key_value[0].trim(),setThat(vars,key_value[1])[0].trim(),this.vars,setThat(vars,cmd)[0].trim());
             return "global::"+var.getName()+"-TYPE:"+var.getType();
         }
-        String[] key_value = cmd.split("=");
+        String[] key_value = cmd.split("=|:\\*");
         Var var = parseVar(key_value[0],setThat(vars,key_value[1])[0],vars,setThat(vars,cmd)[0]);
         return var+"TYPE:"+var.getType();
     }
 
     /**
      * 解析局部变量
+     * 指针赋值
+     *
      * @param key
      * @param value
      * @param vars
      * @return
      */
     private Var parseVar(String key,String value,Map<String,Var> vars,String cmd){
-        if(vars.get(key)!=null){
-            Var var = vars.get(key);
-            var.setValue(value);
+        String name = getPtrName(key);
+        if(vars.get(name)!=null){
+            Var var;
+            if(key.matches("\\*+[\\s\\S]+")){
+                var = findVar(key);
+            }else{
+                var = vars.get(name);
+            }
+            try{
+                var.setValue(value);
+            }catch (NullPointerException e){
+                throw new TypeErrorException("the type is error");
+            }
             return var;
         }else{
             Var var = Var.compile(cmd);
             vars.put(key,var);
+            memory_address_mapping.put(var.hashCode(),var);
             return var;
         }
     }
@@ -400,6 +427,13 @@ public class EmeraldScript_JavaParser {
         //关于变量
         for(String arg:args){
             String lo = arg;
+            Pattern pattern = Pattern.compile("\\$\\{[\\*]+[a-zA-Z_$]+\\}");
+            Matcher matcher = pattern.matcher(arg);
+            while (matcher.find()){
+                String group = matcher.group();
+                String value = script.getPtrValue(group.substring(group.indexOf("{")+1,group.lastIndexOf("}")));
+                lo = lo.replace(group,value);
+            }
             for(Map.Entry<String,Var> var:vars.entrySet()){
                 lo = lo.replace("${"+var.getKey()+"}",var.getValue().getValue());
             }
@@ -410,6 +444,56 @@ public class EmeraldScript_JavaParser {
     }
 
 
+    /**
+     * ***a
+     * ***和a
+     * 0   1           2              3
+     * a->对应hash值->Memory的名字->hash值
+     * @param name
+     * @return
+     */
+    public String getPtrValue(String name){
+        if(!name.matches("[\\*]+[a-zA-Z_$]+")){
+            return name;
+        }
+        return findVar(name).getValue();
+    }
+
+    public Var findVar(String name){
+        int len = getPtrLen(name);
+        name = getPtrName(name);
+        Var nowValue = null;
+        for(int i =0;i<len;i++){
+            if(i ==0){
+                int address = Integer.parseInt(vars.get(name).getValue());
+                Memory memory = memory_address_mapping.get(address);
+                nowValue = ((Var) memory);
+            }else if(i%2==0){
+                nowValue = vars.get(nowValue.getValue());
+            }else{
+                Memory memory = memory_address_mapping.get(Integer.parseInt(nowValue.getValue()));
+                if(memory instanceof Var){
+                    nowValue = ((Var) memory);
+                }
+            }
+        }
+        return nowValue;
+    }
+    public int getPtrLen(String name){
+        int len = 0;
+        char[] chars = name.toCharArray();
+        for(char chara:chars){
+            if (chara == '*'){
+                len++;
+            }else{
+                return len;
+            }
+        }
+        return len;
+    }
+    public String getPtrName(String name){
+        return name.substring(getPtrLen(name));
+    }
 
     public static EmeraldScript_JavaParser getScript() {
         return script;

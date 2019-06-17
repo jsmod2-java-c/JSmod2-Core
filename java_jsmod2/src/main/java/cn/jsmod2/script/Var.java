@@ -1,6 +1,10 @@
 package cn.jsmod2.script;
 
 import cn.jsmod2.ex.TypeErrorException;
+import scala.Int;
+
+
+import static cn.jsmod2.script.EmeraldScript_JavaParser.*;
 
 
 public class Var extends Memory{
@@ -36,6 +40,14 @@ public class Var extends Memory{
         }
     }
 
+    public void setPointerType(String type){
+        if(type.matches("INT|NULL")){
+            this.type = "*";
+        }else if(type.matches("\\*+")){
+            this.type = type+"*";
+        }
+    }
+
     public String getType() {
         return type;
     }
@@ -53,6 +65,19 @@ public class Var extends Memory{
     }
 
     public void setValue(String value) {
+        if(type.matches("\\*+")){
+            if(!value.startsWith("&")){
+                Var var = (Var) (getScript().getMemory_address_mapping().get(Integer.parseInt(value)));
+                if(!var.getType().equals(type)){
+                    this.value = value;
+                }else{
+                    throw new TypeErrorException("the value type is not "+type);
+                }
+            }else{
+                this.value = getScript().getVars().get(value.substring(value.indexOf("&")+1)).hashCode()+"";
+            }
+            return;
+        }
         String type = parseType(value);
         if(getType().equals("NULL")){
             this.value = value;
@@ -76,30 +101,40 @@ public class Var extends Memory{
     }
     // var c=1
     public static Var compile(String command){
-        String[] key_value = command.split("=");
-        if(key_value.length<2){
-            command = command+" ";
-            String key = key_value[0];
-            key_value = new String[2];
-            key_value[0] = key;
-            key_value[1] = " ";
-        }
-        if(Memory.command.contains(key_value[0])){
-            throw new TypeErrorException("the name is define in native");
-        }
-        String[] values = new String[key_value.length-1];
-        System.arraycopy(key_value,1,values,0,values.length);
-        StringBuilder builder = new StringBuilder();
-        for(int i = 0;i<values.length;i++){
-            builder.append(values[i]);
-            if(!(i == values.length-1)) {
+        if(command.matches(matches.get("ptr"))){
+            String[] right_left = command.split(":\\*");
+            String right = right_left[0].trim();
+            String left = right_left[1].trim();
+            Var var = getScript().getVars().get(left);
+            Var var_ptr = new Var(right,var.hashCode()+"");
+            var_ptr.setPointerType(var.getType());
+            return var_ptr;
+        }else{
+            String[] key_value = command.split("=");
+            if(key_value.length<2){
+                command = command+" ";
+                String key = key_value[0];
+                key_value = new String[2];
+                key_value[0] = key;
+                key_value[1] = " ";
+            }
+            if(Memory.command.contains(key_value[0])){
+                throw new TypeErrorException("the name is define in native");
+            }
+            String[] values = new String[key_value.length-1];
+            System.arraycopy(key_value,1,values,0,values.length);
+            StringBuilder builder = new StringBuilder();
+            for(int i = 0;i<values.length;i++){
+                builder.append(values[i]);
+                if(!(i == values.length-1)) {
+                    builder.append("=");
+                }
+            }
+            if(command.endsWith("=")){
                 builder.append("=");
             }
+            return new Var(key_value[0],builder.toString());
         }
-        if(command.endsWith("=")){
-            builder.append("=");
-        }
-        return new Var(key_value[0],builder.toString());
     }
 
     @Override
