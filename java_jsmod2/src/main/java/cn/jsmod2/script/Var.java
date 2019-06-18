@@ -4,7 +4,7 @@ import cn.jsmod2.ex.TypeErrorException;
 
 
 
-import static cn.jsmod2.script.EmeraldScript_JavaParser.*;
+import static cn.jsmod2.script.EmeraldScriptVM.*;
 
 
 public class Var extends Memory{

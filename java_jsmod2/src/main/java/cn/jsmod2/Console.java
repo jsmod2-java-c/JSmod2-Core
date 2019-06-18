@@ -10,7 +10,7 @@ package cn.jsmod2;
 
 import cn.jsmod2.api.server.Smod2Server;
 import cn.jsmod2.ex.ServerRuntimeException;
-import cn.jsmod2.script.EmeraldScript_JavaParser;
+import cn.jsmod2.script.EmeraldScriptVM;
 import cn.jsmod2.script.Memory;
 import cn.jsmod2.utils.Utils;
 import jline.console.completer.Completer;
@@ -51,7 +51,7 @@ public class Console extends Smod2Server {
             String command = Server.getScanner().nextLine();
             //String command = reader.readLine(">");
             try{
-                if(EmeraldScript_JavaParser.matchPattern(command)){
+                if(EmeraldScriptVM.matchPattern(command)){
                     StringBuilder builder = new StringBuilder(command);
                     if(command.matches(Memory.matches.get("startfunc"))){
                         while(!builder.toString().endsWith(":end")){
@@ -67,7 +67,7 @@ public class Console extends Smod2Server {
                             builder.append(otherCommand);
                         }
                     }
-                    Utils.getMessageSender().info("RETURN_THAT:emerald."+EmeraldScript_JavaParser.parse(builder.toString()));
+                    Utils.getMessageSender().info("RETURN_THAT:emerald."+ EmeraldScriptVM.parse(builder.toString()));
                 }else{
                     runConsoleCommand(command);
                 }
@@ -124,9 +124,9 @@ public class Console extends Smod2Server {
     }
 
     public boolean runConsoleCommand(String commandName,String[] args){
-        args = EmeraldScript_JavaParser.setThat(EmeraldScript_JavaParser.getScript().getVars(),args);
+        args = EmeraldScriptVM.setThat(EmeraldScriptVM.getScript().getVars(),args);
         for(int i = 0;i<args.length;i++){
-            args[i] = EmeraldScript_JavaParser.getScript().executeFunction(args[i],EmeraldScript_JavaParser.getScript().getVars(),EmeraldScript_JavaParser.getScript().getVars()).toString();
+            args[i] = EmeraldScriptVM.getScript().executeFunction(args[i], EmeraldScriptVM.getScript().getVars(), EmeraldScriptVM.getScript().getVars()).toString();
         }
         List<NativeCommand> commands =
                 Server

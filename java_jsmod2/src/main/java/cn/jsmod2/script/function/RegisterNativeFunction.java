@@ -1,7 +1,7 @@
 package cn.jsmod2.script.function;
 
 import cn.jsmod2.ex.TypeErrorException;
-import cn.jsmod2.script.EmeraldScript_JavaParser;
+import cn.jsmod2.script.EmeraldScriptVM;
 
 public class RegisterNativeFunction extends NativeFunction {
 
@@ -15,7 +15,7 @@ public class RegisterNativeFunction extends NativeFunction {
             Object obj = Class.forName(objs[0].toString()).newInstance();
             if(obj instanceof NativeFunction){
                 NativeFunction function = (NativeFunction)obj;
-                EmeraldScript_JavaParser.getScript().getFunctions().put(function.getFunctionName(),function);
+                EmeraldScriptVM.getScript().getFunctions().put(function.getFunctionName(),function);
             }else{
                 throw new TypeErrorException("the class type must be NativeFunction");
             }

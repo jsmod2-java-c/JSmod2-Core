@@ -1,6 +1,6 @@
 package cn.jsmod2.script.function;
 
-import cn.jsmod2.script.EmeraldScript_JavaParser;
+import cn.jsmod2.script.EmeraldScriptVM;
 
 import java.io.IOException;
 
@@ -14,7 +14,7 @@ public class ImportFunction extends NativeFunction {
     public Object execute(Object... objs) {
 
         try{
-            EmeraldScript_JavaParser.getScript().importFile(EmeraldScript_JavaParser.getScript().getVars().get("ENV_FILE").getValue()+"/"+objs[0].toString());
+            EmeraldScriptVM.getScript().importFile(EmeraldScriptVM.getScript().getVars().get("ENV_FILE").getValue()+"/"+objs[0].toString());
         }catch (IOException e){
             e.printStackTrace();
         }

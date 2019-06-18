@@ -3,7 +3,6 @@ package cn.jsmod2.script;
 import cn.jsmod2.ex.TypeErrorException;
 import cn.jsmod2.script.function.*;
 import org.apache.commons.io.FileUtils;
-import scala.Int;
 
 import java.io.*;
 import java.util.Arrays;
@@ -49,10 +48,10 @@ import java.util.regex.Pattern;
  * [1=>2,2=>3,3=>4]
  *
  */
-public class EmeraldScript_JavaParser {
+public class EmeraldScriptVM {
 
     static {
-        script = new EmeraldScript_JavaParser();
+        script = new EmeraldScriptVM();
         getScript().functions.put("echo",new EchoFunction());
         getScript().functions.put("typeof",new TypeOfFunction());
         getScript().functions.put("import",new ImportFunction());
@@ -61,7 +60,7 @@ public class EmeraldScript_JavaParser {
         getScript().functions.put("return",new ReturnFunction());
     }
 
-    private static EmeraldScript_JavaParser script;
+    private static EmeraldScriptVM script;
 
     private Map<String, Function> functions = new HashMap<>();
 
@@ -333,12 +332,17 @@ public class EmeraldScript_JavaParser {
                 vars_func.put(name,Var.compile(name+get+"d:"+args[i]));
             }
         }
+
+        return executeCommonFunc(function,vars_func);
+    }
+
+    public Object executeCommonFunc(Function function,Map<String,Var> vars_func){
         String code = function.getCode();
 
         String[] codes =code.split(";");
 
         for(int i = 0;i<codes.length;i++) {
-            Object result = EmeraldScript_JavaParser.parse(codes[i],vars_func,vars);
+            Object result = EmeraldScriptVM.parse(codes[i],vars_func,vars);
             if(result.toString().startsWith("returned")){
                 return setThat(vars_func,result.toString().substring("return:".length()))[0];
             }
@@ -513,7 +517,7 @@ public class EmeraldScript_JavaParser {
         return name.substring(getPtrLen(name));
     }
 
-    public static EmeraldScript_JavaParser getScript() {
+    public static EmeraldScriptVM getScript() {
         return script;
     }
 

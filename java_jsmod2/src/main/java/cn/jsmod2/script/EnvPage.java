@@ -23,7 +23,7 @@ public class EnvPage {
             Properties properties = new Properties();
             properties.load(new FileInputStream(file));
             String rootEnv = properties.getProperty("root-make",defaultRoot);
-            EmeraldScript_JavaParser.getScript().getVars().put("ENV_FILE",Var.compile("ENV_FILE="+rootEnv));
+            EmeraldScriptVM.getScript().getVars().put("ENV_FILE",Var.compile("ENV_FILE="+rootEnv));
             ServerLogger.getLogger().info("the script env is"+rootEnv);
         }catch (IOException e){
             e.printStackTrace();

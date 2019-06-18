@@ -1,6 +1,6 @@
 package cn.jsmod2.script.function;
 
-import cn.jsmod2.script.EmeraldScript_JavaParser;
+import cn.jsmod2.script.EmeraldScriptVM;
 import cn.jsmod2.script.Var;
 
 import java.util.HashMap;
@@ -35,11 +35,11 @@ public class IfFunction extends NativeFunction{
         }
         String code = objs[1].toString();
         HashMap<String, Var> vars = new HashMap<>();
-        vars.putAll(EmeraldScript_JavaParser.getScript().getVars());
+        vars.putAll(EmeraldScriptVM.getScript().getVars());
         String[] codes = code.split(";");
         if(resultBoolean){
             for(String c:codes) {
-                EmeraldScript_JavaParser.parse(c, vars,EmeraldScript_JavaParser.getScript().getVars());
+                EmeraldScriptVM.parse(c, vars, EmeraldScriptVM.getScript().getVars());
             }
         }
         return resultBoolean;

@@ -9,7 +9,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2;
 
 import cn.jsmod2.log.ILogger;
-import cn.jsmod2.script.EmeraldScript_JavaParser;
+import cn.jsmod2.script.EmeraldScriptVM;
 import cn.jsmod2.utils.Utils;
 import org.apache.commons.io.FileUtils;
 import org.kohsuke.github.GHCommit;
@@ -108,7 +108,7 @@ public class FileSystem {
             }
             List<String> alls = FileUtils.readLines(file,"utf-8");
             for(String path:alls){
-                EmeraldScript_JavaParser.getScript().importFile(path);
+                EmeraldScriptVM.getScript().importFile(path);
             }
         }catch (IOException e){
             e.printStackTrace();
