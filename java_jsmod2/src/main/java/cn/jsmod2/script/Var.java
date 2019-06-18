@@ -37,7 +37,7 @@ public class Var extends Memory{
             return "BOOL";
         }else if(value.matches("NULL")){
             return "NULL";
-        }else if(value.matches("'[\\s\\S]+'")){
+        }else if(value.matches("'([\\s\\S]+|)'")){
             return "STRING";
         }else{
             return "UNKNOWN";
