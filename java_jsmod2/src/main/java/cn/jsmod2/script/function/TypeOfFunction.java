@@ -15,6 +15,6 @@ public class TypeOfFunction extends NativeFunction{
         Var var = EmeraldScriptVM.getScript().getVars().get(objs[0]==null?"NULL":objs[0].toString());
         String type = var==null?(Var.compile("nick"+"="+objs[0].toString()).getType()):var.getType();
         Utils.getMessageSender().info(type);
-        return type;
+        return "'"+type+"'";
     }
 }

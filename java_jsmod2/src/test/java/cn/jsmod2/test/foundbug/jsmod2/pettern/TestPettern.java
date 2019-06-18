@@ -2,6 +2,10 @@ package cn.jsmod2.test.foundbug.jsmod2.pettern;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
 public class TestPettern {
 
     @Test
@@ -34,4 +38,18 @@ public class TestPettern {
         System.out.println("if(1){echo(1)}".matches(val));
     }
 
+    @Test
+    public void test3(){
+        System.out.println("'你好'".matches("'[\\s\\S]+'"));
+    }
+
+    @Test
+    public void test4()
+    {
+        String[] args = {"'s","ssd","we'","sdd"};
+
+
+        //System.out.println(lists);
+        System.out.println(Arrays.toString(args));
+    }
 }

@@ -3,12 +3,10 @@ package cn.jsmod2.script;
 import cn.jsmod2.ex.TypeErrorException;
 import cn.jsmod2.script.function.*;
 import org.apache.commons.io.FileUtils;
+import scala.runtime.StringAdd;
 
 import java.io.*;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -58,6 +56,7 @@ public class EmeraldScriptVM {
         getScript().functions.put("register",new RegisterNativeFunction());
         getScript().functions.put("if",new IfFunction());
         getScript().functions.put("return",new ReturnFunction());
+        getScript().functions.put("+",new StringAddFunction());
     }
 
     private static EmeraldScriptVM script;
@@ -285,6 +284,7 @@ public class EmeraldScriptVM {
             last = "){";
         }
         String[] args = funcName.substring(funcName.indexOf("(")+1,funcName.lastIndexOf(last)).split(",");
+
         args = setThat(vars,args);
         for(int i = 0;i<args.length;i++){
             if(!args[i].isEmpty()){
@@ -443,6 +443,29 @@ public class EmeraldScriptVM {
      * @return
      */
     public static String[] setThat(Map<String,Var> vars,String... args){
+        List<String> lists = new LinkedList<>();
+        try{
+            for(int i=0;i<args.length;i++){
+                StringBuilder builder = new StringBuilder();
+                if(args[i].startsWith("'")){
+                    while (!builder.toString().endsWith("'")){
+                        builder.append(args[i]);
+                        if(!args[i].endsWith("'"))
+                            builder.append(",");
+                        i++;
+                    }
+                    i--;
+                }
+                if(builder.toString().isEmpty()){
+                    builder.append(args[i]);
+                }
+                lists.add(builder.toString());
+            }
+        }catch (ArrayIndexOutOfBoundsException e){
+            throw new TypeErrorException("the type must be STRING");
+        }
+
+        args = lists.toArray(new String[lists.size()]);
         String[] dArgs = new String[args.length];
         int i = 0;
         //关于变量
@@ -459,7 +482,11 @@ public class EmeraldScriptVM {
                 lo = lo.replace("${global::"+var.getKey()+"}",script.getVars().get(var.getKey()).getValue());
                 lo = lo.replace("${"+var.getKey()+"}",var.getValue().getValue());
             }
+            //字符串'${}ssadads'+''
+            NativeFunction f = (NativeFunction)(script.functions.get("+"));
+            lo = f.execute(lo).toString();
             dArgs[i] = lo;
+
             i++;
         }
         return dArgs;

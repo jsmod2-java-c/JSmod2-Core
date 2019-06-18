@@ -35,8 +35,10 @@ public class Var extends Memory{
             return "BOOL";
         }else if(value.matches("NULL")){
             return "NULL";
-        }else{
+        }else if(value.matches("'[\\s\\S]+'")){
             return "STRING";
+        }else{
+            return "UNKNOWN";
         }
     }
 
@@ -79,7 +81,7 @@ public class Var extends Memory{
             return;
         }
         String type = parseType(value);
-        if(getType().equals("NULL")){
+        if(getType().equals("NULL")||getType().equals("UNKNOWN")){
             this.value = value;
             this.type = type;
             return;
