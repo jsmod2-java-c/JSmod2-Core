@@ -11,6 +11,7 @@ package cn.jsmod2;
 import cn.jsmod2.ex.ServerRuntimeException;
 import cn.jsmod2.log.ILogger;
 import cn.jsmod2.log.ServerLogger;
+import cn.jsmod2.script.EmeraldScriptVM;
 
 import java.text.MessageFormat;
 import java.util.Properties;
@@ -33,6 +34,11 @@ public class Jsmod2 {
     //
 
     public static void main(String[]args){
+        if(args.length!=0){
+            for(String arg:args)
+                EmeraldScriptVM.parse(arg);
+            return;
+        }
         try{
             //lang properties
             Properties langProperties = FileSystem.getFileSystem().langProperties(log);
