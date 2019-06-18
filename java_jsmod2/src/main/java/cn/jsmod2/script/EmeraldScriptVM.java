@@ -20,13 +20,11 @@ import java.util.regex.Pattern;
  * if(bool b){
  *     right(){
  *
- *     }
- *     else(){
+ *     }else{
  *
- *     }
- *     else(bool b){
+ *     }elif(bool b){
  *
- *     }
+ *     };
  * }
  * while语法
  * while(boolean b){
@@ -149,7 +147,7 @@ public class EmeraldScriptVM {
      */
     //a=0
     //强制修改全局变量global::name
-    private Object parseVar(String cmd,Map<String,Var> vars,Map<String,Var> parent){
+    private Object parseVar(String cmd,Map<String,Var> vars){
         if(cmd.matches(Memory.matches.get("pc"))){
             return cmd;
         }
@@ -313,14 +311,16 @@ public class EmeraldScriptVM {
             return "error:no such function!"+funcName+"on "+func.indexOf(funcName)+" error";
         }
 
-        if(function instanceof NativeFunction){
-            Object object = ((NativeFunction) function).execute(args);
-            return object==null?"NULL":object;
-        }
         //普通函数还没开始处理
         //形式参数作用域在方法，方法执行完则销毁
         Map<String,Var> vars_func = new HashMap<>();
         vars_func.putAll(vars);
+
+        if(function instanceof NativeFunction){
+            Object object = ((NativeFunction) function).execute(args,vars_func);
+            return object==null?"NULL":object;
+        }
+
         //形式参数
         String[] alls = function.getArgs();
         //形式参数
@@ -409,7 +409,7 @@ public class EmeraldScriptVM {
             return result;
         }
         /* 将变量设置 */
-        result = script.parseVar(script.unset(command,vars),vars,parent);
+        result = script.parseVar(script.unset(command,vars),vars);
         if(!result.equals(command)){
             return result;
         }
@@ -494,7 +494,7 @@ public class EmeraldScriptVM {
             }
             //字符串'${}ssadads'+''
             NativeFunction f = (NativeFunction)(script.functions.get("+"));
-            lo = f.execute(lo).toString();
+            lo = f.execute(new String[]{lo}).toString();
             dArgs[i] = lo;
 
             i++;

@@ -7,7 +7,7 @@ public class ElseFunction extends NativeFunction {
     }
 
     @Override
-    public Object execute(Object... objs) {
+    public Object execute(String[] objects,Object... objs) {
         return null;
     }
 }

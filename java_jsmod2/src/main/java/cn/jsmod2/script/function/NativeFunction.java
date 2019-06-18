@@ -7,5 +7,5 @@ public abstract class NativeFunction<T> extends Function {
         super(functionName,code);
     }
 
-    public abstract T execute(Object... objs);
+    public abstract T execute(String[] args,Object... objs);
 }

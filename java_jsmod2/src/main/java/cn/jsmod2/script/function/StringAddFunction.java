@@ -7,7 +7,7 @@ public class StringAddFunction extends NativeFunction {
     }
 
     @Override
-    public Object execute(Object... objs) {
-        return objs[0].toString().replaceAll("'\\+'","");
+    public Object execute(String[] objs,Object... args) {
+        return objs[0].replaceAll("'\\+'","");
     }
 }

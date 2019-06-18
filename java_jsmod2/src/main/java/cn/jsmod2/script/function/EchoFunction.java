@@ -9,7 +9,7 @@ public class EchoFunction extends NativeFunction {
     }
 
     @Override
-    public Void execute(Object... objects) {
+    public Void execute(String[] objects,Object... objs) {
         StringBuilder builder = new StringBuilder();
         for(Object o:objects){
             builder.append(o.toString());

@@ -26,8 +26,8 @@ public class IfFunction extends NativeFunction{
      * @return
      */
     @Override
-    public Object execute(Object... objs) {
-        if(objs.length!=2){
+    public Object execute(String[] objs,Object... objects) {
+        if(objs.length!=3){
             return "error-the if must have one boolean expression";
         }
         boolean resultBoolean = false;

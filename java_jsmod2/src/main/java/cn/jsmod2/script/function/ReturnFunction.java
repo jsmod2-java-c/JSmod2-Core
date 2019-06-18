@@ -6,7 +6,7 @@ public class ReturnFunction extends NativeFunction{
     }
 
     @Override
-    public Object execute(Object... objs) {
+    public Object execute(String[] objs,Object... objects) {
         if(objs.length==0){
             return "returned:NULL";
         }else{

@@ -10,9 +10,9 @@ public class RegisterNativeFunction extends NativeFunction {
     }
 
     @Override
-    public Object execute(Object... objs) {
+    public Object execute(String[] objs,Object... objects) {
         try{
-            Object obj = Class.forName(objs[0].toString()).newInstance();
+            Object obj = Class.forName(objs[0]).newInstance();
             if(obj instanceof NativeFunction){
                 NativeFunction function = (NativeFunction)obj;
                 EmeraldScriptVM.getScript().getFunctions().put(function.getFunctionName(),function);
