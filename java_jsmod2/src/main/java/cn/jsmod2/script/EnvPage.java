@@ -12,6 +12,8 @@ import java.util.Properties;
  */
 public class EnvPage {
 
+    public static boolean isWrite;
+
     public static void loadConf(String folder,String defaultRoot){
         try{
             File file = new File(folder+"/env.conf");
@@ -23,11 +25,16 @@ public class EnvPage {
             Properties properties = new Properties();
             properties.load(new FileInputStream(file));
             String rootEnv = properties.getProperty("root-make",defaultRoot);
+            isWrite = Boolean.parseBoolean(properties.getProperty("console-write","true"));
             EmeraldScriptVM.getScript().getVars().put("ENV_FILE",Var.compile("ENV_FILE="+rootEnv));
             ServerLogger.getLogger().info("the script env is"+rootEnv);
         }catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    public static boolean isWrite(){
+        return isWrite;
     }
 
 }

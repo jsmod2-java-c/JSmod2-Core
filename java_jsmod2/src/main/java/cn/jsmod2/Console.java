@@ -11,12 +11,13 @@ package cn.jsmod2;
 import cn.jsmod2.api.server.Smod2Server;
 import cn.jsmod2.ex.ServerRuntimeException;
 import cn.jsmod2.script.EmeraldScriptVM;
+import cn.jsmod2.script.EnvPage;
 import cn.jsmod2.script.Memory;
 import cn.jsmod2.utils.Utils;
 import jline.console.completer.Completer;
 import cn.jsmod2.command.NativeCommand;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,6 +46,7 @@ public class Console extends Smod2Server {
     void commandInput() throws IOException{
         //ConsoleReader reader = Server.getLineReader();
         //reader.addCompleter(new SimpleConsole());
+        PrintWriter stream = new PrintWriter(new FileOutputStream(Server.getSender().getServer().serverfolder+"/out/out.ela",true));
         while (true){
             //@Deprecated
             Utils.getMessageSender().info("\n>");
@@ -67,6 +69,10 @@ public class Console extends Smod2Server {
                             builder.append(otherCommand);
                         }
                     }
+                    if(EnvPage.isWrite()){
+                        stream.println(builder.toString());
+                        stream.flush();
+                    }
                     Utils.getMessageSender().info("RETURN_THAT:emerald."+ EmeraldScriptVM.parse(builder.toString()));
                 }else{
                     runConsoleCommand(command);
@@ -83,6 +89,7 @@ public class Console extends Smod2Server {
                         e1.geteLogger().error("error, server exception");
                     }
                 }
+                stream.close();
             }
         }
     }
