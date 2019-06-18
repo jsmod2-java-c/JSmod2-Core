@@ -11,6 +11,21 @@ public class IfFunction extends NativeFunction{
         super("if","native func if(boolean){}");
     }
 
+    /**
+     * if(boolean b){
+     *  right(){
+     *
+     *  };
+     *  else(){
+     *
+     *  };
+     *  else(boolean b){
+     *
+     *  };
+     * }
+     * @param objs
+     * @return
+     */
     @Override
     public Object execute(Object... objs) {
         boolean resultBoolean = false;
