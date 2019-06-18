@@ -181,6 +181,10 @@ public class EmeraldScriptVM {
      * @return
      */
     private Var parseVar(String key,String value,Map<String,Var> vars,String cmd){
+        if(key.startsWith("const ")){
+            key = key.substring("const ".length());
+        }
+        System.out.println(key);
         String name = getPtrName(key);
         if(vars.get(name)!=null){
             Var var;

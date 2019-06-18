@@ -17,6 +17,8 @@ public class Var extends Memory{
 
     private String name;
 
+    private boolean readonly;
+
     private Var(String name,String value){
         this.name = name;
         this.value = value;
@@ -67,6 +69,9 @@ public class Var extends Memory{
     }
 
     public void setValue(String value) {
+        if(readonly){
+            throw new TypeErrorException("the value is readonly");
+        }
         if(type.matches("\\*+")){
             if(!value.startsWith("&")){
                 Var var = (Var) (getScript().getMemory_address_mapping().get(Integer.parseInt(value)));
@@ -98,6 +103,9 @@ public class Var extends Memory{
     }
 
     public void unset(){
+        if(readonly){
+            throw new TypeErrorException("the type is readonly");
+        }
         this.type = "NULL";
         this.value = "NULL";
     }
@@ -105,8 +113,8 @@ public class Var extends Memory{
     public static Var compile(String command){
         if(command.matches(matches.get("ptr"))){
             String[] right_left = command.split(":\\*");
-            String right = right_left[0].trim();
-            String left = right_left[1].trim();
+            String right = right_left[0];
+            String left = right_left[1];
             Var var;
             if(left.startsWith("d:")){
                 var = (Var) (getScript().getMemory_address_mapping().get(Integer.parseInt(left.replaceAll("(d:)+",""))));
@@ -115,6 +123,10 @@ public class Var extends Memory{
             }
             Var var_ptr = new Var(right,var.hashCode()+"");
             var_ptr.setPointerType(var.getType());
+            if(command.matches("(global::)*(const )[a-z0-9A-Z_]+:\\*[\\s\\S]+")){
+                var_ptr.readonly = true;
+                var_ptr.setName(right.split(" ")[1]);
+            }
             return var_ptr;
         }else{
             String[] key_value = command.split("=");
@@ -140,7 +152,14 @@ public class Var extends Memory{
             if(command.endsWith("=")){
                 builder.append("=");
             }
-            return new Var(key_value[0],builder.toString());
+            Var var;
+            if(command.matches("(global::)*(const )[\\*]*+[a-z0-9A-Z_]+(=|:\\*)[\\s\\S]+")){
+                var = new Var(key_value[0].split(" ")[1],builder.toString());
+                var.readonly = true;
+            }else{
+                var = new Var(key_value[0],builder.toString());
+            }
+            return var;
         }
     }
 
