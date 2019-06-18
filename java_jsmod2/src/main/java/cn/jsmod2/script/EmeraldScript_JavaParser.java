@@ -325,15 +325,12 @@ public class EmeraldScript_JavaParser {
                 if(name.startsWith("*")){
                     get=":*";
                     name=getPtrName(name);
-                    for(Map.Entry<Integer,Memory> entry:memory_address_mapping.entrySet()){
-                        Var var = (Var) (entry.getValue());
-                        if(var.getName().equals(name)){
-                            args[i] = "d:"+entry.getKey();
-                            break;
-                        }
+                    Memory memory = memory_address_mapping.get(Integer.parseInt(args[i]));
+                    if(memory==null){
+                        return "type is error: the "+args[i]+" is not pointer type";
                     }
                 }
-                vars_func.put(name,Var.compile(name+get+args[i]));
+                vars_func.put(name,Var.compile(name+get+"d:"+args[i]));
             }
         }
         String code = function.getCode();
