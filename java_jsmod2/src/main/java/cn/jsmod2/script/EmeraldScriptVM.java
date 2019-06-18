@@ -283,10 +283,14 @@ public class EmeraldScriptVM {
             funcName = strs[1];
         }
         String last = ")";
+        String[] args;
         if(funcName.contains("){")&&funcName.contains("}")){
-            last = "){";
+
+            String before = funcName.substring(0,funcName.indexOf("){")+1);
+            args = before.substring(before.indexOf("(")+1,before.lastIndexOf(last)).split(",");
+        }else{
+            args = funcName.substring(funcName.indexOf("(")+1,funcName.lastIndexOf(last)).split(",");
         }
-        String[] args = funcName.substring(funcName.indexOf("(")+1,funcName.lastIndexOf(last)).split(",");
 
         args = setThat(vars,args);
         for(int i = 0;i<args.length;i++){
@@ -299,7 +303,7 @@ public class EmeraldScriptVM {
         String funcCode = "";
         //native方法提供了funcCode
         if(before.matches(Memory.matches.get("ffunc"))){
-            funcCode = before.substring(before.indexOf("{")+1,before.indexOf("}"));
+            funcCode = before.substring(before.indexOf("{")+1,before.lastIndexOf("}"));
             funcName = before.substring(0,before.indexOf("{")).replaceAll("\\(([\\s\\S]+|[\\s\\S]*)\\)","");
             args = Arrays.copyOf(args,args.length+1);
             args[args.length-1] = funcCode;
