@@ -450,18 +450,21 @@ public class EmeraldScriptVM {
         try{
             for(int i=0;i<args.length;i++){
                 StringBuilder builder = new StringBuilder();
-                if(args[i].startsWith("'")){
-                    while (!builder.toString().endsWith("'")){
-                        builder.append(args[i]);
-                        if(!args[i].endsWith("'"))
-                            builder.append(",");
-                        i++;
+                if(!args.equals("''")) {
+                    if (args[i].startsWith("'")) {
+                        while (!builder.toString().endsWith("'")) {
+                            builder.append(args[i]);
+                            if (!args[i].endsWith("'"))
+                                builder.append(",");
+                            i++;
+                        }
+                        i--;
                     }
-                    i--;
                 }
                 if(builder.toString().isEmpty()){
                     builder.append(args[i]);
                 }
+
                 lists.add(builder.toString());
             }
         }catch (ArrayIndexOutOfBoundsException e){
