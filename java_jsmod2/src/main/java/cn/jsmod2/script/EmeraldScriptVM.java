@@ -481,12 +481,12 @@ public class EmeraldScriptVM {
             Matcher matcher = pattern.matcher(arg);
             while (matcher.find()){
                 String group = matcher.group();
-                String value = script.getPtrValue(group.substring(group.indexOf("{")+1,group.lastIndexOf("}")),vars);
+                String value = getStringVal(script.getPtrValue(group.substring(group.indexOf("{")+1,group.lastIndexOf("}")),vars));
                 lo = lo.replace(group,value);
             }
             for(Map.Entry<String,Var> var:vars.entrySet()){
-                lo = lo.replace("${global::"+var.getKey()+"}",script.getVars().get(var.getKey()).getValue());
-                lo = lo.replace("${"+var.getKey()+"}",var.getValue().getValue());
+                lo = lo.replace("${global::"+var.getKey()+"}",getStringVal(script.getVars().get(var.getKey()).getValue()));
+                lo = lo.replace("${"+var.getKey()+"}",getStringVal(var.getValue().getValue()));
             }
             //字符串'${}ssadads'+''
             NativeFunction f = (NativeFunction)(script.functions.get("+"));
@@ -496,6 +496,13 @@ public class EmeraldScriptVM {
             i++;
         }
         return dArgs;
+    }
+
+    private static String getStringVal(String globalVar){
+        if(globalVar.startsWith("'")&&globalVar.endsWith("'")){
+            globalVar = globalVar.substring(globalVar.indexOf("'")+1,globalVar.lastIndexOf("'"));
+        }
+        return globalVar;
     }
 
 
