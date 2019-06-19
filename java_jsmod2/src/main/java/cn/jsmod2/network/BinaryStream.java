@@ -34,6 +34,8 @@ import java.util.Properties;
 
 public abstract class BinaryStream {
 
+    public static final String ID = "id";
+
     public Map<Class<? extends DataPacket>,Integer> dataPackets = Register.getInstance().getPackets();
 
     private Properties properties;

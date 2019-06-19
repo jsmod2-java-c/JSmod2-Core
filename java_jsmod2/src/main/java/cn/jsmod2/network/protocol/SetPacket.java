@@ -11,14 +11,21 @@ import java.util.Map;
  */
 public class SetPacket extends DataPacket {
 
+    public SetPacket(int id) {
+        super(id);
+    }
+
     protected static final String DO = "do";
 
     public Map<String,Object> _infor_map;
 
     public String _end;
 
-    protected Server server = Server.getSender().getServer();
 
+    protected final Server server = Server.getSender().getServer();
+
+    protected final Requester requester = server.getRequester().with(ID,getId());
+    
     @Override
     public byte[] encode() {
         return dataObjectEncodeWithEnd(_infor_map,_end);

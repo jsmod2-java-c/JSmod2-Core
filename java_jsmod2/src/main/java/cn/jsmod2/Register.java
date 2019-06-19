@@ -27,6 +27,7 @@ import cn.jsmod2.event.team.TeamRespawnEvent;
 import cn.jsmod2.network.command.CommandRegisterPacket;
 import cn.jsmod2.network.command.PlayerCommandPacket;
 import cn.jsmod2.network.command.ServerCommandPacket;
+import cn.jsmod2.network.protocol.item.*;
 import scala.reflect.io.File;
 
 import java.util.*;
@@ -88,6 +89,11 @@ public class Register {
         packets.put(CommandRegisterPacket.class,0x53);
         packets.put(ServerCommandPacket.class,Register.SERVER_COMMAND);
         packets.put(PlayerCommandPacket.class,Register.PLAYER_COMMAND);
+        packets.put(DropItemPacket.class,0x57);
+        packets.put(RemoveItemPacket.class,0x58);
+        packets.put(SetItemInWorldPacket.class,0x59);
+        packets.put(SetItemKinematicPacket.class,0x5a);
+        packets.put(SetItemPositionPacket.class,0x5b);
         putPackets();
     }
 
