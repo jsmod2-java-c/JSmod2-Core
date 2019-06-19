@@ -11,6 +11,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2;
 
 import cn.jsmod2.api.server.Smod2Server;
+import cn.jsmod2.event.packet.ServerPacketEvent;
 import cn.jsmod2.ex.EventException;
 import cn.jsmod2.network.command.PlayerCommandPacket;
 import cn.jsmod2.network.command.ServerCommandPacket;
@@ -22,7 +23,15 @@ import cn.jsmod2.network.command.ServerVO;
 
 import java.util.Properties;
 
-
+/**
+ * 清算的发包：
+ *  指令注册的发包
+ *  物品设置的发包
+ *  设置config的发包
+ * 接受包：
+ *  事件接受包 - 带附加请求
+ *  指令调用接受包
+ */
 public class PacketManager {
 
     private static PacketManager manager;

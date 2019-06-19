@@ -171,6 +171,8 @@ public class Server implements Closeable,Reloadable{
             DatagramPacket pack = new DatagramPacket(encode,encode.length,InetAddress.getByName(serverProp.getProperty(FileSystem.SMOD2_IP)),Integer.parseInt(serverProp.getProperty("data.network.plugin.port")));
             socket.send(pack);
         });
+        ServerPacketEvent event = new ServerPacketEvent(packet);
+        pluginManager.callEvent(event);
     }
 
     public ILogger getLogger() {

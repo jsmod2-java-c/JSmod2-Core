@@ -78,8 +78,6 @@ public class PluginManager {
             server.getCommandInfo().put(command.getCommandName(),command.getDescription());
             CommandRegisterPacket packet = new CommandRegisterPacket();
             packet.command = command;
-            ServerPacketEvent event = new ServerPacketEvent(packet);
-            callEvent(event);
             server.sendPacket(packet);//发包
         }else{
             throw new PluginException("the plugin is not enabled");
