@@ -74,7 +74,13 @@ public class Var extends Memory{
         }
         if(type.matches("\\*+")){
             if(!value.startsWith("&")){
-                Var var = (Var) (getScript().getMemory_address_mapping().get(Integer.parseInt(value)));
+                Var var;
+                try{
+                    var = (Var) (getScript().getMemory_address_mapping().get(Integer.parseInt(value)));
+                }catch (NumberFormatException e){
+                    throw new TypeErrorException("the pointer have already inited");
+                }
+
                 if(!var.getType().equals(type)){
                     this.value = value;
                 }else{

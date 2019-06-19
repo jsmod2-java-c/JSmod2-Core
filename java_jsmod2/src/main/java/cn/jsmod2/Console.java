@@ -13,6 +13,7 @@ import cn.jsmod2.ex.ServerRuntimeException;
 import cn.jsmod2.script.EmeraldScriptVM;
 import cn.jsmod2.script.EnvPage;
 import cn.jsmod2.script.Memory;
+import cn.jsmod2.script.jni.EmeraldScript;
 import cn.jsmod2.utils.Utils;
 import jline.console.completer.Completer;
 import cn.jsmod2.command.NativeCommand;
@@ -73,7 +74,16 @@ public class Console extends Smod2Server {
                         stream.println(builder.toString());
                         stream.flush();
                     }
-                    Utils.getMessageSender().info("RETURN_THAT:emerald."+ EmeraldScriptVM.parse(builder.toString()));
+                    String method = Server.getSender().getServer().serverProp.getProperty("emerald-compiler");
+                    //目前java版属于最稳定版本，其他不建议使用
+                    if(method.equals("java")){
+                        Utils.getMessageSender().info("RETURN_THAT:emerald."+ EmeraldScript.java_parse(builder.toString()));
+                    }else if(method.equals("c++")){
+                        Utils.getMessageSender().info("RETURN_THAT:emerald."+ EmeraldScript.parse(builder.toString()));
+                    }else{
+                        Utils.getMessageSender().info("RETURN_THAT:emerald."+ EmeraldScript.kotlin_parse(builder.toString()));
+                    }
+
                 }else{
                     runConsoleCommand(command);
                 }

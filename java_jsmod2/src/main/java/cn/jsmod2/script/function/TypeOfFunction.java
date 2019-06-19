@@ -16,7 +16,7 @@ public class TypeOfFunction extends NativeFunction{
     @Override
     public Object execute(String[] objs,Object... args) {
         Map<String,Var> vars = (Map<String, Var>) args[0];
-        if(objs[0].toString().matches("[*]+[\\s\\S]+")){
+        if(objs[0].matches("[*]+[\\s\\S]+")){
             return getScript().findVar(objs[0],vars);
         }
         Var var = vars.get(objs[0]==null?"NULL":objs[0]);
