@@ -116,7 +116,8 @@ public class Register {
         serverProperties.put(FileSystem.SERVER_ENCODE,"utf-8");//编码字符集
         serverProperties.put(FileSystem.THIS_PORT,"19935");//本服务端的port
         serverProperties.put(FileSystem.SMOD2_IP,"127.0.0.1");
-        serverProperties.put("emerald-compiler","java");//java c++ kotlin选项，c++ native未来将被替代
+        serverProperties.put(FileSystem.EMERALD_COMPILER,"java");//java c++ kotlin选项，c++ native未来将被替代
+        serverProperties.put(FileSystem)
     }
 
 

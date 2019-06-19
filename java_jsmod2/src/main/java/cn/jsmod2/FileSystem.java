@@ -41,6 +41,8 @@ public class FileSystem {
 
     public static final String PLUGIN_PORT = "data.network.plugin.port";
 
+    public static final String EMERALD_COMPILER = "script.emerald.emerald-compiler";
+
     public static final String PLUGIN_DIR = "/plugins";
 
     public static final String SERVER_PROPERTIES = "/server.properties";
@@ -60,6 +62,7 @@ public class FileSystem {
     private Properties lang;
 
     private static FileSystem system;
+
 
     static {
         system = new FileSystem();

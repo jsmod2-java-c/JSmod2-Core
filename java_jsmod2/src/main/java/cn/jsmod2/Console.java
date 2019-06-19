@@ -74,7 +74,7 @@ public class Console extends Smod2Server {
                         stream.println(builder.toString());
                         stream.flush();
                     }
-                    String method = Server.getSender().getServer().serverProp.getProperty("emerald-compiler");
+                    String method = Server.getSender().getServer().serverProp.getProperty(FileSystem.EMERALD_COMPILER);
                     //目前java版属于最稳定版本，其他不建议使用
                     if(method.equals("java")){
                         Utils.getMessageSender().info("RETURN_THAT:emerald."+ EmeraldScript.java_parse(builder.toString()));

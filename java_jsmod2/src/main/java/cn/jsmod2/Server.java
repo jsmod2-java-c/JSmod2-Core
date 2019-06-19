@@ -49,6 +49,7 @@ import static cn.jsmod2.FileSystem.getFileSystem;
 
 public class Server implements Closeable,Reloadable{
 
+
     @PacketCMD private static final int INIT_COMMAND = 0x00;
 
     @PacketCMD private static final int CLOSE_COMMAND = 0x02;
@@ -59,6 +60,7 @@ public class Server implements Closeable,Reloadable{
 
     private static final String STOP = "end";
 
+    private Runtime runtimeInfo = Runtime.getRuntime();
 
     // 开辟线程
     // 监听线程 和 一个输入线程
@@ -156,6 +158,9 @@ public class Server implements Closeable,Reloadable{
         this.log.info("the listener thread is starting!!!!");
     }
 
+    public Runtime getRuntimeInfo() {
+        return runtimeInfo;
+    }
 
     public Lock getLock() {
         return lock;
