@@ -103,7 +103,6 @@ public class Server implements Closeable,Reloadable{
 
     private static RuntimeServer sender;
 
-    private Requester requester;
 
     Server(Properties lang) {
 
@@ -117,7 +116,6 @@ public class Server implements Closeable,Reloadable{
 
         sender = new RuntimeServer(server);
 
-        this.requester = new Requester(server);
 
         this.scheduler = new Scheduler();
 
@@ -397,7 +395,11 @@ public class Server implements Closeable,Reloadable{
         smod2Server.updateServer(packet.decode(message.getBytes(serverProp.getProperty("encode"))));
     }
 
+    /**
+     * 采用多对象制度，分发一个请求，创建一个request对象
+     * @return
+     */
     public Requester getRequester() {
-        return requester;
+        return new Requester(this);
     }
 }

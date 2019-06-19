@@ -7,7 +7,11 @@ import java.util.Map;
 
 /**
  * 该类用于发送修改请求
- * Server.getRequester().with("","").with("","").end("").to(Packet.class).reset();
+ * Server.getRequester()
+ *                  .with("","")
+ *                  .with("","")
+ *                  .end("")
+ *                  .to(Packet);
  */
 
 public class Requester {
