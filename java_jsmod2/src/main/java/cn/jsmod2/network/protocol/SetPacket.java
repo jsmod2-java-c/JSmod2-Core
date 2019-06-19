@@ -7,6 +7,8 @@ import java.util.Map;
 
 public class SetPacket extends DataPacket {
 
+    protected static final String DO = "do";
+
     public Map<String,Object> _infor_map;
 
     protected Server server = Server.getSender().getServer();

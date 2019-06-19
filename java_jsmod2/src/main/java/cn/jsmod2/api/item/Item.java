@@ -10,7 +10,7 @@ package cn.jsmod2.api.item;
 
 import cn.jsmod2.annotations.FieldInsert;
 import cn.jsmod2.math.Vector;
-import cn.jsmod2.network.protocol.item.DropItemPacket;
+import cn.jsmod2.network.protocol.item.*;
 
 import java.io.Serializable;
 
@@ -42,7 +42,9 @@ public class Item implements Cloneable, Serializable {
     }
 
     public void remove(){
-
+        RemoveItemPacket packet = new RemoveItemPacket();
+        packet.playerName = playerName;
+        packet.send();
     }
     public void drop(){
         DropItemPacket packet = new DropItemPacket();
@@ -60,6 +62,10 @@ public class Item implements Cloneable, Serializable {
 
     public void setPosition(Vector position) {
         this.position = position;
+        SetItemPositionPacket packet = new SetItemPositionPacket();
+        packet.playerName = playerName;
+        packet.position = position;
+        packet.send();
     }
 
     public boolean isKinematic() {
@@ -68,10 +74,18 @@ public class Item implements Cloneable, Serializable {
 
     public void setKinematic(boolean kinematic) {
         this.kinematic = kinematic;
+        SetItemKinematicPacket packet = new SetItemKinematicPacket();
+        packet.playerName = playerName;
+        packet.kinematic = kinematic;
+        packet.send();
     }
 
     public void setInWord(boolean inWord) {
         this.inWord = inWord;
+        SetItemInWorldPacket packet = new SetItemInWorldPacket();
+        packet.playerName = playerName;
+        packet.setInworld = inWord;
+        packet.send();
     }
 
 
