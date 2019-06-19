@@ -36,6 +36,7 @@ public class Requester {
     public Requester to(SetPacket packet){
         try{
             packet._infor_map = _map;
+            packet._end = _end;
             _sender.sendPacket(packet);
         }catch (Exception e){
             e.printStackTrace();
