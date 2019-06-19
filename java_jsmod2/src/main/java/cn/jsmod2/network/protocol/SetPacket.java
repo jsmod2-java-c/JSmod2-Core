@@ -25,7 +25,7 @@ public class SetPacket extends DataPacket {
     protected final Server server = Server.getSender().getServer();
 
     protected final Requester requester = server.getRequester().with(ID,getId());
-    
+
     @Override
     public byte[] encode() {
         return dataObjectEncodeWithEnd(_infor_map,_end);

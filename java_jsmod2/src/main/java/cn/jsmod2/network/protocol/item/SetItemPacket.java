@@ -6,6 +6,7 @@ public abstract class SetItemPacket extends SetPacket {
 
     public SetItemPacket(int id) {
         super(id);
+        requester.with("type","item");
     }
 
     public String playerName;
