@@ -132,6 +132,10 @@ public class PluginManager {
         });
     }
 
+    public void registerNativeEvents(Listener listener){
+        registerEvents(listener,null);
+    }
+
     private void addMethod(Method method,Listener listenerInstance){
         EventManager manager = method.getDeclaredAnnotation(EventManager.class);
         if (manager != null) {

@@ -146,9 +146,13 @@ public class Server implements Closeable,Reloadable{
          */
         this.plugins = PluginClassLoader.getClassLoader().loadPlugins(pluginDir);
 
-        this.pluginManager.registerEvents(new NativeJoinListener(),null);
+        registerNativeEvents();
 
         start();
+    }
+
+    public void registerNativeEvents(){
+        this.pluginManager.registerNativeEvents(new NativeJoinListener());
     }
 
     public void start(){
