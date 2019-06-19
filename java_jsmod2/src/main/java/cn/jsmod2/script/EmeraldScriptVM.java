@@ -454,7 +454,7 @@ public class EmeraldScriptVM {
         try{
             for(int i=0;i<args.length;i++){
                 StringBuilder builder = new StringBuilder();
-                if(!args.equals("''")) {
+                if(!args[i].equals("''")) {
                     if (args[i].startsWith("'")) {
                         while (!builder.toString().endsWith("'")) {
                             builder.append(args[i]);
