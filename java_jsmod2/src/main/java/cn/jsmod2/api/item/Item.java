@@ -10,6 +10,7 @@ package cn.jsmod2.api.item;
 
 import cn.jsmod2.annotations.FieldInsert;
 import cn.jsmod2.math.Vector;
+import cn.jsmod2.network.protocol.item.DropItemPacket;
 
 import java.io.Serializable;
 
@@ -44,7 +45,9 @@ public class Item implements Cloneable, Serializable {
 
     }
     public void drop(){
-
+        DropItemPacket packet = new DropItemPacket();
+        packet.playerName = playerName;
+        packet.send();
     }
 
     public Object getComponent() {

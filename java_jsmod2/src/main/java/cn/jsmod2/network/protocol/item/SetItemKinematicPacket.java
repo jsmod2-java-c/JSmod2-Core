@@ -1,4 +1,6 @@
 package cn.jsmod2.network.protocol.item;
 
-public class SetItemKinematicPacket {
+import cn.jsmod2.network.protocol.SetPacket;
+
+public class SetItemKinematicPacket extends SetPacket {
 }

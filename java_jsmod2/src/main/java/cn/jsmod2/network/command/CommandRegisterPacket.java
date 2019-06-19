@@ -13,6 +13,11 @@ import cn.jsmod2.network.DataPacket;
 
 public class CommandRegisterPacket extends DataPacket {
 
+
+    public CommandRegisterPacket() {
+        super(0x53);
+    }
+
     public NativeCommand command;
 
 

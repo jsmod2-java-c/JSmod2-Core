@@ -71,6 +71,9 @@ public abstract class BinaryStream {
 
     public byte[] dataObjectEncodeWithEnd(Object o,String end){
         try{
+            if(!end.equals("")){
+                end = "~"+end;
+            }
             String json = JSON.toJSONString(o)+end;
             String packet = id+"-"+json;
             byte[] bytes = packet.getBytes(properties.getProperty("encode"));

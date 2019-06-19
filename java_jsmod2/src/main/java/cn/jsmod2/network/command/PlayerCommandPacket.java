@@ -12,6 +12,10 @@ import cn.jsmod2.network.DataPacket;
 
 public class PlayerCommandPacket extends DataPacket {
 
+    public PlayerCommandPacket() {
+        super(0x56);
+    }
+
     @Override
     public PlayerVO decode(byte[] bytes) {
         return dataObjectDecode(bytes, PlayerVO.class);

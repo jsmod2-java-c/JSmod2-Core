@@ -14,6 +14,7 @@ import cn.jsmod2.event.NativeJoinListener;
 import cn.jsmod2.event.packet.ServerPacketEvent;
 import cn.jsmod2.log.ILogger;
 import cn.jsmod2.log.ServerLogger;
+import cn.jsmod2.network.protocol.Requester;
 import cn.jsmod2.network.ServerInitPacket;
 import cn.jsmod2.plugin.Plugin;
 import cn.jsmod2.plugin.PluginClassLoader;
@@ -102,6 +103,8 @@ public class Server implements Closeable,Reloadable{
 
     private static RuntimeServer sender;
 
+    private Requester requester;
+
     Server(Properties lang) {
 
         this.lock = new ReentrantLock();
@@ -113,6 +116,8 @@ public class Server implements Closeable,Reloadable{
         this.server = this;
 
         sender = new RuntimeServer(server);
+
+        this.requester = new Requester(server);
 
         this.scheduler = new Scheduler();
 
@@ -136,7 +141,7 @@ public class Server implements Closeable,Reloadable{
         EnvPage.loadConf(serverfolder.toString(),serverfolder+"/emerald");
 
         FileSystem.getFileSystem().readScripts(this);
-        /**
+        /*
          * 加载插件
          */
         this.plugins = PluginClassLoader.getClassLoader().loadPlugins(pluginDir);
@@ -388,5 +393,9 @@ public class Server implements Closeable,Reloadable{
         ServerPacketEvent event = new ServerPacketEvent(packet);
         pluginManager.callEvent(event);
         smod2Server.updateServer(packet.decode(message.getBytes(serverProp.getProperty("encode"))));
+    }
+
+    public Requester getRequester() {
+        return requester;
     }
 }

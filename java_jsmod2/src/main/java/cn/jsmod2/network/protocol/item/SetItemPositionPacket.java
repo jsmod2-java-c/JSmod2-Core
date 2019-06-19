@@ -1,4 +1,6 @@
 package cn.jsmod2.network.protocol.item;
 
-public class SetItemPositionPacket {
+import cn.jsmod2.network.protocol.SetPacket;
+
+public class SetItemPositionPacket extends SetPacket {
 }
