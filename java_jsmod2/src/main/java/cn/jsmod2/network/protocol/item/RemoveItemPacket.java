@@ -8,7 +8,7 @@ public class RemoveItemPacket extends SetItemPacket {
 
     @Override
     public void send() {
-        requester.with(ID,getId())
+        requester
                 .with(DO,"remove")
                 .end(playerName)
                 .to();

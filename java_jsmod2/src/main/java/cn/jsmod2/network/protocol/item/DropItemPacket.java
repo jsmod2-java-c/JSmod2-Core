@@ -11,7 +11,7 @@ public class DropItemPacket extends SetItemPacket {
 
     @Override
     public void send() {
-        requester.with(ID,getId())
+        requester
                 .with(DO,"drop")
                 .end(playerName)
                 .to();
