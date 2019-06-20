@@ -84,7 +84,7 @@ public class Item implements Cloneable, Serializable {
         this.inWord = inWord;
         SetItemInWorldPacket packet = new SetItemInWorldPacket();
         packet.playerName = playerName;
-        packet.setInworld = inWord;
+        packet.setInWorld = inWord;
         packet.send();
     }
 
