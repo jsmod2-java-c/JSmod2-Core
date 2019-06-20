@@ -20,6 +20,6 @@ public class SetItemPositionPacket extends SetItemPacket {
         requester
                 .with(POSITION,position)
                 .end(playerName)
-                .to(this);
+                .to();
     }
 }

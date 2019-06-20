@@ -11,6 +11,6 @@ public class RemoveItemPacket extends SetItemPacket {
         requester.with(ID,getId())
                 .with(DO,"remove")
                 .end(playerName)
-                .to(this);
+                .to();
     }
 }

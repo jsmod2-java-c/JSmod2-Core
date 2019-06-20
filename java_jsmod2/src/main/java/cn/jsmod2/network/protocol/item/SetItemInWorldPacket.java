@@ -16,6 +16,6 @@ public class SetItemInWorldPacket extends SetItemPacket {
     public void send() {
         requester.with(INWORLD,setInWorld)
                 .end(playerName)
-                .to(this);
+                .to();
     }
 }

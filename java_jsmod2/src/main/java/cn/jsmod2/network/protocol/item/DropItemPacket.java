@@ -14,6 +14,6 @@ public class DropItemPacket extends SetItemPacket {
         requester.with(ID,getId())
                 .with(DO,"drop")
                 .end(playerName)
-                .to(this);
+                .to();
     }
 }

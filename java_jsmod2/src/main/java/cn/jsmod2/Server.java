@@ -16,6 +16,7 @@ import cn.jsmod2.log.ILogger;
 import cn.jsmod2.log.ServerLogger;
 import cn.jsmod2.network.protocol.Requester;
 import cn.jsmod2.network.ServerInitPacket;
+import cn.jsmod2.network.protocol.SetPacket;
 import cn.jsmod2.plugin.Plugin;
 import cn.jsmod2.plugin.PluginClassLoader;
 import cn.jsmod2.command.NativeCommand;
@@ -408,7 +409,7 @@ public class Server implements Closeable,Reloadable{
      * 采用多对象制度，分发一个请求，创建一个request对象
      * @return
      */
-    public Requester getRequester() {
-        return new Requester(this);
+    public Requester getRequester(SetPacket packet) {
+        return new Requester(this,packet);
     }
 }

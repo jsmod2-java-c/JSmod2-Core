@@ -22,9 +22,12 @@ public class Requester {
 
     private Map<String,Object> _map;
 
-    public Requester(Server sender){
+    private SetPacket _packet;
+
+    public Requester(Server sender, SetPacket packet){
         _sender = sender;
         _map = new HashMap<>();
+        _packet = packet;
     }
 
     public Requester with(String key,Object value){
@@ -37,11 +40,11 @@ public class Requester {
         return this;
     }
 
-    public Requester to(SetPacket packet){
+    public Requester to(){
         try{
-            packet._infor_map = _map;
-            packet._end = _end;
-            _sender.sendPacket(packet);
+            _packet._infor_map = _map;
+            _packet._end = _end;
+            _sender.sendPacket(_packet);
             this.reset();
         }catch (Exception e){
             e.printStackTrace();

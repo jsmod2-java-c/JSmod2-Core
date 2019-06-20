@@ -17,6 +17,6 @@ public class SetItemKinematicPacket extends SetItemPacket {
     public void send() {
         requester.with(KINEMATIC,kinematic)
                 .end(playerName)
-                .to(this);
+                .to();
     }
 }
