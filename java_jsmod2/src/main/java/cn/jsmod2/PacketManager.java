@@ -26,11 +26,24 @@ import java.util.Properties;
 /**
  * 清算的发包：
  *  指令注册的发包
+ *  c#端有一个指令处理器CommandHandler负责中转jsmod2的指令
  *  物品设置的发包
+ *  传输SetPacket,里面包含json值
+ *  {"id":"包的id","type":"类型","修改值字段",{对象}}~尾部请求(一般附加玩家的名称)
  *  设置config的发包
+ *  和SetPacket基本一样
  * 接受包：
  *  事件接受包 - 带附加请求
- *  指令调用接受包
+ *  字段链注入规则:主事件对象的字段名-该字段指向对象中的字段名-...-最终注入的字段名
+ *  如xxEvent的字段
+ *  A a;
+ *  A的字段
+ *  int b;
+ *  注入xxEvent的b就是
+ *  a-b:1即可
+ *  {主事件对象},注入字段链:{}
+ *  指令调用接受包 - 带权限管理
+ *  {VO对象的内容}
  */
 public class PacketManager {
 
