@@ -27,7 +27,7 @@ public class Jsmod2 {
 
 
 
-    private static ILogger log = new ServerLogger();
+    private static ILogger log = ServerLogger.getLogger();
 
     //
     // 选择语言部分->正常启动
