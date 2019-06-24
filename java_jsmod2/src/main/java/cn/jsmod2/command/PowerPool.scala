@@ -2,8 +2,9 @@ package cn.jsmod2.command
 
 import java.util
 
-import cn.jsmod2.ex.NoSuchPlayerException
-import cn.jsmod2.{OpsFile, Server}
+import cn.jsmod2.core.ex.NoSuchPlayerException
+import cn.jsmod2.OpsFile
+import cn.jsmod2.core.Server
 
 import scala.collection.mutable
 
@@ -20,7 +21,7 @@ object PowerPool {
 
   private val ops = OpsFile.getInstance().getOps
 
-  private val players = Server.getSender.getServer.getSmod2Server.getPlayers
+  private val players = Server.getSender.getServer.getGameServer.getPlayers
 
   //把全部权限加载进去
   for(p <- 0 until players.size){

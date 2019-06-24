@@ -1,6 +1,6 @@
 package cn.jsmod2.network.protocol.item;
 
-import cn.jsmod2.network.protocol.SetPacket;
+import cn.jsmod2.core.protocol.SetPacket;
 
 public abstract class SetItemPacket extends SetPacket {
 

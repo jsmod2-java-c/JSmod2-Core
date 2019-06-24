@@ -9,26 +9,27 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2;
 
 import cn.jsmod2.command.*;
-import cn.jsmod2.event.admin.AdminQueryEvent;
-import cn.jsmod2.event.admin.AuthCheckEvent;
-import cn.jsmod2.event.admin.BanEvent;
-import cn.jsmod2.event.config.SetConfigEvent;
-import cn.jsmod2.event.environment.*;
-import cn.jsmod2.event.player.*;
-import cn.jsmod2.event.server.*;
-import cn.jsmod2.event.team.DecideRespawnQueueEvent;
-import cn.jsmod2.event.team.SetSCPConfigEvent;
-import cn.jsmod2.ex.*;
+import cn.jsmod2.api.event.admin.AdminQueryEvent;
+import cn.jsmod2.api.event.admin.AuthCheckEvent;
+import cn.jsmod2.api.event.admin.BanEvent;
+import cn.jsmod2.api.event.config.SetConfigEvent;
+import cn.jsmod2.api.event.environment.*;
+import cn.jsmod2.api.event.player.*;
+import cn.jsmod2.api.event.server.*;
+import cn.jsmod2.api.event.team.DecideRespawnQueueEvent;
+import cn.jsmod2.api.event.team.SetSCPConfigEvent;
+import cn.jsmod2.core.FileSystem;
+import cn.jsmod2.core.RegisterTemplate;
+import cn.jsmod2.core.annotations.RegisterMethod;
 import cn.jsmod2.network.ServerInitPacket;
-import cn.jsmod2.network.DataPacket;
-import cn.jsmod2.event.Event;
-import cn.jsmod2.event.team.SetNTFUnitNameEvent;
-import cn.jsmod2.event.team.TeamRespawnEvent;
+import cn.jsmod2.core.protocol.DataPacket;
+import cn.jsmod2.core.ex.*;
+import cn.jsmod2.api.event.team.SetNTFUnitNameEvent;
+import cn.jsmod2.api.event.team.TeamRespawnEvent;
 import cn.jsmod2.network.command.CommandRegisterPacket;
 import cn.jsmod2.network.command.PlayerCommandPacket;
 import cn.jsmod2.network.command.ServerCommandPacket;
 import cn.jsmod2.network.protocol.item.*;
-import scala.reflect.io.File;
 
 import java.util.*;
 
@@ -39,7 +40,7 @@ import static cn.jsmod2.Jsmod2.START;
  * @author magiclu550
  */
 
-public class Register {
+public class Register extends RegisterTemplate {
 
 
     public static final int MAX_EVENT_ID = 0x52;
@@ -52,11 +53,13 @@ public class Register {
 
     public static final int PLAYER_COMMAND = 0x56;
 
+
+
     /**
      * 注册语言时，首先按照标准格式添加语言
      * 参考resources格式
      */
-
+    @RegisterMethod
     public void registerLang(){
         registerLang.add("zh");
         registerLang.add("en");
@@ -67,6 +70,7 @@ public class Register {
     }
 
 
+    @RegisterMethod
     public void registerNativeCommand(){
         nativeCommandMap.put("stop",new StopCommand());
         nativeCommandMap.put("help",new HelpCommand());
@@ -77,13 +81,15 @@ public class Register {
         nativeCommandMap.put("throw",new ThrowCommand());
     }
 
+
+    @RegisterMethod
     public void registerStartInfo(){
         startInfo.add(START+".info");
         startInfo.add(START+".thanks");
         startInfo.add(START+".warn");
         startInfo.add(START+".connect");
     }
-
+    @RegisterMethod
     public void registerPacket(){
         packets.put(ServerInitPacket.class,0x00);
         packets.put(CommandRegisterPacket.class,0x53);
@@ -98,17 +104,13 @@ public class Register {
     }
 
 
-    public void putPackets(){
-        Set<Map.Entry<Class<? extends DataPacket>,Integer>> dataPackets = packets.entrySet();
-        for(Map.Entry<Class<? extends DataPacket>,Integer> packet:dataPackets){
-            getPackets.put(packet.getValue(),packet.getKey());
-        }
-    }
 
+    @RegisterMethod
     public void registerSuccessInfo(){
         successInfo.add("start.finish");
     }
 
+    @RegisterMethod
     public void registerServerProperties(){
         serverProperties.put(FileSystem.PLUGIN_PORT,"19938");//插件端port
         //serverProperties.put(FileSystem.SERVER_INIT_PORT,"19939");//服务端初始化的端口，传输server信息
@@ -120,9 +122,9 @@ public class Register {
     }
 
 
-
+    @RegisterMethod
     public void registerException(){
-        ex_methods.put (TypeErrorException.class,"* your configuration file type may have some problems, please see your configuration file type*\n\t refer to cn.jsmod2.utils.config.ConfigQueryer class\n\t or cn.jsmod2.configs.ConfigType class");
+        ex_methods.put (TypeErrorException.class,"* your configuration file type may have some problems, please see your configuration file type*\n\t refer to cn.jsmod2.core.utils.config.ConfigQueryer class\n\t or cn.jsmod2.configs.ConfigType class");
         ex_methods.put (ProtocolException.class,"* when transferring protocol, you did not transfer data in accordance with an accurate or correct jsmod2 * \n \t reference grammar ID - {main json}, field chain: {mapping JSON value} ~ tail request (optional, to mark subsidiary information, or ownership information");
         ex_methods.put (PluginException.class, "*There is a serious problem in initializing plug-in objects. Please check that the main class of your configuration file is filled in correctly*");
         ex_methods.put (NoSuchPluginNameException. class, "* when using the PluginManager. getPlugin method, there is no plug-in name caused by *");
@@ -136,6 +138,7 @@ public class Register {
      * put(事件id,事件名.class)
      * 事件id对应数据包id
      */
+    @RegisterMethod
     public void registerEvents(){
         events.put(0x01, AdminQueryEvent.class);//packet
         events.put(0x03, AuthCheckEvent.class);//packet
@@ -221,86 +224,12 @@ public class Register {
         //82 events
     }
 
-    public List<String> getRegisterLang(){
-        return registerLang;
+
+    private void putPackets(){
+        Set<Map.Entry<Class<? extends DataPacket>,Integer>> dataPackets = packets.entrySet();
+        for(Map.Entry<Class<? extends DataPacket>,Integer> packet:dataPackets){
+            getPackets.put(packet.getValue(),packet.getKey());
+        }
     }
 
-    public Map<String, NativeCommand> getNativeCommandMap(){
-        return nativeCommandMap;
-    }
-
-    public List<String> getStartInfo() {
-        return startInfo;
-    }
-
-
-    public Map<Class<? extends Exception>, String> getEx_methods() {
-        return ex_methods;
-    }
-
-    public List<String> getSuccessInfo() {
-        return successInfo;
-    }
-
-    public Map<Class<? extends DataPacket>,Integer> getPackets(){
-        return packets;
-    }
-
-    public Map<Integer, Class<? extends Event>> getEvents() {
-        return events;
-    }
-
-    public static Register getInstance(){
-        return register;
-    }
-
-    public Map<String, String> getServerProperties() {
-        return serverProperties;
-    }
-
-    private static Register register;
-
-    private static List<String> registerLang = new ArrayList<>();
-
-    private Map<String, NativeCommand> nativeCommandMap = new HashMap<>();
-
-    private List<String> startInfo = new ArrayList<>();
-
-    private List<String> successInfo = new ArrayList<>();
-
-    private Map<Class<? extends DataPacket>,Integer> packets = new HashMap<>();
-
-    private Map<String,String> serverProperties = new HashMap<>();
-
-    private Map<Integer, Class<? extends Event>> events = new HashMap<>();
-
-    private Map<Integer,Class<? extends DataPacket>> getPackets = new HashMap<>();
-
-    private Map<Class<? extends Exception>,String> ex_methods = new HashMap<>();
-
-    public Map<Integer, Class<? extends DataPacket>> getGetPackets() {
-        return getPackets;
-    }
-
-    public void setGetPackets(Map<Integer, Class<? extends DataPacket>> getPackets) {
-        this.getPackets = getPackets;
-    }
-
-
-
-
-
-
-    //注册
-    static {
-        register = new Register();
-        getInstance().registerEvents();
-        getInstance().registerException();
-        getInstance().registerLang();
-        getInstance().registerNativeCommand();
-        getInstance().registerPacket();
-        getInstance().registerServerProperties();
-        getInstance().registerStartInfo();
-        getInstance().registerSuccessInfo();
-    }
 }

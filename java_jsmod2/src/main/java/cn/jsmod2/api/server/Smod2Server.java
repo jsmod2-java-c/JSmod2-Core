@@ -12,16 +12,17 @@ package cn.jsmod2.api.server;
 //TODO Smod2Server 计划5.15完成
 
 
-import cn.jsmod2.CommandSender;
-import cn.jsmod2.Server;
-import cn.jsmod2.annotations.FieldInsert;
-import cn.jsmod2.annotations.UseForServerInit;
+import cn.jsmod2.core.CommandSender;
+import cn.jsmod2.core.GameServer;
+import cn.jsmod2.core.Server;
+import cn.jsmod2.core.annotations.FieldInsert;
+import cn.jsmod2.core.annotations.UseForServerInit;
 import cn.jsmod2.api.map.Map;
 import cn.jsmod2.api.player.Player;
 
 import java.util.List;
 
-public class Smod2Server extends CommandSender {
+public class Smod2Server extends CommandSender implements GameServer {
 
     private String name;
     private int port;
@@ -43,17 +44,21 @@ public class Smod2Server extends CommandSender {
     }
 
 
-    public Smod2Server updateServer(Smod2Server server){
-        Server.getSender().getServer().getLock().lock();
-        this.ipAddress = server.ipAddress;
-        this.map = server.map;
-        this.maxPlayers = server.maxPlayers;
-        this.numPlayers = server.numPlayers;
-        this.name = server.name;
-        this.round = server.round;
-        this.port = server.port;
-        Server.getSender().getServer().getLock().unlock();
-        return this;
+    public Smod2Server updateServer(GameServer server){
+        if(server instanceof Smod2Server) {
+            Smod2Server smod2Server = (Smod2Server)server;
+            Server.getSender().getServer().getLock().lock();
+            this.ipAddress = smod2Server.ipAddress;
+            this.map = smod2Server.map;
+            this.maxPlayers = smod2Server.maxPlayers;
+            this.numPlayers = smod2Server.numPlayers;
+            this.name = smod2Server.name;
+            this.round = smod2Server.round;
+            this.port = smod2Server.port;
+            Server.getSender().getServer().getLock().unlock();
+            return this;
+        }
+        return null;
     }
 
     @Override

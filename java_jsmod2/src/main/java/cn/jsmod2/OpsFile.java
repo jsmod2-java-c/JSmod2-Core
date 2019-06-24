@@ -1,13 +1,14 @@
 package cn.jsmod2;
 
 import cn.jsmod2.command.PowerPool;
+import cn.jsmod2.core.Server;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import static cn.jsmod2.FileSystem.OPS_FILE;
+import static cn.jsmod2.core.FileSystem.OPS_FILE;
 
 /**
  *操作admin

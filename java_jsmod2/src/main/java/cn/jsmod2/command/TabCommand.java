@@ -1,8 +1,9 @@
 package cn.jsmod2.command;
 
-import cn.jsmod2.CommandSender;
-import cn.jsmod2.Console;
-import cn.jsmod2.utils.Utils;
+import cn.jsmod2.core.CommandSender;
+import cn.jsmod2.core.Console;
+import cn.jsmod2.core.command.NativeCommand;
+import cn.jsmod2.core.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;

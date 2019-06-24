@@ -8,7 +8,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.network.command;
 
-import cn.jsmod2.network.DataPacket;
+import cn.jsmod2.core.protocol.DataPacket;
 
 public class PlayerCommandPacket extends DataPacket {
 

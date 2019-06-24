@@ -1,7 +1,7 @@
 package cn.jsmod2.network.protocol.item;
 
 
-import cn.jsmod2.math.Vector;
+import cn.jsmod2.core.math.Vector;
 
 public class SetItemPositionPacket extends SetItemPacket {
 

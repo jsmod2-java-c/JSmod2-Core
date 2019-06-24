@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="jsmod2" target="1.5" />
+      <module name="jsmod2" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>

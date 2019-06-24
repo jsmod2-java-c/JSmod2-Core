@@ -1,9 +1,9 @@
 package cn.jsmod2.test.foundbug.jsmod2;
 
-import cn.jsmod2.utils.config.Config;
-import cn.jsmod2.utils.config.JsonConfig;
-import cn.jsmod2.utils.config.PropertiesConfig;
-import cn.jsmod2.utils.config.YamlConfig;
+import cn.jsmod2.core.utils.config.Config;
+import cn.jsmod2.core.utils.config.JsonConfig;
+import cn.jsmod2.core.utils.config.PropertiesConfig;
+import cn.jsmod2.core.utils.config.YamlConfig;
 import org.junit.Test;
 
 import java.io.FileInputStream;

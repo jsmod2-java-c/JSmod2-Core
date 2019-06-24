@@ -1,8 +1,9 @@
 package cn.jsmod2.command;
 
-import cn.jsmod2.CommandSender;
-import cn.jsmod2.FileSystem;
-import cn.jsmod2.utils.Utils;
+import cn.jsmod2.core.CommandSender;
+import cn.jsmod2.core.FileSystem;
+import cn.jsmod2.core.command.NativeCommand;
+import cn.jsmod2.core.utils.Utils;
 
 import java.util.Set;
 
@@ -12,7 +13,7 @@ import java.util.Set;
  * see help
  * see new property
  */
-public class SeeCommand extends NativeCommand{
+public class SeeCommand extends NativeCommand {
 
     public SeeCommand() {
         super("see", "CONSOLE", "prop:cmd.see");

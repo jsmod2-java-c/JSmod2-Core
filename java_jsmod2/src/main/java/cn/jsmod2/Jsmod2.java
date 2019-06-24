@@ -8,12 +8,18 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2;
 
-import cn.jsmod2.ex.ServerRuntimeException;
-import cn.jsmod2.log.ILogger;
-import cn.jsmod2.log.ServerLogger;
-import cn.jsmod2.script.EmeraldScriptVM;
+import cn.jsmod2.core.Console;
+import cn.jsmod2.core.FileSystem;
+import cn.jsmod2.core.RegisterTemplate;
+import cn.jsmod2.core.Server;
+import cn.jsmod2.core.ex.ServerRuntimeException;
+import cn.jsmod2.core.log.ILogger;
+import cn.jsmod2.core.log.ServerLogger;
+import cn.jsmod2.core.script.EmeraldScriptVM;
 
 import java.text.MessageFormat;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -41,15 +47,19 @@ public class Jsmod2 {
         }
         try{
             //lang properties
-            Properties langProperties = FileSystem.getFileSystem().langProperties(log);
+            Server server = new DefaultServer();
+            Properties langProperties = FileSystem.getFileSystem().langProperties(log,server);
+            server.setLang(langProperties);
             FileSystem.getFileSystem().initLang(langProperties);
             long start = System.currentTimeMillis();
-            startMessage(langProperties);
-            new Server(langProperties);
+            startMessage(langProperties,server);
+            server.start();
             long startSuccess = System.currentTimeMillis();
-            log.info("this server uses the Emerald "+Server.getSender().getServer().serverProp.getProperty("emerald-compiler")+" compiler v0.1 Engine By MagicLu550");
-            for(String success:Register.getInstance().getSuccessInfo()){
-                log.info(MessageFormat.format(langProperties.getProperty(success),(startSuccess-start)+""));
+            log.info("this server uses the Emerald "+ Server.getSender().getServer().serverProp.getProperty("emerald-compiler")+" compiler v0.1 Engine By MagicLu550");
+            for(RegisterTemplate template:server.getRegisters()) {
+                for (String success : template.getSuccessInfo()) {
+                    log.info(MessageFormat.format(langProperties.getProperty(success), (startSuccess - start) + ""));
+                }
             }
             Console.getConsole().commandInput();
         }catch (Exception e){
@@ -57,6 +67,7 @@ public class Jsmod2 {
             if (e instanceof ServerRuntimeException){
                 e.printStackTrace();
             }else{
+                e.printStackTrace();
                 try {
                     throw new ServerRuntimeException("Sorry,Unknown Exception", e);
                 }catch (ServerRuntimeException e1){
@@ -66,10 +77,14 @@ public class Jsmod2 {
         }
     }
 
-    public static void startMessage(Properties langProperties){
+    public static void startMessage(Properties langProperties,Server server){
         //plugin dir
-        for(String info:Register.getInstance().getStartInfo()){
-            log.info(langProperties.getProperty(info));
+        for(RegisterTemplate template:server.getRegisters()) {
+            for (String info : template.getStartInfo()) {
+                log.info(langProperties.getProperty(info));
+            }
         }
     }
+
+
 }

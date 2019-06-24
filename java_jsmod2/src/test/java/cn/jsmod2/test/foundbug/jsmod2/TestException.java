@@ -1,7 +1,7 @@
 package cn.jsmod2.test.foundbug.jsmod2;
 
-import cn.jsmod2.ex.TypeErrorException;
-import cn.jsmod2.log.ServerLogger;
+import cn.jsmod2.core.ex.TypeErrorException;
+import cn.jsmod2.core.log.ServerLogger;
 import org.junit.Test;
 
 public class TestException {

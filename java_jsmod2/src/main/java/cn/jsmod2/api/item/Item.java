@@ -8,8 +8,8 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.api.item;
 
-import cn.jsmod2.annotations.FieldInsert;
-import cn.jsmod2.math.Vector;
+import cn.jsmod2.core.annotations.FieldInsert;
+import cn.jsmod2.core.math.Vector;
 import cn.jsmod2.network.protocol.item.*;
 
 import java.io.Serializable;

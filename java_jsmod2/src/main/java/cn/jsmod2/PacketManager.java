@@ -10,16 +10,9 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 
 package cn.jsmod2;
 
-import cn.jsmod2.api.server.Smod2Server;
-import cn.jsmod2.event.packet.ServerPacketEvent;
-import cn.jsmod2.ex.EventException;
-import cn.jsmod2.network.command.PlayerCommandPacket;
-import cn.jsmod2.network.command.ServerCommandPacket;
+import cn.jsmod2.core.*;
+import cn.jsmod2.network.command.*;
 import cn.jsmod2.api.player.Player;
-import cn.jsmod2.event.Event;
-import cn.jsmod2.network.EventBinaryStream;
-import cn.jsmod2.network.command.PlayerVO;
-import cn.jsmod2.network.command.ServerVO;
 
 import java.util.Properties;
 
@@ -45,7 +38,7 @@ import java.util.Properties;
  *  指令调用接受包 - 带权限管理
  *  {VO对象的内容}
  */
-public class PacketManager {
+public class PacketManager implements Manager {
 
     private static PacketManager manager;
 
@@ -62,25 +55,27 @@ public class PacketManager {
      * 处理包的逻辑写在这里
      */
     public void manageMethod(String message,int id){
+        if(((Register.SECOND_START_EVENT<=id&&id<Register.MAX_EVENT_ID)||id==Register.FRIST_EVENT)){
+            Server.getSender().getServer().getLogger().error("no such type packet");
+        }
         try{
             Properties properties = FileSystem.getFileSystem().serverProperties(Server.getSender().getServer());
             byte[] bytes = message.getBytes(properties.getProperty("encode"));//通过utf-8形式获取byte字节数组
             if(id == Register.FRIST_EVENT||(Register.SECOND_START_EVENT<=id&&id<Register.MAX_EVENT_ID)){
                 callEventByPacket(id,bytes);
             }
+            CommandVO vo_get = getCommandVO(id,message,Register.SERVER_COMMAND,Register.PLAYER_COMMAND);
             /* 执行指令的部分 */
-            if(id == Register.SERVER_COMMAND){
-                ServerCommandPacket serverCommandPacket = new ServerCommandPacket();
-                ServerVO vo = serverCommandPacket.decode(bytes);
-                Smod2Server sender = vo.getServer();
+            if(vo_get instanceof ServerVO){
+                ServerVO vo = (ServerVO)vo_get;
+                GameServer sender = vo.getServer();
                 String[] args = vo.getArgs();
                 String commandName = vo.getCommandName();
                 Console.getConsole().runConsoleCommand(commandName,args);
-                Server.getSender().getServer().getSmod2Server().updateServer(sender);
+                Server.getSender().getServer().getGameServer().updateServer(sender);
             }
-            if(id == Register.PLAYER_COMMAND){
-                PlayerCommandPacket playerCommandPacket = new PlayerCommandPacket();
-                PlayerVO vo = playerCommandPacket.decode(bytes);
+            if(vo_get instanceof PlayerVO){
+                PlayerVO vo = (PlayerVO)vo_get;
                 Player player = vo.getPlayer();
                 String commandName = vo.getCommandName();
                 String[] args = vo.getArgs();
@@ -93,24 +88,7 @@ public class PacketManager {
 
 
 
-    /**
-     * 通过数据包调用event
-     * @param id
-     * @param bytes
-     */
 
-    public void callEventByPacket(int id, byte[] bytes){
-
-        EventBinaryStream stream = new EventBinaryStream();
-
-        Class<? extends Event> eventClass = Register.getInstance().getEvents().get(id);
-        if(eventClass != null){
-            Event event = stream.encode(eventClass,bytes);
-            Server.getSender().getServer().getPluginManager().callEvent(event);
-        }else{
-            throw new EventException("No such type of events");
-        }
-    }
 
     public static PacketManager getManager() {
         return manager;

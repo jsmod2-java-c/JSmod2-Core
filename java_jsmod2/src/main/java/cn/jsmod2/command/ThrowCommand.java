@@ -1,12 +1,13 @@
 package cn.jsmod2.command;
 
-import cn.jsmod2.CommandSender;
+import cn.jsmod2.core.CommandSender;
+import cn.jsmod2.core.command.NativeCommand;
 
 /**
  * 测试异常
  */
 @Deprecated
-public class ThrowCommand extends NativeCommand{
+public class ThrowCommand extends NativeCommand {
 
     public ThrowCommand() {
         super("throw","just throw");
