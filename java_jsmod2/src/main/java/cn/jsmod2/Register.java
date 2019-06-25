@@ -27,8 +27,8 @@ import cn.jsmod2.core.ex.*;
 import cn.jsmod2.api.event.team.SetNTFUnitNameEvent;
 import cn.jsmod2.api.event.team.TeamRespawnEvent;
 import cn.jsmod2.core.protocol.CommandRegisterPacket;
-import cn.jsmod2.network.command.PlayerCommandPacket;
-import cn.jsmod2.network.command.ServerCommandPacket;
+import cn.jsmod2.core.protocol.command.PlayerCommandPacket;
+import cn.jsmod2.core.protocol.command.ServerCommandPacket;
 import cn.jsmod2.network.protocol.item.*;
 
 import java.util.*;

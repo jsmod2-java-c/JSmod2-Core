@@ -6,11 +6,11 @@ the GNU open source license before using the software. To understand
 the appropriateness, if infringement, will be handled in accordance
 with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">that<a>
  */
-package cn.jsmod2.network.command;
+package cn.jsmod2.core.protocol.command;
 
 
 import cn.jsmod2.core.protocol.DataPacket;
-import cn.jsmod2.core.protocol.command.AbstractServerVO;
+
 
 
 public class ServerCommandPacket<T extends AbstractServerVO> extends DataPacket {
