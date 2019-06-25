@@ -11,7 +11,6 @@ package cn.jsmod2.core.plugin;
 import cn.jsmod2.core.Server;
 import cn.jsmod2.core.ex.MainClassErrorException;
 import cn.jsmod2.core.log.ILogger;
-import cn.jsmod2.core.utils.ConfigGetter;
 import cn.jsmod2.core.utils.PluginFileVO;
 
 import java.io.File;
@@ -20,6 +19,13 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.jar.JarFile;
+
+/**
+ * 用于加载插件的主类和配置信息
+ *
+ * @author magiclu550
+ */
 
 public class PluginClassLoader {
 
@@ -52,7 +58,10 @@ public class PluginClassLoader {
 
             URLClassLoader classLoader = new URLClassLoader(new URL[]{url},this.getClass().getClassLoader());
 
-            InputStream in = classLoader.getResourceAsStream("plugin.yml");
+            JarFile file = new JarFile(jar);
+
+
+            InputStream in = file.getInputStream(file.getEntry("plugin.yml"));
 
             PluginFileVO vo = ConfigGetter.getConfigGetter().toDoPluginSet(in);
 

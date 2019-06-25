@@ -8,6 +8,12 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.core.ex;
 
+/**
+ * 当传输协议不正确时，会爆出该异常
+ *
+ * @author magiclu550
+ */
+
 public class ProtocolException extends ServerRuntimeException {
     public ProtocolException() {
     }

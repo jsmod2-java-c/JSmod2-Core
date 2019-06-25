@@ -9,7 +9,11 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.core.event.packet;
 
 import cn.jsmod2.core.protocol.DataPacket;
-
+/**
+ * 服务器自带的事件对象，在服务器发生包接收时，调用该事件
+ *
+ * @author magiclu550
+ */
 public class ServerPacketEvent extends PacketEvent {
 
     public ServerPacketEvent(DataPacket packet){

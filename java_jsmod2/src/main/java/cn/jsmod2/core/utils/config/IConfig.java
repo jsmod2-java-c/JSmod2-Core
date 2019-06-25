@@ -16,6 +16,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 定义了jsmod2配置文件的全部属性
+ *
+ * @author magiclu550
+ */
 public interface IConfig extends Closeable,Cloneable, Serializable {
     /**
      * This method can put all basic types and string

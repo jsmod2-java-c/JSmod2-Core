@@ -8,6 +8,12 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.core.protocol;
 
+/**
+ * 用于处理一个事件对象，只要将和事件对象相互匹配的其他语言事件对象对应
+ * 就可以实现事件的调用
+ *
+ * @author magiclu550
+ */
 
 public class EventBinaryStream extends BinaryStream {
 

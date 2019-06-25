@@ -120,6 +120,7 @@ public class Smod2Server extends CommandSender implements GameServer {
     }
 
     public List<Player> getPlayers() {
+
         return players;
     }
 

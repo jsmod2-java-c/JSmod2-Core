@@ -12,7 +12,10 @@ import cn.jsmod2.core.annotations.UseForServerInit;
 import cn.jsmod2.core.event.Event;
 import cn.jsmod2.core.protocol.DataPacket;
 
-public class PacketEvent extends Event {
+/**
+ * 用于标记一个事件由于数据包发送导致的
+ */
+public abstract class PacketEvent extends Event {
 
     private DataPacket packet;
 

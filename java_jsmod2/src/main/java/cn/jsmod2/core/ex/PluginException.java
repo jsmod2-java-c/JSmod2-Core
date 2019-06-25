@@ -8,6 +8,11 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.core.ex;
 
+/**
+ * 一些插件的错误会导致该异常的发生
+ * @author magiclu550
+ */
+
 public class PluginException extends ServerRuntimeException {
     public PluginException() {
     }

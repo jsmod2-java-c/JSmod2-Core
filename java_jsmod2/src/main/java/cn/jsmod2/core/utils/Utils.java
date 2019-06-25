@@ -18,6 +18,11 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.Properties;
 
+/**
+ * 一些常用的工具，简化了操作
+ *
+ * @author magiclu550
+ */
 public class Utils {
 
     private static Message messageSender;

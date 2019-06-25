@@ -6,39 +6,21 @@ the GNU open source license before using the software. To understand
 the appropriateness, if infringement, will be handled in accordance
 with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">that<a>
  */
-package cn.jsmod2.api.player;
+package cn.jsmod2.core;
 
-import cn.jsmod2.api.team.TeamRole;
+/**
+ * 定义了一个玩家的基本信息
+ *
+ * @author magiclu550
+ */
 
-public interface IPlayer {
+public interface ISimplePlayer extends ICommandSender {
 
-    TeamRole getTeamRole();
-
-    void setTeamRole(TeamRole teamRole);
-
+    String getName();
 
     String getIpAddress();
 
-
     int getPlayerId();
-
-
-    String getStreamId();
-
-
-    RadioStatus getRadioStatus();
-
-    void setRadioStatus(RadioStatus radioStatus);
-
-
-    boolean isOverwatchMode();
-
-
-    boolean isDoNotTrack();
-
-    Scp079Data getScp079Data();
-
-    void kill(DamageType type);
 
     void kill();
 

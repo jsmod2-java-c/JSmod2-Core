@@ -22,6 +22,8 @@ import static org.fusesource.jansi.Ansi.Color.*;
  *  beautiful server logger
  * #jsmod2 java server
  *
+ * 统一打印服务器消息
+ *
  *
  * @see ILogger
  *

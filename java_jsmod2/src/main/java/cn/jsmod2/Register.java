@@ -26,7 +26,7 @@ import cn.jsmod2.core.protocol.DataPacket;
 import cn.jsmod2.core.ex.*;
 import cn.jsmod2.api.event.team.SetNTFUnitNameEvent;
 import cn.jsmod2.api.event.team.TeamRespawnEvent;
-import cn.jsmod2.network.command.CommandRegisterPacket;
+import cn.jsmod2.core.protocol.CommandRegisterPacket;
 import cn.jsmod2.network.command.PlayerCommandPacket;
 import cn.jsmod2.network.command.ServerCommandPacket;
 import cn.jsmod2.network.protocol.item.*;
@@ -45,7 +45,7 @@ public class Register extends RegisterTemplate {
 
     public static final int MAX_EVENT_ID = 0x52;
 
-    public static final int FRIST_EVENT = 0x01;
+    public static final int FIRST_EVENT = 0x01;
 
     public static final int SECOND_START_EVENT = 0x03;
 

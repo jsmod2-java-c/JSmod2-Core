@@ -11,7 +11,8 @@ package cn.jsmod2.core.command;
 import cn.jsmod2.core.CommandSender;
 
 /**
- * The native command(server command)
+ * 用于服务器自带指令的注册，该指令在重启服务器时不会被销毁，也不会
+ * 新建，同时忽视了Plugin对象
  *
  * @author magiclu550 #(code) jsmod2
  */

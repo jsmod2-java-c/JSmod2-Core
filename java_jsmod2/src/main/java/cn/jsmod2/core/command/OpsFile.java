@@ -1,6 +1,6 @@
-package cn.jsmod2;
+package cn.jsmod2.core.command;
 
-import cn.jsmod2.command.PowerPool;
+
 import cn.jsmod2.core.Server;
 import org.apache.commons.io.FileUtils;
 
@@ -11,7 +11,10 @@ import java.util.List;
 import static cn.jsmod2.core.FileSystem.OPS_FILE;
 
 /**
- *操作admin
+ * 用于标记一个存放管理玩家名称的文件，当一个玩家存在admin属性时，
+ * 会注册为管理者，并以一行一行的形式记录管理员名称
+ *
+ * @author magiclu550
  */
 public class OpsFile {
 

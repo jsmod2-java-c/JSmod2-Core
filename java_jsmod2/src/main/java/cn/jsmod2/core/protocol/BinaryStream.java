@@ -10,13 +10,13 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 
 package cn.jsmod2.core.protocol;
 
-import cn.jsmod2.Register;
 import cn.jsmod2.core.RegisterTemplate;
 import cn.jsmod2.core.Server;
 import cn.jsmod2.core.ex.ProtocolException;
+import cn.jsmod2.core.FileSystem;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import cn.jsmod2.core.FileSystem;
+
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
@@ -27,6 +27,14 @@ import java.util.Properties;
 /**
  * jsmod2数据包编码是通过序列化为json，并编码为base64所得
  * (= = ])有啥错记得告诉作者，C#端也是以此为规则
+ *
+ * 发包可以带尾部请求(尾部请求未来将淘汰)
+ *
+ * 接收包则不能带尾部请求
+ *
+ * 并且可以注入一个特定的对象
+ *
+ * id-{主对象},字段:{对应对象}...~尾部附带消息
  *
  * 2019.5.4 20:22 开工
  *

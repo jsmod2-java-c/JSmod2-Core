@@ -1,10 +1,9 @@
-package cn.jsmod2.command
+package cn.jsmod2.core.command
 
 import java.util
 
-import cn.jsmod2.core.ex.NoSuchPlayerException
-import cn.jsmod2.OpsFile
 import cn.jsmod2.core.Server
+import cn.jsmod2.core.ex.NoSuchPlayerException
 
 import scala.collection.mutable
 

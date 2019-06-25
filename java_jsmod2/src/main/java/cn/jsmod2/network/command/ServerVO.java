@@ -8,21 +8,9 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.network.command;
 
-import cn.jsmod2.core.GameServer;
-import cn.jsmod2.core.Server;
 import cn.jsmod2.api.server.Smod2Server;
+import cn.jsmod2.core.protocol.command.AbstractServerVO;
 
-public class ServerVO extends CommandVO{
+public class ServerVO extends AbstractServerVO<Smod2Server> {
 
-    public ServerVO(){
-        super();
-    }
-
-    public GameServer getServer() {
-        return Server.getSender().getServer().getGameServer();
-    }
-
-    public void setServer(Smod2Server server) {
-        Server.getSender().getServer().getGameServer().updateServer(server);
-    }
 }

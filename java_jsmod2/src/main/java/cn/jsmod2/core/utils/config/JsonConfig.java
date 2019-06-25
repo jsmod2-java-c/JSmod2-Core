@@ -19,6 +19,7 @@ import java.io.*;
 import java.util.*;
 
 /**
+ * json配置文件对象
  * @author magiclu550 #(code) smod2
  */
 

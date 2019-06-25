@@ -9,15 +9,22 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.network.command;
 
 import cn.jsmod2.core.protocol.DataPacket;
+import cn.jsmod2.core.protocol.command.AbstractPlayerVO;
 
-public class PlayerCommandPacket extends DataPacket {
+public class PlayerCommandPacket<P extends AbstractPlayerVO> extends DataPacket {
+
+    private Class<P> type;
+
+    public PlayerCommandPacket(Class<P> type){
+        this.type = type;
+    }
 
     public PlayerCommandPacket() {
         super(0x56);
     }
 
     @Override
-    public PlayerVO decode(byte[] bytes) {
-        return dataObjectDecode(bytes, PlayerVO.class);
+    public P decode(byte[] bytes) {
+        return dataObjectDecode(bytes, type);
     }
 }

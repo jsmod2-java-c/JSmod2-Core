@@ -1,14 +1,20 @@
 package cn.jsmod2.core.ex;
 
-import cn.jsmod2.Register;
+
 import cn.jsmod2.core.RegisterTemplate;
 import cn.jsmod2.core.Server;
 import cn.jsmod2.core.log.IErrorLogger;
 import cn.jsmod2.core.log.ServerLogger;
-import cn.jsmod2.core.protocol.DataPacket;
 
 import java.util.HashMap;
 import java.util.Map;
+
+/**
+ * 服务器运行时异常。一切有关服务器运行的异常都必须继承该类
+ * 同时会打印解决方案(在RegisterTemplate类中设置)，如果没有方案会返回后缀消息
+ *
+ * @author magiclu550
+ */
 
 public class ServerRuntimeException extends RuntimeException {
 

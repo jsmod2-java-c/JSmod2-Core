@@ -19,6 +19,8 @@ import static org.fusesource.jansi.Ansi.ansi;
 /**
  * format the console log
  *
+ * 可以给予控制台消息颜色
+ *
  * @author magiclu550 #(code) for scpsl
  */
 

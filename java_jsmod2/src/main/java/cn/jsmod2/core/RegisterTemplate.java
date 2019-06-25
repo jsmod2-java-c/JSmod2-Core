@@ -1,6 +1,6 @@
 package cn.jsmod2.core;
 
-import cn.jsmod2.Register;
+
 import cn.jsmod2.core.annotations.RegisterMethod;
 import cn.jsmod2.core.command.NativeCommand;
 import cn.jsmod2.core.event.Event;
@@ -11,6 +11,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 定义了一个注册类的模板，在Server子类注册
+ *
+ * @author magiclu550
+ */
 public abstract class RegisterTemplate {
 
     public List<String> getRegisterLang(){

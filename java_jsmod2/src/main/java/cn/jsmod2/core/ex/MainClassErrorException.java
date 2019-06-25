@@ -8,7 +8,13 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.core.ex;
 
-public class MainClassErrorException extends ServerRuntimeException {
+/**
+ * 在注册插件过程中，如果发现煮类格式错误或不存在，会抛出该异常
+ *
+ * @author magiclu550
+ */
+
+public class MainClassErrorException extends PluginException {
 
     public MainClassErrorException() {
         super();

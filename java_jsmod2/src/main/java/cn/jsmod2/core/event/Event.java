@@ -11,6 +11,8 @@ package cn.jsmod2.core.event;
 import java.io.Serializable;
 
 /**
+ * 所有事件需要继承该类，在注册时，才能嵌入注册器，完成事件的注册
+ * 在使用监听器时，不建议直接使用基类
  * @author magiclu550
  */
 

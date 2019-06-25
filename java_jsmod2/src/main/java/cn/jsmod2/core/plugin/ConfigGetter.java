@@ -6,14 +6,20 @@ the GNU open source license before using the software. To understand
 the appropriateness, if infringement, will be handled in accordance
 with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">that<a>
  */
-package cn.jsmod2.core.utils;
+package cn.jsmod2.core.plugin;
 
+import cn.jsmod2.core.utils.PluginFileVO;
 import cn.jsmod2.core.utils.config.YamlConfig;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 
+/**
+ * 用于读取插件的配置文件plugin.yml，并封装起来
+ *
+ * @author magiclu550
+ */
 public class ConfigGetter {
 
     private static ConfigGetter configGetter;

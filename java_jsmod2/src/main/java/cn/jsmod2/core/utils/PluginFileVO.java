@@ -8,6 +8,11 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.core.utils;
 
+/**
+ * 用于封装一个plugin.yml的信息
+ *
+ * @author magiclu550
+ */
 public class PluginFileVO {
 
     private String pluginName;

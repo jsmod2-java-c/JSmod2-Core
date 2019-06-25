@@ -15,6 +15,7 @@ import java.io.*;
 import java.util.*;
 
 /**
+ * yaml配置文件对象
  * @author magiclu550 #(code) jsmod2
  */
 

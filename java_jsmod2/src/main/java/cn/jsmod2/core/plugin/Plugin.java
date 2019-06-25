@@ -13,6 +13,11 @@ import cn.jsmod2.core.log.ILogger;
 
 import java.io.File;
 
+
+/**
+ * 定义了一个插件对象相关的接口
+ * @author magiclu550
+ */
 public interface Plugin {
 
     default void onLoad(){

@@ -7,6 +7,11 @@ the appropriateness, if infringement, will be handled in accordance
 with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">that<a>
  */
 package cn.jsmod2.core.ex;
+/**
+ * 当发生文档或配置文件类型错误，以及Emerald脚本错误时，会抛出该异常
+ *
+ * @author magiclu550
+ */
 
 public class TypeErrorException extends ServerRuntimeException{
     public TypeErrorException() {

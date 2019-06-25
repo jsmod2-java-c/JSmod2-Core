@@ -9,7 +9,8 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.core.annotations;
 
 /**
- * packet command
+ * 用于标记一个常量是一个包id，但数据包只有id属性
+ * 用于代码的可读性
  * @author magiclu550
  */
 @PacketCMD

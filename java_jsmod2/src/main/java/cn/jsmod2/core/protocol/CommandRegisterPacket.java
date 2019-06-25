@@ -6,10 +6,15 @@ the GNU open source license before using the software. To understand
 the appropriateness, if infringement, will be handled in accordance
 with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">that<a>
  */
-package cn.jsmod2.network.command;
+package cn.jsmod2.core.protocol;
 
 import cn.jsmod2.core.command.NativeCommand;
-import cn.jsmod2.core.protocol.DataPacket;
+
+/**
+ * 内置数据包，用于处理远端发来的指令注册数据包
+ *
+ * @author magiclu550
+ */
 
 public class CommandRegisterPacket extends DataPacket {
 

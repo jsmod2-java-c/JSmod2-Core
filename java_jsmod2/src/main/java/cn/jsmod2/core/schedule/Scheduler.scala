@@ -13,7 +13,7 @@ import java.util.concurrent.{Callable, Executors}
 
 
 /**
-  * 中央线程处理器
+  * 中央线程处理器，线程可以在这里注册
   * @author magiclu550 #(code) jsmod2
   */
 

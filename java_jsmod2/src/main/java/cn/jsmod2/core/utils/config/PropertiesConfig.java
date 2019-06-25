@@ -13,6 +13,11 @@ import cn.jsmod2.core.utils.Utils;
 import java.io.*;
 import java.util.*;
 
+/**
+ * properties配置文件对象
+ *
+ * @author magiclu550
+ */
 public class PropertiesConfig extends Config{
 
     private Properties properties;

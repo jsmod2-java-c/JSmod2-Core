@@ -7,11 +7,12 @@ import java.util.Map;
 
 /**
  * 该类用于发送修改请求
- * Server.getRequester()
+ * Server.getRequester(packet)
  *                  .with("","")
  *                  .with("","")
  *                  .end("")
- *                  .to(Packet);
+ *                  .to();
+ * @author magiclu550
  */
 
 public class Requester {

@@ -8,6 +8,11 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.core.utils.config;
 
+/**
+ * 标记配置文件的属性类型
+ * 在配置文件工厂可以使用
+ * @author magiclu550
+ */
 public enum ConfigType {
 
     JSON(0),

@@ -12,6 +12,8 @@ package cn.jsmod2.core.math
 /**
   * scala vector
   *
+  * 向量类，可以使用在游戏计算当中
+  *
   * @author magiclu550#(code) jsmod2
   */
 

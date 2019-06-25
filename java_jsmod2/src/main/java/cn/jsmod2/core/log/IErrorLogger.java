@@ -8,6 +8,11 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.core.log;
 
+/**
+ * 规定了error相关信息，可以规定前缀和后缀
+ * @author magiclu550
+ */
+
 public interface IErrorLogger {
     void error(String message);
 

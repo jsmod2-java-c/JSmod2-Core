@@ -11,6 +11,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2;
 
 import cn.jsmod2.core.*;
+import cn.jsmod2.core.protocol.command.CommandVO;
 import cn.jsmod2.network.command.*;
 import cn.jsmod2.api.player.Player;
 
@@ -55,16 +56,16 @@ public class PacketManager implements Manager {
      * 处理包的逻辑写在这里
      */
     public void manageMethod(String message,int id){
-        if(((Register.SECOND_START_EVENT<=id&&id<Register.MAX_EVENT_ID)||id==Register.FRIST_EVENT)){
+        if(((Register.SECOND_START_EVENT<=id&&id<Register.MAX_EVENT_ID)||id==Register.FIRST_EVENT)){
             Server.getSender().getServer().getLogger().error("no such type packet");
         }
         try{
             Properties properties = FileSystem.getFileSystem().serverProperties(Server.getSender().getServer());
             byte[] bytes = message.getBytes(properties.getProperty("encode"));//通过utf-8形式获取byte字节数组
-            if(id == Register.FRIST_EVENT||(Register.SECOND_START_EVENT<=id&&id<Register.MAX_EVENT_ID)){
+            if(id == Register.FIRST_EVENT||(Register.SECOND_START_EVENT<=id&&id<Register.MAX_EVENT_ID)){
                 callEventByPacket(id,bytes);
             }
-            CommandVO vo_get = getCommandVO(id,message,Register.SERVER_COMMAND,Register.PLAYER_COMMAND);
+            CommandVO vo_get = getCommandVO(id,message,Register.SERVER_COMMAND,Register.PLAYER_COMMAND,ServerVO.class,PlayerVO.class);
             /* 执行指令的部分 */
             if(vo_get instanceof ServerVO){
                 ServerVO vo = (ServerVO)vo_get;

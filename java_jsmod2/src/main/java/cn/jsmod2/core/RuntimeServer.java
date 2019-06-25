@@ -8,6 +8,11 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.core;
 
+/**
+ * 存储正在运行中的服务器，未来将会做成一个队列
+ *
+ * @author magiclu550
+ */
 
 public class RuntimeServer {
 

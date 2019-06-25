@@ -9,13 +9,15 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.core.plugin;
 
 
+
+import cn.jsmod2.core.ISimplePlayer;
 import cn.jsmod2.core.CommandSender;
 import cn.jsmod2.core.Console;
 import cn.jsmod2.core.Server;
 import cn.jsmod2.core.annotations.NativeListener;
-import cn.jsmod2.api.player.Player;
+
 import cn.jsmod2.core.command.NativeCommand;
-import cn.jsmod2.command.PowerPool;
+import cn.jsmod2.core.command.PowerPool;
 import cn.jsmod2.core.event.Listener;
 import cn.jsmod2.core.ex.EventException;
 import cn.jsmod2.core.ex.NoSuchPluginNameException;
@@ -27,7 +29,7 @@ import cn.jsmod2.core.utils.Utils;
 import cn.jsmod2.core.command.Command;
 import cn.jsmod2.core.event.Event;
 import cn.jsmod2.core.annotations.EventManager;
-import cn.jsmod2.network.command.CommandRegisterPacket;
+import cn.jsmod2.core.protocol.CommandRegisterPacket;
 
 import java.lang.reflect.Method;
 import java.util.*;
@@ -35,6 +37,8 @@ import java.util.*;
 
 /**
  * the plugin manager
+ *
+ * 用于管理插件的相关属性，如注册监听器等注册功能和获取插件全部信息等功能
  *
  * @author magiclu550 #(code) jsmod2
  */
@@ -200,8 +204,8 @@ public class PluginManager {
                     return command.execute(sender,args);
                 }else{
                     Utils.getMessageSender().error("do not have this power");
-                    if(sender instanceof Player){
-                        ((Player) sender).personalBroadcast(1,"do not have "+command.getPower(),true);
+                    if(sender instanceof ISimplePlayer){
+                        ((ISimplePlayer) sender).personalBroadcast(1,"do not have "+command.getPower(),true);
                     }
                     return false;
                 }

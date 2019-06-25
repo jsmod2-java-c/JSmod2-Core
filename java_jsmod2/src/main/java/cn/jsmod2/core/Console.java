@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
+ *
+ * 控制台对象，可以处理控制台指令(NativeCommand和Command)
  * @author magiclu550 #(code)jsmod2
  */
 //TODo
@@ -49,11 +51,15 @@ public class Console extends CommandSender{
         //ConsoleReader reader = Server.getLineReader();
         //reader.addCompleter(new SimpleConsole());
         String out = Server.getSender().getServer().serverfolder+"/out/";
-        File file = new File(out,"out.ela");
-        if(!file.exists()){
-            file.createNewFile();
+        File outDir = new File(out);
+        if (!outDir.exists()){
+            outDir.mkdirs();
         }
-        PrintWriter stream = new PrintWriter(new FileOutputStream(out,true));
+        File outFile = new File(out,"out.ela");
+        if(!outFile.exists()){
+            outFile.createNewFile();
+        }
+        PrintWriter stream = new PrintWriter(new FileOutputStream(outFile,true));
         while (true){
             //@Deprecated
             Utils.getMessageSender().info("\n>");

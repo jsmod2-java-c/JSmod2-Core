@@ -16,6 +16,15 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * 用于在监听器使用，注解在方法上，当注册监听器时，
+ * 标记该注解的方法会被收集，并根据监听器类型调用方法.
+ *
+ * <code>
+ * @ EventManager
+ * public void onTest(TestEvent e){
+ *     //...
+ * }
+ * </code>
  * @author magiclu550 #(code) jsmod2
  */
 @Target(ElementType.METHOD)

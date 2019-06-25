@@ -11,7 +11,8 @@ package cn.jsmod2.core.command;
 import cn.jsmod2.core.plugin.Plugin;
 
 /**
- * all command must extend it
+ * 所有的插件注册指令需要继承该类，才能顺利的嵌入注册器
+ * 并完成正常的指令注册
  *
  * @author magiclu550 #(code) jsmod2
  */

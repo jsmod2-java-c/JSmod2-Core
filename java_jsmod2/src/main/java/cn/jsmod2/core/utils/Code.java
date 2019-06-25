@@ -8,6 +8,12 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.core.utils;
 
+/**
+ * 用于函数式编程中，充当扩展代码块
+ * 如函数式异常处理
+ *
+ * @author magiclu550
+ */
 @FunctionalInterface
 public interface Code{
 

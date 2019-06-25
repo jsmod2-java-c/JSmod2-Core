@@ -8,7 +8,10 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.core.ex;
 
-
+/**
+ * 当发生事件错误问题时，会抛出该异常
+ * @author magiclu550
+ */
 public class EventException extends ServerRuntimeException{
 
     public EventException() {

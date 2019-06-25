@@ -9,10 +9,11 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.api.player;
 
 import cn.jsmod2.core.CommandSender;
+import cn.jsmod2.core.ISimplePlayer;
 import cn.jsmod2.core.annotations.UseForServerInit;
 import cn.jsmod2.api.team.TeamRole;
 
-public class Player extends CommandSender implements IPlayer {
+public class Player extends CommandSender implements ISimplePlayer {
 
     private TeamRole teamRole;
 

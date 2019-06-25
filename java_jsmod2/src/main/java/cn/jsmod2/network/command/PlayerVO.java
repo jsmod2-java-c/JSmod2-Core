@@ -8,18 +8,11 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.network.command;
 
-import cn.jsmod2.core.annotations.UseForServerInit;
+
 import cn.jsmod2.api.player.Player;
+import cn.jsmod2.core.protocol.command.AbstractPlayerVO;
 
-public class PlayerVO extends CommandVO{
+public class PlayerVO extends AbstractPlayerVO<Player> {
 
-    private Player player;
 
-    public Player getPlayer() {
-        return player;
-    }
-    @UseForServerInit
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
 }

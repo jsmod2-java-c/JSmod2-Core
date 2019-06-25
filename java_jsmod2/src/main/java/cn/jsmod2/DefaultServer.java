@@ -1,20 +1,16 @@
 package cn.jsmod2;
 
 import cn.jsmod2.api.event.NativeJoinListener;
-import cn.jsmod2.core.FileSystem;
 import cn.jsmod2.core.Manager;
 import cn.jsmod2.core.RegisterTemplate;
 import cn.jsmod2.core.Server;
 import cn.jsmod2.core.annotations.PacketCMD;
+import cn.jsmod2.core.command.OpsFile;
 import cn.jsmod2.core.event.packet.ServerPacketEvent;
 import cn.jsmod2.api.server.Smod2Server;
 import cn.jsmod2.network.ServerInitPacket;
-import cn.jsmod2.core.utils.Utils;
 
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
 import java.util.List;
-import java.util.Properties;
 
 public class DefaultServer extends Server {
 
@@ -24,14 +20,12 @@ public class DefaultServer extends Server {
     //关闭服务端的指令
     @PacketCMD private static final int CLOSE_COMMAND = 0x02;
 
-    protected OpsFile opsFile;
+
 
 
     public DefaultServer() {
-        this.gameServer = new Smod2Server();
+        super(new Smod2Server());
         this.opsFile = OpsFile.getOpsFile(server);
-        FileSystem.getFileSystem().readScripts(this);
-
     }
 
     @Override
@@ -70,23 +64,7 @@ public class DefaultServer extends Server {
         registers.add(new Register());
     }
 
-    public OpsFile getOpsFile() {
-        return opsFile;
-    }
 
-    /** @deprecated  */
-    @Deprecated
-    private class ServerThread implements Runnable{
-        @Override
-        public void run() {
-            while(true){
-                Utils.TryCatch(()->{
-                    DatagramPacket request = new DatagramPacket(new byte[MAX_LENGTH], MAX_LENGTH);
-                    DatagramSocket socket = getSocket(Integer.parseInt(serverProp.getProperty("server.init.port")));
-                    socket.receive(request);
-                    setServer(new String(request.getData(), 0 , request.getLength()));
-                });
-            }
-        }
-    }
+
+
 }

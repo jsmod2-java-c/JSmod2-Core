@@ -40,6 +40,8 @@ import java.util.regex.Pattern;
  * [1,2,3]
  * 映射
  * [1=>2,2=>3,3=>4]
+ * 一款服务端脚本语言，正在制作
+ * @author magiclu550
  *
  */
 public class EmeraldScriptVM {

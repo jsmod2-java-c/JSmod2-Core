@@ -8,16 +8,26 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.network.command;
 
-import cn.jsmod2.core.protocol.DataPacket;
 
-public class ServerCommandPacket extends DataPacket {
+import cn.jsmod2.core.protocol.DataPacket;
+import cn.jsmod2.core.protocol.command.AbstractServerVO;
+
+
+public class ServerCommandPacket<T extends AbstractServerVO> extends DataPacket {
+
+
+    private Class<T> type;
+    public ServerCommandPacket(Class<T> type){
+        this();
+        this.type = type;
+    }
 
     public ServerCommandPacket() {
         super(0x55);
     }
 
     @Override
-    public ServerVO decode(byte[] bytes) {
-        return dataObjectDecode(bytes,ServerVO.class);
+    public T decode(byte[] bytes) {
+        return dataObjectDecode(bytes, type);
     }
 }

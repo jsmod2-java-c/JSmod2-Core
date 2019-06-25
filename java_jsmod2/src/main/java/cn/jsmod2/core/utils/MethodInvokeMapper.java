@@ -10,6 +10,12 @@ package cn.jsmod2.core.utils;
 
 import java.lang.reflect.Method;
 
+
+/**
+ * 存储优先级和方法对象的映射
+ *
+ * @author magiclu550
+ */
 public class MethodInvokeMapper {
 
     private EventPriority priority;

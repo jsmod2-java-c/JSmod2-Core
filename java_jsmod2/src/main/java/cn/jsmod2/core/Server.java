@@ -9,8 +9,8 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.core;
 
 
-import cn.jsmod2.Jsmod2;
 import cn.jsmod2.core.annotations.RegisterMethod;
+import cn.jsmod2.core.command.OpsFile;
 import cn.jsmod2.core.event.packet.ServerPacketEvent;
 import cn.jsmod2.core.log.ILogger;
 import cn.jsmod2.core.log.ServerLogger;
@@ -23,10 +23,10 @@ import cn.jsmod2.core.command.NativeCommand;
 import cn.jsmod2.core.plugin.PluginManager;
 import cn.jsmod2.core.utils.LogFormat;
 import cn.jsmod2.core.utils.Utils;
-import jline.console.ConsoleReader;
 import cn.jsmod2.core.protocol.DataPacket;
 import cn.jsmod2.core.schedule.Scheduler;
 import org.fusesource.jansi.Ansi;
+import jline.console.ConsoleReader;
 
 import java.io.*;
 import java.lang.reflect.Method;
@@ -54,7 +54,7 @@ public abstract class Server implements Closeable, Reloadable {
 
     //@PacketCMD private static final int EXECUTE_COMMAND = 0xff;
 
-    protected static final int MAX_LENGTH = 0xffff;
+    private static final int MAX_LENGTH = 0xffff;
 
     protected static final String STOP = "end";
 
@@ -108,8 +108,10 @@ public abstract class Server implements Closeable, Reloadable {
 
     protected List<RegisterTemplate> registers;
 
+    protected OpsFile opsFile;
 
-    public Server() {
+
+    public Server(GameServer gServer) {
 
 
 
@@ -132,6 +134,10 @@ public abstract class Server implements Closeable, Reloadable {
 
         registerAll();
 
+        this.opsFile = OpsFile.getOpsFile(this);
+
+        this.gameServer = gServer;
+
         //创建plugin文件夹
         this.pluginDir = getFileSystem().pluginDir(server);
 
@@ -145,7 +151,7 @@ public abstract class Server implements Closeable, Reloadable {
 
         this.packetManagers = new ArrayList<>();
 
-
+        FileSystem.getFileSystem().readScripts(this);
 
         registerPacketManger(packetManagers);
 
@@ -267,7 +273,7 @@ public abstract class Server implements Closeable, Reloadable {
 
     public void reload(){
         Utils.TryCatch(()->{
-            Jsmod2.startMessage(FileSystem.getFileSystem().langProperties(log,this),this);
+            log.debug("reloading...");
             pluginManager.clear();
             pluginManager.getPluginClassLoader().loadPlugins(new File(PLUGIN_DIR));
         });
@@ -392,23 +398,23 @@ public abstract class Server implements Closeable, Reloadable {
         }
     }
 
+    /** 包指令的处理 */
     public abstract void packetCommandManage(int id,String message) throws Exception;
-
+    /** 注册数据包管理员 */
     public abstract void registerPacketManger(List<Manager> managers);
-
+    /** 通过RegisterTemplates注册服务器信息 */
     public abstract void registerTemplates(List<RegisterTemplate> registers,Server server);
 
-
+    /** 注册原生的事件 */
     public abstract void registerNativeEvents();
 
+
+    /** 获取GameServer */
     public GameServer getGameServer(){
         return gameServer;
     }
 
-    /**
-     * 采用多对象制度，分发一个请求，创建一个request对象
-     * @return
-     */
+    /**采用多对象制度，分发一个请求，创建一个request对象*/
     public Requester getRequester(SetPacket packet) {
         return new Requester(this,packet);
     }
@@ -419,5 +425,9 @@ public abstract class Server implements Closeable, Reloadable {
 
     public void setLang(Properties lang) {
         this.lang = lang;
+    }
+
+    public OpsFile getOpsFile() {
+        return opsFile;
     }
 }

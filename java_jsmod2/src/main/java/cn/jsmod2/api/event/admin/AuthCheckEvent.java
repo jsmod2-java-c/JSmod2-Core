@@ -8,7 +8,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.api.event.admin;
 
-import cn.jsmod2.core.utils.AuthType;
+import cn.jsmod2.api.server.AuthType;
 import cn.jsmod2.api.player.Player;
 import cn.jsmod2.core.event.Event;
 
