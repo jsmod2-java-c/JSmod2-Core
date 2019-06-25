@@ -95,4 +95,9 @@ class Vector (var x:Double,var y:Double,var z:Double){
     val state = Seq(sqrMagnitude, x, y, z)
     state.map(_.hashCode()).foldLeft(0)((a, b) => 31 * a + b)
   }
+
+  def getX() = x
+  def getY()= y
+  def getZ() = z
+
 }

@@ -200,15 +200,25 @@ public abstract class Server implements Closeable, Reloadable {
 
     //TODO address和port通过数据包获取
     public void sendPacket(final DataPacket packet){
+        sendPacket(packet,serverProp.getProperty(FileSystem.SMOD2_IP),Integer.parseInt(serverProp.getProperty("data.network.plugin.port")));
+    }
+
+    public void sendPacket(final DataPacket packet,String ip,int port){
         Utils.TryCatch(()->{
             byte[] encode = packet.encode();
             //发送端口为插件的端口,ip写死为jsmod2的
-            DatagramPacket pack = new DatagramPacket(encode,encode.length,InetAddress.getByName(serverProp.getProperty(FileSystem.SMOD2_IP)),Integer.parseInt(serverProp.getProperty("data.network.plugin.port")));
-            socket.send(pack);
+            sendData(encode,ip,port);
         });
         ServerPacketEvent event = new ServerPacketEvent(packet);
         pluginManager.callEvent(event);
     }
+
+    public void sendData(byte[] encode,String ip,int port) throws IOException{
+        DatagramPacket pack = new DatagramPacket(encode,encode.length,InetAddress.getByName(ip),port);
+        socket.send(pack);
+    }
+
+
 
     public ILogger getLogger() {
         return log;
