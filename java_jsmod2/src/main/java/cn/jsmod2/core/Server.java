@@ -33,6 +33,7 @@ import java.lang.reflect.Method;
 import java.net.*;
 import java.text.MessageFormat;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.locks.Lock;
@@ -111,12 +112,15 @@ public abstract class Server implements Closeable, Reloadable {
     protected OpsFile opsFile;
 
 
+
+    protected Properties appProps;
+
+
     public Server(GameServer gServer) {
 
         this.lock = new ReentrantLock();
 
         this.log = ServerLogger.getLogger();
-
 
         this.server = this;
 
@@ -402,6 +406,9 @@ public abstract class Server implements Closeable, Reloadable {
             });
         }
     }
+
+
+
 
     /** 包指令的处理 */
     public abstract void packetCommandManage(int id,String message) throws Exception;

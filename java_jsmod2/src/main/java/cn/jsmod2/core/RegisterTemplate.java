@@ -80,19 +80,36 @@ public abstract class RegisterTemplate {
     }
 
     @RegisterMethod
-    public abstract void registerLang();
+    public void registerLang(){
+
+    }
     @RegisterMethod
-    public abstract void registerNativeCommand();
+    public void registerNativeCommand(){
+
+    }
     @RegisterMethod
-    public abstract void registerStartInfo();
+    public void registerStartInfo(){
+
+    }
     @RegisterMethod
-    public abstract void registerPacket();
+    public void registerPacket(){
+
+    }
     @RegisterMethod
-    public abstract void registerSuccessInfo();
+    public void registerSuccessInfo(){
+
+    }
     @RegisterMethod
-    public abstract void registerServerProperties();
+    public void registerServerProperties(){
+        serverProperties.put(FileSystem.SERVER_DECODE,"utf-8");//解码字符集
+        serverProperties.put(FileSystem.SERVER_ENCODE,"utf-8");//编码字符集
+    }
     @RegisterMethod
-    public abstract void registerException();
+    public void registerException(){
+
+    }
     @RegisterMethod
-    public abstract void registerEvents();
+    public void registerEvents(){
+
+    }
 }

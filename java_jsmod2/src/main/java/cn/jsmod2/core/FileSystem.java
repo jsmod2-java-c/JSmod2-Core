@@ -104,6 +104,17 @@ public class FileSystem {
         return info;
     }
 
+    public Properties getApplicationInfo(){
+        try {
+            Properties info = new Properties();
+            info.load(Utils.getClassStream("application.properties"));
+            return info;
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public List<String> readScripts(Server server){
 
         try{
