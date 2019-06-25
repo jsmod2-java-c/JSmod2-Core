@@ -28,6 +28,8 @@ import java.util.*;
 
 public class FileSystem {
 
+    public static final String THIS_IP = "this.ip";
+
     public static final String SERVER_ENCODE = "encode";
 
     public static final String SERVER_DECODE = "decode";

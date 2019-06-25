@@ -307,7 +307,8 @@ public abstract class Server implements Closeable, Reloadable {
     }
 
     public void serverLogInfo(String message){
-        log.info(message,LogFormat.textFormat("[START::"+FileSystem.getFileSystem().serverProperties(server).getProperty("smod2.ip")+"]", Ansi.Color.GREEN).toString());
+        Properties properties = FileSystem.getFileSystem().serverProperties(server);
+        log.info(message,LogFormat.textFormat("[START::"+properties.getProperty(FileSystem.THIS_IP,"127.0.0.1")+":"+properties.getProperty(FileSystem.THIS_PORT)+"->"+(properties.getProperty(FileSystem.SMOD2_IP).equals(properties.getProperty(FileSystem.THIS_IP))?"":properties.getProperty(FileSystem.SMOD2_IP)+":")+properties.getProperty(FileSystem.PLUGIN_PORT)+"]", Ansi.Color.GREEN).toString());
     }
 
 

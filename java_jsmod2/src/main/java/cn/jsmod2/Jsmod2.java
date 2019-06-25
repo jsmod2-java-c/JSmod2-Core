@@ -24,6 +24,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import static cn.jsmod2.core.FileSystem.EMERALD_COMPILER;
+
 /**
  * @author magiclu550 #(code) jsmod2
  */
@@ -57,7 +59,7 @@ public class Jsmod2 {
             startMessage(langProperties,server);
             server.start();
             long startSuccess = System.currentTimeMillis();
-            server.serverLogInfo("this server uses the Emerald "+ Server.getSender().getServer().serverProp.getProperty("emerald-compiler")+" compiler v0.1 Engine By MagicLu550");
+            server.serverLogInfo("this server uses the Emerald "+ Server.getSender().getServer().serverProp.getProperty(EMERALD_COMPILER,"java")+" compiler v0.1 Engine By MagicLu550");
             for(RegisterTemplate template:server.getRegisters()) {
                 for (String success : template.getSuccessInfo()) {
                     server.serverLogInfo(MessageFormat.format(langProperties.getProperty(success), (startSuccess - start) + ""));
