@@ -5,7 +5,6 @@ import cn.jsmod2.core.Manager;
 import cn.jsmod2.core.RegisterTemplate;
 import cn.jsmod2.core.Server;
 import cn.jsmod2.core.annotations.PacketCMD;
-import cn.jsmod2.core.command.OpsFile;
 import cn.jsmod2.core.event.packet.ServerPacketEvent;
 import cn.jsmod2.api.server.Smod2Server;
 import cn.jsmod2.network.ServerInitPacket;
@@ -25,7 +24,6 @@ public class DefaultServer extends Server {
 
     public DefaultServer() {
         super(new Smod2Server());
-        this.opsFile = OpsFile.getOpsFile(server);
     }
 
     @Override

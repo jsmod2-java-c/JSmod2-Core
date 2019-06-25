@@ -113,8 +113,6 @@ public abstract class Server implements Closeable, Reloadable {
 
     public Server(GameServer gServer) {
 
-
-
         this.lock = new ReentrantLock();
 
         this.log = ServerLogger.getLogger();
@@ -185,7 +183,7 @@ public abstract class Server implements Closeable, Reloadable {
         this.pool.execute(new ListenerThread());
         this.pool.execute(new GithubConnectThread());
         //this.pool.execute(new ServerThread());
-        this.log.info("the listener thread is starting!!!!");
+        this.serverLogInfo("the listener thread is starting!!!!");
     }
 
     public Runtime getRuntimeInfo() {
@@ -240,7 +238,7 @@ public abstract class Server implements Closeable, Reloadable {
 
 
     public void help(){
-        log.info(LogFormat.textFormat("+================HELP========================+", Ansi.Color.GREEN).toString());
+        log.info(LogFormat.textFormat("+================HELP========================+", Ansi.Color.GREEN).toString(),LogFormat.textFormat("[HELP]", Ansi.Color.BLUE).toString());
         Set<Map.Entry<String,String>> cmdSet = commandInfo.entrySet();
         for(Map.Entry<String,String> entry:cmdSet){
             String key = entry.getKey();
@@ -250,7 +248,7 @@ public abstract class Server implements Closeable, Reloadable {
                 value = builder.substring(PROP.length());
                 value = lang.getProperty(value);
             }
-            log.info(LogFormat.textFormat(key+": "+value, Ansi.Color.GREEN).toString());
+            log.info(LogFormat.textFormat(key+": "+value, Ansi.Color.GREEN).toString(),LogFormat.textFormat("[HELP]", Ansi.Color.BLUE).toString());
         }
     }
 
@@ -299,14 +297,19 @@ public abstract class Server implements Closeable, Reloadable {
     public void closeAll(){
         disable();
         closeStream();
-        log.info(lang.getProperty(STOP+".finish"));
+        log.info(lang.getProperty(STOP+".finish"),LogFormat.textFormat("[STOP::"+FileSystem.getFileSystem().serverProperties(server).getProperty("smod2.ip")+"]", Ansi.Color.GREEN).toString());
     }
     private void disable(){
         for(Plugin plugin:plugins){
-            log.info("unload the plugin named "+plugin.getPluginName());
+            serverLogInfo("unload the plugin named "+plugin.getPluginName());
             plugin.onDisable();
         }
     }
+
+    public void serverLogInfo(String message){
+        log.info(message,LogFormat.textFormat("[START::"+FileSystem.getFileSystem().serverProperties(server).getProperty("smod2.ip")+"]", Ansi.Color.GREEN).toString());
+    }
+
 
 
     public static Scanner getScanner(){
@@ -349,6 +352,7 @@ public abstract class Server implements Closeable, Reloadable {
             log.info(MessageFormat.format("version:{0}",info.getProperty("version")));
             log.info(MessageFormat.format("thanks for authors:{0}",info.getProperty("authors")));
             log.info(MessageFormat.format("stars:{0},fork:{1}",info.getProperty("stars"),info.getProperty("forks")));
+            Utils.getMessageSender().info(">");
         }
     }
 

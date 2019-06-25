@@ -16,6 +16,8 @@ import cn.jsmod2.core.ex.ServerRuntimeException;
 import cn.jsmod2.core.log.ILogger;
 import cn.jsmod2.core.log.ServerLogger;
 import cn.jsmod2.core.script.EmeraldScriptVM;
+import cn.jsmod2.core.utils.LogFormat;
+import org.fusesource.jansi.Ansi;
 
 import java.text.MessageFormat;
 import java.util.HashMap;
@@ -55,10 +57,10 @@ public class Jsmod2 {
             startMessage(langProperties,server);
             server.start();
             long startSuccess = System.currentTimeMillis();
-            log.info("this server uses the Emerald "+ Server.getSender().getServer().serverProp.getProperty("emerald-compiler")+" compiler v0.1 Engine By MagicLu550");
+            server.serverLogInfo("this server uses the Emerald "+ Server.getSender().getServer().serverProp.getProperty("emerald-compiler")+" compiler v0.1 Engine By MagicLu550");
             for(RegisterTemplate template:server.getRegisters()) {
                 for (String success : template.getSuccessInfo()) {
-                    log.info(MessageFormat.format(langProperties.getProperty(success), (startSuccess - start) + ""));
+                    server.serverLogInfo(MessageFormat.format(langProperties.getProperty(success), (startSuccess - start) + ""));
                 }
             }
             Console.getConsole().commandInput();
@@ -81,7 +83,7 @@ public class Jsmod2 {
         //plugin dir
         for(RegisterTemplate template:server.getRegisters()) {
             for (String info : template.getStartInfo()) {
-                log.info(langProperties.getProperty(info));
+                server.serverLogInfo(langProperties.getProperty(info));
             }
         }
     }
