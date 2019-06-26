@@ -6,8 +6,6 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.nio.ByteBuffer;
-import java.nio.channels.SocketChannel;
 import java.util.Arrays;
 import java.util.Base64;
 
@@ -33,7 +31,7 @@ public class TestTwoPacket {
     public static void main(String[] args) throws Exception{
         Socket socket = new Socket();
         socket.connect(new InetSocketAddress("127.0.0.1",19935));
-        socket.getOutputStream().write(Base64.getEncoder().encode("111-hello;".getBytes()));
+        socket.getOutputStream().write(Base64.getEncoder().encode("111-hello".getBytes()));
         Thread.sleep(10);
         socket.getOutputStream().write("11".getBytes());
 

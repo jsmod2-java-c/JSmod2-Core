@@ -89,11 +89,9 @@ public abstract class Server implements Closeable, Reloadable {
 
     protected PluginManager pluginManager;
 
-    protected DatagramSocket udpSocket;
+    //protected DatagramSocket udpSocket;
 
-    private Socket socket;
-
-    private ServerSocket serverSocket;
+    private Closeable serverSocket;
 
     protected static ConsoleReader lineReader;
 
@@ -228,13 +226,12 @@ public abstract class Server implements Closeable, Reloadable {
     public void sendData(byte[] encode,String ip,int port) throws IOException{
         if(useUDP) {
             DatagramPacket pack = new DatagramPacket(encode, encode.length, InetAddress.getByName(ip), port);
-            udpSocket.send(pack);
+            ((DatagramSocket)serverSocket).send(pack);
         }else{
-            if(socket==null) {
-                socket = new Socket();
-                socket.connect(new InetSocketAddress(ip,port));
-            }
+            Socket socket = new Socket();
+            socket.connect(new InetSocketAddress(ip,port));
             socket.getOutputStream().write(encode);
+            socket.close();
         }
     }
 
@@ -292,8 +289,12 @@ public abstract class Server implements Closeable, Reloadable {
     }
 
     //监听Smod2转发端接口
-    protected DatagramSocket getSocket(int port) throws SocketException {
-        return new DatagramSocket(port);
+    protected Closeable getSocket(int port) throws IOException {
+        if(useUDP) {
+            return new DatagramSocket(port);
+        }else{
+            return new ServerSocket(port);
+        }
     }
 
 
@@ -408,10 +409,10 @@ public abstract class Server implements Closeable, Reloadable {
             Utils.TryCatch(()->{
                 //注意，一个jsmod2目前只支持一个smod2连接，不支持多个连接
                 //在未来版本可能会加入支持多个smod2连接一个服务器
-                udpSocket = getSocket(Integer.parseInt(serverProp.getProperty(FileSystem.THIS_PORT)));
+                serverSocket = getSocket(Integer.parseInt(serverProp.getProperty(FileSystem.THIS_PORT)));
                 while (true) {
                     DatagramPacket request = new DatagramPacket(new byte[MAX_LENGTH], MAX_LENGTH);
-                    udpSocket.receive(request);
+                    ((DatagramSocket)serverSocket).receive(request);
                     //manageMessage(request);
                     scheduler.executeRunnable(new PacketHandlerThread(request));
 
@@ -432,11 +433,11 @@ public abstract class Server implements Closeable, Reloadable {
         public void run() {
             Utils.TryCatch(()->{
                 if(serverSocket == null){
-                    serverSocket = new ServerSocket(Integer.parseInt(serverProp.getProperty(THIS_PORT)));
+                    serverSocket = getSocket(Integer.parseInt(serverProp.getProperty(THIS_PORT)));
                 }
 
                 while (true) {
-                    Socket socket = serverSocket.accept();
+                    Socket socket = ((ServerSocket)serverSocket).accept();
                     scheduler.executeRunnable(new SocketHandlerThread(socket));
                     if (isDebug) {
                         count++;
@@ -448,11 +449,8 @@ public abstract class Server implements Closeable, Reloadable {
         }
     }
 
-    public Socket getSocket() {
-        return socket;
-    }
 
-    public ServerSocket getServerSocket() {
+    public Closeable getServerSocket() {
         return serverSocket;
     }
 
@@ -511,6 +509,11 @@ public abstract class Server implements Closeable, Reloadable {
         }
     }
 
+
+    /**
+     * 每连接一个Socket 会开辟一个线程，当Socket一段时间不使用，就会废弃，
+     * 此时这个线程的Socket不再接收数据
+     */
     public class SocketHandlerThread implements Runnable{
 
         private Socket socket;
