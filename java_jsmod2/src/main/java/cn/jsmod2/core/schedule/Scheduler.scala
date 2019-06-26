@@ -21,13 +21,12 @@ class Scheduler {
 
   private val service = Executors.newCachedThreadPool
 
-  def execute(c: Callable[_]): Any = try service.submit(c).get
-
-
-  def execute(runnable: Runnable)= service.execute(runnable)
+  def executeRunnable(runnable: Runnable)= service.execute(runnable)
 
   def shutdown : Unit = service.shutdown
 
   def getPool = service
+
+  def execute(c: Callable[_]): Any = try service.submit(c).get
 
 }

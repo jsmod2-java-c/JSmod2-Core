@@ -38,6 +38,8 @@ public class FileSystem {
 
     public static final String SMOD2_IP = "smod2.ip";
 
+    public static final String DEBUG = "this.debug";
+
     @Deprecated
     public static final String SERVER_INIT_PORT = "server.init.port";
 

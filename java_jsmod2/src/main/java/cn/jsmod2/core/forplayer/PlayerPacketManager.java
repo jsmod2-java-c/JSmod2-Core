@@ -15,7 +15,7 @@ import java.util.*;
 import static cn.jsmod2.core.forplayer.PlayerServer.DECODE_BY;
 
 
-public class PlayerPacketManager implements Manager {
+public class PlayerPacketManager extends Manager {
 
     private Map<String,Coder> coders = new HashMap<>();
 

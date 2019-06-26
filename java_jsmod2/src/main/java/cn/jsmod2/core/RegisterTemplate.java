@@ -103,6 +103,13 @@ public abstract class RegisterTemplate {
     public void registerServerProperties(){
         serverProperties.put(FileSystem.SERVER_DECODE,"utf-8");//解码字符集
         serverProperties.put(FileSystem.SERVER_ENCODE,"utf-8");//编码字符集
+        serverProperties.put(FileSystem.PLUGIN_PORT,"19938");//对方端port(或者插件端)
+        //serverProperties.put(FileSystem.SERVER_INIT_PORT,"19939");//服务端初始化的端口，传输server信息
+        serverProperties.put(FileSystem.THIS_PORT,"19935");//本服务端的port
+        serverProperties.put(FileSystem.SMOD2_IP,"127.0.0.1");//对方端的ip
+        serverProperties.put(FileSystem.THIS_IP,"127.0.0.1");//本端的ip
+        serverProperties.put(FileSystem.EMERALD_COMPILER,"java");//java c++ kotlin选项，c++ native未来将被替代
+        serverProperties.put(FileSystem.DEBUG,"false");//debug模式
     }
     @RegisterMethod
     public void registerException(){

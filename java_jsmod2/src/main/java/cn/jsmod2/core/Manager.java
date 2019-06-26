@@ -17,9 +17,9 @@ import java.util.Properties;
  * @author magiclu550
  */
 
-public interface Manager {
+public abstract class Manager implements Cloneable{
 
-    void manageMethod(String message,int id);
+    public abstract void manageMethod(String message,int id);
 
     /**
      * 通过数据包调用event
@@ -27,7 +27,7 @@ public interface Manager {
      * @param bytes
      */
 
-    default void callEventByPacket(int id, byte[] bytes){
+    public void callEventByPacket(int id, byte[] bytes){
 
         EventBinaryStream stream = new EventBinaryStream();
 
@@ -59,7 +59,7 @@ public interface Manager {
      * @throws UnsupportedEncodingException
      */
 
-    default <S extends AbstractServerVO,P extends AbstractPlayerVO> CommandVO getCommandVO(int id, String message, int serverCommand, int playerCommand, Class<S> voServerClass,Class<P> voPlayerClass) throws UnsupportedEncodingException {
+    public <S extends AbstractServerVO,P extends AbstractPlayerVO> CommandVO getCommandVO(int id, String message, int serverCommand, int playerCommand, Class<S> voServerClass,Class<P> voPlayerClass) throws UnsupportedEncodingException {
         Properties properties = FileSystem.getFileSystem().serverProperties(Server.getSender().getServer());
         byte[] bytes = message.getBytes(properties.getProperty("encode"));//通过utf-8形式获取byte字节数组
         if(id == serverCommand){
@@ -73,4 +73,8 @@ public interface Manager {
         return null;
     }
 
+    @Override
+    public Manager clone() throws CloneNotSupportedException {
+        return (Manager) (super.clone());
+    }
 }

@@ -33,14 +33,12 @@ import java.lang.reflect.Method;
 import java.net.*;
 import java.text.MessageFormat;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import static cn.jsmod2.core.FileSystem.PLUGIN_DIR;
-import static cn.jsmod2.core.FileSystem.getFileSystem;
+import static cn.jsmod2.core.FileSystem.*;
 
 /**
  * jsmod2 server class
@@ -50,7 +48,6 @@ import static cn.jsmod2.core.FileSystem.getFileSystem;
  */
 
 public abstract class Server implements Closeable, Reloadable {
-
 
 
     //@PacketCMD private static final int EXECUTE_COMMAND = 0xff;
@@ -92,7 +89,7 @@ public abstract class Server implements Closeable, Reloadable {
 
     protected PluginManager pluginManager;
 
-    protected volatile DatagramSocket socket;
+    protected DatagramSocket socket;
 
 
     protected static ConsoleReader lineReader;
@@ -110,6 +107,9 @@ public abstract class Server implements Closeable, Reloadable {
     protected List<RegisterTemplate> registers;
 
     protected OpsFile opsFile;
+
+
+    private boolean isDebug;
 
 
 
@@ -159,7 +159,7 @@ public abstract class Server implements Closeable, Reloadable {
 
         EnvPage.loadConf(serverfolder.toString(),serverfolder+"/emerald");
 
-
+        this.isDebug = Boolean.parseBoolean(serverProp.getProperty(DEBUG));
         /*
          * 加载插件
          */
@@ -200,7 +200,7 @@ public abstract class Server implements Closeable, Reloadable {
 
     //TODO address和port通过数据包获取
     public void sendPacket(final DataPacket packet){
-        sendPacket(packet,serverProp.getProperty(FileSystem.SMOD2_IP),Integer.parseInt(serverProp.getProperty("data.network.plugin.port")));
+        sendPacket(packet,serverProp.getProperty(FileSystem.SMOD2_IP),Integer.parseInt(serverProp.getProperty(PLUGIN_PORT)));
     }
 
     public void sendPacket(final DataPacket packet,String ip,int port){
@@ -383,37 +383,59 @@ public abstract class Server implements Closeable, Reloadable {
         @Override
         public void run() {
             Utils.TryCatch(()->{
-                Map<Integer, Class<? extends DataPacket>> packets = new HashMap<>();
-                for(RegisterTemplate template:registers){
-                    packets.putAll(template.getGetPackets());
-                }
+                int count = 0;
                 //注意，一个jsmod2目前只支持一个smod2连接，不支持多个连接
                 //在未来版本可能会加入支持多个smod2连接一个服务器
                 socket = getSocket(Integer.parseInt(serverProp.getProperty(FileSystem.THIS_PORT)));
-
                 while (true) {
-
-                    //接收数据包
-
                     DatagramPacket request = new DatagramPacket(new byte[MAX_LENGTH], MAX_LENGTH);
-
                     socket.receive(request);
 
-                    String message = new String(request.getData(), 0 , request.getLength());
-
-
-
-                    //TODO 在这里根据编号分包
-                    int id = Utils.getResponsePacketId(message);
-
-                    packetCommandManage(id,message);
-
-
-                    for(Manager manager:packetManagers){
-                        manager.manageMethod(message,id);
+                    PacketHandlerThread thread = new PacketHandlerThread(request);
+                    scheduler.executeRunnable(thread);
+                    if(isDebug){
+                        count++;
+                        log.debug(new String(request.getData(),serverProp.getProperty(SERVER_DECODE)),count+"::id-message");
                     }
                 }
             });
+        }
+    }
+
+    public class PacketHandlerThread implements Runnable{
+
+        private DatagramPacket packet;
+
+        public PacketHandlerThread(DatagramPacket packet) {
+            this.packet = packet;
+        }
+
+        @Override
+        public void run() {
+            try {
+                //接收数据包
+
+                String message = new String(packet.getData(), 0, packet.getLength());
+
+
+                //TODO 在这里根据编号分包
+                int id = Utils.getResponsePacketId(message);
+
+                packetCommandManage(id, message);
+
+                if(isDebug){
+                    log.debug("Thread--get(FACT):"+message);
+                }
+
+                for (Manager manager : packetManagers) {
+                    synchronized (this) {
+                        manager.manageMethod(message, id);
+                    }
+                }
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 

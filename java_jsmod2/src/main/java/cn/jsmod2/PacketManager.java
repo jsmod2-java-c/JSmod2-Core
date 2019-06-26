@@ -39,7 +39,7 @@ import java.util.Properties;
  *  指令调用接受包 - 带权限管理
  *  {VO对象的内容}
  */
-public class PacketManager implements Manager {
+public class PacketManager extends Manager {
 
     private static PacketManager manager;
 
