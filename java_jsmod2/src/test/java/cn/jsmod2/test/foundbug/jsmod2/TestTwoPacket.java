@@ -29,15 +29,15 @@ public class TestTwoPacket {
     //客户端
 
     public static void main(String[] args) throws Exception{
-        Socket socket = new Socket();
-        socket.connect(new InetSocketAddress("127.0.0.1",19935));
-        socket.getOutputStream().write(Base64.getEncoder().encode("111-hello".getBytes()));
-        Thread.sleep(10);
-        socket.getOutputStream().write("11".getBytes());
+//        Socket socket = new Socket();
+//        socket.connect(new InetSocketAddress("127.0.0.1",19935));
+//        socket.getOutputStream().write(Base64.getEncoder().encode("111-hello".getBytes()));
+//        Thread.sleep(10);
+//        socket.getOutputStream().write("11".getBytes());
 
             //DatagramSocket socket = new DatagramSocket();
-//            new Thread1().start();
-//            new Thread2().start();
+            new Thread1().start();
+            new Thread2().start();
 
     }
 

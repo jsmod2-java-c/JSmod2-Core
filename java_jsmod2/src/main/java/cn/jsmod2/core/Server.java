@@ -394,72 +394,6 @@ public abstract class Server implements Closeable, Reloadable {
         }
     }
 
-
-
-    /**
-     * 服务器监听线程启动
-     * 目前一个java服务器支持一个smod2服
-     * 如果要重启smod2服务器 建议先重启java服务器
-     * 开启顺序->先开启java服务器->开启smod2
-     */
-    private int count = 0;
-    private class ListenerThread implements Runnable{
-        @Override
-        public void run() {
-            Utils.TryCatch(()->{
-                //注意，一个jsmod2目前只支持一个smod2连接，不支持多个连接
-                //在未来版本可能会加入支持多个smod2连接一个服务器
-                serverSocket = getSocket(Integer.parseInt(serverProp.getProperty(FileSystem.THIS_PORT)));
-                while (true) {
-                    DatagramPacket request = new DatagramPacket(new byte[MAX_LENGTH], MAX_LENGTH);
-                    ((DatagramSocket)serverSocket).receive(request);
-                    //manageMessage(request);
-                    scheduler.executeRunnable(new PacketHandlerThread(request));
-
-                    count++;
-                    if(isDebug){
-
-                        log.debug("one/s:"+getTPS());
-
-                        log.debug(new String(Base64.getDecoder().decode(new String(request.getData(),0,request.getLength()))),count+"::id-message");
-                    }
-                }
-            });
-        }
-    }
-
-    private class ListenerThreadTCP implements Runnable{
-        @Override
-        public void run() {
-            Utils.TryCatch(()->{
-                if(serverSocket == null){
-                    serverSocket = getSocket(Integer.parseInt(serverProp.getProperty(THIS_PORT)));
-                }
-
-                while (true) {
-                    Socket socket = ((ServerSocket)serverSocket).accept();
-                    scheduler.executeRunnable(new SocketHandlerThread(socket));
-                    if (isDebug) {
-                        count++;
-                        log.debug("one/s:" + getTPS());
-                    }
-                }
-            });
-
-        }
-    }
-
-
-    public Closeable getServerSocket() {
-        return serverSocket;
-    }
-
-    public double getTPS(){
-        return (double)count/((double)(new Date().getTime()-startTime)/1000.0);
-    }
-
-
-
     private void manageMessage(DatagramPacket packet) throws Exception{
         manageMessage(packet.getData(),packet.getLength());
     }
@@ -532,12 +466,7 @@ public abstract class Server implements Closeable, Reloadable {
                     if(i == -1){
                         break;
                     }
-                    int len = 0;
-                    for (byte get : gets) {
-                        if (get != 0) {
-                            len++;
-                        }
-                    }
+                    int len = getLen(gets);
                     String message = new String(gets,0,len);
                     StringBuilder builder = new StringBuilder(message);
                     if(!message.endsWith(";")){
@@ -551,12 +480,7 @@ public abstract class Server implements Closeable, Reloadable {
                         }
                     }
                     byte[] after = builder.toString().getBytes();
-                    len = 0;
-                    for (byte get : after) {
-                        if (get != 0) {
-                            len++;
-                        }
-                    }
+                    len = getLen(after);
                     manageMessage(after, len);
                     gets = new byte[MAX_LENGTH];
                 }
@@ -570,6 +494,70 @@ public abstract class Server implements Closeable, Reloadable {
                 }
             }
         }
+    }
+
+    /**
+     * 服务器监听线程启动
+     * 目前一个java服务器支持一个smod2服
+     * 如果要重启smod2服务器 建议先重启java服务器
+     * 开启顺序->先开启java服务器->开启smod2
+     */
+    private int count = 0;
+    private class ListenerThread implements Runnable{
+        @Override
+        public void run() {
+            Utils.TryCatch(()->{
+                //注意，一个jsmod2目前只支持一个smod2连接，不支持多个连接
+                //在未来版本可能会加入支持多个smod2连接一个服务器
+                serverSocket = getSocket(Integer.parseInt(serverProp.getProperty(FileSystem.THIS_PORT)));
+                while (true) {
+                    DatagramPacket request = new DatagramPacket(new byte[MAX_LENGTH], MAX_LENGTH);
+                    ((DatagramSocket)serverSocket).receive(request);
+                    //manageMessage(request);
+                    scheduler.executeRunnable(new PacketHandlerThread(request));
+
+                    count++;
+                    if(isDebug){
+
+                        log.debug("one/s:"+getTPS());
+
+                        log.debug(new String(Base64.getDecoder().decode(new String(request.getData(),0,request.getLength()))),count+"::id-message");
+                    }
+                }
+            });
+        }
+    }
+
+    private class ListenerThreadTCP implements Runnable{
+        @Override
+        public void run() {
+            Utils.TryCatch(()->{
+                if(serverSocket == null){
+                    serverSocket = getSocket(Integer.parseInt(serverProp.getProperty(THIS_PORT)));
+                }
+
+                while (true) {
+                    Socket socket = ((ServerSocket)serverSocket).accept();
+                    scheduler.executeRunnable(new SocketHandlerThread(socket));
+                    if (isDebug) {
+                        count++;
+                        log.debug("one/s:" + getTPS());
+                    }
+                }
+            });
+
+        }
+    }
+
+
+    private int getLen(byte[] bytes){
+        int len = 0;
+        for (byte get : bytes) {
+            if (get != 0) {
+                len++;
+            }
+        }
+        return len;
     }
 
 
@@ -606,5 +594,13 @@ public abstract class Server implements Closeable, Reloadable {
 
     public OpsFile getOpsFile() {
         return opsFile;
+    }
+
+    public Closeable getServerSocket() {
+        return serverSocket;
+    }
+
+    public double getTPS(){
+        return (double)count/((double)(new Date().getTime()-startTime)/1000.0);
     }
 }
