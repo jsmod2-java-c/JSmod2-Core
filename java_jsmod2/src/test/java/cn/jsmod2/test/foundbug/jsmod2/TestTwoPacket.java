@@ -4,9 +4,16 @@ import org.junit.Test;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.nio.ByteBuffer;
+import java.nio.channels.SocketChannel;
+import java.util.Arrays;
+import java.util.Base64;
 
 public class TestTwoPacket {
+
+    private static int count;
 
     //服务端
     @Test
@@ -22,46 +29,73 @@ public class TestTwoPacket {
 
 
     //客户端
-    @Test
-    public void send() throws Exception{
-        DatagramSocket socket = new DatagramSocket();
-        new Thread1(socket).start();
-        new Thread2(socket).start();
+
+    public static void main(String[] args) throws Exception{
+            //DatagramSocket socket = new DatagramSocket();
+            new Thread1().start();
+            //new Thread2().start();
+
     }
 
-    class Thread1 extends Thread{
 
-        DatagramSocket socket;
+    static class Thread1 extends Thread{
 
-        public Thread1(DatagramSocket socket) {
-            this.socket = socket;
+        Socket socket;
+
+        public Thread1()throws Exception {
+            socket = new Socket();
+            socket.connect(new InetSocketAddress("127.0.0.1",19935));
+
         }
 
         @Override
         public void run() {
-            DatagramPacket pack;
             try{
-                for(int i = 0;i<1;i++)
-                    socket.send(new DatagramPacket(("Thread1-"+i).getBytes(),("Thread1-"+i).getBytes().length, InetAddress.getByName("127.0.0.1"),8889));
-                Thread.sleep(10);
+
+                for(int i = 0;i<10000000;i++) {
+                    //MTk5OTk5LVRocmVhZDItMjU4NQ==
+                    byte[] bytes = Base64.getEncoder().encode(("9000909-你好，我的世界，helloworld,thanks"+i).getBytes());
+                    bytes = Arrays.copyOf(bytes,bytes.length+1);
+                    bytes[bytes.length-1] = ';';
+                    socket.getOutputStream().write(bytes);
+                    synchronized (TestTwoPacket.class){
+                        count++;
+                        System.out.println(count);
+                    }
+                }
             }catch (Exception e){
+                System.out.println(12);
                 e.printStackTrace();
             }
+
         }
     }
-    class Thread2 extends Thread{
 
-        DatagramSocket socket;
+    static class Thread2 extends Thread{
 
-        public Thread2(DatagramSocket socket) {
-            this.socket = socket;
+        SocketChannel channel;
+
+        public Thread2()throws Exception {
+            this.channel = SocketChannel.open();
+
         }
+
         @Override
         public void run() {
             try{
-                for(int i = 0;i<1;i++)
-                    socket.send(new DatagramPacket(("Thread2-"+i).getBytes(),("Thread2-"+i).getBytes().length, InetAddress.getByName("127.0.0.1"),8889));
+                channel.configureBlocking(false);
+                channel.connect(new InetSocketAddress("127.0.0.1",19935));
+                for(int i = 0;i<10000000;i++) {
+                    ByteBuffer buffer = ByteBuffer.allocate(Base64.getEncoder().encode(("199999-Thread2-"+i).getBytes()).length);
+                    buffer.put(Base64.getEncoder().encode(("199999-Thread2-"+i).getBytes()));
+                    channel.write(buffer);
+                    synchronized (TestTwoPacket.class){
+                        count++;
+                        System.out.println(count);
+                    }
+                }
             }catch (Exception e){
+                System.out.println(12);
                 e.printStackTrace();
             }
 

@@ -52,11 +52,11 @@ public abstract class Server implements Closeable, Reloadable {
 
     //@PacketCMD private static final int EXECUTE_COMMAND = 0xff;
 
-    private static final int MAX_LENGTH = 0xffff;
+    private static final int MAX_LENGTH = 8*30;
 
     protected static final String STOP = "end";
 
-
+    private long startTime;
 
     protected Runtime runtimeInfo = Runtime.getRuntime();
 
@@ -89,8 +89,11 @@ public abstract class Server implements Closeable, Reloadable {
 
     protected PluginManager pluginManager;
 
-    protected DatagramSocket socket;
+    protected DatagramSocket udpSocket;
 
+    private Socket socket;
+
+    private ServerSocket serverSocket;
 
     protected static ConsoleReader lineReader;
 
@@ -111,12 +114,13 @@ public abstract class Server implements Closeable, Reloadable {
 
     private boolean isDebug;
 
-
+    private boolean useUDP;
 
     protected Properties appProps;
 
 
-    public Server(GameServer gServer) {
+
+    public Server(GameServer gServer,boolean useUDP) {
 
         this.lock = new ReentrantLock();
 
@@ -167,6 +171,8 @@ public abstract class Server implements Closeable, Reloadable {
 
         registerNativeEvents();
 
+        this.useUDP = useUDP;
+
     }
 
     public void registerAll(){
@@ -184,10 +190,15 @@ public abstract class Server implements Closeable, Reloadable {
 
 
     public void start(){
-        this.pool.execute(new ListenerThread());
+        if(useUDP) {
+            this.pool.execute(new ListenerThread());
+        }else{
+            this.pool.execute(new ListenerThreadTCP());
+        }
         this.pool.execute(new GithubConnectThread());
         //this.pool.execute(new ServerThread());
         this.serverLogInfo("the listener thread is starting!!!!");
+        startTime =  new Date().getTime();
     }
 
     public Runtime getRuntimeInfo() {
@@ -207,6 +218,7 @@ public abstract class Server implements Closeable, Reloadable {
         Utils.TryCatch(()->{
             byte[] encode = packet.encode();
             //发送端口为插件的端口,ip写死为jsmod2的
+
             sendData(encode,ip,port);
         });
         ServerPacketEvent event = new ServerPacketEvent(packet);
@@ -214,8 +226,16 @@ public abstract class Server implements Closeable, Reloadable {
     }
 
     public void sendData(byte[] encode,String ip,int port) throws IOException{
-        DatagramPacket pack = new DatagramPacket(encode,encode.length,InetAddress.getByName(ip),port);
-        socket.send(pack);
+        if(useUDP) {
+            DatagramPacket pack = new DatagramPacket(encode, encode.length, InetAddress.getByName(ip), port);
+            udpSocket.send(pack);
+        }else{
+            if(socket==null) {
+                socket = new Socket();
+                socket.connect(new InetSocketAddress(ip,port));
+            }
+            socket.getOutputStream().write(encode);
+        }
     }
 
 
@@ -275,6 +295,8 @@ public abstract class Server implements Closeable, Reloadable {
     protected DatagramSocket getSocket(int port) throws SocketException {
         return new DatagramSocket(port);
     }
+
+
 
     /**
      * plugin manager
@@ -379,28 +401,94 @@ public abstract class Server implements Closeable, Reloadable {
      * 如果要重启smod2服务器 建议先重启java服务器
      * 开启顺序->先开启java服务器->开启smod2
      */
+    private int count = 0;
     private class ListenerThread implements Runnable{
         @Override
         public void run() {
             Utils.TryCatch(()->{
-                int count = 0;
                 //注意，一个jsmod2目前只支持一个smod2连接，不支持多个连接
                 //在未来版本可能会加入支持多个smod2连接一个服务器
-                socket = getSocket(Integer.parseInt(serverProp.getProperty(FileSystem.THIS_PORT)));
+                udpSocket = getSocket(Integer.parseInt(serverProp.getProperty(FileSystem.THIS_PORT)));
                 while (true) {
                     DatagramPacket request = new DatagramPacket(new byte[MAX_LENGTH], MAX_LENGTH);
-                    socket.receive(request);
+                    udpSocket.receive(request);
+                    //manageMessage(request);
+                    scheduler.executeRunnable(new PacketHandlerThread(request));
 
-                    PacketHandlerThread thread = new PacketHandlerThread(request);
-                    scheduler.executeRunnable(thread);
+                    count++;
                     if(isDebug){
-                        count++;
-                        log.debug(new String(request.getData(),serverProp.getProperty(SERVER_DECODE)),count+"::id-message");
+
+                        log.debug("one/s:"+getTPS());
+
+                        log.debug(new String(Base64.getDecoder().decode(new String(request.getData(),0,request.getLength()))),count+"::id-message");
                     }
                 }
             });
         }
     }
+
+    private class ListenerThreadTCP implements Runnable{
+        @Override
+        public void run() {
+            Utils.TryCatch(()->{
+                if(serverSocket == null){
+                    serverSocket = new ServerSocket(Integer.parseInt(serverProp.getProperty(THIS_PORT)));
+                }
+
+                while (true) {
+                    Socket socket = serverSocket.accept();
+                    scheduler.executeRunnable(new SocketHandlerThread(socket));
+                    if (isDebug) {
+                        count++;
+                        log.debug("one/s:" + getTPS());
+                    }
+                }
+            });
+
+        }
+    }
+
+    public Socket getSocket() {
+        return socket;
+    }
+
+    public ServerSocket getServerSocket() {
+        return serverSocket;
+    }
+
+    public double getTPS(){
+        return (double)count/((double)(new Date().getTime()-startTime)/1000.0);
+    }
+
+
+
+    private void manageMessage(DatagramPacket packet) throws Exception{
+        manageMessage(packet.getData(),packet.getLength());
+    }
+
+    private void manageMessage(byte[] data,int length) throws Exception{
+        String message = new String(data,0,length);
+        String[] alls = message.split(";");
+        for(String all:alls) {
+            //TODO 在这里根据编号分包
+            int id = Utils.getResponsePacketId(all);
+
+            packetCommandManage(id, all);
+
+            if (isDebug) {
+                log.debug("TPS:"+getTPS()+"[]Thread--get(FACT):" + all,count+"MESSAGE",":"+new String(Base64.getDecoder().decode(all))+"\n");
+
+            }
+
+            for (Manager manager : packetManagers) {
+                synchronized (this) {
+                    manager.manageMethod(all, id);
+                }
+            }
+            count++;
+        }
+    }
+
 
     public class PacketHandlerThread implements Runnable{
 
@@ -415,24 +503,57 @@ public abstract class Server implements Closeable, Reloadable {
             try {
                 //接收数据包
 
-                String message = new String(packet.getData(), 0, packet.getLength());
+                manageMessage(packet);
 
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
 
-                //TODO 在这里根据编号分包
-                int id = Utils.getResponsePacketId(message);
+    public class SocketHandlerThread implements Runnable{
 
-                packetCommandManage(id, message);
+        private Socket socket;
 
-                if(isDebug){
-                    log.debug("Thread--get(FACT):"+message);
-                }
+        public SocketHandlerThread(Socket socket) {
+            this.socket = socket;
+        }
+        //写入请求直接用,隔开
+        @Override
+        public void run() {
 
-                for (Manager manager : packetManagers) {
-                    synchronized (this) {
-                        manager.manageMethod(message, id);
+            try{
+                byte[] gets = new byte[MAX_LENGTH];
+                while (true) {
+                    int i = socket.getInputStream().read(gets);
+                    if(i == -1){
+                        continue;
                     }
+                    int len = 0;
+                    for (byte get : gets) {
+                        if (get != 0) {
+                            len++;
+                        }
+                    }
+                    String message = new String(gets,0,len);
+                    StringBuilder builder = new StringBuilder(message);
+                    if(!message.endsWith(";")){
+                        int b = 0;
+                        while (b!=';'){
+                            b = socket.getInputStream().read();
+                            builder.append((char) b);
+                        }
+                    }
+                    byte[] after = builder.toString().getBytes();
+                    len = 0;
+                    for (byte get : after) {
+                        if (get != 0) {
+                            len++;
+                        }
+                    }
+                    manageMessage(after, len);
+                    gets = new byte[MAX_LENGTH];
                 }
-
             }catch (Exception e){
                 e.printStackTrace();
             }

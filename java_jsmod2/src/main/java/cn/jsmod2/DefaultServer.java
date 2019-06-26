@@ -23,7 +23,7 @@ public class DefaultServer extends Server {
 
 
     public DefaultServer() {
-        super(new Smod2Server());
+        super(new Smod2Server(),false);
     }
 
     @Override

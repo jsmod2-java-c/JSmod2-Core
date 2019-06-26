@@ -61,11 +61,22 @@ public class FileSystem {
 
     private List<PrintWriter> writers = new ArrayList<>();
 
+
+
+    private static FileSystem system;
+
+    private Properties serverProps;
+
+    //------------------all Properties-------------------//
+
+
     private Properties nowInfo;
 
     private Properties lang;
 
-    private static FileSystem system;
+    private Properties applicationInfo;
+
+    private Properties serverPreproties;
 
 
     static {
@@ -77,6 +88,9 @@ public class FileSystem {
     }
 
     public static final String PROPERTIES = ".properties";
+
+
+
 
     public Properties infoProperties(boolean newInfo){
         if(!newInfo){
@@ -107,14 +121,16 @@ public class FileSystem {
     }
 
     public Properties getApplicationInfo(){
-        try {
-            Properties info = new Properties();
-            info.load(Utils.getClassStream("application.properties"));
-            return info;
+        try{
+            if(applicationInfo == null) {
+                applicationInfo = new Properties();
+                applicationInfo.load(Utils.getClassStream("application" + PROPERTIES));
+                return applicationInfo;
+            }
         }catch (IOException e){
             e.printStackTrace();
         }
-        return null;
+        return applicationInfo;
     }
 
     public List<String> readScripts(Server server){
@@ -154,7 +170,7 @@ public class FileSystem {
 
     private Properties readInitPropertiesInfo() throws IOException{
         Properties properties = new Properties();
-        properties.load(Utils.getClassStream("ini.properties"));
+        properties.load(Utils.getClassStream("ini"+PROPERTIES));
         return properties;
     }
 
@@ -213,8 +229,12 @@ public class FileSystem {
                 properties.load(new FileInputStream(serverProp));
                 return properties;
             }else{
-                properties.load(new FileInputStream(serverProp));
-                return properties;
+                if(serverPreproties == null) {
+                    properties.load(new FileInputStream(serverProp));
+                    serverPreproties = properties;
+                    return properties;
+                }
+                return serverPreproties;
             }
         }catch (Exception e){
             e.printStackTrace();

@@ -79,6 +79,7 @@ public class Register extends RegisterTemplate {
         nativeCommandMap.put("tab",new TabCommand());
         nativeCommandMap.put("see",new SeeCommand());
         nativeCommandMap.put("throw",new ThrowCommand());
+        nativeCommandMap.put("tps",new TPSCommand());
     }
 
 

@@ -38,7 +38,7 @@ public abstract class PlayerServer extends Server {
 
 
     public PlayerServer() {
-        super(null);
+        super(null,true);
         this.players = new HashSet<>(Integer.parseInt(FileSystem.getFileSystem().serverProperties(this).getProperty(MAX_PLAYER)));
         this.appProps = FileSystem.getFileSystem().getApplicationInfo();
     }
