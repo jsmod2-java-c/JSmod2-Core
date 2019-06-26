@@ -33,7 +33,7 @@ public class TestTwoPacket {
     public static void main(String[] args) throws Exception{
             //DatagramSocket socket = new DatagramSocket();
             new Thread1().start();
-            //new Thread2().start();
+            new Thread2().start();
 
     }
 
@@ -52,7 +52,39 @@ public class TestTwoPacket {
         public void run() {
             try{
 
-                for(int i = 0;i<10000000;i++) {
+                for(int i = 0;i<1000;i++) {
+                    //MTk5OTk5LVRocmVhZDItMjU4NQ==
+                    byte[] bytes = Base64.getEncoder().encode(("9000909-你好，我的世界，helloworld,thanks"+i).getBytes());
+                    bytes = Arrays.copyOf(bytes,bytes.length+1);
+                    bytes[bytes.length-1] = ';';
+                    socket.getOutputStream().write(bytes);
+                    synchronized (TestTwoPacket.class){
+                        count++;
+                        System.out.println(count);
+                    }
+                }
+            }catch (Exception e){
+                System.out.println(12);
+                e.printStackTrace();
+            }
+
+        }
+    }
+    static class Thread2 extends Thread{
+
+        Socket socket;
+
+        public Thread2()throws Exception {
+            socket = new Socket();
+            socket.connect(new InetSocketAddress("127.0.0.1",19935));
+
+        }
+
+        @Override
+        public void run() {
+            try{
+
+                for(int i = 0;i<1000;i++) {
                     //MTk5OTk5LVRocmVhZDItMjU4NQ==
                     byte[] bytes = Base64.getEncoder().encode(("9000909-你好，我的世界，helloworld,thanks"+i).getBytes());
                     bytes = Arrays.copyOf(bytes,bytes.length+1);
@@ -71,34 +103,4 @@ public class TestTwoPacket {
         }
     }
 
-    static class Thread2 extends Thread{
-
-        SocketChannel channel;
-
-        public Thread2()throws Exception {
-            this.channel = SocketChannel.open();
-
-        }
-
-        @Override
-        public void run() {
-            try{
-                channel.configureBlocking(false);
-                channel.connect(new InetSocketAddress("127.0.0.1",19935));
-                for(int i = 0;i<10000000;i++) {
-                    ByteBuffer buffer = ByteBuffer.allocate(Base64.getEncoder().encode(("199999-Thread2-"+i).getBytes()).length);
-                    buffer.put(Base64.getEncoder().encode(("199999-Thread2-"+i).getBytes()));
-                    channel.write(buffer);
-                    synchronized (TestTwoPacket.class){
-                        count++;
-                        System.out.println(count);
-                    }
-                }
-            }catch (Exception e){
-                System.out.println(12);
-                e.printStackTrace();
-            }
-
-        }
-    }
 }

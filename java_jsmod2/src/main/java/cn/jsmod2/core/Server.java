@@ -527,7 +527,7 @@ public abstract class Server implements Closeable, Reloadable {
                 while (true) {
                     int i = socket.getInputStream().read(gets);
                     if(i == -1){
-                        continue;
+                        break;
                     }
                     int len = 0;
                     for (byte get : gets) {
@@ -556,6 +556,12 @@ public abstract class Server implements Closeable, Reloadable {
                 }
             }catch (Exception e){
                 e.printStackTrace();
+            }finally {
+                try {
+                    socket.close();
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
             }
         }
     }
