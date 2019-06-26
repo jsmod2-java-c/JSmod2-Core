@@ -541,6 +541,9 @@ public abstract class Server implements Closeable, Reloadable {
                         int b = 0;
                         while (b!=';'){
                             b = socket.getInputStream().read();
+                            if(b == -1){
+                                break;
+                            }
                             builder.append((char) b);
                         }
                     }
