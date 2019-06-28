@@ -271,7 +271,7 @@ public class EmeraldScriptVM {
      * @param func
      * @return
      */
-    public Object executeFunction(String func,Map<String,Var> vars,Map<String,Var> parent){
+    public Object executeFunction(String func,Map<String,Var> vars){
         if(!func.matches(Memory.matches.get("func"))){
             return func;
         }
@@ -293,7 +293,7 @@ public class EmeraldScriptVM {
         args = setThat(vars,args);
         for(int i = 0;i<args.length;i++){
             if(!args[i].isEmpty()){
-                args[i] = executeFunction(args[i].trim(),vars,vars).toString();
+                args[i] = executeFunction(args[i].trim(),vars).toString();
             }
         }
         String before = funcName;
@@ -329,14 +329,14 @@ public class EmeraldScriptVM {
                 String name = alls[i];
                 String get = "=";
                 if(name.startsWith("*")){
-                    get=":*";
+                    get=":*d:";
                     name=getPtrName(name);
                     Memory memory = memory_address_mapping.get(Integer.parseInt(args[i]));
                     if(memory==null){
                         return "type is error: the "+args[i]+" is not pointer type";
                     }
                 }
-                vars_func.put(name,Var.compile(name+get+"d:"+args[i]));
+                vars_func.put(name,Var.compile(name+get+args[i]));
             }
         }
 
@@ -349,9 +349,9 @@ public class EmeraldScriptVM {
         String[] codes =code.split(";");
 
         for(int i = 0;i<codes.length;i++) {
-            Object result = EmeraldScriptVM.parse(codes[i],vars_func,vars);
+            Object result = EmeraldScriptVM.parse(codes[i],vars_func);
             if(result.toString().startsWith("returned")){
-                return setThat(vars_func,result.toString().substring("return:".length()))[0];
+                return setThat(vars_func,result.toString().substring("returned:".length()))[0];
             }
         }
         return "NULL";
@@ -399,7 +399,7 @@ public class EmeraldScriptVM {
      * @param vars
      * @return
      */
-    public static Object parse(String command, Map<String,Var> vars,Map<String,Var> parent){
+    public static Object parse(String command, Map<String,Var> vars){
         Object result = null;
         //执行函数可以返回值
         //a=echo()
@@ -419,7 +419,7 @@ public class EmeraldScriptVM {
             return result;
         }
         /* 执行函数，并设置返回值 */
-        result = script.executeFunction(command,vars,parent);
+        result = script.executeFunction(command,vars);
 
         if(result.toString().startsWith("error:")){
             return result;
@@ -430,10 +430,11 @@ public class EmeraldScriptVM {
         if(varName!=null){
             String cmd;
             if(command.matches(Memory.matches.get("ptr"))){
-                cmd=varName+":*"+result;
+                cmd=varName+":*d:"+result;
             }else{
                 cmd=varName+"="+result;
             }
+            System.out.println(cmd);
             result = script.parseVar(varName,result.toString(),vars,cmd).getValue();
         }
 
@@ -441,7 +442,7 @@ public class EmeraldScriptVM {
     }
 
     public static String parse(String command){
-        return parse(command,script.vars,script.vars).toString();
+        return parse(command,script.vars).toString();
     }
 
     /**
@@ -489,7 +490,7 @@ public class EmeraldScriptVM {
                 lo = lo.replace(group,value);
             }
             for(Map.Entry<String,Var> var:vars.entrySet()){
-                lo = lo.replace("${global::"+var.getKey()+"}",getStringVal(script.getVars().get(var.getKey()).getValue()));
+                if(script.getVars().get(var.getKey())!=null)lo = lo.replace("${global::"+var.getKey()+"}",getStringVal(script.getVars().get(var.getKey()).getValue()));
                 lo = lo.replace("${"+var.getKey()+"}",getStringVal(var.getValue().getValue()));
             }
             //字符串'${}ssadads'+''

@@ -156,7 +156,7 @@ public class Console extends CommandSender{
     public boolean runConsoleCommand(String commandName,String[] args){
         args = EmeraldScriptVM.setThat(EmeraldScriptVM.getScript().getVars(),args);
         for(int i = 0;i<args.length;i++){
-            args[i] = EmeraldScriptVM.getScript().executeFunction(args[i], EmeraldScriptVM.getScript().getVars(), EmeraldScriptVM.getScript().getVars()).toString();
+            args[i] = EmeraldScriptVM.getScript().executeFunction(args[i], EmeraldScriptVM.getScript().getVars()).toString();
         }
         List<NativeCommand> commands =
                 Server
