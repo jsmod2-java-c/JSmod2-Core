@@ -6,7 +6,7 @@ public class TestObject {
     public int i = 0;
     public int j = 0;
     public String name = "你好";
-    ObjectC c = new ObjectC();
+    User c = new User();
 
     public int getI() {
         return i;
@@ -24,11 +24,11 @@ public class TestObject {
         this.j = j;
     }
 
-    public ObjectC getC() {
+    public User getC() {
         return c;
     }
 
-    public void setC(ObjectC c) {
+    public void setC(User c) {
         this.c = c;
     }
 

@@ -16,12 +16,12 @@ public class TestEncode{
     public void encode() throws Exception{
 //        System.out.println(JSON.toJSONString("11"));
 //        byte[] bytes = Base64.getEncoder().encode("1-{stop}".getBytes());
-//        System.out.println(dataObjectDecode(Base64.getEncoder().encode("1-{\"SaaLo\":\"1\"}".getBytes()),ObjectC.class));
-        ObjectC c = new ObjectC();
+//        System.out.println(dataObjectDecode(Base64.getEncoder().encode("1-{\"SaaLo\":\"1\"}".getBytes()),User.class));
+        User c = new User();
         String json = JSON.toJSONString(c);
 
         System.out.println(json);
-        ObjectC o = JSONObject.parseObject("{\"saalo\":12,\"test\":0}",ObjectC.class);
+        User o = JSONObject.parseObject("{\"saalo\":12,\"test\":0}", User.class);
 
         System.out.println(o);
     }

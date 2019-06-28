@@ -1,7 +1,7 @@
 package cn.jsmod2.test.foundbug.jsmod2;
 
 
-public class ObjectC{
+public class User {
 
     private int Saalo = 12;
     //test-
@@ -25,9 +25,32 @@ public class ObjectC{
 
     @Override
     public String toString() {
-        return "ObjectC{" +
+        return "User{" +
                 "Saalo=" + Saalo +
                 ", test=" + test +
                 '}';
+    }
+
+    public User next(){
+        return this;
+    }
+
+    public User getFirstUser(){
+        return this;
+    }
+
+    private User getThat(User user, int count, int max){
+        User nextUser = user.next();
+        if(nextUser != null||count != max){
+            count++;
+            return getThat(nextUser,count,max);
+        }else{
+            return user;
+        }
+    }
+
+    public User getUser(int max){
+        User firstUser = getFirstUser();
+        return getThat(firstUser,0,max);
     }
 }

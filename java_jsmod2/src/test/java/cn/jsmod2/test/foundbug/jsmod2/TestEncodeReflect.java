@@ -10,13 +10,13 @@ package cn.jsmod2.test.foundbug.jsmod2;
 public class TestEncodeReflect {
 //    @Test
 //    public void test() throws Exception{
-//        ObjectC o = reflect(new String[]{"test-object02-a:1"});
+//        User o = reflect(new String[]{"test-object02-a:1"});
 //        System.out.println(o.getTest().getObject02().getA());
 //    }
 
 //
-//    public ObjectC reflect(String[] props) throws Exception{
-//        ObjectC o = new net.noyark.test.foundbug.jsmod2.ObjectC();
+//    public User reflect(String[] props) throws Exception{
+//        User o = new net.noyark.test.foundbug.jsmod2.User();
 //        for(int i = 0;i<props.length;i++){
 //            String[] key_value = props[i].split(":");
 //            String[] fields = key_value[0].split("-");

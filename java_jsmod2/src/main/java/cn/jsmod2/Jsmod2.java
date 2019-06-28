@@ -16,12 +16,9 @@ import cn.jsmod2.core.ex.ServerRuntimeException;
 import cn.jsmod2.core.log.ILogger;
 import cn.jsmod2.core.log.ServerLogger;
 import cn.jsmod2.core.script.EmeraldScriptVM;
-import cn.jsmod2.core.utils.LogFormat;
-import org.fusesource.jansi.Ansi;
+
 
 import java.text.MessageFormat;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 
 import static cn.jsmod2.core.FileSystem.EMERALD_COMPILER;
