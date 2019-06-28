@@ -40,8 +40,8 @@ https://www.oracle.com/technetwork/java/javase/downloads/index.html
 
 * use `jsmod2`
 
-First configure SCPDataNetwork to Smod2 (as a plugin), then start jsmod2 first, 
-then start smod2. If it is the default ip and port, make sure they run on a server.
+First configure SCPDataNetwork to Smod2 (as a plugin), then start smod2 first, 
+then start jsmod2. If it is the default ip and port, make sure they run on a server.
 
 
 > Develop plugin
