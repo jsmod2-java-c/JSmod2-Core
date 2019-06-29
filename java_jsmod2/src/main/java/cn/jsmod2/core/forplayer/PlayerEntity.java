@@ -75,13 +75,13 @@ public class PlayerEntity extends CommandSender implements ISimplePlayer,Move {
 
     @Override
     public void personalBroadcast(int duration, String message, boolean isMonoSpaced) {
-
+        send(new JsonRequester().add("type","broadcast").add("name",getName()).add("duration",duration+"").add("message",message).add("isMonoSpaced",isMonoSpaced+"").parse());
     }
 
 
     @Override
     public void move(Vector vector) {
-        send(new JsonRequester().add("type","move").add("x",vector.x()+"").add("y",vector.y()+"").add("z",vector.z()+"").parse());
+        send(new JsonRequester().add("type","move").add("name",getName()).add("x",vector.x()+"").add("y",vector.y()+"").add("z",vector.z()+"").parse());
     }
     @SuppressWarnings("unchecked")
     public void send(String message){
