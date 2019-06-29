@@ -144,7 +144,6 @@ public class Utils {
      */
     public static Integer getResponsePacketId(String str){
         str = toGetString(str);
-        System.out.println(str);
         return Integer.parseInt(str.substring(0,str.indexOf("-")));
     }
 
