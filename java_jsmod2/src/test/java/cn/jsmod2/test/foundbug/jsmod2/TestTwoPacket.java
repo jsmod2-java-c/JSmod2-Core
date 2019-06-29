@@ -36,7 +36,7 @@ public class TestTwoPacket {
 //        socket.getOutputStream().write("11".getBytes());
 
             //DatagramSocket socket = new DatagramSocket();
-//            new Thread1().start();
+            new Thread1().start();
 //            new Thread2().start();
         System.out.println("😄");
     }
@@ -56,7 +56,7 @@ public class TestTwoPacket {
         public void run() {
             try{
 
-                for(int i = 0;i<10000000;i++) {
+                for(int i = 0;i<10;i++) {
                     //MTk5OTk5LVRocmVhZDItMjU4NQ==
                     byte[] bytes = Base64.getEncoder().encode(("9000909-你好，我的世界，helloworld,thanks"+i).getBytes());
                     bytes = Arrays.copyOf(bytes,bytes.length+1);
@@ -67,6 +67,12 @@ public class TestTwoPacket {
                         System.out.println(count);
                     }
                 }
+                Thread.sleep(1000);
+                socket.getOutputStream().write(Base64.getEncoder().encode("11222-jjj".getBytes()));
+                System.out.println(socket.isClosed());
+                Thread.sleep(10000);
+                socket.getOutputStream().write(Base64.getEncoder().encode("222-jjj".getBytes()));
+
             }catch (Exception e){
                 System.out.println(12);
                 e.printStackTrace();

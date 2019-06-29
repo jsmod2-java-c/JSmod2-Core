@@ -21,7 +21,9 @@ import cn.jsmod2.core.plugin.Plugin;
 import cn.jsmod2.core.plugin.PluginClassLoader;
 import cn.jsmod2.core.command.NativeCommand;
 import cn.jsmod2.core.plugin.PluginManager;
+import cn.jsmod2.core.utils.Future;
 import cn.jsmod2.core.utils.LogFormat;
+import cn.jsmod2.core.utils.Result;
 import cn.jsmod2.core.utils.Utils;
 import cn.jsmod2.core.protocol.DataPacket;
 import cn.jsmod2.core.schedule.Scheduler;
@@ -207,23 +209,32 @@ public abstract class Server implements Closeable, Reloadable {
         return lock;
     }
 
-    //TODO address和port通过数据包获取
+
     public void sendPacket(final DataPacket packet){
-        sendPacket(packet,serverProp.getProperty(FileSystem.SMOD2_IP),Integer.parseInt(serverProp.getProperty(PLUGIN_PORT)));
+        sendPacket(packet,false);
+    }
+    //TODO address和port通过数据包获取
+    public Future sendPacket(final DataPacket packet,boolean result){
+       return sendPacket(packet,serverProp.getProperty(FileSystem.SMOD2_IP),Integer.parseInt(serverProp.getProperty(PLUGIN_PORT)),result);
     }
 
-    public void sendPacket(final DataPacket packet,String ip,int port){
-        Utils.TryCatch(()->{
+    private Future sendPacket(final DataPacket packet,String ip,int port,boolean result){
+        ServerPacketEvent event = new ServerPacketEvent(packet);
+        pluginManager.callEvent(event);
+        try {
             byte[] encode = packet.encode();
             //发送端口为插件的端口,ip写死为jsmod2的
 
-            sendData(encode,ip,port);
-        });
-        ServerPacketEvent event = new ServerPacketEvent(packet);
-        pluginManager.callEvent(event);
+            return sendData(encode, ip, port,result);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
-    public void sendData(byte[] encode,String ip,int port) throws IOException{
+    public Future sendData(byte[] encode,String ip,int port,boolean result) throws IOException{
+        Future future = new Result();
         if(useUDP) {
             DatagramPacket pack = new DatagramPacket(encode, encode.length, InetAddress.getByName(ip), port);
             ((DatagramSocket)serverSocket).send(pack);
@@ -231,8 +242,15 @@ public abstract class Server implements Closeable, Reloadable {
             Socket socket = new Socket();
             socket.connect(new InetSocketAddress(ip,port));
             socket.getOutputStream().write(encode);
+            if(result){
+                byte[] bytes = new byte[MAX_LENGTH];
+                socket.getInputStream().read(bytes);
+                byte[] after = getFullBytes(socket,bytes);
+                future.set(after);
+            }
             socket.close();
         }
+        return future;
     }
 
 
@@ -466,22 +484,8 @@ public abstract class Server implements Closeable, Reloadable {
                     if(i == -1){
                         break;
                     }
-                    int len = getLen(gets);
-                    String message = new String(gets,0,len);
-                    StringBuilder builder = new StringBuilder(message);
-                    if(!message.endsWith(";")){
-                        int b = 0;
-                        while (b!=';'){
-                            b = socket.getInputStream().read();
-                            if(b == -1){
-                                break;
-                            }
-                            builder.append((char) b);
-                        }
-                    }
-                    byte[] after = builder.toString().getBytes();
-                    len = getLen(after);
-                    manageMessage(after, len);
+                    byte[] after = getFullBytes(socket,gets);
+                    manageMessage(after, getLen(after));
                     gets = new byte[MAX_LENGTH];
                 }
             }catch (Exception e){
@@ -494,6 +498,22 @@ public abstract class Server implements Closeable, Reloadable {
                 }
             }
         }
+    }
+
+    public byte[] getFullBytes(Socket socket,byte[] gets) throws IOException{
+        String message = new String(gets,0,getLen(gets));
+        StringBuilder builder = new StringBuilder(message);
+        if(!message.endsWith(";")){
+            int b = 0;
+            while (b!=';'){
+                b = socket.getInputStream().read();
+                if(b == -1){
+                    break;
+                }
+                builder.append((char) b);
+            }
+        }
+        return builder.toString().getBytes();
     }
 
     /**
