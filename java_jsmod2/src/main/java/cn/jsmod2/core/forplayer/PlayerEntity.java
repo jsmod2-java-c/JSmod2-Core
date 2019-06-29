@@ -54,7 +54,7 @@ public class PlayerEntity extends CommandSender implements ISimplePlayer,Move {
 
     @Override
     public void kill() {
-
+        send(new JsonRequester().add("type","kill").add("name",getName()).add("kill","true").parse());
     }
 
     @Override
