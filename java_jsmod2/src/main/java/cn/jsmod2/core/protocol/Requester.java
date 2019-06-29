@@ -1,6 +1,7 @@
 package cn.jsmod2.core.protocol;
 
 import cn.jsmod2.core.Server;
+import cn.jsmod2.core.utils.Future;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -50,8 +51,18 @@ public class Requester {
         }catch (Exception e){
             e.printStackTrace();
         }
-
         return this;
+    }
+
+    public Future get(){
+        try{
+            _packet._infor_map = _map;
+            _packet._end = _end;
+            return _sender.sendPacketGetResult(_packet);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public void reset(){

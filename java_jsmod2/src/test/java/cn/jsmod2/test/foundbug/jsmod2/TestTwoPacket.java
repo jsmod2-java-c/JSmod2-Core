@@ -56,7 +56,7 @@ public class TestTwoPacket {
         public void run() {
             try{
 
-                for(int i = 0;i<10;i++) {
+                for(int i = 0;i<10000000;i++) {
                     //MTk5OTk5LVRocmVhZDItMjU4NQ==
                     byte[] bytes = Base64.getEncoder().encode(("9000909-你好，我的世界，helloworld,thanks"+i).getBytes());
                     bytes = Arrays.copyOf(bytes,bytes.length+1);
