@@ -103,7 +103,7 @@ public class PlayerEntity extends CommandSender implements ISimplePlayer,Move {
 
     public void accept(String message){
         try {
-            server.sendData(message.getBytes(),ipAddress,port);
+            server.sendData(message.getBytes(),ipAddress,port,false);
         }catch (IOException e){
             e.printStackTrace();
         }

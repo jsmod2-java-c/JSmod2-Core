@@ -18,11 +18,17 @@ public class RuntimeServer {
 
     private Server runtime;
 
+    protected Runtime runtimeInfo = Runtime.getRuntime();
+
     public RuntimeServer(Server runtime){
         this.runtime = runtime;
     }
 
     public Server getServer(){
         return runtime;
+    }
+
+    public Runtime getRuntimeInfo() {
+        return runtimeInfo;
     }
 }

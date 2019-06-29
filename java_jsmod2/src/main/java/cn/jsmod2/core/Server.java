@@ -15,6 +15,7 @@ import cn.jsmod2.core.event.packet.ServerPacketEvent;
 import cn.jsmod2.core.log.ILogger;
 import cn.jsmod2.core.log.ServerLogger;
 import cn.jsmod2.core.protocol.Requester;
+import cn.jsmod2.core.script.EmeraldScriptVM;
 import cn.jsmod2.core.script.EnvPage;
 import cn.jsmod2.core.protocol.SetPacket;
 import cn.jsmod2.core.plugin.Plugin;
@@ -51,76 +52,70 @@ import static cn.jsmod2.core.FileSystem.*;
 
 public abstract class Server implements Closeable, Reloadable {
 
-
-    //@PacketCMD private static final int EXECUTE_COMMAND = 0xff;
+    public static final String START = "start";
 
     private static final int MAX_LENGTH = 8*30;
 
-    protected static final String STOP = "end";
+    private static final String STOP = "end";
 
-    private long startTime;
+    private static final String PROP = "prop:";
 
-    protected Runtime runtimeInfo = Runtime.getRuntime();
+    private static Scanner scanner = new Scanner(System.in);
 
-    // 开辟线程
-    // 监听线程 和 一个输入线程
-    // 输入线程负责输入命令等
+    private static ConsoleReader lineReader;
 
-    protected static final String PROP = "prop:";
-
-    protected static Scanner scanner = new Scanner(System.in);
+    private static RuntimeServer sender;
 
     protected ILogger log;
 
     protected Properties lang;
 
-    protected ExecutorService pool = Executors.newFixedThreadPool(5);
-    /**用于将服务器对象传递给插件对象*/
     protected Server server;
-
-
-    protected Map<String,String> commandInfo;
-
-    protected List<Plugin> plugins;
-
-    public final File serverfolder;
-
-    public final Properties serverProp;
-
-    public final File pluginDir;
-
-    protected PluginManager pluginManager;
-
-    //protected DatagramSocket udpSocket;
-
-    private Closeable serverSocket;
-
-    protected static ConsoleReader lineReader;
-
-    protected Scheduler scheduler;
-
-    protected Lock lock;
-
-    protected static RuntimeServer sender;
 
     protected GameServer gameServer;
 
-    protected List<Manager> packetManagers;
+    protected List<Plugin> plugins;
 
-    protected List<RegisterTemplate> registers;
+    protected Properties appProps;
 
-    protected OpsFile opsFile;
+    protected PluginManager pluginManager;
 
+    protected final Properties serverProp;
+
+    private long startTime;
+
+    private long startSuccessTime;
+
+    private ExecutorService pool = Executors.newFixedThreadPool(5);
+
+    private Map<String,String> commandInfo;
+
+    private Closeable serverSocket;
+
+    private Scheduler scheduler;
+
+    private Lock lock;
+
+    private List<Manager> packetManagers;
+
+    private List<RegisterTemplate> registers;
+
+    private OpsFile opsFile;
 
     private boolean isDebug;
 
     private boolean useUDP;
 
-    protected Properties appProps;
+    public final File serverfolder;
 
+    public final File pluginDir;
 
 
     public Server(GameServer gServer,boolean useUDP) {
+
+        Server.sender = new RuntimeServer(this);
+
+        this.startTime =  new Date().getTime();
 
         this.lock = new ReentrantLock();
 
@@ -128,23 +123,20 @@ public abstract class Server implements Closeable, Reloadable {
 
         this.server = this;
 
-        sender = new RuntimeServer(server);
-
         this.registers = new ArrayList<>();
 
         this.scheduler = new Scheduler();
 
         this.serverfolder = new File(System.getProperty("user.dir")).getParentFile();
 
-        registerTemplates(registers,this);
+        this.registerTemplates(registers,this);
 
-        registerAll();
+        this.registerAll();
 
         this.opsFile = OpsFile.getOpsFile(this);
 
         this.gameServer = gServer;
 
-        //创建plugin文件夹
         this.pluginDir = getFileSystem().pluginDir(server);
 
         this.serverProp = getFileSystem().serverProperties(server);
@@ -164,30 +156,27 @@ public abstract class Server implements Closeable, Reloadable {
         EnvPage.loadConf(serverfolder.toString(),serverfolder+"/emerald");
 
         this.isDebug = Boolean.parseBoolean(serverProp.getProperty(DEBUG));
-        /*
-         * 加载插件
-         */
+
         this.plugins = PluginClassLoader.getClassLoader().loadPlugins(pluginDir);
 
-        registerNativeEvents();
+        this.registerNativeEvents();
 
         this.useUDP = useUDP;
 
+
+
     }
 
-    public void registerAll(){
+    public void start(Class<?> main,String[] args) {
         Utils.TryCatch(()->{
-            for(RegisterTemplate register:registers){
-                Method[] methods = register.getClass().getDeclaredMethods();
-                for(Method method:methods){
-                    if(method.getAnnotation(RegisterMethod.class)!=null)
-                        method.invoke(register);
-                }
-            }
+            this.log.info(main.getSimpleName()+"::start::"+main.getName());
+            this.executeEmerald(args,true);
+            this.chooseLangOrStart();
+            this.start();
+            this.successTime();
+            this.startConsoleCommand();
         });
     }
-
-
 
     public void start(){
         if(useUDP) {
@@ -198,40 +187,78 @@ public abstract class Server implements Closeable, Reloadable {
         this.pool.execute(new GithubConnectThread());
         //this.pool.execute(new ServerThread());
         this.serverLogInfo("the listener thread is starting!!!!");
-        startTime =  new Date().getTime();
-    }
 
-    public Runtime getRuntimeInfo() {
-        return runtimeInfo;
+        this.startSuccessTime = new Date().getTime();
     }
-
-    public Lock getLock() {
-        return lock;
-    }
-
 
     public void sendPacket(final DataPacket packet){
         sendPacket(packet,false);
     }
-    //TODO address和port通过数据包获取
-    public Future sendPacket(final DataPacket packet,boolean result){
-       return sendPacket(packet,serverProp.getProperty(FileSystem.SMOD2_IP),Integer.parseInt(serverProp.getProperty(PLUGIN_PORT)),result);
+
+    public Future sendPacketGetResult(final  DataPacket packet){
+        return sendPacket(packet,true);
     }
 
-    private Future sendPacket(final DataPacket packet,String ip,int port,boolean result){
-        ServerPacketEvent event = new ServerPacketEvent(packet);
-        pluginManager.callEvent(event);
-        try {
-            byte[] encode = packet.encode();
-            //发送端口为插件的端口,ip写死为jsmod2的
+    /** 包指令的处理 */
+    public abstract void packetCommandManage(int id,String message) throws Exception;
+    /** 注册数据包管理员 */
+    public abstract void registerPacketManger(List<Manager> managers);
+    /** 通过RegisterTemplates注册服务器信息 */
+    public abstract void registerTemplates(List<RegisterTemplate> registers,Server server);
+    /** 注册原生的事件 */
+    public abstract void registerNativeEvents();
 
-            return sendData(encode, ip, port,result);
-        }catch (IOException e){
-            e.printStackTrace();
+
+    public void help(){
+        log.info(LogFormat.textFormat("+================HELP========================+", Ansi.Color.GREEN).toString(),LogFormat.textFormat("[HELP]", Ansi.Color.BLUE).toString());
+        Set<Map.Entry<String,String>> cmdSet = commandInfo.entrySet();
+        for(Map.Entry<String,String> entry:cmdSet){
+            String key = entry.getKey();
+            String value = entry.getValue();
+            if(value.startsWith(PROP)){
+                StringBuilder builder = new StringBuilder(value);
+                value = builder.substring(PROP.length());
+                value = lang.getProperty(value);
+            }
+            log.info(LogFormat.textFormat(key+": "+value, Ansi.Color.GREEN).toString(),LogFormat.textFormat("[HELP]", Ansi.Color.BLUE).toString());
         }
-
-        return null;
     }
+
+
+    public Map<String, String> getCommandInfo(){
+        return commandInfo;
+    }
+
+
+    public PluginManager getPluginManager(){
+        return pluginManager;
+    }
+
+    public void reload(){
+        Utils.TryCatch(()->{
+            log.debug("reloading...");
+            pluginManager.clear();
+            pluginManager.getPluginClassLoader().loadPlugins(new File(PLUGIN_DIR));
+        });
+    }
+    private void registerNativeInfo(){
+        /*
+         * prop:指向当前的lang文件
+         */
+        for(RegisterTemplate registerTemplate:registers) {
+            Set<Map.Entry<String, NativeCommand>> command = registerTemplate.getNativeCommandMap().entrySet();
+            for (Map.Entry<String, NativeCommand> entry : command) {
+                commandInfo.put(entry.getKey(), entry.getValue().getDescription());
+                pluginManager.getCommands().add(entry.getValue());
+            }
+        }
+    }
+
+    public void close(){
+        closeAll();
+        System.exit(0);
+    }
+
 
     public Future sendData(byte[] encode,String ip,int port,boolean result) throws IOException{
         Future future = new Result();
@@ -251,6 +278,44 @@ public abstract class Server implements Closeable, Reloadable {
             socket.close();
         }
         return future;
+    }
+
+    /** 获取GameServer */
+    public GameServer getGameServer(){
+        return gameServer;
+    }
+
+    /**采用多对象制度，分发一个请求，创建一个request对象*/
+    public Requester getRequester(SetPacket packet) {
+        return new Requester(this,packet);
+    }
+
+    public List<RegisterTemplate> getRegisters() {
+        return registers;
+    }
+
+    public OpsFile getOpsFile() {
+        return opsFile;
+    }
+
+    public Closeable getServerSocket() {
+        return serverSocket;
+    }
+
+    public double getTPS(){
+        return (double)count/((double)(new Date().getTime()-startSuccessTime)/1000.0);
+    }
+
+    public long getStartTime() {
+        return startTime;
+    }
+
+    public long getStartSuccessTime() {
+        return startSuccessTime;
+    }
+
+    public Lock getLock() {
+        return lock;
     }
 
 
@@ -284,30 +349,48 @@ public abstract class Server implements Closeable, Reloadable {
         return sender;
     }
 
-
-
-    public void help(){
-        log.info(LogFormat.textFormat("+================HELP========================+", Ansi.Color.GREEN).toString(),LogFormat.textFormat("[HELP]", Ansi.Color.BLUE).toString());
-        Set<Map.Entry<String,String>> cmdSet = commandInfo.entrySet();
-        for(Map.Entry<String,String> entry:cmdSet){
-            String key = entry.getKey();
-            String value = entry.getValue();
-            if(value.startsWith(PROP)){
-                StringBuilder builder = new StringBuilder(value);
-                value = builder.substring(PROP.length());
-                value = lang.getProperty(value);
+    private void registerAll(){
+        Utils.TryCatch(()->{
+            for(RegisterTemplate register:registers){
+                Method[] methods = register.getClass().getDeclaredMethods();
+                for(Method method:methods){
+                    if(method.getAnnotation(RegisterMethod.class)!=null)
+                        method.invoke(register);
+                }
             }
-            log.info(LogFormat.textFormat(key+": "+value, Ansi.Color.GREEN).toString(),LogFormat.textFormat("[HELP]", Ansi.Color.BLUE).toString());
+        });
+    }
+
+    private void serverLogInfo(String message){
+        Properties properties = FileSystem.getFileSystem().serverProperties(server);
+        log.info(message,LogFormat.textFormat("[START::"+properties.getProperty(FileSystem.THIS_IP,"127.0.0.1")+":"+properties.getProperty(FileSystem.THIS_PORT)+"->"+(properties.getProperty(FileSystem.SMOD2_IP).equals(properties.getProperty(FileSystem.THIS_IP))?"":properties.getProperty(FileSystem.SMOD2_IP)+":")+properties.getProperty(FileSystem.PLUGIN_PORT)+"]", Ansi.Color.GREEN).toString());
+    }
+
+
+
+    private Future sendPacket(final DataPacket packet,boolean result){
+        return sendPacket(packet,serverProp.getProperty(FileSystem.SMOD2_IP),Integer.parseInt(serverProp.getProperty(PLUGIN_PORT)),result);
+    }
+
+    private Future sendPacket(final DataPacket packet,String ip,int port,boolean result){
+        ServerPacketEvent event = new ServerPacketEvent(packet);
+        pluginManager.callEvent(event);
+        try {
+            byte[] encode = packet.encode();
+            //发送端口为插件的端口,ip写死为jsmod2的
+
+            return sendData(encode, ip, port,result);
+        }catch (IOException e){
+            e.printStackTrace();
         }
+
+        return null;
     }
 
 
-    public Map<String, String> getCommandInfo(){
-        return commandInfo;
-    }
 
     //监听Smod2转发端接口
-    protected Closeable getSocket(int port) throws IOException {
+    private Closeable getSocket(int port) throws IOException {
         if(useUDP) {
             return new DatagramSocket(port);
         }else{
@@ -315,101 +398,30 @@ public abstract class Server implements Closeable, Reloadable {
         }
     }
 
-
-
-    /**
-     * plugin manager
-     */
-    public PluginManager getPluginManager(){
-        return pluginManager;
-    }
-
-    public void reload(){
-        Utils.TryCatch(()->{
-            log.debug("reloading...");
-            pluginManager.clear();
-            pluginManager.getPluginClassLoader().loadPlugins(new File(PLUGIN_DIR));
-        });
-    }
-    private void registerNativeInfo(){
-        /*
-         * prop:指向当前的lang文件
-         */
-        for(RegisterTemplate registerTemplate:registers) {
-            Set<Map.Entry<String, NativeCommand>> command = registerTemplate.getNativeCommandMap().entrySet();
-            for (Map.Entry<String, NativeCommand> entry : command) {
-                commandInfo.put(entry.getKey(), entry.getValue().getDescription());
-                pluginManager.getCommands().add(entry.getValue());
+    private int getLen(byte[] bytes){
+        int len = 0;
+        for (byte get : bytes) {
+            if (get != 0) {
+                len++;
             }
         }
+        return len;
     }
 
-    public void close(){
-        closeAll();
-        System.exit(0);
-    }
-
-    public void closeAll(){
-        disable();
-        closeStream();
-        log.info(lang.getProperty(STOP+".finish"),LogFormat.textFormat("[STOP::"+FileSystem.getFileSystem().serverProperties(server).getProperty("smod2.ip")+"]", Ansi.Color.GREEN).toString());
-    }
-    private void disable(){
-        for(Plugin plugin:plugins){
-            serverLogInfo("unload the plugin named "+plugin.getPluginName());
-            plugin.onDisable();
+    private byte[] getFullBytes(Socket socket,byte[] gets) throws IOException{
+        String message = new String(gets,0,getLen(gets));
+        StringBuilder builder = new StringBuilder(message);
+        if(!message.endsWith(";")){
+            int b = 0;
+            while (b!=';'){
+                b = socket.getInputStream().read();
+                if(b == -1){
+                    break;
+                }
+                builder.append((char) b);
+            }
         }
-    }
-
-    public void serverLogInfo(String message){
-        Properties properties = FileSystem.getFileSystem().serverProperties(server);
-        log.info(message,LogFormat.textFormat("[START::"+properties.getProperty(FileSystem.THIS_IP,"127.0.0.1")+":"+properties.getProperty(FileSystem.THIS_PORT)+"->"+(properties.getProperty(FileSystem.SMOD2_IP).equals(properties.getProperty(FileSystem.THIS_IP))?"":properties.getProperty(FileSystem.SMOD2_IP)+":")+properties.getProperty(FileSystem.PLUGIN_PORT)+"]", Ansi.Color.GREEN).toString());
-    }
-
-
-
-    public static Scanner getScanner(){
-        return scanner;
-    }
-    //new line reader
-    public static ConsoleReader getLineReader() throws IOException{
-        if(lineReader == null) {
-            lineReader = new ConsoleReader();
-        }
-        return lineReader;
-    }
-
-    private void closeStream(){
-        Utils.TryCatch(()->{
-            List<InputStream> oStreams = FileSystem.getFileSystem().getInputStreams();
-            for(InputStream stream : oStreams){
-                stream.close();
-            }
-            List<OutputStream> iStreams = FileSystem.getFileSystem().getOutputStreams();
-            for(OutputStream stream : iStreams){
-                stream.close();
-            }
-            List<BufferedReader> readers = FileSystem.getFileSystem().getReaders();
-            for(BufferedReader reader:readers){
-                reader.close();
-            }
-            List<PrintWriter> writers = FileSystem.getFileSystem().getWriters();
-            for(PrintWriter writer:writers){
-                writer.close();
-            }
-        });
-    }
-
-    private class GithubConnectThread implements Runnable{
-        @Override
-        public void run() {
-            Properties info = FileSystem.getFileSystem().infoProperties();
-            log.info(MessageFormat.format("last-format-sha:{0},last-format-info:{1}",info.getProperty("last-commit-sha"),info.getProperty("last-update")),"\n");
-            log.info(MessageFormat.format("version:{0}",info.getProperty("version")));
-            log.info(MessageFormat.format("thanks for authors:{0}",info.getProperty("authors")));
-            log.info(MessageFormat.format("stars:{0},fork:{1}",info.getProperty("stars"),info.getProperty("forks")));
-            Utils.getMessageSender().info(">");
-        }
+        return builder.toString().getBytes();
     }
 
     private void manageMessage(DatagramPacket packet) throws Exception{
@@ -438,13 +450,67 @@ public abstract class Server implements Closeable, Reloadable {
             count++;
         }
     }
+    private void closeStream(){
+        Utils.TryCatch(()->{
+            List<InputStream> oStreams = FileSystem.getFileSystem().getInputStreams();
+            for(InputStream stream : oStreams){
+                stream.close();
+            }
+            List<OutputStream> iStreams = FileSystem.getFileSystem().getOutputStreams();
+            for(OutputStream stream : iStreams){
+                stream.close();
+            }
+            List<BufferedReader> readers = FileSystem.getFileSystem().getReaders();
+            for(BufferedReader reader:readers){
+                reader.close();
+            }
+            List<PrintWriter> writers = FileSystem.getFileSystem().getWriters();
+            for(PrintWriter writer:writers){
+                writer.close();
+            }
+        });
+    }
+
+    private void closeAll(){
+        disable();
+        closeStream();
+        log.info(lang.getProperty(STOP+".finish"),LogFormat.textFormat("[STOP::"+FileSystem.getFileSystem().serverProperties(server).getProperty("smod2.ip")+"]", Ansi.Color.GREEN).toString());
+    }
+    private void disable(){
+        for(Plugin plugin:plugins){
+            serverLogInfo("unload the plugin named "+plugin.getPluginName());
+            plugin.onDisable();
+        }
+    }
+    private void startMessage(Properties langProperties,Server server){
+        //plugin dir
+        for(RegisterTemplate template:server.getRegisters()) {
+            for (String info : template.getStartInfo()) {
+                server.serverLogInfo(langProperties.getProperty(info));
+            }
+        }
+    }
+
+    private class GithubConnectThread implements Runnable{
+        @Override
+        public void run() {
+            Properties info = FileSystem.getFileSystem().infoProperties();
+            log.info(MessageFormat.format("last-format-sha:{0},last-format-info:{1}",info.getProperty("last-commit-sha"),info.getProperty("last-update")),"\n");
+            log.info(MessageFormat.format("version:{0}",info.getProperty("version")));
+            log.info(MessageFormat.format("thanks for authors:{0}",info.getProperty("authors")));
+            log.info(MessageFormat.format("stars:{0},fork:{1}",info.getProperty("stars"),info.getProperty("forks")));
+            Utils.getMessageSender().info(">");
+        }
+    }
+
+
 
 
     public class PacketHandlerThread implements Runnable{
 
         private DatagramPacket packet;
 
-        public PacketHandlerThread(DatagramPacket packet) {
+        PacketHandlerThread(DatagramPacket packet) {
             this.packet = packet;
         }
 
@@ -470,7 +536,7 @@ public abstract class Server implements Closeable, Reloadable {
 
         private Socket socket;
 
-        public SocketHandlerThread(Socket socket) {
+        SocketHandlerThread(Socket socket) {
             this.socket = socket;
         }
         //写入请求直接用,隔开
@@ -498,22 +564,6 @@ public abstract class Server implements Closeable, Reloadable {
                 }
             }
         }
-    }
-
-    public byte[] getFullBytes(Socket socket,byte[] gets) throws IOException{
-        String message = new String(gets,0,getLen(gets));
-        StringBuilder builder = new StringBuilder(message);
-        if(!message.endsWith(";")){
-            int b = 0;
-            while (b!=';'){
-                b = socket.getInputStream().read();
-                if(b == -1){
-                    break;
-                }
-                builder.append((char) b);
-            }
-        }
-        return builder.toString().getBytes();
     }
 
     /**
@@ -570,57 +620,49 @@ public abstract class Server implements Closeable, Reloadable {
     }
 
 
-    private int getLen(byte[] bytes){
-        int len = 0;
-        for (byte get : bytes) {
-            if (get != 0) {
-                len++;
-            }
+    //new line reader
+    public static ConsoleReader getLineReader() throws IOException{
+        if(lineReader == null) {
+            lineReader = new ConsoleReader();
         }
-        return len;
+        return lineReader;
     }
 
-
-
-
-    /** 包指令的处理 */
-    public abstract void packetCommandManage(int id,String message) throws Exception;
-    /** 注册数据包管理员 */
-    public abstract void registerPacketManger(List<Manager> managers);
-    /** 通过RegisterTemplates注册服务器信息 */
-    public abstract void registerTemplates(List<RegisterTemplate> registers,Server server);
-
-    /** 注册原生的事件 */
-    public abstract void registerNativeEvents();
-
-
-    /** 获取GameServer */
-    public GameServer getGameServer(){
-        return gameServer;
-    }
-
-    /**采用多对象制度，分发一个请求，创建一个request对象*/
-    public Requester getRequester(SetPacket packet) {
-        return new Requester(this,packet);
-    }
-
-    public List<RegisterTemplate> getRegisters() {
-        return registers;
+    static Scanner getScanner(){
+        return scanner;
     }
 
     public void setLang(Properties lang) {
         this.lang = lang;
     }
 
-    public OpsFile getOpsFile() {
-        return opsFile;
+    private void executeEmerald(String[] args,boolean exit){
+        server.serverLogInfo("this server uses the Emerald "+ Server.getSender().getServer().serverProp.getProperty(EMERALD_COMPILER,"java")+" compiler v0.1 Engine By MagicLu550");
+        if(args.length!=0){
+            for(String arg:args)
+                EmeraldScriptVM.parse(arg);
+            if(exit)
+                System.exit(0);
+        }
     }
 
-    public Closeable getServerSocket() {
-        return serverSocket;
+    private void successTime(){
+        for(RegisterTemplate template:server.getRegisters()) {
+            for (String success : template.getSuccessInfo()) {
+                server.serverLogInfo(MessageFormat.format(lang.getProperty(success), (server.getStartTime()-server.getStartSuccessTime()) + ""));
+            }
+        }
     }
 
-    public double getTPS(){
-        return (double)count/((double)(new Date().getTime()-startTime)/1000.0);
+    private void chooseLangOrStart() throws IOException{
+        Properties langProperties = FileSystem.getFileSystem().langProperties(log,server);
+        server.setLang(langProperties);
+        FileSystem.getFileSystem().initLang(langProperties);
+        startMessage(langProperties,server);
     }
+
+    private void startConsoleCommand() throws IOException{
+        Console.getConsole().commandInput();
+    }
+
 }

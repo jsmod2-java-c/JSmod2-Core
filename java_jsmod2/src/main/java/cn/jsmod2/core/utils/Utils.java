@@ -11,6 +11,7 @@ package cn.jsmod2.core.utils;
 import cn.jsmod2.core.Message;
 import cn.jsmod2.core.FileSystem;
 import cn.jsmod2.core.Server;
+import cn.jsmod2.core.ex.ServerRuntimeException;
 
 import java.io.*;
 import java.lang.reflect.Method;
@@ -126,6 +127,13 @@ public class Utils {
         try{
             code.code();
         }catch (Exception e){
+            try {
+                if (!(e instanceof ServerRuntimeException)) {
+                    throw new ServerRuntimeException(e);
+                }
+            }catch (ServerRuntimeException e1){
+                e1.printStackTrace();
+            }
             e.printStackTrace();
         }
     }

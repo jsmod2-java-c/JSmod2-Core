@@ -18,7 +18,6 @@ import cn.jsmod2.api.event.player.*;
 import cn.jsmod2.api.event.server.*;
 import cn.jsmod2.api.event.team.DecideRespawnQueueEvent;
 import cn.jsmod2.api.event.team.SetSCPConfigEvent;
-import cn.jsmod2.core.FileSystem;
 import cn.jsmod2.core.RegisterTemplate;
 import cn.jsmod2.core.annotations.RegisterMethod;
 import cn.jsmod2.network.ServerInitPacket;
@@ -33,7 +32,7 @@ import cn.jsmod2.network.protocol.item.*;
 
 import java.util.*;
 
-import static cn.jsmod2.Jsmod2.START;
+import static cn.jsmod2.core.Server.START;
 
 /**
  * 所有注册的中心类
