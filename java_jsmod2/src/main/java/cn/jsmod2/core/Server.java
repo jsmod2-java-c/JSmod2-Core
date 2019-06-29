@@ -649,7 +649,7 @@ public abstract class Server implements Closeable, Reloadable {
     private void successTime(){
         for(RegisterTemplate template:server.getRegisters()) {
             for (String success : template.getSuccessInfo()) {
-                server.serverLogInfo(MessageFormat.format(lang.getProperty(success), (server.getStartTime()-server.getStartSuccessTime()) + ""));
+                server.serverLogInfo(MessageFormat.format(lang.getProperty(success), (server.getStartSuccessTime()-server.getStartTime()) + ""));
             }
         }
     }
