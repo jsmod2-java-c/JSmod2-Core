@@ -78,6 +78,7 @@ public class Var extends Memory{
                 try{
                     var = (Var) (getScript().getMemory_address_mapping().get(Integer.parseInt(value)));
                 }catch (NumberFormatException e){
+                    e.printStackTrace();
                     throw new TypeErrorException("the pointer have already inited");
                 }
 
