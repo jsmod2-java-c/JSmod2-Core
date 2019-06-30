@@ -1,6 +1,6 @@
 package cn.jsmod2.core.annotations;
 
-import cn.jsmod2.core.Server;
+import cn.jsmod2.core.Start;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -17,6 +17,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ServerApplication {
 
-    Class<? extends Server> value();
+    Class<? extends Start> value();
 
 }

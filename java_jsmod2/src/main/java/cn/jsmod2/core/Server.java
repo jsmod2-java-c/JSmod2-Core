@@ -50,7 +50,7 @@ import static cn.jsmod2.core.FileSystem.*;
  *
  */
 
-public abstract class Server implements Closeable, Reloadable {
+public abstract class Server implements Closeable, Reloadable, Start {
 
     public static final String START = "start";
 
@@ -566,13 +566,7 @@ public abstract class Server implements Closeable, Reloadable {
         }
     }
 
-    /**
-     * 服务器监听线程启动
-     * 目前一个java服务器支持一个smod2服
-     * 如果要重启smod2服务器 建议先重启java服务器
-     * 开启顺序->先开启java服务器->开启smod2
-     */
-    private int count = 0;
+    private Integer count = 0;
     private class ListenerThread implements Runnable{
         @Override
         public void run() {
@@ -585,8 +579,9 @@ public abstract class Server implements Closeable, Reloadable {
                     ((DatagramSocket)serverSocket).receive(request);
                     //manageMessage(request);
                     scheduler.executeRunnable(new PacketHandlerThread(request));
-
+                    lock.lock();
                     count++;
+                    lock.unlock();
                     if(isDebug){
 
                         log.debug("one/s:"+getTPS());
@@ -610,7 +605,9 @@ public abstract class Server implements Closeable, Reloadable {
                     Socket socket = ((ServerSocket)serverSocket).accept();
                     scheduler.executeRunnable(new SocketHandlerThread(socket));
                     if (isDebug) {
+                        lock.lock();
                         count++;
+                        lock.unlock();
                         log.debug("one/s:" + getTPS());
                     }
                 }
