@@ -19,7 +19,7 @@ public abstract class Memory {
         scriptPattern.put("var","(global::)*(const )*[\\*]*+[a-z0-9A-Z_]+(=|:\\*)[\\s\\S]+");
         scriptPattern.put("list","list");
         scriptPattern.put("unset","unset [a-z0-9A-Z_]+(=[\\s\\S]+)*");
-        scriptPattern.put("func","([a-z0-9A-Z_]=)*[\\s\\S]+\\(([\\s\\S]+|[\\s\\S]*)\\)(\\{([\\s\\S]+|)\\})*");
+        scriptPattern.put("func","([a-z0-9A-Z_]=)*[_/\\\\A-Za-z0-9]+\\(([\\s\\S]+|[\\s\\S]*)\\)(\\{([\\s\\S]+|)\\})*");
         scriptPattern.put("dfunc","func [\\s\\S]+\\(([\\s\\S]*|[\\s\\S]+)\\);start:[\\s\\S]+:end");
         scriptPattern.put("startfunc","func [\\s\\S]+\\(([\\s\\S]+|)\\);start:");
         scriptPattern.put("pc","let [a-zA-Z0-9_]+=[\\s\\S]+");
