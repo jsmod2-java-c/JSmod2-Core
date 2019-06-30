@@ -9,15 +9,16 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2;
 
 import cn.jsmod2.core.Application;
+import cn.jsmod2.core.annotations.ServerApplication;
 
 /**
  * @author magiclu550 #(code) jsmod2
  */
 
-
+@ServerApplication(DefaultServer.class)
 public class Jsmod2 {
 
     public static void main(String[]args){
-        Application.run(DefaultServer.class,Jsmod2.class,args);
+        Application.run(Jsmod2.class,args);
     }
 }
