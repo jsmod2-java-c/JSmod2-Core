@@ -30,13 +30,13 @@ public class IfFunction extends NativeFunction{
             return "error-the if must have one boolean expression";
         }
         boolean resultBoolean = false;
-        String expression = objs[0].toString();
+        String expression = objs[0];
         if(expression.equals("1")){
             resultBoolean = true;
         }
         String code = objs[1].toString();
         HashMap<String, Var> vars = new HashMap<>();
-        vars.putAll(EmeraldScriptVM.getScript().getVars());
+        vars.putAll(EmeraldScriptVM.getVM().getVars());
 
         return resultBoolean;
     }

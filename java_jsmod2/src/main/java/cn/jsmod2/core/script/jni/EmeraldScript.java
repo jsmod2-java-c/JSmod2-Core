@@ -22,7 +22,7 @@ public class EmeraldScript {
     public static native String parse(String command);
 
     public static String java_parse(String command){
-        return EmeraldScriptVM.parse(command);
+        return EmeraldScriptVM.getVM().parse(command);
     }
 
     public static String kotlin_parse(String command){

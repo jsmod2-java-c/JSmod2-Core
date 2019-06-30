@@ -48,13 +48,13 @@ public class EmeraldScriptVM {
 
     static {
         script = new EmeraldScriptVM();
-        getScript().functions.put("echo",new EchoFunction());
-        getScript().functions.put("typeof",new TypeOfFunction());
-        getScript().functions.put("import",new ImportFunction());
-        getScript().functions.put("register",new RegisterNativeFunction());
-        getScript().functions.put("if",new IfFunction());
-        getScript().functions.put("return",new ReturnFunction());
-        getScript().functions.put("+",new StringAddFunction());
+        getVM().functions.put("echo",new EchoFunction());
+        getVM().functions.put("typeof",new TypeOfFunction());
+        getVM().functions.put("import",new ImportFunction());
+        getVM().functions.put("register",new RegisterNativeFunction());
+        getVM().functions.put("if",new IfFunction());
+        getVM().functions.put("return",new ReturnFunction());
+        getVM().functions.put("+",new StringAddFunction());
     }
 
     private static EmeraldScriptVM script;
@@ -349,7 +349,7 @@ public class EmeraldScriptVM {
         String[] codes =code.split(";");
 
         for(int i = 0;i<codes.length;i++) {
-            Object result = EmeraldScriptVM.parse(codes[i],vars_func);
+            Object result = parse(codes[i],vars_func);
             if(result.toString().startsWith("returned")){
                 return setThat(vars_func,result.toString().substring("returned:".length()))[0];
             }
@@ -399,34 +399,34 @@ public class EmeraldScriptVM {
      * @param vars
      * @return
      */
-    public static Object parse(String command, Map<String,Var> vars){
+    public Object parse(String command, Map<String,Var> vars){
         Object result = null;
         //执行函数可以返回值
         //a=echo()
         /* 定义函数 */
-        result = getScript().defineFunction(command);
+        result = this.defineFunction(command);
         if(!result.equals(command)){
             return result;
         }
         /* 将变量设置 */
-        result = script.parseVar(script.unset(command,vars),vars);
+        result = this.parseVar(this.unset(command,vars),vars);
         if(!result.equals(command)){
             return result;
         }
 
-        result = script.listVar(command);
+        result = this.listVar(command);
         if(!result.equals(command)){
             return result;
         }
         /* 执行函数，并设置返回值 */
-        result = script.executeFunction(command,vars);
+        result = this.executeFunction(command,vars);
 
         if(result.toString().startsWith("error:")){
             return result;
         }
 
         /* 获取返回值 */
-        String varName = script.getFunctionVarName(command);
+        String varName = this.getFunctionVarName(command);
         if(varName!=null){
             String cmd;
             if(command.matches(Memory.matches.get("ptr"))){
@@ -435,14 +435,14 @@ public class EmeraldScriptVM {
                 cmd=varName+"="+result;
             }
             System.out.println(cmd);
-            result = script.parseVar(varName,result.toString(),vars,cmd).getValue();
+            result = this.parseVar(varName,result.toString(),vars,cmd).getValue();
         }
 
         return result;
     }
 
-    public static String parse(String command){
-        return parse(command,script.vars).toString();
+    public String parse(String command){
+        return parse(command,this.vars).toString();
     }
 
     /**
@@ -450,7 +450,7 @@ public class EmeraldScriptVM {
      * @param args
      * @return
      */
-    public static String[] setThat(Map<String,Var> vars,String... args){
+    public String[] setThat(Map<String,Var> vars,String... args){
         List<String> lists = new LinkedList<>();
         try{
             for(int i=0;i<args.length;i++){
@@ -486,15 +486,15 @@ public class EmeraldScriptVM {
             Matcher matcher = pattern.matcher(arg);
             while (matcher.find()){
                 String group = matcher.group();
-                String value = getStringVal(script.getPtrValue(group.substring(group.indexOf("{")+1,group.lastIndexOf("}")),vars));
+                String value = getStringVal(this.getPtrValue(group.substring(group.indexOf("{")+1,group.lastIndexOf("}")),vars));
                 lo = lo.replace(group,value);
             }
             for(Map.Entry<String,Var> var:vars.entrySet()){
-                if(script.getVars().get(var.getKey())!=null)lo = lo.replace("${global::"+var.getKey()+"}",getStringVal(script.getVars().get(var.getKey()).getValue()));
+                if(this.getVars().get(var.getKey())!=null)lo = lo.replace("${global::"+var.getKey()+"}",getStringVal(this.getVars().get(var.getKey()).getValue()));
                 lo = lo.replace("${"+var.getKey()+"}",getStringVal(var.getValue().getValue()));
             }
             //字符串'${}ssadads'+''
-            NativeFunction f = (NativeFunction)(script.functions.get("+"));
+            NativeFunction f = (NativeFunction)(this.functions.get("+"));
             lo = f.execute(new String[]{lo}).toString();
             dArgs[i] = lo;
 
@@ -562,7 +562,7 @@ public class EmeraldScriptVM {
         return name.substring(getPtrLen(name));
     }
 
-    public static EmeraldScriptVM getScript() {
+    public static EmeraldScriptVM getVM() {
         return script;
     }
 

@@ -142,7 +142,7 @@ public class FileSystem {
             }
             List<String> alls = FileUtils.readLines(file,"utf-8");
             for(String path:alls){
-                EmeraldScriptVM.getScript().importFile(path);
+                EmeraldScriptVM.getVM().importFile(path);
             }
         }catch (IOException e){
             e.printStackTrace();

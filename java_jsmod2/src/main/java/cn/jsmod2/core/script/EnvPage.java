@@ -26,7 +26,7 @@ public class EnvPage {
             properties.load(new FileInputStream(file));
             String rootEnv = properties.getProperty("root-make",defaultRoot);
             isWrite = Boolean.parseBoolean(properties.getProperty("console-write","true"));
-            EmeraldScriptVM.getScript().getVars().put("ENV_FILE",Var.compile("ENV_FILE="+rootEnv));
+            EmeraldScriptVM.getVM().getVars().put("ENV_FILE",Var.compile("ENV_FILE="+rootEnv));
             ServerLogger.getLogger().info("the script env is"+rootEnv);
         }catch (IOException e){
             e.printStackTrace();

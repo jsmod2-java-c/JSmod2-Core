@@ -15,7 +15,7 @@ public class RegisterNativeFunction extends NativeFunction {
             Object obj = Class.forName(objs[0]).newInstance();
             if(obj instanceof NativeFunction){
                 NativeFunction function = (NativeFunction)obj;
-                EmeraldScriptVM.getScript().getFunctions().put(function.getFunctionName(),function);
+                EmeraldScriptVM.getVM().getFunctions().put(function.getFunctionName(),function);
             }else{
                 throw new TypeErrorException("the class type must be NativeFunction");
             }

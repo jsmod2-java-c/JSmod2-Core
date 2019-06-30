@@ -200,7 +200,7 @@ public class PluginManager {
             if(command.getCommandName().equals(commandName)){
                 //指令发送者所拥有的权限是否包含指令允许的权限
                 if(PowerPool.poolMapping().get(sender.getName()).contains(command.getPower())){
-                    args = EmeraldScriptVM.setThat(EmeraldScriptVM.getScript().getVars(),args);
+                    args = EmeraldScriptVM.getVM().setThat(EmeraldScriptVM.getVM().getVars(),args);
                     return command.execute(sender,args);
                 }else{
                     Utils.getMessageSender().error("do not have this power");

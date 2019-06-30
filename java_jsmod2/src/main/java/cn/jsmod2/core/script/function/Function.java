@@ -48,7 +48,7 @@ public abstract class Function extends Memory {
         String[] args = name_start[0].substring(name_start[0].indexOf("(")+1,name_start[0].indexOf(")")).split(",");
         function.setArgs(args);
         if(function.getFunctionName().equals("main")){
-            EmeraldScriptVM.getScript().executeCommonFunc(function, EmeraldScriptVM.getScript().getVars());
+            EmeraldScriptVM.getVM().executeCommonFunc(function, EmeraldScriptVM.getVM().getVars());
         }
         return function;
     }

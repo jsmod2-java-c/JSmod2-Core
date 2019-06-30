@@ -76,7 +76,7 @@ public class Var extends Memory{
             if(!value.startsWith("&")){
                 Var var;
                 try{
-                    var = (Var) (getScript().getMemory_address_mapping().get(Integer.parseInt(value)));
+                    var = (Var) (getVM().getMemory_address_mapping().get(Integer.parseInt(value)));
                 }catch (NumberFormatException e){
                     e.printStackTrace();
                     throw new TypeErrorException("the pointer have already inited");
@@ -88,7 +88,7 @@ public class Var extends Memory{
                     throw new TypeErrorException("the value type is not "+type);
                 }
             }else{
-                this.value = getScript().getVars().get(value.substring(value.indexOf("&")+1)).hashCode()+"";
+                this.value = getVM().getVars().get(value.substring(value.indexOf("&")+1)).hashCode()+"";
             }
             return;
         }
@@ -124,9 +124,9 @@ public class Var extends Memory{
             String left = right_left[1];
             Var var;
             if(left.startsWith("d:")){
-                var = (Var) (getScript().getMemory_address_mapping().get(Integer.parseInt(left.replaceAll("(d:)+",""))));
+                var = (Var) (getVM().getMemory_address_mapping().get(Integer.parseInt(left.replaceAll("(d:)+",""))));
             }else{
-                var = getScript().getVars().get(left);
+                var = getVM().getVars().get(left);
             }
             Var var_ptr = new Var(right,var.hashCode()+"");
             var_ptr.setPointerType(var.getType());

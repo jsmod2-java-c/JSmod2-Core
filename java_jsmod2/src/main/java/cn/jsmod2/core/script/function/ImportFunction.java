@@ -14,7 +14,7 @@ public class ImportFunction extends NativeFunction {
     public Object execute(String[] objs,Object... objects) {
 
         try{
-            EmeraldScriptVM.getScript().importFile(EmeraldScriptVM.getScript().getVars().get("ENV_FILE").getValue()+"/"+objs[0]);
+            EmeraldScriptVM.getVM().importFile(EmeraldScriptVM.getVM().getVars().get("ENV_FILE").getValue()+"/"+objs[0]);
         }catch (IOException e){
             e.printStackTrace();
         }

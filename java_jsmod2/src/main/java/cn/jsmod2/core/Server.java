@@ -640,7 +640,7 @@ public abstract class Server implements Closeable, Reloadable {
         server.serverLogInfo("this server uses the Emerald "+ Server.getSender().getServer().serverProp.getProperty(EMERALD_COMPILER,"java")+" compiler v0.1 Engine By MagicLu550");
         if(args.length!=0){
             for(String arg:args)
-                EmeraldScriptVM.parse(arg);
+                EmeraldScriptVM.getVM().parse(arg);
             if(exit)
                 System.exit(0);
         }
