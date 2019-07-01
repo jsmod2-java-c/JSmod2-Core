@@ -93,12 +93,10 @@ public class Console extends CommandSender{
                     String method = Server.getSender().getServer().serverProp.getProperty(FileSystem.EMERALD_COMPILER,"java");
 
                     //目前java版属于最稳定版本，其他不建议使用
-                    if(method.equals("java")){
-                        Utils.getMessageSender().info("RETURN_THAT:emerald."+ EmeraldScript.java_parse(builder.toString()));
-                    }else if(method.equals("c++")){
+                    if(method.equals("c++")){
                         Utils.getMessageSender().info("RETURN_THAT:emerald."+ EmeraldScript.parse(builder.toString()));
                     }else{
-                        Utils.getMessageSender().info("RETURN_THAT:emerald."+ EmeraldScript.kotlin_parse(builder.toString()));
+                        Utils.getMessageSender().info("RETURN_THAT:emerald."+ EmeraldScript.java_parse(builder.toString()));
                     }
 
                 }else{
