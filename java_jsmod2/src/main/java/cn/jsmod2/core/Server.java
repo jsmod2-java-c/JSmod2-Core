@@ -621,6 +621,7 @@ public abstract class Server implements Closeable, Reloadable, Start {
     public static ConsoleReader getLineReader() throws IOException{
         if(lineReader == null) {
             lineReader = new ConsoleReader();
+            lineReader.addCompleter(Console.getSimpleConsole());
         }
         return lineReader;
     }

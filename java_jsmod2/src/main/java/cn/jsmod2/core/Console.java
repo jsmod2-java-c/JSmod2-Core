@@ -62,9 +62,13 @@ public class Console extends CommandSender{
         PrintWriter stream = new PrintWriter(new FileOutputStream(outFile,true));
         while (true){
             //@Deprecated
-            Utils.getMessageSender().info("\n>");
-            String command = Server.getScanner().nextLine();
-            //String command = reader.readLine(">");
+            String command;
+            if(Server.getSender().getServer().serverProp.getProperty(FileSystem.CONSOLE_LINE,"false").equals("false")) {
+                Utils.getMessageSender().info("\n>");
+                command = Server.getScanner().nextLine();
+            }else{
+                command = Server.getLineReader().readLine(">");
+            }
             try{
                 if(EmeraldScriptVM.matchPattern(command)){
                     StringBuilder builder = new StringBuilder(command);

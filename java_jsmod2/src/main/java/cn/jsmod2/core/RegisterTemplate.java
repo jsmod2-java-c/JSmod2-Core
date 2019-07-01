@@ -110,6 +110,8 @@ public abstract class RegisterTemplate {
         serverProperties.put(FileSystem.THIS_IP,"127.0.0.1");//本端的ip
         serverProperties.put(FileSystem.EMERALD_COMPILER,"java");//java c++ kotlin选项，c++ native未来将被替代
         serverProperties.put(FileSystem.DEBUG,"false");//debug模式
+        serverProperties.put(FileSystem.CONSOLE_LINE,"false");//开启jline
+
     }
     @RegisterMethod
     public void registerException(){
