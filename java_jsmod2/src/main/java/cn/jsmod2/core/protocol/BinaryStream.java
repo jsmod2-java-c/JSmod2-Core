@@ -20,9 +20,7 @@ import com.alibaba.fastjson.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
-import java.util.Base64;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * jsmod2数据包编码是通过序列化为json，并编码为base64所得
@@ -52,6 +50,7 @@ public abstract class BinaryStream {
     private int id;
 
     public BinaryStream(int id){
+        dataPackets = new HashMap<>();
         for(RegisterTemplate template:Server.getSender().getServer().getRegisters()){
             dataPackets.putAll(template.getPackets());
         }
@@ -73,7 +72,7 @@ public abstract class BinaryStream {
 
 
     public String[] splitJson(String json){
-        return json.split(",");
+        return json.split("\\|");
     }
     /**
      * 编码一个对象
@@ -105,24 +104,35 @@ public abstract class BinaryStream {
         try{
             byte[] packetBytes = Base64.getDecoder().decode(data);
             String json = new String(packetBytes,properties.getProperty("decode"));
-            json = json.substring((id+"-").length());
-            json = json.substring(0,json.indexOf("~"));
-            //{main-object},player-xxx:xxx,team-class:xxx
+            json = json.substring((id+"-").length()-1);
+            if(json.contains("~")) {
+                json = json.substring(0, json.indexOf("~"));
+            }
+            //{main-object}|player-xxx:xxx|team-class:xxx
             String[] props = splitJson(json);
             json = props[0];
             Object o = JSONObject.parseObject(json,clz);
-            for(int i = 0;i<props.length;i++){
-                String[] key_value = props[i].split(":");
-                String[] fields = key_value[0].split("-");
-                Object field = o;
-                for(int j = 0;j<fields.length-1;j++){
-                    field = invokeGetMethod(field,fields[j]);
-                }
-                invokeSetMethod(field,fields[fields.length-1],key_value[1]);
+            String[] fields = new String[props.length-1];
+            if(fields.length>0) {
+                System.arraycopy(props, 1, fields, 0, fields.length);
+                insertField(fields, o);
             }
             return clz.cast(o);
         }catch (Exception e){
+            e.printStackTrace();
             throw new ProtocolException("The jsmod2 protocol is error",e);
+        }
+    }
+
+    private void insertField(String[] props,Object o) throws Exception{
+        for(int i = 0;i<props.length;i++){
+            String[] key_value = props[i].split(":");
+            String[] fields = key_value[0].split("-");
+            Object field = o;
+            for(int j = 0;j<fields.length-1;j++){
+                field = invokeGetMethod(field,fields[j]);
+            }
+            invokeSetMethod(field,fields[fields.length-1],key_value[1]);
         }
     }
 
@@ -131,6 +141,7 @@ public abstract class BinaryStream {
         String first = "get"+builder.append(field.substring(1));
         return o.getClass().getMethod(first).invoke(o);
     }
+
     private void invokeSetMethod(Object o,String field,String value) throws Exception{
         Field field1 = o.getClass().getDeclaredField(field);
         field1.setAccessible(true);

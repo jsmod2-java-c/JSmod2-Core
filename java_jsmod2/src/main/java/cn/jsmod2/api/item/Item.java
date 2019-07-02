@@ -8,7 +8,8 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.api.item;
 
-import cn.jsmod2.core.annotations.FieldInsert;
+
+import cn.jsmod2.core.annotations.PlayerName;
 import cn.jsmod2.core.math.Vector;
 import cn.jsmod2.network.protocol.item.*;
 
@@ -17,17 +18,8 @@ import java.io.Serializable;
 public class Item implements Cloneable, Serializable {
 
     //在字段注入使用
-    @FieldInsert
+    @PlayerName
     private String playerName;
-
-    @FieldInsert
-    private Object component;
-
-    @FieldInsert
-    private Vector position;
-
-    @FieldInsert
-    private boolean kinematic;
 
     private boolean inWord;
 
@@ -53,15 +45,18 @@ public class Item implements Cloneable, Serializable {
     }
 
     public Object getComponent() {
-        return component;
+        GetComponentPacket packet = new GetComponentPacket();
+        packet.playerName = playerName;
+        return packet.send();
     }
 
     public Vector getPosition() {
-        return position;
+        GetPositionPacket positionPacket = new GetPositionPacket();
+        positionPacket.playerName = playerName;
+        return positionPacket.send();
     }
 
     public void setPosition(Vector position) {
-        this.position = position;
         SetItemPositionPacket packet = new SetItemPositionPacket();
         packet.playerName = playerName;
         packet.position = position;
@@ -69,11 +64,11 @@ public class Item implements Cloneable, Serializable {
     }
 
     public boolean isKinematic() {
-        return kinematic;
+        GetItemKinematicPacket kinematicPacket = new GetItemKinematicPacket();
+        return kinematicPacket.send();
     }
 
     public void setKinematic(boolean kinematic) {
-        this.kinematic = kinematic;
         SetItemKinematicPacket packet = new SetItemKinematicPacket();
         packet.playerName = playerName;
         packet.kinematic = kinematic;
@@ -87,7 +82,5 @@ public class Item implements Cloneable, Serializable {
         packet.setInWorld = inWord;
         packet.send();
     }
-
-
 
 }

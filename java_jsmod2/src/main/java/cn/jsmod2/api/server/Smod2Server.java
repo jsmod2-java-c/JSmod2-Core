@@ -9,41 +9,46 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 
 package cn.jsmod2.api.server;
 
-//TODO Smod2Server 计划5.15完成
-
 
 import cn.jsmod2.core.CommandSender;
 import cn.jsmod2.core.GameServer;
 import cn.jsmod2.core.Server;
-import cn.jsmod2.core.annotations.FieldInsert;
 import cn.jsmod2.core.annotations.UseForServerInit;
 import cn.jsmod2.api.map.Map;
 import cn.jsmod2.api.player.Player;
 
 import java.util.List;
 
+/**
+ * 该类换成用GetPacket获取
+ */
 public class Smod2Server extends CommandSender implements GameServer {
 
+    @Deprecated
     private String name;
+    @Deprecated
     private int port;
+    @Deprecated
     private String ipAddress;
+    @Deprecated
     private Round round;
-    private cn.jsmod2.api.map.Map map;
-    private int numPlayers;
-    private int maxPlayers;
 
-    @FieldInsert
-    private List<Player> players;
+    private cn.jsmod2.api.map.Map map;
+    @Deprecated
+    private int numPlayers;
+    @Deprecated
+    private int maxPlayers;
 
     public Smod2Server() {
         super("CONSOLE","all","console","admin","player","nobody");
+        this.map = new Map();
     }
 
     public Server getRuntimeServer(){
         return Server.getSender().getServer();
     }
 
-
+    @Deprecated
     public Smod2Server updateServer(GameServer server){
         if(server instanceof Smod2Server) {
             Smod2Server smod2Server = (Smod2Server)server;
@@ -61,72 +66,42 @@ public class Smod2Server extends CommandSender implements GameServer {
         return null;
     }
 
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getPort() {
-        return port;
+        return 0;
     }
-    @UseForServerInit
-    public void setPort(int port) {
-        this.port = port;
-    }
+
 
     public String getIpAddress() {
-        return ipAddress;
-    }
-    @UseForServerInit
-    public void setIpAddress(String ipAddress) {
-        this.ipAddress = ipAddress;
+        return null;
     }
 
+
     public Round getRound() {
-        return round;
-    }
-    @UseForServerInit
-    public void setRound(Round round) {
-        this.round = round;
+        return null;
     }
 
     public Map getMap() {
         return map;
     }
-    @UseForServerInit
-    public void setMap(Map map) {
-        this.map = map;
-    }
+
 
     public int getNumPlayers() {
-        return numPlayers;
-    }
-    @UseForServerInit
-    public void setNumPlayers(int numPlayers) {
-        this.numPlayers = numPlayers;
+        return 0;
     }
 
+
     public int getMaxPlayers() {
-        return maxPlayers;
+        return 0;
     }
 
     public void setMaxPlayers(int maxPlayers) {
-        this.maxPlayers = maxPlayers;
+
     }
 
     public List<Player> getPlayers() {
 
-        return players;
+        return null;
     }
 
-    @Override
-    public List<String> getPowers() {
-        return super.getPowers();
-    }
 
 }

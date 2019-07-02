@@ -27,9 +27,4 @@ public abstract class ServerEvent extends Event {
         return (Smod2Server) Server.getSender().getServer().getGameServer();
     }
 
-    /** java-bean */
-    @UseForServerInit
-    public void setServer(Smod2Server server) {
-        Server.getSender().getServer().getGameServer().updateServer(server);
-    }
 }

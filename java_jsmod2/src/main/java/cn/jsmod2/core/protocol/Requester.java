@@ -24,9 +24,9 @@ public class Requester {
 
     private Map<String,Object> _map;
 
-    private SetPacket _packet;
+    private ControlPacket _packet;
 
-    public Requester(Server sender, SetPacket packet){
+    public Requester(Server sender, ControlPacket packet){
         _sender = sender;
         _map = new HashMap<>();
         _packet = packet;
@@ -54,11 +54,17 @@ public class Requester {
         return this;
     }
 
-    public Future get(){
+    public Response get(){
         try{
             _packet._infor_map = _map;
             _packet._end = _end;
-            return _sender.sendPacketGetResult(_packet);
+            Future future =  _sender.sendPacketGetResult(_packet);
+            Response response = new Response();
+            if(_packet instanceof GetPacket){
+                response.future = future;
+                response.packet = (GetPacket) _packet;
+            }
+            return response;
         }catch (Exception e){
             e.printStackTrace();
         }

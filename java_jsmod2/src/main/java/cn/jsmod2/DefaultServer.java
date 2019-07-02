@@ -34,11 +34,12 @@ public class DefaultServer extends Server {
 
         //初始化服务器，第一个数据包
 
-        if(id == INIT_COMMAND){
-            setServer(message);
-        }
+        //if(id == INIT_COMMAND){
+        //    setServer(message);
+        //}
     }
 
+    @Deprecated
     private void setServer(String message) throws Exception{
         ServerInitPacket packet = new ServerInitPacket();
         ServerPacketEvent event = new ServerPacketEvent(packet);

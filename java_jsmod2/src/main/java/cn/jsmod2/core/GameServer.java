@@ -13,5 +13,6 @@ public interface GameServer {
 
     List<? extends ISimplePlayer> getPlayers();
 
+    @Deprecated
     GameServer updateServer(GameServer server);
 }

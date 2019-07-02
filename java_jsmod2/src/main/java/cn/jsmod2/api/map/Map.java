@@ -8,7 +8,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.api.map;
 
-import cn.jsmod2.core.annotations.FieldInsert;
+
 import cn.jsmod2.api.item.Item;
 import cn.jsmod2.api.item.ItemType;
 import cn.jsmod2.api.player.Player;
@@ -17,16 +17,11 @@ import cn.jsmod2.core.math.Vector;
 
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
+
 
 public class Map{
 
-    //全部物品
-    @FieldInsert
-    private List<Item> allItems;
 
-    @FieldInsert
-    private java.util.Map<Role, List<Vector>> randomSpawnPoints;
 
 
 
@@ -40,7 +35,7 @@ public class Map{
     //对于条件获得物品，将全部物品穷举出来，之后进行逻辑判断
     //C#端完成
     public List<Item> getItems(ItemType type,boolean world_only){
-        return allItems.stream().filter(x->x.getItemType().equals(type)&&x.isInWord()==world_only).collect(Collectors.toList());
+        return null;
     }
     //随机getSpawnPoints方法的值
     private Vector getRandomSpawnPoint(Role role){
@@ -49,7 +44,7 @@ public class Map{
     }
 
     private List<Vector> getSpawnPoints(Role role){
-        return randomSpawnPoints.get(role);
+        return null;
     }
 
     public List<Vector> getBlastDoorPoints() {

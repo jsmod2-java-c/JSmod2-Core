@@ -69,11 +69,11 @@ public class PacketManager extends Manager {
             /* 执行指令的部分 */
             if(vo_get instanceof ServerVO){
                 ServerVO vo = (ServerVO)vo_get;
-                GameServer sender = vo.getServer();
+                //GameServer sender = vo.getServer();
                 String[] args = vo.getArgs();
                 String commandName = vo.getCommandName();
                 Console.getConsole().runConsoleCommand(commandName,args);
-                Server.getSender().getServer().getGameServer().updateServer(sender);
+                //Server.getSender().getServer().getGameServer().updateServer(sender);
             }
             if(vo_get instanceof PlayerVO){
                 PlayerVO vo = (PlayerVO)vo_get;

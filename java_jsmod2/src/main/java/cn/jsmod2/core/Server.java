@@ -14,6 +14,7 @@ import cn.jsmod2.core.command.OpsFile;
 import cn.jsmod2.core.event.packet.ServerPacketEvent;
 import cn.jsmod2.core.log.ILogger;
 import cn.jsmod2.core.log.ServerLogger;
+import cn.jsmod2.core.protocol.ControlPacket;
 import cn.jsmod2.core.protocol.Requester;
 import cn.jsmod2.core.script.EmeraldScriptVM;
 import cn.jsmod2.core.script.EnvPage;
@@ -286,7 +287,7 @@ public abstract class Server implements Closeable, Reloadable, Start {
     }
 
     /**采用多对象制度，分发一个请求，创建一个request对象*/
-    public Requester getRequester(SetPacket packet) {
+    public Requester getRequester(ControlPacket packet) {
         return new Requester(this,packet);
     }
 
