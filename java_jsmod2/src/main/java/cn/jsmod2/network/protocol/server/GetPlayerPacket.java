@@ -6,6 +6,8 @@ import java.util.List;
 
 public class GetPlayerPacket extends GetServerPacket {
 
+    public static final int ID = 0x63;
+
 
     public GetPlayerPacket() {
         super(0x63, Player.class);

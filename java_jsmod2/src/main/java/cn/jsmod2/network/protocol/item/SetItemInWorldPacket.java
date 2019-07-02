@@ -4,6 +4,8 @@ package cn.jsmod2.network.protocol.item;
 
 public class SetItemInWorldPacket extends SetItemPacket {
 
+    public static final int ID = 0x59;
+
     public SetItemInWorldPacket() {
         super(0x59);
     }

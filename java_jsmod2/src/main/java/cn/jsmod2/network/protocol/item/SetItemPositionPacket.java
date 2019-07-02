@@ -5,6 +5,7 @@ import cn.jsmod2.core.math.Vector;
 
 public class SetItemPositionPacket extends SetItemPacket {
 
+    public static final int ID = 0x5b;
 
 
     public SetItemPositionPacket() {

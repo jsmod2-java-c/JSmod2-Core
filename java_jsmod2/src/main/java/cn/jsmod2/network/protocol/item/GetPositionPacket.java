@@ -5,6 +5,8 @@ import cn.jsmod2.core.math.Vector;
 
 public class GetPositionPacket extends GetItemPacket {
 
+    public static final int ID = 0x5e;
+
     public GetPositionPacket() {
         super(0x5e, Vector.class);
     }

@@ -18,6 +18,8 @@ import cn.jsmod2.core.command.NativeCommand;
 
 public class CommandRegisterPacket extends DataPacket {
 
+    public static final int ID = 0x53;
+
 
     public CommandRegisterPacket() {
         super(0x53);

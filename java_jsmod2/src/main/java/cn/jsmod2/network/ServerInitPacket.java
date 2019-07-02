@@ -18,6 +18,8 @@ import cn.jsmod2.core.protocol.DataPacket;
 
 public class ServerInitPacket extends DataPacket {
 
+    public static final int ID = 0x00;
+
 
     public ServerInitPacket(){
         super(0x00);

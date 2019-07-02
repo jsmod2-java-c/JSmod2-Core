@@ -4,6 +4,8 @@ import cn.jsmod2.core.protocol.SetPacket;
 
 public abstract class SetItemPacket extends SetPacket {
 
+
+
     public SetItemPacket(int id) {
         super(id);
         requester.with("type","item");

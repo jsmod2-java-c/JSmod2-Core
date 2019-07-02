@@ -2,6 +2,8 @@ package cn.jsmod2.network.protocol.server;
 
 public class GetNumPlayersPacket extends GetServerPacket {
 
+    public static final int ID = 0x62;
+
     public GetNumPlayersPacket() {
         super(0x62, GetRoundPacket.class);
     }

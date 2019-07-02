@@ -29,6 +29,7 @@ import cn.jsmod2.core.protocol.CommandRegisterPacket;
 import cn.jsmod2.core.protocol.command.PlayerCommandPacket;
 import cn.jsmod2.core.protocol.command.ServerCommandPacket;
 import cn.jsmod2.network.protocol.item.*;
+import cn.jsmod2.network.protocol.server.*;
 
 import java.util.*;
 
@@ -91,18 +92,24 @@ public class Register extends RegisterTemplate {
     }
     @RegisterMethod
     public void registerPacket(){
-        packets.put(ServerInitPacket.class,0x00);
-        packets.put(CommandRegisterPacket.class,0x53);
+        packets.put(ServerInitPacket.class,ServerInitPacket.ID);
+        packets.put(CommandRegisterPacket.class,CommandRegisterPacket.ID);
         packets.put(ServerCommandPacket.class,Register.SERVER_COMMAND);
         packets.put(PlayerCommandPacket.class,Register.PLAYER_COMMAND);
-        packets.put(DropItemPacket.class,0x57);
-        packets.put(RemoveItemPacket.class,0x58);
-        packets.put(SetItemInWorldPacket.class,0x59);
-        packets.put(SetItemKinematicPacket.class,0x5a);
-        packets.put(SetItemPositionPacket.class,0x5b);
-        packets.put(GetComponentPacket.class,0x5c);
-        packets.put(GetItemKinematicPacket.class,0x5d);
-        packets.put(GetPositionPacket.class,0x5e);
+        packets.put(DropItemPacket.class,DropItemPacket.ID);
+        packets.put(RemoveItemPacket.class,RemoveItemPacket.ID);
+        packets.put(SetItemInWorldPacket.class,SetItemInWorldPacket.ID);
+        packets.put(SetItemKinematicPacket.class,SetItemKinematicPacket.ID);
+        packets.put(SetItemPositionPacket.class,SetItemPositionPacket.ID);
+        packets.put(GetComponentPacket.class,GetComponentPacket.ID);
+        packets.put(GetItemKinematicPacket.class,GetItemKinematicPacket.ID);
+        packets.put(GetPositionPacket.class,GetPositionPacket.ID);
+        packets.put(GetPortPacket.class,GetPortPacket.ID);
+        packets.put(GetPlayerPacket.class,GetPlayerPacket.ID);
+        packets.put(GetIpAddressPacket.class,GetIpAddressPacket.ID);
+        packets.put(GetNumPlayersPacket.class,GetNumPlayersPacket.ID);
+        packets.put(GetRoundPacket.class,GetRoundPacket.ID);
+        //~0x63
         putPackets();
     }
 
