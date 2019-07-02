@@ -11,10 +11,13 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2;
 
 import cn.jsmod2.core.*;
+import cn.jsmod2.core.event.Event;
 import cn.jsmod2.core.protocol.command.CommandVO;
 import cn.jsmod2.network.command.*;
 import cn.jsmod2.api.player.Player;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -62,7 +65,11 @@ public class PacketManager extends Manager {
         try{
             Properties properties = FileSystem.getFileSystem().serverProperties(Server.getSender().getServer());
             byte[] bytes = message.getBytes(properties.getProperty("encode"));//通过utf-8形式获取byte字节数组
-            if(id == Register.FIRST_EVENT||(Register.SECOND_START_EVENT<=id&&id<Register.MAX_EVENT_ID)){
+            Map<Integer, Class<? extends Event>> events = new HashMap<>();
+            for(RegisterTemplate template:Server.getSender().getServer().getRegisters()){
+                events.putAll(template.getEvents());
+            }
+            if(events.containsKey(id)){
                 callEventByPacket(id,bytes);
             }
             CommandVO vo_get = getCommandVO(id,message,Register.SERVER_COMMAND,Register.PLAYER_COMMAND,ServerVO.class,PlayerVO.class);
