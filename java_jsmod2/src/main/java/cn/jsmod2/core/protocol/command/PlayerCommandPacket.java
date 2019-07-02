@@ -16,6 +16,7 @@ public class PlayerCommandPacket<P extends AbstractPlayerVO> extends DataPacket 
     private Class<P> type;
 
     public PlayerCommandPacket(Class<P> type){
+        this();
         this.type = type;
     }
 

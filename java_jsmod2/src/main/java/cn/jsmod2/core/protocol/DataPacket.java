@@ -12,12 +12,46 @@ package cn.jsmod2.core.protocol;
 /**
  * Jsmod2服务器交互协议 V4
  *
- * 数据类型分为ControlPacket，EventPacket，CommandPacket
+ * 数据类型分为ControlPacket，EventPacket，CommandPacket,CloseCommand
  *
+ * CloseCommand用于关闭服务器
+ *  {
+ *      "id":0x02
+ *  }
  * EventPacket整个内容是一个Event对象
+ *  {
+ *      "id":0x01
+ *      "admin":{
+ *          "name":"xxxx"
+ *          ....
+ *      }
+ *  }|xx-xxx-xxx:"xxx"
  * CommandPacket内部是一个CommandVO对象
  * 	CommandVO分为ServerVO和PlayerVO
  * 	他们存储着Command名称和参数数组，以及CommandSender对象
+ * 	Server
+ * 	{
+ * 	    "id":0x55
+ * 	    "commandName":"xxx"
+ * 	    "args":
+ * 	    [
+ * 	        "arg1","arg2"
+ * 	    ]
+ * 	    "server":"server"
+ * 	}
+ * 	Player
+ * 	{
+ * 	    "id":0x56
+ * 	    "commandName":"xxx"
+ * 	    "args":
+ * 	    [
+ * 	        "arg1","arg2"
+ * 	    ]
+ * 	    "player":{
+ * 	        player对象内容
+ * 	    }
+ * 	}
+ *
  * ControlPacket是控制对象数据的数据包
  * 	分为SetPacket和GetPacket
  * 	SetPacket一定会修改对象的属性或者行为
@@ -36,12 +70,28 @@ package cn.jsmod2.core.protocol;
  * 	GetPacket的字段
  * 		“field”:”获取字段” 这里就是去掉get的，首字母小写的字段名
  * 		如Item的getKinematic方法获取kinematic，那就是“field”:”kinematic”
- * 注入字段:
+ * C#注入字段:
  * 	如用于注入到如Item的使用玩家名称来定位Item,需要额外注入，采用|分隔符
- * 	如XXXEvent,里面有个playerName字段要额外注入
+ * 	如XXXEvent,里面的Player对象player，player里的Item对象item，item里面有个playerName字段要额外注入
  * 	可以这样
- *        {XXXEvent对象}|playerName:xxx
+ *        {XXXEvent对象}|player-item-playerName:xxx
  * 	可以实现注入
+ * Java 尾请求
+ *  一般和c#注入字段相互对应，对于玩家姓名的定位
+ *  {XXXEvent对象}~name
+ * 例子:
+ *  SetPacket
+ *  {
+ *      "id":0x9f
+ *      "type":"item"
+ *      "do":"remove"
+ *  }~mike
+ *  GetPacket
+ *  {
+ *      "id":0x9f
+ *      "type":"item"
+ *      "field":"name"
+ *  }~mike
  */
 public abstract class DataPacket extends BinaryStream {
 

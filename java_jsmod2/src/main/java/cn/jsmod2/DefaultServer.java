@@ -15,6 +15,7 @@ public class DefaultServer extends Server {
 
     //初始化服务端的指令
     @PacketCMD
+    @Deprecated
     private static final int INIT_COMMAND = 0x00;
     //关闭服务端的指令
     @PacketCMD private static final int CLOSE_COMMAND = 0x02;
