@@ -109,7 +109,8 @@ public class Register extends RegisterTemplate {
         packets.put(GetIpAddressPacket.class,GetIpAddressPacket.ID);
         packets.put(GetNumPlayersPacket.class,GetNumPlayersPacket.ID);
         packets.put(GetRoundPacket.class,GetRoundPacket.ID);
-        //~0x63
+        packets.put(GetMaxPlayersPacket.class,GetMaxPlayersPacket.ID);
+        //~0x64
         putPackets();
     }
 

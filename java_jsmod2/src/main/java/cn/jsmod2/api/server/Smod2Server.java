@@ -96,11 +96,12 @@ public class Smod2Server extends CommandSender implements GameServer {
 
 
     public int getMaxPlayers() {
-        return 0;
+        GetMaxPlayersPacket playersPacket = new GetMaxPlayersPacket();
+        return playersPacket.send();
     }
 
     public void setMaxPlayers(int maxPlayers) {
-
+        
     }
 
     public List<Player> getPlayers() {
