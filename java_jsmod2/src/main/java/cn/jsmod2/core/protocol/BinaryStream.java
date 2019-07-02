@@ -100,14 +100,31 @@ public abstract class BinaryStream {
     }
 
 
+    public <T> List<T> dataListDecode(byte[] data,Class<T> clz){
+        try {
+            String json = getDefaultJson(data);
+            String[] props = splitJson(json);
+            json = props[0];
+            List<T> list = JSON.parseArray(json,clz);
+            return list;
+        }catch (Exception e){
+            throw new ProtocolException("The jsmod2 protocol is error",e);
+        }
+    }
+
+    private String getDefaultJson(byte[] data) throws Exception{
+        byte[] packetBytes = Base64.getDecoder().decode(data);
+        String json = new String(packetBytes,properties.getProperty("decode"));
+        json = json.substring((id+"-").length()-1);
+        if(json.contains("~")) {
+            json = json.substring(0, json.indexOf("~"));
+        }
+        return json;
+    }
+
     public <T> T dataObjectDecode(byte[] data,Class<T> clz){
         try{
-            byte[] packetBytes = Base64.getDecoder().decode(data);
-            String json = new String(packetBytes,properties.getProperty("decode"));
-            json = json.substring((id+"-").length()-1);
-            if(json.contains("~")) {
-                json = json.substring(0, json.indexOf("~"));
-            }
+            String json = getDefaultJson(data);
             //{main-object}|player-xxx:xxx|team-class:xxx
             String[] props = splitJson(json);
             json = props[0];
@@ -119,7 +136,6 @@ public abstract class BinaryStream {
             }
             return clz.cast(o);
         }catch (Exception e){
-            e.printStackTrace();
             throw new ProtocolException("The jsmod2 protocol is error",e);
         }
     }

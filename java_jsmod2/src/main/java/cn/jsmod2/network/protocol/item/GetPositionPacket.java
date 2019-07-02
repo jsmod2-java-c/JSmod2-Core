@@ -6,7 +6,7 @@ import cn.jsmod2.core.math.Vector;
 public class GetPositionPacket extends GetItemPacket {
 
     public GetPositionPacket() {
-        super(0x3e, Vector.class);
+        super(0x5e, Vector.class);
     }
 
     @Override

@@ -15,4 +15,6 @@ public interface GameServer {
 
     @Deprecated
     GameServer updateServer(GameServer server);
+
+
 }

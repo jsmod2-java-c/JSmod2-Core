@@ -3,7 +3,7 @@ package cn.jsmod2.network.protocol.item;
 public class GetItemKinematicPacket extends GetItemPacket{
 
     public GetItemKinematicPacket() {
-        super(0x3d,Boolean.class);
+        super(0x5d,Boolean.class);
     }
 
     @Override

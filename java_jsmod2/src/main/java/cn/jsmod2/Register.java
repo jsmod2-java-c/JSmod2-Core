@@ -100,6 +100,9 @@ public class Register extends RegisterTemplate {
         packets.put(SetItemInWorldPacket.class,0x59);
         packets.put(SetItemKinematicPacket.class,0x5a);
         packets.put(SetItemPositionPacket.class,0x5b);
+        packets.put(GetComponentPacket.class,0x5c);
+        packets.put(GetItemKinematicPacket.class,0x5d);
+        packets.put(GetPositionPacket.class,0x5e);
         putPackets();
     }
 

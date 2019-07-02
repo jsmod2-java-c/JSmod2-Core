@@ -4,16 +4,16 @@ package cn.jsmod2.core.protocol;
  * 可以获取返回的数据
  */
 
-public abstract class GetPacket<T> extends ControlPacket{
+public abstract class GetPacket extends ControlPacket{
 
-    private Class<T> type;
+    private Class<?> type;
 
-    public GetPacket(int id,Class<T> type) {
+    public GetPacket(int id,Class<?> type) {
         super(id);
         this.type = type;
     }
 
-    public Class<T> getType() {
+    public Class<?> getType() {
         return type;
     }
 

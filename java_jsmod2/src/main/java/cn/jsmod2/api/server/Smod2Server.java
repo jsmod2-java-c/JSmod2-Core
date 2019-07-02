@@ -13,9 +13,9 @@ package cn.jsmod2.api.server;
 import cn.jsmod2.core.CommandSender;
 import cn.jsmod2.core.GameServer;
 import cn.jsmod2.core.Server;
-import cn.jsmod2.core.annotations.UseForServerInit;
 import cn.jsmod2.api.map.Map;
 import cn.jsmod2.api.player.Player;
+import cn.jsmod2.network.protocol.server.*;
 
 import java.util.List;
 
@@ -66,18 +66,22 @@ public class Smod2Server extends CommandSender implements GameServer {
         return null;
     }
 
+
     public int getPort() {
-        return 0;
+        GetPortPacket packet = new GetPortPacket();
+        return packet.send();
     }
 
 
     public String getIpAddress() {
-        return null;
+        GetIpAddressPacket packet = new GetIpAddressPacket();
+        return packet.send();
     }
 
 
     public Round getRound() {
-        return null;
+        GetRoundPacket packet = new GetRoundPacket();
+        return packet.send();
     }
 
     public Map getMap() {
@@ -86,7 +90,8 @@ public class Smod2Server extends CommandSender implements GameServer {
 
 
     public int getNumPlayers() {
-        return 0;
+        GetNumPlayersPacket playersPacket = new GetNumPlayersPacket();
+        return playersPacket.send();
     }
 
 
@@ -99,8 +104,12 @@ public class Smod2Server extends CommandSender implements GameServer {
     }
 
     public List<Player> getPlayers() {
+        GetPlayerPacket playerPacket = new GetPlayerPacket();
+        return playerPacket.send();
+    }
 
-        return null;
+    public void setName(){
+
     }
 
 
