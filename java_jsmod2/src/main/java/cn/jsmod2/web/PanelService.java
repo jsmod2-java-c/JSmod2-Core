@@ -6,7 +6,7 @@ import cn.jsmod2.core.protocol.DataPacket;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PannelService {
+public class PanelService {
 
     //比如获取服务器最大人数
     //0x64-{"id":0x64,"type":"server","field":"maxPlayers"}

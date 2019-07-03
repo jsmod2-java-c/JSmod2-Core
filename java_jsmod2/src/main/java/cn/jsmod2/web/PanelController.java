@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class PannelController {
+public class PanelController {
 
     @Autowired
-    public PannelService service;
+    public PanelService service;
 
     @RequestMapping("/api/{message}")
     public Object api(@PathVariable("message") String message){
