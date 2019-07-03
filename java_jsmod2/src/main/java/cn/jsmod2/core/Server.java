@@ -171,16 +171,19 @@ public abstract class Server implements Closeable, Reloadable, Start {
     }
 
     public void start(Class<?> main,String[] args) {
-        Utils.TryCatch(()->{
-            this.log.info(main.getSimpleName()+"::start::"+main.getName());
-            this.executeEmerald(args,true);
+        startWatch(main,args);
+        Utils.TryCatch(this::startConsoleCommand);
+    }
+
+    public void startWatch(Class<?> main,String[] args) {
+        Utils.TryCatch(()-> {
+            this.log.info(main.getSimpleName() + "::start::" + main.getName());
+            this.executeEmerald(args, true);
             this.chooseLangOrStart();
             this.start();
             this.successTime();
-            this.startConsoleCommand();
         });
     }
-
     public void start(){
         if(useUDP) {
             this.pool.execute(new ListenerThread());

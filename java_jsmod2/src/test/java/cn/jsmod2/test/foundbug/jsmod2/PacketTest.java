@@ -1,15 +1,19 @@
 package cn.jsmod2.test.foundbug.jsmod2;
 
 import cn.jsmod2.DefaultServer;
+import cn.jsmod2.ServerRunner;
+import cn.jsmod2.ServerTest;
 import cn.jsmod2.core.protocol.GetPacket;
 import cn.jsmod2.core.protocol.Response;
 import cn.jsmod2.core.utils.Utils;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Base64;
 
+@RunWith(ServerRunner.class)
 public class PacketTest {
 
     //一个简单解析jsmod2协议的代码
@@ -38,9 +42,8 @@ public class PacketTest {
     }
 
     @Test
+    @ServerTest
     public void test(){
-        DefaultServer server = new DefaultServer();
-        server.start();
         TestGet get = new TestGet();
         Object obj = get.send();
         System.out.println(obj);

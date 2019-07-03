@@ -19,4 +19,13 @@ public class Application {
         }
     }
 
+    public static void runTest(Class<?> clz,String[] args){
+        try{
+            ServerApplication application = clz.getAnnotation(ServerApplication.class);
+            application.value().newInstance().startWatch(clz, args);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 }
