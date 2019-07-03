@@ -43,6 +43,8 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import static cn.jsmod2.core.FileSystem.*;
+import static cn.jsmod2.core.utils.Utils.getFullBytes;
+import static cn.jsmod2.core.utils.Utils.getLen;
 
 /**
  * jsmod2 server class
@@ -399,31 +401,8 @@ public abstract class Server implements Closeable, Reloadable, Start {
         }
     }
 
-    private int getLen(byte[] bytes){
-        int len = 0;
-        for (byte get : bytes) {
-            if (get != 0) {
-                len++;
-            }
-        }
-        return len;
-    }
 
-    private byte[] getFullBytes(Socket socket,byte[] gets) throws IOException{
-        String message = new String(gets,0,getLen(gets));
-        StringBuilder builder = new StringBuilder(message);
-        if(!message.endsWith(";")){
-            int b = 0;
-            while (b!=';'){
-                b = socket.getInputStream().read();
-                if(b == -1){
-                    break;
-                }
-                builder.append((char) b);
-            }
-        }
-        return builder.toString().getBytes();
-    }
+
 
     private void manageMessage(DatagramPacket packet) throws Exception{
         manageMessage(packet.getData(),packet.getLength());

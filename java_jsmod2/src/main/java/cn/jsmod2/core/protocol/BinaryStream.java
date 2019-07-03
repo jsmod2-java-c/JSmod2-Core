@@ -93,7 +93,7 @@ public abstract class BinaryStream {
             String json = JSON.toJSONString(o)+end;
             String packet = id+"-"+json;
             byte[] bytes = packet.getBytes(properties.getProperty("encode"));
-            return Base64.getEncoder().encode(bytes);
+            return (new String(Base64.getEncoder().encode(bytes))+";").getBytes();
         }catch (Exception e){
             return null;
         }

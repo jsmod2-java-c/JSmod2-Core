@@ -3,15 +3,16 @@ package cn.jsmod2.test.foundbug.jsmod2;
 import cn.jsmod2.DefaultServer;
 import cn.jsmod2.core.protocol.GetPacket;
 import cn.jsmod2.core.protocol.Response;
+import cn.jsmod2.core.utils.Utils;
 import org.junit.Test;
 
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Arrays;
 import java.util.Base64;
 
 public class PacketTest {
 
+    //一个简单解析jsmod2协议的代码
     @Test
     public void reget() throws Exception{
         ServerSocket socket = new ServerSocket(19938);
@@ -24,7 +25,14 @@ public class PacketTest {
                 len++;
             }
         }
-        System.out.println(new String(Base64.getDecoder().decode(new String(bytes,0,len))));
+        bytes = Utils.getFullBytes(socket1,bytes);
+        String message = new String(bytes,0,len);
+        String[] alls = message.split(";");
+        for(String all:alls) {
+            System.out.println(new String(Base64.getDecoder().decode(all)));
+        }
+
+
         socket1.getOutputStream().write(Base64.getEncoder().encode("90-{\"name\":\"name\",\"have\":\"true\"}|id:1".getBytes()));
 
     }

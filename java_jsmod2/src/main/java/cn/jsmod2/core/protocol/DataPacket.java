@@ -92,6 +92,7 @@ package cn.jsmod2.core.protocol;
  *      "type":"item"
  *      "field":"name"
  *  }~mike
+ *数据包都必须加密为Base64字符串，并在加密后，结尾以;结尾
  */
 public abstract class DataPacket extends BinaryStream {
 

@@ -15,6 +15,7 @@ import cn.jsmod2.core.ex.ServerRuntimeException;
 
 import java.io.*;
 import java.lang.reflect.Method;
+import java.net.Socket;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.Properties;
@@ -168,4 +169,31 @@ public class Utils {
         }
         return str;
     }
+
+    public static byte[] getFullBytes(Socket socket, byte[] gets) throws IOException{
+        String message = new String(gets,0,getLen(gets));
+        StringBuilder builder = new StringBuilder(message);
+        if(!message.endsWith(";")){
+            int b = 0;
+            while (b!=';'){
+                b = socket.getInputStream().read();
+                if(b == -1){
+                    break;
+                }
+                builder.append((char) b);
+            }
+        }
+        return builder.toString().getBytes();
+    }
+
+    public static int getLen(byte[] bytes){
+        int len = 0;
+        for (byte get : bytes) {
+            if (get != 0) {
+                len++;
+            }
+        }
+        return len;
+    }
+
 }
