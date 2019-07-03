@@ -10,15 +10,29 @@ package cn.jsmod2;
 
 import cn.jsmod2.core.Application;
 import cn.jsmod2.core.annotations.ServerApplication;
+import cn.jsmod2.core.utils.Utils;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.util.concurrent.CountDownLatch;
 
 /**
  * @author magiclu550 #(code) jsmod2
  */
 
 @ServerApplication(DefaultServer.class)
+@SpringBootApplication
 public class Jsmod2 {
 
     public static void main(String[]args){
-        Application.run(Jsmod2.class,args);
+        Utils.TryCatch(()->{
+            CountDownLatch latch = new CountDownLatch(1);
+            new Thread(()->{
+                SpringApplication.run(Jsmod2.class,args);
+                latch.countDown();
+            }).start();
+            latch.await();
+            Application.run(Jsmod2.class,args);
+        });
     }
 }

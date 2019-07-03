@@ -1,6 +1,5 @@
 package cn.jsmod2.test.foundbug.jsmod2;
 
-import cn.jsmod2.DefaultServer;
 import cn.jsmod2.ServerRunner;
 import cn.jsmod2.ServerTest;
 import cn.jsmod2.core.protocol.GetPacket;
@@ -75,7 +74,7 @@ class User{
 
     @Override
     public String toString() {
-        return "User{" +
+        return "PlayerTest{" +
                 "name='" + name + '\'' +
                 ", have='" + have + '\'' +
                 ", id=" + id +

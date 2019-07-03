@@ -10,6 +10,6 @@ public class SetMaxPlayersPacket extends SetServerPacket {
 
     @Override
     public void send() {
-        requester.with("maxplayer",maxPlayers+"").to();
+        requester.with("maxPlayer",maxPlayers+"").to();
     }
 }
