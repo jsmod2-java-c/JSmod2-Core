@@ -145,7 +145,11 @@ public class Utils {
      */
     public static Integer getResponsePacketId(String str){
         str = toGetString(str);
-        return Integer.parseInt(str.substring(0,str.indexOf("-")));
+        try {
+            return Integer.parseInt(str.substring(0, str.indexOf("-")));
+        }catch (NumberFormatException e){
+            return Integer.parseInt(str.substring(str.indexOf("x")+1, str.indexOf("-")),16);
+        }
     }
 
     /**
@@ -161,6 +165,7 @@ public class Utils {
 
     private static String toGetString(String str){
         try{
+
             byte[] decodes = Base64.getDecoder().decode(str);
             Properties properties = FileSystem.getFileSystem().serverProperties(Server.getSender().getServer());
             str = new String(decodes,properties.getProperty(FileSystem.SERVER_DECODE));

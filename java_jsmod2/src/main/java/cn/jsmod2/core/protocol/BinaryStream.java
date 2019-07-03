@@ -59,6 +59,7 @@ public abstract class BinaryStream {
     }
 
     public BinaryStream(){
+        dataPackets = new HashMap<>();
         for(RegisterTemplate template:Server.getSender().getServer().getRegisters()){
             dataPackets.putAll(template.getPackets());
         }
@@ -119,7 +120,7 @@ public abstract class BinaryStream {
     private String getDefaultJson(byte[] data) throws Exception{
         byte[] packetBytes = Base64.getDecoder().decode(data);
         String json = new String(packetBytes,properties.getProperty("decode"));
-        json = json.substring((id+"-").length()-1);
+        json = json.substring((id+"-").length());
         if(json.contains("~")) {
             json = json.substring(0, json.indexOf("~"));
         }

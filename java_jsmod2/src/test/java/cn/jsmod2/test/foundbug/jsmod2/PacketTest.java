@@ -36,7 +36,7 @@ public class PacketTest {
         }
 
 
-        socket1.getOutputStream().write(Base64.getEncoder().encode("90-{\"name\":\"name\",\"have\":\"true\"}|id:1".getBytes()));
+        socket1.getOutputStream().write(Base64.getEncoder().encode("100-100".getBytes()));
 
     }
 

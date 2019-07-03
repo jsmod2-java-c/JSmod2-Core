@@ -10,13 +10,24 @@ public class Response {
 
     public GetPacket packet;
 
-    public Object get(){
+    public Class<?> type;
 
-        return packet.dataObjectDecode(future.get(),packet.getType());
+
+    public Object get(){
+        if(type == null){
+            type = packet.getType();
+        }
+
+        return packet.dataObjectDecode(future.get(),this.type);
     }
 
     public List getArray(){
-        return packet.dataListDecode(future.get(),packet.getType());
+
+        if(type == null){
+            type = packet.getType();
+        }
+
+        return packet.dataListDecode(future.get(),this.type);
     }
 
 
