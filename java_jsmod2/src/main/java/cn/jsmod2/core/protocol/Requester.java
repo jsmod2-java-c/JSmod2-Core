@@ -2,6 +2,7 @@ package cn.jsmod2.core.protocol;
 
 import cn.jsmod2.core.Server;
 import cn.jsmod2.core.utils.Future;
+import com.alibaba.fastjson.JSON;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -69,6 +70,10 @@ public class Requester {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public String getString(){
+        return _packet.getId()+"-"+JSON.toJSONString(_map)+"~"+_end;
     }
 
     public void reset(){

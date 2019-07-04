@@ -16,11 +16,14 @@ import cn.jsmod2.core.ex.ProtocolException;
 import cn.jsmod2.core.FileSystem;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-
+import org.apache.commons.codec.binary.Base64;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 
 /**
  * jsmod2数据包编码是通过序列化为json，并编码为base64所得
@@ -87,6 +90,7 @@ public abstract class BinaryStream {
     }
 
     public byte[] dataObjectEncodeWithEnd(Object o,String end){
+
         try{
             if(!end.equals("")){
                 end = "~"+end;
@@ -101,11 +105,11 @@ public abstract class BinaryStream {
 
     protected byte[] dataJsonEncode(String message) throws Exception{
         byte[] bytes = message.getBytes(properties.getProperty("encode"));
-        return (new String(Base64.getEncoder().encode(bytes))+";").getBytes();
+        return (new String(org.apache.commons.codec.binary.Base64.encodeBase64(bytes))+";").getBytes();
     }
 
 
-    public <T> List<T> dataListDecode(byte[] data,Class<T> clz){
+    public <T> List<T> dataListDecode(byte[] data, Class<T> clz){
         try {
             String json = getDefaultJson(data);
             String[] props = splitJson(json);
@@ -118,7 +122,7 @@ public abstract class BinaryStream {
     }
 
     private String getDefaultJson(byte[] data) throws Exception{
-        byte[] packetBytes = Base64.getDecoder().decode(data);
+        byte[] packetBytes = Base64.decodeBase64(data);
         String json = new String(packetBytes,properties.getProperty("decode"));
         json = json.substring((id+"-").length());
         if(json.contains("~")) {

@@ -3,14 +3,15 @@ package cn.jsmod2.test.foundbug.jsmod2;
 import cn.jsmod2.ServerRunner;
 import cn.jsmod2.ServerTest;
 import cn.jsmod2.core.protocol.GetPacket;
+import cn.jsmod2.core.protocol.Requester;
 import cn.jsmod2.core.protocol.Response;
 import cn.jsmod2.core.utils.Utils;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Base64;
 
 @RunWith(ServerRunner.class)
 public class PacketTest {
@@ -32,11 +33,11 @@ public class PacketTest {
         String message = new String(bytes,0,len);
         String[] alls = message.split(";");
         for(String all:alls) {
-            System.out.println(new String(Base64.getDecoder().decode(all)));
+            System.out.println(all);
         }
 
 
-        socket1.getOutputStream().write(Base64.getEncoder().encode("100-100".getBytes()));
+        socket1.getOutputStream().write("100-100".getBytes());
 
     }
 
@@ -55,14 +56,28 @@ public class PacketTest {
 
         @Override
         public Object send() {
-            Response response = requester.with("get","name").end("a").get();
-            Object obj = getType().cast(response.get());
-            return obj;
+            try {
+                Requester requester = this.requester.with("get", "你好").end("a");
+                System.out.println(requester.getString());
+                System.out.println(new String(java.util.Base64.getEncoder().encode(requester.getString().getBytes("UTF-8"))));
+                Response response = requester.get();
+                Object obj = getType().cast(response.get());
+                System.out.println(requester.getString());
+                return obj;
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            //MTM3LXsiZ2V0Ijoi5L2g5aW9IiwiaWQiOjEzN31+YQ==
+            //MTM3LXsiZ2V0Ijoi5L2g5aW9IiwiaWQiOjEzN31+YQ==
+            return null;
         }
     }
 
 
+
 }
+
+
 class User{
     String name;
     String have;

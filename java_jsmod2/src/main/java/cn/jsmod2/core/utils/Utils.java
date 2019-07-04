@@ -12,12 +12,12 @@ import cn.jsmod2.core.Message;
 import cn.jsmod2.core.FileSystem;
 import cn.jsmod2.core.Server;
 import cn.jsmod2.core.ex.ServerRuntimeException;
+import org.apache.commons.codec.binary.Base64;
 
 import java.io.*;
 import java.lang.reflect.Method;
 import java.net.Socket;
 import java.util.Arrays;
-import java.util.Base64;
 import java.util.Properties;
 
 /**
@@ -166,7 +166,7 @@ public class Utils {
     private static String toGetString(String str){
         try{
 
-            byte[] decodes = Base64.getDecoder().decode(str);
+            byte[] decodes = Base64.decodeBase64(str);
             Properties properties = FileSystem.getFileSystem().serverProperties(Server.getSender().getServer());
             str = new String(decodes,properties.getProperty(FileSystem.SERVER_DECODE));
         }catch (Exception e){
