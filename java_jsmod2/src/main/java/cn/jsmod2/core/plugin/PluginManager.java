@@ -53,6 +53,7 @@ public class PluginManager {
 
     public PluginManager(Server server){
         this.server = server;
+        PluginClassLoader.getClassLoader().setManager(this);
     }
 
     public PluginClassLoader getPluginClassLoader(){
