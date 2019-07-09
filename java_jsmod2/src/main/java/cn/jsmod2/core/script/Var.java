@@ -9,7 +9,7 @@ import static cn.jsmod2.core.script.EmeraldScriptVM.*;
 
 public class Var extends Memory{
 
-    private String value;
+    private Object value;
 
     private String type;
 
@@ -19,28 +19,32 @@ public class Var extends Memory{
 
     private boolean readonly;
 
-    private Var(String name,String value){
+    private Var(String name,Object value){
         this.name = name;
         this.value = value;
         this.type = parseType(value);
-        if(value.matches("NULL")){
+        if(value.toString().matches("NULL")){
             isNull = true;
         }
     }
 
-    private String parseType(String value){
-        if(value.matches("[0-9]+")){
+    private String parseType(Object value){
+        if(value.toString().matches("[0-9]+")){
             return "INT";
-        }else if(value.matches("[0-9]+\\.[0-9]+")){
+        }else if(value.toString().matches("[0-9]+\\.[0-9]+")){
             return "DOUBLE";
-        }else if(value.matches("true|false")){
+        }else if(value.toString().matches("true|false")){
             return "BOOL";
-        }else if(value.matches("NULL")){
+        }else if(value.toString().matches("NULL")){
             return "NULL";
-        }else if(value.matches("'([\\s\\S]+|)'")){
+        }else if(value.toString().matches("'([\\s\\S]+|)'")){
             return "STRING";
         }else{
-            return "UNKNOWN";
+            String val = value.getClass().getName();
+            if(val.equals("java.lang.String")){
+                return "UNKNOWN";
+            }
+            return value.toString();
         }
     }
 
@@ -56,8 +60,16 @@ public class Var extends Memory{
         return type;
     }
 
-    public String getValue() {
+    public Object getObject(){
         return value;
+    }
+
+    public void setObject(Object value){
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value.toString();
     }
 
     public boolean isNull() {

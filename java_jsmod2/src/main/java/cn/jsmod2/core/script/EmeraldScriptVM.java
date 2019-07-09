@@ -5,6 +5,7 @@ import cn.jsmod2.core.script.function.*;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
+import java.lang.reflect.Method;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,37 +15,11 @@ import java.util.regex.Pattern;
  * 运行代码，需要将语言编译成ermerald语言执行
  * Jsmod2服务器脚本的解析器
  * script进入脚本解析页面
- * if语法
- * if(bool b){
- *     right(){
- *
- *     }else{
- *
- *     }elif(bool b){
- *
- *     };
- * }
- * while语法
- * while(boolean b){
- *
- * }
- * do{
- *
- * }while(boolean b)
- *
- * for语法
- * for(a in range(10)){
- *
- * }
- * 数组
- * [1,2,3]
- * 映射
- * [1=>2,2=>3,3=>4]
- * 一款服务端脚本语言，正在制作
- * @author magiclu550
- *
+ * 目前逻辑控制语句和表达式解析没有做
  */
 public class EmeraldScriptVM {
+
+    private Map<String,String> javaMethodMapping = new HashMap<>();
 
     static {
         script = new EmeraldScriptVM();
@@ -56,7 +31,21 @@ public class EmeraldScriptVM {
         getVM().functions.put("return",new ReturnFunction());
         getVM().functions.put("+",new StringAddFunction());
         getVM().functions.put("sline",new SLineEnableFunction());
+        getVM().functions.put("jimport",getVM().new JImportFunction());
     }
+
+    //导入java的方法
+    class JImportFunction extends NativeFunction{
+        public JImportFunction() {
+            super("jimport","native jimport(classpath)");
+        }
+
+        @Override
+        public Object execute(String[] args, Object... objs) {
+            return javaMethodMapping.put(args[0].substring(args[0].lastIndexOf(".")+1),args[0]);
+        }
+    }
+
 
     private static EmeraldScriptVM script;
 
@@ -114,6 +103,101 @@ public class EmeraldScriptVM {
             parse(getFunc.toString());
         }
     }
+
+    /**
+     * 调用java方法必须以J::开头
+     * J::a=A()
+     * J::a=A().b()
+     * J::b=a.c()
+     * J::b=a.c().a
+     * J::a=A.a();//静态方法
+     * J::a=A().B();//内部类
+     *
+     * @param code
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    private Object executeJavaFunction(String code,Map<String,Var> vars) throws Exception{
+        String entry = code.substring("J::".length());
+        String[] key_val = entry.split("=");
+        String[] methods = key_val[1].split("\\.");
+        Object nowReturn = null;
+        for(int i = 0;i<methods.length;i++){
+            String method = methods[i];
+            if(method.matches("[\\s\\S]+\\([\\s\\S]+\\)")){
+                //调用方法或实例化
+                String funcName = method.trim().substring(0,method.indexOf("("));
+                Object[] args = method.substring(method.indexOf("(")+1,method.lastIndexOf(")")).split(",");
+                args = getResultArgs(args,vars);//以后使用
+                String packageClass = javaMethodMapping.get(funcName);
+                if(packageClass!=null){
+                    if(nowReturn!=null) {//nowReturn 不是 null，那就是内部类的实例化
+                        Class inner = Class.forName(nowReturn.getClass().getName()+"$"+funcName);
+                        nowReturn = inner.getConstructor(inner).newInstance(nowReturn);
+                    }else{
+                        nowReturn = Class.forName(packageClass).getConstructor().newInstance();
+                    }
+                    //TODO 参加有参数的支持
+                }
+            }else{
+                //直接调用字段或者静态方法
+                //静态方法直接将指针推移1格
+                String packageClass = javaMethodMapping.get(method);
+                if(packageClass==null){
+                    if(nowReturn == null){ //如果现在值为null，那就是现有的数值
+                        Var var = vars.get(method);
+                        nowReturn = var.getObject();
+                    }else{
+                        //如果不是null，那就是属性
+                        nowReturn = nowReturn.getClass().getField(method).get(nowReturn);
+                    }
+                }else{
+                    i++;
+                    method = methods[i];
+                    String funcName = method.trim().substring(0,method.indexOf("("));
+                    Object[] args = method.substring(method.indexOf("(")+1,method.lastIndexOf(")")).split(",");
+                    args = getResultArgs(args,vars);
+                    Class<?> clz = Class.forName(packageClass);
+
+                    Method _method = clz.getMethod(funcName);
+                    //目前支持无参数的
+                    nowReturn = _method.invoke(null);
+                    //TODO 添加对有参数的支持
+                }
+            }
+        }
+        return nowReturn;//最值的值
+
+    }
+
+
+    private Object[] getResultArgs(Object[] args,Map<String,Var> vars) throws Exception{
+        args = setThat(vars,args);//字段处理
+        for(int index = 0;index<args.length;index++){
+            args[index] = executeFunction(args[index].toString(),vars).toString();
+            args[index] = executeJavaFunction(args[index].toString(),vars);
+        }
+        return args;
+    }
+
+    private Object executeReturn(String code,Map<String,Var> vars) throws Exception{
+        if(code.startsWith("J::")) {
+            String entry = code.substring("J::".length());
+            String[] key_val = entry.split("=");
+            String name = key_val[0].trim();
+            Object obj = executeJavaFunction(code,vars);
+            if(vars.containsKey(name)){
+                vars.get(name).setObject(obj);
+                return vars.get(name);
+            }else{
+                vars.put(name,Var.compile(code));
+                vars.get(name).setObject(obj);
+                return vars.get(name);
+            }
+        }else{
+            return code;
+        }
+    }
     
     /**
      * 计算运算表达式
@@ -130,6 +214,8 @@ public class EmeraldScriptVM {
 
         return "";
     }
+
+
 
     private String performBoolean(String expression){
         return "";
@@ -404,7 +490,17 @@ public class EmeraldScriptVM {
         Object result = null;
         //执行函数可以返回值
         //a=echo()
+        try {
+            result = executeReturn(command, vars);
+            if(!result.equals(command)){
+                return result;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         /* 定义函数 */
+
         result = this.defineFunction(command);
         if(!result.equals(command)){
             return result;
@@ -414,6 +510,8 @@ public class EmeraldScriptVM {
         if(!result.equals(command)){
             return result;
         }
+
+
 
         result = this.listVar(command);
         if(!result.equals(command)){
@@ -451,16 +549,16 @@ public class EmeraldScriptVM {
      * @param args
      * @return
      */
-    public String[] setThat(Map<String,Var> vars,String... args){
+    public String[] setThat(Map<String,Var> vars,Object... args){
         List<String> lists = new LinkedList<>();
         try{
             for(int i=0;i<args.length;i++){
                 StringBuilder builder = new StringBuilder();
                 if(!args[i].equals("''")) {
-                    if (args[i].startsWith("'")) {
+                    if (args[i].toString().startsWith("'")) {
                         while (!builder.toString().endsWith("'")) {
                             builder.append(args[i]);
-                            if (!args[i].endsWith("'"))
+                            if (!args[i].toString().endsWith("'"))
                                 builder.append(",");
                             i++;
                         }
@@ -481,10 +579,10 @@ public class EmeraldScriptVM {
         String[] dArgs = new String[args.length];
         int i = 0;
         //关于变量
-        for(String arg:args){
-            String lo = arg;
+        for(Object arg:args){
+            String lo = arg.toString();
             Pattern pattern = Pattern.compile("\\$\\{[\\*]+[a-zA-Z_$]+\\}");
-            Matcher matcher = pattern.matcher(arg);
+            Matcher matcher = pattern.matcher(arg.toString());
             while (matcher.find()){
                 String group = matcher.group();
                 String value = getStringVal(this.getPtrValue(group.substring(group.indexOf("{")+1,group.lastIndexOf("}")),vars));
