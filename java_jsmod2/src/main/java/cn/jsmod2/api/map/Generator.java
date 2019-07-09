@@ -25,15 +25,13 @@ public class Generator {
     private Vector position;
     private Room room;
 
-    //TODO 解锁发包
-
     public void unlock(){
         if(locked){
             locked = false;
         }
     }
 
-    //TODO 截包返回值
+
 
     public Object getComponent(){
           return null;

@@ -415,7 +415,7 @@ public abstract class Server implements Closeable, Reloadable, Start {
         String message = new String(data,0,length);
         String[] alls = message.split(";");
         for(String all:alls) {
-            //TODO 在这里根据编号分包
+
             int id = Utils.getResponsePacketId(all);
 
             packetCommandManage(id, all);

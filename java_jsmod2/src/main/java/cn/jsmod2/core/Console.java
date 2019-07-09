@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
  * 控制台对象，可以处理控制台指令(NativeCommand和Command)
  * @author magiclu550 #(code)jsmod2
  */
-//TODo
+
 public class Console extends CommandSender{
 
     private Console(){
