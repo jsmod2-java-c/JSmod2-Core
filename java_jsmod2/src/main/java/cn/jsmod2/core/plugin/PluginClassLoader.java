@@ -141,17 +141,18 @@ public class PluginClassLoader {
 
             EnableRegister register = pluginObject.getClass().getAnnotation(EnableRegister.class);
 
-            List<Class<? extends Listener>> exclusionsListener = Arrays.asList(register.exclusionsListener());
-
-            List<Class<? extends Command>> exclusionsCommand = Arrays.asList(register.exclusionsCommand());
             if(register!=null){
+
+                List<Class<? extends Listener>> exclusionsListener = Arrays.asList(register.exclusionsListener());
+
+                List<Class<? extends Command>> exclusionsCommand = Arrays.asList(register.exclusionsCommand());
                 Enumeration<JarEntry> entries = jarFile.entries();
                 while (entries.hasMoreElements()) {
                     JarEntry entry = entries.nextElement();
                     String name = entry.getName();
                     if(name.endsWith(".class")){
                         Class<?> clz = loader.loadClass(name.substring(0,name.lastIndexOf(".")).replace("/","."));
-                        if(mostSuperClass(clz).equals(NativeCommand.class) &&!exclusionsCommand.contains(clz) ){
+                        if(mostSuperClass(clz).equals(NativeCommand.class) && !exclusionsCommand.contains(clz) ){
                             Object obj = clz.getConstructor(Plugin.class).newInstance(pluginObject);
                             manager.registerCommand((Command)obj);
                         }
