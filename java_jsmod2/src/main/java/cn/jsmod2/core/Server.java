@@ -461,8 +461,10 @@ public abstract class Server implements Closeable, Reloadable, Start {
     }
     private void disable(){
         for(Plugin plugin:plugins){
-            serverLogInfo("unload the plugin named "+plugin.getPluginName());
-            plugin.onDisable();
+            if(plugin!=null) {
+                serverLogInfo("unload the plugin named " + plugin.getPluginName());
+                plugin.onDisable();
+            }
         }
     }
     private void startMessage(Properties langProperties,Server server){
