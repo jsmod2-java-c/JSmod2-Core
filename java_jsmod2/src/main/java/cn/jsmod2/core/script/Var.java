@@ -42,9 +42,9 @@ public class Var extends Memory{
         }else{
             String val = value.getClass().getName();
             if(val.equals("java.lang.String")){
-                return "UNKNOWN";
+                return "'"+val+"'";
             }
-            return value.toString();
+            return val;
         }
     }
 
@@ -66,6 +66,7 @@ public class Var extends Memory{
 
     public void setObject(Object value){
         this.value = value;
+        this.type = parseType(value);
     }
 
     public String getValue() {

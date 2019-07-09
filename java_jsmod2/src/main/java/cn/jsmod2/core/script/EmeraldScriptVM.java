@@ -113,56 +113,59 @@ public class EmeraldScriptVM {
      * J::a=A.a();//静态方法
      * J::a=A().B();//内部类
      *
-     * @param code
+     * @param entry
      * @return
      */
     @SuppressWarnings("unchecked")
-    private Object executeJavaFunction(String code,Map<String,Var> vars) throws Exception{
-        String entry = code.substring("J::".length());
-        String[] key_val = entry.split("=");
-        String[] methods = key_val[1].split("\\.");
+    private Object executeJavaFunction(String entry,Map<String,Var> vars) throws Exception{
+        String[] methods = entry.split("\\.");
         Object nowReturn = null;
-        for(int i = 0;i<methods.length;i++){
-            String method = methods[i];
-            if(method.matches("[\\s\\S]+\\([\\s\\S]+\\)")){
-                //调用方法或实例化
-                String funcName = method.trim().substring(0,method.indexOf("("));
-                Object[] args = method.substring(method.indexOf("(")+1,method.lastIndexOf(")")).split(",");
-                args = getResultArgs(args,vars);//以后使用
-                String packageClass = javaMethodMapping.get(funcName);
-                if(packageClass!=null){
-                    if(nowReturn!=null) {//nowReturn 不是 null，那就是内部类的实例化
-                        Class inner = Class.forName(nowReturn.getClass().getName()+"$"+funcName);
-                        nowReturn = inner.getConstructor(inner).newInstance(nowReturn);
+        for(int i = 0;i<methods.length;i++) {
+            String method = methods[i].trim();
+            if (!method.equals("")) {
+                if (method.matches("[\\s\\S]+\\([\\s\\S]+|[\\s\\S]*\\)")) {
+                    //调用方法或实例化
+                    String funcName = method.substring(0, method.indexOf("("));
+                    Object[] args = method.substring(method.indexOf("(") + 1, method.lastIndexOf(")")).split(",");
+                    args = getResultArgs(args, vars);//以后使用
+                    String packageClass = javaMethodMapping.get(funcName);
+                    if (packageClass != null) {
+                        if (nowReturn != null) {//nowReturn 不是 null，那就是内部类的实例化
+                            Class inner = Class.forName(nowReturn.getClass().getName() + "$" + funcName);
+                            nowReturn = inner.getConstructor(inner).newInstance(nowReturn);
+                        } else {
+                            nowReturn = Class.forName(packageClass).newInstance();
+                        }
                     }else{
-                        nowReturn = Class.forName(packageClass).getConstructor().newInstance();
+                        //为null时，说明调用方法
+                        nowReturn = nowReturn.getClass().getMethod(funcName).invoke(nowReturn);
                     }
                     //TODO 参加有参数的支持
-                }
-            }else{
-                //直接调用字段或者静态方法
-                //静态方法直接将指针推移1格
-                String packageClass = javaMethodMapping.get(method);
-                if(packageClass==null){
-                    if(nowReturn == null){ //如果现在值为null，那就是现有的数值
-                        Var var = vars.get(method);
-                        nowReturn = var.getObject();
-                    }else{
-                        //如果不是null，那就是属性
-                        nowReturn = nowReturn.getClass().getField(method).get(nowReturn);
-                    }
-                }else{
-                    i++;
-                    method = methods[i];
-                    String funcName = method.trim().substring(0,method.indexOf("("));
-                    Object[] args = method.substring(method.indexOf("(")+1,method.lastIndexOf(")")).split(",");
-                    args = getResultArgs(args,vars);
-                    Class<?> clz = Class.forName(packageClass);
+                } else {
+                    //直接调用字段或者静态方法
+                    //静态方法直接将指针推移1格
+                    String packageClass = javaMethodMapping.get(method);
+                    if (packageClass == null) {
+                        if (nowReturn == null) { //如果现在值为null，那就是现有的数值
+                            Var var = vars.get(method);
+                            nowReturn = var.getObject();
+                        } else {
+                            //如果不是null，那就是属性
+                            nowReturn = nowReturn.getClass().getField(method).get(nowReturn);
+                        }
+                    } else {
+                        i++;
+                        method = methods[i];
+                        String funcName = method.trim().substring(0, method.indexOf("("));
+                        Object[] args = method.substring(method.indexOf("(") + 1, method.lastIndexOf(")")).split(",");
+                        args = getResultArgs(args, vars);
+                        Class<?> clz = Class.forName(packageClass);
 
-                    Method _method = clz.getMethod(funcName);
-                    //目前支持无参数的
-                    nowReturn = _method.invoke(null);
-                    //TODO 添加对有参数的支持
+                        Method _method = clz.getMethod(funcName);
+                        //目前支持无参数的
+                        nowReturn = _method.invoke(null);
+                        //TODO 添加对有参数的支持
+                    }
                 }
             }
         }
@@ -174,8 +177,10 @@ public class EmeraldScriptVM {
     private Object[] getResultArgs(Object[] args,Map<String,Var> vars) throws Exception{
         args = setThat(vars,args);//字段处理
         for(int index = 0;index<args.length;index++){
-            args[index] = executeFunction(args[index].toString(),vars).toString();
-            args[index] = executeJavaFunction(args[index].toString(),vars);
+            if("".equals(args[index])) {
+                args[index] = executeFunction(args[index].toString(), vars).toString();
+                args[index] = executeJavaFunction(args[index].toString(), vars);
+            }
         }
         return args;
     }
@@ -185,12 +190,12 @@ public class EmeraldScriptVM {
             String entry = code.substring("J::".length());
             String[] key_val = entry.split("=");
             String name = key_val[0].trim();
-            Object obj = executeJavaFunction(code,vars);
+            Object obj = executeJavaFunction(key_val[1],vars);
             if(vars.containsKey(name)){
                 vars.get(name).setObject(obj);
                 return vars.get(name);
             }else{
-                vars.put(name,Var.compile(code));
+                vars.put(name,Var.compile(entry));
                 vars.get(name).setObject(obj);
                 return vars.get(name);
             }

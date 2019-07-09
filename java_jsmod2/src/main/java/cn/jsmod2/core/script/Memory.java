@@ -16,7 +16,7 @@ public abstract class Memory {
 
     public static void registerScriptPattern(){
         //关于变量的正则
-        scriptPattern.put("var","(global::)*(const )*[\\*]*+[a-z0-9A-Z_]+(=|:\\*)[\\s\\S]+");
+        scriptPattern.put("var","(global::|J::)*(const )*[\\*]*+[a-z0-9A-Z_]+(=|:\\*)[\\s\\S]+");
         scriptPattern.put("list","list");
         scriptPattern.put("unset","unset [a-z0-9A-Z_]+(=[\\s\\S]+)*");
         scriptPattern.put("func","([a-z0-9A-Z_]=)*[_/\\\\A-Za-z0-9]+\\(([\\s\\S]+|[\\s\\S]*)\\)(\\{([\\s\\S]+|)\\})*");
@@ -25,7 +25,7 @@ public abstract class Memory {
         scriptPattern.put("pc","let [a-zA-Z0-9_]+=[\\s\\S]+");
         scriptPattern.put("ffunc","(([\\*]+|)[a-z0-9A-Z_]=)*[\\s\\S]+\\(([\\s\\S]+|[\\s\\S]*)\\)\\{([\\s\\S]+|)\\}");
         scriptPattern.put("start","([\\s\\S]+|)\\{");
-        scriptPattern.put("ptr","(global::)*(const )*[a-z0-9A-Z_]+:\\*[\\s\\S]+");
+        scriptPattern.put("ptr","(global::|J::)*(const )*[a-z0-9A-Z_]+:\\*[\\s\\S]+");
         //scriptPattern.put("if","if\\[[\\s\\S]+\\](([\\s\\S]+)|\\{[.]+\\})((elif\\[[\\s\\S]+\\]([\\s\\S]+)|else\\{([\\s\\S]+;)+\\})+|elif\\[[\\s\\S]+\\]\\{([\\s\\S]+)+\\}|)");
     }
 
