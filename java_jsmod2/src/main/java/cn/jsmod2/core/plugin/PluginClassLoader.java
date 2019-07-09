@@ -181,11 +181,7 @@ public class PluginClassLoader {
                 return sub;
         }
     }
-
-    public static void main(String[] args) {
-        Object obj = PluginClassLoader.getClassLoader().mostSuperClass(TPSCommand.class);
-        System.out.println(obj);
-    }
+    
 
     private void loadFiles(File[] files){
         if(files!=null){
