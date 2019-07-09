@@ -1,10 +1,12 @@
 package cn.jsmod2.core.script;
 
+import cn.jsmod2.Test;
 import cn.jsmod2.core.ex.TypeErrorException;
 import cn.jsmod2.core.script.function.*;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -129,6 +131,7 @@ public class EmeraldScriptVM {
                     String packageClass = javaMethodMapping.get(funcName);
                     if (packageClass != null) {
                         if (nowReturn != null) {//nowReturn 不是 null，那就是内部类的实例化
+                            //成员内部类实例化
                             Class inner = Class.forName(nowReturn.getClass().getName() + "$" + funcName);
                             nowReturn = inner.getConstructor(nowReturn.getClass()).newInstance(nowReturn);
                         } else {
@@ -149,20 +152,47 @@ public class EmeraldScriptVM {
                             nowReturn = var.getObject();
                         } else {
                             //如果不是null，那就是属性
+                            //对于成员变量的支持
                             nowReturn = nowReturn.getClass().getField(method).get(nowReturn);
                         }
                     } else {
                         i++;
                         method = methods[i];
-                        String funcName = method.trim().substring(0, method.indexOf("("));
-                        Object[] args = method.substring(method.indexOf("(") + 1, method.lastIndexOf(")")).split(",");
-                        args = getResultArgs(args, vars);
-                        Class<?> clz = Class.forName(packageClass);
-
-                        Method _method = clz.getMethod(funcName);
-                        //目前支持无参数的
-                        nowReturn = _method.invoke(null);
-                        //TODO 添加对有参数的支持
+                        if(method.matches("[\\s\\S]+\\([\\s\\S]+|[\\s\\S]*\\)")) {
+                            String funcName = method.trim().substring(0, method.indexOf("("));
+                            Object[] args = method.substring(method.indexOf("(") + 1, method.lastIndexOf(")")).split(",");
+                            args = getResultArgs(args, vars);
+                            Class<?> clz = Class.forName(packageClass);
+                            try {
+                                Method _method = clz.getMethod(funcName);
+                                //目前支持无参数的
+                                nowReturn = _method.invoke(null);
+                            }catch (NoSuchMethodException e){
+                                //对于静态内部类的成员变量支持
+                                String clzName = javaMethodMapping.get(funcName);
+                                nowReturn = Class.forName(clzName.substring(0,clzName.lastIndexOf("."))+"$"+clzName.substring(clzName.lastIndexOf(".")+1)).newInstance();
+                            }
+                            //TODO 添加对有参数的支持
+                        }else{
+                            String secondPacket = javaMethodMapping.get(method);
+                            if(secondPacket==null) {
+                                //对于一层静态变量的支持
+                                nowReturn = Class.forName(packageClass).getField(method).get(null);
+                            }else{
+                                if(secondPacket.startsWith(packageClass)) {
+                                    Class<?> inner = Class.forName(packageClass+"$"+method);
+                                    i++;
+                                    //对于静态内部类的静态变量支持
+                                    Field field = inner.getField(methods[i]);
+                                    nowReturn = field.get(field.getDeclaringClass());
+                                }
+                            }
+                        }
+                        //支持多层调用方法，返回值传递
+                        //支持一层成员内部类和一层静态内部类
+                        //支持一层实例化
+                        //只支持1层的内部类，多层暂时不支持，未来会提供
+                        //目前不支持有参数的方法，未来将支持
                     }
                 }
             }
