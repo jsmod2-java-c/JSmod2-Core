@@ -11,8 +11,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * emerald代码再EmeraldVM中是最底层的机器代码，如果要使用EmeraldVM
- * 运行代码，需要将语言编译成ermerald语言执行
  * Jsmod2服务器脚本的解析器
  * script进入脚本解析页面
  * 目前逻辑控制语句和表达式解析没有做
