@@ -130,7 +130,7 @@ public class EmeraldScriptVM {
                     if (packageClass != null) {
                         if (nowReturn != null) {//nowReturn 不是 null，那就是内部类的实例化
                             Class inner = Class.forName(nowReturn.getClass().getName() + "$" + funcName);
-                            nowReturn = inner.getConstructor(inner).newInstance(nowReturn);
+                            nowReturn = inner.getConstructor(nowReturn.getClass()).newInstance(nowReturn);
                         } else {
                             nowReturn = Class.forName(packageClass).newInstance();
                         }
