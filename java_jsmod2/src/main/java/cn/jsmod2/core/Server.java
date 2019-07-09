@@ -83,8 +83,6 @@ public abstract class Server implements Closeable, Reloadable, Start {
 
     protected PluginManager pluginManager;
 
-    protected final Properties serverProp;
-
     private long startTime;
 
     private long startSuccessTime;
@@ -112,6 +110,8 @@ public abstract class Server implements Closeable, Reloadable, Start {
     public final File serverfolder;
 
     public final File pluginDir;
+
+    public final Properties serverProp;
 
 
     public Server(GameServer gServer,boolean useUDP) {

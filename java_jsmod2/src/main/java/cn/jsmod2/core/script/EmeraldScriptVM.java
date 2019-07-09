@@ -55,6 +55,7 @@ public class EmeraldScriptVM {
         getVM().functions.put("if",new IfFunction());
         getVM().functions.put("return",new ReturnFunction());
         getVM().functions.put("+",new StringAddFunction());
+        getVM().functions.put("sline",new SLineEnableFunction());
     }
 
     private static EmeraldScriptVM script;
