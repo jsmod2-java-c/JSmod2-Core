@@ -143,6 +143,7 @@ public class PluginClassLoader {
 
             if(register!=null){
 
+
                 List<Class<? extends Listener>> exclusionsListener = Arrays.asList(register.exclusionsListener());
 
                 List<Class<? extends Command>> exclusionsCommand = Arrays.asList(register.exclusionsCommand());
@@ -152,13 +153,17 @@ public class PluginClassLoader {
                     String name = entry.getName();
                     if(name.endsWith(".class")){
                         Class<?> clz = loader.loadClass(name.substring(0,name.lastIndexOf(".")).replace("/","."));
-                        if(mostSuperClass(clz).equals(NativeCommand.class) && !exclusionsCommand.contains(clz) ){
-                            Object obj = clz.getConstructor(Plugin.class).newInstance(pluginObject);
-                            manager.registerCommand((Command)obj);
+                        if(register.command()) {
+                            if (mostSuperClass(clz).equals(NativeCommand.class) && !exclusionsCommand.contains(clz)) {
+                                Object obj = clz.getConstructor(Plugin.class).newInstance(pluginObject);
+                                manager.registerCommand((Command) obj);
+                            }
                         }
-                        if(Arrays.asList(mostSuperClass(clz).getInterfaces()).contains(Listener.class) && !exclusionsListener.contains(clz) ){
-                            Object obj = clz.newInstance();
-                            manager.registerEvents((Listener)obj,pluginObject);
+                        if(register.listener()) {
+                            if (Arrays.asList(mostSuperClass(clz).getInterfaces()).contains(Listener.class) && !exclusionsListener.contains(clz)) {
+                                Object obj = clz.newInstance();
+                                manager.registerEvents((Listener) obj, pluginObject);
+                            }
                         }
                     }
                 }
