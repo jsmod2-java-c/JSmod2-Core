@@ -117,87 +117,90 @@ public class EmeraldScriptVM {
      */
     @SuppressWarnings("unchecked")
     private Object executeJavaFunction(String entry,Map<String,Var> vars) throws Exception{
-        String[] methods = entry.split("\\.");
-        Object nowReturn = null;
-        for(int i = 0;i<methods.length;i++) {
-            String method = methods[i].trim();
-            if (!method.equals("")) {
-                if (method.matches("[\\s\\S]+\\([\\s\\S]+|[\\s\\S]*\\)")) {
-                    //调用方法或实例化
-                    String funcName = method.substring(0, method.indexOf("("));
-                    Object[] args = method.substring(method.indexOf("(") + 1, method.lastIndexOf(")")).split(",");
-                    args = getResultArgs(args, vars);//以后使用
-                    String packageClass = javaMethodMapping.get(funcName);
-                    if (packageClass != null) {
-                        if (nowReturn != null) {//nowReturn 不是 null，那就是内部类的实例化
-                            //成员内部类实例化
-                            Class inner = Class.forName(nowReturn.getClass().getName() + "$" + funcName);
-                            nowReturn = inner.getConstructor(nowReturn.getClass()).newInstance(nowReturn);
-                        } else {
-                            nowReturn = Class.forName(packageClass).newInstance();
-                        }
-                    }else{
-                        //为null时，说明调用方法
-                        nowReturn = nowReturn.getClass().getMethod(funcName).invoke(nowReturn);
-                    }
-                    //TODO 参加有参数的支持
-                } else {
-                    //直接调用字段或者静态方法
-                    //静态方法直接将指针推移1格
-                    String packageClass = javaMethodMapping.get(method);
-                    if (packageClass == null) {
-                        if (nowReturn == null) { //如果现在值为null，那就是现有的数值
-                            Var var = vars.get(method);
-                            nowReturn = var.getObject();
-                        } else {
-                            //如果不是null，那就是属性
-                            //对于成员变量的支持
-                            nowReturn = nowReturn.getClass().getField(method).get(nowReturn);
-                        }
-                    } else {
-                        i++;
-                        method = methods[i];
-                        if(method.matches("[\\s\\S]+\\([\\s\\S]+|[\\s\\S]*\\)")) {
-                            String funcName = method.trim().substring(0, method.indexOf("("));
-                            Object[] args = method.substring(method.indexOf("(") + 1, method.lastIndexOf(")")).split(",");
-                            args = getResultArgs(args, vars);
-                            Class<?> clz = Class.forName(packageClass);
-                            try {
-                                Method _method = clz.getMethod(funcName);
-                                //目前支持无参数的
-                                nowReturn = _method.invoke(null);
-                            }catch (NoSuchMethodException e){
-                                //对于静态内部类的成员变量支持
-                                String clzName = javaMethodMapping.get(funcName);
-                                nowReturn = Class.forName(clzName.substring(0,clzName.lastIndexOf("."))+"$"+clzName.substring(clzName.lastIndexOf(".")+1)).newInstance();
+        if(entry.startsWith("J::")) {
+            entry = entry.substring("J::".length());
+            String[] methods = entry.split("\\.");
+            Object nowReturn = null;
+            for(int i = 0;i<methods.length;i++) {
+                String method = methods[i].trim();
+                if (!method.equals("")) {
+                    if (method.matches("[\\s\\S]+\\([\\s\\S]+|[\\s\\S]*\\)")) {
+                        //调用方法或实例化
+                        String funcName = method.substring(0, method.indexOf("("));
+                        Object[] args = method.substring(method.indexOf("(") + 1, method.lastIndexOf(")")).split(",");
+                        args = getResultArgs(args, vars);//以后使用
+                        String packageClass = javaMethodMapping.get(funcName);
+                        if (packageClass != null) {
+                            if (nowReturn != null) {//nowReturn 不是 null，那就是内部类的实例化
+                                //成员内部类实例化
+                                Class inner = Class.forName(nowReturn.getClass().getName() + "$" + funcName);
+                                nowReturn = inner.getConstructor(nowReturn.getClass()).newInstance(nowReturn);
+                            } else {
+                                nowReturn = Class.forName(packageClass).newInstance();
                             }
-                            //TODO 添加对有参数的支持
                         }else{
-                            String secondPacket = javaMethodMapping.get(method);
-                            if(secondPacket==null) {
-                                //对于一层静态变量的支持
-                                nowReturn = Class.forName(packageClass).getField(method).get(null);
+                            //为null时，说明调用方法
+                            nowReturn = nowReturn.getClass().getMethod(funcName).invoke(nowReturn);
+                        }
+                        //TODO 参加有参数的支持
+                    } else {
+                        //直接调用字段或者静态方法
+                        //静态方法直接将指针推移1格
+                        String packageClass = javaMethodMapping.get(method);
+                        if (packageClass == null) {
+                            if (nowReturn == null) { //如果现在值为null，那就是现有的数值
+                                Var var = vars.get(method);
+                                nowReturn = var.getObject();
+                            } else {
+                                //如果不是null，那就是属性
+                                //对于成员变量的支持
+                                nowReturn = nowReturn.getClass().getField(method).get(nowReturn);
+                            }
+                        } else {
+                            i++;
+                            method = methods[i];
+                            if(method.matches("[\\s\\S]+\\([\\s\\S]+|[\\s\\S]*\\)")) {
+                                String funcName = method.trim().substring(0, method.indexOf("("));
+                                Object[] args = method.substring(method.indexOf("(") + 1, method.lastIndexOf(")")).split(",");
+                                args = getResultArgs(args, vars);
+                                Class<?> clz = Class.forName(packageClass);
+                                try {
+                                    Method _method = clz.getMethod(funcName);
+                                    //目前支持无参数的
+                                    nowReturn = _method.invoke(null);
+                                }catch (NoSuchMethodException e){
+                                    //对于静态内部类的成员变量支持
+                                    String clzName = javaMethodMapping.get(funcName);
+                                    nowReturn = Class.forName(clzName.substring(0,clzName.lastIndexOf("."))+"$"+clzName.substring(clzName.lastIndexOf(".")+1)).newInstance();
+                                }
+                                //TODO 添加对有参数的支持
                             }else{
-                                if(secondPacket.startsWith(packageClass)) {
-                                    Class<?> inner = Class.forName(packageClass+"$"+method);
-                                    i++;
-                                    //对于静态内部类的静态变量支持
-                                    Field field = inner.getField(methods[i]);
-                                    nowReturn = field.get(field.getDeclaringClass());
+                                String secondPacket = javaMethodMapping.get(method);
+                                if(secondPacket==null) {
+                                    //对于一层静态变量的支持
+                                    nowReturn = Class.forName(packageClass).getField(method).get(null);
+                                }else{
+                                    if(secondPacket.startsWith(packageClass)) {
+                                        Class<?> inner = Class.forName(packageClass+"$"+method);
+                                        i++;
+                                        //对于静态内部类的静态变量支持
+                                        Field field = inner.getField(methods[i]);
+                                        nowReturn = field.get(field.getDeclaringClass());
+                                    }
                                 }
                             }
+                            //支持多层调用方法，返回值传递
+                            //支持一层成员内部类和一层静态内部类
+                            //支持一层实例化
+                            //只支持1层的内部类，多层暂时不支持，未来会提供
+                            //目前不支持有参数的方法，未来将支持
                         }
-                        //支持多层调用方法，返回值传递
-                        //支持一层成员内部类和一层静态内部类
-                        //支持一层实例化
-                        //只支持1层的内部类，多层暂时不支持，未来会提供
-                        //目前不支持有参数的方法，未来将支持
                     }
                 }
             }
+            return nowReturn;//最值的值
         }
-        return nowReturn;//最值的值
-
+        return entry;
     }
 
 
@@ -211,13 +214,14 @@ public class EmeraldScriptVM {
         }
         return args;
     }
+    //无返回值调用JF::System.out.println()
 
     private Object executeReturn(String code,Map<String,Var> vars) throws Exception{
         if(code.startsWith("J::")) {
             String entry = code.substring("J::".length());
-            String[] key_val = entry.split("=");
-            String name = key_val[0].trim();
-            Object obj = executeJavaFunction(key_val[1],vars);
+            String name = entry.substring(0,entry.indexOf("="));
+            String value = entry.substring(entry.indexOf("=")+1);
+            Object obj = executeJavaFunction("J::"+value,vars);
             if(vars.containsKey(name)){
                 vars.get(name).setObject(obj);
                 return vars.get(name);
@@ -226,6 +230,9 @@ public class EmeraldScriptVM {
                 vars.get(name).setObject(obj);
                 return vars.get(name);
             }
+        }else if(code.startsWith("JF::")){
+            String entry = code.substring("JF::".length());
+            return executeJavaFunction("J::"+entry,vars);
         }else{
             return code;
         }
@@ -524,9 +531,13 @@ public class EmeraldScriptVM {
         //a=echo()
         try {
             result = executeReturn(command, vars);
-            if(!result.equals(command)){
+            if(result==null||!result.equals(command)){
+                if(result == null){
+                    return "NULL";
+                }
                 return result;
             }
+
         }catch (Exception e){
             e.printStackTrace();
         }
