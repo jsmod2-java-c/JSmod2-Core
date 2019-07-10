@@ -1,6 +1,5 @@
 package cn.jsmod2.core.script;
 
-import cn.jsmod2.Test;
 import cn.jsmod2.core.ex.TypeErrorException;
 import cn.jsmod2.core.script.function.*;
 import org.apache.commons.io.FileUtils;
