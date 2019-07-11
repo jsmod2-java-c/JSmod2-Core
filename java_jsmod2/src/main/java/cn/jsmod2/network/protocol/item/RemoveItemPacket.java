@@ -12,7 +12,7 @@ public class RemoveItemPacket extends SetItemPacket {
     public void send() {
         requester
                 .with(DO,"remove")
-                .end(playerName)
+                .with("player",playerName)
                 .to();
     }
 }

@@ -13,7 +13,7 @@ public class GetComponentPacket extends GetItemPacket {
     public Object send() {
         return requester
                 .with("field","component")
-                .end(playerName)
+                .with("player",playerName)
                 .get().get();
     }
 }

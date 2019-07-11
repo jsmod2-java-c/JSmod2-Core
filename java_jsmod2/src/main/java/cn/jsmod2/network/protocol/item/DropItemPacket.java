@@ -15,7 +15,7 @@ public class DropItemPacket extends SetItemPacket {
     public void send() {
         requester
                 .with(DO,"drop")
-                .end(playerName)
+                .with("player",playerName)
                 .to();
     }
 }

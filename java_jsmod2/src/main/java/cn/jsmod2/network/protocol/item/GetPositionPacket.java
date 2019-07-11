@@ -13,6 +13,6 @@ public class GetPositionPacket extends GetItemPacket {
 
     @Override
     public Vector send() {
-        return (Vector)(requester.with("field","position").end(playerName).get().get());
+        return (Vector)(requester.with("field","position").with("player",playerName).get().get());
     }
 }

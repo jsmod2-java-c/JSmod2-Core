@@ -20,7 +20,7 @@ public class SetItemPositionPacket extends SetItemPacket {
     public void send() {
         requester
                 .with(POSITION,position)
-                .end(playerName)
+                .with("player",playerName)
                 .to();
     }
 }

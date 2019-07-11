@@ -18,10 +18,9 @@ import java.io.Serializable;
 
 public abstract class Event implements Serializable,Cloneable {
 
-    private String eventName;
 
     public final String getEventName() {
-        return eventName == null ? this.getClass().getName() : eventName;
+        return this.getClass().getName();
     }
 
 

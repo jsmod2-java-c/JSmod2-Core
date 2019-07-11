@@ -76,22 +76,21 @@ package cn.jsmod2.core.protocol;
  * 	可以这样
  *        {XXXEvent对象}|player-item-playerName:xxx
  * 	可以实现注入
- * Java 尾请求
- *  一般和c#注入字段相互对应，对于玩家姓名的定位
- *  {XXXEvent对象}~name
  * 例子:
  *  SetPacket
  *  {
- *      "id":0x9f
+ *      "id":0x9f的10进制
  *      "type":"item"
  *      "do":"remove"
- *  }~mike
+ *      "player":"mike"
+ *  }
  *  GetPacket
  *  {
  *      "id":0x9f
  *      "type":"item"
  *      "field":"name"
- *  }~mike
+ *      "player":"mike"
+ *  }
  *数据包都必须加密为Base64字符串，并在加密后，结尾以;结尾
  */
 public abstract class DataPacket extends BinaryStream {

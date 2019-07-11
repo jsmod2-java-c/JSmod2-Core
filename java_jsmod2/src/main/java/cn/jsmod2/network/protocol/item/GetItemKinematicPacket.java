@@ -10,6 +10,7 @@ public class GetItemKinematicPacket extends GetItemPacket{
 
     @Override
     public Boolean send() {
-        return (Boolean)(requester.with("field","kinematic").end(playerName).get().get());
+        return (Boolean)(requester.with("field","kinematic")
+                .with("player",playerName).get().get());
     }
 }

@@ -10,6 +10,7 @@ package cn.jsmod2.core.plugin;
 
 
 
+
 import cn.jsmod2.core.ISimplePlayer;
 import cn.jsmod2.core.CommandSender;
 import cn.jsmod2.core.Console;
@@ -166,7 +167,8 @@ public class PluginManager {
                 for(MethodInvokeMapper mapper:methods){
                     Class[] classes = mapper.getMethod().getParameterTypes();
                     if(classes.length == 1){
-                        if(classes[0].getName().equals(event.getEventName())){
+                        //对父类支持
+                        if(isThisEvent(classes[0],event)){
                             invoker.add(mapper);
                         }
                     }else{
@@ -180,7 +182,10 @@ public class PluginManager {
             }
         });
     }
-
+    //event是监听的event对象 假如对象是PlayerDropEvent类型 那参数为PlayerItemEvent > PlayerEvent > Event都可以匹配
+    private static boolean isThisEvent(Class clz,Event event){
+        return clz.isInstance(event);
+    }
 
     public List<NativeCommand> getCommands(){
         return commands;

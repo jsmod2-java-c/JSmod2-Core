@@ -18,6 +18,7 @@ import java.io.Serializable;
 public class Item implements Cloneable, Serializable {
 
     //在字段注入使用
+    //playerName换成ItemId
     @PlayerName
     private String playerName;
 
