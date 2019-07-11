@@ -18,6 +18,7 @@ import cn.jsmod2.api.event.player.*;
 import cn.jsmod2.api.event.server.*;
 import cn.jsmod2.api.event.team.DecideRespawnQueueEvent;
 import cn.jsmod2.api.event.team.SetSCPConfigEvent;
+import cn.jsmod2.core.FileSystem;
 import cn.jsmod2.core.RegisterTemplate;
 import cn.jsmod2.core.annotations.RegisterMethod;
 import cn.jsmod2.network.ServerInitPacket;
@@ -124,7 +125,8 @@ public class Register extends RegisterTemplate {
     @RegisterMethod
     public void registerServerProperties(){
         super.registerServerProperties();
-
+        serverProperties.put(FileSystem.SMOD2_LOG_FILE,"");
+        serverProperties.put(FileSystem.SMOD2_LOG_INTERVAL,"2000");
     }
 
 

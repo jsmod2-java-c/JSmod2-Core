@@ -28,6 +28,10 @@ import java.util.*;
 
 public class FileSystem {
 
+    public static final String SMOD2_LOG_FILE = "smod2.log-file";
+
+    public static final String SMOD2_LOG_INTERVAL="smod2.log-file.interval";
+
     public static final String THIS_IP = "this.ip";
 
     public static final String SERVER_ENCODE = "encode";

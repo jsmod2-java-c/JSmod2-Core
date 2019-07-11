@@ -18,7 +18,6 @@ import cn.jsmod2.core.protocol.ControlPacket;
 import cn.jsmod2.core.protocol.Requester;
 import cn.jsmod2.core.script.EmeraldScriptVM;
 import cn.jsmod2.core.script.EnvPage;
-import cn.jsmod2.core.protocol.SetPacket;
 import cn.jsmod2.core.plugin.Plugin;
 import cn.jsmod2.core.plugin.PluginClassLoader;
 import cn.jsmod2.core.command.NativeCommand;
@@ -36,11 +35,12 @@ import java.io.*;
 import java.lang.reflect.Method;
 import java.net.*;
 import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.stream.Collectors;
 
 import static cn.jsmod2.core.FileSystem.*;
 import static cn.jsmod2.core.utils.Utils.getFullBytes;
@@ -136,6 +136,8 @@ public abstract class Server implements Closeable, Reloadable, Start {
 
         this.registerAll();
 
+
+
         this.opsFile = OpsFile.getOpsFile(this);
 
         this.gameServer = gServer;
@@ -190,12 +192,19 @@ public abstract class Server implements Closeable, Reloadable, Start {
         }else{
             this.pool.execute(new ListenerThreadTCP());
         }
+        String log = logListener();
+        if(log != null) {
+            this.pool.execute(new LogListener(log, Integer.parseInt(serverProp.getProperty(SMOD2_LOG_INTERVAL,"2000"))));
+        }
         this.pool.execute(new GithubConnectThread());
         //this.pool.execute(new ServerThread());
         this.serverLogInfo("the listener thread is starting!!!!");
 
+        //this.pool.execute(new Smod2LogThread());
         this.startSuccessTime = new Date().getTime();
     }
+
+
 
     public void sendPacket(final DataPacket packet){
         sendPacket(packet,false);
@@ -601,6 +610,118 @@ public abstract class Server implements Closeable, Reloadable, Start {
         }
     }
 
+    /**
+     * 监听smod2的log文件
+     * 一个线程监听，一个线程放行
+     */
+    @Deprecated
+    private class Smod2LogThread implements Runnable{
+        @Override
+        public void run() {
+            String fileName = serverProp.getProperty(SMOD2_LOG_FILE);
+            File file = new File(fileName);
+            if(file.exists()) {
+                try {
+                    BufferedReader reader = Utils.getReader(file);
+                    BlockingQueue<String> queue = new SynchronousQueue<>();
+                    scheduler.executeRunnable(()->{
+                        try {
+                            for (; ; ) {
+                                String message = reader.readLine();
+                                if (message != null) {
+                                    queue.put(message);
+                                }
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    });
+                    scheduler.executeRunnable(()->{
+                        for(;;) {
+                            try {
+                                String take = queue.take();
+                                log.info(take);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    /**
+     *
+     * @author https://crunchify.com
+     */
+    private static int crunchifyCounter = 0;
+    private class LogListener implements Runnable {
+
+        private int crunchifyRunEveryNSeconds;
+        private long lastKnownPosition = 0;
+        private boolean shouldIRun = true;
+        private File crunchifyFile;
+
+
+        public LogListener(String file,int myInterval) {
+            this.crunchifyRunEveryNSeconds = myInterval;
+            this.crunchifyFile = new File(file);
+        }
+
+        private void printLine(String message) {
+            try{
+                log.info(new String(message.getBytes("ISO-8859-1"),System.getProperty("file.encoding")));
+
+            }catch (UnsupportedEncodingException e){
+                e.printStackTrace();
+            }
+        }
+
+        public void stopRunning() {
+            shouldIRun = false;
+        }
+
+        public void run() {
+            try {
+                while (shouldIRun) {
+                    Thread.sleep(crunchifyRunEveryNSeconds);
+
+                    String log = logListener();
+
+                    if(!"same".equals(log)){
+                        if(log !=null) {
+                            crunchifyFile = new File(log);
+                        }
+
+                    }
+
+                    long fileLength = crunchifyFile.length();
+                    if (fileLength > lastKnownPosition) {
+                        // Reading and writing file
+                        RandomAccessFile readWriteFileAccess = new RandomAccessFile(crunchifyFile, "rw");
+                        readWriteFileAccess.seek(lastKnownPosition);
+                        String crunchifyLine;
+                        while ((crunchifyLine = readWriteFileAccess.readLine()) != null) {
+                            this.printLine(crunchifyLine);
+                            crunchifyCounter++;
+                        }
+                        lastKnownPosition = readWriteFileAccess.getFilePointer();
+                        readWriteFileAccess.close();
+                    } else {
+                        if (isDebug)
+                            this.printLine("Hmm.. Couldn't found new line after line # " + crunchifyCounter);
+                    }
+                }
+            } catch (Exception e) {
+                stopRunning();
+            }
+            if (isDebug)
+                this.printLine("Exit the program...");
+        }
+    }
 
     //new line reader
     public static ConsoleReader getLineReader() throws IOException{
@@ -646,6 +767,46 @@ public abstract class Server implements Closeable, Reloadable, Start {
 
     private void startConsoleCommand() throws IOException{
         Console.getConsole().commandInput();
+    }
+
+    private File[] beforeFile;
+    //TODO
+    private String logListener(){
+        String serverProps = serverProp.getProperty(SMOD2_LOG_FILE);
+        File file = new File(serverProps);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss");
+        if(file.exists()){
+            File[] files = file.listFiles();
+            if(files!=null) {
+                if(beforeFile == null){
+                    beforeFile = files;
+                }else{
+                    if(Arrays.asList(beforeFile).equals(Arrays.asList(files))){
+                        return "same";
+                    }
+                }
+                File lastFile = Arrays.stream(files)
+                        .filter(x->x.getName().endsWith(".log"))
+                        .sorted((x1,x2)->{
+                            try {
+                                String name1 = x1.getName().substring("Round".length()).trim();
+                                String name2 = x2.getName().substring("Round".length()).trim();
+                                Date date1 = format.parse(name1);
+                                Date date2 = format.parse(name2);
+
+                                return (int)(date2.getTime()-date1.getTime());
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
+                            return 0;
+                        }).collect(Collectors.toList()).get(0);
+                //Round 2019-07-10 08.47.31
+                return lastFile.toString();
+
+
+            }
+        }
+        return null;
     }
 
 }
