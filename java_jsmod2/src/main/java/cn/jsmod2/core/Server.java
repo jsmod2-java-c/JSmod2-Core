@@ -655,7 +655,7 @@ public abstract class Server implements Closeable, Reloadable, Start {
 
     /**
      *
-     * @author https://crunchify.com
+     * something find in https://crunchify.com
      */
     private static int crunchifyCounter = 0;
     private class LogListener implements Runnable {
