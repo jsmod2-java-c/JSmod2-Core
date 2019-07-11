@@ -686,6 +686,7 @@ public abstract class Server implements Closeable, Reloadable, Start {
 
         public void run() {
             try {
+                int count = 0;
                 while (shouldIRun) {
                     Thread.sleep(crunchifyRunEveryNSeconds);
 
@@ -705,7 +706,9 @@ public abstract class Server implements Closeable, Reloadable, Start {
                         readWriteFileAccess.seek(lastKnownPosition);
                         String crunchifyLine;
                         while ((crunchifyLine = readWriteFileAccess.readLine()) != null) {
-                            this.printLine(crunchifyLine);
+                            if(count!=0) {
+                                this.printLine(crunchifyLine);
+                            }
                             crunchifyCounter++;
                         }
                         lastKnownPosition = readWriteFileAccess.getFilePointer();
@@ -714,6 +717,7 @@ public abstract class Server implements Closeable, Reloadable, Start {
                         if (isDebug)
                             this.printLine("Hmm.. Couldn't found new line after line # " + crunchifyCounter);
                     }
+                    count++;
                 }
             } catch (Exception e) {
                 stopRunning();
