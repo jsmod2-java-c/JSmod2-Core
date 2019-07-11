@@ -656,6 +656,10 @@ public abstract class Server implements Closeable, Reloadable, Start {
     /**
      *
      * something find in https://crunchify.com
+     * 以下代码的产生来之不易，感谢
+     * JunHe友情提供代码地址
+     * 校长提供log文件格式
+     * GNX和菠萝协助解决问题
      */
     private static int crunchifyCounter = 0;
     private class LogListener implements Runnable {
