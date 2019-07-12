@@ -68,7 +68,7 @@ public class Response {
     }
 
     private byte[] encode(String protocol,Properties properties) throws UnsupportedEncodingException{
-        
+
         return Base64.getEncoder().encode(protocol.getBytes(properties.getProperty(FileSystem.SERVER_ENCODE)));
     }
 
