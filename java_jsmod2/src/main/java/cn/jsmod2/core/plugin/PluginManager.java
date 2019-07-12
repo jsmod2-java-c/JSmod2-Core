@@ -46,6 +46,8 @@ import java.util.*;
 
 public class PluginManager {
 
+    private Map<Plugin,Map<String,ConfigSetting>> settings = new HashMap<>();
+
     private Map<Listener, List<MethodInvokeMapper>> listenerMapper = new HashMap<>();
 
     private List<NativeCommand> commands = new ArrayList<>();
@@ -247,5 +249,9 @@ public class PluginManager {
             listenerMapper.remove(listener);
         }
         this.getPlugins().clear();
+    }
+
+    public Map<Plugin, Map<String, ConfigSetting>> getSettings() {
+        return settings;
     }
 }

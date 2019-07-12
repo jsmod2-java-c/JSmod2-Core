@@ -30,7 +30,7 @@ import java.util.Map;
 
 public abstract class PluginBase implements Plugin {
 
-    private Map<String,Object> config = new HashMap<>();
+    private Map<String,ConfigSetting> config = new HashMap<>();
 
     private boolean haveInit = false;
 
@@ -66,6 +66,7 @@ public abstract class PluginBase implements Plugin {
             this.classLoader = classLoader;
             this.version = version;
             this.haveInit = true;
+            this.getServer().getPluginManager().getSettings().put(this,config);
         }
     }
 
@@ -127,19 +128,20 @@ public abstract class PluginBase implements Plugin {
         if(!config.containsKey(key)){
             return "";
         }
-        return config.get(key);
+        ConfigSetting setting = config.get(key);
+        return setting.getValue()==null?setting.getDefaultValue():setting.getValue();
     }
 
-    public Object addConfig(String key,Object value,boolean trySet){
+    public Object addConfig(String key,ConfigSetting setting,boolean trySet){
         if(trySet){
             if(config.containsKey(key)){
                 return config.get(key);
             }
         }
-        return config.put(key,value);
+        return config.put(key,setting);
     }
 
-    public Object addConfig(String key,Object value){
+    public Object addConfig(String key,ConfigSetting value){
         return addConfig(key,value,false);
     }
 

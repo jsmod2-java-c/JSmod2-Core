@@ -44,15 +44,15 @@ import static cn.jsmod2.core.Server.START;
 public class Register extends RegisterTemplate {
 
 
-    public static final int MAX_EVENT_ID = 0x52;
+    static final int MAX_EVENT_ID = 0x52;
 
-    public static final int FIRST_EVENT = 0x01;
+    static final int FIRST_EVENT = 0x01;
 
-    public static final int SECOND_START_EVENT = 0x03;
+    static final int SECOND_START_EVENT = 0x03;
 
-    public static final int SERVER_COMMAND = 0x55;
+    static final int SERVER_COMMAND = 0x55;
 
-    public static final int PLAYER_COMMAND = 0x56;
+    static final int PLAYER_COMMAND = 0x56;
 
 
 

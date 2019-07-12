@@ -131,6 +131,20 @@ public class PluginClassLoader {
         return null;
     }
 
+    public void unloadPlugin(String name){
+        Plugin removed = null;
+        for(int i = 0;i<plugins.size();i++){
+            if(plugins.get(i).getPluginName().equals(name)){
+                removed = plugins.get(i);
+                break;
+            }
+        }
+        if(removed !=null)
+            plugins.remove(removed);
+        else
+            throw new PluginException("no such plugin");
+    }
+
     private Plugin loadPluginInfo(Object plugin,PluginFileVO vo,JarFile jarFile,URLClassLoader loader) throws Exception{
 
 
