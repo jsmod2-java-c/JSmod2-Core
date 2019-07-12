@@ -8,5 +8,30 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.api.map;
 
+import cn.jsmod2.core.annotations.UseForServerInit;
+import cn.jsmod2.core.math.Vector;
+
 public class PocketDimensionExit {
+
+    private PocketDimensionExitType exitType;
+
+    private Vector position;
+
+
+    public PocketDimensionExitType getExitType() {
+        return exitType;
+    }
+
+    public void setExitType(PocketDimensionExitType exitType) {
+        this.exitType = exitType;
+    }
+
+    public Vector getPosition() {
+        return position;
+    }
+
+    @UseForServerInit
+    public void setPosition(Vector position) {
+        this.position = position;
+    }
 }

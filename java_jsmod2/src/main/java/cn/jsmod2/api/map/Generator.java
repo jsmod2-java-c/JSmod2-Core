@@ -8,13 +8,15 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.api.map;
 
+import cn.jsmod2.api.Component;
+import cn.jsmod2.core.annotations.UseForServerInit;
 import cn.jsmod2.core.math.Vector;
 
 /**
  * @author magiclu550
  */
 
-public class Generator {
+public class Generator implements Component {
 
     private boolean open;
     private boolean locked;
@@ -31,53 +33,77 @@ public class Generator {
         }
     }
 
-
-
     public Object getComponent(){
           return null;
     }
 
+
     public boolean isOpen() {
         return open;
+    }
+
+    public void setOpen(boolean open) {
+        this.open = open;
     }
 
     public boolean isLocked() {
         return locked;
     }
 
-    public boolean isHasTablet() {
-        return hasTablet;
-    }
-
-    public boolean isEngaged() {
-        return engaged;
-    }
-
-    public float getStartTime() {
-        return startTime;
-    }
-
-    public float getTimeLeft() {
-        return timeLeft;
-    }
-
-    public Vector getPosition() {
-        return position;
-    }
-
-    public Room getRoom() {
-        return room;
-    }
-
+    @UseForServerInit
     public void setLocked(boolean locked) {
         this.locked = locked;
+    }
+
+    public boolean isHasTablet() {
+        return hasTablet;
     }
 
     public void setHasTablet(boolean hasTablet) {
         this.hasTablet = hasTablet;
     }
 
+    public boolean isEngaged() {
+        return engaged;
+    }
+
+    @UseForServerInit
+    public void setEngaged(boolean engaged) {
+        this.engaged = engaged;
+    }
+
+    public float getStartTime() {
+        return startTime;
+    }
+
+    @UseForServerInit
     public void setStartTime(float startTime) {
         this.startTime = startTime;
+    }
+
+    public float getTimeLeft() {
+        return timeLeft;
+    }
+
+    public void setTimeLeft(float timeLeft) {
+        this.timeLeft = timeLeft;
+    }
+
+    public Vector getPosition() {
+        return position;
+    }
+
+    @UseForServerInit
+    public void setPosition(Vector position) {
+        this.position = position;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    @UseForServerInit
+    public void setRoom(Room room) {
+        this.room = room;
     }
 }

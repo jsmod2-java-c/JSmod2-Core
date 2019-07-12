@@ -9,4 +9,21 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.api.player;
 
 public enum GrenadeType {
+
+    FRAG_GRENADE(0),
+    FLASHBANG(1);
+
+
+    private int type;
+    GrenadeType(int type){
+        this.type = type;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
 }

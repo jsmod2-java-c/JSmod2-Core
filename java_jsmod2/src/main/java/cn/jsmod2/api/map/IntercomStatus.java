@@ -8,5 +8,12 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.api.map;
 
-public class IntercomStatus {
+public enum IntercomStatus {
+
+    Muted,
+    Restarting,
+    Transmitting_Admin,
+    Transmitting_Bypass,
+    Transmitting,
+    Ready
 }

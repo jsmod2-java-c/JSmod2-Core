@@ -8,5 +8,28 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.api.map;
 
-public class TeslaGate {
+import cn.jsmod2.api.Component;
+import cn.jsmod2.core.math.Vector;
+
+public class TeslaGate implements Component {
+
+    private Vector triggerDistance;
+
+    private Vector position;
+
+
+    public void activate(){
+        //instant=false;
+        activate(false);
+    }
+
+    public void activate(boolean instant){
+
+    }
+
+    public Object getComponent(){
+        return null;
+    }
+
+
 }

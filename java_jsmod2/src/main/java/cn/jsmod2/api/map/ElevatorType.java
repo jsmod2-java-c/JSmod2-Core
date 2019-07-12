@@ -9,4 +9,25 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.api.map;
 
 public enum ElevatorType {
+
+    LiftA(0),
+    LiftB(1),
+    GateA(2),
+    GateB(3),
+    WarheadRoom(4),
+    SCP049Chamber(5);
+
+    private int type;
+
+    ElevatorType(int type){
+        this.type = type;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
 }

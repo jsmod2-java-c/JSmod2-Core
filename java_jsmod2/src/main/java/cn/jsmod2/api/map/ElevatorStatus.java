@@ -8,5 +8,10 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.api.map;
 
-public class ElevatorStatus {
+public enum ElevatorStatus {
+
+    Up,
+    Down,
+    Moving
+
 }

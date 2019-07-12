@@ -32,12 +32,10 @@ public class Map{
     public boolean warheadDetonated;
     public boolean LCZDecontaminated;
 
-    //对于条件获得物品，将全部物品穷举出来，之后进行逻辑判断
-    //C#端完成
     public List<Item> getItems(ItemType type,boolean world_only){
         return null;
     }
-    //随机getSpawnPoints方法的值
+
     private Vector getRandomSpawnPoint(Role role){
         List<Vector> vectors = getSpawnPoints(role);
         return vectors.get(new Random().nextInt(vectors.size()));
