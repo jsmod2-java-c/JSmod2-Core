@@ -5,7 +5,7 @@ public class GetItemKinematicPacket extends GetItemPacket{
     public static final int ID = 0x5d;
 
     public GetItemKinematicPacket() {
-        super(0x5d,Boolean.class);
+        super(ID,Boolean.class);
     }
 
     @Override

@@ -7,7 +7,7 @@ public class SetItemKinematicPacket extends SetItemPacket {
     public static final int ID = 0x5a;
 
     public SetItemKinematicPacket() {
-        super(0x5a);
+        super(ID);
     }
 
     private static final String KINEMATIC = "kinematic";

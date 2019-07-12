@@ -5,7 +5,7 @@ public class GetNumPlayersPacket extends GetServerPacket {
     public static final int ID = 0x62;
 
     public GetNumPlayersPacket() {
-        super(0x62, GetRoundPacket.class);
+        super(ID, GetRoundPacket.class);
     }
 
     @Override

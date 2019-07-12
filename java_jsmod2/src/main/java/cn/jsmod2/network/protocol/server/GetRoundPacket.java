@@ -8,7 +8,7 @@ public class GetRoundPacket extends GetPacket {
     public static final int ID = 0x61;
 
     public GetRoundPacket() {
-        super(0x61, Round.class);
+        super(ID, Round.class);
     }
 
     @Override

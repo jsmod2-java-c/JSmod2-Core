@@ -5,7 +5,7 @@ public class GetMaxPlayersPacket extends GetServerPacket{
     public static final int ID = 0x64;
 
     public GetMaxPlayersPacket() {
-        super(0x64, Integer.class);
+        super(ID, Integer.class);
     }
 
     @Override

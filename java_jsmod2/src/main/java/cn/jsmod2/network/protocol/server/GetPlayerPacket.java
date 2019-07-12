@@ -10,7 +10,7 @@ public class GetPlayerPacket extends GetServerPacket {
 
 
     public GetPlayerPacket() {
-        super(0x63, Player.class);
+        super(ID, Player.class);
     }
 
     @Override

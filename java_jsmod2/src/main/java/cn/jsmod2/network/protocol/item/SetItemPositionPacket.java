@@ -9,7 +9,7 @@ public class SetItemPositionPacket extends SetItemPacket {
 
 
     public SetItemPositionPacket() {
-        super(0x5b);
+        super(ID);
     }
 
     private static final String POSITION = "position";

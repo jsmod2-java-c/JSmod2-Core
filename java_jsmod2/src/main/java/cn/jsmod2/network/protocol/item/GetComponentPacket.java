@@ -8,7 +8,7 @@ public class GetComponentPacket extends GetItemPacket {
     public static final int ID = 0x5c;
 
     public GetComponentPacket() {
-        super(0x5c, Item.class);
+        super(ID, Item.class);
     }
 
     @Override

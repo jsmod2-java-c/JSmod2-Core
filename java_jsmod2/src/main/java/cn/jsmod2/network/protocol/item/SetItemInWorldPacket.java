@@ -7,7 +7,7 @@ public class SetItemInWorldPacket extends SetItemPacket {
     public static final int ID = 0x59;
 
     public SetItemInWorldPacket() {
-        super(0x59);
+        super(ID);
     }
 
     private static final String INWORLD = "inWorld";

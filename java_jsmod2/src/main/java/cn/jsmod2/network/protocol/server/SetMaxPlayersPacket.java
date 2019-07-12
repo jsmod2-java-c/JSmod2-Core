@@ -2,10 +2,11 @@ package cn.jsmod2.network.protocol.server;
 
 public class SetMaxPlayersPacket extends SetServerPacket {
 
+    public static final int ID = 0x65;
     public int maxPlayers;
 
     public SetMaxPlayersPacket() {
-        super(0x65);
+        super(ID);
     }
 
     @Override

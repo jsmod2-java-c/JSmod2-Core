@@ -7,7 +7,7 @@ public class GetPortPacket extends GetPacket {
     public static final int ID = 0x5f;
 
     public GetPortPacket() {
-        super(0x5f, Integer.class);
+        super(ID, Integer.class);
     }
 
     @Override
