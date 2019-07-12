@@ -40,6 +40,8 @@ import java.util.zip.ZipEntry;
 
 public class PluginClassLoader {
 
+    public static final String JSMOD2_PACKAGE = "cn.jsmod2";
+
     private PluginManager manager;
 
     private List<Plugin> plugins = new ArrayList<>();
@@ -91,7 +93,7 @@ public class PluginClassLoader {
                     }
                 }
                 Object plugin;
-                if(!vo.getMain_class().startsWith("cn.jsmod2")) {
+                if(!vo.getMain_class().startsWith(JSMOD2_PACKAGE)) {
 
                     plugin = classLoader.loadClass(vo.getMain_class()).newInstance();
                 }else{
@@ -108,7 +110,7 @@ public class PluginClassLoader {
                     String name = entry1.getName();
                     if(name.endsWith(".class")){
                         String mainName = name.substring(0,name.lastIndexOf(".")).replace("/",".");
-                        if(mainName.startsWith("cn.jsmod2")) {
+                        if(mainName.startsWith(JSMOD2_PACKAGE)) {
                             Utils.getMessageSender().error("the main class could not start with 'cn.jsmod2'");
                             continue;
                         }
