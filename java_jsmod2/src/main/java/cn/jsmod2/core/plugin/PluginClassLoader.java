@@ -8,9 +8,6 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.core.plugin;
 
-import cn.jsmod2.ServerRunner;
-import cn.jsmod2.api.event.NativeJoinListener;
-import cn.jsmod2.command.TPSCommand;
 import cn.jsmod2.core.Server;
 import cn.jsmod2.core.annotations.EnableRegister;
 import cn.jsmod2.core.annotations.Main;
@@ -18,8 +15,10 @@ import cn.jsmod2.core.command.Command;
 import cn.jsmod2.core.command.NativeCommand;
 import cn.jsmod2.core.event.Listener;
 import cn.jsmod2.core.ex.MainClassErrorException;
+import cn.jsmod2.core.ex.PluginException;
 import cn.jsmod2.core.log.ILogger;
 import cn.jsmod2.core.utils.PluginFileVO;
+import cn.jsmod2.core.utils.Utils;
 
 import java.io.File;
 import java.io.InputStream;
@@ -91,9 +90,13 @@ public class PluginClassLoader {
                         plugins.remove(plu);
                     }
                 }
+                Object plugin;
+                if(!vo.getMain_class().startsWith("cn.jsmod2")) {
 
-                Object plugin = classLoader.loadClass(vo.getMain_class()).newInstance();
-
+                    plugin = classLoader.loadClass(vo.getMain_class()).newInstance();
+                }else{
+                    throw new PluginException("the main class could not start with 'cn.jsmod2'");
+                }
 
                 return loadPluginInfo(plugin,vo,file,classLoader);
 
@@ -104,7 +107,12 @@ public class PluginClassLoader {
                     JarEntry entry1 = entries.nextElement();
                     String name = entry1.getName();
                     if(name.endsWith(".class")){
-                        Class<?> pluginClass = classLoader.loadClass(name.substring(0,name.lastIndexOf(".")).replace("/","."));
+                        String mainName = name.substring(0,name.lastIndexOf(".")).replace("/",".");
+                        if(mainName.startsWith("cn.jsmod2")) {
+                            Utils.getMessageSender().error("the main class could not start with 'cn.jsmod2'");
+                            continue;
+                        }
+                        Class<?> pluginClass = classLoader.loadClass(mainName);
                         Main main = pluginClass.getAnnotation(Main.class);
                         if(main!=null){
                             PluginFileVO vo = new PluginFileVO(main.name(),pluginClass.getName(),main.description(),main.version());
