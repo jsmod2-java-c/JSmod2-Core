@@ -9,6 +9,8 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.core.plugin;
 
 import cn.jsmod2.core.Server;
+import cn.jsmod2.core.command.Command;
+import cn.jsmod2.core.event.Listener;
 import cn.jsmod2.core.log.ILogger;
 import cn.jsmod2.core.utils.Utils;
 import cn.jsmod2.core.utils.config.Config;
@@ -16,6 +18,8 @@ import cn.jsmod2.core.utils.config.ConfigQueryer;
 import cn.jsmod2.core.utils.config.ConfigType;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * all of the plugin main-classes must extend it
@@ -25,6 +29,8 @@ import java.io.File;
 
 
 public abstract class PluginBase implements Plugin {
+
+    private Map<String,Object> config = new HashMap<>();
 
     private boolean haveInit = false;
 
@@ -115,5 +121,49 @@ public abstract class PluginBase implements Plugin {
             Config config = ConfigQueryer.getInstance(this.dataFolder+"/config.yml",false, ConfigType.YAML);
             config.save();
         });
+    }
+
+    public Object getConfig(String key){
+        if(!config.containsKey(key)){
+            return "";
+        }
+        return config.get(key);
+    }
+
+    public Object addConfig(String key,Object value,boolean trySet){
+        if(trySet){
+            if(config.containsKey(key)){
+                return config.get(key);
+            }
+        }
+        return config.put(key,value);
+    }
+
+    public Object addConfig(String key,Object value){
+        return addConfig(key,value,false);
+    }
+
+    public void info(String message){
+        this.getServer().getLogger().info(message);
+    }
+
+    public void error(String message){
+        this.getServer().getLogger().error(message);
+    }
+
+    public void debug(String message){
+        this.getServer().getLogger().debug(message);
+    }
+
+    public void warn(String message){
+        this.getServer().getLogger().warn(message);
+    }
+
+    public void registerEvents(Listener listener){
+        this.getServer().getPluginManager().registerEvents(listener,this);
+    }
+
+    public void registerCommand(Command command){
+        this.getServer().getPluginManager().registerCommand(command);
     }
 }

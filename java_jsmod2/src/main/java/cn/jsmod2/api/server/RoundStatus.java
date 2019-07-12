@@ -8,5 +8,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.api.server;
 
-public class RoundStats {
+import cn.jsmod2.api.ApiId;
+
+public class RoundStatus extends ApiId {
 }

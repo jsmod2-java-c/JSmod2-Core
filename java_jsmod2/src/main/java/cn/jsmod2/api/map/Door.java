@@ -8,10 +8,11 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.api.map;
 
+import cn.jsmod2.api.ApiId;
 import cn.jsmod2.core.annotations.UseForServerInit;
 import cn.jsmod2.core.math.Vector;
 
-public class Door {
+public class Door extends ApiId {
 
     private boolean open;
 

@@ -8,6 +8,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.api.map;
 
+import cn.jsmod2.api.ApiId;
 import cn.jsmod2.api.Component;
 import cn.jsmod2.core.annotations.UseForServerInit;
 import cn.jsmod2.core.math.Vector;
@@ -16,7 +17,7 @@ import cn.jsmod2.core.math.Vector;
  * @author magiclu550
  */
 
-public class Generator implements Component {
+public class Generator extends ApiId implements Component {
 
     private boolean open;
     private boolean locked;

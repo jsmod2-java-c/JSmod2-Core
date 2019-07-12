@@ -8,9 +8,10 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.api.server;
 
+import cn.jsmod2.api.ApiId;
 import cn.jsmod2.core.annotations.UseForServerInit;
 
-public class Connection {
+public class Connection extends ApiId {
 
     private String ipAddress;
 

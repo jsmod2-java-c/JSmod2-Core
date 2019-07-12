@@ -8,6 +8,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.api.map;
 
+import cn.jsmod2.api.ApiId;
 import cn.jsmod2.core.math.Vector;
 
 
@@ -15,7 +16,7 @@ import cn.jsmod2.core.math.Vector;
  * @author magiclu550
  */
 
-public class Room {
+public class Room extends ApiId {
 
     private ZoneType zoneType;
     private RoomType roomType;

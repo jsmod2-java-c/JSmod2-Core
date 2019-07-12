@@ -9,7 +9,9 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.api.team;
 
 
-public class TeamRole {
+import cn.jsmod2.api.ApiId;
+
+public class TeamRole extends ApiId {
 
     private Team team;
 

@@ -9,18 +9,17 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.api.item;
 
 
+import cn.jsmod2.api.ApiId;
 import cn.jsmod2.core.annotations.PlayerName;
 import cn.jsmod2.core.math.Vector;
 import cn.jsmod2.network.protocol.item.*;
 
 import java.io.Serializable;
 
-public class Item implements Cloneable, Serializable {
+public class Item extends ApiId implements Cloneable, Serializable {
 
     //在字段注入使用
     //playerName换成ItemId
-    @PlayerName
-    private String playerName;
 
     private boolean inWord;
 
