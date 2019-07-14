@@ -4,7 +4,7 @@
 ###### smod2 java edition [based on smod2]
 > about
 
-use (jsmod2 protocol-4.5)[https://github.com/jsmod2-java-c/Jsmod2_protocol.git)
+use [jsmod2 protocol-4.5](https://github.com/jsmod2-java-c/Jsmod2_protocol.git)
 
 `Java server mod2` is a java extension 
 server developed based on `smod2` and proxy 
