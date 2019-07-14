@@ -132,3 +132,21 @@ public class MainClass extends PluginBase{
 } 
 
 ```
+6. New Api can register the listener and command of jsmod2's own accord；
+
+```
+package Package;
+
+
+@Main(name="exmaple")
+
+@EnableRegister
+public class Main extends PluginBase{
+    public void onLoad(){
+    }
+    public void onEnable(){
+    }
+    public void onDisable(){
+    }
+}
+```
