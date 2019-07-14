@@ -6,7 +6,7 @@
 
 `Java server mod2` is a java extension 
 server developed based on `smod2` and proxy 
-handler (`ProxyHandler`)[0]. 
+handler (`ProxyHandler`)[ProxyHandler](https://github.com/jsmod2-java-c/ProxyHandler) 
 
 The role of this server is to extend the 
 language of SCPSL so that Java can also 
@@ -150,4 +150,4 @@ public class Main extends PluginBase{
     }
 }
 ```
-[0](https://github.com/jsmod2-java-c/ProxyHandler)
+
