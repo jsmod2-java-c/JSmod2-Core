@@ -6,7 +6,7 @@
 
 `Java server mod2` is a java extension 
 server developed based on `smod2` and proxy 
-sdn (`SCP DataNetwork`). 
+handler (`ProxyHandler`). 
 
 The role of this server is to extend the 
 language of SCPSL so that Java can also 
