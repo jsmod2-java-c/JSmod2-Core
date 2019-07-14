@@ -134,7 +134,7 @@ public class MainClass extends PluginBase{
 ```
 6. New Api can register the listener and command of jsmod2's own accord；
 
-```
+```java
 package Package;
 
 
