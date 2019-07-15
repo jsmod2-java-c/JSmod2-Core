@@ -4,9 +4,13 @@
 ###### smod2 java edition [based on smod2]
 > about
 
+use [jsmod2 protocol-4.5](https://github.com/jsmod2-java-c/Jsmod2_protocol.git)
+
+use [smod2_C#](https://github.com/Grover-c13/Smod2)
+
 `Java server mod2` is a java extension 
 server developed based on `smod2` and proxy 
-sdn (`SCP DataNetwork`). 
+handler ([ProxyHandler](https://github.com/jsmod2-java-c/ProxyHandler))
 
 The role of this server is to extend the 
 language of SCPSL so that Java can also 
@@ -132,3 +136,22 @@ public class MainClass extends PluginBase{
 } 
 
 ```
+6. New Api can register the listener and command of jsmod2's own accord；
+
+```java
+package Package;
+
+
+@Main(name="exmaple")
+
+@EnableRegister
+public class Main extends PluginBase{
+    public void onLoad(){
+    }
+    public void onEnable(){
+    }
+    public void onDisable(){
+    }
+}
+```
+
