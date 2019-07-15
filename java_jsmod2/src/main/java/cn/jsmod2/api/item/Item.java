@@ -74,7 +74,8 @@ public class Item extends ApiId implements Cloneable, Serializable {
         packet.kinematic = kinematic;
         packet.send();
     }
-
+    /** 这个方法起不了作用 */
+    @Deprecated
     public void setInWord(boolean inWord) {
         this.inWord = inWord;
         SetItemInWorldPacket packet = new SetItemInWorldPacket();

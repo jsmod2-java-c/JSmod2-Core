@@ -1,7 +1,7 @@
 package cn.jsmod2.network.protocol.item;
 
 
-
+@Deprecated
 public class SetItemInWorldPacket extends SetItemPacket {
 
     public static final int ID = 0x59;
