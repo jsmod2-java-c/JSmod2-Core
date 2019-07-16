@@ -3,7 +3,7 @@
 # JSMOD2
 ###### smod2 java edition [based on smod2]
 
-@CopyRight
+> copyright: jsmod2 LICENSE
 ```java
 /*
 Jsmod2 is a java-based scpsl server initiated by jsmod2.cn.
