@@ -2,11 +2,25 @@
 ![BANNER](6DC1237F3087F7B13213246693E6B81E.jpg)
 # JSMOD2
 ###### smod2 java edition [based on smod2]
+
+> copyright: jsmod2 LICENSE
+```java
+/*
+Jsmod2 is a java-based scpsl server initiated by jsmod2.cn.
+It needs to rely on smod2 and proxy. jsmod2 is an open source
+free plugin that is released under the GNU license. Please read
+the GNU open source license before using the software. To understand
+the appropriateness, if infringement, will be handled in accordance
+with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">that<a>
+ */
+```
 > about
 
 use [jsmod2 protocol-4.5](https://github.com/jsmod2-java-c/Jsmod2_protocol.git)
 
 use [smod2_C#](https://github.com/Grover-c13/Smod2)
+
+[design about jsmod2](https://github.com/jsmod2-java-c/jsmod2-design)
 
 `Java server mod2` is a java extension 
 server developed based on `smod2` and proxy 
