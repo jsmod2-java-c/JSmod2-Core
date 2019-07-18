@@ -1,5 +1,6 @@
 package cn.jsmod2.core.script;
 
+import cn.jsmod2.core.Console;
 import cn.jsmod2.core.ex.TypeErrorException;
 import cn.jsmod2.core.script.function.*;
 import org.apache.commons.io.FileUtils;
@@ -99,7 +100,7 @@ public class EmeraldScriptVM {
                 }
                 i--;
             }
-            parse(getFunc.toString());
+            Console.getConsole().runConsoleCommandWithEmerald(getFunc.toString());
         }
     }
 
@@ -443,6 +444,7 @@ public class EmeraldScriptVM {
         vars_func.putAll(vars);
 
         if(function instanceof NativeFunction){
+            getTrueString(args);
             Object object = ((NativeFunction) function).execute(args,vars_func);
             return object==null?"NULL":object;
         }
@@ -638,11 +640,20 @@ public class EmeraldScriptVM {
             //字符串'${}ssadads'+''
             NativeFunction f = (NativeFunction)(this.functions.get("+"));
             lo = f.execute(new String[]{lo}).toString();
+
             dArgs[i] = lo;
 
             i++;
         }
         return dArgs;
+    }
+
+    private void getTrueString(String[] args){
+        for(int i = 0;i<args.length;i++){
+            if(args[i].startsWith("'")&&args[i].endsWith("'")){
+                args[i] = args[i].substring(args[i].indexOf("'")+1,args[i].lastIndexOf("'"));
+            }
+        }
     }
 
     private static String getStringVal(String globalVar){

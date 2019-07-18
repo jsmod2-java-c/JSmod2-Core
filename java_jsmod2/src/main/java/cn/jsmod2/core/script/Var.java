@@ -42,7 +42,7 @@ public class Var extends Memory{
         }else{
             String val = value.getClass().getName();
             if(val.equals("java.lang.String")){
-                return "'"+val+"'";
+                return "STRING";
             }
             return val;
         }

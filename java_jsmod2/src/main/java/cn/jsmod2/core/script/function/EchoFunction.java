@@ -14,7 +14,8 @@ public class EchoFunction extends NativeFunction {
         for(Object o:objects){
             builder.append(o.toString());
         }
-        System.out.println(builder.toString().replaceAll("'",""));
+
+        System.out.println(builder);
         return null;
     }
 }

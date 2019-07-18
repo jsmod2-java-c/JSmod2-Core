@@ -70,37 +70,10 @@ public class Console extends CommandSender{
                 command = Server.getLineReader().readLine(">");
             }
             try{
-                if(EmeraldScriptVM.matchPattern(command)){
-                    StringBuilder builder = new StringBuilder(command);
-                    if(command.matches(Memory.matches.get("startfunc"))){
-                        while(!builder.toString().endsWith(":end")){
-                            Utils.getMessageSender().info("\njsmod2-func>");
-                            String otherCommand = Server.getScanner().nextLine();
-                            builder.append(otherCommand);
-                        }
-                    }
-                    if(command.matches(Memory.matches.get("start"))){
-                        while (!builder.toString().endsWith("}")){
-                            Utils.getMessageSender().info("\njsmod2-func>");
-                            String otherCommand = Server.getScanner().nextLine();
-                            builder.append(otherCommand);
-                        }
-                    }
-                    if(EnvPage.isWrite()){
-                        stream.println(builder.toString());
-                        stream.flush();
-                    }
-                    String method = Server.getSender().getServer().serverProp.getProperty(FileSystem.EMERALD_COMPILER,"java");
-
-                    //目前java版属于最稳定版本，其他不建议使用
-                    if(method.equals("c++")){
-                        Utils.getMessageSender().info("RETURN_THAT:emerald."+ EmeraldScript.parse(builder.toString()));
-                    }else{
-                        Utils.getMessageSender().info("RETURN_THAT:emerald."+ EmeraldScript.java_parse(builder.toString()));
-                    }
-
-                }else{
-                    runConsoleCommand(command);
+                StringBuilder builder = runConsoleCommandWithEmerald(command);
+                if(EnvPage.isWrite()){
+                    stream.println(builder.toString());
+                    stream.flush();
                 }
             }catch (Exception e){
                 if(e instanceof ServerRuntimeException){
@@ -117,6 +90,40 @@ public class Console extends CommandSender{
                 stream.close();
             }
         }
+    }
+
+    public StringBuilder runConsoleCommandWithEmerald(String command){
+        StringBuilder builder = new StringBuilder(command);
+        if(EmeraldScriptVM.matchPattern(command)){
+
+            if(command.matches(Memory.matches.get("startfunc"))){
+                while(!builder.toString().endsWith(":end")){
+                    Utils.getMessageSender().info("\njsmod2-func>");
+                    String otherCommand = Server.getScanner().nextLine();
+                    builder.append(otherCommand);
+                }
+            }
+            if(command.matches(Memory.matches.get("start"))){
+                while (!builder.toString().endsWith("}")){
+                    Utils.getMessageSender().info("\njsmod2-func>");
+                    String otherCommand = Server.getScanner().nextLine();
+                    builder.append(otherCommand);
+                }
+            }
+
+            String method = Server.getSender().getServer().serverProp.getProperty(FileSystem.EMERALD_COMPILER,"java");
+
+            //目前java版属于最稳定版本，其他不建议使用
+            if(method.equals("c++")){
+                Utils.getMessageSender().info("RETURN_THAT:emerald."+ EmeraldScript.parse(builder.toString()));
+            }else{
+                Utils.getMessageSender().info("RETURN_THAT:emerald."+ EmeraldScript.java_parse(builder.toString()));
+            }
+
+        }else{
+            runConsoleCommand(command);
+        }
+        return builder;
     }
 
     public static Console getConsole(){
