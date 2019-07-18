@@ -10,7 +10,7 @@
 
 <AnchorPane fx:id="pane" prefHeight="412.0" prefWidth="621.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cn.jsmod2.panel.StartController">
    <children>
-      <ToolBar prefHeight="40.0" prefWidth="621.0" AnchorPane.bottomAnchor="365.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ToolBar prefHeight="40.0" prefWidth="300.0" AnchorPane.bottomAnchor="365.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <Button id="console" mnemonicParsing="false" text="Console">
                <font>
