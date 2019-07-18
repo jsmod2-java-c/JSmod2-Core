@@ -57,6 +57,7 @@ public class Register extends RegisterTemplate {
 
 
 
+
     /**
      * 注册语言时，首先按照标准格式添加语言
      * 参考resources格式

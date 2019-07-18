@@ -12,6 +12,9 @@ import cn.jsmod2.core.utils.LogFormat;
 import cn.jsmod2.core.utils.LogType;
 import org.apache.log4j.Logger;
 
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+
 import static org.fusesource.jansi.Ansi.Color.*;
 
 
@@ -37,6 +40,8 @@ import static org.fusesource.jansi.Ansi.Color.*;
 
 
 public class ServerLogger implements ILogger{
+
+    private BlockingQueue<String> queue = new LinkedBlockingQueue<>();
 
     private static ServerLogger log;
 
@@ -112,25 +117,36 @@ public class ServerLogger implements ILogger{
 
     @Override
     public void debug(String message, String prefix, String suffix) {
-        logger.debug(LogFormat.format(message,"DEBUG",GREEN,prefix)+suffix);
+        String msg = LogFormat.format(message,"DEBUG",GREEN,prefix)+suffix;
+        logger.debug(msg);
     }
 
     @Override
     public void error(String message, String prefix, String suffix) {
-        logger.error(LogFormat.format(message,"ERROR",RED,prefix)+suffix);
+        String msg = LogFormat.format(message,"ERROR",RED,prefix)+suffix;
+        queue.offer(msg);
+        logger.error(msg);
     }
 
     @Override
     public void info(String message, String prefix, String suffix) {
-        logger.info(LogFormat.format(message,"INFO",YELLOW,prefix)+suffix);
+        String msg = LogFormat.format(message,"INFO",YELLOW,prefix)+suffix;
+        queue.offer(msg);
+        logger.info(msg);
     }
 
     @Override
     public void warn(String message, String prefix, String suffix) {
-        logger.warn(LogFormat.format(message,"WARN",RED,prefix)+suffix);
+        String msg = LogFormat.format(message,"WARN",RED,prefix)+suffix;
+        queue.offer(msg);
+        logger.warn(msg);
     }
 
     public static ServerLogger getLogger() {
         return log;
+    }
+
+    public BlockingQueue<String> getQueue() {
+        return queue;
     }
 }

@@ -9,8 +9,15 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2;
 
 import cn.jsmod2.core.Application;
+import cn.jsmod2.core.FileSystem;
+import cn.jsmod2.core.Server;
 import cn.jsmod2.core.annotations.ServerApplication;
 import cn.jsmod2.core.utils.Utils;
+import cn.jsmod2.panel.RegisterController;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -22,7 +29,8 @@ import java.util.concurrent.CountDownLatch;
 
 @ServerApplication(DefaultServer.class)
 @SpringBootApplication
-public class Jsmod2 {
+@RegisterController("cn.jsmod2.ui")
+public class Jsmod2 extends javafx.application.Application {
 
     public static void main(String[]args){
         Utils.TryCatch(()->{
@@ -32,7 +40,23 @@ public class Jsmod2 {
                 latch.countDown();
             }).start();
             latch.await();
-            Application.run(Jsmod2.class,args);
+            CountDownLatch latch1 = new CountDownLatch(1);
+            new Thread(()->{
+                latch1.countDown();
+                Application.run(Jsmod2.class,args);
+            }).start();
+            latch1.await();
+            launch(args);
+            System.exit(0);
         });
+
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("/ui/start.fxml"));
+        primaryStage.setTitle("Jsmod2-Control-Panel");
+        primaryStage.setScene(new Scene(root, 625, 500));
+        primaryStage.show();
     }
 }
