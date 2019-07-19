@@ -1,4 +1,5 @@
 ![LICENSE](https://img.shields.io/badge/license-GPL-blue.svg)
+######## emmm,who is author that has the copyright about this image,can talk with me
 ![BANNER](6DC1237F3087F7B13213246693E6B81E.jpg)
 # JSMOD2
 ###### smod2 java edition [based on smod2]
