@@ -193,7 +193,7 @@ pom.xml add:
 ```
 and the dependencies
 
-```
+```xml
 
 <dependency>
   <groupId>cn.jsmod2</groupId>
