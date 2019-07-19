@@ -2,7 +2,7 @@
   <artifact type="jar" build-on-make="true" name="test-jsmod2">
     <output-path>$PROJECT_DIR$/out/artifacts/test_jsmod2</output-path>
     <root id="archive" name="test-jsmod2.jar">
-      <element id="dir-copy" path="$PROJECT_DIR$/java_jsmod2/src/main/resources/META-INF" />
+      <element id="dir-copy" path="$PROJECT_DIR$/JSMod2Starter/src/main/resources/META-INF" />
       <element id="module-output" name="jsmod2" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3.jar" path-in-jar="/" />

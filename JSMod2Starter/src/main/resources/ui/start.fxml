@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="pane" prefHeight="412.0" prefWidth="621.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cn.jsmod2.panel.StartController">
+   <children>
+      <ToolBar prefHeight="40.0" prefWidth="300.0" AnchorPane.bottomAnchor="365.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <Button id="console" mnemonicParsing="false" text="Console">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button id="server" mnemonicParsing="false" onAction="#onServer" prefHeight="35.0" prefWidth="92.0" text="Server">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button id="players" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" text="Players">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button id="game" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" text="Game">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+        </items>
+      </ToolBar>
+   </children>
+</AnchorPane>
