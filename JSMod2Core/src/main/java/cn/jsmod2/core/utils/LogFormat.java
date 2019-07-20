@@ -11,7 +11,8 @@ package cn.jsmod2.core.utils;
 import org.fusesource.jansi.Ansi;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import static org.fusesource.jansi.Ansi.Color.*;
 import static org.fusesource.jansi.Ansi.ansi;
@@ -26,10 +27,10 @@ import static org.fusesource.jansi.Ansi.ansi;
 
 public class LogFormat {
 
-    private static SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss ");
+    private static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
     public static Ansi format(String message, String type, Ansi.Color color,String prefix){
-        return ansi().eraseScreen().a(prefix).fg(MAGENTA).a(format.format(new Date())).fg(DEFAULT).a("[").fg(color).a(type).fg(DEFAULT).a("\t]").fg(BLUE).a(" "+message).reset();
+        return ansi().eraseScreen().a(prefix).fg(MAGENTA).a(dateTimeFormatter.format(LocalDate.now())).fg(DEFAULT).a("[").fg(color).a(type).fg(DEFAULT).a("\t]").fg(BLUE).a(" "+message).reset();
     }
 
     public static Ansi textFormat(String message, Ansi.Color color){

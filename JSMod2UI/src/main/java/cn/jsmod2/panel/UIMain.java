@@ -10,6 +10,11 @@ public class UIMain {
 
     public UIMain(String pack){
         this.beans = scanAll(pack);
+        beans.forEach((k,v)->{
+            if(v instanceof IUiController){
+                ((IUiController) v).init();
+            }
+        });
     }
 
     private Map<String,Object> scanAll(String pack){

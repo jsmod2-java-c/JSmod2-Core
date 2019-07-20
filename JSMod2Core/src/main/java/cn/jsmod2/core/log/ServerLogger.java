@@ -12,6 +12,7 @@ import cn.jsmod2.core.utils.LogFormat;
 import cn.jsmod2.core.utils.LogType;
 import org.apache.log4j.Logger;
 
+import java.io.IOException;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -40,7 +41,7 @@ import static org.fusesource.jansi.Ansi.Color.*;
 
 
 public class ServerLogger implements ILogger{
-
+    private ConsoleOutputStream consoleOutputStream = new ConsoleOutputStream();
     private BlockingQueue<String> queue = new LinkedBlockingQueue<>();
 
     private static ServerLogger log;
@@ -50,7 +51,7 @@ public class ServerLogger implements ILogger{
     static {
         log = new ServerLogger();
     }
-
+    @Override
     public void log(LogType logType, String message) {
         Integer level = logType.getLevel();
 
@@ -82,15 +83,15 @@ public class ServerLogger implements ILogger{
     public void error(String message) {
         error(message,"");
     }
-
+    @Override
     public void debug(String message) {
         debug(message,"");
     }
-
+    @Override
     public void info(String message) {
         info(message,"");
     }
-
+    @Override
     public void warn(String message) {
         warn(message,"");
     }
@@ -124,21 +125,33 @@ public class ServerLogger implements ILogger{
     @Override
     public void error(String message, String prefix, String suffix) {
         String msg = LogFormat.format(message,"ERROR",RED,prefix)+suffix;
-        queue.offer(msg);
+        try {
+            consoleOutputStream.write(msg.getBytes());
+        } catch (IOException ignored) {
+        }
+//        queue.offer(msg);
         logger.error(msg);
     }
 
     @Override
     public void info(String message, String prefix, String suffix) {
         String msg = LogFormat.format(message,"INFO",YELLOW,prefix)+suffix;
-        queue.offer(msg);
+        try {
+            consoleOutputStream.write(msg.getBytes());
+        } catch (IOException ignored) {
+        }
+//        queue.offer(msg);
         logger.info(msg);
     }
 
     @Override
     public void warn(String message, String prefix, String suffix) {
         String msg = LogFormat.format(message,"WARN",RED,prefix)+suffix;
-        queue.offer(msg);
+        try {
+            consoleOutputStream.write(msg.getBytes());
+        } catch (IOException ignored) {
+        }
+//        queue.offer(msg);
         logger.warn(msg);
     }
 
@@ -148,5 +161,9 @@ public class ServerLogger implements ILogger{
 
     public BlockingQueue<String> getQueue() {
         return queue;
+    }
+
+    public ConsoleOutputStream getConsoleOutputStream() {
+        return consoleOutputStream;
     }
 }
