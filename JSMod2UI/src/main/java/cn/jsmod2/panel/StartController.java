@@ -10,6 +10,9 @@ import javafx.scene.text.Text;
 
 import java.util.List;
 
+/**
+ * @author GNX-Susanoo
+ */
 @UIController
 public class StartController implements IUiController {
     private ServerLogger serverLogger = ServerLogger.getLogger();
