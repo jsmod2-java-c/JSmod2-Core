@@ -1,0 +1,27 @@
+
+core依赖
+emerald
+
+ui依赖
+core
+
+web依赖
+core
+
+command依赖
+core
+
+emerald依赖
+core
+
+emerald依赖
+core
+
+api依赖
+core protocol
+
+protocol依赖
+core api
+
+starter依赖
+core ui command protocol api web
