@@ -194,22 +194,6 @@ pom.xml add:
 and the dependencies
 
 ```xml
-
-<dependency>
-  <groupId>cn.jsmod2</groupId>
-  <artifactId>jsmod2-command</artifactId>
-  <version>1.0.1</version>
-</dependency>
-<dependency>
-  <groupId>cn.jsmod2</groupId>
-  <artifactId>jsmod2-starter</artifactId>
-  <version>1.0.1</version>
-</dependency>
-<dependency>
-  <groupId>cn.jsmod2</groupId>
-  <artifactId>jsmod2-core</artifactId>
-  <version>1.0.0</version>
-</dependency>
 <dependency>
   <groupId>cn.jsmod2</groupId>
   <artifactId>jsmod2-api</artifactId>
@@ -217,23 +201,8 @@ and the dependencies
 </dependency>
 <dependency>
   <groupId>cn.jsmod2</groupId>
-  <artifactId>jsmod2-emerald</artifactId>
-  <version>1.0.1</version>
-</dependency>
-<dependency>
-  <groupId>cn.jsmod2</groupId>
-  <artifactId>jsmod2-protocol</artifactId>
-  <version>1.0.1</version>
-</dependency>
-<dependency>
-  <groupId>cn.jsmod2</groupId>
-  <artifactId>jsmod2-ui</artifactId>
-  <version>1.0.1</version>
-</dependency>
-<dependency>
-  <groupId>cn.jsmod2</groupId>
-  <artifactId>jsmod2-web</artifactId>
-  <version>1.0.1</version>
+  <artifactId>jsmod2-core</artifactId>
+  <version>1.0.2</version>
 </dependency>
 ```
 
