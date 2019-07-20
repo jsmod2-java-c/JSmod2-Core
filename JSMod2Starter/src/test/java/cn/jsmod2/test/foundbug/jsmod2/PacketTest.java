@@ -6,7 +6,6 @@ import cn.jsmod2.core.protocol.GetPacket;
 import cn.jsmod2.core.protocol.Requester;
 import cn.jsmod2.core.protocol.Response;
 import cn.jsmod2.core.utils.Utils;
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

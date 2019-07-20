@@ -15,6 +15,13 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
+    <repositories>
+        <repository>
+            <id>nexus</id>
+            <name>Team Neux Repository</name><url>http://mapi.noyark.net:8081/nexus/content/groups/public/</url>
+        </repository>
+    </repositories>
+
     <build>
         <plugins>
             <plugin>
@@ -57,7 +64,7 @@
         <dependency>
             <groupId>cn.jsmod2</groupId>
             <artifactId>jsmod2-core</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.2</version>
         </dependency>
         <dependency>
             <groupId>cn.jsmod2</groupId>
@@ -66,17 +73,5 @@
         </dependency>
     </dependencies>
 
-    <repositories>
-        <repository>
-            <id>nexus</id>
-            <name>Team Neux Repository</name><url>http://mapi.noyark.net:8081/nexus/content/groups/public/</url>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>nexus</id>
-            <name>Team Neux Repository</name>
-            <url>http://mapi.noyark.net:8081/nexus/content/groups/public/</url>
-        </pluginRepository>
-    </pluginRepositories>
+
 </project>

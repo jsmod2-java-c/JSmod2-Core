@@ -11,6 +11,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: cn.jsmod2:jsmod2-emerald:1.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.scala-lang:scala-compiler:2.13.0" level="project" />
     <orderEntry type="library" name="Maven: org.scala-lang:scala-reflect:2.13.0" level="project" />
     <orderEntry type="library" name="Maven: com.alibaba:fastjson:1.2.47" level="project" />

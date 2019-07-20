@@ -23,6 +23,7 @@
       <module name="JSMod2Command" target="1.8" />
       <module name="JSMod2Core" target="1.8" />
       <module name="JSMod2Emerald" target="1.8" />
+      <module name="JSMod2Exceptions" target="1.5" />
       <module name="JSMod2Protocol" target="1.8" />
       <module name="JSMod2Starter" target="1.8" />
       <module name="JSMod2UI" target="1.8" />
@@ -32,7 +33,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="JSMod2Protocol" options="-parameters" />
-      <module name="JSMod2Starter" options="-parameters" />
+      <module name="JSMod2Starter" options="" />
       <module name="JSMod2UI" options="-parameters" />
       <module name="JSMod2Web" options="-parameters" />
       <module name="commons" options="-parameters" />

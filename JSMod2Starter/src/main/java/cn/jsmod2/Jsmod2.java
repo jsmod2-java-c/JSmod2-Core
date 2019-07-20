@@ -12,13 +12,6 @@ import cn.jsmod2.core.Application;
 import cn.jsmod2.core.annotations.ServerApplication;
 import cn.jsmod2.core.utils.Utils;
 import cn.jsmod2.panel.RegisterController;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -31,15 +24,14 @@ import java.util.concurrent.CountDownLatch;
 //4.a链接SteamCMD 子工程
 //5.emerald 脚本 子工程
 @ServerApplication(DefaultServer.class)
-@SpringBootApplication
 @RegisterController("cn.jsmod2.ui")
-public class Jsmod2 extends javafx.application.Application {
+public class Jsmod2 {
 
     public static void main(String[]args){
         Utils.TryCatch(()->{
             CountDownLatch latch = new CountDownLatch(1);
             new Thread(()->{
-                SpringApplication.run(Jsmod2.class,args);
+                Starter.run(args);
                 latch.countDown();
             }).start();
             latch.await();
@@ -49,16 +41,9 @@ public class Jsmod2 extends javafx.application.Application {
                 Application.run(Jsmod2.class,args);
             }).start();
             latch1.await();
-            launch(args);
+            UIStarter.run(args);
         });
-
     }
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/ui/start.fxml"));
-        primaryStage.setTitle("Jsmod2-Control-Panel");
-        primaryStage.setScene(new Scene(root, 1000, 500));
-        primaryStage.show();
-    }
+
 }

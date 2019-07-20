@@ -19,7 +19,7 @@
         <dependency>
             <groupId>cn.jsmod2</groupId>
             <artifactId>jsmod2-core</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.2</version>
         </dependency>
         <dependency>
             <groupId>cn.jsmod2</groupId>

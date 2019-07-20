@@ -25,7 +25,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: cn.jsmod2:jsmod2-core:1.0.0" level="project" />
+    <orderEntry type="library" name="Maven: cn.jsmod2:jsmod2-core:1.0.2" level="project" />
     <orderEntry type="library" name="Maven: cn.jsmod2:jsmod2-protocol:1.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-data-rest:2.1.6.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-rest-webmvc:3.1.9.RELEASE" level="project" />

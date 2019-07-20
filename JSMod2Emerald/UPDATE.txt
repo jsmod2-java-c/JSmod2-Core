@@ -1,0 +1,7 @@
+脚本引擎部分
+尽量的要隔离jsmod2
+
+修改了
+Emerald
+
+Starter

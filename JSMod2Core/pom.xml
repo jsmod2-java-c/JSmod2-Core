@@ -18,6 +18,10 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
+        <repository>
+            <id>nexus</id>
+            <name>Team Neux Repository</name><url>http://mapi.noyark.net:8081/nexus/content/groups/public/</url>
+        </repository>
     </repositories>
 
     <build>
@@ -60,7 +64,11 @@
 
 
     <dependencies>
-
+        <dependency>
+            <groupId>cn.jsmod2</groupId>
+            <artifactId>jsmod2-emerald</artifactId>
+            <version>1.0.1</version>
+        </dependency>
         <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala-compiler</artifactId>
