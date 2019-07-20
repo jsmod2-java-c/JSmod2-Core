@@ -35,6 +35,8 @@ import static org.fusesource.jansi.Ansi.Color.*;
  *
  * @author magiclu550 #(code) for scpsl
  *
+ * @author GNX-Susanoo
+ *
  * @version jsmod 001
  *
  */

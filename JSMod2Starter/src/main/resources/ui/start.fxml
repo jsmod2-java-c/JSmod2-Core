@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<!--
+    !author GNX-Susanoo
+    !author MagicLu550
+-->
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 

@@ -23,6 +23,7 @@ import static org.fusesource.jansi.Ansi.ansi;
  * 可以给予控制台消息颜色
  *
  * @author magiclu550 #(code) for scpsl
+ * @author GNX-Susanoo
  */
 
 public class LogFormat {
