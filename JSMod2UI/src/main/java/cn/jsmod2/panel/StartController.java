@@ -36,6 +36,7 @@ public class StartController implements IUiController {
 
     @Override
     public void init() {
+        serverLogger.debug("UI initialize");
         serverLogger.getConsoleOutputStream().setTextArea(consoleTextArea);
     }
 
