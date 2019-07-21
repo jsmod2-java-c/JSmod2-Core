@@ -1,6 +1,5 @@
 package cn.jsmod2.panel;
 
-import cn.jsmod2.core.log.ConsoleOutputStream;
 import cn.jsmod2.core.log.ServerLogger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,10 +8,11 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * @author GNX-Susanoo
+ */
 @UIController
 public class StartController implements IUiController {
     private ServerLogger serverLogger = ServerLogger.getLogger();
