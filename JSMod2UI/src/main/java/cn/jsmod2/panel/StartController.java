@@ -11,6 +11,7 @@ import javafx.scene.text.Text;
 import java.util.List;
 
 /**
+ * @author magiclu550
  * @author GNX-Susanoo
  */
 @UIController

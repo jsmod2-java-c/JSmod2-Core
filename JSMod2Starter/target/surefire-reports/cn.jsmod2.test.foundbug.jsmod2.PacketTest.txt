@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: cn.jsmod2.test.foundbug.jsmod2.PacketTest
--------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2,661.676 s - in cn.jsmod2.test.foundbug.jsmod2.PacketTest
