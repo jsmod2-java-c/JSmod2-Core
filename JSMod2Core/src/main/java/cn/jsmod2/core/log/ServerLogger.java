@@ -128,7 +128,7 @@ public class ServerLogger implements ILogger{
     public void error(String message, String prefix, String suffix) {
         String msg = LogFormat.format(message,"ERROR",RED,prefix)+suffix;
         try {
-            consoleOutputStream.write(msg.getBytes());
+            consoleOutputStream.write(msg);
         } catch (IOException ignored) {
         }
 //        queue.offer(msg);
@@ -139,7 +139,7 @@ public class ServerLogger implements ILogger{
     public void info(String message, String prefix, String suffix) {
         String msg = LogFormat.format(message,"INFO",YELLOW,prefix)+suffix;
         try {
-            consoleOutputStream.write(msg.getBytes());
+            consoleOutputStream.write(msg);
         } catch (IOException ignored) {
         }
 //        queue.offer(msg);
@@ -150,7 +150,7 @@ public class ServerLogger implements ILogger{
     public void warn(String message, String prefix, String suffix) {
         String msg = LogFormat.format(message,"WARN",RED,prefix)+suffix;
         try {
-            consoleOutputStream.write(msg.getBytes());
+            consoleOutputStream.write(msg);
         } catch (IOException ignored) {
         }
 //        queue.offer(msg);

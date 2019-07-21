@@ -32,6 +32,29 @@ public class ConsoleOutputStream extends OutputStream {
         }
     }
 
+    @Override
+    public void write(byte[] b) throws IOException {
+        if (textArea == null) {
+            return;
+        }
+        textArea.appendText(new String(b));
+        cleanUpLin(textArea.getParagraphs());
+        if (scroll) {
+            textArea.setScrollTop(Double.MAX_VALUE);
+        }
+    }
+
+    public void write(String string) throws IOException {
+        if (textArea == null) {
+            return;
+        }
+        textArea.appendText(string);
+        cleanUpLin(textArea.getParagraphs());
+        if (scroll) {
+            textArea.setScrollTop(Double.MAX_VALUE);
+        }
+    }
+
     private void cleanUpLin(ObservableList<CharSequence> charSequencesList) {
         if (charSequencesList.size() > lineHeight + 1) {
             textArea.deleteText(0, charSequencesList.get(0).length() + 1);
