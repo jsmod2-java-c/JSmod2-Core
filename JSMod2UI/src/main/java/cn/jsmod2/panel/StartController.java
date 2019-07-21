@@ -14,8 +14,14 @@ import java.util.List;
  * @author magiclu550
  * @author GNX-Susanoo
  */
-@UIController
+
 public class StartController implements IUiController {
+
+    public StartController(){
+        ServerLogger.getLogger().info("start the ui");
+        this.init();
+    }
+
     private ServerLogger serverLogger = ServerLogger.getLogger();
     private volatile boolean consoleRun = false;
     private volatile boolean serverRun = false;

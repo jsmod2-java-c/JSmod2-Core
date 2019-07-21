@@ -11,7 +11,6 @@ package cn.jsmod2;
 import cn.jsmod2.core.Application;
 import cn.jsmod2.core.annotations.ServerApplication;
 import cn.jsmod2.core.utils.Utils;
-import cn.jsmod2.panel.RegisterController;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -24,7 +23,6 @@ import java.util.concurrent.CountDownLatch;
 //4.a链接SteamCMD 子工程
 //5.emerald 脚本 子工程
 @ServerApplication(DefaultServer.class)
-@RegisterController("cn.jsmod2.ui")
 public class Jsmod2 {
 
     public static void main(String[]args){

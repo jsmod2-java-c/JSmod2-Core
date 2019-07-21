@@ -6,7 +6,11 @@
     <groupId>cn.jsmod2</groupId>
     <artifactId>JSMod2Starter</artifactId>
     <version>1.0.BETA</version>
-
+    <parent>
+        <groupId>cn.jsmod2</groupId>
+        <artifactId>jsmod2-core</artifactId>
+        <version>1.0.3</version>
+    </parent>
 
     <properties>
         <cn.jsmod2.core>1.0.BETA</cn.jsmod2.core>
