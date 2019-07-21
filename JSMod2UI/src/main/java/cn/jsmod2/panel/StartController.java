@@ -30,7 +30,7 @@ public class StartController implements IUiController {
     @FXML
     public TextField lineHeightTextField;
     @FXML
-    public CheckBox scollCheck;
+    public CheckBox scollCheckBox;
     @FXML
     public Button lineHeightSettingButton;
 
@@ -111,7 +111,7 @@ public class StartController implements IUiController {
     }
 
     @FXML
-    public void scollCheck(ActionEvent actionEvent) {
-        serverLogger.getConsoleOutputStream().setScroll(!scollCheck.isSelected());
+    private void scollCheck(ActionEvent actionEvent) {
+        serverLogger.getConsoleOutputStream().setScroll(!scollCheckBox.isSelected());
     }
 }
