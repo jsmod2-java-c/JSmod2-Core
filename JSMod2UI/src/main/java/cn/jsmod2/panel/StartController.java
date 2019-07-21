@@ -15,11 +15,10 @@ import java.util.List;
  * @author GNX-Susanoo
  */
 
-public class StartController implements IUiController {
+public class StartController {
 
     public StartController(){
         ServerLogger.getLogger().info("start the ui");
-        this.init();
     }
 
     private ServerLogger serverLogger = ServerLogger.getLogger();
@@ -41,8 +40,8 @@ public class StartController implements IUiController {
     @FXML
     public Button lineHeightSettingButton;
 
-    @Override
-    public void init() {
+    @FXML
+    private void initialize(){
         serverLogger.debug("UI initialize");
         serverLogger.getConsoleOutputStream().setTextArea(consoleTextArea);
     }
