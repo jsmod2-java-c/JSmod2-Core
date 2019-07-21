@@ -17,7 +17,7 @@
                      <children>
                         <TextArea fx:id="consoleTextArea" layoutY="29.0" prefHeight="354.0" prefWidth="621.0" />
                         <TextField fx:id="lineHeightTextField" layoutX="14.0" layoutY="3.0" text="100" />
-                        <CheckBox fx:id="scollCheck" layoutX="321.0" layoutY="6.0" mnemonicParsing="false" text="滚动设置" onAction="#scollCheck"/>
+                        <CheckBox fx:id="scollCheckBox" layoutX="321.0" layoutY="6.0" mnemonicParsing="false" text="滚动设置" onAction="#scollCheck"/>
                         <Button fx:id="lineHeightSettingButton" layoutX="182.0" layoutY="3.0" mnemonicParsing="false" text="设置日志留存长度" onAction="#settingLineHeight" />
                      </children>
                   </AnchorPane>
