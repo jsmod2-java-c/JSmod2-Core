@@ -9,6 +9,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.core.command;
 
 import cn.jsmod2.core.CommandSender;
+import cn.jsmod2.core.Powers;
 
 /**
  * 用于服务器自带指令的注册，该指令在重启服务器时不会被销毁，也不会
@@ -32,7 +33,7 @@ public abstract class NativeCommand {
     }
     public NativeCommand(String commandName,String description){
         this.commandName = commandName;
-        this.power = "all";
+        this.power = Powers.ALL;
         this.description = description;
     }
 

@@ -171,38 +171,5 @@ public class Main extends PluginBase{
 }
 ```
 
-> About Import Project
 
-pom.xml add:
-```xml
-
-<repositories>
-        <repository>
-            <id>nexus</id>
-            <name>Team Neux Repository</name><url>http://mapi.noyark.net:8081/nexus/content/groups/public/</url>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>nexus</id>
-            <name>Team Neux Repository</name>
-            <url>http://mapi.noyark.net:8081/nexus/content/groups/public/</url>
-        </pluginRepository>
-    </pluginRepositories>
-
-```
-and the dependencies
-
-```xml
-<dependency>
-  <groupId>cn.jsmod2</groupId>
-  <artifactId>jsmod2-api</artifactId>
-  <version>1.0.1</version>
-</dependency>
-<dependency>
-  <groupId>cn.jsmod2</groupId>
-  <artifactId>jsmod2-core</artifactId>
-  <version>1.0.2</version>
-</dependency>
-```
 
