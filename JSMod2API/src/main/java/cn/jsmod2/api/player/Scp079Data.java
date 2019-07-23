@@ -11,4 +11,11 @@ package cn.jsmod2.api.player;
 import cn.jsmod2.core.ApiId;
 
 public class Scp079Data extends ApiId {
+
+    private float exp;
+
+    private int expToLevelUp;
+
+
+
 }

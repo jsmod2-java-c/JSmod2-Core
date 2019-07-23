@@ -18,7 +18,6 @@ public class PocketDimensionExit extends ApiId {
 
     private Vector position;
 
-
     public PocketDimensionExitType getExitType() {
         return exitType;
     }
