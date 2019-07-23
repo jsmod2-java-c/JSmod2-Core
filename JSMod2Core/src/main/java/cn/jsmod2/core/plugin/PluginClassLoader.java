@@ -186,6 +186,7 @@ public class PluginClassLoader {
                         if(register.listener()) {
                             if (Arrays.asList(mostSuperClass(clz).getInterfaces()).contains(Listener.class) && !exclusionsListener.contains(clz)) {
                                 Object obj = clz.newInstance();
+                                logger.info("loading listener");
                                 manager.registerEvents((Listener) obj, pluginObject);
                             }
                         }

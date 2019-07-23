@@ -121,10 +121,9 @@ public class PluginManager {
         }
         Utils.TryCatch(()->{
             Class<?> type = listener.getClass();
-            Listener listenerInstance = (Listener)type.newInstance();
             Method[] methods = type.getDeclaredMethods();
             for(Method method:methods) {
-                addMethod(method,listenerInstance);
+                addMethod(method,listener);
             }
         });
     }
