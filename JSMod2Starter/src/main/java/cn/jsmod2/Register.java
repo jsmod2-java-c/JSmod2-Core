@@ -97,8 +97,8 @@ public class Register extends RegisterTemplate {
     public void registerPacket(){
         packets.put(ServerInitPacket.class,ServerInitPacket.ID);
         packets.put(CommandRegisterPacket.class,CommandRegisterPacket.ID);
-        packets.put(ServerCommandPacket.class,Register.SERVER_COMMAND);
-        packets.put(PlayerCommandPacket.class,Register.PLAYER_COMMAND);
+        packets.put(ServerCommandPacket.class,SERVER_COMMAND);
+        packets.put(PlayerCommandPacket.class,PLAYER_COMMAND);
         packets.put(DropItemPacket.class,DropItemPacket.ID);
         packets.put(RemoveItemPacket.class,RemoveItemPacket.ID);
         packets.put(SetItemInWorldPacket.class,SetItemInWorldPacket.ID);
@@ -115,7 +115,9 @@ public class Register extends RegisterTemplate {
         packets.put(GetMaxPlayersPacket.class,GetMaxPlayersPacket.ID);
         packets.put(AdminQueryAdminSet.class,AdminQueryAdminSet.ID);
         packets.put(SetMaxPlayersPacket.class,SetMaxPlayersPacket.ID);
-        //~0x66 最大
+        packets.put(GetItemInWorldPacket.class,GetItemInWorldPacket.ID);
+        packets.put(GetItemTypePacket.class,GetItemTypePacket.ID);
+        //~104 最大 下一个105
         putPackets();
     }
 

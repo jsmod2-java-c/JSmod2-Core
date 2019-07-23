@@ -20,15 +20,17 @@ public class Item extends ApiId implements Cloneable, Serializable {
     //在字段注入使用
     //playerName换成ItemId
 
-    private boolean inWord;
+    private boolean inWorld;
 
     private ItemType itemType;
 
-    public boolean isInWord() {
-        return inWord;
+    public boolean isInWorld() {
+        inWorld = new GetItemInWorldPacket().send();
+        return inWorld;
     }
 
     public ItemType getItemType() {
+        itemType = new GetItemTypePacket().send();
         return itemType;
     }
 
@@ -75,8 +77,8 @@ public class Item extends ApiId implements Cloneable, Serializable {
     }
     /** 这个方法起不了作用 */
     @Deprecated
-    public void setInWord(boolean inWord) {
-        this.inWord = inWord;
+    public void setInWorld(boolean inWord) {
+        this.inWorld = inWord;
         SetItemInWorldPacket packet = new SetItemInWorldPacket();
         packet.playerName = playerName;
         packet.setInWorld = inWord;
