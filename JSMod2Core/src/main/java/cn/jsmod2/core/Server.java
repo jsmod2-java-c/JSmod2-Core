@@ -130,7 +130,12 @@ public abstract class Server implements Closeable, Reloadable, Start {
 
         this.scheduler = new Scheduler();
 
-        this.serverfolder = new File(System.getProperty("user.dir")).getParentFile();
+        String file = Server.class.getProtectionDomain().getCodeSource().getLocation().getFile();
+        file = file.substring(0,file.lastIndexOf("/")+1);
+
+        this.serverfolder = new File(file);
+
+        this.log.info("Server's folder"+serverfolder);
 
         this.registerTemplates(registers,this);
 
@@ -143,6 +148,7 @@ public abstract class Server implements Closeable, Reloadable, Start {
         this.gameServer = gServer;
 
         this.pluginDir = getFileSystem().pluginDir(server);
+
 
         this.serverProp = getFileSystem().serverProperties(server);
 
