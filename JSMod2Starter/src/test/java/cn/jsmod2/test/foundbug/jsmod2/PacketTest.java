@@ -31,7 +31,7 @@ public class PacketTest {
         Socket socket = new Socket();
         socket.bind(new InetSocketAddress("127.0.0.1",19938));
         socket.connect(new InetSocketAddress("127.0.0.1",19935));
-        socket.getOutputStream().write(Base64.getEncoder().encode("45-{\"name\":{\"a\":11}}".getBytes()));
+        socket.getOutputStream().write(Base64.getEncoder().encode("45-{}".getBytes()));
         socket.close();
     }
 
