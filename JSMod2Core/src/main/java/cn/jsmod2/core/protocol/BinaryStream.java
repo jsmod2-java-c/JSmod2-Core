@@ -125,7 +125,8 @@ public abstract class BinaryStream {
     private String getDefaultJson(byte[] data) throws Exception{
         byte[] packetBytes = Base64.decodeBase64(data);
         String json = new String(packetBytes,properties.getProperty("decode"));
-        json = json.substring((id+"-").length());
+        ServerLogger.getLogger().debug("JSON_B::"+json);
+        json = json.substring(json.indexOf("-")+1);
         if(json.contains("~")) {
             json = json.substring(0, json.indexOf("~"));
         }
@@ -135,10 +136,11 @@ public abstract class BinaryStream {
     public <T> T dataObjectDecode(byte[] data,Class<T> clz){
         try{
             String json = getDefaultJson(data);
-            ServerLogger.getLogger().debug("JSON::"+json);
+
             //{main-object}|player-xxx:xxx|team-class:xxx
             String[] props = splitJson(json);
             json = props[0];
+            ServerLogger.getLogger().debug("JSON_N::"+json);
             Object o = JSONObject.parseObject(json,clz);
             String[] fields = new String[props.length-1];
             if(fields.length>0) {

@@ -15,6 +15,7 @@ import org.junit.runner.RunWith;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Base64;
 
 @ServerApplication(DefaultServer.class)
 public class PacketTest {
@@ -28,8 +29,9 @@ public class PacketTest {
     @Test
     public void eventSend() throws Exception{
         Socket socket = new Socket();
-        socket.connect(new InetSocketAddress("127.0.0.1",19938));
-        socket.getOutputStream().write("11-{}".getBytes());
+        socket.bind(new InetSocketAddress("127.0.0.1",19938));
+        socket.connect(new InetSocketAddress("127.0.0.1",19935));
+        socket.getOutputStream().write(Base64.getEncoder().encode("45-{\"name\":{\"a\":11}}".getBytes()));
         socket.close();
     }
 

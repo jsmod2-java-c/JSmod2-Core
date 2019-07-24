@@ -178,7 +178,11 @@ public class PluginManager {
                 }
                 invoker.sort(Comparator.comparing(MethodInvokeMapper::getPriority));
                 for(MethodInvokeMapper method:invoker){
-                    method.getMethod().invoke(listener,event);
+                    try {
+                        method.getMethod().invoke(listener, event);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                 }
             }
         });

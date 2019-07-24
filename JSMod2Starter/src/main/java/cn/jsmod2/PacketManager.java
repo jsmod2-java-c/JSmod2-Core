@@ -17,6 +17,7 @@ import cn.jsmod2.core.protocol.command.CommandVO;
 import cn.jsmod2.network.command.*;
 import cn.jsmod2.api.player.Player;
 
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -69,6 +70,7 @@ public class PacketManager extends Manager {
                 events.putAll(template.getEvents());
             }
             if(events.containsKey(id)){
+                //System.out.println(new String(Base64.getDecoder().decode(new String(bytes))));
                 callEventByPacket(id,bytes);
             }
             CommandVO vo_get = getCommandVO(id,message,Register.SERVER_COMMAND,Register.PLAYER_COMMAND,ServerVO.class,PlayerVO.class);

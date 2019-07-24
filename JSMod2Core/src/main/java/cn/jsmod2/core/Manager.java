@@ -29,6 +29,7 @@ public abstract class Manager implements Cloneable{
 
     public void callEventByPacket(int id, byte[] bytes){
 
+
         EventBinaryStream stream = new EventBinaryStream();
 
         Map<Integer, Class<? extends Event>> events = new HashMap<>();
