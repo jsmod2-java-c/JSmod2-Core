@@ -16,6 +16,7 @@ import cn.jsmod2.core.ex.ProtocolException;
 import cn.jsmod2.core.FileSystem;
 import cn.jsmod2.core.log.ServerLogger;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.codec.binary.Base64;
 
@@ -169,14 +170,19 @@ public abstract class BinaryStream {
     private Object invokeGetMethod(Object o,String field) throws Exception{
         StringBuilder builder = new StringBuilder((field.charAt(0)+"").toUpperCase());
         String first = "get"+builder.append(field.substring(1));
-        return getMethod(o.getClass(),field);
+        return getMethod(o.getClass(),first);
     }
 
     private void invokeSetMethod(Object o,String field,String value) throws Exception{
         Field field1 = getField(o.getClass(),field);
         field1.setAccessible(true);
         Class<?> clz = field1.getType();
-        Object object = JSON.parseObject(value,clz);
+        Object object;
+        try {
+            object = JSON.parseObject(value, clz);
+        }catch (JSONException e){
+            object = value;
+        }
         field1.set(o,object);
     }
 
