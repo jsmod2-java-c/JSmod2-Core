@@ -41,11 +41,6 @@ public class Player079StartSpeakerEvent extends PlayerEvent {
         this.apDrain = apDrain;
     }
 
-    /** java-bean */
-    @UseForServerInit
-    public void setRoom(Room room) {
-        this.room = room;
-    }
 
     public Player079StartSpeakerEvent(Player player, Room room, boolean allow, float apDrain) {
         super(player);

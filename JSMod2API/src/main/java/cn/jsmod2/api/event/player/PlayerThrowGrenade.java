@@ -37,31 +37,16 @@ public class PlayerThrowGrenade extends PlayerEvent {
         return GrenadeType;
     }
 
-    /** java-bean */
-    @UseForServerInit
-    public void setGrenadeType(ItemType grenadeType) {
-        GrenadeType = grenadeType;
-    }
 
     public Vector getDirection() {
         return direction;
     }
 
-    /** java-bean */
-    @UseForServerInit
-    public void setDirection(Vector direction) {
-        this.direction = direction;
-    }
 
     public boolean isSlowThrow() {
         return slowThrow;
     }
 
-    /** java-bean */
-    @UseForServerInit
-    public void setSlowThrow(boolean slowThrow) {
-        this.slowThrow = slowThrow;
-    }
 
 
 }

@@ -30,8 +30,4 @@ public class PocketDimensionExit extends ApiId {
         return position;
     }
 
-    @UseForServerInit
-    public void setPosition(Vector position) {
-        this.position = position;
-    }
 }

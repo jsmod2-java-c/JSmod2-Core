@@ -32,19 +32,11 @@ public class Elevator extends ApiId implements Component {
         return elevatorType;
     }
 
-    @UseForServerInit
-    public void setElevatorType(ElevatorType elevatorType) {
-        this.elevatorType = elevatorType;
-    }
 
     public ElevatorStatus getElevatorStatus() {
         return elevatorStatus;
     }
 
-    @UseForServerInit
-    public void setElevatorStatus(ElevatorStatus elevatorStatus) {
-        this.elevatorStatus = elevatorStatus;
-    }
 
     public boolean isLocked() {
         return locked;

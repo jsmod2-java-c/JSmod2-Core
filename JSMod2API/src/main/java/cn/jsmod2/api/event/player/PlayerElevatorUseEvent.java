@@ -49,16 +49,6 @@ public class PlayerElevatorUseEvent extends PlayerEvent {
     public void setAllowUse(boolean allowUse) {
         AllowUse = allowUse;
     }
-    /** java-bean */
-    @UseForServerInit
-    public void setElevator(Elevator elevator) {
-        Elevator = elevator;
-    }
-    /** java-bean */
-    @UseForServerInit
-    public void setElevatorPosition(Vector elevatorPosition) {
-        ElevatorPosition = elevatorPosition;
-    }
 
     public boolean isAllowUse() {
         return AllowUse;

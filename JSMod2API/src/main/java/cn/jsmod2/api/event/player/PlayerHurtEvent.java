@@ -33,10 +33,6 @@ public class PlayerHurtEvent extends PlayerEvent {
     public PlayerHurtEvent(){
 
     }
-    /** java-bean */
-    public void setAttacker(Player attacker) {
-        this.attacker = attacker;
-    }
 
     public Player getAttacker() {
         return attacker;

@@ -57,31 +57,16 @@ public class Player extends CommandSender implements ISimplePlayer {
         return ipAddress;
     }
 
-    /** java bean */
-    @UseForServerInit
-    public void setIpAddress(String ipAddress) {
-        this.ipAddress = ipAddress;
-    }
 
     public int getPlayerId() {
         return playerId;
     }
 
-    /** java bean */
-    @UseForServerInit
-    public void setPlayerId(int playerId) {
-        this.playerId = playerId;
-    }
 
     public String getStreamId() {
         return streamId;
     }
 
-    /** java bean */
-    @UseForServerInit
-    public void setStreamId(String streamId) {
-        this.streamId = streamId;
-    }
 
     public RadioStatus getRadioStatus() {
         return radioStatus;
@@ -95,31 +80,16 @@ public class Player extends CommandSender implements ISimplePlayer {
         return overwatchMode;
     }
 
-    /** java bean */
-    @UseForServerInit
-    public void setOverwatchMode(boolean overwatchMode) {
-        this.overwatchMode = overwatchMode;
-    }
 
     public boolean isDoNotTrack() {
         return doNotTrack;
     }
 
-    /** java bean */
-    @UseForServerInit
-    public void setDoNotTrack(boolean doNotTrack) {
-        this.doNotTrack = doNotTrack;
-    }
 
     public Scp079Data getScp079Data() {
         return scp079Data;
     }
 
-    /** java bean */
-    @UseForServerInit
-    public void setScp079Data(Scp079Data scp079Data) {
-        this.scp079Data = scp079Data;
-    }
 
     public void kill(DamageType type){
 

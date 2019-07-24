@@ -29,11 +29,6 @@ public class RoundEndEvent extends ServerEvent {
         return round;
     }
 
-    /** java-bean */
-    @UseForServerInit
-    public void setRound(Round round) {
-        this.round = round;
-    }
 
     public ROUND_END_STATUS getStatus() {
         return status;

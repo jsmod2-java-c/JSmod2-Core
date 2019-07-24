@@ -31,11 +31,6 @@ public class PlayerCallCommandEvent extends PlayerEvent {
         return command;
     }
 
-    /** java-bean */
-    @UseForServerInit
-    public void setCommand(String command) {
-        this.command = command;
-    }
 
     public PlayerCallCommandEvent(){
 

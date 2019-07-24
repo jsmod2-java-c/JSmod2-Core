@@ -41,11 +41,6 @@ public class Player079ElevatorEvent extends PlayerEvent {
         this.apDrain = apDrain;
     }
 
-    /** java-bean */
-    @UseForServerInit
-    public void setElevator(Elevator elevator) {
-        this.elevator = elevator;
-    }
 
     public Player079ElevatorEvent(Player player, Elevator elevator, boolean allow, float apDrain) {
         super(player);

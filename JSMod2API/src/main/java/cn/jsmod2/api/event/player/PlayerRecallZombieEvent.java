@@ -40,11 +40,6 @@ public class PlayerRecallZombieEvent extends PlayerEvent{
     public Player getTarget() {
         return target;
     }
-    /** java-bean */
-    @UseForServerInit
-    public void setTarget(Player target) {
-        this.target = target;
-    }
 
 
 }

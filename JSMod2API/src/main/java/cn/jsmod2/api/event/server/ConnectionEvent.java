@@ -27,9 +27,5 @@ public abstract class ConnectionEvent extends Event {
     public Connection getConnection() {
         return connection;
     }
-    /** java-bean */
-    @UseForServerInit
-    public void setConnection(Connection connection) {
-        this.connection = connection;
-    }
+
 }

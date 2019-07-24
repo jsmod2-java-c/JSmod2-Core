@@ -43,9 +43,5 @@ public class WarheadChangeLeverEvent extends Event {
     }
 
 
-    /** java-bean */
-    @UseForServerInit
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
+
 }

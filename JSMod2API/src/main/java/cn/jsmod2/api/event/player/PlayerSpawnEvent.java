@@ -29,11 +29,7 @@ public class PlayerSpawnEvent extends PlayerEvent {
         return door;
     }
 
-    /** java-bean */
-    @UseForServerInit
-    public void setDoor(Door door) {
-        this.door = door;
-    }
+
 
     public boolean isAllow() {
         return allow;

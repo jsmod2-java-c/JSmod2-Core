@@ -24,9 +24,5 @@ public class DecideRespawnQueueEvent extends Event {
         return teams;
     }
 
-    /** java-bean */
-    @UseForServerInit
-    public void setTeams(Team[] teams) {
-        this.teams = teams;
-    }
+
 }

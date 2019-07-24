@@ -30,11 +30,6 @@ public class PlayerGeneratorAccessEvent extends PlayerEvent {
 
     }
 
-    /** java-bean */
-    @UseForServerInit
-    public void setGenerator(Generator generator) {
-        this.generator = generator;
-    }
 
     public boolean isAllow() {
         return allow;

@@ -56,11 +56,5 @@ public class SetConfigEvent extends Event {
     }
 
 
-    /** java-bean */
-    @UseForServerInit
-    public void setDefaultValue(Object defaultValue) {
-        this.defaultValue = defaultValue;
-    }
-
 
 }

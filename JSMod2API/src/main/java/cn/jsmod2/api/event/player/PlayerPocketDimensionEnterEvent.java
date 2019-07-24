@@ -48,17 +48,6 @@ public class PlayerPocketDimensionEnterEvent extends PlayerEvent {
         return attacker;
     }
 
-    /** java-bean */
-    @UseForServerInit
-    public void setLastPosition(Vector lastPosition) {
-        this.lastPosition = lastPosition;
-    }
-
-    /** java-bean */
-    @UseForServerInit
-    public void setAttacker(Player attacker) {
-        this.attacker = attacker;
-    }
 
     public PlayerPocketDimensionEnterEvent(Player player, float damage, Vector lastPosition, Vector targerPosision, Player attacker) {
         super(player);

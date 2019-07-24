@@ -69,11 +69,6 @@ public class PlayerSpawnRagdollEvent extends Event {
     public Player getAttacker() {
         return attacker;
     }
-    /** java-bean */
-    @UseForServerInit
-    public void setAttacker(Player attacker) {
-        this.attacker = attacker;
-    }
 
     public PlayerSpawnRagdollEvent(Role role, Vector position, Vector rotation, Player attacker, DamageType damageType, boolean allowRecall) {
         this.role = role;

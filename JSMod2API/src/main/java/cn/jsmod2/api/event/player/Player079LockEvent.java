@@ -41,11 +41,6 @@ public class Player079LockEvent extends PlayerEvent {
         return door;
     }
 
-    /** java-bean */
-    @UseForServerInit
-    public void setDoor(Door door) {
-        this.door = door;
-    }
 
     public Player079LockEvent(Player player, Door door, boolean allow, float apDrain) {
         super(player);

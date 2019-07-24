@@ -28,11 +28,6 @@ public class Player079StopSpeakerEvent extends PlayerEvent {
         return allow;
     }
 
-    /** java-bean */
-    @UseForServerInit
-    public void setRoom(Room room) {
-        this.room = room;
-    }
 
     public void setAllow(boolean allow) {
         this.allow = allow;

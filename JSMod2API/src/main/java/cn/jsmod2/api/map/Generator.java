@@ -51,11 +51,6 @@ public class Generator extends ApiId implements Component {
         return locked;
     }
 
-    @UseForServerInit
-    public void setLocked(boolean locked) {
-        this.locked = locked;
-    }
-
     public boolean isHasTablet() {
         return hasTablet;
     }
@@ -68,19 +63,11 @@ public class Generator extends ApiId implements Component {
         return engaged;
     }
 
-    @UseForServerInit
-    public void setEngaged(boolean engaged) {
-        this.engaged = engaged;
-    }
 
     public float getStartTime() {
         return startTime;
     }
 
-    @UseForServerInit
-    public void setStartTime(float startTime) {
-        this.startTime = startTime;
-    }
 
     public float getTimeLeft() {
         return timeLeft;
@@ -94,17 +81,10 @@ public class Generator extends ApiId implements Component {
         return position;
     }
 
-    @UseForServerInit
-    public void setPosition(Vector position) {
-        this.position = position;
-    }
 
     public Room getRoom() {
         return room;
     }
 
-    @UseForServerInit
-    public void setRoom(Room room) {
-        this.room = room;
-    }
+
 }

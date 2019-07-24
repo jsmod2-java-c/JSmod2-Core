@@ -31,11 +31,6 @@ public class PlayerContain106Event extends PlayerEvent {
         this.activateContainment = activateContainment;
     }
 
-    /** java-bean */
-    @UseForServerInit
-    public void setScp106s(Player[] scp106s) {
-        this.scp106s = scp106s;
-    }
 
     public PlayerContain106Event(Player player, Player[] scp106s, boolean activateContainment) {
         super(player);

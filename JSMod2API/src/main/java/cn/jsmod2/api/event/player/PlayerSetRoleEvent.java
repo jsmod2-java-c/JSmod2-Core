@@ -52,10 +52,6 @@ public class PlayerSetRoleEvent extends PlayerEvent {
     public TeamRole getTeamRole() {
         return teamRole;
     }
-    /** java-bean */
-    public void setTeamRole(TeamRole teamRole) {
-        this.teamRole = teamRole;
-    }
 
     public PlayerSetRoleEvent(Player player, List<ItemType> items, boolean usingDefaultItem, Role role, TeamRole teamRole) {
         super(player);

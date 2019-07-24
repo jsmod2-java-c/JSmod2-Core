@@ -33,11 +33,6 @@ public class Player079AddExpEvent extends PlayerEvent {
     }
 
 
-    /** java-bean */
-    @UseForServerInit
-    public void setExperienceType(ExperienceType experienceType) {
-        this.experienceType = experienceType;
-    }
 
     public Player079AddExpEvent(Player player, ExperienceType experienceType, float expToAdd) {
         super(player);

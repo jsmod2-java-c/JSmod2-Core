@@ -33,9 +33,5 @@ public class GeneratorFinishEvent extends Event {
     }
 
 
-    /** java-bean */
-    @UseForServerInit
-    public void setGenerator(Generator generator) {
-        this.generator = generator;
-    }
+
 }

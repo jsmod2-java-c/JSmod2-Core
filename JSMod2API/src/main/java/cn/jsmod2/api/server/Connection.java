@@ -25,16 +25,9 @@ public class Connection extends ApiId {
     public String getIpAddress() {
         return ipAddress;
     }
-    @UseForServerInit
-    public void setIpAddress(String ipAddress) {
-        this.ipAddress = ipAddress;
-    }
 
     public boolean isBanned() {
         return isBanned;
     }
-    @UseForServerInit
-    public void setBanned(boolean banned) {
-        isBanned = banned;
-    }
+
 }

@@ -43,11 +43,6 @@ public class PlayerDeathEvent extends PlayerEvent{
         return damageType;
     }
 
-    /** java-bean */
-    @UseForServerInit
-    public void setKiller(Player killer) {
-        this.killer = killer;
-    }
 
 
     public PlayerDeathEvent(Player player, Player killer, boolean spawnRagdoll, DamageType damageType) {

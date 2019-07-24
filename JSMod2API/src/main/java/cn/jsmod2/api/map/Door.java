@@ -78,27 +78,15 @@ public class Door extends ApiId {
         return position;
     }
 
-    @UseForServerInit
-    public void setPosition(Vector position) {
-        this.position = position;
-    }
 
     public String getName() {
         return name;
     }
 
-    @UseForServerInit
-    public void setName(String name) {
-        this.name = name;
-    }
 
 
     public String getPermission() {
         return permission;
     }
 
-    @UseForServerInit
-    public void setPermission(String permission) {
-        this.permission = permission;
-    }
 }

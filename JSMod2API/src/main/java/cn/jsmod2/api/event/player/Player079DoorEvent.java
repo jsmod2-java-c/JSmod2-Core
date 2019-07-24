@@ -54,9 +54,5 @@ public class Player079DoorEvent extends PlayerEvent {
         this.apDrain = apDrain;
     }
 
-    /** java-bean */
-    @UseForServerInit
-    public void setDoor(Door door) {
-        this.door = door;
-    }
+
 }

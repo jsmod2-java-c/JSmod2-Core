@@ -42,9 +42,5 @@ public class WarheadKeycardAccessEvent extends Event {
 
     }
 
-    /** java-bean */
-    @UseForServerInit
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
+
 }

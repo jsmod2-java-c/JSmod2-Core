@@ -73,36 +73,6 @@ public class PlayerShootEvent extends PlayerEvent {
     }
 
 
-    /** just for javabean */
-    @UseForServerInit
-    public void setTarget(Player target) {
-        this.target = target;
-    }
-    /** java-bean */
-    @UseForServerInit
-    public void setWeapon(DamageType weapon) {
-        this.weapon = weapon;
-    }
-
-    public boolean isShouldSpawnBloodDecal() {
-        return ShouldSpawnBloodDecal;
-    }
-    /** java-bean */
-    @UseForServerInit
-    public void setSourcePosition(Vector sourcePosition) {
-        SourcePosition = sourcePosition;
-    }
-    /** java-bean */
-    @UseForServerInit
-    public void setTargetPosition(Vector targetPosition) {
-        TargetPosition = targetPosition;
-    }
-    /** java-bean */
-    @UseForServerInit
-    public void setTargetHitbox(String targetHitbox) {
-        TargetHitbox = targetHitbox;
-    }
-
     public WeaponType getWeaponSound() {
         return WeaponSound;
     }

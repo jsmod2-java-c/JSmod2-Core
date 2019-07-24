@@ -24,11 +24,6 @@ public class PlayerGeneratorUnlockEvent extends PlayerEvent {
         return generator;
     }
 
-    /** java-bean */
-    @UseForServerInit
-    public void setGenerator(Generator generator) {
-        this.generator = generator;
-    }
 
     public boolean isAllow() {
         return allow;

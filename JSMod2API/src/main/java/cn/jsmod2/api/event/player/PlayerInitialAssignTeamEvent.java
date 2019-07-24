@@ -28,10 +28,5 @@ public class PlayerInitialAssignTeamEvent extends PlayerEvent {
         return team;
     }
 
-    /** java-bean */
-    @UseForServerInit
-    public void setTeam(Team team) {
-        this.team = team;
-    }
 
 }

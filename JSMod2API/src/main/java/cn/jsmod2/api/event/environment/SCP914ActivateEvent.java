@@ -50,11 +50,6 @@ public class SCP914ActivateEvent extends Event {
     }
 
 
-    /** java-bean */
-    @UseForServerInit
-    public void setUser(Player user) {
-        this.user = user;
-    }
 
     public KnobSetting getKnobSetting() {
         return knobSetting;

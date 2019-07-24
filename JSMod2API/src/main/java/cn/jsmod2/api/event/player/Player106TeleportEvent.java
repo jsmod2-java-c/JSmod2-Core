@@ -23,11 +23,6 @@ public class Player106TeleportEvent extends PlayerEvent {
         return position;
     }
 
-    /** java-bean */
-    @UseForServerInit
-    public void setPosition(Vector position) {
-        this.position = position;
-    }
 
     public Player106TeleportEvent(Player player, Vector position) {
         super(player);

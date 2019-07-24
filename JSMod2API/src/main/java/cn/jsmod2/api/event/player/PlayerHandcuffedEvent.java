@@ -32,11 +32,6 @@ public class PlayerHandcuffedEvent extends PlayerEvent {
         return Owner;
     }
 
-    /** java-bean */
-    @UseForServerInit
-    public void setOwner(Player owner) {
-        Owner = owner;
-    }
 
 
 

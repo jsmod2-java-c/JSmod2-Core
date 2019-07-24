@@ -31,11 +31,5 @@ public class PlayerGrenadeHitPlayer extends PlayerEvent {
 
     }
 
-    /** java-bean */
-    @UseForServerInit
-    public void setVictim(Player victim) {
-        this.victim = victim;
-    }
-
 
 }

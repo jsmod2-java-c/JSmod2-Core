@@ -43,10 +43,6 @@ public abstract class WarheadEvent extends Event {
         return player;
     }
 
-    /** java-bean */
-    public void setActivator(Player activator) {
-        this.activator = activator;
-    }
 
     public Player getActivator() {
         return activator;
@@ -62,9 +58,5 @@ public abstract class WarheadEvent extends Event {
 
     }
 
-    /** java-bean */
-    @UseForServerInit
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
+
 }

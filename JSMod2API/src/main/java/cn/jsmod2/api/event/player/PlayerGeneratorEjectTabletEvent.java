@@ -54,10 +54,5 @@ public class PlayerGeneratorEjectTabletEvent extends PlayerEvent {
         this.spawnTablet = spawnTablet;
     }
 
-    /** java-bean */
-    @UseForServerInit
-    public void setGenerator(Generator generator) {
-        this.generator = generator;
-    }
 
 }

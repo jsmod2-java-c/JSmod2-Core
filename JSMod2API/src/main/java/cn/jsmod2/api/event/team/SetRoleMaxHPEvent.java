@@ -30,11 +30,7 @@ public class SetRoleMaxHPEvent extends Event {
     public Role getRole() {
         return role;
     }
-    /** java-bean */
-    @UseForServerInit
-    public void setRole(Role role) {
-        this.role = role;
-    }
+
 
     public int getMaxHP() {
         return maxHP;

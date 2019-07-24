@@ -42,9 +42,5 @@ public class PlayerTriggerTeslaEvent extends PlayerEvent {
         return Triggerable;
     }
 
-    /** java-bean */
-    @UseForServerInit
-    public void setTeslaGate(TeslaGate teslaGate) {
-        TeslaGate = teslaGate;
-    }
+
 }

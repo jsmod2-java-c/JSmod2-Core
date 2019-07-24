@@ -53,9 +53,5 @@ public class Player079LockdownEvent extends PlayerEvent {
         this.apDrain = apDrain;
     }
 
-    /** java-bean */
-    @UseForServerInit
-    public void setRoom(Room room) {
-        this.room = room;
-    }
+
 }
