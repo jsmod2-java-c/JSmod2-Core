@@ -21,6 +21,7 @@ import org.apache.commons.codec.binary.Base64;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -168,14 +169,55 @@ public abstract class BinaryStream {
     private Object invokeGetMethod(Object o,String field) throws Exception{
         StringBuilder builder = new StringBuilder((field.charAt(0)+"").toUpperCase());
         String first = "get"+builder.append(field.substring(1));
-        return o.getClass().getMethod(first).invoke(o);
+        return getMethod(o.getClass(),field);
     }
 
     private void invokeSetMethod(Object o,String field,String value) throws Exception{
-        Field field1 = o.getClass().getDeclaredField(field);
+        Field field1 = getField(o.getClass(),field);
         field1.setAccessible(true);
         Class<?> clz = field1.getType();
         Object object = JSON.parseObject(value,clz);
         field1.set(o,object);
+    }
+
+    private Field getField(Class clz,String field) throws NoSuchFieldException{
+        while (!clz.equals(Object.class)){
+            clz = clz.getSuperclass();
+            if(hasField(clz,field)){
+                Field field1 = clz.getDeclaredField(field);
+                field1.setAccessible(true);
+                return field1;
+            }
+        }
+        return null;
+    }
+
+    private boolean hasField(Class clz,String field){
+        try {
+            clz.getDeclaredField(field);
+            return true;
+        }catch (NoSuchFieldException e){
+
+        }
+        return false;
+    }
+
+    private Method getMethod(Class clz,String method) throws Exception{
+        while (!clz.equals(Object.class)) {
+            clz = clz.getSuperclass();
+            if(hasMethod(clz,method)){
+                return clz.getMethod(method);
+            }
+        }
+        return null;
+    }
+
+    private boolean hasMethod(Class clz,String method){
+        try{
+            clz.getDeclaredMethod(method);
+            return true;
+        }catch (NoSuchMethodException e){
+        }
+        return false;
     }
 }

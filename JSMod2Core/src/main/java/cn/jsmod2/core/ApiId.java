@@ -7,4 +7,13 @@ public class ApiId {
 
     @PlayerName
     protected String playerName;
+
+    @Override
+    public String toString() {
+        return playerName;
+    }
+
+    public String getApiId() {
+        return playerName;
+    }
 }

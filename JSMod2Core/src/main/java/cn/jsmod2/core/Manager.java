@@ -1,6 +1,7 @@
 package cn.jsmod2.core;
 
 
+import cn.jsmod2.core.log.ServerLogger;
 import cn.jsmod2.core.protocol.command.*;
 import cn.jsmod2.core.event.Event;
 import cn.jsmod2.core.ex.EventException;
@@ -39,6 +40,7 @@ public abstract class Manager implements Cloneable{
         Class<? extends Event> eventClass = events.get(id);
         if(eventClass != null){
             Event event = stream.encode(eventClass,bytes);
+            ServerLogger.getLogger().debug("EVENT_API_KEY:"+event.getApiId());
             Server.getSender().getServer().getPluginManager().callEvent(event);
         }else{
             throw new EventException("No such type of events");
