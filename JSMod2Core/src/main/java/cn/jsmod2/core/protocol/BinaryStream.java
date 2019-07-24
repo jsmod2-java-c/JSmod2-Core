@@ -14,6 +14,7 @@ import cn.jsmod2.core.RegisterTemplate;
 import cn.jsmod2.core.Server;
 import cn.jsmod2.core.ex.ProtocolException;
 import cn.jsmod2.core.FileSystem;
+import cn.jsmod2.core.log.ServerLogger;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.codec.binary.Base64;
@@ -134,6 +135,7 @@ public abstract class BinaryStream {
     public <T> T dataObjectDecode(byte[] data,Class<T> clz){
         try{
             String json = getDefaultJson(data);
+            ServerLogger.getLogger().debug("JSON::"+json);
             //{main-object}|player-xxx:xxx|team-class:xxx
             String[] props = splitJson(json);
             json = props[0];

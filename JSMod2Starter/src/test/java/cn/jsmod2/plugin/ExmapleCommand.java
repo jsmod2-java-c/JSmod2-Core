@@ -14,4 +14,5 @@ public class ExmapleCommand extends Command {
     public boolean execute(CommandSender commandSender, String[] args) {
         return false;
     }
+
 }
