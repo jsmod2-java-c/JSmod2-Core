@@ -12,6 +12,7 @@ package cn.jsmod2;
 
 import cn.jsmod2.core.*;
 import cn.jsmod2.core.event.Event;
+import cn.jsmod2.core.log.ServerLogger;
 import cn.jsmod2.core.protocol.command.CommandVO;
 import cn.jsmod2.network.command.*;
 import cn.jsmod2.api.player.Player;
@@ -59,9 +60,7 @@ public class PacketManager extends Manager {
      * 处理包的逻辑写在这里
      */
     public void manageMethod(String message,int id){
-        if(((Register.SECOND_START_EVENT<=id&&id<Register.MAX_EVENT_ID)||id==Register.FIRST_EVENT)){
-            Server.getSender().getServer().getLogger().error("no such type packet");
-        }
+        ServerLogger.getLogger().debug("HANDLE_MESSAGE:"+message+"::ID:"+id);
         try{
             Properties properties = FileSystem.getFileSystem().serverProperties(Server.getSender().getServer());
             byte[] bytes = message.getBytes(properties.getProperty("encode"));//通过utf-8形式获取byte字节数组

@@ -390,6 +390,7 @@ public abstract class Server implements Closeable, Reloadable, Start {
 
 
     private Future sendPacket(final DataPacket packet,boolean result){
+        log.info("PACkET_TYPE:"+packet.getClass().getSimpleName());
         return sendPacket(packet,serverProp.getProperty(FileSystem.SMOD2_IP),Integer.parseInt(serverProp.getProperty(PLUGIN_PORT)),result);
     }
 
@@ -399,8 +400,8 @@ public abstract class Server implements Closeable, Reloadable, Start {
         try {
             byte[] encode = packet.encode();
             //发送端口为插件的端口,ip写死为jsmod2的
-
-            return sendData(encode, ip, port,result);
+            if(encode!=null)
+                return sendData(encode, ip, port,result);
         }catch (IOException e){
             e.printStackTrace();
         }
