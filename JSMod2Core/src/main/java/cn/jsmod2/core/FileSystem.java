@@ -268,7 +268,7 @@ public class FileSystem {
     }
 
     public Properties langProperties(ILogger log,Server server) throws IOException {
-        File file = new File("../init.lang");
+        File file = new File(server.getServerFolder()+"/init.lang");
 
         Properties properties = new Properties();
 
