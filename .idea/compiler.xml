@@ -7,13 +7,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="JSMod2API" />
-        <module name="JSMod2Web" />
-        <module name="JSMod2Command" />
-        <module name="JSMod2Protocol" />
-        <module name="JSMod2Core" />
-        <module name="JSMod2Emerald" />
         <module name="JSMod2UI" />
+        <module name="JSMod2Web" />
+        <module name="JSMod2Emerald" />
         <module name="JSMod2Starter" />
+        <module name="JSMod2Core" />
+        <module name="JSMod2Protocol" />
+        <module name="JSMod2Command" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
@@ -33,7 +33,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="JSMod2Protocol" options="-parameters" />
-      <module name="JSMod2Starter" options="" />
+      <module name="JSMod2Starter" options="-parameters" />
       <module name="JSMod2UI" options="-parameters" />
       <module name="JSMod2Web" options="-parameters" />
       <module name="commons" options="-parameters" />
