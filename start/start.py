@@ -13,7 +13,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href='http://jsmod2.cn'>th
 Created by MagicLu550 on 6.6,2019
 :author fafa_junhe
 '''
-import os
+
 
 import os
 import platform
@@ -108,12 +108,10 @@ def linuxway():
     print(bcolors.CGREEN + '[INFO]完成安装java'+bcolors.CEND)
 def windowsrun():
     print(bcolors.CGREEN + '[INFO]正在启动中'+bcolors.CEND)
-    subprocess.Popen([home+'\.JSMOD2\java\jre1.8.0_211\bin\java.exe','-jar',os.path.abspath(os.path.join(os.getcwd(), ".."))+'\jsmod2.jar'])
-    sys.exit(0)
+    subprocess.Popen([home+r'\.JSMOD2\java\jre1.8.0_221\bin\java.exe','-jar',os.path.abspath(os.path.join(os.getcwd(), ".."))+'\jsmod2.jar'])
 def linuxrun():
     print(bcolors.CGREEN + '[INFO]正在启动中'+bcolors.CEND)
-    subprocess.Popen([home+'/.JSMOD2/java/jre1.8.0_211/bin/java','-jar',os.path.abspath(os.path.join(os.getcwd(), ".."))+ '/jsmod2.jar'])
-    sys.exit(0)
+    subprocess.Popen([home+r'/.JSMOD2/java/jre1.8.0_221/bin/java','-jar',os.path.abspath(os.path.join(os.getcwd(), ".."))+ '/jsmod2.jar'])
 def checkbit():
     import struct
     return (struct.calcsize('P') * 8)
