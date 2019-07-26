@@ -16,7 +16,7 @@ import cn.jsmod2.core.annotations.UseForServerInit;
  * @author kevinj
  */
 public class PlayerSpawnEvent extends PlayerEvent {
-    private Door door;
+    private Door door = new Door();
     private boolean allow;
     private boolean destroy;
 

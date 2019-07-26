@@ -17,7 +17,7 @@ import cn.jsmod2.core.annotations.UseForServerInit;
  */
 
 public class PlayerGeneratorInsertTabletEvent extends PlayerEvent{
-    private Generator generator;
+    private Generator generator = new Generator();
     private boolean allow;
     private boolean removeTablet;
 

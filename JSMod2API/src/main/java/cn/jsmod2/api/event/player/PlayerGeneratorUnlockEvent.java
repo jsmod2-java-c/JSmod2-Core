@@ -17,7 +17,7 @@ import cn.jsmod2.core.annotations.UseForServerInit;
  */
 
 public class PlayerGeneratorUnlockEvent extends PlayerEvent {
-    private Generator generator;
+    private Generator generator = new Generator();
     private boolean allow;
 
     public Generator getGenerator() {

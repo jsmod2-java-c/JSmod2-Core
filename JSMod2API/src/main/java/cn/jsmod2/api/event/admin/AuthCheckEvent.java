@@ -19,7 +19,7 @@ import cn.jsmod2.core.event.Event;
 
 public class AuthCheckEvent extends Event {
 
-    private Player requester;
+    private Player requester = new Player("");
 
     private AuthType type;
 

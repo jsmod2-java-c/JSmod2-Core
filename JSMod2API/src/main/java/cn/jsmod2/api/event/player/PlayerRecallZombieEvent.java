@@ -15,7 +15,7 @@ import cn.jsmod2.core.annotations.UseForServerInit;
  * @author kevinj
  */
 public class PlayerRecallZombieEvent extends PlayerEvent{
-    private Player target;
+    private Player target = new Player("");
 
     private boolean allowRecall;
 

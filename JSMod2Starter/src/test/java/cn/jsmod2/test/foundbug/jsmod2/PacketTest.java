@@ -38,6 +38,7 @@ public class PacketTest {
         socket.close();
     }
 
+
     @Test
     public void eventId() throws Exception{
         PlayerEvent playerEvent = new PlayerJoinEvent();

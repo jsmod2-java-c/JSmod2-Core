@@ -390,7 +390,7 @@ public abstract class Server implements Closeable, Reloadable, Start {
 
 
     private Future sendPacket(final DataPacket packet,boolean result){
-        log.info("PACkET_TYPE:"+packet.getClass().getSimpleName());
+        log.info("PACKET_TYPE:"+packet.getClass().getSimpleName());
         return sendPacket(packet,serverProp.getProperty(FileSystem.SMOD2_IP),Integer.parseInt(serverProp.getProperty(PLUGIN_PORT)),result);
     }
 

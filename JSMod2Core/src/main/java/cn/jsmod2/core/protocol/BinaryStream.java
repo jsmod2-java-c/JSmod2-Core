@@ -144,6 +144,9 @@ public abstract class BinaryStream {
             json = props[0];
             ServerLogger.getLogger().debug("JSON_N::"+json);
             Object o = JSONObject.parseObject(json,clz);
+            if(o==null){
+                o = clz.newInstance();
+            }
             String[] fields = new String[props.length-1];
             if(fields.length>0) {
                 System.arraycopy(props, 1, fields, 0, fields.length);

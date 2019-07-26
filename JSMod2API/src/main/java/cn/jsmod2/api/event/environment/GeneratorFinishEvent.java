@@ -18,7 +18,7 @@ import cn.jsmod2.core.event.Event;
  */
 
 public class GeneratorFinishEvent extends Event {
-    private Generator generator;
+    private Generator generator = new Generator();
 
     public GeneratorFinishEvent(Generator generator) {
         this.generator = generator;

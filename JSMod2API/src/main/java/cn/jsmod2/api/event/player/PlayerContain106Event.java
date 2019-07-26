@@ -19,6 +19,7 @@ public class PlayerContain106Event extends PlayerEvent {
     private Player[] scp106s;
     private boolean activateContainment;
 
+    //这个通过响应去做，获取数组，然后只获取一次
     public Player[] getScp106s() {
         return scp106s;
     }

@@ -16,7 +16,7 @@ import cn.jsmod2.core.annotations.UseForServerInit;
  */
 
 public class PlayerGrenadeHitPlayer extends PlayerEvent {
-    private Player victim;
+    private Player victim = new Player("");
 
     public Player getVictim() {
         return victim;

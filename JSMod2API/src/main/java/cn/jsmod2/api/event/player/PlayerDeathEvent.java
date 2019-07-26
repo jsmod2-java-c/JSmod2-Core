@@ -17,7 +17,7 @@ import cn.jsmod2.core.annotations.UseForServerInit;
  */
 
 public class PlayerDeathEvent extends PlayerEvent{
-    private Player killer;
+    private Player killer = new Player("");
 
     private boolean SpawnRagdoll;
 

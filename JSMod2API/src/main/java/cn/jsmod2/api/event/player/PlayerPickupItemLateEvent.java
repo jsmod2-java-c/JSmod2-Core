@@ -17,11 +17,15 @@ import cn.jsmod2.core.annotations.UseForServerInit;
  */
 
 public class PlayerPickupItemLateEvent extends PlayerEvent{
-    private Item item;
+    private Item item = new Item();
 
     public PlayerPickupItemLateEvent(Player player, Item item) {
         super(player);
         this.item = item;
+    }
+
+    public PlayerPickupItemLateEvent(){
+
     }
 
     public Item getItem() {

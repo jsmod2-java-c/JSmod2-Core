@@ -17,7 +17,7 @@ import cn.jsmod2.core.annotations.UseForServerInit;
  */
 
 public class PlayerGeneratorAccessEvent extends PlayerEvent {
-    private Generator generator;
+    private Generator generator = new Generator();
     private boolean allow;
 
     public PlayerGeneratorAccessEvent(Player player, Generator generator, boolean allow) {

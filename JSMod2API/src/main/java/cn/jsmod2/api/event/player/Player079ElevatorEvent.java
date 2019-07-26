@@ -17,7 +17,7 @@ import cn.jsmod2.core.annotations.UseForServerInit;
  */
 
 public class Player079ElevatorEvent extends PlayerEvent {
-    private Elevator elevator;
+    private Elevator elevator = new Elevator();
     private boolean allow;
     private float apDrain;
 

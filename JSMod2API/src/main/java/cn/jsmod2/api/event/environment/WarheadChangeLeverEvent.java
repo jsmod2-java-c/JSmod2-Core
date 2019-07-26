@@ -18,7 +18,7 @@ import cn.jsmod2.core.event.Event;
  */
 
 public class WarheadChangeLeverEvent extends Event {
-    private Player player;
+    private Player player = new Player("");
     private boolean allow;
 
     public Player getPlayer() {

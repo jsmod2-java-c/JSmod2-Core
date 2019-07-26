@@ -16,7 +16,7 @@ import cn.jsmod2.core.annotations.UseForServerInit;
 
 public class RoundEndEvent extends ServerEvent {
 
-    private Round round;
+    private Round round = new Round();
 
     private ROUND_END_STATUS status;
 

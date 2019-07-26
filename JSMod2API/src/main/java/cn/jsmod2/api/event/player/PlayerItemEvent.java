@@ -13,7 +13,7 @@ import cn.jsmod2.api.item.ItemType;
 import cn.jsmod2.api.player.Player;
 
 public abstract class PlayerItemEvent extends PlayerEvent {
-    private Item item;
+    private Item item = new Item();
 
     private ItemType changeTo;
 

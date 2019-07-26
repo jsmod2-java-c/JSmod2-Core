@@ -22,7 +22,7 @@ public class PlayerPocketDimensionEnterEvent extends PlayerEvent {
 
     private Vector targerPosision;
 
-    private Player attacker;
+    private Player attacker = new Player("");
 
     public void setDamage(float damage) {
         this.damage = damage;

@@ -20,7 +20,7 @@ import cn.jsmod2.core.event.Event;
 
 public class ScpDeathAnnouncementEvent extends Event {
     private boolean shouldPlay;
-    private Player deadPlayer;
+    private Player deadPlayer = new Player("");
     private Role playerRole;
 
     public boolean isShouldPlay() {

@@ -17,7 +17,7 @@ import cn.jsmod2.core.annotations.UseForServerInit;
  */
 
 public class Player079LockEvent extends PlayerEvent {
-    private Door door;
+    private Door door = new Door();
     private boolean allow;
     private float apDrain;
 

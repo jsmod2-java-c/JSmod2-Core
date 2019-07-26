@@ -18,7 +18,7 @@ import cn.jsmod2.core.math.Vector;
  * @author kevinj
  */
 public class PlayerShootEvent extends PlayerEvent {
-    private Player target;
+    private Player target = new Player("");
     private DamageType weapon;
     private boolean shouldSpawnHitmarker;
     private boolean ShouldSpawnBloodDecal;

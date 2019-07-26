@@ -18,9 +18,9 @@ import cn.jsmod2.core.event.Event;
 
 public class BanEvent extends Event {
 
-    private Player player;
+    private Player player = new Player("");
 
-    private Player admin;
+    private Player admin = new Player("");
 
     private int duration;
 

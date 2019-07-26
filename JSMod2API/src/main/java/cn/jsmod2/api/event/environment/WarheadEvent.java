@@ -19,8 +19,8 @@ import cn.jsmod2.core.event.Event;
 
 public abstract class WarheadEvent extends Event {
     private float timeLeft;
-    private Player player;
-    private Player activator;
+    private Player player = new Player("");
+    private Player activator = new Player("");
     private boolean cancel;
 
     public float getTimeLeft() {

@@ -17,7 +17,7 @@ import cn.jsmod2.network.protocol.event.admin.AdminQueryAdminSet;
 
 public class AdminQueryEvent extends Event {
 
-    private Player admin;
+    private Player admin = new Player("");
 
     private String query;
 

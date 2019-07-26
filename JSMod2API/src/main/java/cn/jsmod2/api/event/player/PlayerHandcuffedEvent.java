@@ -16,20 +16,20 @@ import cn.jsmod2.core.annotations.UseForServerInit;
  */
 
 public class PlayerHandcuffedEvent extends PlayerEvent {
-    private boolean Handcuffed;
+    private boolean handcuffed;
 
-    private Player Owner;
+    private Player owner = new Player("");
 
     public boolean isHandcuffed() {
-        return Handcuffed;
+        return handcuffed;
     }
 
     public void setHandcuffed(boolean handcuffed) {
-        Handcuffed = handcuffed;
+        handcuffed = handcuffed;
     }
 
     public Player getOwner() {
-        return Owner;
+        return owner;
     }
 
 
@@ -37,8 +37,8 @@ public class PlayerHandcuffedEvent extends PlayerEvent {
 
     public PlayerHandcuffedEvent(Player player, boolean handcuffed, Player owner) {
         super(player);
-        Handcuffed = handcuffed;
-        Owner = owner;
+        this.handcuffed = handcuffed;
+        this.owner = owner;
     }
 
     public PlayerHandcuffedEvent(){

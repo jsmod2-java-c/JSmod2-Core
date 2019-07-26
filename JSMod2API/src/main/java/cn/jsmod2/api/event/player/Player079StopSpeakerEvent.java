@@ -17,7 +17,7 @@ import cn.jsmod2.core.annotations.UseForServerInit;
  */
 
 public class Player079StopSpeakerEvent extends PlayerEvent {
-    private Room room;
+    private Room room = new Room();
     private boolean allow;
 
     public Room getRoom() {

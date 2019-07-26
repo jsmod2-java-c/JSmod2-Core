@@ -17,7 +17,7 @@ import cn.jsmod2.api.player.Player;
 
 public class PlayerHurtEvent extends PlayerEvent {
 
-    private Player attacker;
+    private Player attacker = new Player("");
 
     private float damage;
 

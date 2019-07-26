@@ -20,7 +20,7 @@ import java.util.Vector;
 
 public class Player079ElevatorTeleportEvent extends PlayerEvent {
     private Vector camera;
-    private Elevator elevator;
+    private Elevator elevator = new Elevator();
     private boolean allow;
     private float apDrain;
 

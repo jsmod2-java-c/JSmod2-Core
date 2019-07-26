@@ -19,7 +19,7 @@ import cn.jsmod2.core.math.Vector;
  */
 
 public class PlayerElevatorUseEvent extends PlayerEvent {
-    private Elevator Elevator;
+    private Elevator Elevator = new Elevator();
     private Vector ElevatorPosition;
     private boolean AllowUse;
 

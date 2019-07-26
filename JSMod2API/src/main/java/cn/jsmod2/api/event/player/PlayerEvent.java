@@ -17,7 +17,7 @@ import cn.jsmod2.core.event.Event;
  */
 
 public abstract class PlayerEvent extends Event {
-    private Player player;
+    private Player player = new Player("");
 
     public PlayerEvent(Player player){
         this.player = player;
@@ -31,9 +31,4 @@ public abstract class PlayerEvent extends Event {
         return player;
     }
 
-    /** java-bean */
-    @UseForServerInit
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
 }
