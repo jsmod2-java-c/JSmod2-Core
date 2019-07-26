@@ -399,9 +399,12 @@ public abstract class Server implements Closeable, Reloadable, Start {
         pluginManager.callEvent(event);
         try {
             byte[] encode = packet.encode();
+
             //发送端口为插件的端口,ip写死为jsmod2的
             if(encode!=null)
                 return sendData(encode, ip, port,result);
+            else
+                log.error("PROTOCOL: NULL");
         }catch (IOException e){
             e.printStackTrace();
         }

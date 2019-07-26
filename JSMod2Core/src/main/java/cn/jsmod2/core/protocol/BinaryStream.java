@@ -102,6 +102,7 @@ public abstract class BinaryStream {
             String packet = id+"-"+json;
             return dataJsonEncode(packet);
         }catch (Exception e){
+            ServerLogger.getLogger().error(e.getMessage());
             return null;
         }
     }

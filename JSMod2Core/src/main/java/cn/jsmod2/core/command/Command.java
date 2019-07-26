@@ -9,6 +9,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.core.command;
 
 import cn.jsmod2.core.plugin.Plugin;
+import com.alibaba.fastjson.annotation.JSONField;
 
 /**
  * 所有的插件注册指令需要继承该类，才能顺利的嵌入注册器
@@ -19,6 +20,7 @@ import cn.jsmod2.core.plugin.Plugin;
 
 public abstract class Command extends NativeCommand {
 
+    @JSONField(serialize = false)
     private Plugin plugin;
 
 
