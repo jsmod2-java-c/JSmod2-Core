@@ -172,4 +172,3 @@ if a == 3:
     os._exit(0)
 else:
     os._exit(0)
-print(home)
