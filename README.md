@@ -1,6 +1,6 @@
 ###### Note that we still don't know who the pic's author is. If you know or you are, please contact [@MagicLu550](https://github.com/MagicLu550).
 ![BANNER](6DC1237F3087F7B13213246693E6B81E.jpg)
-# JSMod2![LICENSE](https://img.shields.io/badge/license-GPL-blue.svg)
+# JSMod2    ![LICENSE](https://img.shields.io/badge/license-GPL-blue.svg)
 ###### Smod2 Java Edition [based on Smod2]
 
 > Copyright: JSmod2 LICENSE 
