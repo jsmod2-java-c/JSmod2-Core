@@ -7,7 +7,7 @@
 ```java
 /*
 JSmod2 is a java-based SCP: Secret Laboratory server initiated by jsmod2.cn.
-It needs to rely on Smod2 and the Proxy. JSmod2 is an open source
+It needs to rely on Smod2 and the ProxyHandler. JSmod2 is an open source
 free plugin that is released under the GNU license. Please read
 the GNU open source license before using the software. To understand
 the appropriateness, if infringement, will be handled in accordance
@@ -18,9 +18,9 @@ with the law, @Copyright JSmod2 China,more can see <a href="http://jsmod2.cn">th
 
 JSmod2 needs the following dependencies:
 
-[JSmod2 Protocol](https://github.com/jsmod2-java-c/Jsmod2_protocol.git)
+* [JSmod2 Protocol](https://github.com/jsmod2-java-c/Jsmod2_protocol.git)
 
-[Smod2](https://github.com/Grover-c13/Smod2)
+* [Smod2](https://github.com/Grover-c13/Smod2)
 
 `JSmod2` is a java extension server 
 developed based on `Smod2` and [ProxyHandler](https://github.com/jsmod2-java-c/ProxyHandler)
