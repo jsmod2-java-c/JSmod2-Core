@@ -43,7 +43,7 @@ public class PacketTest {
     public void eventId() throws Exception{
         PlayerEvent playerEvent = new PlayerJoinEvent();
         insertField(new String[]{"player-scp079Data-playerName:"+UUID.randomUUID().toString()},playerEvent);
-
+        System.out.println(playerEvent.getPlayer().getScp079Data().getApiId());
     }
 
     private void insertField(String[] props,Object o) throws Exception{
@@ -53,6 +53,7 @@ public class PacketTest {
             Object field = o;
             for(int j = 0;j<fields.length-1;j++){
                 field = invokeGetMethod(field,fields[j]);
+                System.out.println(field);
             }
             invokeSetMethod(field,fields[fields.length-1],key_value[1]);
         }
@@ -61,12 +62,12 @@ public class PacketTest {
     private Object invokeGetMethod(Object o,String field) throws Exception{
         StringBuilder builder = new StringBuilder((field.charAt(0)+"").toUpperCase());
         String first = "get"+builder.append(field.substring(1));
-        return getMethod(o.getClass(),first);
+        System.out.println(first);
+        System.out.println(getMethod(o.getClass(),first));
+        return getMethod(o.getClass(),first).invoke(o);
     }
 
     private void invokeSetMethod(Object o,String field,String value) throws Exception{
-        System.out.println(field);
-        System.out.println(o);
         Field field1 = getField(o.getClass(),field);
         field1.setAccessible(true);
         Class<?> clz = field1.getType();
@@ -103,10 +104,11 @@ public class PacketTest {
 
     private Method getMethod(Class clz,String method) throws Exception{
         while (!clz.equals(Object.class)) {
-            clz = clz.getSuperclass();
+
             if(hasMethod(clz,method)){
                 return clz.getMethod(method);
             }
+            clz = clz.getSuperclass();
         }
         return null;
     }

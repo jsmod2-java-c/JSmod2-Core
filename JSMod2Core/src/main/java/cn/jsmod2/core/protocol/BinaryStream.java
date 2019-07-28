@@ -174,7 +174,7 @@ public abstract class BinaryStream {
     private Object invokeGetMethod(Object o,String field) throws Exception{
         StringBuilder builder = new StringBuilder((field.charAt(0)+"").toUpperCase());
         String first = "get"+builder.append(field.substring(1));
-        return getMethod(o.getClass(),first);
+        return getMethod(o.getClass(),first).invoke(o);
     }
 
     private void invokeSetMethod(Object o,String field,String value) throws Exception{
@@ -192,12 +192,12 @@ public abstract class BinaryStream {
 
     private Field getField(Class clz,String field) throws NoSuchFieldException{
         while (!clz.equals(Object.class)){
-            clz = clz.getSuperclass();
             if(hasField(clz,field)){
                 Field field1 = clz.getDeclaredField(field);
                 field1.setAccessible(true);
                 return field1;
             }
+            clz = clz.getSuperclass();
         }
         return null;
     }
@@ -214,10 +214,12 @@ public abstract class BinaryStream {
 
     private Method getMethod(Class clz,String method) throws Exception{
         while (!clz.equals(Object.class)) {
-            clz = clz.getSuperclass();
+
             if(hasMethod(clz,method)){
                 return clz.getMethod(method);
             }
+            clz = clz.getSuperclass();
+
         }
         return null;
     }

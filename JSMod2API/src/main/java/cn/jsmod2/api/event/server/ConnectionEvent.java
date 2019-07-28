@@ -14,7 +14,7 @@ import cn.jsmod2.core.event.Event;
 
 public abstract class ConnectionEvent extends Event {
 
-    private Connection connection;
+    private Connection connection = new Connection();
 
     public ConnectionEvent(Connection connection){
         this.connection = connection;

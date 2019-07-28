@@ -26,7 +26,7 @@ public class Generator extends ApiId implements Component {
     private float startTime;
     private float timeLeft;
     private Vector position;
-    private Room room;
+    private Room room = new Room();
 
     public void unlock(){
         if(locked){

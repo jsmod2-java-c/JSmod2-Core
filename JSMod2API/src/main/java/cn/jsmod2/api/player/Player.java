@@ -23,7 +23,7 @@ import java.util.List;
 
 public class Player extends CommandSender implements ISimplePlayer {
 
-    private TeamRole teamRole;
+    private TeamRole teamRole = new TeamRole();
 
     private String ipAddress;
 
@@ -37,7 +37,7 @@ public class Player extends CommandSender implements ISimplePlayer {
 
     private boolean doNotTrack;
 
-    private Scp079Data scp079Data;
+    private Scp079Data scp079Data = new Scp079Data();
 
     public Player(String name){
         super(name,"all","player");
