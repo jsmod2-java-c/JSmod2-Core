@@ -1,81 +1,73 @@
-![LICENSE](https://img.shields.io/badge/license-GPL-blue.svg)
-
-###### emmm,who is author that has the copyright about this image,can talk with me
+###### Note that we still don't know who the pic's author is. If you know or you are, please contact [@MagicLu550](https://github.com/MagicLu550).
 ![BANNER](6DC1237F3087F7B13213246693E6B81E.jpg)
-# JSMOD2
-###### smod2 java edition [based on smod2]
+# JSMod2    ![LICENSE](https://img.shields.io/badge/license-GPL-blue.svg)
+###### Smod2 Java Edition [based on Smod2]
 
-> copyright: jsmod2 LICENSE
+> Copyright: JSmod2 LICENSE 
 ```java
 /*
-Jsmod2 is a java-based scpsl server initiated by jsmod2.cn.
-It needs to rely on smod2 and proxy. jsmod2 is an open source
+JSmod2 is a java-based SCP: Secret Laboratory server initiated by jsmod2.cn.
+It needs to rely on Smod2 and the ProxyHandler. JSmod2 is an open source
 free plugin that is released under the GNU license. Please read
 the GNU open source license before using the software. To understand
 the appropriateness, if infringement, will be handled in accordance
-with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">that<a>
+with the law, @Copyright JSmod2 China,more can see <a href="http://jsmod2.cn">that<a>
  */
 ```
-> about
+> About JSmod2
 
-use [jsmod2 protocol-4.5](https://github.com/jsmod2-java-c/Jsmod2_protocol.git)
+JSmod2 needs the following dependencies:
 
-use [smod2_C#](https://github.com/Grover-c13/Smod2)
+* [JSmod2 Protocol](https://github.com/jsmod2-java-c/Jsmod2_protocol.git)
 
-[design about jsmod2](https://github.com/jsmod2-java-c/jsmod2-design)
+* [Smod2](https://github.com/Grover-c13/Smod2)
 
-`Java server mod2` is a java extension 
-server developed based on `smod2` and proxy 
-handler ([ProxyHandler](https://github.com/jsmod2-java-c/ProxyHandler))
+`JSmod2` is a java extension server 
+developed based on `Smod2` and [ProxyHandler](https://github.com/jsmod2-java-c/ProxyHandler)
 
-The role of this server is to extend the 
-language of SCPSL so that Java can also 
-develop SCP plugins.
+The role of JSmod2 is to extend the language of SCPSL
+so that Java can also develop SCPSL plugins.
 
-At the same time, `jsmod2` is a java server 
-development framework, so it provides a lot of `APIs`,
-so that everyone can use `jsmod2` to develop plugins.
+Also, `JSmod2` is a Java server 
+development framework, by the time it provides a lot of `APIs`,
+everyone can use `JSmod2` to develop plugins.
 
-`Jsmod2` must be combined with `smod2`, and ensure that `smod2`
-installs the agent. In the future, `jsmod2` will support a 
-`jsmod2` to connect multiple `smod2` to form a central cluster.
+`JSmod2` needs `Smod2`, and you need to install `ProxyHandler` 
+correctly(Grab it into \sm_plugins). In the future, `JSmod2` will support 
+connecting multiple `Smod2` servers to form a central cluster.
 
-Welcome everyone to join the `jsmod2` team, 
-currently `jsmod2` is in the development stage, 
-I hope everyone can contribute code
+Welcome everyone to join us, 
+currently `JSmod2` is still in the development stage, 
+Founder [@MagicLu550](https://github.com/MagicLu550) hopes everyone can contribute
+by sending issues ,Prs and suggestions.
 
-If you want to participate in the development of jsmod2,
-you can refer to README_design.md for architectural 
-information.
+If you want to participate in the development of JSmod2,
+you can refer to [JSmod2-design](https://github.com/jsmod2-java-c/jsmod2-design) for further information.
 
 ![avatar](github_info/jsmod2-banner.png)
-> How to start JDMOD2
-* windows and linux
+> How to start?
+* We recommended you to set up in Windows Server 2008-2016 / Ubuntu Server 18.04.2 LTS
 
+* [Environment](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
+* [ProxyHandler](https://github.com/jsmod2-java-c/JSMod2-ProxyHandler)
+
+After finished installing JRE, you need to put ProxyHandler.dll into 
+(Where your server is)\sm_plugins, then start LocalAdmin.exe / MultiAdmin.exe.
+If there's no problem, launch JSmod2.jar:
 `java -jar jsmod2.jar`
 
-* JRE
+> How to develop a plugin?
 
-use jre 8:
-https://www.oracle.com/technetwork/java/javase/downloads/index.html
-
-* use `jsmod2`
-
-First configure SCPDataNetwork to Smod2 (as a plugin), then start smod2 first, 
-then start jsmod2. If it is the default ip and port, make sure they run on a server.
-
-
-> Develop plugin
 1. First you need to create a plugin.yml
 ```yaml
 
 name: pluginName
 main: Package.MainClass
-description: description
-version: plugin-version
+description: Description of the plugin.
+version: The version of the plugin.
 
 ```
-2 . Create a jsmod2 main class, and the main class of plugin.yml...
+2. Create JSmod2 main class, and the main class you had been set in plugin.yml:
 ```java
 package Package;
 /**
@@ -98,7 +90,7 @@ public class MainClass extends PluginBase{
 } 
 
 ```
-3  . Create a listener
+3. Create a Listener:
 ```java
 package Package;
 
@@ -111,7 +103,7 @@ public class TestListener implements Listener{
     
 }
 ```
-4 . Create a Command
+4. Create a Command:
 ```java
 package Package;
 
@@ -128,7 +120,7 @@ public class TestCommand extends Command{
 }
 
 ```
-5 . Register Command and Listener
+5. Register the Command and Listener:
 ```java
 package Package;
 /**
@@ -152,7 +144,7 @@ public class MainClass extends PluginBase{
 } 
 
 ```
-6. New Api can register the listener and command of jsmod2's own accord；
+6. New API can register the Listeners and Commands of JSmod2's；
 
 ```java
 package Package;
@@ -170,6 +162,3 @@ public class Main extends PluginBase{
     }
 }
 ```
-
-
-

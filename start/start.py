@@ -13,7 +13,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href='http://jsmod2.cn'>th
 Created by MagicLu550 on 6.6,2019
 :author fafa_junhe
 '''
-import os
+
 
 import os
 import platform
@@ -77,7 +77,7 @@ class bcolors:
     CWHITEBG2  = '\33[107m'
         
 def windowsway():
-    print('[INFO]下载jre中'+bcolors.CEND)#todo processbar
+    print(bcolors.CGREEN +'[INFO]下载jre中'+bcolors.CEND)#todo processbar
     import tarfile
     if checkbit() == 64:
         file = download(windowsurl64)
@@ -89,10 +89,10 @@ def windowsway():
         os.mkdir(home + '/.JSMOD2/java')
     os.rename(file, home + '/.JSMOD2/java/jre.tar.gz')
     tar = tarfile.open(home+'/.JSMOD2/java/jre.tar.gz')
-    tar.extractall()
+    tar.extractall(path=home + "/.JSMOD2/java/")
     print(bcolors.CGREEN + '[INFO]完成安装java'+bcolors.CEND)
 def linuxway():
-    print('[INFO]下载jre中'+bcolors.CEND)#todo processbar
+    print(bcolors.CGREEN +'[INFO]下载jre中'+bcolors.CEND)#todo processbar
     import tarfile
     if checkbit() == 64:
         file = download(linuxurl64)
@@ -104,16 +104,14 @@ def linuxway():
         os.mkdir(home + '/.JSMOD2/java')
     os.rename(file, home + '/.JSMOD2/java/jre.tar.gz')
     tar = tarfile.open(home + '/.JSMOD2/java/jre.tar.gz')
-    tar.extractall(path="/.JSMOD2/java/")
+    tar.extractall(path=home + "/.JSMOD2/java/")
     print(bcolors.CGREEN + '[INFO]完成安装java'+bcolors.CEND)
 def windowsrun():
     print(bcolors.CGREEN + '[INFO]正在启动中'+bcolors.CEND)
-    subprocess.Popen([home+'\.JSMOD2\java\jre1.8.0_221\bin\java.exe','-jar','..\jsmod2.jar'])
-    sys.exit(0)
+    subprocess.Popen([home+r'\.JSMOD2\java\jre1.8.0_221\bin\java.exe','-jar',os.path.abspath(os.path.join(os.getcwd(), ".."))+'\jsmod2.jar'])
 def linuxrun():
     print(bcolors.CGREEN + '[INFO]正在启动中'+bcolors.CEND)
-    subprocess.Popen([home+'/.JSMOD2/java/jre1.8.0_221/bin/java','-jar','../jsmod2.jar'])
-    sys.exit(0)
+    subprocess.Popen([home+r'/.JSMOD2/java/jre1.8.0_221/bin/java','-jar',os.path.abspath(os.path.join(os.getcwd(), ".."))+ '/jsmod2.jar'])
 def checkbit():
     import struct
     return (struct.calcsize('P') * 8)
@@ -131,14 +129,14 @@ def download( url):
     return local_filename
 if platform.system() == 'Linux':
     osystem = 'linux'
-    print('[DEBUG]Linux')
+    #print('[DEBUG]Linux')
 if platform.system() == 'Windows':
     osystem = 'windows'
-    print('[DEBUG]windows')
+    #print('[DEBUG]windows')
 if platform.system() == 'Darwin':
     #Macos
     print(bcolors.CRED + '[WARN]你的系统不支持'+bcolors.CEND)
-    print('[DEBUG]MACOS')
+    #print('[DEBUG]MACOS')
     os._exit(0)
 print(bcolors.CGREEN + '     JSMOD2启动脚本'+bcolors.CEND)
 print(bcolors.CYELLOW + '   |启动jsmod2     |[0]'+bcolors.CEND)
@@ -151,7 +149,7 @@ try:
 except ValueError:
     sys.exit(0)
 if a == 0:
-    print('[DEBUG]0')
+    #print('[DEBUG]0')
     if osystem == 'windows':
         windowsrun()
     else:
@@ -172,4 +170,3 @@ if a == 3:
     os._exit(0)
 else:
     os._exit(0)
-print(home)
