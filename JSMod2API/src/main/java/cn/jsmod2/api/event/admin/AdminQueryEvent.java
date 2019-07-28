@@ -9,7 +9,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.api.event.admin;
 import cn.jsmod2.api.player.Player;
 import cn.jsmod2.core.event.Event;
-import cn.jsmod2.network.protocol.event.admin.AdminQueryAdminSet;
+import cn.jsmod2.network.protocol.event.admin.AdminQueryAdminSetPacket;
 
 /**
  * @author magiclu550 #(code) jsmod2
@@ -32,7 +32,7 @@ public class AdminQueryEvent extends Event {
     }
 
     public void setAdmin(Player admin) {
-        AdminQueryAdminSet set = new AdminQueryAdminSet();
+        AdminQueryAdminSetPacket set = new AdminQueryAdminSetPacket();
         set.playerName = playerName;
         set.admin = admin;
         set.send();
