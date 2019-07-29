@@ -2,8 +2,10 @@ package cn.jsmod2.core;
 
 import cn.jsmod2.core.annotations.PlayerName;
 
+import java.io.Serializable;
+
 //这个用来定位实体api在smod2的对象位置
-public class ApiId {
+public abstract class ApiId implements Cloneable, Serializable {
 
     @PlayerName
     protected String playerName;

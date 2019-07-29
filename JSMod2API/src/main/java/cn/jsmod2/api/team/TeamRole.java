@@ -66,4 +66,15 @@ public class TeamRole extends ApiId {
     public Object getTeamClass(){
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "TeamRole{" +
+                "team=" + team +
+                ", role=" + role +
+                ", roleDisallowed=" + roleDisallowed +
+                ", maxHP=" + maxHP +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

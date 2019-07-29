@@ -30,4 +30,11 @@ public class Connection extends ApiId {
         return isBanned;
     }
 
+    @Override
+    public String toString() {
+        return "Connection{" +
+                "ipAddress='" + ipAddress + '\'' +
+                ", isBanned=" + isBanned +
+                '}';
+    }
 }

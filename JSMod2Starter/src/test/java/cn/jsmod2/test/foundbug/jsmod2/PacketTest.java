@@ -44,6 +44,7 @@ public class PacketTest {
         PlayerEvent playerEvent = new PlayerJoinEvent();
         insertField(new String[]{"player-scp079Data-playerName:"+UUID.randomUUID().toString()},playerEvent);
         System.out.println(playerEvent.getPlayer().getScp079Data().getApiId());
+        System.out.println(playerEvent.getPlayer());
     }
 
     private void insertField(String[] props,Object o) throws Exception{

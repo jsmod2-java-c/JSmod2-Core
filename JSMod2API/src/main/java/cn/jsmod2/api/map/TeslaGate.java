@@ -32,5 +32,11 @@ public class TeslaGate extends ApiId implements Component {
         return null;
     }
 
-
+    @Override
+    public String toString() {
+        return "TeslaGate{" +
+                "triggerDistance=" + triggerDistance +
+                ", position=" + position +
+                '}';
+    }
 }

@@ -30,4 +30,11 @@ public class PocketDimensionExit extends ApiId {
         return position;
     }
 
+    @Override
+    public String toString() {
+        return "PocketDimensionExit{" +
+                "exitType=" + exitType +
+                ", position=" + position +
+                '}';
+    }
 }

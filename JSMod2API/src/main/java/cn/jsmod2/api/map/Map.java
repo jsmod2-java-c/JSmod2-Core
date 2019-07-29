@@ -185,4 +185,14 @@ public class Map{
     public void setLCZDecontaminated(boolean LCZDecontaminated) {
         this.LCZDecontaminated = LCZDecontaminated;
     }
+
+    @Override
+    public String toString() {
+        return "Map{" +
+                "warheadLeverEnabled=" + warheadLeverEnabled +
+                ", warheadKeycardEntered=" + warheadKeycardEntered +
+                ", warheadDetonated=" + warheadDetonated +
+                ", LCZDecontaminated=" + LCZDecontaminated +
+                '}';
+    }
 }

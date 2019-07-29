@@ -89,4 +89,17 @@ public class Door extends ApiId {
         return permission;
     }
 
+    @Override
+    public String toString() {
+        return "Door{" +
+                "open=" + open +
+                ", destoryed=" + destoryed +
+                ", dontOpenOnWarhead=" + dontOpenOnWarhead +
+                ", blockAfterWarheadDetonation=" + blockAfterWarheadDetonation +
+                ", locked=" + locked +
+                ", position=" + position +
+                ", name='" + name + '\'' +
+                ", permission='" + permission + '\'' +
+                '}';
+    }
 }

@@ -289,4 +289,18 @@ public class Player extends CommandSender implements ISimplePlayer {
     public void setGhostMode(boolean ghostMode, boolean visibleToSpec, boolean visibleWhenTalking){
 
     }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "teamRole=" + teamRole +
+                ", ipAddress='" + ipAddress + '\'' +
+                ", playerId=" + playerId +
+                ", streamId='" + streamId + '\'' +
+                ", radioStatus=" + radioStatus +
+                ", overwatchMode=" + overwatchMode +
+                ", doNotTrack=" + doNotTrack +
+                ", scp079Data=" + scp079Data +
+                '}';
+    }
 }

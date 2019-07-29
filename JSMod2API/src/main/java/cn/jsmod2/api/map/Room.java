@@ -67,4 +67,16 @@ public class Room extends ApiId {
     public Object getGameObject(){
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "zoneType=" + zoneType +
+                ", roomType=" + roomType +
+                ", genericID=" + genericID +
+                ", position=" + position +
+                ", forward=" + forward +
+                ", speakerPosition=" + speakerPosition +
+                '}';
+    }
 }

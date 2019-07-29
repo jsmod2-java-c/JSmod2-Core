@@ -74,5 +74,14 @@ public class Elevator extends ApiId implements Component {
 
     }
 
-
+    @Override
+    public String toString() {
+        return "Elevator{" +
+                "elevatorType=" + elevatorType +
+                ", elevatorStatus=" + elevatorStatus +
+                ", locked=" + locked +
+                ", lockable=" + lockable +
+                ", movingSpeed=" + movingSpeed +
+                '}';
+    }
 }
