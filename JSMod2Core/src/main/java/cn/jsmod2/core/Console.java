@@ -204,7 +204,7 @@ public class Console extends CommandSender{
             }
         }
         if(!find){
-            Utils.getMessageSender().error("Unkown command,please input 'help'");
+            Utils.getMessageSender().error("Unknown command,please input 'help'");
         }
         return true;
     }
