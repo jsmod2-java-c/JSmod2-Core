@@ -283,20 +283,24 @@ public abstract class Server implements Closeable, Reloadable, Start {
 
     public Future sendData(byte[] encode,String ip,int port,boolean result) throws IOException{
         Future future = new Result();
-        if(useUDP) {
-            DatagramPacket pack = new DatagramPacket(encode, encode.length, InetAddress.getByName(ip), port);
-            ((DatagramSocket)serverSocket).send(pack);
-        }else{
-            Socket socket = new Socket();
-            socket.connect(new InetSocketAddress(ip,port));
-            socket.getOutputStream().write(encode);
-            if(result){
-                byte[] bytes = new byte[MAX_LENGTH];
-                socket.getInputStream().read(bytes);
-                byte[] after = getFullBytes(socket,bytes);
-                future.set(after);
+        try {
+            if (useUDP) {
+                DatagramPacket pack = new DatagramPacket(encode, encode.length, InetAddress.getByName(ip), port);
+                ((DatagramSocket) serverSocket).send(pack);
+            } else {
+                Socket socket = new Socket();
+                socket.connect(new InetSocketAddress(ip, port));
+                socket.getOutputStream().write(encode);
+                if (result) {
+                    byte[] bytes = new byte[MAX_LENGTH];
+                    socket.getInputStream().read(bytes);
+                    byte[] after = getFullBytes(socket, bytes);
+                    future.set(after);
+                }
+                socket.close();
             }
-            socket.close();
+        }catch (Exception e){
+            log.error(e.getMessage());
         }
         return future;
     }

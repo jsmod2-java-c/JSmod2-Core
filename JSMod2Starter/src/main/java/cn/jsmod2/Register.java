@@ -29,7 +29,7 @@ import cn.jsmod2.api.event.team.TeamRespawnEvent;
 import cn.jsmod2.core.protocol.CommandRegisterPacket;
 import cn.jsmod2.core.protocol.command.PlayerCommandPacket;
 import cn.jsmod2.core.protocol.command.ServerCommandPacket;
-import cn.jsmod2.network.protocol.event.admin.AdminQueryAdminSet;
+import cn.jsmod2.network.protocol.event.admin.AdminQueryAdminSetPacket;
 import cn.jsmod2.network.protocol.item.*;
 import cn.jsmod2.network.protocol.server.*;
 
@@ -113,7 +113,7 @@ public class Register extends RegisterTemplate {
         packets.put(GetNumPlayersPacket.class,GetNumPlayersPacket.ID);
         packets.put(GetRoundPacket.class,GetRoundPacket.ID);
         packets.put(GetMaxPlayersPacket.class,GetMaxPlayersPacket.ID);
-        packets.put(AdminQueryAdminSet.class,AdminQueryAdminSet.ID);
+        packets.put(AdminQueryAdminSetPacket.class,AdminQueryAdminSetPacket.ID);
         packets.put(SetMaxPlayersPacket.class,SetMaxPlayersPacket.ID);
         packets.put(GetItemInWorldPacket.class,GetItemInWorldPacket.ID);
         packets.put(GetItemTypePacket.class,GetItemTypePacket.ID);
