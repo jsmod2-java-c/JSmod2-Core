@@ -39,6 +39,8 @@ public abstract class CommandSender {
         return powers;
     }
 
+    public abstract void personalBroadcast(int duration, String message, boolean isMonoSpaced);
+
     /** java bean */
     @UseForServerInit
     public void setPowers(List<String> powers) {

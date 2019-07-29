@@ -115,5 +115,8 @@ public class Smod2Server extends CommandSender implements GameServer {
 
     }
 
+    @Override
+    public void personalBroadcast(int i, String s, boolean b) {
 
+    }
 }

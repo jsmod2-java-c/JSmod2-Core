@@ -86,6 +86,7 @@ public class Register extends RegisterTemplate {
         nativeCommandMap.put("tps",new TPSCommand());
         nativeCommandMap.put("unload",new UnloadPluginCommand());
         nativeCommandMap.put("load",new LoadPluginCommand());
+        nativeCommandMap.put("about",new AboutCommand());
     }
 
 

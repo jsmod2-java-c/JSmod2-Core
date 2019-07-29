@@ -209,6 +209,11 @@ public class Console extends CommandSender{
         return true;
     }
 
+    @Override
+    public void personalBroadcast(int duration, String message, boolean isMonoSpaced) {
+        Utils.getMessageSender().info(message);
+    }
+
     public boolean runConsoleCommand(String command){
         String[] strs = command.split(" ");
         String[] args = new String[strs.length-1];
