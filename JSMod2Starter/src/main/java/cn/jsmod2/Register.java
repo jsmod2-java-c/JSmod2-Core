@@ -55,6 +55,7 @@ public class Register extends RegisterTemplate {
 
     static final int PLAYER_COMMAND = 0x56;
 
+    public static final String ABOUT = "jsmod2.about";
 
 
 

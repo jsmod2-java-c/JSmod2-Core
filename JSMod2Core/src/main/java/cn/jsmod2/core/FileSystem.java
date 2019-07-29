@@ -84,6 +84,8 @@ public class FileSystem {
 
     private Properties serverPreproties;
 
+    private Properties initProperties;
+
 
     static {
         system = new FileSystem();
@@ -174,10 +176,12 @@ public class FileSystem {
         }
     }
 
-    private Properties readInitPropertiesInfo() throws IOException{
-        Properties properties = new Properties();
-        properties.load(new InputStreamReader(Utils.getClassStream("ini"+PROPERTIES)));
-        return properties;
+    public Properties readInitPropertiesInfo() throws IOException{
+        if(initProperties == null) {
+            initProperties = new Properties();
+            initProperties.load(new InputStreamReader(Utils.getClassStream("ini" + PROPERTIES)));
+        }
+        return initProperties;
     }
 
     private GHRepository getRepository(Properties properties) throws IOException{

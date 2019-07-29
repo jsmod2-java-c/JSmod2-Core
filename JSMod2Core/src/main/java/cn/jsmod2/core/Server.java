@@ -142,7 +142,6 @@ public abstract class Server implements Closeable, Reloadable, Start {
         this.registerAll();
 
 
-
         this.opsFile = OpsFile.getOpsFile(this);
 
         this.gameServer = gServer;

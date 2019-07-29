@@ -1,6 +1,7 @@
 package cn.jsmod2;
 
 import cn.jsmod2.api.event.NativeJoinListener;
+import cn.jsmod2.core.FileSystem;
 import cn.jsmod2.core.Manager;
 import cn.jsmod2.core.RegisterTemplate;
 import cn.jsmod2.core.Server;
@@ -25,6 +26,12 @@ public class DefaultServer extends Server {
 
     public DefaultServer() {
         super(new Smod2Server(),false);
+        try {
+            String about = FileSystem.getFileSystem().readInitPropertiesInfo().getProperty(Register.ABOUT);
+            log.info("Running JSMod2 Version: "+about);
+        }catch (Exception e){
+            log.error(e.getMessage());
+        }
     }
 
     @Override

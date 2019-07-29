@@ -42,6 +42,4 @@ public class Jsmod2 {
             UIStarter.run(args);
         });
     }
-
-
 }
