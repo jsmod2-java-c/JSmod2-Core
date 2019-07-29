@@ -130,7 +130,7 @@ public class FileSystem {
         try{
             if(applicationInfo == null) {
                 applicationInfo = new Properties();
-                applicationInfo.load(Utils.getClassStream("application" + PROPERTIES));
+                applicationInfo.load(new InputStreamReader(Utils.getClassStream("application" + PROPERTIES)));
                 return applicationInfo;
             }
         }catch (IOException e){
@@ -176,7 +176,7 @@ public class FileSystem {
 
     private Properties readInitPropertiesInfo() throws IOException{
         Properties properties = new Properties();
-        properties.load(Utils.getClassStream("ini"+PROPERTIES));
+        properties.load(new InputStreamReader(Utils.getClassStream("ini"+PROPERTIES)));
         return properties;
     }
 
@@ -232,7 +232,7 @@ public class FileSystem {
 
                 properties.store(stream,"this is the server's properties\n data.network.plugin.port is the jsmod2_dataNetwork plugin's port \n the this.port is java server port \n it will support more ports");
                 stream.flush();
-                properties.load(new FileInputStream(serverProp));
+                properties.load(new InputStreamReader(new FileInputStream(serverProp)));
                 return properties;
             }else{
                 if(serverPreproties == null) {
@@ -275,7 +275,7 @@ public class FileSystem {
         if(!file.exists()){
             PrintWriter writer = new PrintWriter(file);
 
-            properties.load(Utils.getClassStream("lang.properties"));
+            properties.load(new InputStreamReader(Utils.getClassStream("lang.properties")));
             for(RegisterTemplate template:server.getRegisters()) {
                 for (String lang : template.getRegisterLang()) {
                     log.info(properties.getProperty(lang));
@@ -283,13 +283,13 @@ public class FileSystem {
             }
             String langType = Server.getScanner().nextLine();
             try{
-                properties.load(Utils.getClassStream(langType+PROPERTIES));
+                properties.load(new InputStreamReader(Utils.getClassStream(langType+PROPERTIES)));
                 writer.println(langType);
             }catch (Exception e1){
                 log.error("sorry,no such language,default: chinese");
                 log.error("不好意思，没有这样的语言，默认为:中文");
                 try{
-                    properties.load(Utils.getClassStream("zh"+PROPERTIES));
+                    properties.load(new InputStreamReader(Utils.getClassStream("zh"+PROPERTIES)));
                 }catch (Exception e2){
                     e2.printStackTrace();
                 }
@@ -300,9 +300,9 @@ public class FileSystem {
             BufferedReader reader = Utils.getReader(file);
             String lang = reader.readLine();
             try{
-                properties.load(Utils.getClassStream(lang+PROPERTIES));
+                properties.load(new InputStreamReader(Utils.getClassStream(lang+PROPERTIES)));
             }catch (IOException|NullPointerException e){
-                properties.load(Utils.getClassStream("zh"+PROPERTIES));
+                properties.load(new InputStreamReader(Utils.getClassStream("zh"+PROPERTIES)));
             }
         }
         return properties;
