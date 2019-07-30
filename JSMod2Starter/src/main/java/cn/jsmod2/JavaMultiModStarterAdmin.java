@@ -4,7 +4,7 @@ It needs to rely on smod2 and proxy. jsmod2 is an open source
 free plugin that is released under the GNU license. Please read
 the GNU open source license before using the software. To understand
 the appropriateness, if infringement, will be handled in accordance
-with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">that<a>
+with the law, @Copyright JavaMultiModStarterAdmin China,more can see <a href="http://jsmod2.cn">that<a>
  */
 package cn.jsmod2;
 
@@ -23,7 +23,7 @@ import java.util.concurrent.CountDownLatch;
 //4.a链接SteamCMD 子工程
 //5.emerald 脚本 子工程
 @ServerApplication(DefaultServer.class)
-public class Jsmod2 {
+public class JavaMultiModStarterAdmin {
 
     public static void main(String[]args){
         Utils.TryCatch(()->{
@@ -36,7 +36,7 @@ public class Jsmod2 {
             CountDownLatch latch1 = new CountDownLatch(1);
             new Thread(()->{
                 latch1.countDown();
-                Application.run(Jsmod2.class,args);
+                Application.run(JavaMultiModStarterAdmin.class,args);
             }).start();
             latch1.await();
             UIStarter.run(args);
