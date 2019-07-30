@@ -146,19 +146,19 @@ public abstract class PluginBase implements Plugin {
     }
 
     public void info(String message){
-        this.getServer().getLogger().info(message);
+        this.getServer().getLogger().multiInfo(this.getClass(),message,"","");
     }
 
     public void error(String message){
-        this.getServer().getLogger().error(message);
+        this.getServer().getLogger().multiError(this.getClass(),message,"","");
     }
 
     public void debug(String message){
-        this.getServer().getLogger().debug(message);
+        this.getServer().getLogger().multiDebug(this.getClass(),message,"","");
     }
 
     public void warn(String message){
-        this.getServer().getLogger().warn(message);
+        this.getServer().getLogger().multiWarn(this.getClass(),message,"","");
     }
 
     public void registerEvents(Listener listener){

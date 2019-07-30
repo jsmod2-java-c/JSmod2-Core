@@ -10,7 +10,9 @@ package cn.jsmod2.core.log;
 
 import cn.jsmod2.core.utils.LogFormat;
 import cn.jsmod2.core.utils.LogType;
+import cn.jsmod2.core.utils.Utils;
 import org.apache.log4j.Logger;
+import org.fusesource.jansi.Ansi;
 
 import java.io.IOException;
 import java.util.concurrent.BlockingQueue;
@@ -44,6 +46,7 @@ import static org.fusesource.jansi.Ansi.Color.*;
 
 public class ServerLogger implements ILogger{
     private ConsoleOutputStream consoleOutputStream = new ConsoleOutputStream();
+    @Deprecated
     private BlockingQueue<String> queue = new LinkedBlockingQueue<>();
 
     private static ServerLogger log;
@@ -98,6 +101,25 @@ public class ServerLogger implements ILogger{
         warn(message,"");
     }
 
+    @Override
+    public void multiDebug(Class<?> clz, String message, String prefix, String suffix) {
+        debug(getMultiMessage(message,clz),prefix,suffix);
+    }
+
+    @Override
+    public void multiError(Class<?> clz, String message, String prefix, String suffix) {
+        error(getMultiMessage(message,clz),prefix,suffix);
+    }
+
+    @Override
+    public void multiInfo(Class<?> clz, String message, String prefix, String suffix) {
+        info(getMultiMessage(message,clz),prefix,suffix);
+    }
+
+    @Override
+    public void multiWarn(Class<?> clz, String message, String prefix, String suffix) {
+        warn(getMultiMessage(message,clz),prefix,suffix);
+    }
     @Override
     public void debug(String message, String prefix) {
         debug(message,prefix,"\n");
@@ -161,11 +183,16 @@ public class ServerLogger implements ILogger{
         return log;
     }
 
+    @Deprecated
     public BlockingQueue<String> getQueue() {
         return queue;
     }
 
     public ConsoleOutputStream getConsoleOutputStream() {
         return consoleOutputStream;
+    }
+
+    private String getMultiMessage(String message,Class clz){
+        return LogFormat.textFormat("["+ Utils.simpleClassName(clz) +"]"+message, CYAN).toString();
     }
 }

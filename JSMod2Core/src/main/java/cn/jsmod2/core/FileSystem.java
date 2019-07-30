@@ -282,7 +282,7 @@ public class FileSystem {
             properties.load(new InputStreamReader(Utils.getClassStream("lang.properties")));
             for(RegisterTemplate template:server.getRegisters()) {
                 for (String lang : template.getRegisterLang()) {
-                    log.info(properties.getProperty(lang));
+                    log.multiInfo(this.getClass(),properties.getProperty(lang),"","");
                 }
             }
             String langType = Server.getScanner().nextLine();
@@ -290,8 +290,8 @@ public class FileSystem {
                 properties.load(new InputStreamReader(Utils.getClassStream(langType+PROPERTIES)));
                 writer.println(langType);
             }catch (Exception e1){
-                log.error("sorry,no such language,default: chinese");
-                log.error("不好意思，没有这样的语言，默认为:中文");
+                log.multiWarn(getClass(),"sorry,no such language,default: chinese","","");
+                log.multiWarn(getClass(),"不好意思，没有这样的语言，默认为:中文","","");
                 try{
                     properties.load(new InputStreamReader(Utils.getClassStream("zh"+PROPERTIES)));
                 }catch (Exception e2){

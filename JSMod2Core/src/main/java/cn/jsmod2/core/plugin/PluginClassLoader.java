@@ -161,7 +161,7 @@ public class PluginClassLoader {
 
             pluginObject.setEnabled(true);
 
-            Server.getSender().getServer().getLogger().info("the plugin named:" + vo.getPluginName() + " is loading.. version: " + vo.getVersion());
+            Server.getSender().getServer().getLogger().multiInfo(this.getClass(),"the plugin named:" + vo.getPluginName() + " is loading.. version: " + vo.getVersion(),"","");
 
             EnableRegister register = pluginObject.getClass().getAnnotation(EnableRegister.class);
 
@@ -186,7 +186,7 @@ public class PluginClassLoader {
                         if(register.listener()) {
                             if (Arrays.asList(mostSuperClass(clz).getInterfaces()).contains(Listener.class) && !exclusionsListener.contains(clz)) {
                                 Object obj = clz.newInstance();
-                                logger.info("loading listener");
+                                logger.multiInfo(this.getClass(),"loading listener","","");
                                 manager.registerEvents((Listener) obj, pluginObject);
                             }
                         }

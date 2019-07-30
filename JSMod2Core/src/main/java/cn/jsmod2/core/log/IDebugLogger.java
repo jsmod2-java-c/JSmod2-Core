@@ -12,4 +12,6 @@ public interface IDebugLogger {
     void debug(String message, String prefix);
 
     void debug(String message, String prefix, String suffix);
+
+    void multiDebug(Class<?> clz,String message,String prefix,String suffix);
 }

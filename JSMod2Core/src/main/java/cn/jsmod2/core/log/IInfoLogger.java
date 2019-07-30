@@ -10,4 +10,6 @@ public interface IInfoLogger {
     void info(String message);
 
     void info(String message, String prefix, String suffix);
+
+    void multiInfo(Class<?> clz,String message,String prefix,String suffix);
 }

@@ -12,4 +12,6 @@ public interface IWarnLogger {
 
     void warn(String message, String prefix, String suffix);
 
+    void multiWarn(Class<?> clz,String message,String prefix,String suffix);
+
 }

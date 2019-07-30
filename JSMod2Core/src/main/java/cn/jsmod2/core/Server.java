@@ -135,7 +135,7 @@ public abstract class Server implements Closeable, Reloadable, Start {
 
         this.serverfolder = new File(file);
 
-        this.log.info("Server's folder"+serverfolder);
+        this.log.multiInfo(this.getClass(),"Server's folder"+serverfolder,"","");
 
         this.registerTemplates(registers,this);
 
@@ -184,7 +184,7 @@ public abstract class Server implements Closeable, Reloadable, Start {
 
     public void startWatch(Class<?> main,String[] args) {
         Utils.TryCatch(()-> {
-            this.log.info(main.getSimpleName() + "::start::" + main.getName());
+            this.log.multiInfo(this.getClass(),main.getSimpleName() + "::start::" + main.getName(),"","");
             this.executeEmerald(args, true);
             this.chooseLangOrStart();
             this.start();
@@ -230,7 +230,7 @@ public abstract class Server implements Closeable, Reloadable, Start {
 
 
     public void help(){
-        log.info(LogFormat.textFormat("+================HELP========================+", Ansi.Color.GREEN).toString(),LogFormat.textFormat("[HELP]", Ansi.Color.BLUE).toString());
+        log.multiInfo(this.getClass(),LogFormat.textFormat("+================HELP========================+", Ansi.Color.GREEN).toString(),LogFormat.textFormat("[HELP]", Ansi.Color.BLUE).toString(),"");
         Set<Map.Entry<String,String>> cmdSet = commandInfo.entrySet();
         for(Map.Entry<String,String> entry:cmdSet){
             String key = entry.getKey();
@@ -240,7 +240,7 @@ public abstract class Server implements Closeable, Reloadable, Start {
                 value = builder.substring(PROP.length());
                 value = lang.getProperty(value);
             }
-            log.info(LogFormat.textFormat(key+": "+value, Ansi.Color.GREEN).toString(),LogFormat.textFormat("[HELP]", Ansi.Color.BLUE).toString());
+            log.multiInfo(this.getClass(),LogFormat.textFormat(key+": "+value, Ansi.Color.GREEN).toString(),LogFormat.textFormat("[HELP]", Ansi.Color.BLUE).toString(),"");
         }
     }
 
@@ -256,7 +256,7 @@ public abstract class Server implements Closeable, Reloadable, Start {
 
     public void reload(){
         Utils.TryCatch(()->{
-            log.debug("reloading...");
+            log.multiDebug(getClass(),"reloading...","","");
             pluginManager.clear();
             pluginManager.getPluginClassLoader().loadPlugins(new File(PLUGIN_DIR));
         });
@@ -299,7 +299,7 @@ public abstract class Server implements Closeable, Reloadable, Start {
                 socket.close();
             }
         }catch (Exception e){
-            log.error(e.getMessage());
+            log.multiError(getClass(),e.getMessage(),"","");
         }
         return future;
     }
@@ -393,7 +393,7 @@ public abstract class Server implements Closeable, Reloadable, Start {
 
 
     private Future sendPacket(final DataPacket packet,boolean result){
-        log.info("PACKET_TYPE:"+packet.getClass().getSimpleName());
+        log.multiInfo(getClass(),"PACKET_TYPE:"+packet.getClass().getSimpleName(),"","");
         return sendPacket(packet,serverProp.getProperty(FileSystem.SMOD2_IP),Integer.parseInt(serverProp.getProperty(PLUGIN_PORT)),result);
     }
 
@@ -407,7 +407,7 @@ public abstract class Server implements Closeable, Reloadable, Start {
             if(encode!=null)
                 return sendData(encode, ip, port,result);
             else
-                log.error("PROTOCOL: NULL");
+                log.multiError(getClass(),"PROTOCOL: NULL","","");
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -479,7 +479,7 @@ public abstract class Server implements Closeable, Reloadable, Start {
     private void closeAll(){
         disable();
         closeStream();
-        log.info(lang.getProperty(STOP+".finish"),LogFormat.textFormat("[STOP::"+FileSystem.getFileSystem().serverProperties(server).getProperty("smod2.ip")+"]", Ansi.Color.GREEN).toString());
+        log.multiInfo(this.getClass(),lang.getProperty(STOP+".finish"),LogFormat.textFormat("[STOP::"+FileSystem.getFileSystem().serverProperties(server).getProperty("smod2.ip")+"]", Ansi.Color.GREEN).toString(),"");
     }
     private void disable(){
         for(Plugin plugin:plugins){
@@ -502,10 +502,10 @@ public abstract class Server implements Closeable, Reloadable, Start {
         @Override
         public void run() {
             Properties info = FileSystem.getFileSystem().infoProperties();
-            log.info(MessageFormat.format("last-format-sha:{0},last-format-info:{1}",info.getProperty("last-commit-sha"),info.getProperty("last-update")),"\n");
-            log.info(MessageFormat.format("version:{0}",info.getProperty("version")));
-            log.info(MessageFormat.format("thanks for authors:{0}",info.getProperty("authors")));
-            log.info(MessageFormat.format("stars:{0},fork:{1}",info.getProperty("stars"),info.getProperty("forks")));
+            log.multiInfo(this.getClass(),MessageFormat.format("last-commit-sha:{0},last-commit-info:{1}",info.getProperty("last-commit-sha"),info.getProperty("last-update")),"\n","");
+            log.multiInfo(this.getClass(),MessageFormat.format("version:{0}",info.getProperty("version")),"","");
+            log.multiInfo(this.getClass(),MessageFormat.format("thanks for authors:{0}",info.getProperty("authors")),"","");
+            log.multiInfo(this.getClass(),MessageFormat.format("stars:{0},fork:{1}",info.getProperty("stars"),info.getProperty("forks")),"","");
             Utils.getMessageSender().info(">");
         }
     }
@@ -591,7 +591,7 @@ public abstract class Server implements Closeable, Reloadable, Start {
                     lock.unlock();
                     if(isDebug){
 
-                        log.debug("one/s:"+getTPS());
+                        log.multiDebug(this.getClass(),"one/s:"+getTPS(),"","");
 
                         log.debug(new String(Base64.getDecoder().decode(new String(request.getData(),0,request.getLength()))),count+"::id-message");
                     }
@@ -615,7 +615,7 @@ public abstract class Server implements Closeable, Reloadable, Start {
                         lock.lock();
                         count++;
                         lock.unlock();
-                        log.debug("one/s:" + getTPS());
+                        log.multiDebug(getClass(),"one/s:" + getTPS(),"","");
                     }
                 }
             });
@@ -690,7 +690,7 @@ public abstract class Server implements Closeable, Reloadable, Start {
 
         private void printLine(String message) {
             try{
-                log.info(new String(message.getBytes("ISO-8859-1"),System.getProperty("file.encoding")));
+                log.multiInfo(getClass(),new String(message.getBytes("ISO-8859-1"),System.getProperty("file.encoding")),"","");
 
             }catch (UnsupportedEncodingException e){
                 e.printStackTrace();

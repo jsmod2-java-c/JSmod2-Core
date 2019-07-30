@@ -19,4 +19,6 @@ public interface IErrorLogger {
     void error(String message, String prefix);
 
     void error(String message, String prefix, String suffix);
+
+    void multiError(Class<?> clz,String message,String prefix,String suffix);
 }

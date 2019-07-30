@@ -8,10 +8,7 @@ with the law, @Copyright JavaMultiModStarterAdmin China,more can see <a href="ht
  */
 package cn.jsmod2;
 
-import cn.jsmod2.core.Application;
-import cn.jsmod2.core.annotations.ServerApplication;
-import cn.jsmod2.core.utils.Utils;
-import java.util.concurrent.CountDownLatch;
+import cn.jsmod2.core.log.ServerLogger;
 
 /**
  * @author magiclu550 #(code) jsmod2
@@ -22,24 +19,13 @@ import java.util.concurrent.CountDownLatch;
 //3.基本的数据定义
 //4.a链接SteamCMD 子工程
 //5.emerald 脚本 子工程
-@ServerApplication(DefaultServer.class)
+
 public class JavaMultiModStarterAdmin {
 
     public static void main(String[]args){
-        Utils.TryCatch(()->{
-            CountDownLatch latch = new CountDownLatch(1);
-            new Thread(()->{
-                Starter.run(args);
-                latch.countDown();
-            }).start();
-            latch.await();
-            CountDownLatch latch1 = new CountDownLatch(1);
-            new Thread(()->{
-                latch1.countDown();
-                Application.run(JavaMultiModStarterAdmin.class,args);
-            }).start();
-            latch1.await();
-            UIStarter.run(args);
-        });
+        ServerStarter starter = new ServerStarter();
+        starter.start(args);
     }
+
+
 }

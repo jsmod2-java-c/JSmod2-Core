@@ -1,16 +1,14 @@
 package cn.jsmod2;
 
-import cn.jsmod2.api.event.player.PlayerJoinEvent;
+
 import cn.jsmod2.core.Application;
 import cn.jsmod2.core.annotations.ServerApplication;
-import cn.jsmod2.core.event.Event;
 import cn.jsmod2.core.log.ServerLogger;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 
-import java.lang.reflect.Field;
 
 @ServerApplication(DefaultServer.class)
 public class ServerRunner extends BlockJUnit4ClassRunner {
