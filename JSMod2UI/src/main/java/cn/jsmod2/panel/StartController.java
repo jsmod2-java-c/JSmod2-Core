@@ -17,10 +17,6 @@ import java.util.List;
 
 public class StartController {
 
-    public StartController(){
-        ServerLogger.getLogger().info("start the ui");
-    }
-
     private ServerLogger serverLogger = ServerLogger.getLogger();
     private volatile boolean consoleRun = false;
     private volatile boolean serverRun = false;
@@ -42,7 +38,6 @@ public class StartController {
 
     @FXML
     private void initialize(){
-        serverLogger.debug("UI initialize");
         serverLogger.getConsoleOutputStream().setTextArea(consoleTextArea);
     }
 
