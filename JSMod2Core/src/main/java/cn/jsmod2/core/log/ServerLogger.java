@@ -103,22 +103,22 @@ public class ServerLogger implements ILogger{
 
     @Override
     public void multiDebug(Class<?> clz, String message, String prefix, String suffix) {
-        debug(getMultiMessage(message,clz),prefix,suffix);
+        debug(message,prefix+getMultiMessage(clz)+"\t",suffix.equals("")?"\n":suffix);
     }
 
     @Override
     public void multiError(Class<?> clz, String message, String prefix, String suffix) {
-        error(getMultiMessage(message,clz),prefix,suffix);
+        error(message,prefix+getMultiMessage(clz)+"\t",suffix.equals("")?"\n":suffix);
     }
 
     @Override
     public void multiInfo(Class<?> clz, String message, String prefix, String suffix) {
-        info(getMultiMessage(message,clz),prefix,suffix);
+        info(message,prefix+getMultiMessage(clz)+"\t",suffix.equals("")?"\n":suffix);
     }
 
     @Override
     public void multiWarn(Class<?> clz, String message, String prefix, String suffix) {
-        warn(getMultiMessage(message,clz),prefix,suffix);
+        warn(message,prefix+getMultiMessage(clz)+"\t",suffix.equals("")?"\n":suffix);
     }
     @Override
     public void debug(String message, String prefix) {
@@ -192,7 +192,7 @@ public class ServerLogger implements ILogger{
         return consoleOutputStream;
     }
 
-    private String getMultiMessage(String message,Class clz){
-        return LogFormat.textFormat("["+ Utils.simpleClassName(clz) +"]"+message, CYAN).toString();
+    private String getMultiMessage(Class clz){
+        return LogFormat.textFormat("["+ Utils.simpleClassName(clz) +"]", CYAN).toString();
     }
 }

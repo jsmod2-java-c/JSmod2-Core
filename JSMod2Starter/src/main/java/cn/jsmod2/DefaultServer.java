@@ -28,9 +28,9 @@ public class DefaultServer extends Server {
         super(new Smod2Server(),false);
         try {
             String about = FileSystem.getFileSystem().readInitPropertiesInfo().getProperty(Register.ABOUT);
-            log.info("Running JSMod2 Version: "+about);
+            log.multiInfo(getClass(),"Running JSMod2 Version: "+about,"","");
         }catch (Exception e){
-            log.error(e.getMessage());
+            log.multiError(getClass(),e.getMessage(),"","");
         }
     }
 
