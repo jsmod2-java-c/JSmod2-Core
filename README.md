@@ -45,6 +45,11 @@ If you want to participate in the development of JSmod2,
 you can refer to [JSmod2-design](https://github.com/jsmod2-java-c/jsmod2-design) for further information.
 
 ![avatar](github_info/jsmod2-banner.png)
+
+> Discord
+
+Welcome to our [discord](https://discord.gg/Qjzvb2a)
+
 > How to start?
 * We recommended you to set up in Windows Server 2008-2016 / Ubuntu Server 18.04.2 LTS
 
