@@ -16,7 +16,7 @@ public class AboutCommand extends NativeCommand {
     public boolean execute(CommandSender commandSender, String[] strings) {
 
         try {
-           commandSender.personalBroadcast(0,"Running" + FileSystem.getFileSystem().readInitPropertiesInfo().getProperty("jsmod2.about"),true);
+           commandSender.personalBroadcast(0,"Running " + FileSystem.getFileSystem().readInitPropertiesInfo().getProperty("jsmod2.about"),true);
         }catch (Exception e){
             ServerLogger.getLogger().error(e.getMessage());
             return false;
