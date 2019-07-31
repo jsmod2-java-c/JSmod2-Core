@@ -19,7 +19,7 @@ import java.util.List;
  * @author magiclu550 #(code) jsmod2
  */
 
-public abstract class CommandSender {
+public abstract class CommandSender extends ApiId{
 
     private List<String> powers = new LinkedList<>();//powers
 

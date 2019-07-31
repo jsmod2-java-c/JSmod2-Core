@@ -176,8 +176,6 @@ public abstract class BinaryStream {
     }
 
     private void invokeSetMethod(Object o,String field,String value) throws Exception{
-        ServerLogger.getLogger().multiDebug(getClass(),field,"","");
-        ServerLogger.getLogger().multiDebug(getClass(),o.getClass().toString(),"","");
         Field field1 = getField(o.getClass(),field);
         field1.setAccessible(true);
         Class<?> clz = field1.getType();

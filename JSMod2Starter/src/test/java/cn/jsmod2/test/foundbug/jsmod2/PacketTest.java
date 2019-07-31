@@ -3,6 +3,7 @@ package cn.jsmod2.test.foundbug.jsmod2;
 import cn.jsmod2.DefaultServer;
 import cn.jsmod2.api.event.player.PlayerEvent;
 import cn.jsmod2.api.event.player.PlayerJoinEvent;
+import cn.jsmod2.api.player.Player;
 import cn.jsmod2.core.ApiId;
 import cn.jsmod2.core.Application;
 import cn.jsmod2.core.FileSystem;
@@ -34,11 +35,9 @@ public class PacketTest {
         Application.run(PacketTest.class,new String[]{});
 
     }
-
     @Test
-    public void send(){
-        Map map = new HashMap();
-        map.put("aa",null);
+    public void send() throws Exception{
+        System.out.println(getField(Player.class,"playerName"));
     }
 
     @Test
@@ -46,9 +45,32 @@ public class PacketTest {
         Socket socket = new Socket();
         socket.bind(new InetSocketAddress("127.0.0.1",19938));
         socket.connect(new InetSocketAddress("127.0.0.1",19935));
+        socket.getOutputStream().write(Base64.getEncoder().encode(("85-{}").getBytes()));
         socket.close();
     }
 
+    private Field getField(Class clz,String field) throws NoSuchFieldException{
+        while (!clz.equals(Object.class)){
+            System.out.println(clz);
+            if(hasField(clz,field)){
+                Field field1 = clz.getDeclaredField(field);
+                field1.setAccessible(true);
+                return field1;
+            }
+            clz = clz.getSuperclass();
+        }
+        return null;
+    }
+
+    private boolean hasField(Class clz,String field){
+        try {
+            clz.getDeclaredField(field);
+            return true;
+        }catch (NoSuchFieldException e){
+
+        }
+        return false;
+    }
 
 
 //    @Test
