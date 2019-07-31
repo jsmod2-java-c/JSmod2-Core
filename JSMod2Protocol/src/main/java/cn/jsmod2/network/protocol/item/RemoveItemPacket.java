@@ -12,7 +12,6 @@ public class RemoveItemPacket extends SetItemPacket {
     public void send() {
         requester
                 .with(DO,"remove")
-                .with("player",playerName)
                 .to();
     }
 }

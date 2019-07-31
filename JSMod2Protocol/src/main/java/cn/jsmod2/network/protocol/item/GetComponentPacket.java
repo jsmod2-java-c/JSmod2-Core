@@ -15,7 +15,6 @@ public class GetComponentPacket extends GetItemPacket {
     public Object send() {
         return requester
                 .with("field","component")
-                .with("player",playerName)
                 .get().get();
     }
 }

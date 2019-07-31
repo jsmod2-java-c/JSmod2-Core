@@ -25,12 +25,16 @@ public class Item extends ApiId implements Cloneable, Serializable {
     private ItemType itemType;
 
     public boolean isInWorld() {
-        inWorld = new GetItemInWorldPacket().send();
+        GetItemInWorldPacket packet = new GetItemInWorldPacket();
+        packet.playerName = playerName;
+        inWorld = packet.send();
         return inWorld;
     }
 
     public ItemType getItemType() {
-        itemType = new GetItemTypePacket().send();
+        GetItemTypePacket packet = new GetItemTypePacket();
+        packet.playerName = playerName;
+        itemType = packet.send();
         return itemType;
     }
 
@@ -66,6 +70,7 @@ public class Item extends ApiId implements Cloneable, Serializable {
 
     public boolean isKinematic() {
         GetItemKinematicPacket kinematicPacket = new GetItemKinematicPacket();
+        kinematicPacket.playerName = playerName;
         return kinematicPacket.send();
     }
 

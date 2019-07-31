@@ -30,6 +30,8 @@ import cn.jsmod2.core.protocol.CommandRegisterPacket;
 import cn.jsmod2.core.protocol.command.PlayerCommandPacket;
 import cn.jsmod2.core.protocol.command.ServerCommandPacket;
 import cn.jsmod2.network.protocol.event.admin.AdminQueryAdminSetPacket;
+import cn.jsmod2.network.protocol.event.admin.AdminQueryQueryGetPacket;
+import cn.jsmod2.network.protocol.event.admin.AdminQueryQuerySetPacket;
 import cn.jsmod2.network.protocol.item.*;
 import cn.jsmod2.network.protocol.server.*;
 
@@ -121,7 +123,9 @@ public class Register extends RegisterTemplate {
         packets.put(SetMaxPlayersPacket.class,SetMaxPlayersPacket.ID);
         packets.put(GetItemInWorldPacket.class,GetItemInWorldPacket.ID);
         packets.put(GetItemTypePacket.class,GetItemTypePacket.ID);
-        //~104 最大 下一个105
+        packets.put(AdminQueryQuerySetPacket.class,AdminQueryQuerySetPacket.ID);
+        packets.put(AdminQueryQueryGetPacket.class,AdminQueryQueryGetPacket.ID);
+        //~106 最大 下一个107
         putPackets();
     }
 

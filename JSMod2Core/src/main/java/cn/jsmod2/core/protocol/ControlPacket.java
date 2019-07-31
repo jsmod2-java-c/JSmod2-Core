@@ -6,6 +6,8 @@ import java.util.Map;
 
 public class ControlPacket extends DataPacket {
 
+    public String playerName;
+
     public ControlPacket(int id) {
         super(id);
     }
@@ -16,7 +18,10 @@ public class ControlPacket extends DataPacket {
 
     protected final Server server = Server.getSender().getServer();
 
-    protected final Requester requester = server.getRequester(this).with(ID,getId());
+    protected final Requester requester = server.getRequester(this)
+            .with(ID,getId())
+            .with("player",playerName);
+
 
 
     @Override

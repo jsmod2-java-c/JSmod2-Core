@@ -9,6 +9,5 @@ public abstract class GetItemPacket extends GetPacket {
         requester.with("type","item");
     }
 
-    public String playerName;
 
 }

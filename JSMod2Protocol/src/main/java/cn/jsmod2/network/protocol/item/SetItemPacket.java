@@ -11,6 +11,5 @@ public abstract class SetItemPacket extends SetPacket {
         requester.with("type","item");
     }
 
-    public String playerName;
 
 }

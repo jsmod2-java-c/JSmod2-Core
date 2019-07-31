@@ -10,6 +10,8 @@ package cn.jsmod2.api.event.admin;
 import cn.jsmod2.api.player.Player;
 import cn.jsmod2.core.event.Event;
 import cn.jsmod2.network.protocol.event.admin.AdminQueryAdminSetPacket;
+import cn.jsmod2.network.protocol.event.admin.AdminQueryQueryGetPacket;
+import cn.jsmod2.network.protocol.event.admin.AdminQueryQuerySetPacket;
 
 /**
  * @author magiclu550 #(code) jsmod2
@@ -40,11 +42,18 @@ public class AdminQueryEvent extends Event {
     }
 
     public String getQuery() {
+        AdminQueryQueryGetPacket packet = new AdminQueryQueryGetPacket();
+        packet.playerName = playerName;
+        query = packet.send();
         return query;
     }
 
     public void setQuery(String query) {
         this.query = query;
+        AdminQueryQuerySetPacket packet = new AdminQueryQuerySetPacket();
+        packet.playerName = playerName;
+        packet.query = query;
+        packet.send();
     }
 
     public String getOutput() {

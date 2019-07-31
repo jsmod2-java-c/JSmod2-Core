@@ -4,7 +4,6 @@ import cn.jsmod2.core.protocol.SetPacket;
 
 public abstract class EventSetPacket extends SetPacket {
 
-    public String playerName;
 
     public EventSetPacket(int id) {
         super(id);
