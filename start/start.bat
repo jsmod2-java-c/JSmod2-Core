@@ -75,7 +75,7 @@ ECHO Start to easy_install rsa......
 easy_install rsa
 if errorlevel 0 echo 执行成功!
 
-./start.py
+".\start.py"
 path
 
 pause
