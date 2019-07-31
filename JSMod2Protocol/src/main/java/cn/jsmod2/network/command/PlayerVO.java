@@ -14,5 +14,8 @@ import cn.jsmod2.core.protocol.command.AbstractPlayerVO;
 
 public class PlayerVO extends AbstractPlayerVO<Player> {
 
+    public PlayerVO(){
+        this.player = new Player("");
+    }
 
 }

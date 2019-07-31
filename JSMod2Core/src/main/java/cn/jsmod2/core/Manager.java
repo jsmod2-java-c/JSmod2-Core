@@ -73,6 +73,7 @@ public abstract class Manager implements Cloneable{
             PlayerCommandPacket<P> playerCommandPacket = new PlayerCommandPacket<>(voPlayerClass);
             return playerCommandPacket.decode(bytes);
         }
+
         return null;
     }
 

@@ -61,7 +61,6 @@ public class PacketManager extends Manager {
      * 处理包的逻辑写在这里
      */
     public void manageMethod(String message,int id){
-        ServerLogger.getLogger().debug("HANDLE_MESSAGE:"+message+"::ID:"+id);
         try{
             Properties properties = FileSystem.getFileSystem().serverProperties(Server.getSender().getServer());
             byte[] bytes = message.getBytes(properties.getProperty("encode"));//通过utf-8形式获取byte字节数组
