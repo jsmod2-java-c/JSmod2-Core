@@ -11,6 +11,7 @@ import cn.jsmod2.core.annotations.ServerApplication;
 import cn.jsmod2.core.event.Event;
 import cn.jsmod2.core.protocol.DataPacket;
 import cn.jsmod2.core.protocol.GetPacket;
+import cn.jsmod2.network.protocol.item.RemoveItemPacket;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
 import org.junit.Test;
@@ -31,6 +32,13 @@ public class PacketTest {
     @Test
     public void eventRe(){
         Application.run(PacketTest.class,new String[]{});
+
+    }
+
+    @Test
+    public void send(){
+        Map map = new HashMap();
+        map.put("aa",null);
     }
 
     @Test
@@ -38,7 +46,6 @@ public class PacketTest {
         Socket socket = new Socket();
         socket.bind(new InetSocketAddress("127.0.0.1",19938));
         socket.connect(new InetSocketAddress("127.0.0.1",19935));
-        socket.getOutputStream().write(Base64.getEncoder().encode(("45-{}|player-scp079Data-playerName:"+ UUID.randomUUID()).getBytes()));
         socket.close();
     }
 

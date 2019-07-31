@@ -34,6 +34,10 @@ public class PlayerReloadEvent extends PlayerEvent {
         CurrentAmmoTotal = currentAmmoTotal;
     }
 
+    public PlayerReloadEvent(){
+
+    }
+
     public int getAmmoRemoved() {
         return ammoRemoved;
     }
