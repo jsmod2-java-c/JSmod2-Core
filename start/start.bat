@@ -1,9 +1,9 @@
-# Jsmod2 is a java-based scpsl server initiated by jsmod2.cn.
-# It needs to rely on smod2 and proxy. jsmod2 is an open source
-# free plugin that is released under the GNU license. Please read
-# the GNU open source license before using the software. To understand
-# the appropriateness, if infringement, will be handled in accordance
-# with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">that<a>
+:: Jsmod2 is a java-based scpsl server initiated by jsmod2.cn.
+:: It needs to rely on smod2 and proxy. jsmod2 is an open source
+:: free plugin that is released under the GNU license. Please read
+:: the GNU open source license before using the software. To understand
+:: the appropriateness, if infringement, will be handled in accordance
+:: with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">that<a>
 
 ::python版语言环境、配置自动安装批处理文件
 
@@ -75,6 +75,7 @@ ECHO Start to easy_install rsa......
 easy_install rsa
 if errorlevel 0 echo 执行成功!
 
+./start.py
 path
 
 pause
