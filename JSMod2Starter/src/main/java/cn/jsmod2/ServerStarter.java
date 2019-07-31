@@ -20,10 +20,10 @@ public class ServerStarter {
             CountDownLatch latch1 = new CountDownLatch(1);
             new Thread(()->{
                 latch1.countDown();
-                Application.run(this.getClass(),args);
+                UIStarter.run(args);
             }).start();
             latch1.await();
-            UIStarter.run(args);
+            Application.run(this.getClass(),args);
         });
     }
 }
