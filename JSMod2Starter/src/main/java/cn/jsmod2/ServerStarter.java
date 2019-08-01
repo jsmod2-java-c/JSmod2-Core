@@ -2,6 +2,7 @@ package cn.jsmod2;
 
 import cn.jsmod2.core.Application;
 import cn.jsmod2.core.annotations.ServerApplication;
+import cn.jsmod2.core.log.ServerLogger;
 import cn.jsmod2.core.utils.Utils;
 
 import java.util.concurrent.CountDownLatch;
@@ -20,7 +21,11 @@ public class ServerStarter {
             CountDownLatch latch1 = new CountDownLatch(1);
             new Thread(()->{
                 latch1.countDown();
-                UIStarter.run(args);
+                try {
+                    UIStarter.run(args);
+                }catch (Exception e){
+                    ServerLogger.getLogger().multiError(getClass(),e.getMessage(),"","");
+                }
             }).start();
             latch1.await();
             Application.run(this.getClass(),args);
