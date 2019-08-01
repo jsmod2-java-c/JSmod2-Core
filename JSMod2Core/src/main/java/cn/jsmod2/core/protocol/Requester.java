@@ -1,6 +1,7 @@
 package cn.jsmod2.core.protocol;
 
 import cn.jsmod2.core.Server;
+import cn.jsmod2.core.math.Vector;
 import cn.jsmod2.core.utils.Future;
 import com.alibaba.fastjson.JSON;
 
@@ -34,7 +35,7 @@ public class Requester {
     }
 
     public Requester with(String key,Object value){
-        _map.put(key,value);
+        _map.put(key,value instanceof Vector?value.toString():value);
         return this;
     }
 

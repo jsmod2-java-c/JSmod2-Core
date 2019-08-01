@@ -21,6 +21,7 @@ import cn.jsmod2.api.event.team.SetSCPConfigEvent;
 import cn.jsmod2.core.FileSystem;
 import cn.jsmod2.core.RegisterTemplate;
 import cn.jsmod2.core.annotations.RegisterMethod;
+import cn.jsmod2.core.protocol.CommandSendPacket;
 import cn.jsmod2.network.ServerInitPacket;
 import cn.jsmod2.core.protocol.DataPacket;
 import cn.jsmod2.core.ex.*;
@@ -89,6 +90,7 @@ public class Register extends RegisterTemplate {
         nativeCommandMap.put("unload",new UnloadPluginCommand());
         nativeCommandMap.put("load",new LoadPluginCommand());
         nativeCommandMap.put("about",new AboutCommand());
+        nativeCommandMap.put("multi",new MultiCommand());
     }
 
 
@@ -125,7 +127,8 @@ public class Register extends RegisterTemplate {
         packets.put(GetItemTypePacket.class,GetItemTypePacket.ID);
         packets.put(AdminQueryQuerySetPacket.class,AdminQueryQuerySetPacket.ID);
         packets.put(AdminQueryQueryGetPacket.class,AdminQueryQueryGetPacket.ID);
-        //~106 最大 下一个107
+        packets.put(CommandSendPacket.class,CommandSendPacket.ID);
+        //~107 最大 下一个108
         putPackets();
     }
 

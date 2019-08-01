@@ -100,4 +100,6 @@ class Vector (var x:Double,var y:Double,var z:Double){
   def getY()= y
   def getZ() = z
 
+  override def toString() = x+","+y+","+z
+
 }

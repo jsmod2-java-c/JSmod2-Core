@@ -10,9 +10,7 @@ import cn.jsmod2.core.FileSystem;
 import cn.jsmod2.core.Server;
 import cn.jsmod2.core.annotations.ServerApplication;
 import cn.jsmod2.core.event.Event;
-import cn.jsmod2.core.protocol.DataPacket;
-import cn.jsmod2.core.protocol.GetPacket;
-import cn.jsmod2.network.protocol.item.RemoveItemPacket;
+import cn.jsmod2.core.math.Vector;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
 import org.junit.Test;
@@ -37,6 +35,15 @@ public class PacketTest {
     }
     @Test
     public void send() throws Exception{
+
+        System.out.println(JSON.toJSONString(new HashMap<String,Object>(){
+            {
+                     put("name","xiaoming");
+                     put("args",new Vector(1,2,3).toString());
+            }
+        }));
+
+        System.out.println(JSON.parseObject("[\"aa\",\"bb\"]",List.class));
     }
 
     @Test

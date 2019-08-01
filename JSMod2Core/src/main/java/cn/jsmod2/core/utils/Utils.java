@@ -214,4 +214,13 @@ public class Utils {
         return builder.toString();
     }
 
+    public static String arraysToString(String[] args){
+        StringBuilder builder = new StringBuilder(args[0]);
+        for(int i = 1;i<args.length;i++){
+            builder.append(",");
+            builder.append(args[i]);
+        }
+        return builder.toString();
+    }
+
 }

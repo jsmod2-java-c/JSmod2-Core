@@ -19,7 +19,7 @@ public class SetItemPositionPacket extends SetItemPacket {
     @Override
     public void send() {
         requester
-                .with(POSITION,position)
+                .with(POSITION,position.toString())
                 .to();
     }
 }
