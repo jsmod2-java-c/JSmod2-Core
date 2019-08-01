@@ -8,7 +8,6 @@ with the law, @Copyright JavaMultiModStarterAdmin China,more can see <a href="ht
  */
 package cn.jsmod2;
 
-import cn.jsmod2.core.log.ServerLogger;
 
 /**
  * @author magiclu550 #(code) jsmod2
