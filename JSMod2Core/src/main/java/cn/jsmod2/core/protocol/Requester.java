@@ -48,6 +48,7 @@ public class Requester {
             _packet._infor_map = _map;
             _packet._end = _end;
             _sender.sendPacket(_packet);
+            System.out.println(_map);
             this.reset();
         }catch (Exception e){
             e.printStackTrace();

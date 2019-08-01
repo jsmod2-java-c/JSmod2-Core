@@ -41,12 +41,46 @@ public class PacketTest {
 
     @Test
     public void eventSend() throws Exception{
+        new Thread(()->{
+            try {
+                eventRe1();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }).start();
         Socket socket = new Socket();
-        socket.bind(new InetSocketAddress("127.0.0.1",19938));
+        //socket.bind(new InetSocketAddress("127.0.0.1",19938));
         socket.connect(new InetSocketAddress("127.0.0.1",19935));
-        System.out.println(0x55+"-{'commandName':'hello','args':[]}");
-        socket.getOutputStream().write(Base64.getEncoder().encode((0x55+"-{'commandName':'hello','args':[]}").getBytes()));
+        System.out.println(0x31+"-{}|playerName:11111|player-playerName:222|player-scp079Data-playerName:333|item-playerName:444");
+        socket.getOutputStream().write(Base64.getEncoder().encode((0x31+"-{}|playerName:11111|player-playerName:222|player-scp079Data-playerName:333|item-playerName:444").getBytes()));
         socket.close();
+        while (true);
+    }
+
+
+    public void eventRe1() throws Exception{
+        ServerSocket socket = new ServerSocket(19938);
+        while (true){
+            System.out.println(".....");
+            Socket socket1 = socket.accept();
+            byte[] b = new byte[1000];
+            socket1.getInputStream().read(b);
+            int len = 0;
+            int i = 0;
+            while (true){
+                if(b[i]==0){
+                    break;
+                }
+                len++;
+                i++;
+            }
+            b = Arrays.copyOf(b,len);
+            String str = new String(b);
+            String[] get = str.split(";");
+            System.out.println(str);
+            System.out.println(new String(Base64.getDecoder().decode(get[0].getBytes())));
+            socket1.close();
+        }
     }
 
     private Field getField(Class clz,String field) throws NoSuchFieldException{
