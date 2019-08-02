@@ -43,6 +43,8 @@ public class PacketTest {
             }
         }));
 
+
+
         System.out.println(JSON.parseObject("[\"aa\",\"bb\"]",List.class));
     }
 

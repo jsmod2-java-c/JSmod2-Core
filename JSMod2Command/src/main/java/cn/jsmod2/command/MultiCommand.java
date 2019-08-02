@@ -1,6 +1,7 @@
 package cn.jsmod2.command;
 
 import cn.jsmod2.core.CommandSender;
+import cn.jsmod2.core.Powers;
 import cn.jsmod2.core.command.NativeCommand;
 import cn.jsmod2.core.log.ServerLogger;
 import cn.jsmod2.core.protocol.MultiAdminCommand;
@@ -10,7 +11,7 @@ import java.util.List;
 public class MultiCommand extends NativeCommand {
 
     public MultiCommand() {
-        super("multi", "power", "use multiAdmin command");
+        super("multi", Powers.CONSOLE, "use multiAdmin command");
     }
 
     @Override
