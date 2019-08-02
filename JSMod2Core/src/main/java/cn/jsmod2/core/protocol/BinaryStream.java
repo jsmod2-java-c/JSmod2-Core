@@ -116,7 +116,6 @@ public abstract class BinaryStream {
             String json = getDefaultJson(data);
             String[] props = splitJson(json);
             json = props[0];
-            ServerLogger.getLogger().multiInfo(getClass(),"Response: "+json,"","");
             List<T> list = JSON.parseArray(json,clz);
             return list;
         }catch (Exception e){
