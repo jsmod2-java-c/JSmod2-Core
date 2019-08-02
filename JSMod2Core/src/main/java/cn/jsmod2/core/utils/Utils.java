@@ -188,6 +188,7 @@ public class Utils {
                 builder.append((char) b);
             }
         }
+
         return builder.toString().getBytes();
     }
 

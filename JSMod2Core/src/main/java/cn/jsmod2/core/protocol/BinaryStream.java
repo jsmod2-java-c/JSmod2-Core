@@ -77,7 +77,7 @@ public abstract class BinaryStream {
 
 
     public String[] splitJson(String json){
-        return json.split("\\|");
+        return json.split("\\||||");
     }
     /**
      * 编码一个对象
@@ -116,6 +116,7 @@ public abstract class BinaryStream {
             String json = getDefaultJson(data);
             String[] props = splitJson(json);
             json = props[0];
+            ServerLogger.getLogger().multiInfo(getClass(),"Response: "+json,"","");
             List<T> list = JSON.parseArray(json,clz);
             return list;
         }catch (Exception e){

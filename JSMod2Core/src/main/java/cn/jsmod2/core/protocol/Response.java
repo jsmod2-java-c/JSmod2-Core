@@ -2,6 +2,7 @@ package cn.jsmod2.core.protocol;
 
 import cn.jsmod2.core.FileSystem;
 import cn.jsmod2.core.Server;
+import cn.jsmod2.core.log.ServerLogger;
 import cn.jsmod2.core.utils.Future;
 
 import java.io.UnsupportedEncodingException;
@@ -24,7 +25,6 @@ public class Response {
         if(type == null){
             type = packet.getType();
         }
-
         return packet.dataObjectDecode(future.get(),this.type);
     }
 

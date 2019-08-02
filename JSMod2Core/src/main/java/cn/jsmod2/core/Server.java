@@ -292,7 +292,6 @@ public abstract class Server implements Closeable, Reloadable, Start {
                 socket.getOutputStream().write(encode);
                 if (result) {
                     byte[] bytes = new byte[MAX_LENGTH];
-                    socket.getInputStream().read(bytes);
                     byte[] after = getFullBytes(socket, bytes);
                     future.set(after);
                 }
