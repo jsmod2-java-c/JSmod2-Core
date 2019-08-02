@@ -190,6 +190,7 @@
             <artifactId>junit</artifactId>
             <version>4.12</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.fusesource.jansi/jansi -->
         <dependency>
             <groupId>org.fusesource.jansi</groupId>
             <artifactId>jansi</artifactId>

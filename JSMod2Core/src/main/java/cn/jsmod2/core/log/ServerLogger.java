@@ -12,7 +12,6 @@ import cn.jsmod2.core.utils.LogFormat;
 import cn.jsmod2.core.utils.LogType;
 import cn.jsmod2.core.utils.Utils;
 import org.apache.log4j.Logger;
-import org.fusesource.jansi.Ansi;
 
 import java.io.IOException;
 import java.util.concurrent.BlockingQueue;
@@ -148,7 +147,7 @@ public class ServerLogger implements ILogger{
 
     @Override
     public void error(String message, String prefix, String suffix) {
-        String msg = LogFormat.format(message,"ERROR",RED,prefix)+suffix;
+        String msg = LogFormat.format(message,"ERROR",RED,prefix,true)+suffix;
         try {
             consoleOutputStream.write(msg);
         } catch (IOException ignored) {
@@ -170,7 +169,7 @@ public class ServerLogger implements ILogger{
 
     @Override
     public void warn(String message, String prefix, String suffix) {
-        String msg = LogFormat.format(message,"WARN",RED,prefix)+suffix;
+        String msg = LogFormat.format(message,"WARN",RED,prefix,true)+suffix;
         try {
             consoleOutputStream.write(msg);
         } catch (IOException ignored) {

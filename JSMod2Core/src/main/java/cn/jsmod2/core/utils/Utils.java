@@ -62,7 +62,7 @@ public class Utils {
         return writer;
     }
     public static PrintWriter getWriter(File file) throws IOException{
-        return getWriter(new FileOutputStream(file));
+        return getWriter(new FileOutputStream(file,true));
     }
     public static String getClassFileName(String file){
         return Server.class.getClassLoader().getResource("/").getPath()+file;
