@@ -19,8 +19,10 @@ public class MultiCommand extends NativeCommand {
         String[] str = new String[strings.length-1];
         System.arraycopy(strings,1,str,0,strings.length-1);
         List list = MultiAdminCommand.sendCommand(strings[0],str);
-        for(Object o:list){
-            ServerLogger.getLogger().multiInfo(getClass(),o.toString(),"","");
+        if(list!=null) {
+            for (Object o : list) {
+                ServerLogger.getLogger().multiInfo(getClass(), o.toString(), "", "");
+            }
         }
         return true;
     }

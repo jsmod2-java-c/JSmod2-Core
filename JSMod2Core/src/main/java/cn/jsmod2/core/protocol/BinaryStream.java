@@ -15,6 +15,7 @@ import cn.jsmod2.core.Server;
 import cn.jsmod2.core.ex.ProtocolException;
 import cn.jsmod2.core.FileSystem;
 import cn.jsmod2.core.log.ServerLogger;
+import cn.jsmod2.core.utils.Utils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
@@ -23,10 +24,7 @@ import org.apache.commons.codec.binary.Base64;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * jsmod2数据包编码是通过序列化为json，并编码为base64所得
@@ -127,6 +125,7 @@ public abstract class BinaryStream {
 
     private String getDefaultJson(byte[] data) throws Exception{
         byte[] packetBytes = Base64.decodeBase64(data);
+        packetBytes = Arrays.copyOf(packetBytes, Utils.getLen(packetBytes));
         String json = new String(packetBytes,properties.getProperty("decode"));
         json = json.substring(json.indexOf("-")+1);
         if(json.contains("~")) {
