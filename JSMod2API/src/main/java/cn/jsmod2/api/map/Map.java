@@ -15,11 +15,12 @@ import cn.jsmod2.api.player.Player;
 import cn.jsmod2.api.team.Role;
 import cn.jsmod2.core.math.Vector;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Random;
 
 //从map获取物品时，要为每个物品分配id(C#端分配),从而可以定位到
-public class Map{
+public class Map implements IMap, Serializable {
 
     private boolean warheadLeverEnabled;
 

@@ -10,7 +10,7 @@ package cn.jsmod2.api.event.server;
 
 import cn.jsmod2.api.server.Smod2Server;
 
-public class WaitingForPlayersEvent extends ServerEvent{
+public class WaitingForPlayersEvent extends ServerEvent implements IWaitingForPlayersEvent{
 
     public WaitingForPlayersEvent(Smod2Server server){
         super(server);

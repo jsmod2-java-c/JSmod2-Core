@@ -14,6 +14,6 @@ import cn.jsmod2.core.event.Event;
  * @author Kevinj
  */
 
-public class LCZDecontaminateEvent extends Event {
+public class LCZDecontaminateEvent extends Event implements ILCZDecontaminateEvent{
 
 }

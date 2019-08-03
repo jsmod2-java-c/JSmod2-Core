@@ -10,7 +10,7 @@ package cn.jsmod2.api.event.server;
 
 import cn.jsmod2.api.server.Smod2Server;
 
-public class SetServerNameEvent extends ServerEvent {
+public class SetServerNameEvent extends ServerEvent implements ISetServerNameEvent{
 
     public SetServerNameEvent(){
 

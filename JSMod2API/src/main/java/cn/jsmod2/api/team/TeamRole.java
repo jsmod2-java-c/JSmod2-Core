@@ -11,7 +11,9 @@ package cn.jsmod2.api.team;
 
 import cn.jsmod2.core.ApiId;
 
-public class TeamRole extends ApiId {
+import java.io.Serializable;
+
+public class TeamRole extends ApiId implements Serializable,Cloneable,ITeamRole {
 
     private Team team;
 

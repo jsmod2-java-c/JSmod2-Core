@@ -16,7 +16,7 @@ import cn.jsmod2.core.event.Event;
  * @author magiclu550 #(code) jsmod2
  */
 
-public class BanEvent extends Event {
+public class BanEvent extends Event implements IBanEvent{
 
     private Player player = new Player("");
 

@@ -11,7 +11,9 @@ package cn.jsmod2.api.server;
 import cn.jsmod2.core.ApiId;
 import cn.jsmod2.core.annotations.UseForServerInit;
 
-public class Connection extends ApiId {
+import java.io.Serializable;
+
+public class Connection extends ApiId implements IConnection, Serializable,Cloneable {
 
     private String ipAddress;
 

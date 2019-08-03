@@ -10,7 +10,7 @@ package cn.jsmod2.api.event.server;
 
 import cn.jsmod2.api.server.Connection;
 
-public class DisconnectEvent extends ConnectionEvent {
+public class DisconnectEvent extends ConnectionEvent implements IDisconnectEvent{
 
     public DisconnectEvent(Connection connection){
         super(connection);

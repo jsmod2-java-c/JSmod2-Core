@@ -17,7 +17,7 @@ import cn.jsmod2.core.event.Event;
  * @author magiclu550
  */
 
-public class WarheadKeycardAccessEvent extends Event {
+public class WarheadKeycardAccessEvent extends Event implements IWarheadKeycardAccessEvent{
     public Player player = new Player("");
     public boolean allow;
 

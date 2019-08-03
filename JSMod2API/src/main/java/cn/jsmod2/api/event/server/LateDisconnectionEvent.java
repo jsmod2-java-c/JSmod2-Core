@@ -10,7 +10,7 @@ package cn.jsmod2.api.event.server;
 
 import cn.jsmod2.api.server.Connection;
 
-public class LateDisconnectionEvent extends ConnectionEvent {
+public class LateDisconnectionEvent extends ConnectionEvent implements IConnectionEvent{
 
     public LateDisconnectionEvent(Connection connection){
         super(connection);

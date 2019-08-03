@@ -15,7 +15,7 @@ import cn.jsmod2.core.event.Event;
  * @author magiclu550
  */
 
-public class SummonVehicleEvent extends Event {
+public class SummonVehicleEvent extends Event implements ISummonVehicleEvent{
     private boolean IsCI;
 
     private boolean allowSummon;

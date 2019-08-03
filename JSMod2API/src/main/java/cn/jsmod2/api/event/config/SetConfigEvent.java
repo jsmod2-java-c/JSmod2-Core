@@ -17,7 +17,7 @@ import cn.jsmod2.core.event.Event;
  */
 
 
-public class SetConfigEvent extends Event {
+public class SetConfigEvent extends Event implements ISetConfigEvent {
 
     private String key;
 

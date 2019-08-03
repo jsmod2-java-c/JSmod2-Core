@@ -17,7 +17,7 @@ import cn.jsmod2.core.event.Event;
  * @author magiclu550
  */
 
-public class WarheadChangeLeverEvent extends Event {
+public class WarheadChangeLeverEvent extends Event implements IWarheadChangeLeverEvent{
     private Player player = new Player("");
     private boolean allow;
 

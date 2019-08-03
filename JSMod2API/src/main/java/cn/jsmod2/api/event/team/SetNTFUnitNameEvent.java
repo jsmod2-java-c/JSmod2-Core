@@ -10,7 +10,7 @@ package cn.jsmod2.api.event.team;
 
 import cn.jsmod2.core.event.Event;
 
-public class SetNTFUnitNameEvent extends Event {
+public class SetNTFUnitNameEvent extends Event implements ISetNTFUnitNameEvent{
 
     private String unit;
 

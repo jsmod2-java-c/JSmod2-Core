@@ -14,6 +14,6 @@ import cn.jsmod2.core.event.Event;
  * @author Kevinj
  */
 
-public class WarheadDetonateEvent extends Event {
+public class WarheadDetonateEvent extends Event implements IWarheadDetonateEvent{
 
 }

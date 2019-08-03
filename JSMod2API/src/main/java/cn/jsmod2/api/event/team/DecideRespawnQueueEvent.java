@@ -12,7 +12,7 @@ import cn.jsmod2.api.team.Team;
 import cn.jsmod2.core.annotations.UseForServerInit;
 import cn.jsmod2.core.event.Event;
 
-public class DecideRespawnQueueEvent extends Event {
+public class DecideRespawnQueueEvent extends Event implements IDecideRespawnQueueEvent{
 
     private Team[] teams;
 

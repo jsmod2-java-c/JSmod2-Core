@@ -13,9 +13,10 @@ import cn.jsmod2.core.ApiId;
 import cn.jsmod2.core.annotations.UseForServerInit;
 import cn.jsmod2.core.math.Vector;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Elevator extends ApiId implements Component {
+public class Elevator extends ApiId implements Component,IElevator, Serializable,Cloneable {
 
     private ElevatorType elevatorType;
 

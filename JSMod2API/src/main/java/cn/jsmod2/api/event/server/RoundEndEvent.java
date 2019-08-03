@@ -14,7 +14,7 @@ import cn.jsmod2.api.server.Smod2Server;
 import cn.jsmod2.core.annotations.UseForServerInit;
 
 
-public class RoundEndEvent extends ServerEvent {
+public class RoundEndEvent extends ServerEvent implements IRoundEndEvent{
 
     private Round round = new Round();
 

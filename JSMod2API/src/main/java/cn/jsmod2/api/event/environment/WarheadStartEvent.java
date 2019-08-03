@@ -16,7 +16,7 @@ import cn.jsmod2.api.player.Player;
  * @author magiclu550
  */
 
-public class WarheadStartEvent extends WarheadEvent {
+public class WarheadStartEvent extends WarheadEvent implements IWarheadStartEvent{
     private boolean isResumed;
     private boolean openDoorsAfter;
 

@@ -19,9 +19,10 @@ import cn.jsmod2.core.Server;
 import cn.jsmod2.core.annotations.UseForServerInit;
 import cn.jsmod2.core.math.Vector;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Player extends CommandSender implements ISimplePlayer {
+public class Player extends CommandSender implements ISimplePlayer,IPlayer, Serializable,Cloneable {
 
     private TeamRole teamRole = new TeamRole();
 

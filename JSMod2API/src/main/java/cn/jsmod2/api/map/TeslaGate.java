@@ -12,7 +12,9 @@ import cn.jsmod2.api.Component;
 import cn.jsmod2.core.ApiId;
 import cn.jsmod2.core.math.Vector;
 
-public class TeslaGate extends ApiId implements Component {
+import java.io.Serializable;
+
+public class TeslaGate extends ApiId implements Component,ITeslaGate,Cloneable, Serializable {
 
     private Vector triggerDistance;
 

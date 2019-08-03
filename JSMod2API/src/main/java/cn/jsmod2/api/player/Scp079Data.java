@@ -10,7 +10,9 @@ package cn.jsmod2.api.player;
 
 import cn.jsmod2.core.ApiId;
 
-public class Scp079Data extends ApiId {
+import java.io.Serializable;
+
+public class Scp079Data extends ApiId implements IScp079Data, Serializable,Cloneable {
 
     private float exp;
 

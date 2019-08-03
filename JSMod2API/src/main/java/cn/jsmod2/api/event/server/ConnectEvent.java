@@ -10,7 +10,7 @@ package cn.jsmod2.api.event.server;
 
 import cn.jsmod2.api.server.Connection;
 
-public class ConnectEvent extends ConnectionEvent {
+public class ConnectEvent extends ConnectionEvent implements IConnectEvent{
 
     public ConnectEvent(Connection connection){
         super(connection);

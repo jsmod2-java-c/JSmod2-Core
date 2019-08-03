@@ -11,7 +11,7 @@ package cn.jsmod2.api.event.server;
 
 import cn.jsmod2.api.server.Smod2Server;
 
-public class RoundStartEvent extends ServerEvent {
+public class RoundStartEvent extends ServerEvent implements IRoundStartEvent{
 
     public RoundStartEvent(Smod2Server server){
         super(server);

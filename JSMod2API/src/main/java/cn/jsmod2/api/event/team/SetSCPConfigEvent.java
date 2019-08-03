@@ -10,7 +10,7 @@ package cn.jsmod2.api.event.team;
 
 import cn.jsmod2.core.event.Event;
 
-public class SetSCPConfigEvent extends Event {
+public class SetSCPConfigEvent extends Event implements ISetSCPConfigEvent{
 
     private boolean ban049;
 

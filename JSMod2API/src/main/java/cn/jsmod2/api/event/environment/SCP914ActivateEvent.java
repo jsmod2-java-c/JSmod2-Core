@@ -21,7 +21,7 @@ import cn.jsmod2.core.math.Vector;
  */
 
 
-public class SCP914ActivateEvent extends Event {
+public class SCP914ActivateEvent extends Event implements ISCP914ActivateEvent{
 
     private Player user;
 

@@ -18,7 +18,7 @@ import cn.jsmod2.core.event.Event;
  * @author magiclu550
  */
 
-public class ScpDeathAnnouncementEvent extends Event {
+public class ScpDeathAnnouncementEvent extends Event implements IScpDeathAnnouncementEvent{
     private boolean shouldPlay;
     private Player deadPlayer = new Player("");
     private Role playerRole;

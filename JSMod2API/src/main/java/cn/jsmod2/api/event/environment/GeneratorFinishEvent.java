@@ -17,7 +17,7 @@ import cn.jsmod2.core.event.Event;
  * @author magiclu550
  */
 
-public class GeneratorFinishEvent extends Event {
+public class GeneratorFinishEvent extends Event implements IGeneratorFinishEvent{
     private Generator generator = new Generator();
 
     public GeneratorFinishEvent(Generator generator) {

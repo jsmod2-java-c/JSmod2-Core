@@ -11,7 +11,7 @@ package cn.jsmod2.api.event.server;
 import cn.jsmod2.api.server.Smod2Server;
 
 
-public class RoundReStartEvent extends ServerEvent{
+public class RoundReStartEvent extends ServerEvent implements IRoundReStartEvent{
 
     public RoundReStartEvent(){
 

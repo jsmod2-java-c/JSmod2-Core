@@ -12,7 +12,7 @@ import cn.jsmod2.api.server.Smod2Server;
 import cn.jsmod2.core.Server;
 import cn.jsmod2.core.event.Event;
 
-public abstract class ServerEvent extends Event {
+public abstract class ServerEvent extends Event implements IServerEvent{
 
 
     public ServerEvent(Smod2Server server) {

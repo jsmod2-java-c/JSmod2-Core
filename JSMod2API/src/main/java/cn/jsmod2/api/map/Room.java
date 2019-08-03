@@ -11,12 +11,14 @@ package cn.jsmod2.api.map;
 import cn.jsmod2.core.ApiId;
 import cn.jsmod2.core.math.Vector;
 
+import java.io.Serializable;
+
 
 /**
  * @author magiclu550
  */
 
-public class Room extends ApiId {
+public class Room extends ApiId implements IRoom, Serializable,Cloneable {
 
     private ZoneType zoneType;
     private RoomType roomType;

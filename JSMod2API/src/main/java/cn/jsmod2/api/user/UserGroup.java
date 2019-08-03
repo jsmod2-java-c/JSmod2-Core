@@ -10,5 +10,7 @@ package cn.jsmod2.api.user;
 
 import cn.jsmod2.core.ApiId;
 
-public class UserGroup extends ApiId {
+import java.io.Serializable;
+
+public class UserGroup extends ApiId implements IUserGroup, Serializable,Cloneable {
 }

@@ -17,7 +17,7 @@ import cn.jsmod2.core.event.Event;
  * @author magiclu550
  */
 
-public abstract class WarheadEvent extends Event {
+public abstract class WarheadEvent extends Event implements IWarheadEvent{
     private float timeLeft;
     private Player player = new Player("");
     private Player activator = new Player("");

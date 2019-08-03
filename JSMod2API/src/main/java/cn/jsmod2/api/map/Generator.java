@@ -13,11 +13,13 @@ import cn.jsmod2.core.ApiId;
 import cn.jsmod2.core.annotations.UseForServerInit;
 import cn.jsmod2.core.math.Vector;
 
+import java.io.Serializable;
+
 /**
  * @author magiclu550
  */
 
-public class Generator extends ApiId implements Component {
+public class Generator extends ApiId implements Component,IGenerator, Serializable,Cloneable {
 
     private boolean open;
     private boolean locked;

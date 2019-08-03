@@ -10,5 +10,5 @@ package cn.jsmod2.api.event.server;
 
 import cn.jsmod2.core.event.Event;
 
-public class UpdateEvent extends Event {
+public class UpdateEvent extends Event implements IUpdateEvent{
 }

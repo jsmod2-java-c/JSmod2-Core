@@ -10,5 +10,7 @@ package cn.jsmod2.api.server;
 
 import cn.jsmod2.core.ApiId;
 
-public class Round extends ApiId {
+import java.io.Serializable;
+
+public class Round extends ApiId implements IRound, Serializable,Cloneable {
 }

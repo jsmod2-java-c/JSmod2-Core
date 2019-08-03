@@ -12,7 +12,9 @@ import cn.jsmod2.core.ApiId;
 import cn.jsmod2.core.annotations.UseForServerInit;
 import cn.jsmod2.core.math.Vector;
 
-public class Door extends ApiId {
+import java.io.Serializable;
+
+public class Door extends ApiId implements IDoor, Serializable,Cloneable {
 
     private boolean open;
 

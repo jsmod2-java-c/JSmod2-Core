@@ -12,7 +12,9 @@ import cn.jsmod2.core.ApiId;
 import cn.jsmod2.core.annotations.UseForServerInit;
 import cn.jsmod2.core.math.Vector;
 
-public class PocketDimensionExit extends ApiId {
+import java.io.Serializable;
+
+public class PocketDimensionExit extends ApiId implements IPocketDimensionExit, Serializable,Cloneable {
 
     private PocketDimensionExitType exitType;
 

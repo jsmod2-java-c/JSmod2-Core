@@ -17,7 +17,7 @@ import cn.jsmod2.core.event.Event;
  * @author magiclu550 #(code) jsmod2
  */
 
-public class AuthCheckEvent extends Event {
+public class AuthCheckEvent extends Event implements IAuthCheckEvent{
 
     private Player requester = new Player("");
 

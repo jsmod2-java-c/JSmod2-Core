@@ -17,7 +17,7 @@ import cn.jsmod2.network.protocol.event.admin.AdminQueryQuerySetPacket;
  * @author magiclu550 #(code) jsmod2
  */
 
-public class AdminQueryEvent extends Event {
+public class AdminQueryEvent extends Event implements IAdminQueryEvent{
 
     private Player admin = new Player("");
 

@@ -1,6 +1,9 @@
 package cn.jsmod2.core;
 
 
+import cn.jsmod2.api.map.IMap;
+import cn.jsmod2.api.server.IRound;
+
 import java.util.List;
 
 /**
@@ -16,5 +19,35 @@ public interface GameServer {
     @Deprecated
     GameServer updateServer(GameServer server);
 
+    default int getPort() {
+        return 0;
+    }
+
+
+    default String getIpAddress() {
+        return "";
+    }
+
+
+    default IRound getRound() {
+        return null;
+    }
+
+    default IMap getMap() {
+        return null;
+    }
+
+
+    default int getNumPlayers() {
+        return 0;
+    }
+
+
+    default int getMaxPlayers() {
+        return 0;
+    }
+
+    default void setMaxPlayers(int maxPlayers) {
+    }
 
 }

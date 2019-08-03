@@ -12,7 +12,7 @@ import cn.jsmod2.api.team.Role;
 import cn.jsmod2.core.annotations.UseForServerInit;
 import cn.jsmod2.core.event.Event;
 
-public class SetRoleMaxHPEvent extends Event {
+public class SetRoleMaxHPEvent extends Event implements ISetRoleMaxHPEvent{
 
     private Role role;
 

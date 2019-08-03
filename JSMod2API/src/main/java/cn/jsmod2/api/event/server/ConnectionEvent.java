@@ -12,7 +12,7 @@ import cn.jsmod2.api.server.Connection;
 import cn.jsmod2.core.annotations.UseForServerInit;
 import cn.jsmod2.core.event.Event;
 
-public abstract class ConnectionEvent extends Event {
+public abstract class ConnectionEvent extends Event implements IConnectionEvent{
 
     private Connection connection = new Connection();
 
