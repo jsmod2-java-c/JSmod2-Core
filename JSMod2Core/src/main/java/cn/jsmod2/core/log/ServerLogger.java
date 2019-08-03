@@ -192,6 +192,13 @@ public class ServerLogger implements ILogger{
     }
 
     private String getMultiMessage(Class clz){
-        return LogFormat.textFormat("["+ Utils.simpleClassName(clz) +"]", CYAN).toString();
+        return LogFormat.textFormat("[",BLUE)+LogFormat.textFormat(getLine()+"",BLUE)+"]"+LogFormat.textFormat("["+ Utils.simpleClassName(clz) +"]", CYAN);
     }
+
+    public int getLine(){
+        Throwable t = new Throwable();
+        return t.getStackTrace()[t.getStackTrace().length-1].getLineNumber();
+    }
+
+
 }

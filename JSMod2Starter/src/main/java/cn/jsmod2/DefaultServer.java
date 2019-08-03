@@ -21,9 +21,6 @@ public class DefaultServer extends Server {
     //关闭服务端的指令
     @PacketCMD private static final int CLOSE_COMMAND = 0x02;
 
-
-
-
     public DefaultServer() {
         super(new Smod2Server(),false);
         try {
