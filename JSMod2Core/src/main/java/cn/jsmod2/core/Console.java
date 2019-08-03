@@ -10,13 +10,13 @@ package cn.jsmod2.core;
 
 
 import cn.jsmod2.core.ex.ServerRuntimeException;
+import cn.jsmod2.core.interapi.command.INativeCommand;
 import cn.jsmod2.core.script.EmeraldScriptVM;
 import cn.jsmod2.core.script.EnvPage;
 import cn.jsmod2.core.script.Memory;
 import cn.jsmod2.core.script.jni.EmeraldScript;
 import cn.jsmod2.core.utils.Utils;
 import jline.console.completer.Completer;
-import cn.jsmod2.core.command.NativeCommand;
 
 import java.io.*;
 import java.util.Arrays;
@@ -140,7 +140,7 @@ public class Console extends CommandSender{
                             .getPluginManager()
                             .getCommands()
                             .stream()
-                            .map(NativeCommand::getCommandName)
+                            .map(INativeCommand::getCommandName)
                             .filter(x->{
                                 //模糊查询
                                 char[] chars = s.toCharArray();
@@ -170,7 +170,7 @@ public class Console extends CommandSender{
                 args[i] = args[i].substring(args[i].indexOf("'")+1,args[i].lastIndexOf("'"));
             }
         }
-        List<NativeCommand> commands =
+        List<INativeCommand> commands =
                 Server
                         .getSender()
                         .getServer()
@@ -192,7 +192,7 @@ public class Console extends CommandSender{
          * 允许普通玩家使用的指令权限
          * player all
          */
-        for(NativeCommand cmd:commands){
+        for(INativeCommand cmd:commands){
             if(commandName.equals(cmd.getCommandName())){
                 //如果含有这个权限
                 if(getPowers().contains(cmd.getPower())){

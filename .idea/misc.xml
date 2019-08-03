@@ -15,7 +15,13 @@
         <option value="$PROJECT_DIR$/JSMod2Emerald/pom.xml" />
         <option value="$PROJECT_DIR$/JSMod2Starter/pom.xml" />
         <option value="$PROJECT_DIR$/JSMod2Command/pom.xml" />
+        <option value="$PROJECT_DIR$/JSMod2IAPI/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/JSMod2Core/JSMod2-IAPI/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="1.8.0_181" project-jdk-type="JavaSDK">

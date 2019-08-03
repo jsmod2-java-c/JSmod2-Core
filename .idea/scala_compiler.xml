@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ScalaCompilerConfiguration">
-    <profile name="Maven 1" modules="JSMod2API,JSMod2Core,JSMod2Starter,jsmod2" />
+    <profile name="Maven 1" modules="JSMod2API,JSMod2Core,JSMod2IAPI,JSMod2Starter,jsmod2" />
   </component>
 </project>

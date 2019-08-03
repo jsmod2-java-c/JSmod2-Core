@@ -7,13 +7,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="JSMod2API" />
-        <module name="JSMod2UI" />
+        <module name="JSMod2IAPI" />
         <module name="JSMod2Web" />
-        <module name="JSMod2Emerald" />
-        <module name="JSMod2Starter" />
-        <module name="JSMod2Core" />
         <module name="JSMod2Protocol" />
         <module name="JSMod2Command" />
+        <module name="JSMod2Starter" />
+        <module name="JSMod2Emerald" />
+        <module name="JSMod2UI" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
@@ -24,6 +24,7 @@
       <module name="JSMod2Core" target="1.8" />
       <module name="JSMod2Emerald" target="1.8" />
       <module name="JSMod2Exceptions" target="1.5" />
+      <module name="JSMod2IAPI" target="1.8" />
       <module name="JSMod2Protocol" target="1.8" />
       <module name="JSMod2Starter" target="1.8" />
       <module name="JSMod2UI" target="1.8" />

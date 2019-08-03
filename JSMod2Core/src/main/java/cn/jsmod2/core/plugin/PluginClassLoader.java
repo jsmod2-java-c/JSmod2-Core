@@ -16,6 +16,7 @@ import cn.jsmod2.core.command.NativeCommand;
 import cn.jsmod2.core.event.Listener;
 import cn.jsmod2.core.ex.MainClassErrorException;
 import cn.jsmod2.core.ex.PluginException;
+import cn.jsmod2.core.interapi.plugin.IPluginClassLoader;
 import cn.jsmod2.core.log.ILogger;
 import cn.jsmod2.core.utils.PluginFileVO;
 import cn.jsmod2.core.utils.Utils;
@@ -38,7 +39,7 @@ import java.util.zip.ZipEntry;
  * @author magiclu550
  */
 
-public class PluginClassLoader {
+public class PluginClassLoader implements IPluginClassLoader {
 
     public static final String JSMOD2_PACKAGE = "cn.jsmod2";
 
@@ -145,7 +146,7 @@ public class PluginClassLoader {
             throw new PluginException("no such plugin");
     }
 
-    private Plugin loadPluginInfo(Object plugin,PluginFileVO vo,JarFile jarFile,URLClassLoader loader) throws Exception{
+    public Plugin loadPluginInfo(Object plugin,PluginFileVO vo,JarFile jarFile,URLClassLoader loader) throws Exception{
 
 
         if (plugin instanceof PluginBase) {

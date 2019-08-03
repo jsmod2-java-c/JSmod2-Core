@@ -7,7 +7,6 @@ import cn.jsmod2.core.math.Vector;
 import com.alibaba.fastjson.JSON;
 
 
-import java.io.IOException;
 import java.util.Map;
 
 
@@ -102,10 +101,7 @@ public class PlayerEntity extends CommandSender implements ISimplePlayer,Move {
     //根据type分发到各个方法
 
     public void accept(String message){
-        try {
-            server.sendData(message.getBytes(),ipAddress,port,false);
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+
+        server.sendData(message.getBytes(),ipAddress,port,false);
     }
 }

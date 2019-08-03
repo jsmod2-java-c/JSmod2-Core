@@ -1,6 +1,7 @@
 package cn.jsmod2.core.protocol;
 
 import cn.jsmod2.core.Server;
+import cn.jsmod2.core.interapi.network.IRequester;
 import cn.jsmod2.core.math.Vector;
 import cn.jsmod2.core.utils.Future;
 import com.alibaba.fastjson.JSON;
@@ -18,7 +19,7 @@ import java.util.Map;
  * @author magiclu550
  */
 
-public class Requester {
+public class Requester implements IRequester {
 
     private Server _sender;
 

@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/JSMod2Command/JSMod2Command.iml" filepath="$PROJECT_DIR$/JSMod2Command/JSMod2Command.iml" />
       <module fileurl="file://$PROJECT_DIR$/JSMod2Core/JSMod2Core.iml" filepath="$PROJECT_DIR$/JSMod2Core/JSMod2Core.iml" />
       <module fileurl="file://$PROJECT_DIR$/JSMod2Emerald/JSMod2Emerald.iml" filepath="$PROJECT_DIR$/JSMod2Emerald/JSMod2Emerald.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JSMod2IAPI/JSMod2IAPI.iml" filepath="$PROJECT_DIR$/JSMod2IAPI/JSMod2IAPI.iml" />
       <module fileurl="file://$PROJECT_DIR$/JSMod2Protocol/JSMod2Protocol.iml" filepath="$PROJECT_DIR$/JSMod2Protocol/JSMod2Protocol.iml" />
       <module fileurl="file://$PROJECT_DIR$/JSMod2Starter/JSMod2Starter.iml" filepath="$PROJECT_DIR$/JSMod2Starter/JSMod2Starter.iml" />
       <module fileurl="file://$PROJECT_DIR$/JSMod2UI/JSMod2UI.iml" filepath="$PROJECT_DIR$/JSMod2UI/JSMod2UI.iml" />

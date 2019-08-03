@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="jsmod2-core-1.0.3">
+    <output-path>$PROJECT_DIR$/JSMod2Core/target</output-path>
+    <root id="archive" name="jsmod2-core-1.0.3.jar">
+      <element id="module-output" name="JSMod2Core" />
+    </root>
+  </artifact>
+</component>

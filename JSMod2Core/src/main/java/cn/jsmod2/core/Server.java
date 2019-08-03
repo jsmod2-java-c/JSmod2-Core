@@ -12,6 +12,7 @@ package cn.jsmod2.core;
 import cn.jsmod2.core.annotations.RegisterMethod;
 import cn.jsmod2.core.command.OpsFile;
 import cn.jsmod2.core.event.packet.ServerPacketEvent;
+import cn.jsmod2.core.interapi.IServer;
 import cn.jsmod2.core.log.ILogger;
 import cn.jsmod2.core.log.ServerLogger;
 import cn.jsmod2.core.protocol.ControlPacket;
@@ -53,7 +54,7 @@ import static cn.jsmod2.core.utils.Utils.getLen;
  *
  */
 
-public abstract class Server implements Closeable, Reloadable, Start {
+public abstract class Server implements IServer {
 
     public static final String START = "start";
 
@@ -263,18 +264,7 @@ public abstract class Server implements Closeable, Reloadable, Start {
             pluginManager.getPluginClassLoader().loadPlugins(new File(PLUGIN_DIR));
         });
     }
-    private void registerNativeInfo(){
-        /*
-         * prop:指向当前的lang文件
-         */
-        for(RegisterTemplate registerTemplate:registers) {
-            Set<Map.Entry<String, NativeCommand>> command = registerTemplate.getNativeCommandMap().entrySet();
-            for (Map.Entry<String, NativeCommand> entry : command) {
-                commandInfo.put(entry.getKey(), entry.getValue().getDescription());
-                pluginManager.getCommands().add(entry.getValue());
-            }
-        }
-    }
+
 
     public void close(){
         closeAll();
@@ -282,7 +272,7 @@ public abstract class Server implements Closeable, Reloadable, Start {
     }
 
 
-    public Future sendData(byte[] encode,String ip,int port,boolean result) throws IOException{
+    public Future sendData(byte[] encode,String ip,int port,boolean result) {
         Future future = new Result();
         try {
             if (useUDP) {
@@ -402,17 +392,14 @@ public abstract class Server implements Closeable, Reloadable, Start {
     private Future sendPacket(final DataPacket packet,String ip,int port,boolean result){
         ServerPacketEvent event = new ServerPacketEvent(packet);
         pluginManager.callEvent(event);
-        try {
-            byte[] encode = packet.encode();
 
-            //发送端口为插件的端口,ip写死为jsmod2的
-            if(encode!=null)
-                return sendData(encode, ip, port,result);
-            else
-                log.multiError(getClass(),"PROTOCOL: NULL","","");
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+        byte[] encode = packet.encode();
+
+        //发送端口为插件的端口,ip写死为jsmod2的
+        if(encode!=null)
+            return sendData(encode, ip, port,result);
+        else
+            log.multiError(getClass(),"PROTOCOL: NULL","","");
 
         return null;
     }
@@ -428,6 +415,18 @@ public abstract class Server implements Closeable, Reloadable, Start {
         }
     }
 
+    private void registerNativeInfo(){
+        /*
+         * prop:指向当前的lang文件
+         */
+        for(RegisterTemplate registerTemplate:registers) {
+            Set<Map.Entry<String, NativeCommand>> command = registerTemplate.getNativeCommandMap().entrySet();
+            for (Map.Entry<String, NativeCommand> entry : command) {
+                commandInfo.put(entry.getKey(), entry.getValue().getDescription());
+                pluginManager.getCommands().add(entry.getValue());
+            }
+        }
+    }
 
 
 

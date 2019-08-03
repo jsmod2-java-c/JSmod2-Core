@@ -2,6 +2,7 @@ package cn.jsmod2.core.command;
 
 
 import cn.jsmod2.core.Server;
+import cn.jsmod2.core.interapi.command.IOpsFile;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -16,7 +17,7 @@ import static cn.jsmod2.core.FileSystem.OPS_FILE;
  *
  * @author magiclu550
  */
-public class OpsFile {
+public class OpsFile implements IOpsFile {
 
     private static OpsFile opsFile;
 

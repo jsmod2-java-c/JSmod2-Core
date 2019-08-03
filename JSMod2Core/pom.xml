@@ -6,6 +6,7 @@
 
     <groupId>cn.jsmod2</groupId>
     <artifactId>JSMod2-Core</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 
     <repositories>
@@ -234,6 +235,11 @@
         <dependency>
             <groupId>cn.jsmod2</groupId>
             <artifactId>jsmod2-emerald</artifactId>
+            <version>1.0.3</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.jsmod2</groupId>
+            <artifactId>jsmod2-iapi</artifactId>
             <version>1.0.3</version>
         </dependency>
     </dependencies>

@@ -32,5 +32,6 @@
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.9.2" level="project" />
     <orderEntry type="library" name="Maven: org.scala-lang:scala-library:2.13.0" level="project" />
     <orderEntry type="library" name="Maven: cn.jsmod2:jsmod2-emerald:1.0.3" level="project" />
+    <orderEntry type="library" name="Maven: cn.jsmod2:jsmod2-iapi:1.0.3" level="project" />
   </component>
 </module>

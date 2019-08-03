@@ -17,13 +17,15 @@ import cn.jsmod2.core.Console;
 import cn.jsmod2.core.Server;
 import cn.jsmod2.core.annotations.NativeListener;
 
-import cn.jsmod2.core.command.NativeCommand;
 import cn.jsmod2.core.command.PowerPool;
 import cn.jsmod2.core.event.Listener;
 import cn.jsmod2.core.ex.EventException;
 import cn.jsmod2.core.ex.NoSuchPluginNameException;
 import cn.jsmod2.core.ex.PluginException;
 import cn.jsmod2.core.ex.TypeErrorException;
+import cn.jsmod2.core.interapi.command.INativeCommand;
+import cn.jsmod2.core.interapi.event.IEvent;
+import cn.jsmod2.core.interapi.plugin.IPluginManager;
 import cn.jsmod2.core.script.EmeraldScriptVM;
 import cn.jsmod2.core.utils.MethodInvokeMapper;
 import cn.jsmod2.core.utils.Utils;
@@ -44,13 +46,13 @@ import java.util.*;
  * @author magiclu550 #(code) jsmod2
  */
 
-public class PluginManager {
+public class PluginManager implements IPluginManager {
 
     private Map<Plugin,Map<String,ConfigSetting>> settings = new HashMap<>();
 
     private Map<Listener, List<MethodInvokeMapper>> listenerMapper = new HashMap<>();
 
-    private List<NativeCommand> commands = new ArrayList<>();
+    private List<INativeCommand> commands = new ArrayList<>();
 
     private Server server;
 
@@ -158,7 +160,7 @@ public class PluginManager {
         }
     }
 
-    public void callEvent(final Event event){
+    public void callEvent(final IEvent event){
         Utils.TryCatch(()->{
             Set<Map.Entry<Listener,List<MethodInvokeMapper>>> set = listenerMapper.entrySet();
             for(Map.Entry<Listener,List<MethodInvokeMapper>> entry:set){
@@ -188,17 +190,17 @@ public class PluginManager {
         });
     }
     //event是监听的event对象 假如对象是PlayerDropEvent类型 那参数为PlayerItemEvent > PlayerEvent > Event都可以匹配
-    private static boolean isThisEvent(Class clz,Event event){
+    private static boolean isThisEvent(Class clz,IEvent event){
         return clz.isInstance(event);
     }
 
-    public List<NativeCommand> getCommands(){
+    public List<INativeCommand> getCommands(){
         return commands;
     }
 
-    public List<NativeCommand> getPluginCommands(){
-        List<NativeCommand> pluginCommands = new ArrayList<>();
-        for(NativeCommand cmd:commands){
+    public List<INativeCommand> getPluginCommands(){
+        List<INativeCommand> pluginCommands = new ArrayList<>();
+        for(INativeCommand cmd:commands){
             if(cmd instanceof Command){
                 pluginCommands.add(cmd);
             }
@@ -207,7 +209,7 @@ public class PluginManager {
     }
 
     public boolean executeCommand(String commandName, String[] args, CommandSender sender){
-        for(NativeCommand command:commands){
+        for(INativeCommand command:commands){
             if(command.getCommandName().equals(commandName)){
                 //指令发送者所拥有的权限是否包含指令允许的权限
                 if(PowerPool.poolMapping().get(sender.getName()).contains(command.getPower())){

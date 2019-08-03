@@ -9,6 +9,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.core.event;
 
 import cn.jsmod2.core.ApiId;
+import cn.jsmod2.core.interapi.event.IEvent;
 
 import java.io.Serializable;
 
@@ -18,7 +19,7 @@ import java.io.Serializable;
  * @author magiclu550
  */
 
-public abstract class Event extends ApiId implements Serializable,Cloneable {
+public abstract class Event extends ApiId implements Serializable,Cloneable, IEvent {
 
 
     public final String getEventName() {

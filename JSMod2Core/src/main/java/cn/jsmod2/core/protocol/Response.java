@@ -2,7 +2,7 @@ package cn.jsmod2.core.protocol;
 
 import cn.jsmod2.core.FileSystem;
 import cn.jsmod2.core.Server;
-import cn.jsmod2.core.log.ServerLogger;
+import cn.jsmod2.core.interapi.network.IResponse;
 import cn.jsmod2.core.utils.Future;
 
 import java.io.UnsupportedEncodingException;
@@ -11,7 +11,7 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Properties;
 
-public class Response {
+public class Response implements IResponse {
 
     public Future future;
 
