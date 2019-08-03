@@ -793,7 +793,7 @@ public abstract class Server implements Closeable, Reloadable, Start {
     }
 
     private File[] beforeFile;
-    //TODO
+
     private String logListener(){
         String serverProps = serverProp.getProperty(SMOD2_LOG_FILE);
         File file = new File(serverProps);

@@ -40,7 +40,7 @@ public abstract class Manager implements Cloneable{
         Class<? extends Event> eventClass = events.get(id);
         if(eventClass != null){
             Event event = stream.encode(eventClass,bytes);
-            ServerLogger.getLogger().multiDebug(getClass(),"EVENT_API_KEY:"+event.getApiId(),"\n","");
+            //ServerLogger.getLogger().multiDebug(getClass(),"EVENT_API_KEY:"+event.getApiId(),"\n","");
             Server.getSender().getServer().getPluginManager().callEvent(event);
         }else{
             throw new EventException("No such type of events");
