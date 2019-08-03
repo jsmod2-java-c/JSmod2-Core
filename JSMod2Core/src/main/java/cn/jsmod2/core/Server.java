@@ -201,7 +201,9 @@ public abstract class Server implements Closeable, Reloadable, Start {
         if(log != null) {
             this.pool.execute(new LogListener(log, Integer.parseInt(serverProp.getProperty(SMOD2_LOG_INTERVAL,"2000"))));
         }
-        this.pool.execute(new GithubConnectThread());
+        if(Boolean.parseBoolean(serverProp.getProperty(GITHUB))) {
+            this.pool.execute(new GithubConnectThread());
+        }
         //this.pool.execute(new ServerThread());
         this.serverLogInfo("the listener thread is starting!!!!");
 

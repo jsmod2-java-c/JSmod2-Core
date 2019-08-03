@@ -46,6 +46,8 @@ public class FileSystem {
 
     public static final String CONSOLE_LINE = "this.console.read.jline";
 
+    public static final String GITHUB = "this.github.info";
+
     @Deprecated
     public static final String SERVER_INIT_PORT = "server.init.port";
 

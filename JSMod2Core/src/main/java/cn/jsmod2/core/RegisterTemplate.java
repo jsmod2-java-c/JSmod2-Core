@@ -111,6 +111,7 @@ public abstract class RegisterTemplate {
         serverProperties.put(FileSystem.EMERALD_COMPILER,"java");//java c++ kotlin选项，c++ native未来将被替代
         serverProperties.put(FileSystem.DEBUG,"false");//debug模式
         serverProperties.put(FileSystem.CONSOLE_LINE,"false");//开启jline
+        serverProperties.put(FileSystem.GITHUB,"false");
 
     }
     @RegisterMethod
