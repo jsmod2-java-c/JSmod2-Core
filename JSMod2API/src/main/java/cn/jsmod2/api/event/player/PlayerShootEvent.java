@@ -17,7 +17,7 @@ import cn.jsmod2.core.math.Vector;
 /**
  * @author kevinj
  */
-public class PlayerShootEvent extends PlayerEvent {
+public class PlayerShootEvent extends PlayerEvent implements IPlayerShootEvent{
     private Player target = new Player("");
     private DamageType weapon;
     private boolean shouldSpawnHitmarker;

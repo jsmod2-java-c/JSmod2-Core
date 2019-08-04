@@ -14,7 +14,7 @@ import cn.jsmod2.api.player.Player;
  * @author kevinj
  */
 
-public class PlayerMedkitUseEvent extends PlayerEvent {
+public class PlayerMedkitUseEvent extends PlayerEvent implements IPlayerMedkitUseEvent{
     private Integer recoverHealth;
 
     public PlayerMedkitUseEvent(Player player, Integer recoverHealth) {

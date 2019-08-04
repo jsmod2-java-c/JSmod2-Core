@@ -15,7 +15,7 @@ import cn.jsmod2.core.math.Vector;
  * @author kevinj
  */
 
-public class Player106CreatePortalEvent extends PlayerEvent {
+public class Player106CreatePortalEvent extends PlayerEvent implements IPlayer106CreatePortalEvent{
     private Vector position;
 
     public Vector getPosition() {

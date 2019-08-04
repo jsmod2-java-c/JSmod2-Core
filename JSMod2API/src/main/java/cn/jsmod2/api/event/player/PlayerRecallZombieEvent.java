@@ -14,7 +14,7 @@ import cn.jsmod2.core.annotations.UseForServerInit;
 /**
  * @author kevinj
  */
-public class PlayerRecallZombieEvent extends PlayerEvent{
+public class PlayerRecallZombieEvent extends PlayerEvent implements IPlayerRecallZombieEvent{
     private Player target = new Player("");
 
     private boolean allowRecall;

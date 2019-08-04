@@ -15,7 +15,7 @@ import cn.jsmod2.core.annotations.UseForServerInit;
  * @author kevinj
  */
 
-public class PlayerCallCommandEvent extends PlayerEvent {
+public class PlayerCallCommandEvent extends PlayerEvent implements IPlayerCallCommandEvent{
     private String returnMessage;
     private String command;
 

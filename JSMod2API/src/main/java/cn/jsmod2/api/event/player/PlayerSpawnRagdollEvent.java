@@ -18,7 +18,7 @@ import cn.jsmod2.core.math.Vector;
 /**
  * @author kevinj
  */
-public class PlayerSpawnRagdollEvent extends Event {
+public class PlayerSpawnRagdollEvent extends Event implements IPlayerSpawnRagdollEvent{
     private Role role;
     private Vector position;
     private Vector Rotation;

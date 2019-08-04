@@ -14,7 +14,7 @@ import cn.jsmod2.api.player.RadioStatus;
 /**
  * @author kevinj
  */
-public class PlayerRadioSwitchEvent extends PlayerEvent{
+public class PlayerRadioSwitchEvent extends PlayerEvent implements IPlayerRadioSwitchEvent{
     private RadioStatus ChangeTo;
 
     public RadioStatus getChangeTo() {

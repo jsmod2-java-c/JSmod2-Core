@@ -15,7 +15,7 @@ import cn.jsmod2.api.player.Player;
  * @author kevinj
  */
 
-public class PlayerHurtEvent extends PlayerEvent {
+public class PlayerHurtEvent extends PlayerEvent implements IPlayerHurtEvent{
 
     private Player attacker = new Player("");
 

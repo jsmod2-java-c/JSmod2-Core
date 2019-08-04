@@ -12,7 +12,7 @@ import cn.jsmod2.api.player.Player;
 import cn.jsmod2.api.team.Team;
 import cn.jsmod2.core.annotations.UseForServerInit;
 
-public class PlayerInitialAssignTeamEvent extends PlayerEvent {
+public class PlayerInitialAssignTeamEvent extends PlayerEvent implements IPlayerInitialAssignTeamEvent{
     private Team team;
 
     public PlayerInitialAssignTeamEvent(Player player, Team team) {

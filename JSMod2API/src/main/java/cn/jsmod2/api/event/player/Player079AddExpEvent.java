@@ -14,9 +14,10 @@ import cn.jsmod2.core.annotations.UseForServerInit;
 
 /**
  * @author kevinj
+ * @author Magiclu550
  */
 
-public class Player079AddExpEvent extends PlayerEvent {
+public class Player079AddExpEvent extends PlayerEvent implements IPlayer079AddExpEvent{
     private ExperienceType experienceType;
     private float expToAdd;
 

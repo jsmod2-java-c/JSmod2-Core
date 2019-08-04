@@ -12,7 +12,7 @@ import cn.jsmod2.api.item.Item;
 import cn.jsmod2.api.item.ItemType;
 import cn.jsmod2.api.player.Player;
 
-public class PlayerPickupItemEvent extends PlayerItemEvent {
+public class PlayerPickupItemEvent extends PlayerItemEvent implements IPlayerPickupItemEvent{
     public PlayerPickupItemEvent(Player player, Item item, ItemType changeTo, boolean allow) {
         super(player, item, changeTo, allow);
     }

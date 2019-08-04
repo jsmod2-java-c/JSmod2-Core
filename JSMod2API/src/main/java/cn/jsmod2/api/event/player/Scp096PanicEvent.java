@@ -14,7 +14,7 @@ import cn.jsmod2.api.player.Player;
  * @author kevinj
  */
 
-public class Scp096PanicEvent extends PlayerEvent {
+public class Scp096PanicEvent extends PlayerEvent implements IScp096PanicEvent{
     private boolean allow;
     private float panicTime;
 

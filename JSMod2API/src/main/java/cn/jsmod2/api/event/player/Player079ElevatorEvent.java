@@ -16,7 +16,7 @@ import cn.jsmod2.core.annotations.UseForServerInit;
  * @author kevinj
  */
 
-public class Player079ElevatorEvent extends PlayerEvent {
+public class Player079ElevatorEvent extends PlayerEvent implements IPlayer079ElevatorEvent{
     private Elevator elevator = new Elevator();
     private boolean allow;
     private float apDrain;

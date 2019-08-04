@@ -10,15 +10,14 @@ package cn.jsmod2.api.event.player;
 
 import cn.jsmod2.api.map.Elevator;
 import cn.jsmod2.api.player.Player;
-import cn.jsmod2.core.annotations.UseForServerInit;
+import cn.jsmod2.core.math.Vector;
 
-import java.util.Vector;
 
 /**
  * @author kevinj
  */
 
-public class Player079ElevatorTeleportEvent extends PlayerEvent {
+public class Player079ElevatorTeleportEvent extends PlayerEvent implements IPlayer079ElevatorTeleportEvent{
     private Vector camera;
     private Elevator elevator = new Elevator();
     private boolean allow;

@@ -16,7 +16,7 @@ import cn.jsmod2.api.player.Player;
  * @author kevinj
  */
 
-public class PlayerDropItemEvent extends PlayerItemEvent {
+public class PlayerDropItemEvent extends PlayerItemEvent implements IPlayerDropItemEvent{
     public PlayerDropItemEvent(Player player, Item item, ItemType changeTo, boolean allow) {
         super(player, item, changeTo, allow);
     }
@@ -24,4 +24,5 @@ public class PlayerDropItemEvent extends PlayerItemEvent {
     public PlayerDropItemEvent(){
 
     }
+
 }

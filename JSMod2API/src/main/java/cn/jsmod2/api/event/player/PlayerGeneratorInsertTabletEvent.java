@@ -16,7 +16,7 @@ import cn.jsmod2.core.annotations.UseForServerInit;
  * @author kevinj
  */
 
-public class PlayerGeneratorInsertTabletEvent extends PlayerEvent{
+public class PlayerGeneratorInsertTabletEvent extends PlayerEvent implements IPlayerGeneratorInsertTabletEvent{
     private Generator generator = new Generator();
     private boolean allow;
     private boolean removeTablet;

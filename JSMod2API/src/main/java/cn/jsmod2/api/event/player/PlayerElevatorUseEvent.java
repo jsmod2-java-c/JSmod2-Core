@@ -18,7 +18,7 @@ import cn.jsmod2.core.math.Vector;
  * @author kevinj
  */
 
-public class PlayerElevatorUseEvent extends PlayerEvent {
+public class PlayerElevatorUseEvent extends PlayerEvent implements IPlayerElevatorUseEvent {
     private Elevator Elevator = new Elevator();
     private Vector ElevatorPosition;
     private boolean AllowUse;

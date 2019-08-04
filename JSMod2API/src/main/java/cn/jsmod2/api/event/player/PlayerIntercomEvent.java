@@ -14,7 +14,7 @@ import cn.jsmod2.api.player.Player;
  * @author kevinj
  */
 
-public class PlayerIntercomEvent extends PlayerEvent {
+public class PlayerIntercomEvent extends PlayerEvent implements IPlayerIntercomEvent{
     private float speechTime;
     private float cooldownTime;
 

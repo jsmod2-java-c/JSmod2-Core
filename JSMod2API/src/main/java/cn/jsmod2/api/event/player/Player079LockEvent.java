@@ -16,7 +16,7 @@ import cn.jsmod2.core.annotations.UseForServerInit;
  * @author kevinj
  */
 
-public class Player079LockEvent extends PlayerEvent {
+public class Player079LockEvent extends PlayerEvent implements IPlayer079LockEvent{
     private Door door = new Door();
     private boolean allow;
     private float apDrain;

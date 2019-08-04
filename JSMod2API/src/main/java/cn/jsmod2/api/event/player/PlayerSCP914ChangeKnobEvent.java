@@ -15,7 +15,7 @@ import cn.jsmod2.api.player.Player;
 /**
  * @author kevinj
  */
-public class PlayerSCP914ChangeKnobEvent extends PlayerEvent {
+public class PlayerSCP914ChangeKnobEvent extends PlayerEvent implements IPlayerSCP914ChangeKnobEvent{
     private KnobSetting knobSetting;
 
     public KnobSetting getKnobSetting() {

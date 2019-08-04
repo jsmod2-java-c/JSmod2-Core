@@ -14,7 +14,7 @@ import cn.jsmod2.api.player.Player;
  * @author kevinj
  */
 
-public class PlayerLureEvent extends PlayerEvent {
+public class PlayerLureEvent extends PlayerEvent implements IPlayerLureEvent{
     private boolean allowContain;
 
     public PlayerLureEvent(Player player, boolean allowContain) {

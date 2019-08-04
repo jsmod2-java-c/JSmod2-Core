@@ -16,7 +16,7 @@ import cn.jsmod2.core.event.Event;
  * @author kevinj
  */
 
-public abstract class PlayerEvent extends Event {
+public abstract class PlayerEvent extends Event implements IPlayerEvent{
     private Player player = new Player("");
 
     public PlayerEvent(Player player){

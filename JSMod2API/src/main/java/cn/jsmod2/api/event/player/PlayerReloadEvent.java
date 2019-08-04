@@ -16,7 +16,7 @@ import cn.jsmod2.core.annotations.UseForServerInit;
  * @author kevinj
  */
 
-public class PlayerReloadEvent extends PlayerEvent {
+public class PlayerReloadEvent extends PlayerEvent implements IPlayerReloadEvent{
     private ItemType weapon;
     private int ammoRemoved;
     private int ClipAmmoCountAfterReload;

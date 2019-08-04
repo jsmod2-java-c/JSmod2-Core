@@ -14,7 +14,7 @@ import cn.jsmod2.api.player.Player;
  * @author kevinj
  */
 
-public class PlayerJoinEvent extends PlayerEvent{
+public class PlayerJoinEvent extends PlayerEvent implements IPlayerJoinEvent{
     public PlayerJoinEvent(Player player) {
         super(player);
     }

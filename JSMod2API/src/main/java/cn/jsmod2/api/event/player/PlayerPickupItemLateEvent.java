@@ -16,7 +16,7 @@ import cn.jsmod2.core.annotations.UseForServerInit;
  * @author kevinj
  */
 
-public class PlayerPickupItemLateEvent extends PlayerEvent{
+public class PlayerPickupItemLateEvent extends PlayerEvent implements IPlayerPickupItemLateEvent{
     private Item item = new Item();
 
     public PlayerPickupItemLateEvent(Player player, Item item) {

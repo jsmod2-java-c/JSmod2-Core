@@ -16,7 +16,7 @@ import cn.jsmod2.core.annotations.UseForServerInit;
  * @author kevinj
  */
 
-public class Player079StartSpeakerEvent extends PlayerEvent {
+public class Player079StartSpeakerEvent extends PlayerEvent implements IPlayer079StartSpeakerEvent{
     private Room room = new Room();
     private boolean allow;
     private float apDrain;

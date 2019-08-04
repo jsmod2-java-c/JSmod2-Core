@@ -16,7 +16,7 @@ import cn.jsmod2.core.annotations.UseForServerInit;
  * @author kevinj
  */
 
-public class PlayerTriggerTeslaEvent extends PlayerEvent {
+public class PlayerTriggerTeslaEvent extends PlayerEvent implements IPlayerTriggerTeslaEvent{
     private TeslaGate TeslaGate = new TeslaGate();
     private boolean Triggerable;
 

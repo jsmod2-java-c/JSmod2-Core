@@ -14,7 +14,7 @@ import cn.jsmod2.api.player.Player;
  * @author kevinj
  */
 
-public class Player079UnlockDoorsEvent extends PlayerEvent {
+public class Player079UnlockDoorsEvent extends PlayerEvent implements IPlayer079UnlockDoorsEvent{
     private boolean allow;
 
     public Player079UnlockDoorsEvent(Player player, boolean allow) {

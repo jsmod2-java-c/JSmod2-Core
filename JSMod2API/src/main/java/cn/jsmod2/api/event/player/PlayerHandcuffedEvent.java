@@ -15,7 +15,7 @@ import cn.jsmod2.core.annotations.UseForServerInit;
  * @author kevinj
  */
 
-public class PlayerHandcuffedEvent extends PlayerEvent {
+public class PlayerHandcuffedEvent extends PlayerEvent implements IPlayerHandcuffedEvent{
     private boolean handcuffed;
 
     private Player owner = new Player("");

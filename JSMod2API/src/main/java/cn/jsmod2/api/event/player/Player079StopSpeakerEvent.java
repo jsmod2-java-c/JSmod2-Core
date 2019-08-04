@@ -16,7 +16,7 @@ import cn.jsmod2.core.annotations.UseForServerInit;
  * @author kevinj
  */
 
-public class Player079StopSpeakerEvent extends PlayerEvent {
+public class Player079StopSpeakerEvent extends PlayerEvent implements IPlayer079StopSpeakerEvent{
     private Room room = new Room();
     private boolean allow;
 

@@ -14,9 +14,10 @@ import cn.jsmod2.core.math.Vector;
 
 /**
  * @author kevinj
+ * @author Magiclu550
  */
 
-public class Player079CameraTeleportEvent extends PlayerEvent {
+public class Player079CameraTeleportEvent extends PlayerEvent implements IPlayer079CameraTeleportEvent{
     private Vector camera;
     private boolean allow;
     private float apDrain;

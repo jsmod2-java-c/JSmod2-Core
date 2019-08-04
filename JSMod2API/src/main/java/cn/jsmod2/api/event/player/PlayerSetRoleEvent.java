@@ -19,7 +19,7 @@ import java.util.List;
  * @author kevinj
  */
 
-public class PlayerSetRoleEvent extends PlayerEvent {
+public class PlayerSetRoleEvent extends PlayerEvent implements IPlayerSetRoleEvent{
     private List<ItemType> items;
     private boolean usingDefaultItem;
     private Role role;

@@ -8,12 +8,13 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.api.event.player;
 
+import cn.jsmod2.api.item.IItem;
 import cn.jsmod2.api.item.Item;
 import cn.jsmod2.api.item.ItemType;
 import cn.jsmod2.api.player.Player;
 
 public abstract class PlayerItemEvent extends PlayerEvent {
-    private Item item = new Item();
+    private IItem item = new Item();
 
     private ItemType changeTo;
 
@@ -30,11 +31,11 @@ public abstract class PlayerItemEvent extends PlayerEvent {
 
     }
 
-    public Item getItem() {
+    public IItem getItem() {
         return item;
     }
 
-    public void setItem(Item item) {
+    public void setItem(IItem item) {
         this.item = item;
     }
 

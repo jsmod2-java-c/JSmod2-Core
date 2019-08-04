@@ -15,7 +15,7 @@ import cn.jsmod2.core.annotations.UseForServerInit;
  * @author kevinj
  */
 
-public class PlayerGrenadeHitPlayer extends PlayerEvent {
+public class PlayerGrenadeHitPlayer extends PlayerEvent implements IPlayerGrenadeHitPlayer{
     private Player victim = new Player("");
 
     public Player getVictim() {

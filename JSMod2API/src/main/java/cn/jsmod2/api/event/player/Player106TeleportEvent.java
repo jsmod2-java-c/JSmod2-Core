@@ -16,7 +16,7 @@ import cn.jsmod2.core.math.Vector;
  * @author kevinj
  */
 
-public class Player106TeleportEvent extends PlayerEvent {
+public class Player106TeleportEvent extends PlayerEvent implements IPlayer106TeleportEvent{
     private Vector position;
 
     public Vector getPosition() {

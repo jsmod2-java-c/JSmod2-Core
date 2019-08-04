@@ -14,7 +14,7 @@ import cn.jsmod2.api.player.Player;
  * @author kevinj
  */
 
-public class PlayerMakeNoiseEvent extends PlayerEvent {
+public class PlayerMakeNoiseEvent extends PlayerEvent implements IPlayerMakeNoiseEvent{
     public PlayerMakeNoiseEvent(Player player) {
         super(player);
     }

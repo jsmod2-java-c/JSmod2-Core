@@ -13,7 +13,7 @@ import cn.jsmod2.api.player.Player;
 /**
  * @author kevinj
  */
-public class Scp096EnrageEvent extends PlayerEvent {
+public class Scp096EnrageEvent extends PlayerEvent implements IScp096EnrageEvent{
     private boolean allow;
 
     public Scp096EnrageEvent(Player player, boolean allow) {

@@ -13,7 +13,7 @@ import cn.jsmod2.api.player.Player;
 /**
  * @author kevinj
  */
-public class Scp096CooldownEndEvent extends PlayerEvent {
+public class Scp096CooldownEndEvent extends PlayerEvent implements IScp096CooldownEndEvent{
     private boolean allow;
 
     public boolean isAllow() {

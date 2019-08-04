@@ -10,7 +10,7 @@ package cn.jsmod2.api.event.player;
 
 import cn.jsmod2.api.player.Player;
 
-public class PlayerIntercomCooldownCheckEvent extends PlayerEvent{
+public class PlayerIntercomCooldownCheckEvent extends PlayerEvent implements IPlayerIntercomCooldownCheckEvent{
     private float currentCooldown;
 
     public PlayerIntercomCooldownCheckEvent(Player player, float currentCooldown) {

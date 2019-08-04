@@ -16,7 +16,7 @@ import cn.jsmod2.core.annotations.UseForServerInit;
  * @author kevinj
  */
 
-public class PlayerDeathEvent extends PlayerEvent{
+public class PlayerDeathEvent extends PlayerEvent implements IPlayerDeathEvent{
     private Player killer = new Player("");
 
     private boolean SpawnRagdoll;

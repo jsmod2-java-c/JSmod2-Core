@@ -15,7 +15,7 @@ import cn.jsmod2.core.math.Vector;
 /**
  * @author kevinj
  */
-public class PlayerPocketDimensionEnterEvent extends PlayerEvent {
+public class PlayerPocketDimensionEnterEvent extends PlayerEvent implements IPlayerPocketDimensionEnterEvent{
     private float damage;
 
     private Vector lastPosition;

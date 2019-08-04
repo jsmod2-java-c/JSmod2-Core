@@ -15,7 +15,7 @@ import cn.jsmod2.core.annotations.UseForServerInit;
  * @author kevinj
  */
 
-public class PlayerContain106Event extends PlayerEvent {
+public class PlayerContain106Event extends PlayerEvent implements IPlayerContain106Event{
     private Player[] scp106s;
     private boolean activateContainment;
 

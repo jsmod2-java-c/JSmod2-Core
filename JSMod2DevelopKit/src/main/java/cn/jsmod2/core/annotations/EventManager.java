@@ -21,7 +21,7 @@ import java.lang.annotation.Target;
  *
  * <code>
  * @ EventManager
- * public void onTest(TestEvent e){
+ * public void onTest(ITestEvent e){
  *     //...
  * }
  * </code>

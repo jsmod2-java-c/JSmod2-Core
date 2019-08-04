@@ -14,7 +14,7 @@ import cn.jsmod2.api.player.Player;
  * @author kevinj
  */
 
-public class PlayerGrenadeExplosion extends PlayerEvent {
+public class PlayerGrenadeExplosion extends PlayerEvent implements IPlayerGrenadeExplosion{
     public PlayerGrenadeExplosion(Player player) {
         super(player);
     }

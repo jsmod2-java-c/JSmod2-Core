@@ -16,7 +16,7 @@ import cn.jsmod2.core.math.Vector;
 /**
  * @author kevinj
  */
-public class PlayerThrowGrenade extends PlayerEvent {
+public class PlayerThrowGrenade extends PlayerEvent implements IPlayerThrowGrenade{
 
     private ItemType GrenadeType;
     private Vector direction;

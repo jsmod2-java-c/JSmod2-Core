@@ -15,7 +15,7 @@ import java.util.Vector;
 /**
  * @author kevinj
  */
-public class PlayerPocketDimensionExitEvent extends PlayerEvent {
+public class PlayerPocketDimensionExitEvent extends PlayerEvent implements IPlayerPocketDimensionExitEvent{
     private Vector exitPosition;
 
     public PlayerPocketDimensionExitEvent(Player player, Vector exitPosition) {

@@ -14,7 +14,7 @@ import cn.jsmod2.api.player.Player;
  * @author kevinj
  */
 
-public class Player079LevelUpEvent extends PlayerEvent {
+public class Player079LevelUpEvent extends PlayerEvent implements IPlayer079LevelUpEvent{
     public Player079LevelUpEvent(Player player) {
         super(player);
     }

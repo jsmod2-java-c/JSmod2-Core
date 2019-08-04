@@ -15,7 +15,7 @@ import cn.jsmod2.api.team.Role;
  * @author kevinj
  */
 
-public class PlayerCheckEscapeEvent extends PlayerEvent {
+public class PlayerCheckEscapeEvent extends PlayerEvent implements IPlayerCheckEscapeEvent{
     private boolean allowEscape;
     private Role changeRole;
 

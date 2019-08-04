@@ -16,7 +16,7 @@ import cn.jsmod2.core.annotations.UseForServerInit;
  * @author kevinj
  */
 
-public class PlayerGeneratorUnlockEvent extends PlayerEvent {
+public class PlayerGeneratorUnlockEvent extends PlayerEvent implements IPlayerGeneratorUnlockEvent{
     private Generator generator = new Generator();
     private boolean allow;
 
