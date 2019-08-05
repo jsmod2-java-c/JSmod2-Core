@@ -26,19 +26,19 @@ public class Map implements IMap, Serializable {
 
     private boolean warheadKeycardEntered;
 
-    public boolean warheadDetonated;
-    public boolean LCZDecontaminated;
+    private boolean warheadDetonated;
+    private boolean LCZDecontaminated;
 
     public List<Item> getItems(ItemType type,boolean world_only){
         return null;
     }
 
-    private Vector getRandomSpawnPoint(Role role){
+    public Vector getRandomSpawnPoint(Role role){
         List<Vector> vectors = getSpawnPoints(role);
         return vectors.get(new Random().nextInt(vectors.size()));
     }
 
-    private List<Vector> getSpawnPoints(Role role){
+    public List<Vector> getSpawnPoints(Role role){
         return null;
     }
 
