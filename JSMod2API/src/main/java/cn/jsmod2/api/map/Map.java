@@ -9,8 +9,9 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.api.map;
 
 
-import cn.jsmod2.api.item.Item;
+import cn.jsmod2.api.item.IItem;
 import cn.jsmod2.api.item.ItemType;
+import cn.jsmod2.api.player.IPlayer;
 import cn.jsmod2.api.player.Player;
 import cn.jsmod2.api.team.Role;
 import cn.jsmod2.core.math.Vector;
@@ -29,7 +30,7 @@ public class Map implements IMap, Serializable {
     private boolean warheadDetonated;
     private boolean LCZDecontaminated;
 
-    public List<Item> getItems(ItemType type,boolean world_only){
+    public List<IItem> getItems(ItemType type, boolean world_only){
         return null;
     }
 
@@ -47,12 +48,12 @@ public class Map implements IMap, Serializable {
     }
 
 
-    public List<Door> getDoors() {
+    public List<IDoor> getDoors() {
         return null;
     }
 
 
-    public List<PocketDimensionExit> getPocketDimensionExits() {
+    public List<IPocketDimensionExit> getPocketDimensionExits() {
         return null;
     }
 
@@ -102,7 +103,7 @@ public class Map implements IMap, Serializable {
     }
 
 
-    public List<Elevator> getElevators() {
+    public List<IElevator> getElevators() {
         return null;
     }
 
@@ -116,7 +117,7 @@ public class Map implements IMap, Serializable {
     }
 
 
-    public List<TeslaGate> getTeslaGates() {
+    public List<ITeslaGate> getTeslaGates() {
         return null;
     }
 
@@ -126,7 +127,7 @@ public class Map implements IMap, Serializable {
     }
 
 
-    public void announceScpKill(String scpNumber, Player killer) {
+    public void announceScpKill(String scpNumber, IPlayer killer) {
 
     }
 
@@ -136,7 +137,7 @@ public class Map implements IMap, Serializable {
     }
 
 
-    public void setIntercomSpeaker(Player player) {
+    public void setIntercomSpeaker(IPlayer player) {
 
     }
 
