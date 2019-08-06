@@ -20,6 +20,15 @@ import java.util.Properties;
 
 public abstract class Manager implements Cloneable{
 
+    Map<Integer, Class<? extends Event>> events;
+
+    public Manager(){
+        events = new HashMap<>();
+        for(RegisterTemplate template:Server.getSender().getServer().getRegisters()){
+            events.putAll(template.getEvents());
+        }
+    }
+
     public abstract void manageMethod(String message,int id);
 
     /**
@@ -32,11 +41,7 @@ public abstract class Manager implements Cloneable{
 
 
         EventBinaryStream stream = new EventBinaryStream();
-
-        Map<Integer, Class<? extends Event>> events = new HashMap<>();
-        for(RegisterTemplate template:Server.getSender().getServer().getRegisters()){
-            events.putAll(template.getEvents());
-        }
+        
         Class<? extends Event> eventClass = events.get(id);
         if(eventClass != null){
             Event event = stream.encode(eventClass,bytes);
