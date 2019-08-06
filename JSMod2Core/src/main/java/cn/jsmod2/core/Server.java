@@ -333,7 +333,9 @@ public abstract class Server implements IServer {
         return lock;
     }
 
-
+    public String  getPluginDir() {
+        return pluginDir.toString();
+    }
 
     public ILogger getLogger() {
         return log;
@@ -830,5 +832,6 @@ public abstract class Server implements IServer {
         }
         return null;
     }
+
 
 }

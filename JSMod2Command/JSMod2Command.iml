@@ -13,5 +13,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Maven: cn.jsmod2:jsmod2-core:1.0.3" level="project" />
     <orderEntry type="library" name="Maven: jline:jline:2.14.2" level="project" />
+    <orderEntry type="library" name="Maven: cn.jsmod2:jsmod2-iapi:1.0.3" level="project" />
   </component>
 </module>

@@ -94,6 +94,7 @@
 /Users/luchangcun/IdeaProjects/jsmod2/JSMod2DevelopKit/src/main/java/cn/jsmod2/api/event/environment/ISummonVehicleEvent.java
 /Users/luchangcun/IdeaProjects/jsmod2/JSMod2DevelopKit/src/main/java/cn/jsmod2/api/event/player/IPlayer079StartSpeakerEvent.java
 /Users/luchangcun/IdeaProjects/jsmod2/JSMod2DevelopKit/src/main/java/cn/jsmod2/api/player/AmmoType.java
+/Users/luchangcun/IdeaProjects/jsmod2/JSMod2DevelopKit/src/main/java/cn/jsmod2/core/ISimplePlayer.java
 /Users/luchangcun/IdeaProjects/jsmod2/JSMod2DevelopKit/src/main/java/cn/jsmod2/core/utils/core/config/oaml/ValueAnchor.java
 /Users/luchangcun/IdeaProjects/jsmod2/JSMod2DevelopKit/src/main/java/cn/jsmod2/api/event/environment/IWarheadEvent.java
 /Users/luchangcun/IdeaProjects/jsmod2/JSMod2DevelopKit/src/main/java/cn/jsmod2/api/event/server/ISetServerNameEvent.java
@@ -143,6 +144,7 @@
 /Users/luchangcun/IdeaProjects/jsmod2/JSMod2DevelopKit/src/main/java/cn/jsmod2/core/command/NativeCommand.java
 /Users/luchangcun/IdeaProjects/jsmod2/JSMod2DevelopKit/src/main/java/cn/jsmod2/api/event/team/ISetRoleMaxHPEvent.java
 /Users/luchangcun/IdeaProjects/jsmod2/JSMod2DevelopKit/src/main/java/cn/jsmod2/core/log/IWarnLogger.java
+/Users/luchangcun/IdeaProjects/jsmod2/JSMod2DevelopKit/src/main/java/cn/jsmod2/core/ICommandSender.java
 /Users/luchangcun/IdeaProjects/jsmod2/JSMod2DevelopKit/src/main/java/cn/jsmod2/core/utils/core/config/oaml/io/DocumentWritable.java
 /Users/luchangcun/IdeaProjects/jsmod2/JSMod2DevelopKit/src/main/java/cn/jsmod2/api/map/IRoom.java
 /Users/luchangcun/IdeaProjects/jsmod2/JSMod2DevelopKit/src/main/java/cn/jsmod2/api/player/IPlayer.java
@@ -154,6 +156,7 @@
 /Users/luchangcun/IdeaProjects/jsmod2/JSMod2DevelopKit/src/main/java/cn/jsmod2/api/event/player/IPlayer079AddExpEvent.java
 /Users/luchangcun/IdeaProjects/jsmod2/JSMod2DevelopKit/src/main/java/cn/jsmod2/api/event/player/IPlayerSpawnRagdollEvent.java
 /Users/luchangcun/IdeaProjects/jsmod2/JSMod2DevelopKit/src/main/java/cn/jsmod2/core/interapi/network/IRequester.java
+/Users/luchangcun/IdeaProjects/jsmod2/JSMod2DevelopKit/src/main/java/cn/jsmod2/core/ApiId.java
 /Users/luchangcun/IdeaProjects/jsmod2/JSMod2DevelopKit/src/main/java/cn/jsmod2/core/utils/core/config/oaml/utils/OrderMap.java
 /Users/luchangcun/IdeaProjects/jsmod2/JSMod2DevelopKit/src/main/java/cn/jsmod2/api/event/player/IScp096CooldownEndEvent.java
 /Users/luchangcun/IdeaProjects/jsmod2/JSMod2DevelopKit/src/main/java/cn/jsmod2/core/interapi/plugin/IPluginManager.java

@@ -16,6 +16,7 @@ import cn.jsmod2.core.command.NativeCommand;
 import cn.jsmod2.core.event.Listener;
 import cn.jsmod2.core.ex.MainClassErrorException;
 import cn.jsmod2.core.ex.PluginException;
+import cn.jsmod2.core.interapi.IServer;
 import cn.jsmod2.core.interapi.plugin.IPluginClassLoader;
 import cn.jsmod2.core.log.ILogger;
 import cn.jsmod2.core.utils.PluginFileVO;
@@ -150,13 +151,13 @@ public class PluginClassLoader implements IPluginClassLoader {
 
 
         if (plugin instanceof PluginBase) {
-            Server server = Server.getSender().getServer();
+            IServer server = Server.getSender().getServer();
 
             ILogger logger = server.getLogger();
 
             Plugin pluginObject = ((PluginBase) plugin);
 
-            pluginObject.init(logger, server, vo.getPluginName(), server.serverfolder, vo.getDescription(), this, new File(server.pluginDir + "/" + vo.getPluginName()), vo.getVersion());
+            pluginObject.init(logger, server, vo.getPluginName(), server.getServerFolder(), vo.getDescription(), this, new File(server.getPluginDir() + "/" + vo.getPluginName()), vo.getVersion());
 
             pluginObject.onLoad();
 

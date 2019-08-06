@@ -70,5 +70,6 @@ public interface IServer extends Start,Closeable, Reloadable {
 
     File getServerFolder();
 
+    String getPluginDir();
 
 }

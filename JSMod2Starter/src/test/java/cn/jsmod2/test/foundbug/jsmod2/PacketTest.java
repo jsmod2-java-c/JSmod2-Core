@@ -60,8 +60,8 @@ public class PacketTest {
         Socket socket = new Socket();
         //socket.bind(new InetSocketAddress("127.0.0.1",19938));
         socket.connect(new InetSocketAddress("127.0.0.1",19935));
-        System.out.println(0x31+"-{}|playerName:'11111'|player-playerName:'222'|player-scp079Data-playerName:'333'|item-playerName:'444'");
-        socket.getOutputStream().write(Base64.getEncoder().encode((0x31+"-{}|playerName:11111|player-playerName:222|player-scp079Data-playerName:333|item-playerName:444").getBytes()));
+        System.out.println(0x31+"-s{}&&&playerName:'11111'&&&player-playerName:'222'&&&player-scp079Data-playerName:'333'&&&item-playerName:'444'");
+        socket.getOutputStream().write(Base64.getEncoder().encode((0x31+"-{}|||playerName:11111|||player-playerName:222|||player-scp079Data-playerName:333|||item-playerName:444").getBytes()));
         socket.close();
         while (true);
     }

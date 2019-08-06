@@ -40,6 +40,7 @@ cn/jsmod2/api/event/player/IPlayerPickupItemLateEvent.class
 cn/jsmod2/api/map/RoomType.class
 cn/jsmod2/api/map/PocketDimensionExitType.class
 cn/jsmod2/api/event/server/IRoundStartEvent.class
+cn/jsmod2/core/ApiId.class
 cn/jsmod2/core/log/IInfoLogger.class
 cn/jsmod2/api/event/server/IUpdateEvent.class
 cn/jsmod2/api/event/player/IScp096PanicEvent.class
@@ -137,6 +138,7 @@ cn/jsmod2/api/event/player/IPlayer079DoorEvent.class
 cn/jsmod2/core/utils/core/config/oaml/NodeFactory.class
 cn/jsmod2/api/event/player/IPlayerDropItemEvent.class
 cn/jsmod2/core/utils/config/ConfigQueryer.class
+cn/jsmod2/core/ICommandSender.class
 cn/jsmod2/api/item/KnobSetting.class
 cn/jsmod2/core/annotations/EnableRegister.class
 cn/jsmod2/api/event/player/IPlayer079ElevatorTeleportEvent.class

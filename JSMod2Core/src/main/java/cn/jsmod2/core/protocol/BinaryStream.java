@@ -131,6 +131,7 @@ public abstract class BinaryStream {
         if(json.contains("~")) {
             json = json.substring(0, json.indexOf("~"));
         }
+        //ServerLogger.getLogger().debug(json);
         return json;
     }
 
@@ -141,6 +142,7 @@ public abstract class BinaryStream {
             //{main-object}|player-xxx:xxx|team-class:xxx
             String[] props = splitJson(json);
             json = props[0];
+            //ServerLogger.getLogger().debug(json);
             Object o = JSONObject.parseObject(json,clz);
             if(o==null){
                 o = clz.newInstance();

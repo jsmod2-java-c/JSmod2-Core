@@ -12,7 +12,7 @@ public abstract class ApiId implements Cloneable, Serializable {
 
     @Override
     public String toString() {
-        return playerName;
+        return playerName == null?"SERVER":playerName;
     }
 
     public String getApiId() {

@@ -41,7 +41,6 @@ public class Smod2Server extends CommandSender implements GameServer {
 
     public Smod2Server() {
         super("CONSOLE","all","console","admin","player","nobody");
-        this.map = new Map();
     }
 
     public Server getRuntimeServer(){
@@ -85,6 +84,9 @@ public class Smod2Server extends CommandSender implements GameServer {
     }
 
     public Map getMap() {
+        if(map == null){
+            map = new Map();
+        }
         return map;
     }
 
