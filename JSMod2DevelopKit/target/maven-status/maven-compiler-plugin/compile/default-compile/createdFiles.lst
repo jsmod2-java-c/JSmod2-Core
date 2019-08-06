@@ -143,6 +143,7 @@ cn/jsmod2/api/event/player/IPlayer079ElevatorTeleportEvent.class
 cn/jsmod2/api/event/player/IPlayerGeneratorUnlockEvent.class
 cn/jsmod2/core/utils/core/config/oaml/tree/Anchor.class
 cn/jsmod2/api/event/player/IPlayerDeathEvent.class
+cn/jsmod2/core/ISimplePlayer.class
 cn/jsmod2/api/event/player/IPlayerMakeNoiseEvent.class
 cn/jsmod2/core/event/Listener.class
 cn/jsmod2/core/utils/core/config/oaml/utils/NodeMap$NodeEntry.class

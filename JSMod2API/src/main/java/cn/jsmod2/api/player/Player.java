@@ -8,8 +8,10 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.api.player;
 
+import cn.jsmod2.api.item.IItem;
 import cn.jsmod2.api.item.Item;
 import cn.jsmod2.api.item.ItemType;
+import cn.jsmod2.api.team.ITeamRole;
 import cn.jsmod2.api.team.Role;
 import cn.jsmod2.api.team.TeamRole;
 import cn.jsmod2.api.user.UserGroup;
@@ -22,9 +24,9 @@ import cn.jsmod2.core.math.Vector;
 import java.io.Serializable;
 import java.util.List;
 
-public class Player extends CommandSender implements ISimplePlayer,IPlayer, Serializable,Cloneable {
+public class Player extends CommandSender implements IPlayer, Serializable,Cloneable {
 
-    private TeamRole teamRole = new TeamRole();
+    private ITeamRole teamRole = new TeamRole();
 
     private String ipAddress;
 
@@ -45,11 +47,11 @@ public class Player extends CommandSender implements ISimplePlayer,IPlayer, Seri
     }
 
 
-    public TeamRole getTeamRole() {
+    public ITeamRole getTeamRole() {
         return teamRole;
     }
 
-    public void setTeamRole(TeamRole teamRole) {
+    public void setTeamRole(ITeamRole teamRole) {
         this.teamRole = teamRole;
     }
 
@@ -171,7 +173,7 @@ public class Player extends CommandSender implements ISimplePlayer,IPlayer, Seri
         return null;
     }
 
-    public List<Item> getInventory(){
+    public List<IItem> getInventory(){
         return null;
     }
 
@@ -278,7 +280,7 @@ public class Player extends CommandSender implements ISimplePlayer,IPlayer, Seri
     public void setRadioBattery(int battery){
 
     }
-    public void handcuffPlayer(Player playerToHandcuff){
+    public void handcuffPlayer(IPlayer playerToHandcuff){
 
     }
     public void removeHandcuffs(){
