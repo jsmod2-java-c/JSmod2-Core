@@ -41,7 +41,7 @@ public abstract class Manager implements Cloneable{
 
 
         EventBinaryStream stream = new EventBinaryStream();
-        
+
         Class<? extends Event> eventClass = events.get(id);
         if(eventClass != null){
             Event event = stream.encode(eventClass,bytes);
