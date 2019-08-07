@@ -16,6 +16,6 @@ public class GetPlayerPacket extends GetServerPacket {
     @Override
     @SuppressWarnings("unchecked")
     public List<Player> send() {
-        return (List<Player>)requester.with("field","players").get().getArray();
+        return (List<Player>)requester.with("field","players").get().getProtocolArray(false);
     }
 }

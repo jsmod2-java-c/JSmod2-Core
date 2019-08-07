@@ -113,10 +113,6 @@ public class Smod2Server extends CommandSender implements GameServer {
         return playerPacket.send();
     }
 
-    public void setName(){
-
-    }
-
     @Override
     public void personalBroadcast(int i, String s, boolean b) {
 
