@@ -20,4 +20,6 @@ public interface IAuthCheckEvent extends IEvent {
 
     void setSuccessful(boolean successful);
 
+    void setRequester(IPlayer requester);
+
 }

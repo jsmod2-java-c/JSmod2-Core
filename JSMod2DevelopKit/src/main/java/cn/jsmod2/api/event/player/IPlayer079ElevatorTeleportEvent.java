@@ -3,7 +3,7 @@ package cn.jsmod2.api.event.player;
 import cn.jsmod2.api.map.IElevator;
 import cn.jsmod2.core.math.Vector;
 
-public interface IPlayer079ElevatorTeleportEvent {
+public interface IPlayer079ElevatorTeleportEvent extends IPlayerEvent{
 
     Vector getCamera();
 
@@ -12,4 +12,10 @@ public interface IPlayer079ElevatorTeleportEvent {
     boolean isAllow();
 
     void setAllow(boolean allow);
+
+    float getApDrain();
+
+    void setApDrain(float apDrain);
+
+
 }

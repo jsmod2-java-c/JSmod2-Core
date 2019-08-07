@@ -25,4 +25,6 @@ public interface IBanEvent extends IEvent {
     boolean isAllowBan();
 
     void setAllowBan(boolean allowBan);
+
+    void setAdmin(IPlayer admin);
 }

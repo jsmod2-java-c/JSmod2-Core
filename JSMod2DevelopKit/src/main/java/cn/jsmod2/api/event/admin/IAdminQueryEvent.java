@@ -19,6 +19,13 @@ public interface IAdminQueryEvent extends IEvent {
     IPlayer getAdmin();
 
     /**
+     * Set the player who queried the server
+     * @param admin admin
+     */
+    void setAdmin(IPlayer admin);
+
+
+    /**
      *
      * @return The query
      *

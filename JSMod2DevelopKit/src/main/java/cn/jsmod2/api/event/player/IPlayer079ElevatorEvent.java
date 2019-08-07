@@ -12,6 +12,8 @@ public interface IPlayer079ElevatorEvent extends IPlayerEvent {
 
     float getApDrain();
 
+    void setApDrain(float apDrain);
+
 
 
 }

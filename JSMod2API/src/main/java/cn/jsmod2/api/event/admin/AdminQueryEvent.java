@@ -7,6 +7,7 @@ the appropriateness, if infringement, will be handled in accordance
 with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">that<a>
  */
 package cn.jsmod2.api.event.admin;
+import cn.jsmod2.api.player.IPlayer;
 import cn.jsmod2.api.player.Player;
 import cn.jsmod2.core.event.Event;
 import cn.jsmod2.network.protocol.event.admin.AdminQueryAdminSetPacket;
@@ -19,7 +20,7 @@ import cn.jsmod2.network.protocol.event.admin.AdminQueryQuerySetPacket;
 
 public class AdminQueryEvent extends Event implements IAdminQueryEvent{
 
-    private Player admin = new Player("");
+    private IPlayer admin = new Player("");
 
     private String query;
 
@@ -29,14 +30,14 @@ public class AdminQueryEvent extends Event implements IAdminQueryEvent{
 
     private boolean successful;
 
-    public Player getAdmin() {
+    public IPlayer getAdmin() {
         return admin;
     }
 
-    public void setAdmin(Player admin) {
+    public void setAdmin(IPlayer admin) {
         AdminQueryAdminSetPacket set = new AdminQueryAdminSetPacket();
         set.playerName = playerName;
-        set.admin = admin;
+        set.admin = (Player) admin;
         set.send();
         this.admin = admin;
     }

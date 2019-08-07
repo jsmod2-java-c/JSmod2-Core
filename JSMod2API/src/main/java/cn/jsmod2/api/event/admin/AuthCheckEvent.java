@@ -8,6 +8,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.api.event.admin;
 
+import cn.jsmod2.api.player.IPlayer;
 import cn.jsmod2.api.player.Player;
 import cn.jsmod2.api.server.AuthType;
 import cn.jsmod2.core.event.Event;
@@ -19,7 +20,7 @@ import cn.jsmod2.core.event.Event;
 
 public class AuthCheckEvent extends Event implements IAuthCheckEvent{
 
-    private Player requester = new Player("");
+    private IPlayer requester = new Player("");
 
     private AuthType type;
 
@@ -27,11 +28,11 @@ public class AuthCheckEvent extends Event implements IAuthCheckEvent{
 
     private boolean successful;
 
-    public Player getRequester() {
+    public IPlayer getRequester() {
         return requester;
     }
 
-    public void setRequester(Player requester) {
+    public void setRequester(IPlayer requester) {
         this.requester = requester;
     }
 

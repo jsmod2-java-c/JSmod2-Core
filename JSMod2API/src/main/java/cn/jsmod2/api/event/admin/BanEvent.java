@@ -8,6 +8,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.api.event.admin;
 
+import cn.jsmod2.api.player.IPlayer;
 import cn.jsmod2.api.player.Player;
 import cn.jsmod2.core.event.Event;
 
@@ -18,9 +19,9 @@ import cn.jsmod2.core.event.Event;
 
 public class BanEvent extends Event implements IBanEvent{
 
-    private Player player = new Player("");
+    private IPlayer player = new Player("");
 
-    private Player admin = new Player("");
+    private IPlayer admin = new Player("");
 
     private int duration;
 
@@ -30,19 +31,19 @@ public class BanEvent extends Event implements IBanEvent{
 
     private boolean allowBan;
 
-    public Player getPlayer() {
+    public IPlayer getPlayer() {
         return player;
     }
 
-    public void setPlayer(Player player) {
+    public void setPlayer(IPlayer player) {
         this.player = player;
     }
 
-    public Player getAdmin() {
+    public IPlayer getAdmin() {
         return admin;
     }
 
-    public void setAdmin(Player admin) {
+    public void setAdmin(IPlayer admin) {
         this.admin = admin;
     }
 
