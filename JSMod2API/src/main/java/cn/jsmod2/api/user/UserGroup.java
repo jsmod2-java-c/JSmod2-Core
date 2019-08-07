@@ -13,4 +13,44 @@ import cn.jsmod2.core.ApiId;
 import java.io.Serializable;
 
 public class UserGroup extends ApiId implements IUserGroup, Serializable,Cloneable {
+
+    private String color;
+
+    private String badgeText;
+
+    private long permissions;
+
+    private boolean cover;
+
+    private boolean hiddenByDefault;
+
+    private String name;
+
+    public Object getComponent(){
+        return null;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public String getBadgeText() {
+        return badgeText;
+    }
+
+    public long getPermissions() {
+        return permissions;
+    }
+
+    public boolean isCover() {
+        return cover;
+    }
+
+    public boolean isHiddenByDefault() {
+        return hiddenByDefault;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

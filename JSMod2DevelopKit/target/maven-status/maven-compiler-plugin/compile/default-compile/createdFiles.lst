@@ -71,7 +71,6 @@ cn/jsmod2/core/utils/core/config/oaml/ValueAnchor.class
 cn/jsmod2/api/map/IElevator.class
 cn/jsmod2/api/event/player/IPlayerGrenadeExplosion.class
 cn/jsmod2/api/event/player/IPlayerGeneratorAccessEvent.class
-cn/jsmod2/api/event/player/IPlayerPocketDimensionExitEvent.class
 cn/jsmod2/api/server/ROUND_END_STATUS.class
 cn/jsmod2/core/annotations/EventManager.class
 cn/jsmod2/core/command/NativeCommand.class
@@ -84,7 +83,6 @@ cn/jsmod2/api/player/IScp079Data.class
 cn/jsmod2/core/utils/core/config/oaml/utils/CollectionFactory.class
 cn/jsmod2/core/CommandSender.class
 cn/jsmod2/api/event/team/ISetSCPConfigEvent.class
-cn/jsmod2/api/event/player/IPlayerElevatorUseEvent.class
 cn/jsmod2/api/event/player/IScp096EnrageEvent.class
 cn/jsmod2/api/event/environment/IScpDeathAnnouncementEvent.class
 cn/jsmod2/core/utils/core/config/oaml/exception/AmbiguousTypeException.class
@@ -123,7 +121,6 @@ cn/jsmod2/api/event/team/IDecideRespawnQueueEvent.class
 cn/jsmod2/core/log/ILogger.class
 cn/jsmod2/api/event/player/IPlayerIntercomEvent.class
 cn/jsmod2/core/Start.class
-cn/jsmod2/core/utils/config/IConfig.class
 cn/jsmod2/api/event/player/IPlayerSCP914ChangeKnobEvent.class
 cn/jsmod2/core/utils/core/config/oaml/io/DocumentWriter.class
 cn/jsmod2/api/event/player/IScp096CooldownEndEvent.class

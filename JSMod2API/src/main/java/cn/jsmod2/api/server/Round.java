@@ -13,4 +13,40 @@ import cn.jsmod2.core.ApiId;
 import java.io.Serializable;
 
 public class Round extends ApiId implements IRound, Serializable,Cloneable {
+
+    private IRoundStatus stats;
+
+    private int duration;
+
+    public void endRound(){
+
+    }
+
+    public void addNTFUnit(String unit){
+
+    }
+
+    public void MTFRespawn(boolean isCI){
+
+    }
+
+    public void restartRound(){
+
+    }
+
+    public IRoundStatus getStats() {
+        return stats;
+    }
+
+    public void setStats(IRoundStatus stats) {
+        this.stats = stats;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
 }
