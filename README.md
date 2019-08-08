@@ -63,7 +63,61 @@ If there's no problem, launch JSmod2.jar:
 
 > How to develop a plugin?
 
-1. First you need to create a plugin.yml
+1. New API can register the Listeners and Commands of JSmod2's；
+
+```java
+package Package;
+
+
+@Main(name="exmaple")
+
+@EnableRegister
+public class Main extends PluginBase{
+    public void onLoad(){
+    }
+    public void onEnable(){
+    }
+    public void onDisable(){
+    }
+}
+```
+2. Create a Command:
+```java
+package Package;
+
+public class TestCommand extends Command{
+    
+   
+    public TestCommand(Plugin plugin){
+        super("test","CONSOLE", "hello,jsmod2",plugin);
+    }
+    //override the method
+    public boolean execute(CommandSender commandSender, String[] args){
+        //Processing when executing instructions
+    }
+}
+
+```
+
+3. Create a Listener:
+```java
+package Package;
+
+public class TestListener implements Listener{
+    //EventManager has a listener priority, see the note
+    @EventManager
+    public void JoinEvent(PlayerJoinEvent e){
+        //Trigger corresponding event will run
+    }
+    
+}
+```
+> Old Method
+
+this method can also create a plugin:
+
+1. First you need to create a plugin.yml [@Deprecated]
+`now you can not create this file for the plugin,and use @Main instead`
 ```yaml
 
 name: pluginName
@@ -95,37 +149,10 @@ public class MainClass extends PluginBase{
 } 
 
 ```
-3. Create a Listener:
-```java
-package Package;
 
-public class TestListener implements Listener{
-    //EventManager has a listener priority, see the note
-    @EventManager
-    public void JoinEvent(PlayerJoinEvent e){
-        //Trigger corresponding event will run
-    }
-    
-}
-```
-4. Create a Command:
-```java
-package Package;
 
-public class TestCommand extends Command{
-    
-   
-    public TestCommand(Plugin plugin){
-        super("test","CONSOLE", "hello,jsmod2",plugin);
-    }
-    //override the method
-    public boolean execute(CommandSender commandSender, String[] args){
-        //Processing when executing instructions
-    }
-}
-
-```
-5. Register the Command and Listener:
+3.Register the Command and Listener:[@Deprecated]
+`now you can not register the listener and command,use @EnableRegister instead`
 ```java
 package Package;
 /**
@@ -149,21 +176,4 @@ public class MainClass extends PluginBase{
 } 
 
 ```
-6. New API can register the Listeners and Commands of JSmod2's；
 
-```java
-package Package;
-
-
-@Main(name="exmaple")
-
-@EnableRegister
-public class Main extends PluginBase{
-    public void onLoad(){
-    }
-    public void onEnable(){
-    }
-    public void onDisable(){
-    }
-}
-```
