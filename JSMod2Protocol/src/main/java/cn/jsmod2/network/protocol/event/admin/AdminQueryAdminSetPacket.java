@@ -14,7 +14,7 @@ public class AdminQueryAdminSetPacket extends EventSetPacket {
 
     @Override
     public void send() {
-        requester.with("admin",admin)
+        requester.with("admin",admin.getApiId())
                 .to();
     }
 }
