@@ -16,6 +16,7 @@ public class UIStarter extends javafx.application.Application  {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/ui/start.fxml"));
         primaryStage.setTitle("Jsmod2-Control-Panel");
+        primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(root, 650, 450));
         primaryStage.show();
     }
