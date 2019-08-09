@@ -34,6 +34,7 @@ import cn.jsmod2.network.protocol.event.admin.AdminQueryAdminSetPacket;
 import cn.jsmod2.network.protocol.event.admin.AdminQueryQueryGetPacket;
 import cn.jsmod2.network.protocol.event.admin.AdminQueryQuerySetPacket;
 import cn.jsmod2.network.protocol.item.*;
+import cn.jsmod2.network.protocol.map.door.*;
 import cn.jsmod2.network.protocol.server.*;
 
 import java.util.*;
@@ -128,7 +129,20 @@ public class Register extends RegisterTemplate {
         packets.put(AdminQueryQuerySetPacket.class,AdminQueryQuerySetPacket.ID);
         packets.put(AdminQueryQueryGetPacket.class,AdminQueryQueryGetPacket.ID);
         packets.put(CommandSendPacket.class,CommandSendPacket.ID);
-        //~107 最大 下一个108
+        packets.put(GetDoorBlockAfterWarheadDetonationPacket.class,GetDoorBlockAfterWarheadDetonationPacket.ID);
+        packets.put(GetDoorDestoryedPacket.class,GetDoorDestoryedPacket.ID);
+        packets.put(GetDoorDontOpenOnWarheadPacket.class,GetDoorDontOpenOnWarheadPacket.ID);
+        packets.put(GetDoorLockedPacket.class,GetDoorLockedPacket.ID);
+        packets.put(GetDoorNamePacket.class,GetDoorNamePacket.ID);
+        packets.put(GetDoorOpenPacket.class,GetDoorOpenPacket.ID);
+        packets.put(GetDoorPermissionPacket.class,GetDoorPermissionPacket.ID);
+        packets.put(GetDoorPositionPacket.class,GetDoorPositionPacket.ID);
+        packets.put(SetDoorBlockAfterWarheadDetonationPacket.class,SetDoorBlockAfterWarheadDetonationPacket.ID);
+        packets.put(SetDoorDestoryPacket.class,SetDoorDestoryPacket.ID);
+        packets.put(SetDoorDontOpenOnWarheadPacket.class,SetDoorDontOpenOnWarheadPacket.ID);
+        packets.put(SetDoorLockedPacket.class,SetDoorLockedPacket.ID);
+        packets.put(SetDoorOpenPacket.class,SetDoorOpenPacket.ID);
+        //~120 最大 下一个121
         putPackets();
     }
 
