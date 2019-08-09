@@ -14,6 +14,9 @@ the appropriateness, if infringement, will be handled in accordance
 with the law, @Copyright JSmod2 China,more can see <a href="http://jsmod2.cn">that<a>
  */
 ```
+
+README edited by YorokobiMaster And MagicLu
+
 > About JSmod2
 
 JSmod2 needs the following dependencies:
@@ -66,8 +69,11 @@ If there's no problem, launch JSmod2.jar:
 1. New API can register the Listeners and Commands of JSmod2's；
 
 ```java
-package Package;
+package com.magiclu.plugin;
 
+import cn.jsmod2.core.annotations.EnableRegister;
+import cn.jsmod2.core.annotations.Main;
+import cn.jsmod2.core.plugin.PluginBase;
 
 @Main(name="exmaple")
 
@@ -83,7 +89,12 @@ public class Main extends PluginBase{
 ```
 2. Create a Command:
 ```java
-package Package;
+package com.magiclu.plugin.command;
+
+import cn.jsmod2.api.player.IPlayer;
+import cn.jsmod2.core.CommandSender;
+import cn.jsmod2.core.command.Command;
+import cn.jsmod2.core.plugin.Plugin;
 
 public class TestCommand extends Command{
     
@@ -101,7 +112,12 @@ public class TestCommand extends Command{
 
 3. Create a Listener:
 ```java
-package Package;
+package com.magiclu.plugin.listener;
+
+import cn.jsmod2.api.event.player.IPlayerJoinEvent;
+import cn.jsmod2.core.annotations.EventManager;
+import cn.jsmod2.core.event.Listener;
+
 
 public class TestListener implements Listener{
     //EventManager has a listener priority, see the note
