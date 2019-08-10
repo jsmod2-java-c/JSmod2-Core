@@ -132,7 +132,9 @@ public class TestListener implements Listener{
 
 this method can also create a plugin:
 
-1. First you need to create a plugin.yml [@Deprecated]
+1. First you need to create a plugin.yml 
+
+[@Deprecated]
 `now you can not create this file for the plugin,and use @Main instead`
 ```yaml
 
@@ -167,7 +169,9 @@ public class MainClass extends PluginBase{
 ```
 
 
-3.Register the Command and Listener:[@Deprecated]
+3.Register the Command and Listener:
+
+[@Deprecated]
 `now you can not register the listener and command,use @EnableRegister instead`
 ```java
 package Package;
