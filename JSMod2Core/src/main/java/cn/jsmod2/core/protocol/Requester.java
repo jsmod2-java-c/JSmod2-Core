@@ -4,6 +4,7 @@ import cn.jsmod2.core.Server;
 import cn.jsmod2.core.interapi.network.IRequester;
 import cn.jsmod2.core.math.Vector;
 import cn.jsmod2.core.utils.Future;
+import cn.jsmod2.core.utils.Utils;
 import com.alibaba.fastjson.JSON;
 
 import java.util.HashMap;
@@ -69,7 +70,7 @@ public class Requester implements IRequester {
             }
             return response;
         }catch (Exception e){
-            e.printStackTrace();
+            Utils.printException(e);
         }
         return null;
     }

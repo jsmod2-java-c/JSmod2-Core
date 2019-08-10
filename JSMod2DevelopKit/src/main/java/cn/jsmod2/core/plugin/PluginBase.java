@@ -10,6 +10,7 @@ package cn.jsmod2.core.plugin;
 
 import cn.jsmod2.core.command.Command;
 import cn.jsmod2.core.event.Listener;
+import cn.jsmod2.core.ex.ServerRuntimeException;
 import cn.jsmod2.core.interapi.IServer;
 import cn.jsmod2.core.interapi.plugin.IPluginClassLoader;
 import cn.jsmod2.core.log.ILogger;
@@ -137,6 +138,10 @@ public abstract class PluginBase implements Plugin {
         if(trySet){
             if(config.containsKey(key)){
                 return config.get(key);
+            }
+        }else{
+            if(config.get(key)!=null&&config.get(key).isPrimary()){
+                throw new ServerRuntimeException("primary=true,the key is exists");
             }
         }
         return config.put(key,setting);

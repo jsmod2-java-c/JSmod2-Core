@@ -12,6 +12,7 @@ import cn.jsmod2.core.Message;
 import cn.jsmod2.core.FileSystem;
 import cn.jsmod2.core.Server;
 import cn.jsmod2.core.ex.ServerRuntimeException;
+import cn.jsmod2.core.log.ServerLogger;
 import org.apache.commons.codec.binary.Base64;
 
 import java.io.*;
@@ -132,10 +133,10 @@ public class Utils {
                 if (!(e instanceof ServerRuntimeException)) {
                     throw new ServerRuntimeException(e);
                 }
-            }catch (ServerRuntimeException e1){
-                e1.printStackTrace();
+            }catch (Exception e1){
+                printException(e1);
             }
-            e.printStackTrace();
+            printException(e);
         }
     }
 
@@ -225,6 +226,14 @@ public class Utils {
             return builder.toString();
         }
         return "";
+    }
+
+    public static void printException(Throwable t){
+        ServerLogger.getLogger().error(t.toString());
+        for(StackTraceElement e : t.getStackTrace()){
+            ServerLogger.getLogger().error("\tat "+e);
+        }
+        ServerLogger.getLogger().error("\tFINISHED");
     }
 
 }

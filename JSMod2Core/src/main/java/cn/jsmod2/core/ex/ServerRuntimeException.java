@@ -50,7 +50,7 @@ public class ServerRuntimeException extends RuntimeException {
         return eLogger;
     }
 
-    private void printServerError(){
+    public void printServerError(){
         Map<Class<? extends Exception>,String>  exs = new HashMap<>();
         for(RegisterTemplate template: Server.getSender().getServer().getRegisters()) {
             exs.putAll(template.getEx_methods());

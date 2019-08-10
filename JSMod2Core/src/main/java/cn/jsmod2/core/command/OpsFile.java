@@ -3,6 +3,7 @@ package cn.jsmod2.core.command;
 
 import cn.jsmod2.core.Server;
 import cn.jsmod2.core.interapi.command.IOpsFile;
+import cn.jsmod2.core.utils.Utils;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -51,7 +52,7 @@ public class OpsFile implements IOpsFile {
             if(opsFile==null)
                 opsFile = new OpsFile(server);
         }catch (IOException e){
-            e.printStackTrace();
+            Utils.printException(e);
         }
         return opsFile;
     }

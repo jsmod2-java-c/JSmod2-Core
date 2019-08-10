@@ -128,7 +128,7 @@ public class PluginClassLoader implements IPluginClassLoader {
             }
 
         }catch (Exception e){
-            e.printStackTrace();
+            Utils.printException(e);
         }
         return null;
     }

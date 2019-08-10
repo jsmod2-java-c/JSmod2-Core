@@ -118,14 +118,14 @@ public class FileSystem {
                 try{
                     return (int)(c2.getCommitDate().getTime()-c1.getCommitDate().getTime());
                 }catch (IOException e){
-                    e.printStackTrace();
+                    Utils.printException(e);
                 }
                 return 0;
             });
             intoProperties(commits,repository,info,properties);
             return info;
         }catch (Exception e){
-            e.printStackTrace();
+            Utils.printException(e);
         }
         return info;
     }
@@ -138,7 +138,7 @@ public class FileSystem {
                 return applicationInfo;
             }
         }catch (IOException e){
-            e.printStackTrace();
+            Utils.printException(e);
         }
         return applicationInfo;
     }
@@ -155,7 +155,7 @@ public class FileSystem {
                 EmeraldScriptVM.getVM().importFile(path);
             }
         }catch (IOException e){
-            e.printStackTrace();
+            Utils.printException(e);
         }
         return null;
     }
@@ -249,7 +249,7 @@ public class FileSystem {
                 return serverPreproties;
             }
         }catch (Exception e){
-            e.printStackTrace();
+            Utils.printException(e);
         }
         return null;
     }
@@ -297,7 +297,7 @@ public class FileSystem {
                 try{
                     properties.load(new InputStreamReader(Utils.getClassStream("zh"+PROPERTIES)));
                 }catch (Exception e2){
-                    e2.printStackTrace();
+                    Utils.printException(e2);
                 }
                 writer.println("zh");
             }

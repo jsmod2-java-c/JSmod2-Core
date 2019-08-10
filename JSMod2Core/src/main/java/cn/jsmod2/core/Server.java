@@ -565,12 +565,12 @@ public abstract class Server implements IServer {
                     gets = new byte[MAX_LENGTH];
                 }
             }catch (Exception e){
-                e.printStackTrace();
+                Utils.printException(e);
             }finally {
                 try {
                     socket.close();
                 }catch (IOException e){
-                    e.printStackTrace();
+                    Utils.printException(e);
                 }
             }
         }
@@ -820,7 +820,7 @@ public abstract class Server implements IServer {
 
                                 return (int)(date2.getTime()-date1.getTime());
                             }catch (Exception e){
-                                e.printStackTrace();
+                                Utils.printException(e);
                             }
                             return 0;
                         }).collect(Collectors.toList()).get(0);

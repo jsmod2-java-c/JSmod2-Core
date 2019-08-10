@@ -183,7 +183,7 @@ public class PluginManager implements IPluginManager {
                     try {
                         method.getMethod().invoke(listener, event);
                     }catch (Exception e){
-                        e.printStackTrace();
+                        Utils.printException(e);
                     }
                 }
             }

@@ -8,10 +8,13 @@ public class ConfigSetting {
 
     private String defaultValue;
 
-    public ConfigSetting(String key, String value, String defaultValue) {
+    private boolean primary;
+
+    public ConfigSetting(String key, String value, String defaultValue,boolean primary) {
         this.key = key;
         this.value = value;
         this.defaultValue = defaultValue;
+        this.primary = primary;
     }
 
     public String getKey() {
@@ -24,5 +27,9 @@ public class ConfigSetting {
 
     public String getDefaultValue() {
         return defaultValue;
+    }
+
+    public boolean isPrimary() {
+        return primary;
     }
 }
