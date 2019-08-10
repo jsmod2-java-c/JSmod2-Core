@@ -3,6 +3,7 @@ package cn.jsmod2.network.protocol.server;
 import cn.jsmod2.api.server.Round;
 import cn.jsmod2.core.protocol.GetPacket;
 
+@Deprecated
 public class GetRoundPacket extends GetPacket {
 
     public static final int ID = 0x61;

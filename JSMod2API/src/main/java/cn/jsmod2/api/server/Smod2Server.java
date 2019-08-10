@@ -30,7 +30,7 @@ public class Smod2Server extends CommandSender implements GameServer {
     private int port;
     @Deprecated
     private String ipAddress;
-    @Deprecated
+
     private Round round;
 
     private cn.jsmod2.api.map.Map map;
@@ -79,8 +79,10 @@ public class Smod2Server extends CommandSender implements GameServer {
 
 
     public Round getRound() {
-        GetRoundPacket packet = new GetRoundPacket();
-        return packet.send();
+        if(round == null){
+            round = new Round();
+        }
+        return round;
     }
 
     public Map getMap() {
