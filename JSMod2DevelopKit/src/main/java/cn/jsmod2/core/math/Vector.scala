@@ -100,6 +100,12 @@ class Vector (var x:Double,var y:Double,var z:Double){
   def getY()= y
   def getZ() = z
 
+  def setX(x:Float) = this.x = x
+
+  def setY(y:Float) = this.y = y
+
+  def setZ(z:Float) = this.z = z
+
   override def toString() = x+","+y+","+z
 
 }

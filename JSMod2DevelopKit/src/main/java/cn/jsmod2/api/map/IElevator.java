@@ -20,4 +20,10 @@ public interface IElevator{
     List<Vector> getPositions();
 
     void use();
+
+    ElevatorType getElevatorType();
+
+
+    ElevatorStatus getElevatorStatus();
+
 }
