@@ -92,6 +92,7 @@ public class Register extends RegisterTemplate {
         nativeCommandMap.put("load",new LoadPluginCommand());
         nativeCommandMap.put("about",new AboutCommand());
         nativeCommandMap.put("multi",new MultiCommand());
+        nativeCommandMap.put("download",new DownloadPluginCommand());
     }
 
 
@@ -158,6 +159,7 @@ public class Register extends RegisterTemplate {
         super.registerServerProperties();
         serverProperties.put(FileSystem.SMOD2_LOG_FILE,"");
         serverProperties.put(FileSystem.SMOD2_LOG_INTERVAL,"2000");
+        serverProperties.put(DownloadPluginCommand.MIRROR,"");
     }
 
 
