@@ -50,6 +50,8 @@ public class DownloadPluginCommand extends NativeCommand {
                         Server.getSender().getServer().getPluginManager().getPluginClassLoader().loadPlugin(pluginFile);
                     }
                 }
+                file.close();
+                stream.close();
             });
         });
         return true;
