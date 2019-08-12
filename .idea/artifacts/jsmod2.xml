@@ -3,10 +3,14 @@
     <output-path>$PROJECT_DIR$/java_jsmod2/out/artifacts/jsmod2</output-path>
     <root id="archive" name="jsmod2.jar">
       <element id="module-output" name="JSMod2API" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/cn/jsmod2/jsmod2-core/1.0.3/jsmod2-core-1.0.3.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/cn/jsmod2/jsmod2-protocol/1.0.3/jsmod2-protocol-1.0.3.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/cn/jsmod2/jsmod2-iapi/1.0.3/jsmod2-iapi-1.0.3.jar" path-in-jar="/" />
       <element id="module-output" name="JSMod2Command" />
+      <element id="module-output" name="JSMod2Core" />
+      <element id="module-output" name="JSMod2DevelopKit" />
+      <element id="module-output" name="JSMod2Emerald" />
+      <element id="module-output" name="JSMod2Protocol" />
+      <element id="module-output" name="JSMod2Starter" />
+      <element id="module-output" name="JSMod2UI" />
+      <element id="module-output" name="JSMod2Web" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/jline/jline/2.14.2/jline-2.14.2.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/alibaba/fastjson/1.2.47/fastjson-1.2.47.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-annotations/2.9.0/jackson-annotations-2.9.0.jar" path-in-jar="/" />
@@ -28,18 +32,8 @@
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/yaml/snakeyaml/1.16/snakeyaml-1.16.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$USER_HOME$/Downloads/scala-2.13.0/lib/scala-library.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$USER_HOME$/Downloads/scala-2.13.0/lib/scala-reflect.jar" path-in-jar="/" />
-      <element id="module-output" name="JSMod2Core" />
-      <element id="module-output" name="JSMod2DevelopKit" />
-      <element id="module-output" name="JSMod2Emerald" />
-      <element id="module-output" name="JSMod2Protocol" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/cn/jsmod2/jsmod2-api/1.0.3/jsmod2-api-1.0.3.jar" path-in-jar="/" />
-      <element id="module-output" name="JSMod2Starter" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/ch/qos/logback/logback-core/1.2.3/logback-core-1.2.3.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/cn/jsmod2/jsmod2-command/1.0.3/jsmod2-command-1.0.3.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/cn/jsmod2/jsmod2-emerald/1.0.3/jsmod2-emerald-1.0.3.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/cn/jsmod2/jsmod2-ui/1.0.3/jsmod2-ui-1.0.3.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/cn/jsmod2/jsmod2-web/1.0.3/jsmod2-web-1.0.3.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-core/2.9.9/jackson-core-2.9.9.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-databind/2.9.9/jackson-databind-2.9.9.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.9.9/jackson-datatype-jdk8-2.9.9.jar" path-in-jar="/" />
@@ -82,10 +76,7 @@
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/springframework/spring-tx/5.1.8.RELEASE/spring-tx-5.1.8.RELEASE.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/springframework/spring-web/5.1.8.RELEASE/spring-web-5.1.8.RELEASE.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/5.1.8.RELEASE/spring-webmvc-5.1.8.RELEASE.jar" path-in-jar="/" />
-      <element id="module-output" name="JSMod2UI" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/yaml/snakeyaml/1.23/snakeyaml-1.23.jar" path-in-jar="/" />
-      <element id="module-output" name="JSMod2Web" />
-      <element id="dir-copy" path="$PROJECT_DIR$/JSMod2Starter/src/main/resources/META-INF" />
     </root>
   </artifact>
 </component>
