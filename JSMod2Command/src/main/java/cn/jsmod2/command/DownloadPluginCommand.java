@@ -23,7 +23,7 @@ public class DownloadPluginCommand extends NativeCommand {
     public static final String MIRROR = "jsmod2.plugin.mirror";
 
     public DownloadPluginCommand() {
-        super("download", Powers.CONSOLE,"upload the plugin");
+        super("download", Powers.CONSOLE,"download the plugin");
     }
 
     @Override

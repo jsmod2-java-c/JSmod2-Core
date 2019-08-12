@@ -142,6 +142,10 @@ public class ServerLogger implements ILogger{
     @Override
     public void debug(String message, String prefix, String suffix) {
         String msg = LogFormat.format(message,"DEBUG",GREEN,prefix)+suffix;
+        try {
+            consoleOutputStream.write(getSimpleMessage(getSimpleMessage(msg)));
+        } catch (IOException ignored) {
+        }
         logger.debug(msg);
     }
 
@@ -149,7 +153,7 @@ public class ServerLogger implements ILogger{
     public void error(String message, String prefix, String suffix) {
         String msg = LogFormat.format(message,"ERROR",RED,prefix,true)+suffix;
         try {
-            consoleOutputStream.write(msg);
+            consoleOutputStream.write(getSimpleMessage(msg));
         } catch (IOException ignored) {
         }
 //        queue.offer(msg);
@@ -160,7 +164,7 @@ public class ServerLogger implements ILogger{
     public void info(String message, String prefix, String suffix) {
         String msg = LogFormat.format(message,"INFO",YELLOW,prefix)+suffix;
         try {
-            consoleOutputStream.write(msg);
+            consoleOutputStream.write(getSimpleMessage(msg));
         } catch (IOException ignored) {
         }
 //        queue.offer(msg);
@@ -171,7 +175,7 @@ public class ServerLogger implements ILogger{
     public void warn(String message, String prefix, String suffix) {
         String msg = LogFormat.format(message,"WARN",RED,prefix,true)+suffix;
         try {
-            consoleOutputStream.write(msg);
+            consoleOutputStream.write(getSimpleMessage(msg));
         } catch (IOException ignored) {
         }
 //        queue.offer(msg);
@@ -198,6 +202,10 @@ public class ServerLogger implements ILogger{
     public int getLine(){
         Throwable t = new Throwable();
         return t.getStackTrace()[t.getStackTrace().length-1].getLineNumber();
+    }
+
+    public String getSimpleMessage(String str){
+        return str.replaceAll("\\033\\[[0-9]+m","");
     }
 
 
