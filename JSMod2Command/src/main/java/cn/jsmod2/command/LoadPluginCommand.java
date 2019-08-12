@@ -4,6 +4,7 @@ import cn.jsmod2.core.CommandSender;
 import cn.jsmod2.core.Powers;
 import cn.jsmod2.core.Server;
 import cn.jsmod2.core.command.NativeCommand;
+import cn.jsmod2.core.plugin.PluginClassLoader;
 
 public class LoadPluginCommand extends NativeCommand {
 
@@ -14,7 +15,10 @@ public class LoadPluginCommand extends NativeCommand {
     @Override
     public boolean execute(CommandSender commandSender, String[] strings) {
         for(String str:strings){
-            Server.getSender().getServer().getPluginManager().getPluginClassLoader().loadPlugin(str);
+            Server server = Server.getSender().getServer();
+            PluginClassLoader loader = server.getPluginManager().getPluginClassLoader();
+            String pluginFile = server.pluginDir.toString();
+            loader.loadPlugin(pluginFile+"/"+str);
         }
         return true;
     }

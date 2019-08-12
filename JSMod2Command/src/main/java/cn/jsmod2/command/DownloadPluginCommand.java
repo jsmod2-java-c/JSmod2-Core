@@ -7,6 +7,7 @@ import cn.jsmod2.core.command.NativeCommand;
 import cn.jsmod2.core.log.ServerLogger;
 import cn.jsmod2.core.utils.Utils;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.URL;
@@ -28,13 +29,19 @@ public class DownloadPluginCommand extends NativeCommand {
     @Override
     public boolean execute(CommandSender commandSender, String[] strings) {
         if(strings.length < 2)return false;
+        String fileName = strings[0]+"-"+strings[1]+".jar";
+        String pluginFile = Server.getSender().getServer().pluginDir+"/"+fileName;
+        if(new File(pluginFile).exists()){
+            ServerLogger.getLogger().multiInfo(getClass(),"the plugin has existed","","");
+            return true;
+        }
         Server.getSender().getServer().getScheduler().executeRunnable(()->{
-            String fileName = strings[0]+"-"+strings[1]+".jar";
+
             Utils.TryCatch(()->{
                 URL url = new URL(Server.getSender().getServer().serverProp.getProperty(MIRROR)+"/"+fileName);
                 URLConnection connection = url.openConnection();
                 InputStream stream = connection.getInputStream();
-                String pluginFile = Server.getSender().getServer().pluginDir+"/"+fileName;
+
                 FileOutputStream file = new FileOutputStream(pluginFile);
                 byte[] buffer = new byte[1204];
                 int byteSum = 0;
