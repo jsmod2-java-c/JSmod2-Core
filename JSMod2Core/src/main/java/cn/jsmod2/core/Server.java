@@ -564,6 +564,7 @@ public abstract class Server implements IServer {
                     manageMessage(after, getLen(after),socket);
                     gets = new byte[MAX_LENGTH];
                 }
+                socket.close();
             }catch (Exception e){
                 Utils.printException(e);
             }finally {

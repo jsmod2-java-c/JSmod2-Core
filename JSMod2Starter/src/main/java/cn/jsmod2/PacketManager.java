@@ -91,7 +91,6 @@ public class PacketManager extends Manager {
                 String[] args = vo.getArgs();
                 Server.getSender().getServer().getPluginManager().executeCommand(commandName,args,player);
             }
-            socket.close();
         }catch (Exception e){
             e.printStackTrace();
         }
