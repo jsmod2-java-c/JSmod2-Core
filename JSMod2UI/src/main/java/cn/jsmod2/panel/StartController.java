@@ -4,12 +4,12 @@ import cn.jsmod2.core.Console;
 import cn.jsmod2.core.log.ServerLogger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author magiclu550
@@ -18,7 +18,11 @@ import java.util.List;
 
 public class StartController {
 
+    private List<String> strings = new ArrayList();
+
     private ServerLogger serverLogger = ServerLogger.getLogger();
+
+    private AtomicInteger integer = new AtomicInteger(0);
     @FXML
     private AnchorPane pane;
     @FXML
@@ -37,6 +41,12 @@ public class StartController {
     public TextField sendText;
 
     @FXML
+    public Button go;
+
+    @FXML
+    public Button back;
+
+    @FXML
     private void initialize(){
         serverLogger.getConsoleOutputStream().setTextArea(consoleTextArea);
     }
@@ -44,7 +54,26 @@ public class StartController {
     @FXML
     public void onSend(ActionEvent event){
         String text = sendText.getText();
+        strings.add(text);
         Console.getConsole().runConsoleCommandWithEmerald(text).toString();
+        sendText.clear();
+        integer.set(0);
+    }
+
+    @FXML
+    public void onGo(ActionEvent event){
+        if(integer.get()>=strings.size()||integer.get()<0){
+            integer.set(0);
+        }
+        sendText.setText(strings.get(integer.getAndIncrement()));
+    }
+
+    @FXML
+    public void onBack(ActionEvent event){
+        if(integer.get()<0||integer.get()>=strings.size()){
+            integer.set(strings.size()-1);
+        }
+        sendText.setText(strings.get(integer.getAndDecrement()));
     }
 
     @FXML
