@@ -10,6 +10,7 @@ import com.alibaba.fastjson.JSON;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
+import java.net.Socket;
 import java.util.*;
 
 import static cn.jsmod2.core.forplayer.PlayerServer.DECODE_BY;
@@ -69,7 +70,7 @@ public class PlayerPacketManager extends Manager {
 
     @Override
     @SuppressWarnings("unchecked")
-    public void manageMethod(String message, int id) {
+    public void manageMethod(String message, int id, Socket socket) {
         message = decode(message);
         Map<String,String> playerStrings = JSON.parseObject(message,Map.class);
         String name = playerStrings.get("name");

@@ -432,11 +432,11 @@ public abstract class Server implements IServer {
 
 
 
-    private void manageMessage(DatagramPacket packet) throws Exception{
-        manageMessage(packet.getData(),packet.getLength());
+    private void manageMessage(DatagramPacket packet,Socket socket) throws Exception{
+        manageMessage(packet.getData(),packet.getLength(),socket);
     }
 
-    private void manageMessage(byte[] data,int length) throws Exception{
+    private void manageMessage(byte[] data,int length,Socket socket) throws Exception{
         String message = new String(data,0,length);
         String[] alls = message.split(";");
         for(String all:alls) {
@@ -452,7 +452,7 @@ public abstract class Server implements IServer {
 
             for (Manager manager : packetManagers) {
                 synchronized (this) {
-                    manager.manageMethod(all, id);
+                    manager.manageMethod(all, id,socket);
                 }
             }
             count++;
@@ -529,7 +529,7 @@ public abstract class Server implements IServer {
             try {
                 //接收数据包
 
-                manageMessage(packet);
+                manageMessage(packet,null);
 
             }catch (Exception e){
                 e.printStackTrace();
@@ -561,7 +561,7 @@ public abstract class Server implements IServer {
                         break;
                     }
                     byte[] after = getFullBytes(socket,gets);
-                    manageMessage(after, getLen(after));
+                    manageMessage(after, getLen(after),socket);
                     gets = new byte[MAX_LENGTH];
                 }
             }catch (Exception e){

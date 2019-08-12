@@ -8,6 +8,7 @@ import cn.jsmod2.core.ex.EventException;
 import cn.jsmod2.core.protocol.EventBinaryStream;
 
 import java.io.UnsupportedEncodingException;
+import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -29,7 +30,7 @@ public abstract class Manager implements Cloneable{
         }
     }
 
-    public abstract void manageMethod(String message,int id);
+    public abstract void manageMethod(String message, int id, Socket socket);
 
     /**
      * 通过数据包调用event

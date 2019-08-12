@@ -17,6 +17,7 @@ import cn.jsmod2.core.protocol.command.CommandVO;
 import cn.jsmod2.network.command.*;
 import cn.jsmod2.api.player.Player;
 
+import java.net.Socket;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
@@ -60,7 +61,7 @@ public class PacketManager extends Manager {
     /**
      * 处理包的逻辑写在这里
      */
-    public void manageMethod(String message,int id){
+    public void manageMethod(String message, int id, Socket socket){
         try{
             Properties properties = FileSystem.getFileSystem().serverProperties(Server.getSender().getServer());
             byte[] bytes = message.getBytes(properties.getProperty("encode"));//通过utf-8形式获取byte字节数组
@@ -71,6 +72,7 @@ public class PacketManager extends Manager {
             if(events.containsKey(id)){
                 //System.out.println(new String(Base64.getDecoder().decode(new String(bytes))));
                 callEventByPacket(id,bytes);
+                socket.getOutputStream().write(0xFF&1);
             }
             CommandVO vo_get = getCommandVO(id,message,Register.SERVER_COMMAND,Register.PLAYER_COMMAND,ServerVO.class,PlayerVO.class);
             /* 执行指令的部分 */
@@ -89,6 +91,7 @@ public class PacketManager extends Manager {
                 String[] args = vo.getArgs();
                 Server.getSender().getServer().getPluginManager().executeCommand(commandName,args,player);
             }
+            socket.close();
         }catch (Exception e){
             e.printStackTrace();
         }
