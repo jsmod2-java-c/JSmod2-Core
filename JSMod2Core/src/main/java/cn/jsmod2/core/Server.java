@@ -572,7 +572,6 @@ public abstract class Server implements IServer {
                         break;
                     }
                     byte[] after = getFullBytes(socket,gets);
-                    System.out.println(new String(after));
                     manageMessage(after, getLen(after),socket);
                     gets = new byte[MAX_LENGTH];
                 }
