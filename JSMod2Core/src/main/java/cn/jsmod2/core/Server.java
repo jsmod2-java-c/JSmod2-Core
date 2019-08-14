@@ -290,7 +290,8 @@ public abstract class Server implements IServer {
                 ((DatagramSocket) serverSocket).send(pack);
             } else {
                 Socket socket = new Socket();
-                socket.connect(new InetSocketAddress(ip, port));
+                if(!socket.isConnected())
+                    socket.connect(new InetSocketAddress(ip, port));
                 socket.getOutputStream().write(encode);
                 if (result) {
                     byte[] bytes = new byte[MAX_LENGTH];
@@ -575,7 +576,6 @@ public abstract class Server implements IServer {
                     manageMessage(after, getLen(after),socket);
                     gets = new byte[MAX_LENGTH];
                 }
-                socket.getOutputStream().write(0xFF&1);
             }catch (Exception e){
                 Utils.printException(e);
             }finally {
