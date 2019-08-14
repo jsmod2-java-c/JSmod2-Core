@@ -567,15 +567,9 @@ public abstract class Server implements IServer {
 
             try{
                 byte[] gets = new byte[MAX_LENGTH];
-                while (true) {
-                    int i = socket.getInputStream().read(gets);
-                    if(i == -1){
-                        break;
-                    }
-                    byte[] after = getFullBytes(socket,gets);
-                    manageMessage(after, getLen(after),socket);
-                    gets = new byte[MAX_LENGTH];
-                }
+                socket.getInputStream().read(gets);
+                byte[] after = getFullBytes(socket,gets);
+                manageMessage(after, getLen(after),socket);
             }catch (Exception e){
                 Utils.printException(e);
             }finally {
