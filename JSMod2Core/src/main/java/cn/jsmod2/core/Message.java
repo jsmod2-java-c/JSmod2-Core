@@ -8,6 +8,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.core;
 
+import cn.jsmod2.core.utils.LogFormat;
 import org.fusesource.jansi.Ansi;
 
 import static org.fusesource.jansi.Ansi.Color.DEFAULT;
@@ -32,7 +33,7 @@ public class Message {
     }
 
     public void error(String msg){
-        System.out.println(ansi().eraseScreen().fg(RED).a(msg).fg(DEFAULT));
+        System.out.println(LogFormat.textFormat(msg,RED));
     }
 
 }
