@@ -9,7 +9,6 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.api.event.player;
 
 import cn.jsmod2.api.map.Elevator;
-import cn.jsmod2.api.player.Player;
 import cn.jsmod2.core.math.Vector;
 
 
@@ -48,15 +47,6 @@ public class Player079ElevatorTeleportEvent extends PlayerEvent implements IPlay
     }
 
 
-
-
-    public Player079ElevatorTeleportEvent(Player player, Vector camera, Elevator elevator, boolean allow, float apDrain) {
-        super(player);
-        this.camera = camera;
-        this.elevator = elevator;
-        this.allow = allow;
-        this.apDrain = apDrain;
-    }
 
     public Player079ElevatorTeleportEvent(){
 

@@ -36,10 +36,7 @@ public class SummonVehicleEvent extends Event implements ISummonVehicleEvent{
         this.allowSummon = allowSummon;
     }
 
-    public SummonVehicleEvent(boolean isCI, boolean allowSummon) {
-        IsCI = isCI;
-        this.allowSummon = allowSummon;
-    }
+
 
     public SummonVehicleEvent(){
 

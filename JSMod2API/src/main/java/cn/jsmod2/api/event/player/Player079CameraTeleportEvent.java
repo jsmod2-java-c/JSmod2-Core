@@ -8,8 +8,6 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.api.event.player;
 
-import cn.jsmod2.api.player.Player;
-import cn.jsmod2.core.annotations.UseForServerInit;
 import cn.jsmod2.core.math.Vector;
 
 /**
@@ -22,12 +20,6 @@ public class Player079CameraTeleportEvent extends PlayerEvent implements IPlayer
     private boolean allow;
     private float apDrain;
 
-    public Player079CameraTeleportEvent(Player player, Vector camera, boolean allow, float apDrain) {
-        super(player);
-        this.camera = camera;
-        this.allow = allow;
-        this.apDrain = apDrain;
-    }
 
     public Player079CameraTeleportEvent(){
 

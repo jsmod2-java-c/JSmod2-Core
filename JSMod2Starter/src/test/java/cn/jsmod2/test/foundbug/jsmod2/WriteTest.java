@@ -12,6 +12,7 @@ public class WriteTest {
     public void send() throws Exception{
         Socket socket = new Socket();
         socket.connect(new InetSocketAddress("localhost",19135));
+        Thread.sleep(10000);
         socket.getOutputStream().write("hello".getBytes());
         socket.getInputStream().read();
     }

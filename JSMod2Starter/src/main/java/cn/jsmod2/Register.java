@@ -181,16 +181,16 @@ public class Register extends RegisterTemplate {
      */
     @RegisterMethod
     public void registerEvents(){
-        events.put(0x01, AdminQueryEvent.class);//packet
-        events.put(0x03, AuthCheckEvent.class);//packet
-        events.put(0x04, BanEvent.class);//packet
-        events.put(0x05, SetConfigEvent.class);//packet
-        events.put(0x06, GeneratorFinishEvent.class);//p
+        events.put(0x01, AdminQueryEvent.class);//packet 1
+        events.put(0x03, AuthCheckEvent.class);//packet 1
+        events.put(0x04, BanEvent.class);//packet 1
+        events.put(0x05, SetConfigEvent.class);//packet 1
+        events.put(0x06, GeneratorFinishEvent.class);//p  \1
         events.put(0x07, LCZDecontaminateEvent.class);//p
         events.put(0x08, SCP914ActivateEvent.class);//p
         events.put(0x09, ScpDeathAnnouncementEvent.class);//p
         events.put(0x0a, SummonVehicleEvent.class);//p
-        events.put(0x0b,WarheadChangeLeverEvent.class);//p
+        events.put(0x0b,WarheadChangeLeverEvent.class);//p 1
         events.put(0x0c,WarheadDetonateEvent.class);//p
         events.put(0x0d,WarheadKeycardAccessEvent.class);//p
         events.put(0x0e,WarheadStartEvent.class);//p
@@ -224,12 +224,12 @@ public class Register extends RegisterTemplate {
         events.put(0x2a,PlayerInitialAssignTeamEvent.class);
         events.put(0x2b,PlayerIntercomCooldownCheckEvent.class);
         events.put(0x2c,PlayerIntercomEvent.class);
-        events.put(0x2d,PlayerJoinEvent.class);
+        events.put(0x2d,PlayerJoinEvent.class);// 1
         events.put(0x2e,PlayerLureEvent.class);
         events.put(0x2f,PlayerMakeNoiseEvent.class);
         events.put(0x30,PlayerMedkitUseEvent.class);
-        events.put(0x31,PlayerPickupItemEvent.class);
-        events.put(0x32,PlayerPickupItemLateEvent.class);
+        events.put(0x31,PlayerPickupItemEvent.class);// 1
+        events.put(0x32,PlayerPickupItemLateEvent.class);// 1
         events.put(0x33,PlayerPocketDimensionEnterEvent.class);
         events.put(0x34,PlayerPocketDimensionExitEvent.class);
         events.put(0x35,PlayerRadioSwitchEvent.class);

@@ -8,16 +8,13 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.api.event.player;
 
-import cn.jsmod2.api.player.Player;
+
 
 /**
  * @author kevinj
  */
 
 public class Player079LevelUpEvent extends PlayerEvent implements IPlayer079LevelUpEvent{
-    public Player079LevelUpEvent(Player player) {
-        super(player);
-    }
 
     public Player079LevelUpEvent(){
 

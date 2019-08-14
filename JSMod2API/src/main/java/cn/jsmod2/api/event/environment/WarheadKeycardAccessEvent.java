@@ -9,7 +9,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.api.event.environment;
 
 import cn.jsmod2.api.player.Player;
-import cn.jsmod2.core.annotations.UseForServerInit;
+
 import cn.jsmod2.core.event.Event;
 
 /**
@@ -31,11 +31,6 @@ public class WarheadKeycardAccessEvent extends Event implements IWarheadKeycardA
 
     public void setAllow(boolean allow) {
         this.allow = allow;
-    }
-
-    public WarheadKeycardAccessEvent(Player player, boolean allow) {
-        this.player = player;
-        allow = allow;
     }
 
     public WarheadKeycardAccessEvent(){

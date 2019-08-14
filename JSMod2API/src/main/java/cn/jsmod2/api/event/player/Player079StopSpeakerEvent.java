@@ -9,8 +9,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.api.event.player;
 
 import cn.jsmod2.api.map.Room;
-import cn.jsmod2.api.player.Player;
-import cn.jsmod2.core.annotations.UseForServerInit;
+
 
 /**
  * @author kevinj
@@ -33,11 +32,7 @@ public class Player079StopSpeakerEvent extends PlayerEvent implements IPlayer079
         this.allow = allow;
     }
 
-    public Player079StopSpeakerEvent(Player player, Room room, boolean allow) {
-        super(player);
-        this.room = room;
-        this.allow = allow;
-    }
+
 
     public Player079StopSpeakerEvent(){
 

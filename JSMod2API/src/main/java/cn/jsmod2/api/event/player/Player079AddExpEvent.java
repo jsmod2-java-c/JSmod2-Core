@@ -35,11 +35,6 @@ public class Player079AddExpEvent extends PlayerEvent implements IPlayer079AddEx
 
 
 
-    public Player079AddExpEvent(Player player, ExperienceType experienceType, float expToAdd) {
-        super(player);
-        this.experienceType = experienceType;
-        this.expToAdd = expToAdd;
-    }
 
     public Player079AddExpEvent(){
 

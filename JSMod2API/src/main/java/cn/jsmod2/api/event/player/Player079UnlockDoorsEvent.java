@@ -8,7 +8,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.api.event.player;
 
-import cn.jsmod2.api.player.Player;
+
 
 /**
  * @author kevinj
@@ -17,10 +17,7 @@ import cn.jsmod2.api.player.Player;
 public class Player079UnlockDoorsEvent extends PlayerEvent implements IPlayer079UnlockDoorsEvent{
     private boolean allow;
 
-    public Player079UnlockDoorsEvent(Player player, boolean allow) {
-        super(player);
-        this.allow = allow;
-    }
+
 
     public Player079UnlockDoorsEvent(){
 

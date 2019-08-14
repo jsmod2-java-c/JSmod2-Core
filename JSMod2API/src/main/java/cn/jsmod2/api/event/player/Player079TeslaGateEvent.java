@@ -9,8 +9,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.api.event.player;
 
 import cn.jsmod2.api.map.TeslaGate;
-import cn.jsmod2.api.player.Player;
-import cn.jsmod2.core.annotations.UseForServerInit;
+
 
 
 /**
@@ -22,12 +21,7 @@ public class Player079TeslaGateEvent extends PlayerEvent implements IPlayer079Te
     private boolean allow;
     private float apDrain;
 
-    public Player079TeslaGateEvent(Player player, TeslaGate teslaGate, boolean allow, float apDrain) {
-        super(player);
-        this.teslaGate = teslaGate;
-        this.allow = allow;
-        this.apDrain = apDrain;
-    }
+
 
     public Player079TeslaGateEvent(){
 

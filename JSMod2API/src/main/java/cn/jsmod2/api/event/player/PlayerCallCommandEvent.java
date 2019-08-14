@@ -8,8 +8,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.api.event.player;
 
-import cn.jsmod2.api.player.Player;
-import cn.jsmod2.core.annotations.UseForServerInit;
+
 
 /**
  * @author kevinj
@@ -36,9 +35,4 @@ public class PlayerCallCommandEvent extends PlayerEvent implements IPlayerCallCo
 
     }
 
-    public PlayerCallCommandEvent(Player player, String returnMessage, String command) {
-        super(player);
-        this.returnMessage = returnMessage;
-        this.command = command;
-    }
 }

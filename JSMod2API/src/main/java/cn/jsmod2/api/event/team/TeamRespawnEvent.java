@@ -23,6 +23,9 @@ public class TeamRespawnEvent extends Event implements ITeamRespawnEvent{
         this.playerList = playerList;
         this.spawnChaos = isCI;
     }
+    public TeamRespawnEvent(){
+
+    }
 
     public List<IPlayer> getPlayerList() {
         return playerList;

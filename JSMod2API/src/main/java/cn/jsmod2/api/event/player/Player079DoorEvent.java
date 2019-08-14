@@ -9,8 +9,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.api.event.player;
 
 import cn.jsmod2.api.map.Door;
-import cn.jsmod2.api.player.Player;
-import cn.jsmod2.core.annotations.UseForServerInit;
+
 
 /**
  * @author kevinj
@@ -21,12 +20,6 @@ public class Player079DoorEvent extends PlayerEvent implements IPlayer079DoorEve
     private boolean allow;
     private float apDrain;
 
-    public Player079DoorEvent(Player player, Door door, boolean allow, float apDrain) {
-        super(player);
-        this.door = door;
-        this.allow = allow;
-        this.apDrain = apDrain;
-    }
 
     public Player079DoorEvent(){
 

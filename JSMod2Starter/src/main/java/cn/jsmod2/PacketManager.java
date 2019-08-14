@@ -72,7 +72,7 @@ public class PacketManager extends Manager {
             if(events.containsKey(id)){
                 //System.out.println(new String(Base64.getDecoder().decode(new String(bytes))));
                 callEventByPacket(id,bytes);
-                socket.getOutputStream().write(0xFF&1);
+                //ServerLogger.getLogger().multiInfo(getClass(),"write","","");
             }
             CommandVO vo_get = getCommandVO(id,message,Register.SERVER_COMMAND,Register.PLAYER_COMMAND,ServerVO.class,PlayerVO.class);
             /* 执行指令的部分 */
@@ -91,6 +91,7 @@ public class PacketManager extends Manager {
                 String[] args = vo.getArgs();
                 Server.getSender().getServer().getPluginManager().executeCommand(commandName,args,player);
             }
+            socket.getOutputStream().write(0xFF&1);
         }catch (Exception e){
             e.printStackTrace();
         }

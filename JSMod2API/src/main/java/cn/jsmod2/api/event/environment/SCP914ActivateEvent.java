@@ -10,7 +10,7 @@ package cn.jsmod2.api.event.environment;
 
 import cn.jsmod2.api.item.KnobSetting;
 import cn.jsmod2.api.player.Player;
-import cn.jsmod2.core.annotations.UseForServerInit;
+
 import cn.jsmod2.core.event.Event;
 import cn.jsmod2.core.math.Vector;
 
@@ -33,13 +33,7 @@ public class SCP914ActivateEvent extends Event implements ISCP914ActivateEvent{
 
     private Vector outputPos;
 
-    public SCP914ActivateEvent(Player user, KnobSetting knobSetting, Object[] inputs, Vector intakePos, Vector outputPos) {
-        this.user = user;
-        this.knobSetting = knobSetting;
-        this.inputs = inputs;
-        this.intakePos = intakePos;
-        this.outputPos = outputPos;
-    }
+
 
     public SCP914ActivateEvent(){
 

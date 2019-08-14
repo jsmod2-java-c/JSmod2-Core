@@ -149,8 +149,19 @@ public abstract class Server implements IServer {
 
         this.pluginDir = getFileSystem().pluginDir(server);
 
-
         this.serverProp = getFileSystem().serverProperties(server);
+
+
+        getLogger().info("Connecting the multiAdmin | LocalAdmin");
+
+        try {
+            ServerSocket socket = new ServerSocket(20003);
+
+            socket.accept();
+
+        }catch (Exception e){
+
+        }
 
         this.pluginManager = new PluginManager(server);
 
@@ -206,7 +217,6 @@ public abstract class Server implements IServer {
             this.pool.execute(new GithubConnectThread());
         }
         //this.pool.execute(new ServerThread());
-        this.serverLogInfo("the listener thread is starting!!!!");
 
         //this.pool.execute(new Smod2LogThread());
         this.startSuccessTime = new Date().getTime();
@@ -450,6 +460,7 @@ public abstract class Server implements IServer {
 
             }
 
+
             for (Manager manager : packetManagers) {
                 synchronized (this) {
                     manager.manageMethod(all, id,socket);
@@ -561,10 +572,11 @@ public abstract class Server implements IServer {
                         break;
                     }
                     byte[] after = getFullBytes(socket,gets);
+                    System.out.println(new String(after));
                     manageMessage(after, getLen(after),socket);
                     gets = new byte[MAX_LENGTH];
                 }
-                socket.close();
+                socket.getOutputStream().write(0xFF&1);
             }catch (Exception e){
                 Utils.printException(e);
             }finally {

@@ -9,8 +9,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.api.event.player;
 
 import cn.jsmod2.api.map.Elevator;
-import cn.jsmod2.api.player.Player;
-import cn.jsmod2.core.annotations.UseForServerInit;
+
 
 /**
  * @author kevinj
@@ -42,12 +41,6 @@ public class Player079ElevatorEvent extends PlayerEvent implements IPlayer079Ele
     }
 
 
-    public Player079ElevatorEvent(Player player, Elevator elevator, boolean allow, float apDrain) {
-        super(player);
-        this.elevator = elevator;
-        this.allow = allow;
-        this.apDrain = apDrain;
-    }
 
     public Player079ElevatorEvent(){
 

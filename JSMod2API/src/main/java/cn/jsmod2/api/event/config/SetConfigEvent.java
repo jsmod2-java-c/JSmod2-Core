@@ -25,11 +25,6 @@ public class SetConfigEvent extends Event implements ISetConfigEvent {
 
     private Object defaultValue;
 
-    public SetConfigEvent(String key, Object value, Object defaultValue) {
-        this.key = key;
-        this.value = value;
-        this.defaultValue = defaultValue;
-    }
 
     public SetConfigEvent(){
 

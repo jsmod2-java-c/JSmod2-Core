@@ -9,7 +9,6 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.api.event.environment;
 
 import cn.jsmod2.api.map.Generator;
-import cn.jsmod2.core.annotations.UseForServerInit;
 import cn.jsmod2.core.event.Event;
 
 /**
@@ -20,9 +19,6 @@ import cn.jsmod2.core.event.Event;
 public class GeneratorFinishEvent extends Event implements IGeneratorFinishEvent{
     private Generator generator = new Generator();
 
-    public GeneratorFinishEvent(Generator generator) {
-        this.generator = generator;
-    }
 
     public GeneratorFinishEvent(){
 

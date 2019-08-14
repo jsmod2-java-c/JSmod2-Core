@@ -8,7 +8,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.api.event.environment;
 
-import cn.jsmod2.api.player.Player;
+
 
 
 /**
@@ -20,9 +20,6 @@ public class WarheadStartEvent extends WarheadEvent implements IWarheadStartEven
     private boolean isResumed;
     private boolean openDoorsAfter;
 
-    public WarheadStartEvent(Player player, float timeLeft) {
-        super(player, timeLeft);
-    }
 
     public boolean isResumed() {
         return isResumed;

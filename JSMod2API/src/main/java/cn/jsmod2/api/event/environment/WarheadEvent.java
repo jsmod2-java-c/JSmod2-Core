@@ -9,7 +9,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.api.event.environment;
 
 import cn.jsmod2.api.player.Player;
-import cn.jsmod2.core.annotations.UseForServerInit;
+
 import cn.jsmod2.core.event.Event;
 
 /**
@@ -48,11 +48,6 @@ public abstract class WarheadEvent extends Event implements IWarheadEvent{
         return activator;
     }
 
-    public WarheadEvent(Player player, float timeLeft){
-        this.player = player;
-        this.timeLeft = timeLeft;
-        this.cancel = false;
-    }
 
     public WarheadEvent(){
 

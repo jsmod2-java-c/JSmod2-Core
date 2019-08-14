@@ -16,5 +16,8 @@ public class ConnectEvent extends ConnectionEvent implements IConnectEvent{
         super(connection);
     }
 
+    public ConnectEvent(){
+
+    }
 
 }

@@ -10,7 +10,6 @@ package cn.jsmod2.api.event.environment;
 
 import cn.jsmod2.api.player.Player;
 import cn.jsmod2.api.team.Role;
-import cn.jsmod2.core.annotations.UseForServerInit;
 import cn.jsmod2.core.event.Event;
 
 /**
@@ -39,11 +38,6 @@ public class ScpDeathAnnouncementEvent extends Event implements IScpDeathAnnounc
         return playerRole;
     }
 
-    public ScpDeathAnnouncementEvent(boolean shouldPlay, Player deadPlayer, Role playerRole) {
-        this.shouldPlay = shouldPlay;
-        this.deadPlayer = deadPlayer;
-        this.playerRole = playerRole;
-    }
 
     public ScpDeathAnnouncementEvent(){
 
