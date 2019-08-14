@@ -4,9 +4,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TextArea;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.UUID;
 
 /**
  * @ClassName: ConsoleOutputStream
