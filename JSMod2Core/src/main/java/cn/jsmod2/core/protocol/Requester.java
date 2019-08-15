@@ -37,7 +37,12 @@ public class Requester implements IRequester {
     }
 
     public Requester with(String key,Object value){
-        _map.put(key,value instanceof Vector?value.toString():value);
+        _map.put(key,value.toString());
+        return this;
+    }
+
+    public Requester withObject(String key,Object value){
+        _map.put(key,value);
         return this;
     }
 
