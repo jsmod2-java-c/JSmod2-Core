@@ -10,8 +10,8 @@ package cn.jsmod2.api.map;
 
 import cn.jsmod2.api.Component;
 import cn.jsmod2.core.ApiId;
-import cn.jsmod2.core.annotations.UseForServerInit;
 import cn.jsmod2.core.math.Vector;
+import cn.jsmod2.network.protocol.map.generator.*;
 
 import java.io.Serializable;
 
@@ -31,9 +31,9 @@ public class Generator extends ApiId implements Component,IGenerator, Serializab
     private Room room = new Room();
 
     public void unlock(){
-        if(locked){
-            locked = false;
-        }
+        UnlockGeneratorPacket packet = new UnlockGeneratorPacket();
+        packet.playerName = playerName;
+        packet.send();
     }
 
     public Object getComponent(){
@@ -42,44 +42,77 @@ public class Generator extends ApiId implements Component,IGenerator, Serializab
 
 
     public boolean isOpen() {
+        GetGeneratorOpenPacket packet = new GetGeneratorOpenPacket();
+        packet.playerName = playerName;
+        open = packet.send();
         return open;
     }
 
     public void setOpen(boolean open) {
+        SetGeneratorOpenPacket packet = new SetGeneratorOpenPacket();
+        packet.open = open;
+        packet.playerName = playerName;
+        packet.send();
         this.open = open;
     }
 
     public boolean isLocked() {
+        GetGeneratorLockedPacket packet = new GetGeneratorLockedPacket();
+        packet.playerName = playerName;
+        locked = packet.send();
         return locked;
     }
 
     public boolean isHasTablet() {
+        GetGeneratorHasTabletPacket packet = new GetGeneratorHasTabletPacket();
+        packet.playerName = playerName;
+        hasTablet = packet.send();
         return hasTablet;
     }
 
     public void setHasTablet(boolean hasTablet) {
+        SetGeneratorHasTabletPacket packet = new SetGeneratorHasTabletPacket();
+        packet.hasTablet = hasTablet;
+        packet.playerName = playerName;
+        packet.send();
         this.hasTablet = hasTablet;
     }
 
     public boolean isEngaged() {
+        GetGeneratorEngagedPacket packet = new GetGeneratorEngagedPacket();
+        packet.playerName = playerName;
+        engaged = packet.send();
         return engaged;
     }
 
 
     public float getStartTime() {
+        GetGeneratorStartTimePacket packet = new GetGeneratorStartTimePacket();
+        packet.playerName = playerName;
+        startTime = packet.send();
         return startTime;
     }
 
 
     public float getTimeLeft() {
+        GetGeneratorTimeLeftPacket packet = new GetGeneratorTimeLeftPacket();
+        packet.playerName = playerName;
+        timeLeft = packet.send();
         return timeLeft;
     }
 
     public void setTimeLeft(float timeLeft) {
+        SetGeneratorTimeLeftPacket packet = new SetGeneratorTimeLeftPacket();
+        packet.playerName = playerName;
+        packet.timeLeft = timeLeft;
+        packet.send();
         this.timeLeft = timeLeft;
     }
 
     public Vector getPosition() {
+        GetGeneratorPositionPacket packet = new GetGeneratorPositionPacket();
+        packet.playerName = playerName;
+        position = packet.send();
         return position;
     }
 

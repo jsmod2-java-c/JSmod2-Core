@@ -35,6 +35,7 @@ import cn.jsmod2.network.protocol.event.admin.AdminQueryQueryGetPacket;
 import cn.jsmod2.network.protocol.event.admin.AdminQueryQuerySetPacket;
 import cn.jsmod2.network.protocol.item.*;
 import cn.jsmod2.network.protocol.map.door.*;
+import cn.jsmod2.network.protocol.map.elevator.*;
 import cn.jsmod2.network.protocol.server.*;
 
 import java.util.*;
@@ -143,7 +144,17 @@ public class Register extends RegisterTemplate {
         packets.put(SetDoorDontOpenOnWarheadPacket.class,SetDoorDontOpenOnWarheadPacket.ID);
         packets.put(SetDoorLockedPacket.class,SetDoorLockedPacket.ID);
         packets.put(SetDoorOpenPacket.class,SetDoorOpenPacket.ID);
-        //~120 最大 下一个121
+        packets.put(GetElevatorLockedPacket.class,GetElevatorLockedPacket.ID);
+        packets.put(GetElevatorLockablePacket.class,GetElevatorLockablePacket.ID);
+        packets.put(GetElevatorMovingSpeedPacket.class,GetElevatorMovingSpeedPacket.ID);
+        packets.put(GetElevatorPositionsPacket.class,GetElevatorPositionsPacket.ID);
+        packets.put(GetElevatorStatusPacket.class,GetElevatorStatusPacket.ID);
+        packets.put(GetElevatorTypePacket.class,GetElevatorTypePacket.ID);
+        packets.put(SetElevatorLockablePacket.class,SetElevatorLockablePacket.ID);
+        packets.put(SetElevatorLockedPacket.class,SetElevatorLockedPacket.ID);
+        packets.put(SetElevatorMovingSpeedPacket.class,SetElevatorMovingSpeedPacket.ID);
+        packets.put(UseElevatorPacket.class,UseElevatorPacket.ID);
+        //~130 最大 下一个131
         putPackets();
     }
 
