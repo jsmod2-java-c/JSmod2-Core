@@ -36,6 +36,7 @@ import cn.jsmod2.network.protocol.event.admin.AdminQueryQuerySetPacket;
 import cn.jsmod2.network.protocol.item.*;
 import cn.jsmod2.network.protocol.map.door.*;
 import cn.jsmod2.network.protocol.map.elevator.*;
+import cn.jsmod2.network.protocol.map.generator.*;
 import cn.jsmod2.network.protocol.server.*;
 
 import java.util.*;
@@ -154,7 +155,18 @@ public class Register extends RegisterTemplate {
         packets.put(SetElevatorLockedPacket.class,SetElevatorLockedPacket.ID);
         packets.put(SetElevatorMovingSpeedPacket.class,SetElevatorMovingSpeedPacket.ID);
         packets.put(UseElevatorPacket.class,UseElevatorPacket.ID);
-        //~130 最大 下一个131
+        packets.put(GetGeneratorPositionPacket.class,GetGeneratorPositionPacket.ID);
+        packets.put(GetGeneratorTimeLeftPacket.class,GetGeneratorTimeLeftPacket.ID);
+        packets.put(GetGeneratorStartTimePacket.class,GetGeneratorStartTimePacket.ID);
+        packets.put(GetGeneratorEngagedPacket.class,GetGeneratorEngagedPacket.ID);
+        packets.put(GetGeneratorHasTabletPacket.class,GetGeneratorHasTabletPacket.ID);
+        packets.put(GetGeneratorLockedPacket.class,GetGeneratorLockedPacket.ID);
+        packets.put(GetGeneratorOpenPacket.class,GetGeneratorOpenPacket.ID);
+        packets.put(SetGeneratorTimeLeftPacket.class,SetGeneratorTimeLeftPacket.ID);
+        packets.put(SetGeneratorHasTabletPacket.class,SetGeneratorHasTabletPacket.ID);
+        packets.put(SetGeneratorOpenPacket.class,SetGeneratorOpenPacket.ID);
+        //11
+        //~143 最大 下一个144
         putPackets();
     }
 
