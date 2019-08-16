@@ -9,4 +9,12 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.api.server;
 
 public enum ROUND_END_STATS {
+    ON_GOING,
+    MTF_VICTORY,
+    SCP_VICTORY,
+    SCP_CI_VICTORY,
+    CI_VICTORY,
+    NO_VICTORY,
+    FORCE_END,
+    OTHER_VICTORY
 }
