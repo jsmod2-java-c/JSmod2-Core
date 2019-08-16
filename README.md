@@ -13,6 +13,10 @@ We safeguard the sovereignty of the People’s Republic of China. Taiwan, Hong K
 It is forbidden to issue anti-state peace speech in the issues area, discord area, and pr area, prohibiting the project contribution process, the commit information has the split and incitement to split the words.
 If found, will be expelled legally or morally
 
+私たちは中華人民共和国の主権を支持します。台湾、香港、マカオは中華人民共和国の一部です。彼らは香港の独立と台湾の独立の要素の暴動に反対します。 コントリビューションの過程で、コミット情報には分割があり、分割を引き起こす単語は、見つかった場合は法的にまたは道徳的に追放されます。
+
+우리는 중화 인민 공화국의 주권을지지합니다 대만, 홍콩, 마카오는 중화 인민 공화국의 일부이며 홍콩의 독립과 대만 독립 요소의 폭동에 반대하며, 분리 주의자들의 반 국가 평화 발언 금지, 반 국가 평화 발언 금지, 지구 문제에 대한 프로젝트 금지, 지구 문제에 대한 분쟁을 단호히 단속하고 있습니다. 기여 과정에서 커밋 정보는 분리되어 있으며 분리를 촉구하는 단어는 발견되면 합법적 또는 도덕적으로 추방됩니다.
+
 > Copyright: JSmod2 LICENSE 
 ```java
 /*
