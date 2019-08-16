@@ -2,9 +2,9 @@ package cn.jsmod2.network.protocol.map.map;
 
 import cn.jsmod2.api.map.Room;
 import cn.jsmod2.api.map.Scp079InteractionType;
-import cn.jsmod2.core.protocol.GetPacket;
 
-public class Get079InteractionRoomsPacket extends GetPacket {
+
+public class Get079InteractionRoomsPacket extends GetMapPacket {
 
     public static final int ID = 151;
 

@@ -1,8 +1,7 @@
 package cn.jsmod2.network.protocol.map.map;
 
-import cn.jsmod2.core.protocol.SetPacket;
 
-public class ClearBroadcastsPacket extends SetPacket {
+public class ClearBroadcastsPacket extends SetMapPacket {
 
     public static final int ID = 148;
 

@@ -1,8 +1,7 @@
 package cn.jsmod2.network.protocol.map.map;
 
-import cn.jsmod2.core.protocol.SetPacket;
 
-public class DetonateWarheadMapPacket extends SetPacket {
+public class DetonateWarheadMapPacket extends SetMapPacket {
 
     public static final int ID = 149;
 

@@ -1,8 +1,8 @@
 package cn.jsmod2.network.protocol.map.map;
 
-import cn.jsmod2.core.protocol.SetPacket;
 
-public class BroadCastPacket extends SetPacket {
+
+public class BroadCastPacket extends SetMapPacket {
 
     public int duration;
     public String message;

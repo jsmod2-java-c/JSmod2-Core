@@ -1,8 +1,8 @@
 package cn.jsmod2.network.protocol.map.map;
 
-import cn.jsmod2.core.protocol.SetPacket;
 
-public class AnnounceNtfEntrancePacket extends SetPacket {
+
+public class AnnounceNtfEntrancePacket extends SetMapPacket {
 
     public int scpsLeft;
     public int mtfNumber;

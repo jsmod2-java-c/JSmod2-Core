@@ -1,8 +1,8 @@
 package cn.jsmod2.network.protocol.map.map;
 
-import cn.jsmod2.core.protocol.SetPacket;
 
-public class FemurBreakerMapPacket extends SetPacket {
+
+public class FemurBreakerMapPacket extends SetMapPacket {
 
 
     public static final int ID = 150;
