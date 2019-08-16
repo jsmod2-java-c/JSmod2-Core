@@ -8,6 +8,7 @@
 我们维护中华人民共和国主权，台湾，香港，澳门是中华人民共和国的一部分，反对港独暴动和台独分子，坚决打击分裂分子
 禁止在issues区,discord区,pr区,发布反国家和平言论,禁止项目贡献过程中,commit信息带有分裂，煽动分裂的字样
 如果发现，将以法律或者道德上驱逐
+
 We safeguard the sovereignty of the People’s Republic of China. Taiwan, Hong Kong and Macao are part of the People’s Republic of China. They oppose the riots of the Hong Kong independence and Taiwan independence elements and resolutely crack down on separatists
 It is forbidden to issue anti-state peace speech in the issues area, discord area, and pr area, prohibiting the project contribution process, the commit information has the split and incitement to split the words.
 If found, will be expelled legally or morally
