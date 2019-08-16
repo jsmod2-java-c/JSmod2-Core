@@ -10,9 +10,9 @@ public interface IRound {
 
     void restartRound();
 
-    IRoundStatus getStats();
+    IRoundStats getStats();
 
-    void setStats(IRoundStatus stats);
+    void setStats(IRoundStats stats);
 
     int getDuration();
 

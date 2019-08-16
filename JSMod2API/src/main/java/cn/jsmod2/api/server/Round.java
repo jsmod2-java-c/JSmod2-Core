@@ -14,7 +14,7 @@ import java.io.Serializable;
 
 public class Round extends ApiId implements IRound, Serializable,Cloneable {
 
-    private IRoundStatus stats;
+    private IRoundStats stats;
 
     private int duration;
 
@@ -34,11 +34,11 @@ public class Round extends ApiId implements IRound, Serializable,Cloneable {
 
     }
 
-    public IRoundStatus getStats() {
+    public IRoundStats getStats() {
         return stats;
     }
 
-    public void setStats(IRoundStatus stats) {
+    public void setStats(IRoundStats stats) {
         this.stats = stats;
     }
 

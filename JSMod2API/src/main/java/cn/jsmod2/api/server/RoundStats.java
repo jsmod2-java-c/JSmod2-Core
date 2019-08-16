@@ -12,7 +12,7 @@ import cn.jsmod2.core.ApiId;
 
 import java.io.Serializable;
 
-public class RoundStatus extends ApiId implements IRoundStatus, Serializable,Cloneable {
+public class RoundStats extends ApiId implements IRoundStats, Serializable,Cloneable {
 
     private int NTFAlive;
 

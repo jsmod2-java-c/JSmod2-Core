@@ -1,6 +1,6 @@
 package cn.jsmod2.api.server;
 
-public interface IRoundStatus {
+public interface IRoundStats {
 
     int getNTFAlive();
 
