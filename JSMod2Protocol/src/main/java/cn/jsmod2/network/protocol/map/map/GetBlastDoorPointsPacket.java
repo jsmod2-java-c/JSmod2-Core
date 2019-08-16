@@ -3,6 +3,8 @@ package cn.jsmod2.network.protocol.map.map;
 import cn.jsmod2.api.team.Role;
 import cn.jsmod2.core.math.Vector;
 
+import java.util.List;
+
 public class GetBlastDoorPointsPacket extends GetMapPacket {
 
     public Role role;
@@ -14,7 +16,7 @@ public class GetBlastDoorPointsPacket extends GetMapPacket {
     }
 
     @Override
-    public Object send() {
-        return requester.with("role",role).to();
+    public List send() {
+        return requester.with("role",role).get().getArray();
     }
 }
