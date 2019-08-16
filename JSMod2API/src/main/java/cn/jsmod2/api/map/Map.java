@@ -9,7 +9,8 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.api.map;
 
 
-import cn.jsmod2.api.item.IItem;
+
+import cn.jsmod2.api.item.Item;
 import cn.jsmod2.api.item.ItemType;
 import cn.jsmod2.api.player.IPlayer;
 import cn.jsmod2.api.player.Player;
@@ -30,7 +31,7 @@ public class Map implements IMap, Serializable {
     private boolean warheadDetonated;
     private boolean LCZDecontaminated;
 
-    public List<IItem> getItems(ItemType type, boolean world_only){
+    public List<Item> getItems(ItemType type, boolean world_only){
         return null;
     }
 
@@ -53,7 +54,7 @@ public class Map implements IMap, Serializable {
     }
 
 
-    public List<IPocketDimensionExit> getPocketDimensionExits() {
+    public List<PocketDimensionExit> getPocketDimensionExits() {
         return null;
     }
 
@@ -103,7 +104,7 @@ public class Map implements IMap, Serializable {
     }
 
 
-    public List<IElevator> getElevators() {
+    public List<Elevator> getElevators() {
         return null;
     }
 
@@ -117,7 +118,7 @@ public class Map implements IMap, Serializable {
     }
 
 
-    public List<ITeslaGate> getTeslaGates() {
+    public List<TeslaGate> getTeslaGates() {
         return null;
     }
 

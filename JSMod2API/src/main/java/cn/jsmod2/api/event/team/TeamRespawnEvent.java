@@ -9,17 +9,19 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.api.event.team;
 
 import cn.jsmod2.api.player.IPlayer;
+import cn.jsmod2.api.player.Player;
 import cn.jsmod2.core.event.Event;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TeamRespawnEvent extends Event implements ITeamRespawnEvent{
 
-    private List<IPlayer> playerList;
+    private List<Player> playerList = new ArrayList<>();
 
     private boolean spawnChaos;
 
-    public TeamRespawnEvent(List<IPlayer> playerList,boolean isCI){
+    public TeamRespawnEvent(List<Player> playerList, boolean isCI){
         this.playerList = playerList;
         this.spawnChaos = isCI;
     }
@@ -27,12 +29,14 @@ public class TeamRespawnEvent extends Event implements ITeamRespawnEvent{
 
     }
 
-    public List<IPlayer> getPlayerList() {
+    public List<Player> getPlayerList() {
         return playerList;
     }
 
     public void setPlayerList(List<IPlayer> playerList) {
-        this.playerList = playerList;
+        for(IPlayer p : playerList){
+            this.playerList.add((Player)p);
+        }
     }
 
     public boolean isSpawnChaos() {

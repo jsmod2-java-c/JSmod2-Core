@@ -18,7 +18,7 @@ import java.util.List;
 public interface ITeamRespawnEvent extends IEvent {
 
 
-    List<IPlayer> getPlayerList();
+    List<? extends IPlayer> getPlayerList();
 
     void setPlayerList(List<IPlayer> playerList);
 

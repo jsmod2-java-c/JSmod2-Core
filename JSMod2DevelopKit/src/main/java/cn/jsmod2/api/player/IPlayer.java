@@ -68,7 +68,7 @@ public interface IPlayer extends ISimplePlayer {
 
     IItem giveItem(ItemType type);
 
-    List<IItem> getInventory();
+    List<? extends IItem> getInventory();
 
     IItem getCurrentItem();
 

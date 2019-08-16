@@ -8,7 +8,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.api.player;
 
-import cn.jsmod2.api.item.IItem;
+
 import cn.jsmod2.api.item.Item;
 import cn.jsmod2.api.item.ItemType;
 import cn.jsmod2.api.team.ITeamRole;
@@ -16,9 +16,7 @@ import cn.jsmod2.api.team.Role;
 import cn.jsmod2.api.team.TeamRole;
 import cn.jsmod2.api.user.UserGroup;
 import cn.jsmod2.core.CommandSender;
-import cn.jsmod2.core.ISimplePlayer;
 import cn.jsmod2.core.Server;
-import cn.jsmod2.core.annotations.UseForServerInit;
 import cn.jsmod2.core.math.Vector;
 
 import java.io.Serializable;
@@ -173,7 +171,7 @@ public class Player extends CommandSender implements IPlayer, Serializable,Clone
         return null;
     }
 
-    public List<IItem> getInventory(){
+    public List<Item> getInventory(){
         return null;
     }
 

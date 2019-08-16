@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface IMap {
 
-    public List<IItem> getItems(ItemType type, boolean world_only);
+    public List<? extends IItem> getItems(ItemType type, boolean world_only);
 
     Vector getRandomSpawnPoint(Role role);
 
@@ -20,10 +20,10 @@ public interface IMap {
     List<Vector> getBlastDoorPoints();
 
 
-    List<IDoor> getDoors();
+    List<? extends IDoor> getDoors();
 
 
-    List<IPocketDimensionExit> getPocketDimensionExits();
+    List<? extends IPocketDimensionExit> getPocketDimensionExits();
 
 
     java.util.Map<Vector, Vector> getElevatorTeleportPoints();
@@ -53,7 +53,7 @@ public interface IMap {
     void femurBreaker(boolean enable);
 
 
-    List<IElevator> getElevators();
+    List<? extends IElevator> getElevators();
 
 
     void setIntercomContent(IntercomStatus intercomStatus, String content);
@@ -61,7 +61,7 @@ public interface IMap {
     String getIntercomContent(IntercomStatus intercomStatus);
 
 
-    List<ITeslaGate> getTeslaGates();
+    List<? extends ITeslaGate> getTeslaGates();
 
 
     void announceNtfEntrance(int scpsLeft, int mtfNumber, char mtfLetter);
