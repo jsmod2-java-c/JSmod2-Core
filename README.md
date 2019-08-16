@@ -3,6 +3,24 @@
 # JSMod2    ![LICENSE](https://img.shields.io/badge/license-GPL-blue.svg)
 ###### Smod2 Java Edition [based on Smod2]
 
+> 严正声明: Strict statement
+
+我们维护中华人民共和国主权，台湾，香港，澳门是中华人民共和国的一部分，
+反对港独暴动和台独分子，坚决打击分裂分子 禁止在issues区,discord区,pr区,发布反国家和平言论,
+禁止项目贡献过程中,commit信息带有分裂，煽动分裂的字样 如果发现，将以法律或者道德上驱逐
+
+We uphold the sovereignty of the People’s Republic of China. Taiwan, Hong Kong 
+and Macao are part of the People’s Republic of China. They oppose the riots of the 
+Hong Kong independence and the Taiwan independence elements. They are resolutely cracking 
+down on the separatists’ ban on issuing anti-state peace speeches and prohibiting projects in the issues,
+ discord and pr districts. In the process of contribution, the commit information has a split, and the words 
+ that incite splitting will be expelled legally or morally if found.
+
+私たちは中華人民共和国の主権を支持します。台湾、香港、マカオは中華人民共和国の一部です。彼らは香港の独立と台湾の独立の要素の暴動に反対します。 コントリビューションの過程で、コミット情報には分割があり、分割を引き起こす単語は、見つかった場合は法的にまたは道徳的に追放されます。
+
+우리는 중화 인민 공화국의 주권을지지합니다 대만, 홍콩, 마카오는 중화 인민 공화국의 일부이며 홍콩의 독립과 대만 독립 요소의 폭동에 반대하며, 분리 주의자들의 반 국가 평화 발언 금지, 반 국가 평화 발언 금지, 지구 문제에 대한 프로젝트 금지, 지구 문제에 대한 분쟁을 단호히 단속하고 있습니다. 기여 과정에서 커밋 정보는 분리되어 있으며 분리를 촉구하는 단어는 발견되면 합법적 또는 도덕적으로 추방됩니다.
+
+
 > Copyright: JSmod2 LICENSE 
 ```java
 /*
