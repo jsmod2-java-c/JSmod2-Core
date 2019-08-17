@@ -11,6 +11,10 @@ package cn.jsmod2.api.event.player;
 import cn.jsmod2.api.map.Generator;
 import cn.jsmod2.api.player.Player;
 import cn.jsmod2.core.annotations.UseForServerInit;
+import cn.jsmod2.network.PacketSender;
+
+import static cn.jsmod2.network.PacketSender.sendEventGetPacket;
+import static cn.jsmod2.network.PacketSender.sendEventSetPacket;
 
 /**
  * @author kevinj
@@ -37,18 +41,24 @@ public class PlayerGeneratorInsertTabletEvent extends PlayerEvent implements IPl
     }
 
     public boolean isAllow() {
+        allow = sendEventGetPacket(playerName,"Allow",Boolean.class);
         return allow;
     }
 
+
+
     public void setAllow(boolean allow) {
+        sendEventSetPacket(playerName,"Allow",allow);
         this.allow = allow;
     }
 
     public boolean isRemoveTablet() {
+        removeTablet = PacketSender.sendEventGetPacket(playerName,"RemoveTablet",Boolean.class);
         return removeTablet;
     }
 
     public void setRemoveTablet(boolean removeTablet) {
+        PacketSender.sendEventSetPacket(playerName,"RemoveTablet",removeTablet);
         this.removeTablet = removeTablet;
     }
 

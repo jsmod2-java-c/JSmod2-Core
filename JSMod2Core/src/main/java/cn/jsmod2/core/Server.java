@@ -15,8 +15,7 @@ import cn.jsmod2.core.event.packet.ServerPacketEvent;
 import cn.jsmod2.core.interapi.IServer;
 import cn.jsmod2.core.log.ILogger;
 import cn.jsmod2.core.log.ServerLogger;
-import cn.jsmod2.core.protocol.ControlPacket;
-import cn.jsmod2.core.protocol.Requester;
+import cn.jsmod2.core.protocol.*;
 import cn.jsmod2.core.script.EmeraldScriptVM;
 import cn.jsmod2.core.script.EnvPage;
 import cn.jsmod2.core.plugin.Plugin;
@@ -27,7 +26,6 @@ import cn.jsmod2.core.utils.Future;
 import cn.jsmod2.core.utils.LogFormat;
 import cn.jsmod2.core.utils.Result;
 import cn.jsmod2.core.utils.Utils;
-import cn.jsmod2.core.protocol.DataPacket;
 import cn.jsmod2.core.schedule.Scheduler;
 import org.fusesource.jansi.Ansi;
 import jline.console.ConsoleReader;
@@ -222,7 +220,21 @@ public abstract class Server implements IServer {
         this.startSuccessTime = new Date().getTime();
     }
 
+    public <T> T sendGetPacket(GetPacket packet,Class<T> type){
+        return type.cast(packet.send());
+    }
 
+    public void sendSetPacket(SetPacket packet){
+        packet.send();
+    }
+
+    public File getServerfolder() {
+        return serverfolder;
+    }
+
+    public Properties getServerProperties() {
+        return serverProp;
+    }
 
     public void sendPacket(final DataPacket packet){
         sendPacket(packet,false);

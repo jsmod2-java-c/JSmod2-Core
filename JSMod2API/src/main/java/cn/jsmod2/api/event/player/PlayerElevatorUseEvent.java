@@ -11,8 +11,10 @@ package cn.jsmod2.api.event.player;
 
 import cn.jsmod2.api.map.Elevator;
 import cn.jsmod2.api.player.Player;
-import cn.jsmod2.core.annotations.UseForServerInit;
 import cn.jsmod2.core.math.Vector;
+
+import static cn.jsmod2.network.PacketSender.sendEventGetPacket;
+import static cn.jsmod2.network.PacketSender.sendEventSetPacket;
 
 /**
  * @author kevinj
@@ -28,10 +30,12 @@ public class PlayerElevatorUseEvent extends PlayerEvent implements IPlayerElevat
     }
 
     public Vector getElevatorPosition() {
+        ElevatorPosition = sendEventGetPacket(playerName,"ElevatorPosition",Vector.class);
         return ElevatorPosition;
     }
 
     public boolean getAllowUse() {
+        AllowUse = sendEventGetPacket(playerName,"AllowUse",Boolean.class);
         return AllowUse;
     }
 
@@ -47,10 +51,12 @@ public class PlayerElevatorUseEvent extends PlayerEvent implements IPlayerElevat
     }
 
     public void setAllowUse(boolean allowUse) {
+        sendEventSetPacket(playerName,"AllowUse",allowUse);
         AllowUse = allowUse;
     }
 
     public boolean isAllowUse() {
+        AllowUse = sendEventGetPacket(playerName,"AllowUse",Boolean.class);
         return AllowUse;
     }
 }

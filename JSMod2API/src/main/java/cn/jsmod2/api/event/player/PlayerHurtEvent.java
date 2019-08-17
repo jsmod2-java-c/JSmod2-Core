@@ -10,6 +10,7 @@ package cn.jsmod2.api.event.player;
 
 import cn.jsmod2.api.player.DamageType;
 import cn.jsmod2.api.player.Player;
+import cn.jsmod2.network.PacketSender;
 
 /**
  * @author kevinj
@@ -39,18 +40,22 @@ public class PlayerHurtEvent extends PlayerEvent implements IPlayerHurtEvent{
     }
 
     public float getDamage() {
+        damage = PacketSender.sendEventGetPacket(playerName,"Damage",Float.class);
         return damage;
     }
 
     public DamageType getDamageType() {
+        damageType = PacketSender.sendEventGetPacket(playerName,"DamageType",DamageType.class);
         return damageType;
     }
 
     public void setDamage(float damage) {
+        PacketSender.sendEventSetPacket(playerName,"Damage",damage);
         this.damage = damage;
     }
 
     public void setDamageType(DamageType damageType) {
+        PacketSender.sendEventSetPacket(playerName,"DamageType",damageType);
         this.damageType = damageType;
     }
 }

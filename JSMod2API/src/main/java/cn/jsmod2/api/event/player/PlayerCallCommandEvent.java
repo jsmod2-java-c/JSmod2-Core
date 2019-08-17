@@ -10,6 +10,9 @@ package cn.jsmod2.api.event.player;
 
 
 
+import static cn.jsmod2.network.PacketSender.sendEventGetPacket;
+import static cn.jsmod2.network.PacketSender.sendEventSetPacket;
+
 /**
  * @author kevinj
  */
@@ -19,14 +22,17 @@ public class PlayerCallCommandEvent extends PlayerEvent implements IPlayerCallCo
     private String command;
 
     public String getReturnMessage() {
+        returnMessage = sendEventGetPacket(playerName,"ReturnMessage",String.class);
         return returnMessage;
     }
 
     public void setReturnMessage(String returnMessage) {
+        sendEventSetPacket(playerName,"ReturnMessage",returnMessage);
         this.returnMessage = returnMessage;
     }
 
     public String getCommand() {
+        command = sendEventGetPacket(playerName,"Command",String.class);
         return command;
     }
 

@@ -11,6 +11,9 @@ package cn.jsmod2.api.event.player;
 
 import cn.jsmod2.core.math.Vector;
 
+import static cn.jsmod2.network.PacketSender.sendEventGetPacket;
+import static cn.jsmod2.network.PacketSender.sendEventSetPacket;
+
 /**
  * @author kevinj
  */
@@ -19,10 +22,12 @@ public class Player106CreatePortalEvent extends PlayerEvent implements IPlayer10
     private Vector position;
 
     public Vector getPosition() {
+        position = sendEventGetPacket(playerName,"Position",Vector.class);
         return position;
     }
 
     public void setPosition(Vector position) {
+        sendEventSetPacket(playerName,"Position",position);
         this.position = position;
     }
 

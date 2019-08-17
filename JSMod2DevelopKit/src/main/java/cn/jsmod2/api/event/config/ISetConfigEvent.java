@@ -6,10 +6,10 @@ public interface ISetConfigEvent {
 
     void setKey(String key);
 
-    Object getValue();
+    <T> T getValue(Class<T> type);
 
     void setValue(Object value);
 
-    Object getDefaultValue();
+    <T> T getDefaultValue(Class<T> type);
 
 }

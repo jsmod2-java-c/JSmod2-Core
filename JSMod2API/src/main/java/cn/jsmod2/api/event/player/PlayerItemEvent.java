@@ -36,6 +36,7 @@ public abstract class PlayerItemEvent extends PlayerEvent {
     }
 
     public void setItem(IItem item) {
+
         this.item = item;
     }
 

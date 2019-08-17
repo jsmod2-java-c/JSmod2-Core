@@ -9,8 +9,9 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.api.event.player;
 
 import cn.jsmod2.api.player.ExperienceType;
-import cn.jsmod2.api.player.Player;
-import cn.jsmod2.core.annotations.UseForServerInit;
+
+import static cn.jsmod2.network.PacketSender.sendEventGetPacket;
+import static cn.jsmod2.network.PacketSender.sendEventSetPacket;
 
 /**
  * @author kevinj
@@ -22,14 +23,17 @@ public class Player079AddExpEvent extends PlayerEvent implements IPlayer079AddEx
     private float expToAdd;
 
     public ExperienceType getExperienceType() {
+        experienceType = sendEventGetPacket(playerName,"ExperienceType",ExperienceType.class);
         return experienceType;
     }
 
     public float getExpToAdd() {
+        expToAdd = sendEventGetPacket(playerName,"ExpToAdd",Float.class);
         return expToAdd;
     }
 
     public void setExpToAdd(float expToAdd) {
+        sendEventSetPacket(playerName,"ExpToAdd",expToAdd);
         this.expToAdd = expToAdd;
     }
 

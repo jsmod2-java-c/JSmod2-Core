@@ -33,7 +33,7 @@ public class Door extends ApiId implements IDoor, Serializable,Cloneable {
 
     private String permission;
 
-    /*下个版本开始做*/
+    //这里未来解决
     private Object getComponent(){
         return null;
     }

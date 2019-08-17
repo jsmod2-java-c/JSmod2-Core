@@ -207,6 +207,7 @@ public class Player extends CommandSender implements IPlayer, Serializable,Clone
 
     }
 
+    //这里未来解决
     public Object getGameObject(){
         return null;
     }

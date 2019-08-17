@@ -96,6 +96,7 @@ public class Elevator extends ApiId implements Component,IElevator, Serializable
         return packet.send();
     }
 
+    //这里未来解决
     public Object getComponent(){
         return null;
     }

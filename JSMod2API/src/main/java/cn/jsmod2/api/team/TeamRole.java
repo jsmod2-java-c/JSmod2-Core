@@ -65,6 +65,7 @@ public class TeamRole extends ApiId implements Serializable,Cloneable,ITeamRole 
         this.name = name;
     }
 
+    //这里未来解决
     public Object getTeamClass(){
         return null;
     }

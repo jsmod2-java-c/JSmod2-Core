@@ -10,6 +10,9 @@ package cn.jsmod2.api.event.player;
 
 import cn.jsmod2.api.map.Room;
 
+import static cn.jsmod2.network.PacketSender.sendEventGetPacket;
+import static cn.jsmod2.network.PacketSender.sendEventSetPacket;
+
 
 /**
  * @author kevinj
@@ -24,13 +27,17 @@ public class Player079StopSpeakerEvent extends PlayerEvent implements IPlayer079
     }
 
     public boolean isAllow() {
+        allow = sendEventGetPacket(playerName,"Allow",Boolean.class);
         return allow;
     }
 
 
+
     public void setAllow(boolean allow) {
+        sendEventSetPacket(playerName,"Allow",allow);
         this.allow = allow;
     }
+
 
 
 

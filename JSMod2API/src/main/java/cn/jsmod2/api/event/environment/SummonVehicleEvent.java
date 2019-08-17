@@ -9,6 +9,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.api.event.environment;
 
 import cn.jsmod2.core.event.Event;
+import static cn.jsmod2.network.PacketSender.*;
 
 /**
  * @author Kevinj
@@ -21,18 +22,22 @@ public class SummonVehicleEvent extends Event implements ISummonVehicleEvent{
     private boolean allowSummon;
 
     public boolean isCI() {
+        IsCI = sendEventGetPacket(playerName,"IsCI",Boolean.class);
         return IsCI;
     }
 
     public void setCI(boolean CI) {
+        sendEventSetPacket(playerName,"IsCI",CI);
         IsCI = CI;
     }
 
     public boolean isAllowSummon() {
+        allowSummon = sendEventGetPacket(playerName,"AllowSummon",Boolean.class);
         return allowSummon;
     }
 
     public void setAllowSummon(boolean allowSummon) {
+        sendEventSetPacket(playerName,"AllowSummon",allowSummon);
         this.allowSummon = allowSummon;
     }
 

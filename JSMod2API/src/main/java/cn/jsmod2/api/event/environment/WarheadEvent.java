@@ -12,6 +12,9 @@ import cn.jsmod2.api.player.Player;
 
 import cn.jsmod2.core.event.Event;
 
+import static cn.jsmod2.network.PacketSender.sendEventGetPacket;
+import static cn.jsmod2.network.PacketSender.sendEventSetPacket;
+
 /**
  * @author Kevinj
  * @author magiclu550
@@ -24,19 +27,23 @@ public abstract class WarheadEvent extends Event implements IWarheadEvent{
     private boolean cancel;
 
     public float getTimeLeft() {
+        timeLeft = sendEventGetPacket(playerName,"TimeLeft",Float.class);
         return timeLeft;
     }
 
     public void setTimeLeft(float timeLeft) {
-        timeLeft = timeLeft;
+        sendEventSetPacket(playerName,"TimeLeft",timeLeft);
+        this.timeLeft = timeLeft;
     }
 
     public boolean isCancel() {
+        cancel = sendEventGetPacket(playerName,"Cancel",Boolean.class);
         return cancel;
     }
 
     public void setCancel(boolean cancel) {
-        cancel = cancel;
+        sendEventSetPacket(playerName,"Cancel",cancel);
+        this.cancel = cancel;
     }
 
     public Player getPlayer() {

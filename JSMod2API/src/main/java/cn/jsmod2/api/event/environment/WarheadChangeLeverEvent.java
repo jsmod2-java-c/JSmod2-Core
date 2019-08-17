@@ -10,6 +10,7 @@ package cn.jsmod2.api.event.environment;
 
 import cn.jsmod2.api.player.Player;
 import cn.jsmod2.core.event.Event;
+import static cn.jsmod2.network.PacketSender.*;
 
 /**
  * @author Kevinj
@@ -25,10 +26,12 @@ public class WarheadChangeLeverEvent extends Event implements IWarheadChangeLeve
     }
 
     public boolean isAllow() {
+        allow = sendEventGetPacket(playerName,"Allow",Boolean.class);
         return allow;
     }
 
     public void setAllow(boolean allow) {
+        sendEventSetPacket(playerName,"Allow",allow);
         this.allow = allow;
     }
 

@@ -1,5 +1,6 @@
 package cn.jsmod2.core.protocol;
 
+import cn.jsmod2.core.ApiId;
 import cn.jsmod2.core.Server;
 import cn.jsmod2.core.interapi.network.IRequester;
 import cn.jsmod2.core.math.Vector;
@@ -37,7 +38,7 @@ public class Requester implements IRequester {
     }
 
     public Requester with(String key,Object value){
-        _map.put(key,value.toString());
+        _map.put(key,value instanceof ApiId?((ApiId) value).getApiId():value.toString());
         return this;
     }
 

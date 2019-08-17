@@ -10,6 +10,7 @@ package cn.jsmod2.api.event.player;
 
 import cn.jsmod2.api.player.Player;
 import cn.jsmod2.core.annotations.UseForServerInit;
+import cn.jsmod2.network.PacketSender;
 
 /**
  * @author kevinj
@@ -21,11 +22,13 @@ public class PlayerHandcuffedEvent extends PlayerEvent implements IPlayerHandcuf
     private Player owner = new Player("");
 
     public boolean isHandcuffed() {
+        handcuffed = PacketSender.sendEventGetPacket(playerName,"Handcuffed",Boolean.class);
         return handcuffed;
     }
 
     public void setHandcuffed(boolean handcuffed) {
-        handcuffed = handcuffed;
+        PacketSender.sendEventSetPacket(playerName,"Handcuffed",handcuffed);
+        this.handcuffed = handcuffed;
     }
 
     public Player getOwner() {

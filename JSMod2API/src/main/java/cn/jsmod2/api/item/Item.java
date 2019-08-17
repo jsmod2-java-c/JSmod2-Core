@@ -49,6 +49,7 @@ public class Item extends ApiId implements Cloneable, Serializable,IItem {
         packet.send();
     }
 
+    //这里未来解决
     public Object getComponent() {
         GetComponentPacket packet = new GetComponentPacket();
         packet.playerName = playerName;

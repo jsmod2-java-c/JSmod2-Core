@@ -10,7 +10,9 @@ package cn.jsmod2.api.event.player;
 
 import cn.jsmod2.api.player.DamageType;
 import cn.jsmod2.api.player.Player;
-import cn.jsmod2.core.annotations.UseForServerInit;
+
+import static cn.jsmod2.network.PacketSender.sendEventGetPacket;
+import static cn.jsmod2.network.PacketSender.sendEventSetPacket;
 
 /**
  * @author kevinj
@@ -24,10 +26,12 @@ public class PlayerDeathEvent extends PlayerEvent implements IPlayerDeathEvent{
     private DamageType damageType;
 
     public void setSpawnRagdoll(boolean spawnRagdoll) {
+        sendEventSetPacket(playerName,"SpawnRagdoll",spawnRagdoll);
         SpawnRagdoll = spawnRagdoll;
     }
 
     public void setDamageType(DamageType damageType) {
+        sendEventSetPacket(playerName,"DamageType",damageType);
         this.damageType = damageType;
     }
 
@@ -36,10 +40,12 @@ public class PlayerDeathEvent extends PlayerEvent implements IPlayerDeathEvent{
     }
 
     public boolean isSpawnRagdoll() {
+        SpawnRagdoll = sendEventGetPacket(playerName,"SpawnRagdoll",Boolean.class);
         return SpawnRagdoll;
     }
 
     public DamageType getDamageType() {
+        damageType = sendEventGetPacket(playerName,"DamageType",DamageType.class);
         return damageType;
     }
 

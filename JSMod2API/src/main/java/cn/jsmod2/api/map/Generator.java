@@ -36,6 +36,7 @@ public class Generator extends ApiId implements Component,IGenerator, Serializab
         packet.send();
     }
 
+    //这里未来解决
     public Object getComponent(){
           return null;
     }

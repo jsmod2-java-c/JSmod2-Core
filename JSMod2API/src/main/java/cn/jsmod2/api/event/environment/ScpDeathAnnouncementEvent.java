@@ -12,6 +12,8 @@ import cn.jsmod2.api.player.Player;
 import cn.jsmod2.api.team.Role;
 import cn.jsmod2.core.event.Event;
 
+import static cn.jsmod2.network.PacketSender.*;
+
 /**
  * @author Kevinj
  * @author magiclu550
@@ -23,10 +25,12 @@ public class ScpDeathAnnouncementEvent extends Event implements IScpDeathAnnounc
     private Role playerRole;
 
     public boolean isShouldPlay() {
+        shouldPlay = sendEventGetPacket(playerName,"ShouldPlay",Boolean.class);
         return shouldPlay;
     }
 
     public void setShouldPlay(boolean shouldPlay) {
+        sendEventSetPacket(playerName,"ShouldPlay",shouldPlay);
         this.shouldPlay = shouldPlay;
     }
 
@@ -35,6 +39,7 @@ public class ScpDeathAnnouncementEvent extends Event implements IScpDeathAnnounc
     }
 
     public Role getPlayerRole() {
+        playerRole = sendEventGetPacket(playerName,"PlayerRole",Role.class);
         return playerRole;
     }
 

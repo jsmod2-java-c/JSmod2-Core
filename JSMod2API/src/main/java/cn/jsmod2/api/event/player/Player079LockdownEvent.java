@@ -10,6 +10,9 @@ package cn.jsmod2.api.event.player;
 
 import cn.jsmod2.api.map.Room;
 
+import static cn.jsmod2.network.PacketSender.sendEventGetPacket;
+import static cn.jsmod2.network.PacketSender.sendEventSetPacket;
+
 
 /**
  * @author kevinj
@@ -31,20 +34,25 @@ public class Player079LockdownEvent extends PlayerEvent implements IPlayer079Loc
     }
 
     public boolean isAllow() {
+        allow = sendEventGetPacket(playerName,"Allow",Boolean.class);
         return allow;
     }
 
+
+
     public void setAllow(boolean allow) {
+        sendEventSetPacket(playerName,"Allow",allow);
         this.allow = allow;
     }
 
     public float getApDrain() {
+        apDrain = sendEventGetPacket(playerName,"ApDrain",Float.class);
         return apDrain;
     }
 
     public void setApDrain(float apDrain) {
+        sendEventSetPacket(playerName,"ApDrain",apDrain);
         this.apDrain = apDrain;
     }
-
 
 }

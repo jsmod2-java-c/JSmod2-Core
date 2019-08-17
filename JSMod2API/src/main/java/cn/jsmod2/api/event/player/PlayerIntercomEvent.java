@@ -9,6 +9,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.api.event.player;
 
 import cn.jsmod2.api.player.Player;
+import cn.jsmod2.network.PacketSender;
 
 /**
  * @author kevinj
@@ -19,18 +20,22 @@ public class PlayerIntercomEvent extends PlayerEvent implements IPlayerIntercomE
     private float cooldownTime;
 
     public float getSpeechTime() {
+        speechTime = PacketSender.sendEventGetPacket(playerName,"SpeechTime",Float.class);
         return speechTime;
     }
 
     public void setSpeechTime(float speechTime) {
+        PacketSender.sendEventSetPacket(playerName,"SpeechTime",speechTime);
         this.speechTime = speechTime;
     }
 
     public float getCooldownTime() {
+        cooldownTime = PacketSender.sendEventGetPacket(playerName,"CooldownTime",Float.class);
         return cooldownTime;
     }
 
     public void setCooldownTime(float cooldownTime) {
+        PacketSender.sendEventSetPacket(playerName,"CooldownTime",cooldownTime);
         this.cooldownTime = cooldownTime;
     }
 

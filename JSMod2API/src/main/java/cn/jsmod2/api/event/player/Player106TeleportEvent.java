@@ -11,6 +11,8 @@ package cn.jsmod2.api.event.player;
 
 import cn.jsmod2.core.math.Vector;
 
+import static cn.jsmod2.network.PacketSender.sendEventGetPacket;
+
 /**
  * @author kevinj
  */
@@ -19,6 +21,7 @@ public class Player106TeleportEvent extends PlayerEvent implements IPlayer106Tel
     private Vector position;
 
     public Vector getPosition() {
+        position = sendEventGetPacket(playerName,"Position",Vector.class);
         return position;
     }
 

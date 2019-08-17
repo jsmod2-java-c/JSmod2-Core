@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface IMap {
 
-    public List<? extends IItem> getItems(ItemType type, boolean world_only);
+    List<? extends IItem> getItems(ItemType type, boolean world_only);
 
     Vector getRandomSpawnPoint(Role role);
 

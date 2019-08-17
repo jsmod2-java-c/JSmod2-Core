@@ -66,6 +66,8 @@ public class Room extends ApiId implements IRoom, Serializable,Cloneable {
     public String[] getObjectName(){
         return null;
     }
+
+    //这里未来解决
     public Object getGameObject(){
         return null;
     }

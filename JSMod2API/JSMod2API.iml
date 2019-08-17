@@ -14,5 +14,6 @@
     <orderEntry type="library" name="Maven: cn.jsmod2:jsmod2-core:1.0.3" level="project" />
     <orderEntry type="library" name="Maven: cn.jsmod2:jsmod2-protocol:1.0.3" level="project" />
     <orderEntry type="library" name="Maven: cn.jsmod2:jsmod2-iapi:1.0.3" level="project" />
+    <orderEntry type="library" name="Maven: com.alibaba:fastjson:1.2.47" level="project" />
   </component>
 </module>

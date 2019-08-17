@@ -11,6 +11,9 @@ package cn.jsmod2.api.event.player;
 import cn.jsmod2.api.player.Player;
 import cn.jsmod2.api.team.Role;
 
+import static cn.jsmod2.network.PacketSender.sendEventGetPacket;
+import static cn.jsmod2.network.PacketSender.sendEventSetPacket;
+
 /**
  * @author kevinj
  */
@@ -28,18 +31,22 @@ public class PlayerCheckEscapeEvent extends PlayerEvent implements IPlayerCheckE
     }
 
     public boolean isAllowEscape() {
+        allowEscape = sendEventGetPacket(playerName,"AllowEscape",Boolean.class);
         return allowEscape;
     }
 
     public void setAllowEscape(boolean allowEscape) {
+        sendEventSetPacket(playerName,"AllowEscape",allowEscape);
         this.allowEscape = allowEscape;
     }
 
     public Role getChangeRole() {
+        changeRole = sendEventGetPacket(playerName,"ChangeRole",Role.class);
         return changeRole;
     }
 
     public void setChangeRole(Role changeRole) {
+        sendEventSetPacket(playerName,"ChangeRole",changeRole);
         this.changeRole = changeRole;
     }
 }

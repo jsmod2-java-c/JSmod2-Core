@@ -12,6 +12,9 @@ import cn.jsmod2.api.map.Generator;
 import cn.jsmod2.api.player.Player;
 import cn.jsmod2.core.annotations.UseForServerInit;
 
+import static cn.jsmod2.network.PacketSender.sendEventGetPacket;
+import static cn.jsmod2.network.PacketSender.sendEventSetPacket;
+
 /**
  * @author kevinj
  */
@@ -25,9 +28,6 @@ public class PlayerGeneratorUnlockEvent extends PlayerEvent implements IPlayerGe
     }
 
 
-    public boolean isAllow() {
-        return allow;
-    }
 
     public PlayerGeneratorUnlockEvent(Player player, Generator generator, boolean allow) {
         super(player);
@@ -38,7 +38,16 @@ public class PlayerGeneratorUnlockEvent extends PlayerEvent implements IPlayerGe
     public PlayerGeneratorUnlockEvent(){
 
     }
+
+    public boolean isAllow() {
+        allow = sendEventGetPacket(playerName,"Allow",Boolean.class);
+        return allow;
+    }
+
+
+
     public void setAllow(boolean allow) {
+        sendEventSetPacket(playerName,"Allow",allow);
         this.allow = allow;
     }
 

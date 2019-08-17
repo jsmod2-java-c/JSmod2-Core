@@ -8,8 +8,8 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.api.event.environment;
 
-
-
+import static cn.jsmod2.network.PacketSender.sendEventGetPacket;
+import static cn.jsmod2.network.PacketSender.sendEventSetPacket;
 
 /**
  * @author Kevinj
@@ -22,18 +22,22 @@ public class WarheadStartEvent extends WarheadEvent implements IWarheadStartEven
 
 
     public boolean isResumed() {
+        isResumed = sendEventGetPacket(playerName,"Resumed",Boolean.class);
         return isResumed;
     }
 
     public void setResumed(boolean resumed) {
+        sendEventSetPacket(playerName,"Resumed",Boolean.class);
         isResumed = resumed;
     }
 
     public boolean isOpenDoorsAfter() {
+        openDoorsAfter = sendEventGetPacket(playerName,"OpenDoorsAfter",Boolean.class);
         return openDoorsAfter;
     }
 
     public void setOpenDoorsAfter(boolean openDoorsAfter) {
+        sendEventSetPacket(playerName,"OpenDoorsAfter",openDoorsAfter);
         this.openDoorsAfter = openDoorsAfter;
     }
 

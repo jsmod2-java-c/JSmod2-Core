@@ -9,6 +9,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.api.event.player;
 
 import cn.jsmod2.api.player.Player;
+import cn.jsmod2.network.PacketSender;
 
 public class PlayerIntercomCooldownCheckEvent extends PlayerEvent implements IPlayerIntercomCooldownCheckEvent{
     private float currentCooldown;
@@ -23,10 +24,12 @@ public class PlayerIntercomCooldownCheckEvent extends PlayerEvent implements IPl
     }
 
     public float getCurrentCooldown() {
+        currentCooldown = PacketSender.sendEventGetPacket(playerName,"CurrentCooldown",Float.class);
         return currentCooldown;
     }
 
     public void setCurrentCooldown(float currentCooldown) {
+        PacketSender.sendEventSetPacket(playerName,"CurrentCoolDown",currentCooldown);
         this.currentCooldown = currentCooldown;
     }
 }

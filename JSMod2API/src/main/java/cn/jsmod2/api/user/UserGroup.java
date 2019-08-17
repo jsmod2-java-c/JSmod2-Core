@@ -26,6 +26,7 @@ public class UserGroup extends ApiId implements IUserGroup, Serializable,Cloneab
 
     private String name;
 
+    //这里未来解决
     public Object getComponent(){
         return null;
     }
