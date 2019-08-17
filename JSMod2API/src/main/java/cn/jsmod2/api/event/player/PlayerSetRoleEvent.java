@@ -12,6 +12,8 @@ import cn.jsmod2.api.item.ItemType;
 import cn.jsmod2.api.player.Player;
 import cn.jsmod2.api.team.Role;
 import cn.jsmod2.api.team.TeamRole;
+import cn.jsmod2.network.PacketSender;
+import cn.jsmod2.network.protocol.event.admin.PlayerSetRoleSetItemsPacket;
 
 import java.util.List;
 
@@ -26,14 +28,20 @@ public class PlayerSetRoleEvent extends PlayerEvent implements IPlayerSetRoleEve
     private TeamRole teamRole;
 
     public void setItems(List<ItemType> items) {
+        PlayerSetRoleSetItemsPacket packet = new PlayerSetRoleSetItemsPacket();
+        packet.playerName = playerName;
+        packet.items = items;
+        packet.send();
         this.items = items;
     }
 
     public void setUsingDefaultItem(boolean usingDefaultItem) {
+        PacketSender.sendEventSetPacket(playerName,"UsingDefaultItem",usingDefaultItem);
         this.usingDefaultItem = usingDefaultItem;
     }
 
     public void setRole(Role role) {
+        PacketSender.sendEventSetPacket(playerName,"Role",role);
         this.role = role;
     }
 

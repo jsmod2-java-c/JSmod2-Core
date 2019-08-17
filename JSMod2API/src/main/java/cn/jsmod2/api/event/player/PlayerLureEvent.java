@@ -9,6 +9,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.api.event.player;
 
 import cn.jsmod2.api.player.Player;
+import cn.jsmod2.network.PacketSender;
 
 /**
  * @author kevinj
@@ -27,10 +28,12 @@ public class PlayerLureEvent extends PlayerEvent implements IPlayerLureEvent{
     }
 
     public boolean isAllowContain() {
+        allowContain = PacketSender.sendEventGetPacket(playerName,"AllowContain",Boolean.class);
         return allowContain;
     }
 
     public void setAllowContain(boolean allowContain) {
+        PacketSender.sendEventSetPacket(playerName,"AllowContain",allowContain);
         this.allowContain = allowContain;
     }
 }

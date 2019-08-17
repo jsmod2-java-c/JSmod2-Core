@@ -18,6 +18,11 @@
     <dependencies>
         <dependency>
             <groupId>cn.jsmod2</groupId>
+            <artifactId>jsmod2-iapi</artifactId>
+            <version>1.0.3</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.jsmod2</groupId>
             <artifactId>jsmod2-core</artifactId>
             <version>1.0.3</version>
         </dependency>

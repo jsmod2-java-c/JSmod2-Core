@@ -9,8 +9,8 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.api.event.player;
 
 import cn.jsmod2.api.player.Player;
-import cn.jsmod2.core.annotations.UseForServerInit;
 import cn.jsmod2.core.math.Vector;
+import cn.jsmod2.network.PacketSender;
 
 /**
  * @author kevinj
@@ -20,28 +20,33 @@ public class PlayerPocketDimensionEnterEvent extends PlayerEvent implements IPla
 
     private Vector lastPosition;
 
-    private Vector targerPosision;
+    private Vector targetPosition;
 
     private Player attacker = new Player("");
 
     public void setDamage(float damage) {
+        PacketSender.sendEventSetPacket(playerName,"Damage",damage);
         this.damage = damage;
     }
 
-    public void setTargerPosision(Vector targerPosision) {
-        this.targerPosision = targerPosision;
+    public void setTargetPosition(Vector targetPosition) {
+        PacketSender.sendEventSetPacket(playerName,"TargetPosition",targetPosition);
+        this.targetPosition = targetPosition;
     }
 
     public float getDamage() {
+        damage = PacketSender.sendEventGetPacket(playerName,"Damage",Float.class);
         return damage;
     }
 
     public Vector getLastPosition() {
+        lastPosition = PacketSender.sendEventGetPacket(playerName,"LastPosition",Vector.class);
         return lastPosition;
     }
 
-    public Vector getTargerPosision() {
-        return targerPosision;
+    public Vector getTargetPosition() {
+        targetPosition = PacketSender.sendEventGetPacket(playerName,"TargetPosition",Vector.class);
+        return targetPosition;
     }
 
     public Player getAttacker() {
@@ -49,11 +54,11 @@ public class PlayerPocketDimensionEnterEvent extends PlayerEvent implements IPla
     }
 
 
-    public PlayerPocketDimensionEnterEvent(Player player, float damage, Vector lastPosition, Vector targerPosision, Player attacker) {
+    public PlayerPocketDimensionEnterEvent(Player player, float damage, Vector lastPosition, Vector targetPosition, Player attacker) {
         super(player);
         this.damage = damage;
         this.lastPosition = lastPosition;
-        this.targerPosision = targerPosision;
+        this.targetPosition = targetPosition;
         this.attacker = attacker;
     }
 

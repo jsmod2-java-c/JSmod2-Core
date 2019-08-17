@@ -19,13 +19,13 @@ public interface IPlayerPocketDimensionEnterEvent extends IPlayerEvent {
 
     void setDamage(float damage);
 
-    void setTargerPosision(Vector targerPosision);
+    void setTargetPosition(Vector targetPosition);
 
     float getDamage();
 
     Vector getLastPosition();
 
-    Vector getTargerPosision();
+    Vector getTargetPosition();
 
     IPlayer getAttacker();
 

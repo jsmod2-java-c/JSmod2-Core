@@ -10,6 +10,7 @@ package cn.jsmod2.api.event.player;
 
 import cn.jsmod2.api.player.Player;
 import cn.jsmod2.core.annotations.UseForServerInit;
+import cn.jsmod2.network.PacketSender;
 
 /**
  * @author kevinj
@@ -30,10 +31,12 @@ public class PlayerRecallZombieEvent extends PlayerEvent implements IPlayerRecal
     }
 
     public boolean isAllowRecall() {
+        allowRecall = PacketSender.sendEventGetPacket(playerName,"AllowRecall",Boolean.class);
         return allowRecall;
     }
 
     public void setAllowRecall(boolean allowRecall) {
+        PacketSender.sendEventSetPacket(playerName,"AllowRecall",allowRecall);
         this.allowRecall = allowRecall;
     }
 

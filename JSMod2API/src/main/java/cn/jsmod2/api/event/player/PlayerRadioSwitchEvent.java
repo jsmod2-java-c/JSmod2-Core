@@ -10,6 +10,7 @@ package cn.jsmod2.api.event.player;
 
 import cn.jsmod2.api.player.Player;
 import cn.jsmod2.api.player.RadioStatus;
+import cn.jsmod2.network.PacketSender;
 
 /**
  * @author kevinj
@@ -18,10 +19,12 @@ public class PlayerRadioSwitchEvent extends PlayerEvent implements IPlayerRadioS
     private RadioStatus ChangeTo;
 
     public RadioStatus getChangeTo() {
+        ChangeTo = PacketSender.sendEventGetPacket(playerName,"ChangeTo",RadioStatus.class);
         return ChangeTo;
     }
 
     public void setChangeTo(RadioStatus changeTo) {
+        PacketSender.sendEventSetPacket(playerName,"ChangeTo",changeTo);
         ChangeTo = changeTo;
     }
 

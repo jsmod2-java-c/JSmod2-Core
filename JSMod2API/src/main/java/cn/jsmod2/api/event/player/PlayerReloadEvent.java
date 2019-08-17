@@ -11,6 +11,7 @@ package cn.jsmod2.api.event.player;
 import cn.jsmod2.api.item.ItemType;
 import cn.jsmod2.api.player.Player;
 import cn.jsmod2.core.annotations.UseForServerInit;
+import cn.jsmod2.network.PacketSender;
 
 /**
  * @author kevinj
@@ -39,34 +40,42 @@ public class PlayerReloadEvent extends PlayerEvent implements IPlayerReloadEvent
     }
 
     public int getAmmoRemoved() {
+        ammoRemoved = PacketSender.sendEventGetPacket(playerName,"AmmoRemoved",Integer.class);
         return ammoRemoved;
     }
 
     public void setAmmoRemoved(int ammoRemoved) {
+        PacketSender.sendEventSetPacket(playerName,"AmmoRemoved",ammoRemoved);
         this.ammoRemoved = ammoRemoved;
     }
 
     public int getClipAmmoCountAfterReload() {
+        ClipAmmoCountAfterReload = PacketSender.sendEventGetPacket(playerName,"ClipAmmoCountAfterReload",Integer.class);
         return ClipAmmoCountAfterReload;
     }
 
     public void setClipAmmoCountAfterReload(int clipAmmoCountAfterReload) {
+        PacketSender.sendEventSetPacket(playerName,"ClipAmmoCountAfterReload",clipAmmoCountAfterReload);
         ClipAmmoCountAfterReload = clipAmmoCountAfterReload;
     }
 
     public ItemType getWeapon() {
+        weapon = PacketSender.sendEventGetPacket(playerName,"Weapon",ItemType.class);
         return weapon;
     }
 
     public int getNormalMaxClipSize() {
+        NormalMaxClipSize = PacketSender.sendEventGetPacket(playerName,"NormalMaxClipSize",Integer.class);
         return NormalMaxClipSize;
     }
 
     public int getCurrentClipAmmoCount() {
+        CurrentClipAmmoCount = PacketSender.sendEventGetPacket(playerName,"CurrentClipAmmoCount",Integer.class);
         return CurrentClipAmmoCount;
     }
 
     public int getCurrentAmmoTotal() {
+        CurrentAmmoTotal = PacketSender.sendEventGetPacket(playerName,"CurrentAmmoTotal",Integer.class);
         return CurrentAmmoTotal;
     }
 

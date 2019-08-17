@@ -9,6 +9,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.api.event.player;
 
 import cn.jsmod2.api.player.Player;
+import cn.jsmod2.network.PacketSender;
 
 /**
  * @author kevinj
@@ -27,10 +28,12 @@ public class PlayerMedkitUseEvent extends PlayerEvent implements IPlayerMedkitUs
     }
 
     public Integer getRecoverHealth() {
+        recoverHealth = PacketSender.sendEventGetPacket(playerName,"RecoverHealth",Integer.class);
         return recoverHealth;
     }
 
     public void setRecoverHealth(Integer recoverHealth) {
+        PacketSender.sendEventSetPacket(playerName,"RecoverHealth",recoverHealth);
         this.recoverHealth = recoverHealth;
     }
 

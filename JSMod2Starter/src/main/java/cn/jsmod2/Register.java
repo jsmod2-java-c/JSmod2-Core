@@ -30,9 +30,9 @@ import cn.jsmod2.api.event.team.TeamRespawnEvent;
 import cn.jsmod2.core.protocol.CommandRegisterPacket;
 import cn.jsmod2.core.protocol.command.PlayerCommandPacket;
 import cn.jsmod2.core.protocol.command.ServerCommandPacket;
-import cn.jsmod2.network.protocol.event.admin.AdminQueryAdminSetPacket;
-import cn.jsmod2.network.protocol.event.admin.AdminQueryQueryGetPacket;
-import cn.jsmod2.network.protocol.event.admin.AdminQueryQuerySetPacket;
+import cn.jsmod2.network.protocol.event.admin.*;
+import cn.jsmod2.network.protocol.event.newstream.EventValueGetStream;
+import cn.jsmod2.network.protocol.event.newstream.EventValueSetStream;
 import cn.jsmod2.network.protocol.item.*;
 import cn.jsmod2.network.protocol.map.door.*;
 import cn.jsmod2.network.protocol.map.elevator.*;
@@ -165,6 +165,10 @@ public class Register extends RegisterTemplate {
         packets.put(SetGeneratorTimeLeftPacket.class,SetGeneratorTimeLeftPacket.ID);
         packets.put(SetGeneratorHasTabletPacket.class,SetGeneratorHasTabletPacket.ID);
         packets.put(SetGeneratorOpenPacket.class,SetGeneratorOpenPacket.ID);
+        packets.put(EventValueGetStream.class,180);
+        packets.put(EventValueSetStream.class,181);
+        packets.put(PlayerContain106Scp106sGetPacket.class,PlayerContain106Scp106sGetPacket.ID);
+        packets.put(PlayerSetRoleSetItemsPacket.class,PlayerSetRoleSetItemsPacket.ID);
         //11
         //~143 最大 下一个144
         putPackets();

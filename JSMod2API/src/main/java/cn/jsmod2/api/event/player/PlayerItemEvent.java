@@ -12,6 +12,7 @@ import cn.jsmod2.api.item.IItem;
 import cn.jsmod2.api.item.Item;
 import cn.jsmod2.api.item.ItemType;
 import cn.jsmod2.api.player.Player;
+import cn.jsmod2.network.PacketSender;
 
 public abstract class PlayerItemEvent extends PlayerEvent {
     private IItem item = new Item();
@@ -36,23 +37,27 @@ public abstract class PlayerItemEvent extends PlayerEvent {
     }
 
     public void setItem(IItem item) {
-
+        PacketSender.sendEventSetPacket(playerName,"Item",item);
         this.item = item;
     }
 
     public ItemType getChangeTo() {
+        changeTo = PacketSender.sendEventGetPacket(playerName,"ChangeTo",ItemType.class);
         return changeTo;
     }
 
     public void setChangeTo(ItemType changeTo) {
+        PacketSender.sendEventSetPacket(playerName,"ChangeTo",changeTo);
         this.changeTo = changeTo;
     }
 
     public boolean isAllow() {
+        allow = PacketSender.sendEventGetPacket(playerName,"Allow",Boolean.class);
         return allow;
     }
 
     public void setAllow(boolean allow) {
+        PacketSender.sendEventSetPacket(playerName,"Allow",allow);
         this.allow = allow;
     }
 

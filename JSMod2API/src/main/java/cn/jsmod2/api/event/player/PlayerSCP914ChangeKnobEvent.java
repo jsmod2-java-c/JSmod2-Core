@@ -11,6 +11,7 @@ package cn.jsmod2.api.event.player;
 
 import cn.jsmod2.api.item.KnobSetting;
 import cn.jsmod2.api.player.Player;
+import cn.jsmod2.network.PacketSender;
 
 /**
  * @author kevinj
@@ -19,10 +20,12 @@ public class PlayerSCP914ChangeKnobEvent extends PlayerEvent implements IPlayerS
     private KnobSetting knobSetting;
 
     public KnobSetting getKnobSetting() {
+        knobSetting = PacketSender.sendEventGetPacket(playerName,"KnobSetting",KnobSetting.class);
         return knobSetting;
     }
 
     public void setKnobSetting(KnobSetting knobSetting) {
+        PacketSender.sendEventSetPacket(playerName,"KnobSetting",knobSetting);
         this.knobSetting = knobSetting;
     }
 
