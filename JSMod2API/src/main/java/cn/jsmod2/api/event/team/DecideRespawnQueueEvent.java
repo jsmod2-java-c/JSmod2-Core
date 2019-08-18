@@ -11,6 +11,10 @@ package cn.jsmod2.api.event.team;
 import cn.jsmod2.api.team.Team;
 import cn.jsmod2.core.annotations.UseForServerInit;
 import cn.jsmod2.core.event.Event;
+import cn.jsmod2.network.PacketSender;
+import cn.jsmod2.network.protocol.event.newstream.GetTypes;
+
+import java.util.List;
 
 public class DecideRespawnQueueEvent extends Event implements IDecideRespawnQueueEvent{
 
@@ -21,6 +25,7 @@ public class DecideRespawnQueueEvent extends Event implements IDecideRespawnQueu
     }
 
     public Team[] getTeams() {
+        teams = (Team[]) PacketSender.sendEventGetPacket(playerName,"Teams",Team.class, List.class, GetTypes.GET_ARRAY).toArray();
         return teams;
     }
 

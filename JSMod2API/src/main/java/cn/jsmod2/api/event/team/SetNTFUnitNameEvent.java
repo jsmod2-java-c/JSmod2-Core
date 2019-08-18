@@ -9,6 +9,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.api.event.team;
 
 import cn.jsmod2.core.event.Event;
+import cn.jsmod2.network.PacketSender;
 
 public class SetNTFUnitNameEvent extends Event implements ISetNTFUnitNameEvent{
 
@@ -23,10 +24,12 @@ public class SetNTFUnitNameEvent extends Event implements ISetNTFUnitNameEvent{
     }
 
     public String getUnit() {
+        unit = PacketSender.sendEventGetPacket(playerName,"Unit",String.class);
         return unit;
     }
 
     public void setUnit(String unit) {
+        PacketSender.sendEventSetPacket(playerName,"Unit",unit);
         this.unit = unit;
     }
 }

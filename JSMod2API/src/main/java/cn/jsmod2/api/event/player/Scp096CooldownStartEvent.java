@@ -10,6 +10,9 @@ package cn.jsmod2.api.event.player;
 
 import cn.jsmod2.api.player.Player;
 
+import static cn.jsmod2.network.PacketSender.sendEventGetPacket;
+import static cn.jsmod2.network.PacketSender.sendEventSetPacket;
+
 /**
  * @author kevinj
  */
@@ -26,12 +29,15 @@ public class Scp096CooldownStartEvent extends PlayerEvent implements IScp096Cool
     }
 
     public boolean isAllow() {
+        allow = sendEventGetPacket(playerName,"Allow",Boolean.class);
         return allow;
     }
 
+
+
     public void setAllow(boolean allow) {
+        sendEventSetPacket(playerName,"Allow",allow);
         this.allow = allow;
     }
-
 
 }

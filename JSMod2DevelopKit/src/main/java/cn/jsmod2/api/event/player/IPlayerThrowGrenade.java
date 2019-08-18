@@ -8,7 +8,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.api.event.player;
 
-import cn.jsmod2.api.item.ItemType;
+import cn.jsmod2.api.player.GrenadeType;
 import cn.jsmod2.core.math.Vector;
 
 /**
@@ -17,7 +17,7 @@ import cn.jsmod2.core.math.Vector;
 public interface IPlayerThrowGrenade extends IPlayerEvent {
 
 
-    ItemType getGrenadeType();
+    GrenadeType getGrenadeType();
 
     Vector getDirection();
 

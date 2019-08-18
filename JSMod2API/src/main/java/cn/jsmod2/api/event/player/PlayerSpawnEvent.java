@@ -8,43 +8,25 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.api.event.player;
 
-import cn.jsmod2.api.map.Door;
-import cn.jsmod2.api.player.Player;
-import cn.jsmod2.core.annotations.UseForServerInit;
+import cn.jsmod2.core.math.Vector;
+import cn.jsmod2.network.PacketSender;
+
 
 /**
  * @author kevinj
  */
 public class PlayerSpawnEvent extends PlayerEvent implements IPlayerSpawnEvent{
-    private Door door = new Door();
-    private boolean allow;
-    private boolean destroy;
 
-    public PlayerSpawnEvent(Player player, Door door) {
-        super(player);
-        this.door = door;
+    public Vector spawnPos;
+
+    public Vector getSpawnPos() {
+        spawnPos = PacketSender.sendEventGetPacket(playerName,"SpawnPos",Vector.class);
+        return spawnPos;
     }
 
-    public Door getDoor() {
-        return door;
-    }
-
-
-
-    public boolean isAllow() {
-        return allow;
-    }
-
-    public void setAllow(boolean allow) {
-        this.allow = allow;
-    }
-
-    public boolean isDestroy() {
-        return destroy;
-    }
-
-    public void setDestroy(boolean destroy) {
-        this.destroy = destroy;
+    public void setSpawnPos(Vector spawnPos) {
+        PacketSender.sendEventSetPacket(playerName,"SpawnPos",spawnPos);
+        this.spawnPos = spawnPos;
     }
 
     public PlayerSpawnEvent(){

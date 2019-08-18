@@ -9,4 +9,23 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.api.team;
 
 public enum Team {
+
+    NONE(-1),
+    SCP(0),
+    NINETAILFOX(1),
+    CHAOS_INSURGENCY(2),
+    SCIENTIST(3),
+    CLASSD(4),
+    SPECTATOR(5),
+    TUTORIAL(6);
+
+    private int team;
+
+    Team(int i){
+        this.team = i;
+    }
+
+    public int getTeam() {
+        return team;
+    }
 }

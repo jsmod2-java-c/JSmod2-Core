@@ -8,23 +8,23 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.api.event.player;
 
-import cn.jsmod2.api.item.ItemType;
+import cn.jsmod2.api.player.GrenadeType;
 import cn.jsmod2.api.player.Player;
-import cn.jsmod2.core.annotations.UseForServerInit;
 import cn.jsmod2.core.math.Vector;
+import cn.jsmod2.network.PacketSender;
 
 /**
  * @author kevinj
  */
 public class PlayerThrowGrenade extends PlayerEvent implements IPlayerThrowGrenade{
 
-    private ItemType GrenadeType;
+    private GrenadeType grenadeType;
     private Vector direction;
     private boolean slowThrow;
 
-    public PlayerThrowGrenade(Player player, ItemType grenadeType, Vector direction, boolean slowThrow) {
+    public PlayerThrowGrenade(Player player, GrenadeType grenadeType, Vector direction, boolean slowThrow) {
         super(player);
-        GrenadeType = grenadeType;
+        this.grenadeType = grenadeType;
         this.direction = direction;
         this.slowThrow = slowThrow;
     }
@@ -33,17 +33,20 @@ public class PlayerThrowGrenade extends PlayerEvent implements IPlayerThrowGrena
 
     }
 
-    public ItemType getGrenadeType() {
-        return GrenadeType;
+    public GrenadeType getGrenadeType() {
+        grenadeType = PacketSender.sendEventGetPacket(playerName,"GrenadeType",GrenadeType.class);
+        return grenadeType;
     }
 
 
     public Vector getDirection() {
+        direction = PacketSender.sendEventGetPacket(playerName,"Direction",Vector.class);
         return direction;
     }
 
 
     public boolean isSlowThrow() {
+        slowThrow = PacketSender.sendEventGetPacket(playerName,"SlowThrow",Boolean.class);
         return slowThrow;
     }
 

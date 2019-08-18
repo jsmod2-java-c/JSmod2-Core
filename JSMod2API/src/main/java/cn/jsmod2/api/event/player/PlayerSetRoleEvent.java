@@ -14,6 +14,7 @@ import cn.jsmod2.api.team.Role;
 import cn.jsmod2.api.team.TeamRole;
 import cn.jsmod2.network.PacketSender;
 import cn.jsmod2.network.protocol.event.admin.PlayerSetRoleSetItemsPacket;
+import cn.jsmod2.network.protocol.event.newstream.GetTypes;
 
 import java.util.List;
 
@@ -45,15 +46,19 @@ public class PlayerSetRoleEvent extends PlayerEvent implements IPlayerSetRoleEve
         this.role = role;
     }
 
+    @SuppressWarnings("unchecked")
     public List<ItemType> getItems() {
+        items = PacketSender.sendEventGetPacket(playerName,"Items",ItemType.class,List.class, GetTypes.GET_ARRAY);
         return items;
     }
 
     public boolean isUsingDefaultItem() {
+        usingDefaultItem = PacketSender.sendEventGetPacket(playerName,"UsingDefaultItem",Boolean.class);
         return usingDefaultItem;
     }
 
     public Role getRole() {
+        role = PacketSender.sendEventGetPacket(playerName,"Role",Role.class);
         return role;
     }
 

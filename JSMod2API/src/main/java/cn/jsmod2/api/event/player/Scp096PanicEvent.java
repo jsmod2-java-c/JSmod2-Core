@@ -10,6 +10,9 @@ package cn.jsmod2.api.event.player;
 
 import cn.jsmod2.api.player.Player;
 
+import static cn.jsmod2.network.PacketSender.sendEventGetPacket;
+import static cn.jsmod2.network.PacketSender.sendEventSetPacket;
+
 /**
  * @author kevinj
  */
@@ -19,18 +22,24 @@ public class Scp096PanicEvent extends PlayerEvent implements IScp096PanicEvent{
     private float panicTime;
 
     public boolean isAllow() {
+        allow = sendEventGetPacket(playerName,"Allow",Boolean.class);
         return allow;
     }
 
+
+
     public void setAllow(boolean allow) {
+        sendEventSetPacket(playerName,"Allow",allow);
         this.allow = allow;
     }
 
     public float getPanicTime() {
+        panicTime = sendEventGetPacket(playerName,"PanicTime",Float.class);
         return panicTime;
     }
 
     public void setPanicTime(float panicTime) {
+        sendEventSetPacket(playerName,"PanicTime",panicTime);
         this.panicTime = panicTime;
     }
 

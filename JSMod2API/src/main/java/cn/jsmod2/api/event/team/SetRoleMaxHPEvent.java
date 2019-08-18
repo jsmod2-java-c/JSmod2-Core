@@ -11,6 +11,7 @@ package cn.jsmod2.api.event.team;
 import cn.jsmod2.api.team.Role;
 import cn.jsmod2.core.annotations.UseForServerInit;
 import cn.jsmod2.core.event.Event;
+import cn.jsmod2.network.PacketSender;
 
 public class SetRoleMaxHPEvent extends Event implements ISetRoleMaxHPEvent{
 
@@ -28,15 +29,18 @@ public class SetRoleMaxHPEvent extends Event implements ISetRoleMaxHPEvent{
     }
 
     public Role getRole() {
+        role = PacketSender.sendEventGetPacket(playerName,"Role",Role.class);
         return role;
     }
 
 
     public int getMaxHP() {
+        maxHP = PacketSender.sendEventGetPacket(playerName,"MaxHP",Integer.class);
         return maxHP;
     }
 
     public void setMaxHP(int maxHP) {
+        PacketSender.sendEventSetPacket(playerName,"MaxHP",maxHP);
         this.maxHP = maxHP;
     }
 }

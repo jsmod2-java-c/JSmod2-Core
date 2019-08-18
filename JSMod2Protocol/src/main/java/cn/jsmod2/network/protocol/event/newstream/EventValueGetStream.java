@@ -4,6 +4,11 @@ import cn.jsmod2.core.protocol.GetPacket;
 import cn.jsmod2.core.protocol.Requester;
 import cn.jsmod2.core.protocol.Response;
 
+/**
+ * jsmod2中最新的一款数据包设计，在Proxy端通过反射实现，统一使用id 180
+ * name为属性名，在后期的api中替代传统发包，但不代表它一定可以在任何地方使用
+ * @author MagicLu550
+ */
 public class EventValueGetStream extends GetPacket {
 
     public String name;

@@ -11,6 +11,7 @@ package cn.jsmod2.api.event.server;
 import cn.jsmod2.api.server.ROUND_END_STATS;
 import cn.jsmod2.api.server.Round;
 import cn.jsmod2.api.server.Smod2Server;
+import cn.jsmod2.network.PacketSender;
 
 
 public class RoundEndEvent extends ServerEvent implements IRoundEndEvent{
@@ -20,9 +21,6 @@ public class RoundEndEvent extends ServerEvent implements IRoundEndEvent{
     private ROUND_END_STATS stats;
 
 
-    public RoundEndEvent(Round round, ROUND_END_STATS status, Smod2Server smod2Server){
-        super(smod2Server);
-    }
 
     public Round getRound() {
         return round;
@@ -30,6 +28,7 @@ public class RoundEndEvent extends ServerEvent implements IRoundEndEvent{
 
 
     public ROUND_END_STATS getStats() {
+        stats = PacketSender.sendEventGetPacket(playerName,"Stats",ROUND_END_STATS.class);
         return stats;
     }
 

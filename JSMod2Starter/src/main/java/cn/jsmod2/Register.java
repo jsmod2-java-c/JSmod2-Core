@@ -169,6 +169,8 @@ public class Register extends RegisterTemplate {
         packets.put(EventValueSetStream.class,181);
         packets.put(PlayerContain106Scp106sGetPacket.class,PlayerContain106Scp106sGetPacket.ID);
         packets.put(PlayerSetRoleSetItemsPacket.class,PlayerSetRoleSetItemsPacket.ID);
+        packets.put(TeamRespawnEventGetPlayersPacket.class,TeamRespawnEventGetPlayersPacket.ID);
+        packets.put(TeamRespawnEventSetPlayerListPacket.class,TeamRespawnEventSetPlayerListPacket.ID);
         //11
         //~143 最大 下一个144
         putPackets();

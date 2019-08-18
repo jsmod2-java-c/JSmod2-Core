@@ -9,7 +9,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.api.event.player;
 
 
-import cn.jsmod2.api.map.IDoor;
+import cn.jsmod2.core.math.Vector;
 
 
 /**
@@ -18,14 +18,8 @@ import cn.jsmod2.api.map.IDoor;
 public interface IPlayerSpawnEvent extends IPlayerEvent {
 
 
-    IDoor getDoor();
+    Vector getSpawnPos();
 
-    boolean isAllow();
-
-    void setAllow(boolean allow);
-
-    boolean isDestroy();
-
-    void setDestroy(boolean destroy);
+    void setSpawnPos(Vector spawnPos);
 
 }
