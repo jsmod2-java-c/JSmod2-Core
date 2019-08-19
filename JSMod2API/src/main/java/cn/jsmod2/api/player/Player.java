@@ -18,6 +18,8 @@ import cn.jsmod2.api.user.UserGroup;
 import cn.jsmod2.core.CommandSender;
 import cn.jsmod2.core.Server;
 import cn.jsmod2.core.math.Vector;
+import cn.jsmod2.network.DoGetStream;
+import cn.jsmod2.network.DoStream;
 import cn.jsmod2.network.SimpleGetStream;
 import cn.jsmod2.network.SimpleSetStream;
 
@@ -67,29 +69,40 @@ public class Player extends CommandSender implements IPlayer, Serializable,Clone
 
     public int getPlayerId() {
         SimpleGetStream stream = new SimpleGetStream(Integer.class);
+        playerId = stream.read(playerName,"PlayerId",Integer.class);
         return playerId;
     }
 
 
     public String getSteamId() {
+        SimpleGetStream stream = new SimpleGetStream(String.class);
+        steamId = stream.read(playerName,"SteamId",String.class);
         return steamId;
     }
 
 
     public RadioStatus getRadioStatus() {
+        SimpleGetStream stream = new SimpleGetStream(RadioStatus.class);
+        radioStatus = stream.read(playerName,"RadioStatus",RadioStatus.class);
         return radioStatus;
     }
 
     public void setRadioStatus(RadioStatus radioStatus) {
+        SimpleSetStream stream = new SimpleSetStream();
+        stream.write(playerName,"RadioStatus",radioStatus);
         this.radioStatus = radioStatus;
     }
 
     public boolean isOverwatchMode() {
+        SimpleGetStream stream = new SimpleGetStream(Boolean.class);
+        overwatchMode = stream.read(playerName,"OverWatchMode",Boolean.class);
         return overwatchMode;
     }
 
 
     public boolean isDoNotTrack() {
+        SimpleGetStream stream = new SimpleGetStream(Boolean.class);
+        doNotTrack = stream.read(playerName,"DoNotTrack",Boolean.class);
         return doNotTrack;
     }
 
@@ -100,7 +113,11 @@ public class Player extends CommandSender implements IPlayer, Serializable,Clone
 
 
     public void kill(DamageType type){
-
+        DoStream stream = new DoStream();
+        stream.method = "Kill";
+        stream.args = new String[]{"'"+type+"'"};
+        stream.playerName = playerName;
+        stream.send();
     }
 
     public void kill(){
@@ -108,15 +125,26 @@ public class Player extends CommandSender implements IPlayer, Serializable,Clone
     }
 
     public int getHealth(){
-        return 0;
+        DoGetStream stream = new DoGetStream(Integer.class);
+        stream.method = "GetHealth";
+        return (Integer)stream.send();
     }
 
     public void addHealth(int amount){
+        DoStream stream = new DoStream();
+        stream.args = new String[]{amount+""};
+        stream.method = "AddHealth";
+        stream.playerName = playerName;
+        stream.send();
         //发包
     }
 
     public void damage(int amount,DamageType type){
-
+        DoStream stream = new DoStream();
+        stream.playerName = playerName;
+        stream.method = "Damage";
+        stream.args = new String[]{amount+"","'"+type+"'"};
+        stream.send();
     }
 
     public void damage(int amount){
@@ -124,7 +152,10 @@ public class Player extends CommandSender implements IPlayer, Serializable,Clone
     }
 
     public void setHealth(int amount,DamageType type){
-
+        DoStream stream = new DoStream();
+        stream.method = "SetHealth";
+        stream.playerName = playerName;
+        stream.args = new String[]{amount+"","'"+type+"'"};
     }
 
     public void setHealth(int amount){
@@ -132,19 +163,34 @@ public class Player extends CommandSender implements IPlayer, Serializable,Clone
     }
 
     public int getAmmo(AmmoType type){
-        return 0;
+        DoGetStream stream = new DoGetStream(AmmoType.class);
+        stream.method = "GetAmmo";
+        stream.args = new String[]{"'"+type+"'"};
+        stream.playerName = playerName;
+        return (Integer) stream.send();
     }
 
     public void setAmmo(AmmoType type,int amount){
-
+        DoStream stream = new DoStream();
+        stream.playerName = playerName;
+        stream.method = "SetAmmo";
+        stream.args = new String[]{"'"+type+"'",amount+""};
+        stream.send();
     }
 
     public Vector getPosition(){
-        return null;
+        DoGetStream stream = new DoGetStream(Vector.class);
+        stream.playerName = playerName;
+        stream.method = "GetPosition";
+        return (Vector) stream.send();
     }
 
     public void teleport(Vector pos,boolean unstuck){
-
+        DoGetStream stream = new DoGetStream(Vector.class);
+        stream.method = "Teleport";
+        stream.playerName = playerName;
+        stream.args = new String[]{pos.toString(),unstuck+""};
+        stream.send();
     }
 
     public void teleport(Vector pos){
@@ -152,26 +198,48 @@ public class Player extends CommandSender implements IPlayer, Serializable,Clone
     }
 
     public void setRank(String color,String text,String group){
-
+        DoStream stream = new DoStream();
+        stream.method = "SetRank";
+        stream.playerName = playerName;
+        stream.args = new String[]{color,text,group};
+        stream.send();
     }
 
     public String getRankName(){
-        return "";
+        DoGetStream stream = new DoGetStream(String.class);
+        stream.method = "GetRankName";
+        stream.playerName = playerName;
+        return (String) stream.send();
     }
 
     public void disConnect(){
-
+        DoStream stream = new DoStream();
+        stream.method = "DisConnect";
+        stream.playerName = playerName;
+        stream.send();
     }
 
     public void disConnect(String message){
-
+        DoStream stream = new DoStream();
+        stream.playerName = playerName;
+        stream.method = "DisConnect";
+        stream.args =new String[]{message};
+        stream.send();
     }
     public void ban(int duration){
-
+        DoStream stream = new DoStream();
+        stream.playerName = playerName;
+        stream.method = "Ban";
+        stream.args = new String[]{duration+""};
+        stream.send();
     }
 
     public void ban(int duration,String message){
-
+        DoStream stream = new DoStream();
+        stream.method = "Ban";
+        stream.args = new String[]{duration+"",message};
+        stream.playerName = playerName;
+        stream.send();
     }
 
     public Item giveItem(ItemType type){

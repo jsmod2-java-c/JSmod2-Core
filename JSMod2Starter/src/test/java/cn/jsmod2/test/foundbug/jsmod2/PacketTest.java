@@ -27,6 +27,7 @@ import java.util.*;
 @ServerApplication(DefaultServer.class)
 public class PacketTest {
 
+
     @Test
     public void get(){
         String str = ("events.put(0x01, AdminQueryEvent.class);//packet 1\n" +
