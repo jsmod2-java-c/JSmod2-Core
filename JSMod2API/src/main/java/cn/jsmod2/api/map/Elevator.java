@@ -107,14 +107,4 @@ public class Elevator extends ApiId implements Component,IElevator, Serializable
         packet.send();
     }
 
-    @Override
-    public String toString() {
-        return "Elevator{" +
-                "elevatorType=" + elevatorType +
-                ", elevatorStatus=" + elevatorStatus +
-                ", locked=" + locked +
-                ", lockable=" + lockable +
-                ", movingSpeed=" + movingSpeed +
-                '}';
-    }
 }

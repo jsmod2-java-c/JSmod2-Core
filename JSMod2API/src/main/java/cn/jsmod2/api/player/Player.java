@@ -18,6 +18,8 @@ import cn.jsmod2.api.user.UserGroup;
 import cn.jsmod2.core.CommandSender;
 import cn.jsmod2.core.Server;
 import cn.jsmod2.core.math.Vector;
+import cn.jsmod2.network.SimpleGetStream;
+import cn.jsmod2.network.SimpleSetStream;
 
 import java.io.Serializable;
 import java.util.List;
@@ -30,7 +32,7 @@ public class Player extends CommandSender implements IPlayer, Serializable,Clone
 
     private int playerId;
 
-    private String streamId;
+    private String steamId;
 
     private RadioStatus radioStatus;
 
@@ -50,22 +52,27 @@ public class Player extends CommandSender implements IPlayer, Serializable,Clone
     }
 
     public void setTeamRole(ITeamRole teamRole) {
+        SimpleSetStream stream = new SimpleSetStream();
+        stream.write(playerName,"TeamRole",teamRole);
         this.teamRole = teamRole;
     }
 
 
     public String getIpAddress() {
+        SimpleGetStream stream = new SimpleGetStream(String.class);
+        ipAddress = stream.read(playerName,"IpAddress",String.class);
         return ipAddress;
     }
 
 
     public int getPlayerId() {
+        SimpleGetStream stream = new SimpleGetStream(Integer.class);
         return playerId;
     }
 
 
-    public String getStreamId() {
-        return streamId;
+    public String getSteamId() {
+        return steamId;
     }
 
 
@@ -292,17 +299,4 @@ public class Player extends CommandSender implements IPlayer, Serializable,Clone
 
     }
 
-    @Override
-    public String toString() {
-        return "Player{" +
-                "teamRole=" + teamRole +
-                ", ipAddress='" + ipAddress + '\'' +
-                ", playerId=" + playerId +
-                ", streamId='" + streamId + '\'' +
-                ", radioStatus=" + radioStatus +
-                ", overwatchMode=" + overwatchMode +
-                ", doNotTrack=" + doNotTrack +
-                ", scp079Data=" + scp079Data +
-                '}';
-    }
 }

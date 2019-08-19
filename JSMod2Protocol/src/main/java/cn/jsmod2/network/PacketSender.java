@@ -1,8 +1,8 @@
 package cn.jsmod2.network;
 
 import cn.jsmod2.core.Server;
-import cn.jsmod2.core.protocol.GetPacket;
-import cn.jsmod2.core.protocol.SetPacket;
+import cn.jsmod2.core.protocol.*;
+import cn.jsmod2.core.utils.Utils;
 import cn.jsmod2.network.protocol.event.newstream.EventValueGetStream;
 import cn.jsmod2.network.protocol.event.newstream.EventValueSetStream;
 import cn.jsmod2.network.protocol.event.newstream.GetTypes;
@@ -36,6 +36,21 @@ public class PacketSender {
         packet.name = key;
         packet.value = value;
         sendSetPacket(packet);
+    }
+
+    public static Object getResponseValue(Response response,int getType){
+        if(getType == GetTypes.GET)return response.get();
+        if(getType == GetTypes.GET_ARRAY)return response.getArray();
+        if(getType == GetTypes.GET_PROTOCOL_ARRAY_WITH_LIST_IN)return response.getProtocolArray(true);
+        if(getType == GetTypes.GET_PROTOCOL_ARRAY_WITHOUT_LIST_IN)return response.getProtocolArray(false);
+        return response.get();
+    }
+
+    public static void req(Requester requester,String method,String[] args){
+        requester.with("do",method);
+        if(args != null){
+            requester.with("args", Utils.arraysToString(args));
+        }
     }
 
 }

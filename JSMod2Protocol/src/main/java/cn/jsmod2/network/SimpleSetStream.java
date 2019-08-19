@@ -10,7 +10,7 @@ public class SimpleSetStream {
         setStream = new EventValueSetStream();
     }
 
-    public void write(String id,String key,String value){
+    public void write(String id,String key,Object value){
         setStream.playerName = id;
         setStream.name = key;
         setStream.value = value;

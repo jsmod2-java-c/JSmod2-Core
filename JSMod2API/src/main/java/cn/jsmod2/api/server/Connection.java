@@ -32,11 +32,5 @@ public class Connection extends ApiId implements IConnection, Serializable,Clone
         return isBanned;
     }
 
-    @Override
-    public String toString() {
-        return "Connection{" +
-                "ipAddress='" + ipAddress + '\'' +
-                ", isBanned=" + isBanned +
-                '}';
-    }
+
 }

@@ -70,14 +70,5 @@ public class TeamRole extends ApiId implements Serializable,Cloneable,ITeamRole 
         return null;
     }
 
-    @Override
-    public String toString() {
-        return "TeamRole{" +
-                "team=" + team +
-                ", role=" + role +
-                ", roleDisallowed=" + roleDisallowed +
-                ", maxHP=" + maxHP +
-                ", name='" + name + '\'' +
-                '}';
-    }
+
 }

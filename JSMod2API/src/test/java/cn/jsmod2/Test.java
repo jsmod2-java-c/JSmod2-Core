@@ -1,14 +1,18 @@
 package cn.jsmod2;
 
+import cn.jsmod2.api.player.Player;
+import cn.jsmod2.core.ApiId;
 import com.alibaba.fastjson.JSON;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Test {
 
     public static void main(String[] args) {
-        System.out.println(JSON.toJSONString(Role.UNASSIGNED));
+        System.out.println(new Player(""));
     }
 
 }

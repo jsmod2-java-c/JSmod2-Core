@@ -189,13 +189,4 @@ public class Map implements IMap, Serializable {
         this.LCZDecontaminated = LCZDecontaminated;
     }
 
-    @Override
-    public String toString() {
-        return "Map{" +
-                "warheadLeverEnabled=" + warheadLeverEnabled +
-                ", warheadKeycardEntered=" + warheadKeycardEntered +
-                ", warheadDetonated=" + warheadDetonated +
-                ", LCZDecontaminated=" + LCZDecontaminated +
-                '}';
-    }
 }

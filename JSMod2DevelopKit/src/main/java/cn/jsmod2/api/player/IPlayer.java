@@ -18,7 +18,7 @@ public interface IPlayer extends ISimplePlayer {
     void setTeamRole(ITeamRole teamRole);
 
 
-    String getStreamId();
+    String getSteamId();
 
 
     RadioStatus getRadioStatus();

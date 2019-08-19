@@ -11,6 +11,9 @@ package cn.jsmod2.api.map;
 import cn.jsmod2.api.Component;
 import cn.jsmod2.core.ApiId;
 import cn.jsmod2.core.math.Vector;
+import cn.jsmod2.network.DoStream;
+import cn.jsmod2.network.SimpleGetStream;
+import cn.jsmod2.network.SimpleSetStream;
 
 import java.io.Serializable;
 
@@ -27,18 +30,32 @@ public class TeslaGate extends ApiId implements Component,ITeslaGate,Cloneable, 
     }
 
     public void activate(boolean instant){
+        DoStream stream = new DoStream();
+        stream.playerName = playerName;
+        stream.method = "Activate";
+        stream.args = new String[]{instant+""};
+    }
 
+    public Vector getTriggerDistance() {
+        SimpleGetStream stream = new SimpleGetStream(Vector.class);
+        triggerDistance = stream.read(playerName,"TriggerDistance",Vector.class);
+        return triggerDistance;
+    }
+
+    public void setTriggerDistance(Vector triggerDistance) {
+        SimpleSetStream stream = new SimpleSetStream();
+        stream.write(playerName,"TriggerDistance",triggerDistance);
+        this.triggerDistance = triggerDistance;
+    }
+
+    public Vector getPosition() {
+        SimpleGetStream stream = new SimpleGetStream(Vector.class);
+        position = stream.read(playerName,"Position",Vector.class);
+        return position;
     }
 
     public Object getComponent(){
         return null;
     }
 
-    @Override
-    public String toString() {
-        return "TeslaGate{" +
-                "triggerDistance=" + triggerDistance +
-                ", position=" + position +
-                '}';
-    }
 }

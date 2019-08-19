@@ -11,6 +11,9 @@ package cn.jsmod2.api.map;
 import cn.jsmod2.core.ApiId;
 import cn.jsmod2.core.annotations.UseForServerInit;
 import cn.jsmod2.core.math.Vector;
+import cn.jsmod2.network.SimpleGetStream;
+import cn.jsmod2.network.SimpleSetStream;
+import cn.jsmod2.network.protocol.event.newstream.GetTypes;
 
 import java.io.Serializable;
 
@@ -21,22 +24,22 @@ public class PocketDimensionExit extends ApiId implements IPocketDimensionExit, 
     private Vector position;
 
     public PocketDimensionExitType getExitType() {
+        SimpleGetStream stream = new SimpleGetStream(PocketDimensionExitType.class);
+        exitType = stream.read(playerName,"ExitType",PocketDimensionExitType.class);
         return exitType;
     }
 
     public void setExitType(PocketDimensionExitType exitType) {
+        SimpleSetStream stream = new SimpleSetStream();
+        stream.write(playerName,"ExitType",exitType);
         this.exitType = exitType;
     }
 
     public Vector getPosition() {
+        SimpleGetStream stream = new SimpleGetStream(Vector.class);
+        position = stream.read(playerName,"Position",Vector.class);
         return position;
     }
 
-    @Override
-    public String toString() {
-        return "PocketDimensionExit{" +
-                "exitType=" + exitType +
-                ", position=" + position +
-                '}';
-    }
+
 }

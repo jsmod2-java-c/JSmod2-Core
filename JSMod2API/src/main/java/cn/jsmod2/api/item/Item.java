@@ -90,12 +90,5 @@ public class Item extends ApiId implements Cloneable, Serializable,IItem {
         packet.setInWorld = inWord;
         packet.send();
     }
-
-    @Override
-    public String toString() {
-        return "Item{" +
-                "inWorld=" + inWorld +
-                ", itemType=" + itemType +
-                '}';
-    }
+    
 }

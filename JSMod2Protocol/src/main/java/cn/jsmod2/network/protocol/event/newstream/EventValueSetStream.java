@@ -1,5 +1,6 @@
 package cn.jsmod2.network.protocol.event.newstream;
 
+import cn.jsmod2.core.ApiId;
 import cn.jsmod2.core.protocol.Requester;
 import cn.jsmod2.core.protocol.SetPacket;
 /**
@@ -29,6 +30,9 @@ public class EventValueSetStream extends SetPacket {
 
     @Override
     public void send() {
+        if(value instanceof ApiId){
+            requester.with("apiId","true");
+        }
         requester.with("type","event").with("field",name).with(name,value).to();
     }
 }

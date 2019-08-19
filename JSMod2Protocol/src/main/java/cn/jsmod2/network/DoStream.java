@@ -1,10 +1,15 @@
 package cn.jsmod2.network;
 
+import cn.jsmod2.core.protocol.Response;
 import cn.jsmod2.core.protocol.SetPacket;
+import cn.jsmod2.core.utils.Utils;
+import cn.jsmod2.network.protocol.event.newstream.GetTypes;
 
 public class DoStream extends SetPacket {
 
     public String method;
+
+    public String[] args;
 
     public DoStream() {
         super(190);
@@ -12,6 +17,12 @@ public class DoStream extends SetPacket {
 
     @Override
     public void send() {
-        requester.with(DO,method).to();
+        PacketSender.req(requester,method,args);
+        requester.to();
     }
+
+
+
+
+
 }

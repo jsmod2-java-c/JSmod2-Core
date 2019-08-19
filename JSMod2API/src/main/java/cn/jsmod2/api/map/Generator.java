@@ -122,17 +122,4 @@ public class Generator extends ApiId implements Component,IGenerator, Serializab
         return room;
     }
 
-    @Override
-    public String toString() {
-        return "Generator{" +
-                "open=" + open +
-                ", locked=" + locked +
-                ", hasTablet=" + hasTablet +
-                ", engaged=" + engaged +
-                ", startTime=" + startTime +
-                ", timeLeft=" + timeLeft +
-                ", position=" + position +
-                ", room=" + room +
-                '}';
-    }
 }
