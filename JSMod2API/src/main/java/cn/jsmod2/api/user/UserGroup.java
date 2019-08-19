@@ -9,6 +9,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.api.user;
 
 import cn.jsmod2.core.ApiId;
+import cn.jsmod2.network.SimpleGetStream;
 
 import java.io.Serializable;
 
@@ -32,26 +33,38 @@ public class UserGroup extends ApiId implements IUserGroup, Serializable,Cloneab
     }
 
     public String getColor() {
+        SimpleGetStream stream = new SimpleGetStream(String.class);
+        color = stream.read(playerName,"Color",String.class);
         return color;
     }
 
     public String getBadgeText() {
+        SimpleGetStream stream = new SimpleGetStream(String.class);
+        badgeText = stream.read(playerName,"BadgeText",String.class);
         return badgeText;
     }
 
     public long getPermissions() {
+        SimpleGetStream stream = new SimpleGetStream(Long.class);
+        permissions = stream.read(playerName,"Permissions",Long.class);
         return permissions;
     }
 
     public boolean isCover() {
+        SimpleGetStream stream = new SimpleGetStream(Boolean.class);
+        cover = stream.read(playerName,"Cover",Boolean.class);
         return cover;
     }
 
     public boolean isHiddenByDefault() {
+        SimpleGetStream stream = new SimpleGetStream(Boolean.class);
+        hiddenByDefault = stream.read(playerName,"HiddenByDefault",Boolean.class);
         return hiddenByDefault;
     }
 
     public String getName() {
+        SimpleGetStream stream = new SimpleGetStream(String.class);
+        name = stream.read(playerName,"Name",String.class);
         return name;
     }
 }

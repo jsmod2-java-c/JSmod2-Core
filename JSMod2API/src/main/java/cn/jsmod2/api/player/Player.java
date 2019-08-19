@@ -18,10 +18,12 @@ import cn.jsmod2.api.user.UserGroup;
 import cn.jsmod2.core.CommandSender;
 import cn.jsmod2.core.Server;
 import cn.jsmod2.core.math.Vector;
-import cn.jsmod2.network.DoGetStream;
-import cn.jsmod2.network.DoStream;
-import cn.jsmod2.network.SimpleGetStream;
-import cn.jsmod2.network.SimpleSetStream;
+import cn.jsmod2.network.*;
+import cn.jsmod2.network.protocol.item.GetItemPacket;
+import cn.jsmod2.network.protocol.player.GetCurrentItemPacket;
+import cn.jsmod2.network.protocol.player.GetInventoryPacket;
+import cn.jsmod2.network.protocol.player.GetUserGroupPacket;
+import cn.jsmod2.network.protocol.player.GiveItemPacket;
 
 import java.io.Serializable;
 import java.util.List;
@@ -243,43 +245,77 @@ public class Player extends CommandSender implements IPlayer, Serializable,Clone
     }
 
     public Item giveItem(ItemType type){
-        return null;
+        GiveItemPacket packet = new GiveItemPacket();
+        packet.playerName = playerName;
+        packet.type = type;
+        return (Item)packet.send();
     }
 
+    @SuppressWarnings("unchecked")
     public List<Item> getInventory(){
-        return null;
+        GetInventoryPacket packet = new GetInventoryPacket();
+        packet.playerName = playerName;
+        return packet.send();
     }
 
     public Item getCurrentItem(){
-        return null;
+        GetCurrentItemPacket packet = new GetCurrentItemPacket();
+        packet.playerName = playerName;
+        return packet.send();
     }
 
     public void setCurrentItem(ItemType type){
-
+        DoStream stream = new DoStream();
+        stream.playerName = playerName;
+        stream.method = "SetCurrentItem";
+        stream.args = new String[]{"'"+type+"'"};
+        stream.send();
     }
 
     public int getCurrentItemIndex(){
-        return 0;
+        DoGetStream stream = new DoGetStream(Integer.class);
+        stream.playerName = playerName;
+        stream.method = "GetCurrentItem";
+        return (Integer) stream.send();
     }
 
     public void setCurrentItemIndex(int index){
-
+        DoStream stream = new DoStream();
+        stream.playerName = playerName;
+        stream.method = "SetCurrentItemIndex";
+        stream.args = new String[]{index+""};
+        stream.send();
     }
 
     public boolean hasItem(ItemType type){
-        return false;
+        DoGetStream stream = new DoGetStream(ItemType.class);
+        stream.method = "HasItem";
+        stream.args = new String[]{"'"+type+"'"};
+        stream.playerName = playerName;
+        return (Boolean)stream.send();
     }
 
     public int getItemIndex(ItemType type){
-        return 0;
+        DoGetStream stream = new DoGetStream(ItemType.class);
+        stream.method = "GetItemIndex";
+        stream.playerName = playerName;
+        stream.args = new String[]{"'"+type+"'"};
+        return (Integer) stream.send();
     }
 
     public boolean isHandcuffed(){
-        return false;
+        DoGetStream stream = new DoGetStream(Boolean.class);
+        stream.method = "IsHandcuffed";
+        stream.playerName = playerName;
+        return (Boolean)stream.send();
     }
 
     public void changeRole(Role role,boolean full,boolean spawnTeleport,boolean spawnProtected){
-
+        DoStream stream = new DoStream();
+        stream.playerName = playerName;
+        stream.method = "ChangeRole";
+        stream.args = new String[]{"'"+role+"'",full+"",spawnTeleport+"",spawnProtected+""};
+        stream.send();
     }
 
     //这里未来解决
@@ -288,7 +324,9 @@ public class Player extends CommandSender implements IPlayer, Serializable,Clone
     }
 
     public UserGroup getUserGroup(){
-        return null;
+        GetUserGroupPacket packet = new GetUserGroupPacket();
+        packet.playerName = playerName;
+        return packet.send();
     }
 
     public boolean runCommand(String command,String[] args){
@@ -296,75 +334,140 @@ public class Player extends CommandSender implements IPlayer, Serializable,Clone
     }
 
     public boolean getGodmode(){
-        return true;
+        DoGetStream stream = new DoGetStream(Boolean.class);
+        stream.playerName = playerName;
+        stream.method = "GetGodmode";
+        return (Boolean) stream.send();
     }
 
     public void setGodmode(boolean godmode){
-
+        DoStream stream = new DoStream();
+        stream.playerName = playerName;
+        stream.method = "SetGodMode";
+        stream.args = new String[]{godmode+""};
+        stream.send();
     }
 
     public Vector getRotation(){
-        return null;
+        DoGetStream stream = new DoGetStream(Vector.class);
+        stream.playerName = playerName;
+        stream.method = "GetRotation";
+        return (Vector) stream.send();
     }
 
     public void sendConsoleMessage(String message, String color){
-
+        DoStream stream = new DoStream();
+        stream.playerName = playerName;
+        stream.method = "SendConsoleMessage";
+        stream.args = new String[]{message,color};
+        stream.send();
     }
     public void sendConsoleMessage(String message){
         sendConsoleMessage(message,"green");
     }
 
     public void infect(float time){
-
+        DoStream stream = new DoStream();
+        stream.playerName = playerName;
+        stream.method = "Infect";
+        stream.args = new String[]{time+""};
+        stream.send();
     }
     public void throwGrenade(GrenadeType grenadeType, boolean isCustomDirection, Vector direction, boolean isEnvironmentallyTriggered, Vector position, boolean isCustomForce, float throwForce, boolean slowThrow){
-
+        DoStream stream = new DoStream();
+        stream.playerName = playerName;
+        stream.method = "ThrowGrenade";
+        stream.args = new String[]{"'"+grenadeType+"'",isCustomDirection+"",direction.toString(),isEnvironmentallyTriggered+"",position.toString(),isCustomForce+"",throwForce+"",slowThrow+""};
+        stream.send();
     }
     public void throwGrenade(GrenadeType grenadeType, boolean isCustomDirection, Vector direction, boolean isEnvironmentallyTriggered, Vector position, boolean isCustomForce, float throwForce){
         throwGrenade(grenadeType,isCustomDirection,direction,isEnvironmentallyTriggered,position,isCustomForce,throwForce,false);
     }
     public boolean getBypassMode(){
-        return false;
+        DoGetStream stream = new DoGetStream(Boolean.class);
+        stream.playerName = playerName;
+        stream.method = "GetBypassMode";
+        return (Boolean) stream.send();
     }
     public String getAuthToken(){
-        return "";
+        DoGetStream stream = new DoGetStream(String.class);
+        stream.method = "GetAuthToken";
+        stream.playerName = playerName;
+        return (String) stream.send();
     }
     public void hideTag(boolean enable){
-
+        DoStream doStream = new DoStream();
+        doStream.method = "HideTag";
+        doStream.args = new String[]{enable+""};
+        doStream.playerName = playerName;
+        doStream.send();
     }
 
     public void personalBroadcast(int duration, String message, boolean isMonoSpaced){
-
+        DoStream doStream = new DoStream();
+        doStream.method = "PersonalBroadcast";
+        doStream.args = new String[]{duration+"",message,isMonoSpaced+""};
+        doStream.playerName = playerName;
+        doStream.send();
     }
 
     public void personalClearBroadcasts(){
-
+        DoStream doStream = new DoStream();
+        doStream.method = "PersonalClearBroadcasts";
+        doStream.playerName = playerName;
+        doStream.send();
     }
 
     //hasPermission未来搞
 
     public boolean hasPermission(String permissionName){
-        return false;
+        DoGetStream stream = new DoGetStream(Boolean.class);
+        stream.method = "HasPermission";
+        stream.args = new String[]{permissionName};
+        stream.playerName = playerName;
+        return (Boolean)stream.send();
     }
 
     public Vector get106Portal(){
-        return null;
+        DoGetStream stream = new DoGetStream(Vector.class);
+        stream.method = "Get106Portal";
+        stream.playerName = playerName;
+        return (Vector)stream.send();
     }
 
     public void setRadioBattery(int battery){
-
+        DoStream stream = new DoStream();
+        stream.method = "SetRadioBattery";
+        stream.playerName = playerName;
+        stream.args = new String[]{battery+""};
+        stream.send();
     }
     public void handcuffPlayer(IPlayer playerToHandcuff){
-
+        DoApiStream stream = new DoApiStream();
+        stream.playerName = playerName;
+        stream.value = playerToHandcuff;
+        stream.method = "HandcuffPlayer";
+        stream.send();
     }
     public void removeHandcuffs(){
+        DoStream stream = new DoStream();
+        stream.playerName = playerName;
+        stream.method = "RemoveHandcuffs";
+        stream.send();
 
     }
     public boolean getGhostMode(){
-        return false;
+        DoGetStream stream = new DoGetStream(Boolean.class);
+        stream.method = "GetGhostMode";
+        stream.playerName = playerName;
+        return (Boolean) stream.send();
     }
     public void setGhostMode(boolean ghostMode, boolean visibleToSpec, boolean visibleWhenTalking){
-
+        DoStream stream = new DoStream();
+        stream.method = "SetGhostMode";
+        stream.playerName = playerName;
+        stream.args = new String[]{ghostMode+"",visibleToSpec+"",visibleWhenTalking+""};
+        stream.send();
     }
 
 }

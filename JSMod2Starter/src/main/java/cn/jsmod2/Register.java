@@ -22,6 +22,8 @@ import cn.jsmod2.core.FileSystem;
 import cn.jsmod2.core.RegisterTemplate;
 import cn.jsmod2.core.annotations.RegisterMethod;
 import cn.jsmod2.core.protocol.CommandSendPacket;
+import cn.jsmod2.network.DoGetStream;
+import cn.jsmod2.network.DoStream;
 import cn.jsmod2.network.ServerInitPacket;
 import cn.jsmod2.core.protocol.DataPacket;
 import cn.jsmod2.core.ex.*;
@@ -171,6 +173,8 @@ public class Register extends RegisterTemplate {
         packets.put(PlayerSetRoleSetItemsPacket.class,PlayerSetRoleSetItemsPacket.ID);
         packets.put(TeamRespawnEventGetPlayersPacket.class,TeamRespawnEventGetPlayersPacket.ID);
         packets.put(TeamRespawnEventSetPlayerListPacket.class,TeamRespawnEventSetPlayerListPacket.ID);
+        packets.put(DoStream.class,190);
+        packets.put(DoGetStream.class,190);
         //11
         //~143 最大 下一个144
         putPackets();

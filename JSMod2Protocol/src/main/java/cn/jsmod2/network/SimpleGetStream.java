@@ -2,6 +2,10 @@ package cn.jsmod2.network;
 
 import cn.jsmod2.network.protocol.event.newstream.EventValueGetStream;
 
+/**
+ * 获取一个非单例api的某个特定值时使用
+ * 可以获取枚举，基本类型值
+ */
 public class SimpleGetStream {
 
     private EventValueGetStream stream;

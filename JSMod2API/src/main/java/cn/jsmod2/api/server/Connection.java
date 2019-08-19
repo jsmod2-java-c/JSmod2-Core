@@ -9,7 +9,8 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.api.server;
 
 import cn.jsmod2.core.ApiId;
-import cn.jsmod2.core.annotations.UseForServerInit;
+import cn.jsmod2.network.DoStream;
+import cn.jsmod2.network.SimpleGetStream;
 
 import java.io.Serializable;
 
@@ -20,15 +21,22 @@ public class Connection extends ApiId implements IConnection, Serializable,Clone
     private boolean isBanned;
 
     public void disconnect(){
-
+        DoStream stream = new DoStream();
+        stream.playerName = playerName;
+        stream.method = "Disconnect";
+        stream.send();
     }
 
 
     public String getIpAddress() {
+        SimpleGetStream stream = new SimpleGetStream(String.class);
+        ipAddress = stream.read(playerName,"IpAddress",String.class);
         return ipAddress;
     }
 
     public boolean isBanned() {
+        SimpleGetStream stream = new SimpleGetStream(Boolean.class);
+        isBanned = stream.read(playerName,"IsBanned",Boolean.class);
         return isBanned;
     }
 

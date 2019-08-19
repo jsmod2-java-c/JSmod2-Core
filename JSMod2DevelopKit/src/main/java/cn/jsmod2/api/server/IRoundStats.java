@@ -6,7 +6,7 @@ public interface IRoundStats {
 
     int getScientistsAlive();
 
-    int getScientlistsEscaped();
+    int getScientistsEscaped();
 
     int getScientistsDead();
 
@@ -36,7 +36,7 @@ public interface IRoundStats {
 
     int getCiAlive();
 
-    void setScientlistsEscaped(int scientlistsEscaped);
+    void setScientistsEscaped(int scientlistsEscaped);
 
     void setClassDEscaped(int classDEscaped);
 }
