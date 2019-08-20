@@ -106,6 +106,6 @@ class Vector (var x:Double,var y:Double,var z:Double){
 
   def setZ(z:Float) = this.z = z
 
-  override def toString() = x+","+y+","+z
+  override def toString() = "("+x+"-"+y+"-"+z+")"
 
 }
