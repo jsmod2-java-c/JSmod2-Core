@@ -112,7 +112,6 @@ public abstract class Server implements IServer {
 
     public final Properties serverProp;
 
-
     public Server(GameServer gServer,boolean useUDP) {
 
         Server.sender = new RuntimeServer(this);
@@ -150,16 +149,9 @@ public abstract class Server implements IServer {
         this.serverProp = getFileSystem().serverProperties(server);
 
 
-        getLogger().info("Connecting the multiAdmin | LocalAdmin");
+        getLogger().multiInfo(getClass(),"Connecting the multiAdmin | LocalAdmin","","");
 
-        try {
-            ServerSocket socket = new ServerSocket(20003);
 
-            socket.accept();
-
-        }catch (Exception e){
-
-        }
 
         this.pluginManager = new PluginManager(server);
 
@@ -177,26 +169,36 @@ public abstract class Server implements IServer {
 
         this.isDebug = Boolean.parseBoolean(serverProp.getProperty(DEBUG));
 
-        this.plugins = PluginClassLoader.getClassLoader().loadPlugins(pluginDir);
-
         this.registerNativeEvents();
 
+        try {
+            this.chooseLangOrStart();
+            scheduler.executeRunnable(()->Utils.TryCatch(this::startConsoleCommand));
+
+            ServerSocket socket = new ServerSocket(20003);
+
+            socket.accept();
+
+        }catch (Exception e){
+
+        }
+
+        getLogger().multiInfo(getClass(),"Connect successfully,loading plugins...","","");
+        //加载插件
+        this.plugins = PluginClassLoader.getClassLoader().loadPlugins(pluginDir);
+
         this.useUDP = useUDP;
-
-
 
     }
 
     public void start(Class<?> main,String[] args) {
         startWatch(main,args);
-        Utils.TryCatch(this::startConsoleCommand);
     }
 
     public void startWatch(Class<?> main,String[] args) {
         Utils.TryCatch(()-> {
             this.log.multiInfo(this.getClass(),main.getSimpleName() + "::start::" + main.getName(),"","");
             this.executeEmerald(args, true);
-            this.chooseLangOrStart();
             this.start();
             this.successTime();
         });

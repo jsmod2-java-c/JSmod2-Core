@@ -229,11 +229,15 @@ public class Utils {
     }
 
     public static void printException(Throwable t){
+        if(t == null){
+            return;
+        }
         ServerLogger.getLogger().error(t.toString());
         for(StackTraceElement e : t.getStackTrace()){
             ServerLogger.getLogger().error("\tat "+e);
         }
         ServerLogger.getLogger().error("\tFINISHED");
+        printException(t.getCause());
     }
 
 }
