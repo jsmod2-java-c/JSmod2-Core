@@ -20,7 +20,6 @@ down on the separatists’ ban on issuing anti-state peace speeches and prohibit
 
 우리는 중화 인민 공화국의 주권을지지합니다 대만, 홍콩, 마카오는 중화 인민 공화국의 일부이며 홍콩의 독립과 대만 독립 요소의 폭동에 반대하며, 분리 주의자들의 반 국가 평화 발언 금지, 반 국가 평화 발언 금지, 지구 문제에 대한 프로젝트 금지, 지구 문제에 대한 분쟁을 단호히 단속하고 있습니다. 기여 과정에서 커밋 정보는 분리되어 있으며 분리를 촉구하는 단어는 발견되면 합법적 또는 도덕적으로 추방됩니다.
 
-
 > Copyright: JSmod2 LICENSE 
 ```java
 /*
@@ -72,6 +71,8 @@ you can refer to [JSmod2-design](https://github.com/jsmod2-java-c/jsmod2-design)
 Welcome to our [discord](https://discord.gg/Qjzvb2a)
 
 > How to start?
+* Download: [release](https://github.com/jsmod2-java-c/JSmod2-Core/releases)
+
 * We recommended you to set up in Windows Server 2008-2016 / Ubuntu Server 18.04.2 LTS
 
 * [Environment](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
@@ -146,72 +147,3 @@ public class TestListener implements Listener{
     
 }
 ```
-> Old Method
-
-this method can also create a plugin:
-
-1. First you need to create a plugin.yml 
-
-[@Deprecated]
-`now you can not create this file for the plugin,and use @Main instead`
-```yaml
-
-name: pluginName
-main: Package.MainClass
-description: Description of the plugin.
-version: The version of the plugin.
-
-```
-2. Create JSmod2 main class, and the main class you had been set in plugin.yml:
-```java
-package Package;
-/**
-* This is the main class
-*/
-public class MainClass extends PluginBase{
-    
-        public void onLoad(){
-            //The server is officially started before it can be registered.
-        }
-    
-        public void onEnable(){
-            //The contents of the server startup, can be registered, initialized, etc.
-    
-        }
-    
-        public void onDisable(){
-            //Running content when the server is shut down
-        }
-} 
-
-```
-
-
-3.Register the Command and Listener:
-
-[@Deprecated]
-`now you can not register the listener and command,use @EnableRegister instead`
-```java
-package Package;
-/**
-* This is the main class
-*/
-public class MainClass extends PluginBase{
-    
-        public void onLoad(){
-            //The server is officially started before it can be registered.
-        }
-    
-        public void onEnable(){
-            //The contents of the server startup, can be registered, initialized, etc.
-            this.getServer().getPluginManager().registerEvents(new TestListener(),this);
-            this.getServer().getPluginManager().registerCommand(new TestCommand(this));
-        }
-    
-        public void onDisable(){
-            //Running content when the server is shut down
-        }
-} 
-
-```
-
