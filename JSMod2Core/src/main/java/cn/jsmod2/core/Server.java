@@ -511,10 +511,12 @@ public abstract class Server implements IServer {
         log.multiInfo(this.getClass(),lang.getProperty(STOP+".finish"),LogFormat.textFormat("[STOP::"+FileSystem.getFileSystem().serverProperties(server).getProperty("smod2.ip")+"]", Ansi.Color.GREEN).toString(),"");
     }
     private void disable(){
-        for(Plugin plugin:plugins){
-            if(plugin!=null) {
-                serverLogInfo("unload the plugin named " + plugin.getPluginName());
-                plugin.onDisable();
+        if(plugins != null){
+            for(Plugin plugin:plugins){
+                if(plugin!=null) {
+                    serverLogInfo("unload the plugin named " + plugin.getPluginName());
+                    plugin.onDisable();
+                }
             }
         }
     }
