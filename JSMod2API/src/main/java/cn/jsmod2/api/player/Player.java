@@ -50,7 +50,6 @@ public class Player extends CommandSender implements IPlayer, Serializable,Clone
         super(name,"all","player");
     }
 
-
     public ITeamRole getTeamRole() {
         return teamRole;
     }

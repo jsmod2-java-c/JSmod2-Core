@@ -12,9 +12,13 @@ package cn.jsmod2.api.server;
 
 import cn.jsmod2.api.map.Map;
 import cn.jsmod2.api.player.Player;
+import cn.jsmod2.api.team.ITeamRole;
+import cn.jsmod2.api.team.TeamRole;
 import cn.jsmod2.core.CommandSender;
+import cn.jsmod2.core.Console;
 import cn.jsmod2.core.GameServer;
 import cn.jsmod2.core.Server;
+import cn.jsmod2.network.protocol.event.newstream.GetTypes;
 import cn.jsmod2.network.protocol.server.*;
 
 import java.util.List;
@@ -38,6 +42,8 @@ public class Smod2Server extends CommandSender implements GameServer {
     private int numPlayers;
     @Deprecated
     private int maxPlayers;
+
+    private String playerListTitle;
 
     public Smod2Server() {
         super("CONSOLE","all","console","admin","player","nobody");
@@ -65,6 +71,22 @@ public class Smod2Server extends CommandSender implements GameServer {
         return null;
     }
 
+    public String getPlayerListTitle() {
+        SimpleServerFieldStream stream = new SimpleServerFieldStream(String.class);
+        stream.field = "PlayerListTitle";
+        stream.isWrite = false;
+        playerListTitle = (String) stream.send();
+        return playerListTitle;
+    }
+
+    public void setPlayerListTitle(String playerListTitle) {
+        SimpleServerFieldStream stream = new SimpleServerFieldStream(Void.class);
+        stream.field = "PlayerListTitle";
+        stream.isWrite = true;
+        stream.value = playerListTitle;
+        stream.send();
+        this.playerListTitle = playerListTitle;
+    }
 
     public int getPort() {
         GetPortPacket packet = new GetPortPacket();
@@ -118,5 +140,47 @@ public class Smod2Server extends CommandSender implements GameServer {
     @Override
     public void personalBroadcast(int i, String s, boolean b) {
 
+    }
+
+    @Override
+    public List<IConnection> getConnections(String s) {
+        SimpleServerMethodPacket packet = new SimpleServerMethodPacket(Connection.class);
+        packet.method = "GetConnections";
+        packet.args = new String[]{s};
+        packet.getTypes = GetTypes.GET_PROTOCOL_ARRAY_WITHOUT_LIST_IN;
+        return (List<IConnection>) packet.send();
+    }
+
+    @Override
+    public List<ITeamRole> getRoles(String s) {
+        SimpleServerMethodPacket packet = new SimpleServerMethodPacket(TeamRole.class);
+        packet.method = "GetRoles";
+        packet.args = new String[]{s};
+        packet.getTypes = GetTypes.GET_PROTOCOL_ARRAY_WITHOUT_LIST_IN;
+        return (List<ITeamRole>)packet.send();
+    }
+
+    @Override
+    public String getAppFolder(boolean b, boolean b1, boolean b2, boolean b3) {
+        SimpleServerMethodPacket packet = new SimpleServerMethodPacket(String.class);
+        packet.method = "GetAppFolder";
+        packet.args = new String[]{b+"",b1+"",b2+"",b3+""};
+        return (String)packet.send();
+    }
+
+    @Override
+    public boolean banSteamId(String s, String s1, int i, String s2, String s3) {
+        SimpleServerMethodPacket packet = new SimpleServerMethodPacket(Boolean.class);
+        packet.method = "BanSteamId";
+        packet.args = new String[]{s,s1,i+"",s2,s3};
+        return (Boolean) packet.send();
+    }
+
+    @Override
+    public boolean banIpAddress(String s, String s1, int i, String s2, String s3) {
+        SimpleServerMethodPacket packet = new SimpleServerMethodPacket(Boolean.class);
+        packet.method = "BanIpAddress";
+        packet.args = new String[]{s,s1,i+"",s2,s3};
+        return (Boolean)packet.send();
     }
 }
