@@ -194,6 +194,7 @@ public class PluginClassLoader implements IPluginClassLoader {
                         }
                     }
                 }
+                jarFile.close();
 
             }
 
