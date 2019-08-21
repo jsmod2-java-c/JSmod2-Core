@@ -1,0 +1,9 @@
+{
+  "Server":{
+    "get":"Map",
+    "values":[{"0":"UN"}],
+    "Map":{
+      "name":"12"
+    }
+  }
+}
