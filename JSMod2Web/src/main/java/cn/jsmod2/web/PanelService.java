@@ -174,7 +174,7 @@ public class PanelService {
                 }
             }
             if(method == null){
-                throw new ApiErrorException("no such get method");
+                throw new ApiErrorException("no such get or set or do method");
             }
 
             Class<?>[] paramTypes = method.getParameterTypes();

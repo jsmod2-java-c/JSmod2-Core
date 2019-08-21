@@ -32,7 +32,6 @@ import java.util.Map;
 
 public abstract class PluginBase implements Plugin {
 
-    private Map<String,ConfigSetting> config = new HashMap<>();
 
     private boolean haveInit = false;
 
@@ -68,7 +67,6 @@ public abstract class PluginBase implements Plugin {
             this.classLoader = classLoader;
             this.version = version;
             this.haveInit = true;
-            this.getServer().getPluginManager().getSettings().put(this,config);
         }
     }
 
@@ -126,30 +124,14 @@ public abstract class PluginBase implements Plugin {
         });
     }
 
-    public Object getConfig(String key){
-        if(!config.containsKey(key)){
-            return "";
-        }
-        ConfigSetting setting = config.get(key);
-        return setting.getValue()==null?setting.getDefaultValue():setting.getValue();
+    public Object addConfig(ConfigSetting setting){
+        return ConfigManager.getManager().registerConfig(this,setting);
     }
 
-    public Object addConfig(String key,ConfigSetting setting,boolean trySet){
-        if(trySet){
-            if(config.containsKey(key)){
-                return config.get(key);
-            }
-        }else{
-            if(config.get(key)!=null&&config.get(key).isPrimary()){
-                throw new ServerRuntimeException("primary=true,the key is exists");
-            }
-        }
-        return config.put(key,setting);
+    public <T> T getConfig(String key,Class<T> type){
+       return ConfigManager.getManager().getConfig(this,key,type);
     }
 
-    public Object addConfig(String key,ConfigSetting value){
-        return addConfig(key,value,false);
-    }
 
     public void info(String message){
         this.getServer().getLogger().multiInfo(this.getClass(),message,"","");

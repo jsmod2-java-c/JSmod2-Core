@@ -10,6 +10,8 @@ public class ConfigSetting {
 
     private boolean primary;
 
+    private String description;
+
     public ConfigSetting(String key, String value, String defaultValue,boolean primary) {
         this.key = key;
         this.value = value;
@@ -31,5 +33,9 @@ public class ConfigSetting {
 
     public boolean isPrimary() {
         return primary;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }
