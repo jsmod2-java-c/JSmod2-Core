@@ -21,7 +21,7 @@
         </repository>
         <repository>
             <id>nexus</id>
-            <name>Team Neux Repository</name><url>http://mapi.noyark.net:8081/nexus/content/groups/public/</url>
+            <name>Team Neux Repository</name><url>http://repo.noyark.net/nexus/content/groups/public/</url>
         </repository>
     </repositories>
 
