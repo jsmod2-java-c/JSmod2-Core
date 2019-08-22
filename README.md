@@ -99,7 +99,7 @@ Import Dependency
 ```xml
         <dependency>
             <groupId>cn.jsmod2</groupId>
-            <artifactId>jsmod2-iapi</artifactId>
+            <artifactId>jsmod2-dk</artifactId>
             <version>1.0.3</version>
         </dependency>
 ```
