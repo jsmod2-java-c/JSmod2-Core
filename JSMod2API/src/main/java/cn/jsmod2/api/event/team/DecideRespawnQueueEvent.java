@@ -20,13 +20,16 @@ public class DecideRespawnQueueEvent extends Event implements IDecideRespawnQueu
 
     private Team[] teams;
 
-    public DecideRespawnQueueEvent(Team[] teams){
-        this.teams = teams;
-    }
+
 
     public Team[] getTeams() {
         teams = (Team[]) PacketSender.sendEventGetPacket(playerName,"Teams",Team.class, List.class, GetTypes.GET_ARRAY).toArray();
         return teams;
+    }
+
+    public void setTeams(Team[] teams){
+        PacketSender.sendEventSetPacket(playerName,"Teams",teams);
+        this.teams = teams;
     }
 
 

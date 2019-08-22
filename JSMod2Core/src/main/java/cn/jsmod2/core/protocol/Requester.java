@@ -9,6 +9,7 @@ import cn.jsmod2.core.utils.Utils;
 import com.alibaba.fastjson.JSON;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -38,7 +39,7 @@ public class Requester implements IRequester {
     }
 
     public Requester with(String key,Object value){
-        _map.put(key,value instanceof ApiId?((ApiId) value).getApiId():value instanceof Enum?"'"+value+"'":value.toString());
+        _map.put(key,value instanceof ApiId?((ApiId) value).getApiId():value instanceof Enum?"'"+value+"'":value.getClass().isArray()||value instanceof List?JSON.toJSONString(value):value.toString());
         return this;
     }
 

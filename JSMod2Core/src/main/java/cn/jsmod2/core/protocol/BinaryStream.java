@@ -96,7 +96,7 @@ public abstract class BinaryStream {
             if(!end.equals("")){
                 end = "~"+end;
             }
-            String json = JSON.toJSONString(o)+end;
+            String json = JSON.toJSONString(o).replace("\\\"","'")+end;
             String packet = id+"-"+json;
             return dataJsonEncode(packet);
         }catch (Exception e){

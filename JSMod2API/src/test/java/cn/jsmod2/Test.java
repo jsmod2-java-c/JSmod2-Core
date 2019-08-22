@@ -12,7 +12,9 @@ import java.util.Map;
 public class Test {
 
     public static void main(String[] args) {
-        System.out.println(new Player(""));
+        Map<String,String> map = new HashMap<>();
+        map.put("Teams","'"+Role.SCP_049+"'");
+        System.out.println(JSON.toJSONString(map).replace("\\\"","'"));
     }
 
 }

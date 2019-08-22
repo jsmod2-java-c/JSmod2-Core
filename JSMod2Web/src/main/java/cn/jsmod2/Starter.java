@@ -15,7 +15,6 @@ import java.util.Properties;
 
 @SpringBootApplication
 @Configuration
-@ComponentScan("web")
 @ComponentScan("cn")
 public class Starter {
 

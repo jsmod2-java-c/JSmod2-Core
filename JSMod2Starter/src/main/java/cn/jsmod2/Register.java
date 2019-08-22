@@ -296,6 +296,11 @@ public class Register extends RegisterTemplate {
         events.put(0x50, SetNTFUnitNameEvent.class);
         events.put(0x51, SetSCPConfigEvent.class);
         events.put(0x52, TeamRespawnEvent.class);
+        events.put(301,CheckRoundEndEvent.class);
+        events.put(302,PlayerInfectedEvent.class);
+        events.put(303,PlayerDoorAccessEvent.class);
+        events.put(304,PlayerNicknameSetEvent.class);
+        events.put(305,WarheadStopEvent.class);
         //82 events
     }
 
