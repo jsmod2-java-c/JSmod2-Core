@@ -117,6 +117,7 @@ public class PluginClassLoader implements IPluginClassLoader {
                             continue;
                         }
                         Class<?> pluginClass = classLoader.loadClass(mainName);
+                        SpringbootLoader.loadBean(pluginClass);
                         Main main = pluginClass.getAnnotation(Main.class);
                         if(main!=null){
                             PluginFileVO vo = new PluginFileVO(main.name(),pluginClass.getName(),main.description(),main.version());
