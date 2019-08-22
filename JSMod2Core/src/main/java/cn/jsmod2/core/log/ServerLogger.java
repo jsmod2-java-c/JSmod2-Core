@@ -151,7 +151,7 @@ public class ServerLogger implements ILogger{
 
     @Override
     public void error(String message, String prefix, String suffix) {
-        String msg = LogFormat.format(message,"ERROR",RED,prefix,true)+suffix;
+        String msg = LogFormat.format(LogFormat.textFormat(message,RED),"ERROR",RED,prefix,true)+suffix;
         try {
             consoleOutputStream.write(getSimpleMessage(msg));
         } catch (IOException ignored) {
