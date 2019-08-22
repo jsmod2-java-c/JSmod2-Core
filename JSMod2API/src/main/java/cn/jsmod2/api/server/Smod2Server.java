@@ -15,7 +15,6 @@ import cn.jsmod2.api.player.Player;
 import cn.jsmod2.api.team.ITeamRole;
 import cn.jsmod2.api.team.TeamRole;
 import cn.jsmod2.core.CommandSender;
-import cn.jsmod2.core.Console;
 import cn.jsmod2.core.GameServer;
 import cn.jsmod2.core.Server;
 import cn.jsmod2.network.protocol.event.newstream.GetTypes;

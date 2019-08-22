@@ -19,7 +19,6 @@ import cn.jsmod2.core.CommandSender;
 import cn.jsmod2.core.Server;
 import cn.jsmod2.core.math.Vector;
 import cn.jsmod2.network.*;
-import cn.jsmod2.network.protocol.item.GetItemPacket;
 import cn.jsmod2.network.protocol.player.GetCurrentItemPacket;
 import cn.jsmod2.network.protocol.player.GetInventoryPacket;
 import cn.jsmod2.network.protocol.player.GetUserGroupPacket;

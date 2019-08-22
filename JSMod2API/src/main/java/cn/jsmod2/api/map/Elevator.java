@@ -10,7 +10,6 @@ package cn.jsmod2.api.map;
 
 import cn.jsmod2.api.Component;
 import cn.jsmod2.core.ApiId;
-import cn.jsmod2.core.annotations.UseForServerInit;
 import cn.jsmod2.core.math.Vector;
 import cn.jsmod2.network.protocol.map.elevator.*;
 

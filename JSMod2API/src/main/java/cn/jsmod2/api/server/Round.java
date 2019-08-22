@@ -9,7 +9,6 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.api.server;
 
 import cn.jsmod2.core.ApiId;
-import cn.jsmod2.network.DoApiStream;
 import cn.jsmod2.network.DoStream;
 import cn.jsmod2.network.SimpleGetStream;
 import cn.jsmod2.network.SimpleSetStream;

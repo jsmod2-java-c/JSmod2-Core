@@ -24,9 +24,6 @@ import cn.jsmod2.network.protocol.map.map.SimpleMapMethodPacket;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
-import java.util.Set;
-
 //从map获取物品时，要为每个物品分配id(C#端分配),从而可以定位到
 public class Map implements IMap, Serializable {
 
