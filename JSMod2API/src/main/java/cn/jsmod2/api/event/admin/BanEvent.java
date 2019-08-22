@@ -116,7 +116,7 @@ public class BanEvent extends Event implements IBanEvent{
     public boolean isAllowBan() {
         EventValueGetStream stream = new EventValueGetStream(Boolean.class);
         stream.playerName = playerName;
-        stream.name = "AlloBan";
+        stream.name = "AllowBan";
         allowBan = sendGetPacket(stream,Boolean.class);
         return allowBan;
     }

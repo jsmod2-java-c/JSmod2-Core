@@ -11,5 +11,5 @@ package cn.jsmod2.api.event.server;
 
 import cn.jsmod2.core.interapi.event.IEvent;
 
-public interface ILateUpEvent extends IEvent {
+public interface ILateUpdateEvent extends IEvent {
 }

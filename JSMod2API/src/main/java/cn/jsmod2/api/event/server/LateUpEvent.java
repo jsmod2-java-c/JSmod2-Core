@@ -10,5 +10,5 @@ package cn.jsmod2.api.event.server;
 
 import cn.jsmod2.core.event.Event;
 
-public class LateUpEvent extends Event implements ILateUpEvent{
+public class LateUpEvent extends Event implements ILateUpdateEvent{
 }
