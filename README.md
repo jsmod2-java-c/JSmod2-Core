@@ -83,6 +83,27 @@ After finished installing JRE, you need to put ProxyHandler.dll into
 If there's no problem, launch JSmod2.jar:
 `java -jar jsmod2.jar`
 
+> Import the DevelopmentKit
+Connect Repository
+
+```xml
+<repositories>
+        <repository>
+            <id>nexus</id>
+            <name>Team Neux Repository</name><url>http://repo.noyark.net/nexus/content/groups/public/</url>
+        </repository>
+    </repositories>
+```
+Import Dependency
+```xml
+        <dependency>
+            <groupId>cn.jsmod2</groupId>
+            <artifactId>jsmod2-iapi</artifactId>
+            <version>1.0.3</version>
+        </dependency>
+```
+
+
 > How to develop a plugin?
 
 1. New API can register the Listeners and Commands of JSmod2's；
