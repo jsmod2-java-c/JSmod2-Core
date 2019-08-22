@@ -16,9 +16,9 @@ public interface IAuthCheckEvent extends IEvent {
 
     void setAllow(boolean allow);
 
-    boolean isSuccessful();
+    String getDeniedMessage();
 
-    void setSuccessful(boolean successful);
+    void setDeniedMessage(String message);
 
     void setRequester(IPlayer requester);
 

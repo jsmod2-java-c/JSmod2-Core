@@ -31,6 +31,7 @@ public class PlayerTriggerTeslaEvent extends PlayerEvent implements IPlayerTrigg
 
     }
 
+    //Triggerable
     public void setTriggerable(boolean triggerable) {
         PacketSender.sendEventSetPacket(playerName,"Triggerable",triggerable);
         Triggerable = triggerable;

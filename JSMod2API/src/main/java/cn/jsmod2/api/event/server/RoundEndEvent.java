@@ -8,9 +8,8 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.api.event.server;
 
-import cn.jsmod2.api.server.ROUND_END_STATS;
+import cn.jsmod2.api.server.ROUND_END_STATUS;
 import cn.jsmod2.api.server.Round;
-import cn.jsmod2.api.server.Smod2Server;
 import cn.jsmod2.network.PacketSender;
 
 
@@ -18,7 +17,7 @@ public class RoundEndEvent extends ServerEvent implements IRoundEndEvent{
 
     private Round round = new Round();
 
-    private ROUND_END_STATS stats;
+    private ROUND_END_STATUS status;
 
 
 
@@ -27,9 +26,9 @@ public class RoundEndEvent extends ServerEvent implements IRoundEndEvent{
     }
 
 
-    public ROUND_END_STATS getStats() {
-        stats = PacketSender.sendEventGetPacket(playerName,"Stats",ROUND_END_STATS.class);
-        return stats;
+    public ROUND_END_STATUS getStats() {
+        status = PacketSender.sendEventGetPacket(playerName,"Status",ROUND_END_STATUS.class);
+        return status;
     }
 
     public RoundEndEvent(){

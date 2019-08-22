@@ -33,7 +33,7 @@ public class AuthCheckEvent extends Event implements IAuthCheckEvent{
 
     private boolean allow;
 
-    private boolean successful;
+    private String deniedMessage;
 
     public IPlayer getRequester() {
         return requester;
@@ -82,21 +82,21 @@ public class AuthCheckEvent extends Event implements IAuthCheckEvent{
         this.allow = allow;
     }
 
-    public boolean isSuccessful() {
-        EventValueGetStream stream = new EventValueGetStream(Boolean.class);
+    public String getDeniedMessage() {
+        EventValueGetStream stream = new EventValueGetStream(String.class);
         stream.playerName = playerName;
-        stream.name = "Successful";
-        successful = sendGetPacket(stream,Boolean.class);
-        return successful;
+        stream.name = "DeniedMessage";
+        deniedMessage = sendGetPacket(stream,String.class);
+        return deniedMessage;
     }
 
-    public void setSuccessful(boolean successful) {
+    public void setDeniedMessage(String dm) {
         EventValueSetStream stream = new EventValueSetStream();
         stream.playerName = playerName;
-        stream.name = "Successful";
-        stream.value = successful;
+        stream.name = "DeniedMessage";
+        stream.value = dm;
         sendSetPacket(stream);
-        this.successful = successful;
+        this.deniedMessage = dm;
     }
 
 

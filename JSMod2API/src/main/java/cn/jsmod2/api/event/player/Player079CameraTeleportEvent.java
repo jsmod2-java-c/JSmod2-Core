@@ -46,12 +46,12 @@ public class Player079CameraTeleportEvent extends PlayerEvent implements IPlayer
     }
 
     public float getApDrain() {
-        apDrain = sendEventGetPacket(playerName,"ApDrain",Float.class);
+        apDrain = sendEventGetPacket(playerName,"APDrain",Float.class);
         return apDrain;
     }
 
     public void setApDrain(float apDrain) {
-        sendEventSetPacket(playerName,"ApDrain",apDrain);
+        sendEventSetPacket(playerName,"APDrain",apDrain);
         this.apDrain = apDrain;
     }
 

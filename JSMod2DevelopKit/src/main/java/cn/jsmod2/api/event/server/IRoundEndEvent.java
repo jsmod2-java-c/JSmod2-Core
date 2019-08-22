@@ -9,7 +9,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.api.event.server;
 
 import cn.jsmod2.api.server.IRound;
-import cn.jsmod2.api.server.ROUND_END_STATS;
+import cn.jsmod2.api.server.ROUND_END_STATUS;
 
 
 public interface IRoundEndEvent extends IServerEvent {
@@ -18,6 +18,6 @@ public interface IRoundEndEvent extends IServerEvent {
     IRound getRound();
 
 
-    ROUND_END_STATS getStats();
+    ROUND_END_STATUS getStats();
 
 }

@@ -8,7 +8,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 package cn.jsmod2.api.server;
 
-public enum ROUND_END_STATS {
+public enum ROUND_END_STATUS {
     ON_GOING,
     MTF_VICTORY,
     SCP_VICTORY,

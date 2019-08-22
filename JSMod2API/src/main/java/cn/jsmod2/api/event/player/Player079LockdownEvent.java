@@ -46,12 +46,12 @@ public class Player079LockdownEvent extends PlayerEvent implements IPlayer079Loc
     }
 
     public float getApDrain() {
-        apDrain = sendEventGetPacket(playerName,"ApDrain",Float.class);
+        apDrain = sendEventGetPacket(playerName,"APDrain",Float.class);
         return apDrain;
     }
 
     public void setApDrain(float apDrain) {
-        sendEventSetPacket(playerName,"ApDrain",apDrain);
+        sendEventSetPacket(playerName,"APDrain",apDrain);
         this.apDrain = apDrain;
     }
 

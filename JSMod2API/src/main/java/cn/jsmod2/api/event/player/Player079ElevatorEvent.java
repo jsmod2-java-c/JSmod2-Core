@@ -40,12 +40,12 @@ public class Player079ElevatorEvent extends PlayerEvent implements IPlayer079Ele
     }
 
     public float getApDrain() {
-        apDrain = sendEventGetPacket(playerName,"ApDrain",Float.class);
+        apDrain = sendEventGetPacket(playerName,"APDrain",Float.class);
         return apDrain;
     }
 
     public void setApDrain(float apDrain) {
-        sendEventSetPacket(playerName,"ApDrain",apDrain);
+        sendEventSetPacket(playerName,"APDrain",apDrain);
         this.apDrain = apDrain;
     }
 
