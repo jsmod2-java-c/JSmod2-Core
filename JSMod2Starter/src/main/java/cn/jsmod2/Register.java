@@ -180,7 +180,7 @@ public class Register extends RegisterTemplate {
         putPackets();
     }
 
-
+    public static final String CONSOLE_LOG = "smod2.console.log";
 
     @RegisterMethod
     public void registerSuccessInfo(){
@@ -193,6 +193,7 @@ public class Register extends RegisterTemplate {
         serverProperties.put(FileSystem.SMOD2_LOG_FILE,"");
         serverProperties.put(FileSystem.SMOD2_LOG_INTERVAL,"2000");
         serverProperties.put(DownloadPluginCommand.MIRROR,"");
+        serverProperties.put(CONSOLE_LOG,"");
     }
 
 
