@@ -209,10 +209,18 @@ public abstract class Server implements IServer {
         }else{
             this.pool.execute(new ListenerThreadTCP());
         }
-        String log = logListener();
+        String log = logListener("yyyy-MM-dd HH.mm.ss",this::getMax,SMOD2_LOG_FILE);
         if(log != null) {
-            this.pool.execute(new LogListener(log, Integer.parseInt(serverProp.getProperty(SMOD2_LOG_INTERVAL,"2000"))));
+            this.pool.execute(new LogListener(log, Integer.parseInt(serverProp.getProperty(SMOD2_LOG_INTERVAL,"2000")),"yyyy-MM-dd HH.mm.ss",this::getMax,SMOD2_LOG_FILE));
         }
+        String log1 = logListener("yyyy-MM-dd_HH_mm",(format, x1, x2) -> getMultiSCPMax(format,x1,x2,"MA"),"multi-admin.log");
+        if(log1 != null){
+            this.pool.execute(new LogListener(log1,Integer.parseInt(serverProp.getProperty(SMOD2_LOG_INTERVAL,"2000")),"yyyy-MM-dd_HH_mm",(format, x1, x2) -> getMultiSCPMax(format,x1,x2,"MA"),"multi-admin.log"));
+            this.pool.execute(new LogListener(log1,Integer.parseInt(serverProp.getProperty(SMOD2_LOG_INTERVAL,"2000")),"yyyy-MM-dd_HH_mm",(format, x1, x2) -> getMultiSCPMax(format,x1,x2,"SCP"),"multi-admin.log"));
+        }
+
+
+
         if(Boolean.parseBoolean(serverProp.getProperty(GITHUB))) {
             this.pool.execute(new GithubConnectThread());
         }
@@ -220,6 +228,35 @@ public abstract class Server implements IServer {
 
         //this.pool.execute(new Smod2LogThread());
         this.startSuccessTime = new Date().getTime();
+    }
+
+    private int getMax(SimpleDateFormat format,File x1,File x2){
+        try {
+            String name1 = x1.getName().substring("Round".length()).trim();
+            String name2 = x2.getName().substring("Round".length()).trim();
+            Date date1 = format.parse(name1);
+            Date date2 = format.parse(name2);
+
+            return (int)(date2.getTime()-date1.getTime());
+        }catch (Exception e){
+            Utils.printException(e);
+        }
+        return 0;
+    }
+
+    private int getMultiSCPMax(SimpleDateFormat format,File x1,File x2,String str){
+        try{
+            String name1 = x1.getName().replace("_"+str+"_output_log.txt","");
+            String name2 = x2.getName().replace("_"+str+"_output_log.txt","");
+            Date date1 = format.parse(name1);
+            Date date2 = format.parse(name2);
+
+            return (int)(date2.getTime()-date1.getTime());
+        }catch (Exception e){
+            Utils.printException(e);
+        }
+
+        return 0;
     }
 
     public <T> T sendGetPacket(GetPacket packet,Class<T> type){
@@ -706,11 +743,18 @@ public abstract class Server implements IServer {
         private long lastKnownPosition = 0;
         private boolean shouldIRun = true;
         private File crunchifyFile;
+        private String timeFormat;
 
+        private Max max;
 
-        public LogListener(String file,int myInterval) {
+        private String fileProperty;
+
+        public LogListener(String file,int myInterval,String timeFormat,Max max,String prop) {
             this.crunchifyRunEveryNSeconds = myInterval;
             this.crunchifyFile = new File(file);
+            this.timeFormat = timeFormat;
+            this.max = max;
+            this.fileProperty = prop;
         }
 
         private void printLine(String message) {
@@ -732,7 +776,7 @@ public abstract class Server implements IServer {
                 while (shouldIRun) {
                     Thread.sleep(crunchifyRunEveryNSeconds);
 
-                    String log = logListener();
+                    String log = logListener(timeFormat,max,fileProperty);
 
                     if(!"same".equals(log)){
                         if(log !=null) {
@@ -817,10 +861,10 @@ public abstract class Server implements IServer {
 
     private File[] beforeFile;
 
-    private String logListener(){
-        String serverProps = serverProp.getProperty(SMOD2_LOG_FILE);
+    private String logListener(String timeFormat,Max max,String fileProperty){
+        String serverProps = serverProp.getProperty(fileProperty);
         File file = new File(serverProps);
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH.mm.ss");
+        SimpleDateFormat format = new SimpleDateFormat(timeFormat);
         if(file.exists()){
             File[] files = file.listFiles();
             if(files!=null) {
@@ -832,20 +876,8 @@ public abstract class Server implements IServer {
                     }
                 }
                 File lastFile = Arrays.stream(files)
-                        .filter(x->x.getName().endsWith(".log"))
-                        .sorted((x1,x2)->{
-                            try {
-                                String name1 = x1.getName().substring("Round".length()).trim();
-                                String name2 = x2.getName().substring("Round".length()).trim();
-                                Date date1 = format.parse(name1);
-                                Date date2 = format.parse(name2);
-
-                                return (int)(date2.getTime()-date1.getTime());
-                            }catch (Exception e){
-                                Utils.printException(e);
-                            }
-                            return 0;
-                        }).collect(Collectors.toList()).get(0);
+                        .filter(x->x.getName().endsWith(".log")||x.getName().endsWith(".txt"))
+                        .sorted((x1,x2)->max.getMax(format,x1,x2)).collect(Collectors.toList()).get(0);
                 //Round 2019-07-10 08.47.31
                 return lastFile.toString();
 
@@ -855,5 +887,11 @@ public abstract class Server implements IServer {
         return null;
     }
 
+    interface Max{
+
+
+        int getMax(SimpleDateFormat format,File x1,File x2);
+
+    }
 
 }

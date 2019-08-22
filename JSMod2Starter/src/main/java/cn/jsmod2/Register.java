@@ -180,7 +180,7 @@ public class Register extends RegisterTemplate {
         putPackets();
     }
 
-    public static final String CONSOLE_LOG = "smod2.console.log";
+    public static final String CONSOLE_LOG = "multi-admin.log";
 
     @RegisterMethod
     public void registerSuccessInfo(){
