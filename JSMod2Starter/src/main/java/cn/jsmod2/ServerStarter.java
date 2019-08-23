@@ -3,6 +3,7 @@ package cn.jsmod2;
 import cn.jsmod2.core.Application;
 import cn.jsmod2.core.annotations.ServerApplication;
 import cn.jsmod2.core.log.ServerLogger;
+import cn.jsmod2.core.plugin.SpringContextUtil;
 import cn.jsmod2.core.utils.Utils;
 
 import java.util.concurrent.CountDownLatch;
@@ -14,7 +15,7 @@ public class ServerStarter {
         Utils.TryCatch(()->{
             CountDownLatch latch = new CountDownLatch(1);
             new Thread(()->{
-                Starter.run(args);
+                SpringContextUtil.setApplicationContext(Starter.run(args));
                 latch.countDown();
             }).start();
             latch.await();

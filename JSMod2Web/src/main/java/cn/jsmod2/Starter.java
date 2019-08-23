@@ -6,20 +6,21 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.server.ConfigurableWebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 import java.io.*;
 import java.util.Properties;
 
 @SpringBootApplication
 @Configuration
-@ComponentScan("cn")
 public class Starter {
 
-    public static void run(String[] args){
-        SpringApplication.run(Starter.class,args);
+    public static ApplicationContext run(String[] args){
+        return SpringApplication.run(Starter.class,args);
     }
 
 

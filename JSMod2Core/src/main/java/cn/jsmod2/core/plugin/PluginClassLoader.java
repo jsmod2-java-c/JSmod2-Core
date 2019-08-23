@@ -117,7 +117,6 @@ public class PluginClassLoader implements IPluginClassLoader {
                             continue;
                         }
                         Class<?> pluginClass = classLoader.loadClass(mainName);
-                        SpringbootLoader.loadBean(pluginClass);
                         Main main = pluginClass.getAnnotation(Main.class);
                         if(main!=null){
                             PluginFileVO vo = new PluginFileVO(main.name(),pluginClass.getName(),main.description(),main.version());
@@ -180,6 +179,7 @@ public class PluginClassLoader implements IPluginClassLoader {
                     String name = entry.getName();
                     if(name.endsWith(".class")){
                         Class<?> clz = loader.loadClass(name.substring(0,name.lastIndexOf(".")).replace("/","."));
+                        SpringContextUtil.loadBean(clz);
                         if(register.command()) {
                             if (mostSuperClass(clz).equals(NativeCommand.class) && !exclusionsCommand.contains(clz)) {
                                 Object obj = clz.getConstructor(Plugin.class).newInstance(pluginObject);
