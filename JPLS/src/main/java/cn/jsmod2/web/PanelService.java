@@ -23,7 +23,7 @@ import java.util.*;
 public class PanelService {
 
     //比如获取服务器最大人数
-    //0x64-{"id":0x64,"type":"cn.jsmod2.server","field":"maxPlayers"}
+    //0x64-{"id":0x64,"type":"server","field":"maxPlayers"}
     public Object api(String json) {
         int id = Utils.getResponsePacketId(new String(Base64.getEncoder().encode(json.getBytes())));
         Response response = new Response();

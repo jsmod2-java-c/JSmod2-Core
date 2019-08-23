@@ -14,7 +14,7 @@ public class PanelController {
     @Autowired
     public PanelService service;
 
-    @RequestMapping("/cn.jsmod2.api/{message}")
+    @RequestMapping("/api/{message}")
     public Object api(@PathVariable("message") String message){
         Object o = service.api(message);
         return o;
@@ -30,7 +30,7 @@ public class PanelController {
 
     }
 
-    @RequestMapping("/cn.jsmod2.api")
+    @RequestMapping("/api")
     public Object apiParam(String message){
         return service.api(message);
     }
