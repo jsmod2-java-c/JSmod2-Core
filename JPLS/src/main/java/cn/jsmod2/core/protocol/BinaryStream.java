@@ -10,6 +10,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 
 package cn.jsmod2.core.protocol;
 
+import cn.jsmod2.core.CommandSender;
 import cn.jsmod2.core.RegisterTemplate;
 import cn.jsmod2.core.Server;
 import cn.jsmod2.core.ex.ProtocolException;
@@ -151,6 +152,9 @@ public abstract class BinaryStream {
             if(fields.length>0) {
                 System.arraycopy(props, 1, fields, 0, fields.length);
                 insertField(fields, o);
+            }
+            if(o instanceof CommandSender){
+                ((CommandSender) o).setName(((CommandSender) o).getName());
             }
             return clz.cast(o);
         }catch (Exception e){

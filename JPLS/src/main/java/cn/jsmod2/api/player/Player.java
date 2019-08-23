@@ -16,6 +16,7 @@ import cn.jsmod2.api.team.Role;
 import cn.jsmod2.api.team.TeamRole;
 import cn.jsmod2.api.user.UserGroup;
 import cn.jsmod2.core.CommandSender;
+import cn.jsmod2.core.Powers;
 import cn.jsmod2.core.Server;
 import cn.jsmod2.core.math.Vector;
 import cn.jsmod2.network.*;
@@ -46,7 +47,13 @@ public class Player extends CommandSender implements IPlayer, Serializable,Clone
     private Scp079Data scp079Data = new Scp079Data();
 
     public Player(String name){
-        super(name,"all","cn.jsmod2.player");
+        super(name, Powers.ALL,Powers.PLAYER);
+    }
+
+    @Override
+    public String getName() {
+        SimpleGetStream stream = new SimpleGetStream(String.class);
+        return stream.read(playerName,"Name",String.class);
     }
 
     public ITeamRole getTeamRole() {

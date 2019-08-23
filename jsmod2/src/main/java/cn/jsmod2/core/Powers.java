@@ -9,10 +9,10 @@ public interface Powers {
     String CONSOLE = "console";
 
     //管理员
-    String ADMIN = "cn.jsmod2.admin";
+    String ADMIN = "admin";
 
     //普通玩家
-    String PLAYER = "cn.jsmod2.player";
+    String PLAYER = "player";
 
     //任何人不能，控制台可以
     String NOBODY = "nobody";

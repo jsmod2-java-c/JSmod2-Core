@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
 public class Console extends CommandSender{
 
     private Console(){
-        super("CONSOLE","all","console","cn.jsmod2.admin","cn.jsmod2.player","nobody");
+        super("CONSOLE","all","console","admin","player","nobody");
     }
 
     private static Console console;

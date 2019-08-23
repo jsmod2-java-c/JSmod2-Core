@@ -34,7 +34,7 @@ object PowerPool {
   for(i <- 0 until ops.size()){
     val powers = poolMapping.get(ops.get(i))
     if(powers != null){
-      powers.get.add("cn.jsmod2.admin")
+      powers.get.add("admin")
     }
   }
 
@@ -49,18 +49,18 @@ object PowerPool {
   def addAdminMemory(name:String): Unit ={
     val find = poolMapping.get(name)
     if(find==null){
-      throw new NoSuchPlayerException("no such cn.jsmod2.player name")
+      throw new NoSuchPlayerException("no such player name")
     }
-    if(!find.get.contains("cn.jsmod2.admin"))
-      find.get.add("cn.jsmod2.admin")
+    if(!find.get.contains("admin"))
+      find.get.add("admin")
   }
 
   def removeAdminMemory(name:String): Boolean ={
     val find = poolMapping.get(name)
     if(find==null){
-      throw new NoSuchPlayerException("no such cn.jsmod2.player name")
+      throw new NoSuchPlayerException("no such player name")
     }
-    find.get.remove("cn.jsmod2.admin")
+    find.get.remove("admin")
   }
 
 }
