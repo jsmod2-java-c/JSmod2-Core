@@ -1,0 +1,120 @@
+.wrapper {
+	width: 500px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -200px 0 0 -250px;
+}
+h1 {
+	margin-top: 10px;
+	font-weight: 400;
+	font-size: 30px;
+	float: right;
+	color: #393939;
+	text-shadow: 0 1px 0 #fff;
+}
+.inner {
+	width: 460px;
+	margin: auto;
+}
+.logo {
+	height: 40px;
+	width: 500px;
+	background: url(../img/logo.png) no-repeat;
+}
+.lg-body {
+	margin-top: 10px;
+	height: 235px;
+	background: url(../img/login-bg.jpg);
+	border-radius: 4px;
+	border: 1px solid #323232;
+	box-shadow: 0px 0px 1px 0px #000;
+}
+#lg-head {
+	height: 26px;
+	margin: 10px 0;
+	background: url(../img_/login-sprite.png) no-repeat;
+}
+#lg-head p {
+	padding: 6px 0 0 42px;
+	font-size: 17px;
+	color: #d3d3d3;
+	text-shadow: 0 1px 0 #292929;
+}
+.separator {
+	height: 2px;
+	background: url(../img/separator-dark-hz.png) repeat-x;
+	margin: 14px 0;
+}
+.login {
+	width: 460px;
+	margin: auto;
+	position: relative;
+	padding-top: 5px;
+}
+.login ul li {
+	margin-top: 14px;
+}
+#usr-field {
+	width: 462px;
+	height: 32px;
+	background: url(../img_/login-sprite.png);
+	background-position: 0px -27px;
+}
+#psw-field {
+	width: 462px;
+	height: 32px;
+	background: url(../img_/login-sprite.png);
+	background-position: 0px -60px;
+}
+.input {
+	width: 422px;
+	height: 32px;
+	background: transparent;
+	border: none;
+	box-shadow: none;
+	padding: 0;
+	padding-left: 40px;
+	position: relative;
+	font-size: 12px;
+	color: #ccc;
+	text-shadow: 0 1px 0 #292929;
+}
+#checkbox {
+	margin: 16px 0 16px 4px;
+}
+.checkbox-text {
+	color: #d3d3d3;
+	margin-left: 6px;
+	font-size: 13px;
+	float: none;
+}
+.submit {
+	background: url(../img_/login-sprite.png) -1px -93px no-repeat;
+	width: 82px;
+	height: 26px;
+	border: none;
+	box-shadow: none;
+}
+#lost-psw {
+	float: right;
+	margin-top: -24px;
+}
+#lost-psw a {
+	color: #d3d3d3;
+	font-size: 13px;
+}
+label.error {
+	width: 100px;
+	height: 22px;
+	display: block;
+	clear: both;
+	text-indent: -9999px;
+	position: relative;
+	top: -25px;
+	left: 354px;
+	background: url(../img_/login-sprite.png) no-repeat;
+	background-position: -360px -111px;
+	border: none;
+	float: none;
+}
