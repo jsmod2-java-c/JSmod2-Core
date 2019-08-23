@@ -47,13 +47,11 @@ public class SpringContextUtil {
                 //RequestMapping("/aa")+RequestMapping("/name");
                 RequestMapping rm = m.getAnnotation(RequestMapping.class);
                 String[] paths = rm.value();
-                for(String path:paths) {
-                    try {
-                        RequestMappingInfo mappingInfo = (RequestMappingInfo) method.invoke(mapping, m, path);
-                        mapping.registerMapping(mappingInfo, configurableApplicationContext.getBean(beanName), m);
-                    }catch (Exception e){
-                        Utils.printException(e);
-                    }
+                try {
+                    RequestMappingInfo mappingInfo = (RequestMappingInfo) method.invoke(mapping, m, clz);
+                    mapping.registerMapping(mappingInfo, configurableApplicationContext.getBean(beanName), m);
+                }catch (Exception e){
+                    Utils.printException(e);
                 }
             }
 
