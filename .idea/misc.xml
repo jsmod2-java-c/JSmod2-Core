@@ -7,16 +7,10 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/java_jsmod2/pom.xml" />
-        <option value="$PROJECT_DIR$/JSMod2Core/pom.xml" />
-        <option value="$PROJECT_DIR$/JSMod2Protocol/pom.xml" />
-        <option value="$PROJECT_DIR$/JSMod2API/pom.xml" />
-        <option value="$PROJECT_DIR$/JSMod2UI/pom.xml" />
-        <option value="$PROJECT_DIR$/JSMod2Web/pom.xml" />
-        <option value="$PROJECT_DIR$/JSMod2Emerald/pom.xml" />
-        <option value="$PROJECT_DIR$/JSMod2Starter/pom.xml" />
-        <option value="$PROJECT_DIR$/JSMod2Command/pom.xml" />
         <option value="$PROJECT_DIR$/JSMod2IAPI/pom.xml" />
         <option value="$PROJECT_DIR$/JSMod2DevelopKit/pom.xml" />
+        <option value="$PROJECT_DIR$/Jpls/pom.xml" />
+        <option value="$PROJECT_DIR$/jsmod2/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

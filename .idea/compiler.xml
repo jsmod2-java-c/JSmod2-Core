@@ -6,23 +6,17 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="JSMod2UI" />
-        <module name="JSMod2API" />
-        <module name="JSMod2Web" />
-        <module name="JSMod2Emerald" />
-        <module name="JSMod2Starter" />
-        <module name="JSMod2Protocol" />
-        <module name="JSMod2Command" />
-        <module name="JSMod2DevelopKit" />
+        <module name="JPLS" />
+        <module name="jsmod2" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
       <module name="commons" target="1.8" />
+      <module name="JPLS" target="1.8" />
       <module name="jsmod2" target="1.8" />
       <module name="JSMod2API" target="1.8" />
       <module name="JSMod2Command" target="1.8" />
       <module name="JSMod2Core" target="1.8" />
-      <module name="JSMod2DevelopKit" target="1.8" />
       <module name="JSMod2Emerald" target="1.8" />
       <module name="JSMod2Exceptions" target="1.5" />
       <module name="JSMod2Protocol" target="1.8" />
@@ -33,12 +27,13 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="JPLS" options="-parameters" />
       <module name="JSMod2Protocol" options="-parameters" />
       <module name="JSMod2Starter" options="-parameters" />
       <module name="JSMod2UI" options="-parameters" />
       <module name="JSMod2Web" options="-parameters" />
       <module name="commons" options="-parameters" />
-      <module name="jsmod2" options="-parameters" />
+      <module name="jsmod2" options="" />
     </option>
   </component>
 </project>
