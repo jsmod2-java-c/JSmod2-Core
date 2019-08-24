@@ -28,6 +28,7 @@ import cn.jsmod2.core.utils.LogFormat;
 import cn.jsmod2.core.utils.Result;
 import cn.jsmod2.core.utils.Utils;
 import cn.jsmod2.core.schedule.Scheduler;
+import cn.jsmod2.panel.NettyServer;
 import org.fusesource.jansi.Ansi;
 import jline.console.ConsoleReader;
 
@@ -174,8 +175,11 @@ public abstract class Server implements IServer {
 
         try {
             this.chooseLangOrStart();
-            scheduler.executeRunnable(()->Utils.TryCatch(this::startConsoleCommand));
 
+            scheduler.executeRunnable(()->Utils.TryCatch(this::startConsoleCommand));
+            if(Boolean.parseBoolean(serverProp.getProperty(Register.START_NETTY_SERVER,"true"))) {
+                scheduler.executeRunnable(new NettyServer());
+            }
             ServerSocket socket = new ServerSocket(20003);
 
             socket.accept();

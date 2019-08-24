@@ -45,7 +45,7 @@ import static org.fusesource.jansi.Ansi.Color.*;
 
 public class ServerLogger implements ILogger{
     private ConsoleOutputStream consoleOutputStream = new ConsoleOutputStream();
-    @Deprecated
+
     private BlockingQueue<String> queue = new LinkedBlockingQueue<>();
 
     private static ServerLogger log;
@@ -156,7 +156,7 @@ public class ServerLogger implements ILogger{
             consoleOutputStream.write(getSimpleMessage(msg));
         } catch (IOException ignored) {
         }
-//        queue.offer(msg);
+        queue.offer(msg);
         logger.error(msg);
     }
 
@@ -167,7 +167,7 @@ public class ServerLogger implements ILogger{
             consoleOutputStream.write(getSimpleMessage(msg));
         } catch (IOException ignored) {
         }
-//        queue.offer(msg);
+        queue.offer(msg);
         logger.info(msg);
     }
 
@@ -177,8 +177,7 @@ public class ServerLogger implements ILogger{
         try {
             consoleOutputStream.write(getSimpleMessage(msg));
         } catch (IOException ignored) {
-        }
-//        queue.offer(msg);
+        }queue.offer(msg);
         logger.warn(msg);
     }
 
@@ -186,7 +185,7 @@ public class ServerLogger implements ILogger{
         return log;
     }
 
-    @Deprecated
+
     public BlockingQueue<String> getQueue() {
         return queue;
     }
