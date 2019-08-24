@@ -11,8 +11,8 @@
     <dependencies>
         <dependency>
             <groupId>cn.jsmod2</groupId>
-            <artifactId>jsmod2-core</artifactId>
-            <version>1.0.3</version>
+            <artifactId>JPLS</artifactId>
+            <version>1.0.BETA</version>
         </dependency>
         <dependency>
             <groupId>org.scala-lang</groupId>

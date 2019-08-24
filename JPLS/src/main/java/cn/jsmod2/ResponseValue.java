@@ -4,13 +4,13 @@ public class ResponseValue<T> {
 
     private String message;
 
-    private T responseValue;
+    private T value;
 
     private int state;
 
     public ResponseValue(String message, T responseValue, int state) {
         this.message = message;
-        this.responseValue = responseValue;
+        this.value = responseValue;
         this.state = state;
     }
 
@@ -22,12 +22,12 @@ public class ResponseValue<T> {
         this.message = message;
     }
 
-    public T getResponseValue() {
-        return responseValue;
+    public T getValue() {
+        return value;
     }
 
-    public void setResponseValue(T responseValue) {
-        this.responseValue = responseValue;
+    public void setValue(T value) {
+        this.value = value;
     }
 
     public int getState() {

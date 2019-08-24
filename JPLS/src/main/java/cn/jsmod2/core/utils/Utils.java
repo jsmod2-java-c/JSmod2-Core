@@ -237,6 +237,7 @@ public class Utils {
             ServerLogger.getLogger().error("\tat "+e);
         }
         ServerLogger.getLogger().error("\tFINISHED");
+        ServerLogger.getLogger().error("Caused by: ");
         printException(t.getCause());
     }
 

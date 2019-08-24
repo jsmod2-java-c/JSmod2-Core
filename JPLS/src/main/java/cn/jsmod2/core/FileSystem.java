@@ -100,6 +100,19 @@ public class FileSystem {
     public static final String PROPERTIES = ".properties";
 
 
+    public File jsmod2Db() throws IOException{
+        File file = new File(Server.getSender().getServer().getServerFolder(),".jsmod2.db");
+        if(!file.exists()){
+            file.createNewFile();
+        }
+        if(!file.isHidden()){
+            if(!System.getProperty("os.name").toLowerCase().contains("linux")){
+                String sets = "attrib +H \"" + file.getAbsolutePath() + "\"";
+                Runtime.getRuntime().exec(sets);
+            }
+        }
+        return file;
+    }
 
 
     public Properties infoProperties(boolean newInfo){
