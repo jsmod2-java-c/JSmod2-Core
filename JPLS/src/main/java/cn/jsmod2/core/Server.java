@@ -44,8 +44,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
 
 import static cn.jsmod2.core.FileSystem.*;
-import static cn.jsmod2.core.utils.Utils.getFullBytes;
-import static cn.jsmod2.core.utils.Utils.getLen;
+import static cn.jsmod2.core.utils.Utils.*;
 
 /**
  * jsmod2 cn.jsmod2.server class
@@ -204,30 +203,34 @@ public abstract class Server implements IServer {
         Utils.TryCatch(()-> {
             this.log.multiInfo(this.getClass(),main.getSimpleName() + "::start::" + main.getName(),"","");
             this.executeEmerald(args, true);
-            this.start();
+            this.start(args);
             this.successTime();
         });
     }
-    public void start(){
+    public void start(String[] args){
         if(useUDP) {
             this.pool.execute(new ListenerThread());
         }else{
             this.pool.execute(new ListenerThreadTCP());
         }
-        String log = logListener("yyyy-MM-dd HH.mm.ss",this::getMax,SMOD2_LOG_FILE);
-        if(log != null) {
-            this.pool.execute(new LogListener(log, Integer.parseInt(serverProp.getProperty(SMOD2_LOG_INTERVAL,"2000")),"yyyy-MM-dd HH.mm.ss",this::getMax,SMOD2_LOG_FILE));
+        if(!contains(args,"-lr")) {
+            String log = logListener("yyyy-MM-dd HH.mm.ss", this::getMax, SMOD2_LOG_FILE);
+            if (log != null) {
+                this.pool.execute(new LogListener(log, Integer.parseInt(serverProp.getProperty(SMOD2_LOG_INTERVAL, "2000")), "yyyy-MM-dd HH.mm.ss", this::getMax, SMOD2_LOG_FILE));
+            }
         }
-        String log1 = logListener("yyyy-MM-dd_HH_mm",(format, x1, x2) -> getMultiSCPMax(format,x1,x2,"MA"), Register.CONSOLE_LOG);
-        if(log1 != null){
-            this.pool.execute(new LogListener(log1,Integer.parseInt(serverProp.getProperty(SMOD2_LOG_INTERVAL,"2000")),"yyyy-MM-dd_HH_mm",(format, x1, x2) -> getMultiSCPMax(format,x1,x2,"MA"),Register.CONSOLE_LOG));
-            this.pool.execute(new LogListener(log1,Integer.parseInt(serverProp.getProperty(SMOD2_LOG_INTERVAL,"2000")),"yyyy-MM-dd_HH_mm",(format, x1, x2) -> getMultiSCPMax(format,x1,x2,"SCP"),Register.CONSOLE_LOG));
+        if(!contains(args,"-lm")) {
+            String log1 = logListener("yyyy-MM-dd_HH_mm", (format, x1, x2) -> getMultiSCPMax(format, x1, x2, "MA"), Register.CONSOLE_LOG);
+            if (log1 != null) {
+                this.pool.execute(new LogListener(log1, Integer.parseInt(serverProp.getProperty(SMOD2_LOG_INTERVAL, "2000")), "yyyy-MM-dd_HH_mm", (format, x1, x2) -> getMultiSCPMax(format, x1, x2, "MA"), Register.CONSOLE_LOG));
+                this.pool.execute(new LogListener(log1, Integer.parseInt(serverProp.getProperty(SMOD2_LOG_INTERVAL, "2000")), "yyyy-MM-dd_HH_mm", (format, x1, x2) -> getMultiSCPMax(format, x1, x2, "SCP"), Register.CONSOLE_LOG));
+            }
         }
 
-
-
-        if(Boolean.parseBoolean(serverProp.getProperty(GITHUB))) {
-            this.pool.execute(new GithubConnectThread());
+        if(!contains(args,"-github")) {
+            if (Boolean.parseBoolean(serverProp.getProperty(GITHUB))) {
+                this.pool.execute(new GithubConnectThread());
+            }
         }
         //this.pool.execute(new ServerThread());
 

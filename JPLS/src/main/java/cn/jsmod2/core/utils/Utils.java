@@ -34,6 +34,11 @@ public class Utils {
         messageSender = new Message();
     }
 
+    public static boolean contains(String[] args,String value){
+        if(Arrays.toString(args).contains(value))return true;
+        return false;
+    }
+
     public static Method getServerMethod(String methodName) throws NoSuchMethodException{
         Method method = Server.class.getDeclaredMethod(methodName);
         method.setAccessible(true);
