@@ -19,5 +19,5 @@ public class UIStarter extends javafx.application.Application  {
         primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(root, 650, 450));
         primaryStage.show();
-    }
+}
 }

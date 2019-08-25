@@ -9,7 +9,6 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.core;
 
 
-import cn.jsmod2.JVMRuntime;
 import cn.jsmod2.Register;
 import cn.jsmod2.core.annotations.RegisterMethod;
 import cn.jsmod2.core.command.OpsFile;
@@ -149,9 +148,6 @@ public abstract class Server implements IServer {
         this.pluginDir = getFileSystem().pluginDir(server);
 
         this.serverProp = getFileSystem().serverProperties(server);
-
-        JVMRuntime runtime = new JVMRuntime(this);
-        runtime.setServerArgs();
 
         getLogger().multiInfo(getClass(),"Connecting the multiAdmin | LocalAdmin","","");
 

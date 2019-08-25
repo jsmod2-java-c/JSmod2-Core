@@ -187,10 +187,6 @@ public class Register extends RegisterTemplate {
 
     public static final String START_NETTY_SERVER = "client.server.start";
 
-    public static final String MAX_HEAP = "jsmod2.jvm.max.heap";
-
-    public static final String JVM_ARGS = "jsmod2.jvm.args";
-
 
     @RegisterMethod
     public void registerSuccessInfo(){
@@ -206,8 +202,6 @@ public class Register extends RegisterTemplate {
         serverProperties.put(CONSOLE_LOG,"");
         serverProperties.put(START_NETTY_SERVER,"true");
         serverProperties.put(CLIENT_PORT,"20020");
-        serverProperties.put(MAX_HEAP,"1024");
-        serverProperties.put(JVM_ARGS,"");
     }
 
 
