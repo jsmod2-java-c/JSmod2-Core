@@ -12,17 +12,21 @@ import java.util.concurrent.CountDownLatch;
 import static cn.jsmod2.core.utils.Utils.contains;
 
 /**
- * -w -u -lr -lm -github
+ * -w -u -lr -lm -github -a
  * -w 关闭web
  * -u 关闭ui
  * -lr 关闭round的log监听
  * -lm 关闭multiAdmin和游戏的log监听
  * -github 关闭和Github连接
+ * -a 关闭全部
  */
 @ServerApplication(DefaultServer.class)
 public class ServerStarter {
 
     public void start(String[] args){
+        if(contains(args,"-a")){
+            args[0] = "-w-u-lr-l-github";
+        }
         Utils.TryCatch(()->{
             CountDownLatch latch = new CountDownLatch(1);
             if(!contains(args,"-w")) {

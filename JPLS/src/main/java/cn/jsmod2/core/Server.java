@@ -9,6 +9,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.core;
 
 
+import cn.jsmod2.JVMRuntime;
 import cn.jsmod2.Register;
 import cn.jsmod2.core.annotations.RegisterMethod;
 import cn.jsmod2.core.command.OpsFile;
@@ -149,6 +150,8 @@ public abstract class Server implements IServer {
 
         this.serverProp = getFileSystem().serverProperties(server);
 
+        JVMRuntime runtime = new JVMRuntime(this);
+        runtime.setServerArgs();
 
         getLogger().multiInfo(getClass(),"Connecting the multiAdmin | LocalAdmin","","");
 
@@ -201,7 +204,6 @@ public abstract class Server implements IServer {
 
     public void startWatch(Class<?> main,String[] args) {
         Utils.TryCatch(()-> {
-            this.log.multiInfo(this.getClass(),main.getSimpleName() + "::start::" + main.getName(),"","");
             this.executeEmerald(args, true);
             this.start(args);
             this.successTime();
@@ -232,9 +234,7 @@ public abstract class Server implements IServer {
                 this.pool.execute(new GithubConnectThread());
             }
         }
-        //this.pool.execute(new ServerThread());
 
-        //this.pool.execute(new Smod2LogThread());
         this.startSuccessTime = new Date().getTime();
     }
 
