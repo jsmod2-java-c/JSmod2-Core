@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/JPLS/JPLS.iml" filepath="$PROJECT_DIR$/JPLS/JPLS.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Starter/Starter.iml" filepath="$PROJECT_DIR$/Starter/Starter.iml" />
       <module fileurl="file://$PROJECT_DIR$/jsmod2/jsmod2.iml" filepath="$PROJECT_DIR$/jsmod2/jsmod2.iml" />
     </modules>
   </component>
