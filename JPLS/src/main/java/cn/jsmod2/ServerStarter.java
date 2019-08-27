@@ -93,6 +93,7 @@ public class ServerStarter {
             //"-w -u -lr -lm -github -n -a"
             try {
                 int port = Integer.parseInt(args[1]);
+                ServerLogger.getLogger().multiInfo(getClass(),"xmlrpc is started...","","");
                 WebServer webServer = new WebServer(port);
                 PropertyHandlerMapping mapping = new PropertyHandlerMapping();
                 mapping.addHandler("jsmod", RPCHandler.class);
