@@ -43,13 +43,11 @@ public class RPCHandler{
     }
 
     public double cpu() {
-//        try {
-//            return sigar.getCpuPerc().getCombined();
-//        }catch (SigarException e){
-//            Utils.printException(e);
-//        }
-
-        return CPUMonitorCalc.getInstance().getProcessCpu();
+        double pre = CPUMonitorCalc.getInstance().getProcessCpu();
+        while (pre >= 1){
+            pre = CPUMonitorCalc.getInstance().getProcessCpu();
+        }
+        return pre;
     }
 
     public double ram(){
@@ -116,7 +114,7 @@ class CPUMonitorCalc {
     public double getProcessCpu() {
         long totalTime = 0;
         for (long id : threadBean.getAllThreadIds()) {
-            totalTime += threadBean.getThreadCpuTime(id);
+                totalTime += threadBean.getThreadCpuTime(id);
         }
         long curtime = System.nanoTime();
         long usedTime = totalTime - preUsedTime;
