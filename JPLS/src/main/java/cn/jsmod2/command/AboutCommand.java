@@ -9,7 +9,7 @@ import cn.jsmod2.core.log.ServerLogger;
 public class AboutCommand extends NativeCommand {
 
     public AboutCommand() {
-        super("about", Powers.ADMIN, "see the cn.jsmod2.server version");
+        super("about", Powers.ADMIN, "see the server version");
     }
 
     @Override

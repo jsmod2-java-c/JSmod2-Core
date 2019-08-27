@@ -17,15 +17,18 @@ import java.lang.management.ThreadMXBean;
 public class RPCHandler{
 
     public String start(String sw){
-        sw = sw.replace("1","-w")
-                .replace("2","-u")
-                .replace("3","-lr")
-                .replace("4","-lm")
-                .replace("5","-github")
-                .replace("6","-n")
-                .replace("7","-a");
-        final String args = sw;
-        new Thread(()->ServerStarter.getInstance().startNow(new String[]{args})).start();
+        if(Server.getSender() == null){
+            sw = sw.replace("1","-w")
+                    .replace("2","-u")
+                    .replace("3","-lr")
+                    .replace("4","-lm")
+                    .replace("5","-github")
+                    .replace("6","-n")
+                    .replace("7","-a");
+            final String args = sw;
+            new Thread(()->ServerStarter.getInstance().startNow(new String[]{args})).start();
+        }
+
         return "server has started";
     }
 

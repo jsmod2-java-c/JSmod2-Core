@@ -25,7 +25,7 @@ import org.fusesource.jansi.AnsiConsole;
 public class JavaMultiModStarterAdmin {
 
     public static void main(String[]args){
-        AnsiConsole.systemInstall();
+        //AnsiConsole.systemInstall();
         ServerStarter starter = new ServerStarter();
         starter.start(args);
     }

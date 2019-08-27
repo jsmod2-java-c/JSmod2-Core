@@ -2,6 +2,8 @@ package cn.jsmod2.command;
 
 import cn.jsmod2.core.CommandSender;
 import cn.jsmod2.core.FileSystem;
+import cn.jsmod2.core.Powers;
+import cn.jsmod2.core.Server;
 import cn.jsmod2.core.command.NativeCommand;
 import cn.jsmod2.core.utils.Utils;
 
@@ -16,7 +18,7 @@ import java.util.Set;
 public class SeeCommand extends NativeCommand {
 
     public SeeCommand() {
-        super("see", "CONSOLE", "prop:cmd.see");
+        super("see", Powers.CONSOLE, "prop:cmd.see");
     }
 
     @Override

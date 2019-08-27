@@ -9,6 +9,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.command;
 
 import cn.jsmod2.core.CommandSender;
+import cn.jsmod2.core.Powers;
 import cn.jsmod2.core.Server;
 import cn.jsmod2.core.command.NativeCommand;
 
@@ -19,7 +20,7 @@ import cn.jsmod2.core.command.NativeCommand;
 public class ReloadCommand extends NativeCommand {
 
     public ReloadCommand() {
-        super("reload","cn.jsmod2.admin","prop:cmd.reload");
+        super("reload", Powers.ADMIN,"prop:cmd.reload");
     }
 
     @Override
