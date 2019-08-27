@@ -3,10 +3,13 @@ package cn.jsmod2;
 import cn.jsmod2.core.Server;
 import cn.jsmod2.core.log.ServerLogger;
 import cn.jsmod2.core.plugin.PluginClassLoader;
+import cn.jsmod2.core.utils.Utils;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.OperatingSystemMXBean;
 import java.lang.management.ThreadMXBean;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicInteger;
 //import cn.jsmod2.core.utils.Utils;
 //import com.google.common.io.Resources;
 //import org.hyperic.sigar.Sigar;
@@ -15,6 +18,8 @@ import java.lang.management.ThreadMXBean;
 //import java.io.File;
 
 public class RPCHandler{
+
+    private static AtomicInteger times = new AtomicInteger(0);
 
     public String start(String sw){
         if(Server.getSender() == null){
@@ -27,12 +32,26 @@ public class RPCHandler{
                     .replace("7","-a");
             final String args = sw;
             new Thread(()->ServerStarter.getInstance().startNow(new String[]{args})).start();
+            new Thread(()->{
+                while (Server.getSender()!=null);
+                try {
+                    Thread.sleep(2000);
+                    while (true) {
+                        if(times.get() >= 5)stop();
+                        times.addAndGet(1);
+                        Thread.sleep(1000);
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }).start();
         }
 
         return "server has started";
     }
 
     public String get_status(){
+        times.set(0);
         if(Server.getSender() == null)return "stop";
         return "started";
     }
