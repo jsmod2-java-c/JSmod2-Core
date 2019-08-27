@@ -535,19 +535,23 @@ public abstract class Server implements IServer {
         Utils.TryCatch(()->{
             List<InputStream> oStreams = FileSystem.getFileSystem().getInputStreams();
             for(InputStream stream : oStreams){
-                stream.close();
+                if(stream!=null)
+                    stream.close();
             }
             List<OutputStream> iStreams = FileSystem.getFileSystem().getOutputStreams();
             for(OutputStream stream : iStreams){
-                stream.close();
+                if(stream!=null)
+                    stream.close();
             }
             List<BufferedReader> readers = FileSystem.getFileSystem().getReaders();
             for(BufferedReader reader:readers){
-                reader.close();
+                if(reader!=null)
+                    reader.close();
             }
             List<PrintWriter> writers = FileSystem.getFileSystem().getWriters();
             for(PrintWriter writer:writers){
-                writer.close();
+                if(writer!=null)
+                    writer.close();
             }
         });
     }
