@@ -26,10 +26,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Enumeration;
-import java.util.List;
+import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
@@ -43,6 +40,8 @@ import java.util.zip.ZipEntry;
 public class PluginClassLoader implements IPluginClassLoader {
 
     public static final String JSMOD2_PACKAGE = "cn.jsmod2";
+
+    private Map<String,String> plugin_info = new HashMap<>();
 
     private PluginManager manager;
 
@@ -96,7 +95,7 @@ public class PluginClassLoader implements IPluginClassLoader {
                 }
                 Object plugin;
                 if(!vo.getMain_class().startsWith(JSMOD2_PACKAGE)) {
-
+                    plugin_info.put(jar.getName(),vo.getDescription());
                     plugin = classLoader.loadClass(vo.getMain_class()).newInstance();
                 }else{
                     throw new PluginException("the main class could not start with 'cn.jsmod2'");
@@ -119,6 +118,7 @@ public class PluginClassLoader implements IPluginClassLoader {
                         Class<?> pluginClass = classLoader.loadClass(mainName);
                         Main main = pluginClass.getAnnotation(Main.class);
                         if(main!=null){
+                            plugin_info.put(jar.getName(),main.description());
                             PluginFileVO vo = new PluginFileVO(main.name(),pluginClass.getName(),main.description(),main.version());
                             Object obj = pluginClass.newInstance();
                             return loadPluginInfo(obj,vo,file,classLoader);
@@ -133,6 +133,10 @@ public class PluginClassLoader implements IPluginClassLoader {
         return null;
     }
 
+    public Map<String, String> getPlugin_info() {
+        return plugin_info;
+    }
+
     public void unloadPlugin(String name){
         Plugin removed = null;
         for(int i = 0;i<plugins.size();i++){
@@ -141,9 +145,11 @@ public class PluginClassLoader implements IPluginClassLoader {
                 break;
             }
         }
-        if(removed !=null)
+
+        if(removed !=null) {
+            removed.onDisable();
             plugins.remove(removed);
-        else
+        }else
             throw new PluginException("no such plugin");
     }
 

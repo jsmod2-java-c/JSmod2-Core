@@ -151,8 +151,6 @@ public abstract class Server implements IServer {
 
         getLogger().multiInfo(getClass(),"Connecting the multiAdmin | LocalAdmin","","");
 
-
-
         this.pluginManager = new PluginManager(server);
 
         this.commandInfo = new HashMap<>();
@@ -175,9 +173,7 @@ public abstract class Server implements IServer {
             this.chooseLangOrStart();
 
             scheduler.executeRunnable(()->Utils.TryCatch(this::startConsoleCommand));
-            if(Boolean.parseBoolean(serverProp.getProperty(Register.START_NETTY_SERVER,"true"))) {
-                scheduler.executeRunnable(new NettyServer());
-            }
+
             ServerSocket socket = new ServerSocket(20003);
 
             socket.accept();
@@ -193,6 +189,7 @@ public abstract class Server implements IServer {
         this.useUDP = useUDP;
 
     }
+
 
     public void start(Class<?> main,String[] args) {
         startWatch(main,args);
@@ -211,13 +208,16 @@ public abstract class Server implements IServer {
         }else{
             this.pool.execute(new ListenerThreadTCP());
         }
-        if(!contains(args,"-lr")) {
+        if(contains(args,"-n")) {
+            scheduler.executeRunnable(new NettyServer());
+        }
+        if(contains(args,"-lr")) {
             String log = logListener("yyyy-MM-dd HH.mm.ss", this::getMax, SMOD2_LOG_FILE);
             if (log != null) {
                 this.pool.execute(new LogListener(log, Integer.parseInt(serverProp.getProperty(SMOD2_LOG_INTERVAL, "2000")), "yyyy-MM-dd HH.mm.ss", this::getMax, SMOD2_LOG_FILE));
             }
         }
-        if(!contains(args,"-lm")) {
+        if(contains(args,"-lm")) {
             String log1 = logListener("yyyy-MM-dd_HH_mm", (format, x1, x2) -> getMultiSCPMax(format, x1, x2, "MA"), Register.CONSOLE_LOG);
             if (log1 != null) {
                 this.pool.execute(new LogListener(log1, Integer.parseInt(serverProp.getProperty(SMOD2_LOG_INTERVAL, "2000")), "yyyy-MM-dd_HH_mm", (format, x1, x2) -> getMultiSCPMax(format, x1, x2, "MA"), Register.CONSOLE_LOG));
@@ -225,7 +225,7 @@ public abstract class Server implements IServer {
             }
         }
 
-        if(!contains(args,"-github")) {
+        if(contains(args,"-github")) {
             if (Boolean.parseBoolean(serverProp.getProperty(GITHUB))) {
                 this.pool.execute(new GithubConnectThread());
             }
@@ -332,8 +332,14 @@ public abstract class Server implements IServer {
 
 
     public void close(){
+        close(true);
+    }
+
+    public void close(boolean trulyClose){
         closeAll();
-        System.exit(0);
+        if(trulyClose) {
+            System.exit(0);
+        }
     }
 
 
@@ -547,6 +553,7 @@ public abstract class Server implements IServer {
     }
 
     private void closeAll(){
+        scheduler.getPool().shutdownNow();
         disable();
         closeStream();
         log.multiInfo(this.getClass(),lang.getProperty(STOP+".finish"),LogFormat.textFormat("[STOP::"+FileSystem.getFileSystem().serverProperties(server).getProperty("smod2.ip")+"]", Ansi.Color.GREEN).toString(),"");

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="sigar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/JPLS/hyperic-sigar-1.6.4/sigar-bin/lib/sigar.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

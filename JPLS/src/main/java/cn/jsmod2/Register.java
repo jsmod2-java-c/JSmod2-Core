@@ -185,8 +185,7 @@ public class Register extends RegisterTemplate {
 
     public static final String CLIENT_PORT = "client.port";
 
-    public static final String START_NETTY_SERVER = "client.server.start";
-
+    public static final String JSMOD2_JVM_ARGS = "jsmod2.jvm.args";
 
     @RegisterMethod
     public void registerSuccessInfo(){
@@ -200,8 +199,8 @@ public class Register extends RegisterTemplate {
         serverProperties.put(FileSystem.SMOD2_LOG_INTERVAL,"2000");
         serverProperties.put(DownloadPluginCommand.MIRROR,"");
         serverProperties.put(CONSOLE_LOG,"");
-        serverProperties.put(START_NETTY_SERVER,"true");
         serverProperties.put(CLIENT_PORT,"20020");
+        serverProperties.put(JSMOD2_JVM_ARGS,"");
     }
 
 

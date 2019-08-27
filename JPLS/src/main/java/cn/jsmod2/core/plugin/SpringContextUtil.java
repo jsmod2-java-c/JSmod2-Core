@@ -33,28 +33,29 @@ public class SpringContextUtil {
     }
 
     public static void loadBean(Class clz){
-        if(isSpringBean(clz)){
-            String beanName = StringUtils.uncapitalize(clz.getSimpleName());
-            ConfigurableApplicationContext configurableApplicationContext = (ConfigurableApplicationContext) SpringContextUtil.getApplicationContext();
-            DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory)configurableApplicationContext.getBeanFactory();
-            BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder.genericBeanDefinition(clz);
-            defaultListableBeanFactory.registerBeanDefinition(beanName, beanDefinitionBuilder.getRawBeanDefinition());
-            RequestMappingHandlerMapping mapping = configurableApplicationContext.getBean(RequestMappingHandlerMapping.class);
-            Method method = ReflectionUtils.findMethod(RequestMappingHandlerMapping.class,"getMappingForMethod",Method.class,Class.class);
-            method.setAccessible(true);
-            Method[] methods = clz.getDeclaredMethods();
-            for(Method m:methods){
-                //RequestMapping("/aa")+RequestMapping("/name");
-                RequestMapping rm = m.getAnnotation(RequestMapping.class);
-                String[] paths = rm.value();
-                try {
-                    RequestMappingInfo mappingInfo = (RequestMappingInfo) method.invoke(mapping, m, clz);
-                    mapping.registerMapping(mappingInfo, configurableApplicationContext.getBean(beanName), m);
-                }catch (Exception e){
-                    Utils.printException(e);
+        if(applicationContext!=null){
+            if(isSpringBean(clz)) {
+                String beanName = StringUtils.uncapitalize(clz.getSimpleName());
+                ConfigurableApplicationContext configurableApplicationContext = (ConfigurableApplicationContext) SpringContextUtil.getApplicationContext();
+                DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory) configurableApplicationContext.getBeanFactory();
+                BeanDefinitionBuilder beanDefinitionBuilder = BeanDefinitionBuilder.genericBeanDefinition(clz);
+                defaultListableBeanFactory.registerBeanDefinition(beanName, beanDefinitionBuilder.getRawBeanDefinition());
+                RequestMappingHandlerMapping mapping = configurableApplicationContext.getBean(RequestMappingHandlerMapping.class);
+                Method method = ReflectionUtils.findMethod(RequestMappingHandlerMapping.class, "getMappingForMethod", Method.class, Class.class);
+                method.setAccessible(true);
+                Method[] methods = clz.getDeclaredMethods();
+                for (Method m : methods) {
+                    //RequestMapping("/aa")+RequestMapping("/name");
+                    RequestMapping rm = m.getAnnotation(RequestMapping.class);
+                    String[] paths = rm.value();
+                    try {
+                        RequestMappingInfo mappingInfo = (RequestMappingInfo) method.invoke(mapping, m, clz);
+                        mapping.registerMapping(mappingInfo, configurableApplicationContext.getBean(beanName), m);
+                    } catch (Exception e) {
+                        Utils.printException(e);
+                    }
                 }
             }
-
         }
     }
 
