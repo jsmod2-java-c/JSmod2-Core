@@ -3,16 +3,18 @@ package cn.jsmod2;
 import cn.jsmod2.core.Server;
 import cn.jsmod2.core.log.ServerLogger;
 import cn.jsmod2.core.plugin.PluginClassLoader;
-import cn.jsmod2.core.utils.Utils;
-import com.google.common.io.Resources;
-import org.hyperic.sigar.Sigar;
-import org.hyperic.sigar.SigarException;
 
-import java.io.File;
+import java.lang.management.ManagementFactory;
+import java.lang.management.OperatingSystemMXBean;
+import java.lang.management.ThreadMXBean;
+//import cn.jsmod2.core.utils.Utils;
+//import com.google.common.io.Resources;
+//import org.hyperic.sigar.Sigar;
+//import org.hyperic.sigar.SigarException;
+//
+//import java.io.File;
 
 public class RPCHandler{
-
-    private Sigar sigar = initSigar();
 
     public String start(String sw){
         sw = sw.replace("1","-w")
@@ -41,12 +43,13 @@ public class RPCHandler{
     }
 
     public double cpu() {
-        try {
-            return sigar.getCpuPerc().getCombined();
-        }catch (SigarException e){
-            Utils.printException(e);
-        }
-        return 0.0;
+//        try {
+//            return sigar.getCpuPerc().getCombined();
+//        }catch (SigarException e){
+//            Utils.printException(e);
+//        }
+
+        return CPUMonitorCalc.getInstance().getProcessCpu();
     }
 
     public double ram(){
@@ -67,26 +70,59 @@ public class RPCHandler{
         return true;
     }
 
-    private Sigar initSigar() {
-        String os = System.getProperty("os.name");
-        try {
-            String file = Resources.getResource("sigar/.sigar_shellrc").getFile();
-            File classPath = new File(file).getParentFile();
+//    private Sigar initSigar() {
+//        String os = System.getProperty("os.name");
+//        try {
+//            String file = Resources.getResource("sigar/.sigar_shellrc").getFile();
+//            File classPath = new File(file).getParentFile();
+//
+//            String path = System.getProperty("java.library.path");
+//            if (os.toLowerCase().contains("win")) {
+//                path += ";" + classPath.getCanonicalPath();
+//            } else {
+//                path += ":" + classPath.getCanonicalPath();
+//            }
+//            System.setProperty("java.library.path", path);
+//
+//            return new Sigar();
+//        } catch (Exception e) {
+//            Utils.printException(e);
+//            return null;
+//        }
+//    }
 
-            String path = System.getProperty("java.library.path");
-            if (os.toLowerCase().contains("win")) {
-                path += ";" + classPath.getCanonicalPath();
-            } else {
-                path += ":" + classPath.getCanonicalPath();
-            }
-            System.setProperty("java.library.path", path);
 
-            return new Sigar();
-        } catch (Exception e) {
-            Utils.printException(e);
-            return null;
-        }
+}
+
+
+class CPUMonitorCalc {
+
+    private static CPUMonitorCalc instance = new CPUMonitorCalc();
+
+    private OperatingSystemMXBean osMxBean;
+    private ThreadMXBean threadBean;
+    private long preTime = System.nanoTime();
+    private long preUsedTime = 0;
+
+    private CPUMonitorCalc() {
+        osMxBean = ManagementFactory.getOperatingSystemMXBean();
+        threadBean = ManagementFactory.getThreadMXBean();
     }
 
+    public static CPUMonitorCalc getInstance() {
+        return instance;
+    }
 
+    public double getProcessCpu() {
+        long totalTime = 0;
+        for (long id : threadBean.getAllThreadIds()) {
+            totalTime += threadBean.getThreadCpuTime(id);
+        }
+        long curtime = System.nanoTime();
+        long usedTime = totalTime - preUsedTime;
+        long totalPassedTime = curtime - preTime;
+        preTime = curtime;
+        preUsedTime = totalTime;
+        return (((double) usedTime) / totalPassedTime / osMxBean.getAvailableProcessors()) * 100;
+    }
 }
