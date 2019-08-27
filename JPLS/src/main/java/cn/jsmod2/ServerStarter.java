@@ -1,17 +1,15 @@
 package cn.jsmod2;
 import cn.jsmod2.core.Application;
-import cn.jsmod2.core.Console;
-import cn.jsmod2.core.Server;
+
 import cn.jsmod2.core.annotations.ServerApplication;
 import cn.jsmod2.core.log.ServerLogger;
-import cn.jsmod2.core.plugin.PluginClassLoader;
 import cn.jsmod2.core.plugin.SpringContextUtil;
 import cn.jsmod2.core.utils.Utils;
 import org.apache.xmlrpc.XmlRpcException;
 import org.apache.xmlrpc.server.PropertyHandlerMapping;
+import org.apache.xmlrpc.server.XmlRpcServerConfigImpl;
 import org.apache.xmlrpc.webserver.WebServer;
-import org.hyperic.sigar.Sigar;
-import org.hyperic.sigar.SigarException;
+
 
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
@@ -31,60 +29,9 @@ import static cn.jsmod2.core.utils.Utils.contains;
 @ServerApplication(DefaultServer.class)
 public class ServerStarter {
 
+    private static ServerStarter instance;
 
-    private class RPCHandler{
-
-        private Sigar sigar = new Sigar();
-
-        public void start(String sw){
-            sw = sw.replace("1","-w")
-                    .replace("2","-u")
-                    .replace("3","-lr")
-                    .replace("4","-lm")
-                    .replace("5","-github")
-                    .replace("6","-n")
-                    .replace("7","-a");
-            startNow(new String[]{sw});
-        }
-
-        public String get_status(){
-            if(Server.getSender() == null)return "stop";
-            return "started";
-        }
-
-        public void execute(String command){
-            Console.getConsole().runConsoleCommandWithEmerald(command);
-        }
-
-        public double cpu() {
-            try {
-                return sigar.getCpuPerc().getCombined();
-            }catch (SigarException e){
-                Utils.printException(e);
-            }
-            return 0.0;
-        }
-
-        public double ram(){
-            return 1.0-((double) Runtime.getRuntime().freeMemory()/(double)Runtime.getRuntime().totalMemory());
-        }
-
-        public String plugin_info(String info){
-            return PluginClassLoader.getClassLoader().getPlugin_info().get(info);
-        }
-
-
-        public void stop(){
-            if(Server.getSender() == null){
-                ServerLogger.getLogger().multiWarn(getClass(),"the server has stopped","","");
-                return;
-            }
-            Server.getSender().getServer().close();
-        }
-
-    }
-
-
+    //Failed to instantiate class cn.jsmod2.ServerStarter$RPCHandler
     public void start(String[] args){
 
         //java -jar jsmod2.jar -rpc 20021
@@ -93,12 +40,16 @@ public class ServerStarter {
         if(contains(args,"-rpc")){
             //"-w -u -lr -lm -github -n -a"
             try {
+                instance = this;
                 int port = Integer.parseInt(args[1]);
                 ServerLogger.getLogger().multiInfo(getClass(),"xmlrpc is started...","","");
                 WebServer webServer = new WebServer(port);
                 PropertyHandlerMapping mapping = new PropertyHandlerMapping();
                 mapping.addHandler("jsmod", RPCHandler.class);
                 webServer.getXmlRpcServer().setHandlerMapping(mapping);
+                XmlRpcServerConfigImpl serverConfig = (XmlRpcServerConfigImpl)webServer.getXmlRpcServer().getConfig();
+                serverConfig.setEnabledForExceptions(true);
+                serverConfig.setContentLengthOptional(false);
                 webServer.start();
             }catch (IOException|XmlRpcException e){
                 Utils.printException(e);
@@ -108,7 +59,7 @@ public class ServerStarter {
         }
     }
 
-    private void startNow(String[] args){
+    void startNow(String[] args){
 
         if(contains(args,"-a")){
             args[0] = "-w-u-lr-lm-n-github";
@@ -138,4 +89,7 @@ public class ServerStarter {
         });
     }
 
+    public static ServerStarter getInstance() {
+        return instance;
+    }
 }

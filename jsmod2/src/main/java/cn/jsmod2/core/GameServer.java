@@ -7,7 +7,6 @@ import cn.jsmod2.api.server.IConnection;
 import cn.jsmod2.api.server.IRound;
 import cn.jsmod2.api.team.ITeamRole;
 import cn.jsmod2.api.team.Role;
-import cn.jsmod2.core.annotations.PlayerName;
 
 import java.util.Arrays;
 import java.util.List;
