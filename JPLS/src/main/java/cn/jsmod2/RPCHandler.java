@@ -58,7 +58,11 @@ public class RPCHandler{
     }
 
     public String plugin_info(String info){
-        return PluginClassLoader.getClassLoader().getPlugin_info().get(info);
+        String des = PluginClassLoader.getClassLoader().getPlugin_info().get(info);
+        if(des == null){
+            return "No such plugin";
+        }
+        return des;
     }
 
 
