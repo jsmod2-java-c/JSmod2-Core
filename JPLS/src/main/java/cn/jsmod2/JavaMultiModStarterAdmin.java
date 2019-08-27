@@ -10,7 +10,6 @@ package cn.jsmod2;
 
 
 
-import org.fusesource.jansi.AnsiConsole;
 
 /**
  * @author magiclu550 #(code) jsmod2
