@@ -170,12 +170,3 @@ public class TestListener implements Listener{
     
 }
 ```
-> JSmod2 run args
-
-* -w -u -lr -lm -github -a
-* -w close web
-* -u close ui
-* -lr close round log listener
-* -lm Turn off multiAdmin and game log listener
-* -github closes and connects to Github
-* -a close all
