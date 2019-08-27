@@ -13,6 +13,7 @@ import org.apache.xmlrpc.webserver.WebServer;
 import org.hyperic.sigar.Sigar;
 import org.hyperic.sigar.SigarException;
 
+import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
 
 import static cn.jsmod2.core.utils.Utils.contains;
@@ -98,7 +99,8 @@ public class ServerStarter {
                 PropertyHandlerMapping mapping = new PropertyHandlerMapping();
                 mapping.addHandler("jsmod", RPCHandler.class);
                 webServer.getXmlRpcServer().setHandlerMapping(mapping);
-            }catch (XmlRpcException e){
+                webServer.start();
+            }catch (IOException|XmlRpcException e){
                 Utils.printException(e);
             }
         }else{
