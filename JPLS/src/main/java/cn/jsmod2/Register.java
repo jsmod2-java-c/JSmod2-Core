@@ -46,8 +46,11 @@ import java.util.*;
 import static cn.jsmod2.core.Server.START;
 
 /**
- * 所有注册的中心类
+ * Jsmod2的默认注册机，用于注册语言,本地命令,启动信息,数据包class对象
+ * 事件id,服务器配置文件等基本信息，会在服务端运行过程中进行调用
  * @author magiclu550
+ * @since 1.0.0
+ * @see cn.jsmod2.core.RegisterTemplate
  */
 
 public class Register extends RegisterTemplate {
@@ -68,8 +71,9 @@ public class Register extends RegisterTemplate {
 
 
     /**
+     * 注册语言文件，在选择语言时，使得语言可以在控制台显示
      * 注册语言时，首先按照标准格式添加语言
-     * 参考resources格式
+     * 参考resources格式(zh.properties等)
      */
     @RegisterMethod
     public void registerLang(){
@@ -82,6 +86,11 @@ public class Register extends RegisterTemplate {
     }
 
 
+    /**
+     * 注册本地的命令，前提命令必须直接继承自NativeCommand
+     * 注册名称必须和NativeCommand的名称一一对应，否则会发生
+     * 及其诡异的错误
+     */
     @RegisterMethod
     public void registerNativeCommand(){
         nativeCommandMap.put("stop",new StopCommand());
@@ -101,6 +110,10 @@ public class Register extends RegisterTemplate {
     }
 
 
+    /**
+     * 用于注册开启时的信息，这里的内容对应着语言文件的key值上,参见
+     * resources可以知悉
+     */
     @RegisterMethod
     public void registerStartInfo(){
         startInfo.add(START+".info");
@@ -108,6 +121,12 @@ public class Register extends RegisterTemplate {
         startInfo.add(START+".warn");
         startInfo.add(START+".connect");
     }
+
+    /**
+     * 注册数据包的信息，如果在定义数据包时不表明id信息，那么数据包就会从这个
+     * 表里寻找它的id，如果依然找不到，则不发出id,但是proxyHandler会默认为命令
+     * 的id，最终导致解析失败
+     */
     @RegisterMethod
     public void registerPacket(){
         packets.put(ServerInitPacket.class,ServerInitPacket.ID);
@@ -181,17 +200,33 @@ public class Register extends RegisterTemplate {
         putPackets();
     }
 
+    /**
+     * 监听multiAdmin的log文件时，指定是否启动的key值
+     */
     public static final String CONSOLE_LOG = "multi-admin.log";
 
+    /**
+     * 远程连接ui的netty服务端端口，这里不建议使用,默认关闭
+     */
     public static final String CLIENT_PORT = "client.port";
 
+    /**
+     * 运行jsmod2时的jvm参数，只有在启动启动器(rpc调用)时，才会生效
+     */
     public static final String JSMOD2_JVM_ARGS = "jsmod2.jvm.args";
 
+    /**
+     * 当开启成功时的信息
+     */
     @RegisterMethod
     public void registerSuccessInfo(){
         successInfo.add("start.finish");
     }
 
+    /**
+     * 服务端的配置文件:server.properties的信息，在使用时,必须调用父类的
+     * 注册信息
+     */
     @RegisterMethod
     public void registerServerProperties(){
         super.registerServerProperties();
@@ -204,6 +239,10 @@ public class Register extends RegisterTemplate {
     }
 
 
+    /**
+     * 注册异常，必须是ServerRuntimeException的子类，在发生时，会找到value值，作为该
+     * 异常的解决方案给用户参考
+     */
     @RegisterMethod
     public void registerException(){
         ex_methods.put (TypeErrorException.class,"* your configuration file type may have some problems, please see your configuration file type*\n\t refer to cn.jsmod2.core.utils.cn.jsmod2.config.ConfigQueryer class\n\t or cn.jsmod2.configs.ConfigType class");
@@ -219,6 +258,8 @@ public class Register extends RegisterTemplate {
      * 格式:
      * put(事件id,事件名.class)
      * 事件id对应数据包id
+     * 这里注册了全部的事件，在发送事件触发数据包时，会从这里寻找Event类对象，并
+     * 创建类对象，但是构造器不得有参数
      */
     @RegisterMethod
     public void registerEvents(){
@@ -312,6 +353,9 @@ public class Register extends RegisterTemplate {
     }
 
 
+    /**
+     * 将数据包信息反向的放入表里，以用于调用
+     */
     private void putPackets(){
         Set<Map.Entry<Class<? extends DataPacket>,Integer>> dataPackets = packets.entrySet();
         for(Map.Entry<Class<? extends DataPacket>,Integer> packet:dataPackets){

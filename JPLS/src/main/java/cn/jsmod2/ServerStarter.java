@@ -21,22 +21,38 @@ import java.util.concurrent.CountDownLatch;
 import static cn.jsmod2.core.utils.Utils.contains;
 
 /**
- * -w -u -lr -lm -github -n -a
- *  * -w 打开web
- * -u 打开ui
- * -lr 打开round的log监听
- * -lm 打开multiAdmin和游戏的log监听
- * -github 打开和Github连接
- * -n 打开client处理
- * -a 打开全部
+ * 服务端的启动控制类,使用DefaultServer进行启动,args参数包含以下
+ * <ul>
+ *     <li>-w -u -lr -lm -github -n -a</li>
+ *     <li>-w 打开web</li>
+ *     <li>-u 打开ui</li>
+ *     <li>-lr 打开round的log监听</li>
+ *     <li>-lm 打开multiAdmin和游戏的log监听</li>
+ *     <li>-github 打开和Github连接</li>
+ *     <li>-n 打开client处理</li>
+ *     <li>-a 打开全部</li>
+ * </ul>
+ * <P>同时包含了RPC心跳(-rpc port)和普通启动</P>
+ * @author magiclu550
  */
 @ServerApplication(DefaultServer.class)
 public class ServerStarter {
 
+    /**
+     * 为了在Handler中可以被使用，在调用start时会被初始化
+     */
     private static ServerStarter instance;
 
+    /**
+     * RPC的pKey名称
+     */
     public static final String P_KEY = "jsmod";
-    //Failed to instantiate class cn.jsmod2.ServerStarter$RPCHandler
+
+    /**
+     * 通过此方法来判断是开启rpc模式还是直接启动，通过args里的-rpc是否存在来
+     * 知晓，如果有-rpc参数，后面必须空格带着端口号，并且不得有其他的参数
+     * @param args 启动参数
+     */
     public void start(String[] args){
 
         //java -jar jsmod2.jar -rpc 20021
@@ -80,6 +96,10 @@ public class ServerStarter {
         }
     }
 
+    /**
+     * 开启一个真正的服务器，使得各个监听线程打开
+     * @param args 启动选项
+     */
     void startNow(String[] args){
 
         if(contains(args,"-a")){
@@ -110,6 +130,10 @@ public class ServerStarter {
         });
     }
 
+    /**
+     * 获得ServerStarter对象
+     * @return ServerStarter单例对象
+     */
     public static ServerStarter getInstance() {
         return instance;
     }

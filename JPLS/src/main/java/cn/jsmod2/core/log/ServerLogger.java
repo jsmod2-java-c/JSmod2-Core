@@ -80,6 +80,9 @@ public class ServerLogger implements ILogger{
             case 4:
                 error(message);
                 break;
+            case 5:
+                crit(message);
+                break;
         }
     }
 
@@ -177,8 +180,35 @@ public class ServerLogger implements ILogger{
         try {
             consoleOutputStream.write(getSimpleMessage(msg));
         } catch (IOException ignored) {
-        }queue.offer(msg);
+        }
+        queue.offer(msg);
         logger.warn(msg);
+    }
+
+    @Override
+    public void crit(String s) {
+        crit(s,"");
+    }
+
+    @Override
+    public void crit(String s, String s1) {
+        crit(s,s1,"\n");
+    }
+
+    @Override
+    public void crit(String s, String s1, String s2) {
+        String msg = LogFormat.format(s,"CRIT",YELLOW,s1,true)+s2;
+        try {
+            consoleOutputStream.write(getSimpleMessage(msg));
+        } catch (IOException ignored) {
+        }
+        queue.offer(msg);
+        logger.warn(msg);
+    }
+
+    @Override
+    public void multiCrit(Class<?> clz, String message, String prefix, String suffix) {
+        debug(message,prefix+getMultiMessage(clz)+"\t",suffix.equals("")?"\n":suffix);
     }
 
     public static ServerLogger getLogger() {
@@ -206,6 +236,7 @@ public class ServerLogger implements ILogger{
     public String getSimpleMessage(String str){
         return str.replaceAll("\\033\\[[0-9]+m","");
     }
+
 
 
 }

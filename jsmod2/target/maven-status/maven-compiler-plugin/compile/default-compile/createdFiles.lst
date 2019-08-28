@@ -127,6 +127,7 @@ cn/jsmod2/api/event/admin/IAdminQueryEvent.class
 cn/jsmod2/api/event/team/IDecideRespawnQueueEvent.class
 cn/jsmod2/core/log/ILogger.class
 cn/jsmod2/api/event/player/IPlayerIntercomEvent.class
+cn/jsmod2/core/log/ICritLogger.class
 cn/jsmod2/core/Start.class
 cn/jsmod2/core/utils/config/IConfig.class
 cn/jsmod2/api/event/player/IPlayerSCP914ChangeKnobEvent.class

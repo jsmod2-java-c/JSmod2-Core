@@ -5,6 +5,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * 老版本ui的启动器，目前不建议去使用
+ * @author magiclu550
+ */
 public class UIStarter extends javafx.application.Application  {
 
 

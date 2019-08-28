@@ -12,17 +12,28 @@ package cn.jsmod2;
 import org.fusesource.jansi.AnsiConsole;
 
 /**
+ * Jsmod2的主启动类，实例化了ServerStarter对象，并对于Windows的
+ * ansi字符做了兼容支持
  * @author magiclu550 #(code) jsmod2
  */
-//目前jsmod2还差的功能
-//1.UI启动器，未来将设计UI启动器，可视化的开启关闭服务器，检测服务器流量，人数，其他参数，控制台信息
-//2.测试框架，实现离线测试操作，即不连接游戏即可测试程序
-//3.基本的数据定义
-//4.a链接SteamCMD 子工程
-//5.emerald 脚本 子工程
-
 public class JavaMultiModStarterAdmin {
 
+    /**
+     * 主启动方法
+     * @param args 启动参数和选项
+     *             <P>
+     *             -rpc 端口号，以RPC形式启动，一般用于启动器，如果有该选项，则
+     *             其他选项不得存在.
+     *             </P>
+     *              -w -u -lr -lm -github -n -a
+     *              -w 打开web
+     *              -u 打开ui
+     *              -lr 打开round的log监听
+     *              -lm 打开multiAdmin和游戏的log监听
+     *              -github 打开和Github连接
+     *              -n 打开client处理
+     *              -a 打开全部
+     */
     public static void main(String[]args){
         AnsiConsole.systemInstall();
         ServerStarter starter = new ServerStarter();

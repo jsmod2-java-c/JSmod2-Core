@@ -6,6 +6,10 @@ import cn.jsmod2.core.annotations.NativeListener;
 import cn.jsmod2.core.event.Listener;
 import cn.jsmod2.core.log.ServerLogger;
 
+/**
+ * 本地监听器，监听玩家进入的信息
+ * @author magiclu550
+ */
 @NativeListener
 public class NativeJoinListener implements Listener {
 

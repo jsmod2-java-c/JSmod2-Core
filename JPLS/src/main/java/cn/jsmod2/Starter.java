@@ -15,6 +15,10 @@ import org.springframework.context.annotation.Import;
 import java.io.*;
 import java.util.Properties;
 
+/**
+ * 这是web服务器的启动对象,通过Springboot框架实现的
+ * @author magiclu550
+ */
 @SpringBootApplication
 @Configuration
 public class Starter {

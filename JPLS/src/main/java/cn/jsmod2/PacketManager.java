@@ -42,6 +42,9 @@ import java.util.Properties;
  *  {主事件对象},注入字段链:{}
  *  指令调用接受包 - 带权限管理
  *  {VO对象的内容}
+ *  PacketManager是本服务端默认的包处理器，进行的任务主要是指令执行,事件调用的功能
+ * @author MagicLu550
+ * @since 1.0.0
  */
 public class PacketManager extends Manager {
 
@@ -57,7 +60,11 @@ public class PacketManager extends Manager {
 
 
     /**
-     * 处理包的逻辑写在这里
+     *  用于切面处理数据包信息，最终调用所需求的地方
+     * @param message json字符串
+     * @param id 数据包的id号
+     * @param socket 此时接收到的Socket对象，作用是释放事件的执行,使得下一个事件进行
+     *               执行完成后返回0xFF&1的值
      */
     public void manageMethod(String message, int id, Socket socket){
         try{
@@ -95,9 +102,10 @@ public class PacketManager extends Manager {
         }
     }
 
-
-
-
+    /**
+     * 获取PacketManager的单例对象
+     * @return PacketManager的单利对象
+     */
 
     public static PacketManager getManager() {
         return manager;

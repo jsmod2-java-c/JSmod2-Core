@@ -113,6 +113,8 @@ public abstract class Server implements IServer {
 
     public final Properties serverProp;
 
+    public volatile boolean isConnected;
+
     public Server(GameServer gServer,boolean useUDP) {
 
         Server.sender = new RuntimeServer(this);
@@ -179,6 +181,8 @@ public abstract class Server implements IServer {
         }catch (Exception e){
 
         }
+
+        this.isConnected = true;
 
         getLogger().multiInfo(getClass(),"Connect successfully,loading plugins...","","");
         //加载插件

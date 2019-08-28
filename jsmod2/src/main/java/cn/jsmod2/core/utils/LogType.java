@@ -29,7 +29,9 @@ public enum LogType {
 
     WARN(3),
 
-    ERROR(4);
+    ERROR(4),
+
+    CRIT(5);
 
     int level;
     LogType(Integer level){

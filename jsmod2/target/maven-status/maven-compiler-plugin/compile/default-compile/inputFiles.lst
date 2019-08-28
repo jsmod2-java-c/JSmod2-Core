@@ -126,6 +126,7 @@
 /Users/luchangcun/jsmod2/jsmod2-info/jsmod2/src/main/java/cn/jsmod2/core/utils/LogType.java
 /Users/luchangcun/jsmod2/jsmod2-info/jsmod2/src/main/java/cn/jsmod2/core/ICommandSender.java
 /Users/luchangcun/jsmod2/jsmod2-info/jsmod2/src/main/java/cn/jsmod2/api/event/player/IPlayerSCP914ChangeKnobEvent.java
+/Users/luchangcun/jsmod2/jsmod2-info/jsmod2/src/main/java/cn/jsmod2/core/log/ICritLogger.java
 /Users/luchangcun/jsmod2/jsmod2-info/jsmod2/src/main/java/cn/jsmod2/api/event/player/IPlayerReloadEvent.java
 /Users/luchangcun/jsmod2/jsmod2-info/jsmod2/src/main/java/cn/jsmod2/api/event/player/IPlayer079TeslaGateEvent.java
 /Users/luchangcun/jsmod2/jsmod2-info/jsmod2/src/main/java/cn/jsmod2/core/utils/core/config/oaml/OamlWriter.java
