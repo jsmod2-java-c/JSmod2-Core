@@ -849,6 +849,9 @@ public abstract class Server implements IServer {
         if(args.length!=0){
             for(String arg:args)
                 EmeraldScriptVM.getVM().parse(arg);
+            if(contains(args,"-emerald")){
+                System.exit(0);
+            }
         }
     }
 
