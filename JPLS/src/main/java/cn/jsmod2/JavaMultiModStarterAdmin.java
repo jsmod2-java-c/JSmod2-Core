@@ -9,7 +9,7 @@ with the law, @Copyright JavaMultiModStarterAdmin China,more can see <a href="ht
 package cn.jsmod2;
 
 
-
+import org.fusesource.jansi.AnsiConsole;
 
 /**
  * @author magiclu550 #(code) jsmod2
@@ -24,7 +24,7 @@ package cn.jsmod2;
 public class JavaMultiModStarterAdmin {
 
     public static void main(String[]args){
-        //AnsiConsole.systemInstall();
+        AnsiConsole.systemInstall();
         ServerStarter starter = new ServerStarter();
         starter.start(args);
     }
