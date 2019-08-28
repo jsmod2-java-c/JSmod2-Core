@@ -172,8 +172,6 @@ public abstract class Server implements IServer {
         try {
             this.chooseLangOrStart();
 
-            scheduler.executeRunnable(()->Utils.TryCatch(this::startConsoleCommand));
-
             ServerSocket socket = new ServerSocket(20003);
 
             socket.accept();
@@ -197,9 +195,10 @@ public abstract class Server implements IServer {
 
     public void startWatch(Class<?> main,String[] args) {
         Utils.TryCatch(()-> {
-            this.executeEmerald(args, true);
+            this.executeEmerald(args);
             this.start(args);
             this.successTime();
+            scheduler.executeRunnable(()->Utils.TryCatch(this::startConsoleCommand));
         });
     }
     public void start(String[] args){
@@ -845,13 +844,11 @@ public abstract class Server implements IServer {
         this.lang = lang;
     }
 
-    private void executeEmerald(String[] args,boolean exit){
+    private void executeEmerald(String[] args){
         server.serverLogInfo("this cn.jsmod2.server uses the Emerald "+ Server.getSender().getServer().serverProp.getProperty(EMERALD_COMPILER,"java")+" compiler v0.1 Engine By MagicLu550");
         if(args.length!=0){
             for(String arg:args)
                 EmeraldScriptVM.getVM().parse(arg);
-            if(exit)
-                System.exit(0);
         }
     }
 
