@@ -1,5 +1,6 @@
 package cn.jsmod2;
 
+import cn.jsmod2.core.Console;
 import cn.jsmod2.core.Server;
 import cn.jsmod2.core.log.ServerLogger;
 import cn.jsmod2.core.plugin.PluginClassLoader;
@@ -60,7 +61,7 @@ public class RPCHandler{
         if(Server.getSender()==null){
             return "the server has stopped";
         }
-        return Server.getSender().getServer().getPluginManager().consoleExecuteCommand(command)+"";
+        return Console.getConsole().runConsoleCommandWithEmerald(command)+"";
     }
 
     public double cpu() {
