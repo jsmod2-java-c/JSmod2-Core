@@ -560,6 +560,7 @@ public abstract class Server implements IServer {
     }
 
     private void closeAll(){
+        isConnected = false;
         scheduler.getPool().shutdownNow();
         disable();
         closeStream();
@@ -662,6 +663,9 @@ public abstract class Server implements IServer {
                 //在未来版本可能会加入支持多个smod2连接一个服务器
                 serverSocket = getSocket(Integer.parseInt(serverProp.getProperty(FileSystem.THIS_PORT)));
                 while (true) {
+                    if(!Server.getSender().getServer().isConnected){
+                        ServerLogger.getLogger().multiInfo(getClass(),"the listener thread is closed","","");
+                    }
                     DatagramPacket request = new DatagramPacket(new byte[MAX_LENGTH], MAX_LENGTH);
                     ((DatagramSocket)serverSocket).receive(request);
                     //manageMessage(request);
@@ -689,6 +693,9 @@ public abstract class Server implements IServer {
                 }
 
                 while (true) {
+                    if(!Server.getSender().getServer().isConnected){
+                        ServerLogger.getLogger().multiInfo(getClass(),"the listener thread is closed","","");
+                    }
                     Socket socket = ((ServerSocket)serverSocket).accept();
                     scheduler.executeRunnable(new SocketHandlerThread(socket));
                     if (isDebug) {
@@ -792,6 +799,9 @@ public abstract class Server implements IServer {
             try {
                 int count = 0;
                 while (shouldIRun) {
+                    if(!Server.getSender().getServer().isConnected){
+                        ServerLogger.getLogger().multiInfo(getClass(),"the listener thread is closed","","");
+                    }
                     Thread.sleep(crunchifyRunEveryNSeconds);
 
                     String log = logListener(timeFormat,max,fileProperty);

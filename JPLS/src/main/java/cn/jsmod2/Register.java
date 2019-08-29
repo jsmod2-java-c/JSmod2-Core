@@ -213,7 +213,10 @@ public class Register extends RegisterTemplate {
     /**
      * 运行jsmod2时的jvm参数，只有在启动启动器(rpc调用)时，才会生效
      */
-    public static final String JSMOD2_JVM_ARGS = "jsmod2.jvm.args";
+    public static final String JSMOD2_JVM_ARGS = "jsmod2.option";
+
+
+
 
     /**
      * 当开启成功时的信息

@@ -11,6 +11,7 @@ package cn.jsmod2.core;
 
 import cn.jsmod2.core.ex.ServerRuntimeException;
 import cn.jsmod2.core.interapi.command.INativeCommand;
+import cn.jsmod2.core.log.ServerLogger;
 import cn.jsmod2.core.script.EmeraldScriptVM;
 import cn.jsmod2.core.script.EnvPage;
 import cn.jsmod2.core.script.Memory;
@@ -61,6 +62,10 @@ public class Console extends CommandSender{
         }
         PrintWriter stream = new PrintWriter(new FileOutputStream(outFile,true));
         while (true){
+            if(!Server.getSender().getServer().isConnected){
+                ServerLogger.getLogger().multiInfo(getClass(),"Exit the command input thread...","","");
+                break;
+            }
             //@Deprecated
             String command;
             if(Server.getSender().getServer().serverProp.getProperty(FileSystem.CONSOLE_LINE,"false").equals("false")) {
