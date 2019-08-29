@@ -144,6 +144,10 @@ public class ServerStarter {
         return instance;
     }
 
+    /**
+     * RPC Server的WebServer,当不开启rpc模式时，WebServer会为null
+     * @return WebServer实例,如果没有开启rpc模式,则会返回null
+     */
     public WebServer getWebServer() {
         return webServer;
     }

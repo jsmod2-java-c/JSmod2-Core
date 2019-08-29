@@ -44,7 +44,7 @@ public class RPCHandler{
 
     /**
      * 可以用于开启服务端(即开启web,log监听器,数据包监听器,事件调度器和指令调度器)
-     * 并开启心跳监听
+     * 并开启心跳监听,如果心跳监听超过5s没有反应则为超时，将关闭服务器
      * @param sw 启动选项，以数字代替
      *           <code>
      *                     .replace("1","-w")
@@ -82,15 +82,6 @@ public class RPCHandler{
                     Utils.printException(e);
                 }
             }).start();
-            new Thread(()->{
-               while (Server.getSender()!=null&&!Server.getSender().getServer().isConnected);
-               try{
-                   if(!Server.getSender().getServer().isConnected)ServerStarter.getInstance().getWebServer().shutdown();
-               }catch (Exception e){
-                   Utils.printException(e);
-               }
-
-            });
         }
 
         return "server has started";
