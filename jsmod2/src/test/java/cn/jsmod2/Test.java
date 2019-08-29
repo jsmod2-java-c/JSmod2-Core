@@ -1,15 +1,16 @@
 package cn.jsmod2;
 
-import java.io.File;
+
+
 
 public class Test {
 
-    public static void main(String[] args) {
-        System.out.println(new File("a/b/c/a.txt").getName());
-        System.out.println(new File("a/b/c/a.txt").getName());
-        System.out.println(new File("a/b/c/a.txt").getName());
-        System.out.println(new File("a/b/c/a.txt").getName());
-        System.out.println(1-((double) Runtime.getRuntime().freeMemory()/(double)Runtime.getRuntime().totalMemory()));
-        System.out.println(new File("a/b/c/a.txt").getName());
+    public static void main(String[] args) throws Exception{
+
+        String str ="\u001B[34m[\u001B[34m748]\u001B[36m[c.j.DefaultServer]\t\u001B[35m10:36:38\u001B[\u001BINFO\u001B\t]\u001B Server's folder/home/fafa/start.py/start.py";
+        String[] strs = str.split("\\u001B");
+        for(String s:strs){
+            System.out.print(s.replaceAll("(\\[[0-9]+m)","<span style=''>"+s.replaceAll("\\[[0-9]+m","")+"</span>"));
+        }
     }
 }

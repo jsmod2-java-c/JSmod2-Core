@@ -9,7 +9,7 @@ with the law, @Copyright JavaMultiModStarterAdmin China,more can see <a href="ht
 package cn.jsmod2;
 
 
-import org.fusesource.jansi.AnsiConsole;
+
 
 /**
  * Jsmod2的主启动类，实例化了ServerStarter对象，并对于Windows的
@@ -35,7 +35,6 @@ public class JavaMultiModStarterAdmin {
      *              -a 打开全部
      */
     public static void main(String[]args){
-        AnsiConsole.systemInstall();
         ServerStarter starter = new ServerStarter();
         starter.start(args);
     }

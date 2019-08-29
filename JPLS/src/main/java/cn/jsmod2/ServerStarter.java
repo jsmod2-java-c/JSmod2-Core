@@ -10,6 +10,7 @@ import org.apache.xmlrpc.server.PropertyHandlerMapping;
 import org.apache.xmlrpc.server.XmlRpcHandlerMapping;
 import org.apache.xmlrpc.server.XmlRpcServerConfigImpl;
 import org.apache.xmlrpc.webserver.WebServer;
+import org.fusesource.jansi.AnsiConsole;
 
 
 import java.io.IOException;
@@ -92,6 +93,7 @@ public class ServerStarter {
                 Utils.printException(e);
             }
         }else{
+            AnsiConsole.systemInstall();
             startNow(args);
         }
     }
