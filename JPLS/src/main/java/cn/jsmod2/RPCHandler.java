@@ -79,9 +79,18 @@ public class RPCHandler{
                         Thread.sleep(1000);
                     }
                 }catch (Exception e){
-                    e.printStackTrace();
+                    Utils.printException(e);
                 }
             }).start();
+            new Thread(()->{
+               while (Server.getSender()!=null&&!Server.getSender().getServer().isConnected);
+               try{
+                   if(!Server.getSender().getServer().isConnected)ServerStarter.getInstance().getWebServer().shutdown();
+               }catch (Exception e){
+                   Utils.printException(e);
+               }
+
+            });
         }
 
         return "server has started";

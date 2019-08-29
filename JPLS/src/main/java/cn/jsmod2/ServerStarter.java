@@ -49,12 +49,16 @@ public class ServerStarter {
      */
     public static final String P_KEY = "jsmod";
 
+
+    private WebServer webServer;
     /**
      * 通过此方法来判断是开启rpc模式还是直接启动，通过args里的-rpc是否存在来
      * 知晓，如果有-rpc参数，后面必须空格带着端口号，并且不得有其他的参数
      * @param args 启动参数
      */
     public void start(String[] args){
+
+
 
         //java -jar jsmod2.jar -rpc 20021
         //有-rpc就不允许其他命令
@@ -65,7 +69,7 @@ public class ServerStarter {
                 instance = this;
                 int port = Integer.parseInt(args[1]);
                 ServerLogger.getLogger().multiInfo(getClass(),"xmlrpc is started...","","");
-                WebServer webServer = new WebServer(port);
+                webServer = new WebServer(port);
                 PropertyHandlerMapping mapping = new PropertyHandlerMapping();
                 mapping.addHandler(P_KEY, RPCHandler.class);
                 webServer.getXmlRpcServer().setHandlerMapping(mapping);
@@ -138,5 +142,9 @@ public class ServerStarter {
      */
     public static ServerStarter getInstance() {
         return instance;
+    }
+
+    public WebServer getWebServer() {
+        return webServer;
     }
 }

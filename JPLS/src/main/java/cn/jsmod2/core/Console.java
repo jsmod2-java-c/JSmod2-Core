@@ -197,10 +197,11 @@ public class Console extends CommandSender{
          * 允许普通玩家使用的指令权限
          * cn.jsmod2.player all
          */
+
         for(INativeCommand cmd:commands){
             if(commandName.equals(cmd.getCommandName())){
                 //如果含有这个权限
-                if(getPowers().contains(cmd.getPower())){
+                if(getPowers().contains(cmd.getPower().replace("cn.jsmod2.",""))){
                     cmd.execute(this,args);
                 }else{
                     Utils.getMessageSender().error("you do not have this power");
