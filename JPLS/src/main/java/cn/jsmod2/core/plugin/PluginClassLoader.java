@@ -41,7 +41,11 @@ public class PluginClassLoader implements IPluginClassLoader {
 
     public static final String JSMOD2_PACKAGE = "cn.jsmod2";
 
-    private Map<String,String> plugin_info = new HashMap<>();
+    private Map<String,String> plugin_info = new HashMap<>();//文件名 介绍
+
+    private Map<String,String> plugin_name = new HashMap<>();//文件名 插件名
+
+    private Map<String,String> name_file = new HashMap<>();//插件名 文件名
 
     private PluginManager manager;
 
@@ -51,6 +55,15 @@ public class PluginClassLoader implements IPluginClassLoader {
 
     static {
         classLoader = new PluginClassLoader();
+    }
+
+    //文件名 插件名
+    public Map<String, String> getName_file() {
+        return name_file;
+    }
+
+    public Map<String, String> getPlugin_name() {
+        return plugin_name;
     }
 
     private List<File> jarFiles = new ArrayList<>();
@@ -119,6 +132,8 @@ public class PluginClassLoader implements IPluginClassLoader {
                         Main main = pluginClass.getAnnotation(Main.class);
                         if(main!=null){
                             plugin_info.put(jar.getName(),main.description());
+                            name_file.put(main.name(),jar.getName());
+                            plugin_name.put(jar.getName(),main.name());
                             PluginFileVO vo = new PluginFileVO(main.name(),pluginClass.getName(),main.description(),main.version());
                             Object obj = pluginClass.newInstance();
                             return loadPluginInfo(obj,vo,file,classLoader);
@@ -149,6 +164,9 @@ public class PluginClassLoader implements IPluginClassLoader {
         if(removed !=null) {
             removed.onDisable();
             plugins.remove(removed);
+            plugin_info.remove(name_file.get(name));
+            plugin_name.remove(name_file.get(name));
+            name_file.remove(name);
         }else
             throw new PluginException("no such plugin");
     }
