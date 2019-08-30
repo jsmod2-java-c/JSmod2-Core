@@ -38,14 +38,12 @@ public class OpsFile implements IOpsFile {
     }
 
     public void addOp(String name) throws IOException{
-        PowerPool.addAdminMemory(name);
         List<String> all = getOps();
         all.add(name);
         FileUtils.writeLines(file,System.getProperty("file.encoding"),all);
     }
 
     public void removeOp(String name) throws IOException{
-        PowerPool.removeAdminMemory(name);
         List<String> all = getOps();
         all.remove(name);
         FileUtils.writeLines(file,System.getProperty("file.encoding"),all);

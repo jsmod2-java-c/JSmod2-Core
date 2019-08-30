@@ -48,10 +48,12 @@ object PowerPool {
   }
 
   def addAdmin(name:String): Unit ={
+    addAdminMemory(name)
     OpsFile.getInstance.addOp(name)
   }
 
   def removeAdmin(name:String): Unit={
+    removeAdminMemory(name)
     OpsFile.getInstance.removeOp(name)
   }
 
