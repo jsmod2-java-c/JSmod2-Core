@@ -233,7 +233,7 @@ public class Utils {
             }
         }
 
-        return "";
+        return null;
     }
 
     public static void printException(Throwable t){
