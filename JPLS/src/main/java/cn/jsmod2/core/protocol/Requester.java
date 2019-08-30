@@ -39,6 +39,7 @@ public class Requester implements IRequester {
     }
 
     public Requester with(String key,Object value){
+        if(value == null)return this;
         _map.put(key,value instanceof ApiId?((ApiId) value).getApiId():value instanceof Enum?"'"+value+"'":value.getClass().isArray()||value instanceof List?JSON.toJSONString(value):value.toString());
         return this;
     }
