@@ -96,6 +96,17 @@ public class RPCHandler{
     }
 
     /**
+     * 这个用于通过文件名获取指定的插件名称，如果服务器是关闭的
+     * 会返回插件已经关闭的信息
+     * @param file 获取插件的文件名称
+     * @return 获取插件名称
+     */
+    public String get_plugin_name(String file){
+        if(Server.getSender()==null)return "Server has stopped";
+        return Server.getSender().getServer().getPluginManager().getPluginClassLoader().getPlugin_name().get(file);
+    }
+
+    /**
      * 用于设置语言文件,必须在start之前设置一个特定的语言(当然，如果已经设置过了，那就
      * 不用了),必须是已经存在的语言文件，如果不存在,则默认zh(中文语言)
      * @param lang 设置的语言属性
