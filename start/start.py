@@ -1,3 +1,4 @@
+#!/bin/python3.7
 # -*- coding: utf-8 -*-
 """
 Jsmod2 is a java-based scpsl server initiated by jsmod2.cn.
@@ -15,13 +16,12 @@ Created by MagicLu550 on 6.6,2019
 import glob
 import os
 import platform
-import re
 import subprocess
-import matplotlib.pyplot as plt
 
 from requests import get
 from os.path import expanduser
 from xmlrpc.client import *
+
 
 home = expanduser('~')
 
@@ -30,8 +30,10 @@ linuxurl64 = 'https://dl.jymc.top/java/jre_x64.tar.gz'
 # 采用我的下载服务器下载java
 windowsurl = 'https://dl.jymc.top/java/windows-i586.tar.gz'
 windowsurl64 = 'https://dl.jymc.top/java/windows-x64.tar.gz'
-
-
+print("{0}/manager.properties".format(os.getcwd()))
+if not os.path.exists("{0}/manager.properties".format(os.getcwd())):
+	managerproperties = "rpc.port=20020\nrpc.server=127.0.0.1\njsmod2.option=\njvm.option="
+	print(open(os.getcwd()+"/manager.properties","w").write(managerproperties))
 # 采用我的下载服务器下载java
 
 def installwindows():
@@ -95,27 +97,16 @@ if platform.system() == 'Linux':
 	system = 'linux'
 if platform.system() == 'Windows':
 	system = 'windows'
-# if platform.system() == 'Darwin':
-# 	os._exit(0)
-# Form implementation generated from reading ui file 'Jsmod2Manager.ui'
-#
-# Created by: PyQt5 UI code generator 5.13.0
-#
-# WARNING! All changes made in this file will be lost!
 
-
-from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QApplication, QMainWindow
 
-# -*- coding: utf-8 -*-
 
 # Form implementation generated from reading ui file 'JSmod2Manager.ui'
 #
 # Created by: PyQt5 UI code generator 5.13.0
 #
 # WARNING! All changes made in this file will be lost!
-
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -476,7 +467,7 @@ class Ui_JSmod2Manager(object):
 		keyvalue["jvm.option"] = self.jvm.toPlainText()
 		print(keyvalue)
 		emm =str(keyvalue).replace("{","").replace("}","").replace("\'","").replace(":","=").replace(",","\n").replace(" ","")
-		properties = open(os.getcwd() + "/../manager.properties", "w")
+		properties = open(os.getcwd() + "/manager.properties", "w")
 		print(properties.write(emm))
 		properties.close()
 	def loadplugin(self):
@@ -504,25 +495,25 @@ class Ui_JSmod2Manager(object):
 	def refreshpluginlist(self):
 		self.PluginsList.clear()
 		enabled = []
-		for file in glob.glob(os.getcwd() + "/../plugins/*.jar"):
+		for file in glob.glob(os.getcwd() + "/plugins/*.jar"):
 			enabled.append(file)
 			self.PluginsList.addItem(file.split("/")[-1:][0])
 		disabled = []
-		for file in glob.glob(os.getcwd() + "/../plugins/*.disabled"):
+		for file in glob.glob(os.getcwd() + "/plugins/*.disabled"):
 			disabled.append(file)
 			self.PluginsList.addItem(file.split("/")[-1:][0])
 
 	def disable(self):
 		plugin = self.PluginsList.currentItem().text()
 		self.unloadplugin()
-		os.rename(os.getcwd() + "/../plugins/" + plugin,
-		          (os.getcwd() + "/../plugins/" + plugin + ".disabled").replace(".jar", ""))
+		os.rename(os.getcwd() + "/plugins/" + plugin,
+		          (os.getcwd() + "/plugins/" + plugin + ".disabled").replace(".jar", ""))
 		self.refreshpluginlist()
 
 	def enable(self):
 		plugin = self.PluginsList.currentItem().text()
-		os.rename(os.getcwd() + "/../plugins/" + plugin,
-		          (os.getcwd() + "/../plugins/" + plugin + ".jar").replace(".disabled", ""))
+		os.rename(os.getcwd() + "/plugins/" + plugin,
+		          (os.getcwd() + "/plugins/" + plugin + ".jar").replace(".disabled", ""))
 		self.loadplugin()
 		self.refreshpluginlist()
 
@@ -538,17 +529,15 @@ class Ui_JSmod2Manager(object):
 		def run(self):
 			try:
 				for line in runprocess((home + r'/.JSMOD2/java/jre1.8.0_211/bin/java -jar ' + os.path.abspath(
-						os.path.join(os.getcwd(), "..")) + '/jsmod2.jar -rpc '+ keyvalue["rpc.port"]).split()):
+						os.path.join(os.getcwd(), ".")) + '/jsmod2.jar -rpc '+ keyvalue["rpc.port"]).split()):
 					self.signal.emit(line.decode().replace("\n", ""))
 			except:
 				try:
 					for line in runprocess((r'java -jar ' + os.path.abspath(
-							os.path.join(os.getcwd(), "..")) + '/jsmod2.jar -rpc '+ keyvalue["rpc.port"]).split()):
+							os.path.join(os.getcwd(), ".")) + '/jsmod2.jar -rpc '+ keyvalue["rpc.port"]).split()):
 						self.signal.emit(line.decode().replace("\n", ""))
 				except:
 					print("您的系统不支持并且系统没有java too sad :(")
-					sys.exit(1)
-
 	def detect(self):
 		print(self.treeWidget.selectedIndexes())
 		getSelected = self.treeWidget.selectedItems()
@@ -764,7 +753,7 @@ class rpcclientThread(QtCore.QThread):
 		except:
 			pass
 
-properties = open(os.getcwd() + "/../manager.properties","r+")
+properties = open(os.getcwd() + "/manager.properties","r+")
 keyvalue = {"":""}
 for line in properties.readlines():
 	if line[0] == "#":
@@ -777,6 +766,6 @@ MainWindow = QMainWindow()
 ui = Ui_JSmod2Manager()
 ui.setupUi(MainWindow)
 MainWindow.show()
-# MainWindow.setFixedSize(600, 411)
+MainWindow.setFixedSize(932, 450)
 MainWindow.setWindowTitle("JSmod2启动器")
 app.exit(app.exec_())
