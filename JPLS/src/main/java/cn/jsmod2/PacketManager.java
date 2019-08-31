@@ -68,12 +68,15 @@ public class PacketManager extends Manager {
      */
     public void manageMethod(String message, int id, Socket socket){
         try{
+            //第一步,获取server的信息,解码规则:UTF-8
             Properties properties = FileSystem.getFileSystem().serverProperties(Server.getSender().getServer());
             byte[] bytes = message.getBytes(properties.getProperty("encode"));//通过utf-8形式获取byte字节数组
+            //从注册机中找到注册的事件Register中的那些，然后放进去
             Map<Integer, Class<? extends Event>> events = new HashMap<>();
             for(RegisterTemplate template:Server.getSender().getServer().getRegisters()){
                 events.putAll(template.getEvents());
             }
+            //然后如果存在这个id在事件里,那么就去执行事件
             if(events.containsKey(id)){
                 //System.out.println(new String(Base64.getDecoder().decode(new String(bytes))));
                 callEventByPacket(id,bytes);
