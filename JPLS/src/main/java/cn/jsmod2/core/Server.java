@@ -47,10 +47,228 @@ import static cn.jsmod2.core.FileSystem.*;
 import static cn.jsmod2.core.utils.Utils.*;
 
 /**
- * jsmod2 cn.jsmod2.server class
+ * JSMod2是一款基于协议(JSmod2协议)开发的一款使得java插件可以开发SCPSL:SCP基金会秘密实验室
+ * 插件的一个框架,这个框架主要由两部分组成
+ * JPLS和JSmod2组成,JPLS的全称叫做Java Plugin Loading System,JSmod2称为Java Server Mod
+ * Java Server Mod提供了开发插件的接口和工具类,JPLS则是驱动插件生效的核心,同时C#服务端必须装配
+ * ProxyHandler(协议代理插件)才能使得java插件真正生效于指定的客户端
+ * JSMod2同时提供了
+ * JSMod2Manager:基于python开发的管理控制平台
+ * JSMod2DevelopmentKit:JSMod2开发工具包,结合在JSmod2中
+ * JSMod2 Repo:JSMod2的maven控制平台
+ * http://repo.noyark.net/nexus
+ * 同时JSMod2的源代码在github开放,并作为主要的版本控制平台
+ * https://www.github.com/jsmod2-java-c
+ * JSMod2的官方网站:
+ * http://jsmod2.cn
+ * 以上就是JSMod2的执行体系,即JSmod2的结构
+ * |     这一部分都是JSmod2的组件    |
+ * JSmod2->插件->JPLS->ProxyHandler->ServerMod->MultiAdmin/LocalAdmin->Game
  *
- * @author magiclu550 #(code)jsmod2
+ * 首先上一届课讲解了开发一款JavaServerMod插件的流程,JSMod2已经提供了方便的插件加载框架
+ * 并且提供了web网站开发的支持
+ * <code>
  *
+ *  @Controller
+ *  public class Test{
+ *
+ *         @RequestMapping("/jsmod2")
+ *         public String hello(){
+ *             return "index.html";
+ *         }
+ *  }
+ * </code>
+ * 您完全可以在代码中使用这种形式进行开发网站,访问网站使用ip:jsmod2的默认web服务器端口/jsmod2即可
+ *
+ * 1.JSmod2的心脏: Server类和DefaultServer类
+ * 这两个类是JSMod2的核心部分,一切能够让java和ServerMod交互,其实都是依靠了这个类/对象为基础,Server类
+ * 和ServerMod的Server是不一样的
+ *
+ * - Server为基类,实现了IServer接口,IServer继承了Start和Closeable,Reloadable接口
+ *      - Start主要包含了start方法(startWatch方法其实和start的作用几乎差不多),Closeable包含close方法,Reloadable包含reload方法
+ *      - 分析Server的作用
+ *          - Server的第一个作用,就是存储了这个服务端运行时的一切基本信息
+ *              - 语言属性 lang
+ *              - jar包的所在目录 serverfolder
+ *              - 启动和成功的时间 startTime和startSuccessTime 启动时间就是(startSuccessTime-startTime)ms
+ *              - 指令的基本信息
+ *              - 一系列最常用的常量(在项目中使用频率最高)
+ *              - 记录管理员信息的对象OpsFile
+ *              - 使用的是udp还是tcp
+ *              - 是否和游戏已经对接
+ *          - Server的第二个作用,提供了这个服务端运行的基本对象
+ *              - LineReader 命令行对象
+ *              - RuntimeServer 正在运行的服务器对象
+ *              - Logger 打印日志信息的对象
+ *              - plugins 服务器的插件对象
+ *              - PluginManager 服务器的插件管理对象
+ *              - RegisterTemplate 注册机对象:就是管理一些字典信息的对象,用于运行过程根据情况获取,从而使得数据严谨整齐分区安放，比较易于管理
+ *          - 第三个作用,运行监听线程:start和startWatch
+ *              - 根据情况启动ListenerThread(TCP或者UDP)
+ *                  - ListenerThread UDP
+ *                  - ListenerThreadTCP TCP
+ *                  - ListenerThread的作用是监听来自ProxyHandler的信息
+ *                      - ProxyHandler由c#编写,后期将ProxyHandler会讲解
+ *                      - ProxyHandler会在事件发生的时候发送数据包(EventPacket)，JSmod2的
+ *                      监听线程会根据数据包id从Register中的registerEvents()中找到对应的class对象
+ *                          例如 -> 0x01 -> 找到AdminQueryEvent.class 之后调用newInstance()产生事件对象
+ *                          之后通过callEvent(传入一个Event对象)调用之前注册的监听器方法
+ *                  - ListenerThread启动后,会将来自ProxyHandler的base64字符串解析成jsmod2协议的字符串(实际上是一个json字符串)
+ *                      之后将json字符串拆分注入
+ *
+ *                      完整的事件jsmod2协议长这个样子:0x01-{}|||playerName:UUID序列|||admin-playerName:UUID序列
+ *                      这里会把AdminQueryEvent中的playerName字段注入UUID序列(这个序列是为了从Server Mod中找到它所对应的对象)
+ *                      然后从AdminQueryEvent中找到admin字段,是Player类型,然后Player类型中也有playerName字段,因此就把admin中的
+ *                      playerName字段注入进去这个UUID序列(而且playerName和admin-playerName对应的uuid序列都是不同的)这样每个复杂对象
+ *                      都有一个uuid对应,在proxyHandler中,uuid将会和一个对象绑定在一起
+ *
+ *                      此时ProxyHandler中的apiMapping就是这样的(在事件触发时就会把这两个信息放了进去,这里省略其他复杂对象)
+ *                      {
+ *                          "UUID1":"AdminQueryEvent对象1",
+ *                          "UUID2":"admin对象1"
+ *                          ...
+ *                      }
+ *
+ *                      当在jsmod2中,使用这个admin
+ *                      <code>
+ *                          public void onAdmin(IAdminQueryEvent e){
+ *                              e.getAdmin().getName();
+ *                          }
+ *                      </code>
+ *                      此时getName发出了这个包
+ *                      {
+ *                          "id":"xxx"//具体id暂时不用知道
+ *                          "field":"Name"
+ *                          "playerName":"UUID2"
+ *                      }
+ *                      之后传输到ProxyHandler
+ *                      ProxyHandler会先读取playerName找到UUID2
+ *                      然后在通过UUID2,从apiMapping中找到admin对象1
+ *                      之后admin对象1.Name获取返回值
+ *                      然后通过JsonSetting对象把数据封装起来
+ *                      之后返回
+ *                      然后Socket此时进行write读取,然后通过BinaryStream的decode方法解码
+ *                      得到Name的返回值
+ *                      之后获取Name成功
+ *                      这是事件触发和调用方法获取属性的运行流程,也是jsmod2的基本流程
+ *                      游戏触发事件Event->之后把Event和它的复杂对象(如Player,TeamRole等等)放到apiMapping表里，并生成一个
+ *                      UUID Key对应着他们,然后发出协议,把uuid注入到jsmod2的对象进去,之后对象在执行方法时候,会发出数据包,里面包含
+ *                      了该对象的uuid,ProxyHandler接受到后,通过这个uuid找到游戏里的这个对象，从而实现对应的操作
+ *
+ *                      另外这些操作是jsmod2真正的核心部分，也是实现了jsmod2核心功能的地方
+ *
+ *                      实现这些解码的核心组件是BinaryStream,也就是协议的翻译器
+ *
+ * 2.JSMod2的大脑: BinaryStream
+ *       - BinaryStream在JavaServerMod中是思考的角色，对一切传来的协议进行解析,再对一切发出的协议组合
+ *       - Server运行过程中,PacketManager是协议管理器,协议管理器只是充当了控制者和决策者角色,就是我该根据什么情况去调用什么地方
+ *          - 如调用事件和调用指令
+ *          - 根据id去判别
+ *              - Manager接口提供了已经实现的通过ID和数据包信息调用事件和指令的接口
+ *          - PacketManager事实上代码很简单
+ *              - 然后再就是callEventByPacket,
+ *                  - 就是定义一个EventStream(BinaryStream的子类)
+ *                  - 从events找到class对象
+ *                  - 之后直接通过callEvent执行(callEvent如何执行的会在Plugin中讲解)
+ *                  - 之后事件调用结束
+ *              - 如果不存在这个id
+ *                  - 那么就是关心命令调用
+ *                  - 命令调用两种方式,c#控制台调用和玩家调用
+ *                  - 这个是ProxyHandler发的id信息来判断的
+ *                  - 最终从数据包中获取这个VO对象(Value Object）,其实就是把数据包信息拆解,组成的对象
+ *                  - 最终获得到VO对象,就根据情况来执行,如果是控制台命令,那么就直接runConsoleCommand
+ *                  - 如果不是,就获得到Player对象，然后传进去
+ *              -   最后socket会返回一个信息0xFF&1，对对方说明已经结束了指令和事件,游戏可以继续进行下去(在事件没有结束前,ProxyHandler是将
+ *                  事件给阻塞掉的)
+ *          - Server的sendDataPacket 是对象调用时,如Player对象,就会使用这个方法(发出数据包),核心实现还是由BinaryStream实现
+ *              - DataPacket是BinaryStream的子类
+ *              - DataPacket分为 GetPacket和SetPacket(ControlPacket)和DoPacket以及SimplePacket(DoMethodPacket DoStream...)
+ *              - DataPacket的介绍在Jsmod2-protocol[参见(1)]里说明了
+ *              - JSmod2前期采用一个Packet对应一个Handler,但是作者突发奇想,写出了SimpleHandler,即通用Handler,通过"反射"机制实现的Handler
+ *              可以动态的设置和获取数值,这个解析器可以10行代码顶n行
+ *              - 对应SimpleHandler就是SimplePacket(Packet的定义在cn.jsmod2.network.protocol下)
+ *          这些大概就是BinaryStream的作用
+ *
+ * 3.附带的组件
+ *          - MultiAdminCommand 基于ProxyHandler的CommandHandler实现的,可以直接调用smod2上的命令
+ *              multi HELP 查看smod2命令 multi 命令 参数1 参数2 调用smod2的命令
+ *          - Config Framework 基于yaml json properties的Config框架,可以通过ConfigQueryer来定义对象(这样使用了对象池,节省内存开销)
+ *
+ *          - Oaml Config 这是为jsmod2定制的配置文件格式,位于oaml包下,可以从https://github.com/noyark-system/noyark_oaml_java来获得使用
+ *          方法
+ *
+ *          - Plugin Loading Framework 是为JSmod2定制的基于URLClassLoader的插件加载框架,可以实现自动定义和自动注册的插件框架
+ *              - 这个框架分为PluginClassLoader和PluginManager
+ *                  - PluginClassLoader首先读取jar包,通过URLClassloader读取所有类对象，然后进行查找,如果找到配置文件则从plugin.yml读取信息,加载主类
+ *                  如果没有配置文件,则找@Main注解,然后找到Main注解后开始加载Plugin对象,加载onLoad onEnable,在服务器停止前调用onDisable(强制停止则不会)
+ *                  - 找到@Main后,会再尝试查找EnableRegister注解,如果没找到,则不进行自动注册,如果找到,则扫描全部实现Listener接口和继承Command对象的类,并
+ *                  注册进去
+ *                  - 注册Command只是将Plugin注入进去，然后放在commands映射表(PluginClassLoader中),如果是Listener,则将类进行拆分,整理出带@EventManager
+ *                  的方法,之后下一步根据优先级整理成一个个列表,然后放在一个映射表中(首先根据方法的参数类型划分成一个个列表,再根据优先级对列表排序),之后发生事件时,
+ *                  通过callEvent调用,callEvent则是先得到事件类型,然后把有和这个事件类型相同参数类型(或者子类的类型)的方法找到,然后根据优先级依次执行这些方法
+ *                  <code>
+ *                      public void onPlayerJoin(IPlayerJoinEvent e){
+ *
+ *                      }
+ *                      //发送callEvent
+ *                      Event e = PlayerJoinEvent.class.newInstance();//动态生成的事件对象
+ *                      callEvent(e);//则会找到onPlayerJoin这个方法,之后执行
+ *                      因此您可以通过这个特性来自定义事件
+ *                  </code>
+ *         - Emerald脚本语言
+ *              - 基于java写的脚本语言,但是这个语言目前有点挫,但是可以结合命令行使用
+ *
+ *
+ *
+ *  参见(1)
+ *           Jsmod2协议分为5种请求方式:Get，Set，IDSend，CommandRegister，CommandSender
+ *             一种响应: Future响应
+ * Jsmod2端会发送Get和Set和CommandRegister
+ * Get请求发送后，会有一个具体的返回值，Get请求基本不会修改对方端的具体参数，它的目的仅仅为了返回值
+ * Set请求发送后，不会有返回值，Set请求一定会修改对方端的具体参数，它的目的仅仅为了修改值
+ * CommandRegister请求，用于注册命令，没有返回值
+ * C#端会发送
+ * IDSend是发送Event请求，当发送Event对象时，将全部对象添加到请求链，并附带一个id账号
+ * CommandSender请求，用于执行jsmod2注册的命令
+ *
+ * Future响应是一个二进制的响应串，Jsmod2的Response对象已经封装了它，进行了响应编译
+ *
+ * Get和Set请求已经封装在了数据包中，直接使用send即可发包
+ *
+ * 一个Get请求
+ * 111-{
+ *    "id":"111",
+ *    "type":"item",
+ *    "field":"xxx",
+ *    "player":"ADE4-FL09-ADGB-Y9E6“
+ * }
+ * 一个Set请求
+ * 111-{
+ *    "id":"111",
+ *    "type":"item",
+ *    "do":"remove",
+ *    "player":"ADE4-FL09-ADGB-Y9E6“
+ * }
+ * 111-{
+ *    "id":"111",
+ *    "type":"item",
+ *    "kinematic":"true",
+ *    "player":"ADE4-FL09-ADGB-Y9E6“
+ * }
+ * IDSend请求
+ * {
+ *     #省略，对象信息
+ * }|||"admin-playerName":"ADE4-FL09-ADGB-Y9E6"
+ *
+ *
+ * Future响应
+ * {
+ *     #省略，对象信息
+ * }|||"admin-item":"ADE4-FL09-ADGB-Y9E6"@!{
+ *     #省略，对象信息
+ * }|||"admin-item":"ADE4-FL09-ADGB-Y9E7"
+ *
+ * @author magiclu550
  */
 
 public abstract class Server implements IServer {
