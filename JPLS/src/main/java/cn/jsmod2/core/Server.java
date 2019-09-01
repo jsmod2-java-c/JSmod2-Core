@@ -914,6 +914,7 @@ public abstract class Server implements IServer {
                     if(!Server.getSender().getServer().isConnected){
                         ServerLogger.getLogger().multiInfo(getClass(),"the listener thread is closed","","");
                     }
+                    //getLogger().multiDebug(getClass(),"正在响应...","","");
                     Socket socket = ((ServerSocket)serverSocket).accept();
                     scheduler.executeRunnable(new SocketHandlerThread(socket));
                     if (isDebug) {

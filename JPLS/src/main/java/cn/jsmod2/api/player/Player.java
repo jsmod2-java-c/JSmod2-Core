@@ -50,6 +50,9 @@ public class Player extends CommandSender implements IPlayer, Serializable,Clone
         super(name, Powers.ALL,Powers.PLAYER);
     }
 
+    public Player(){
+        this("");
+    }
     @Override
     public String getName() {
         SimpleGetStream stream = new SimpleGetStream(String.class);

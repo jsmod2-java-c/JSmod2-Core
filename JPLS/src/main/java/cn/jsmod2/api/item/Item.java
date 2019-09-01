@@ -17,6 +17,9 @@ import java.io.Serializable;
 
 public class Item extends ApiId implements Cloneable, Serializable,IItem {
 
+    public Item(){
+
+    }
     //在字段注入使用
     //playerName换成ItemId
 

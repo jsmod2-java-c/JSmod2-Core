@@ -212,7 +212,7 @@ public class RPCHandler{
      * @return ip地址/已经关闭
      */
     public String get_ip(){
-        if(Server.getSender()==null){
+        if(Server.getSender()==null||!Server.getSender().getServer().isConnected){
             return "the server has stopped";
         }
         return Server.getSender().getServer().getGameServer().getIpAddress();
@@ -223,7 +223,7 @@ public class RPCHandler{
      * @return 最大玩家数量
      */
     public int get_player_max(){
-        if(Server.getSender()==null){
+        if(Server.getSender()==null||!Server.getSender().getServer().isConnected){
             return 0;
         }
         return Server.getSender().getServer().getGameServer().getMaxPlayers();
@@ -234,7 +234,7 @@ public class RPCHandler{
      * @return 在线玩家数量
      */
     public int get_player(){
-        if(Server.getSender()==null){
+        if(Server.getSender()==null||!Server.getSender().getServer().isConnected){
             return 0;
         }
         return Server.getSender().getServer().getGameServer().getPlayers().size();
@@ -246,7 +246,7 @@ public class RPCHandler{
      */
     public List<String> get_player_list(){
         List<String> list = new ArrayList<>();
-        if(Server.getSender()==null)return list;
+        if(Server.getSender()==null||!Server.getSender().getServer().isConnected)return list;
         List<? extends IPlayer> players = Server.getSender().getServer().getGameServer().getPlayers();
         for(IPlayer p:players){
             list.add(p.getName());
