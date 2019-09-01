@@ -1,7 +1,5 @@
 package cn.jsmod2.core.protocol;
 
-import cn.jsmod2.core.protocol.GetPacket;
-import cn.jsmod2.core.protocol.SetPacket;
 import cn.jsmod2.core.utils.Utils;
 
 import java.util.List;

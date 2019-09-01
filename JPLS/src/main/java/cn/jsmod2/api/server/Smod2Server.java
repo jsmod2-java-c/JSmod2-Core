@@ -132,7 +132,12 @@ public class Smod2Server extends CommandSender implements GameServer {
     }
 
     public List<Player> getPlayers() {
+        return getPlayers("");
+    }
+
+    public List<Player> getPlayers(String filter){
         GetPlayerPacket playerPacket = new GetPlayerPacket();
+        playerPacket.filter = filter;
         return playerPacket.send();
     }
 

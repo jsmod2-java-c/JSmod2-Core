@@ -8,6 +8,8 @@ public class GetPlayerPacket extends GetServerPacket {
 
     public static final int ID = 0x63;
 
+    public String filter = "";
+
 
     public GetPlayerPacket() {
         super(ID, Player.class);
@@ -16,6 +18,6 @@ public class GetPlayerPacket extends GetServerPacket {
     @Override
     @SuppressWarnings("unchecked")
     public List<Player> send() {
-        return (List<Player>)requester.with("field","players").get().getProtocolArray(false);
+        return (List<Player>)requester.with("field","players").with("filter",filter).get().getProtocolArray(false);
     }
 }
