@@ -25,7 +25,7 @@ public class ControlPacket extends DataPacket {
 
     @Override
     public byte[] encode() {
-        requester.with("cn.jsmod2.player",playerName);
+        requester.with("player",playerName);
         return dataObjectEncodeWithEnd(_infor_map,_end);
     }
 

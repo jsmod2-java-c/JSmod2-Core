@@ -14,7 +14,7 @@ public class AdminQueryAdminSetPacket extends EventSetPacket {
 
     @Override
     public void send() {
-        requester.with("cn.jsmod2.admin",admin.getApiId())
+        requester.with("admin",admin.getApiId())
                 .to();
     }
 }
