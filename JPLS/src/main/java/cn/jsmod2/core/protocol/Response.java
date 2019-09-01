@@ -51,6 +51,9 @@ public class Response implements IResponse {
         //转化为base64解密后的，之后再加密 getBytes
         try {
             String message = new String(Base64.getDecoder().decode(future.get()), properties.getProperty(FileSystem.SERVER_DECODE));
+            if(message.equals("null")){
+                return null;
+            }
             String[] protocols = message.split("@!");
             if(!getArray) {
                 for (String protocol : protocols) {

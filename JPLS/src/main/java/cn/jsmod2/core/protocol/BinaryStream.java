@@ -115,6 +115,9 @@ public abstract class BinaryStream {
     public <T> List<T> dataListDecode(byte[] data, Class<T> clz){
         try {
             String json = getDefaultJson(data);
+            if(json == null){
+                return null;
+            }
             String[] props = splitJson(json);
             json = props[0];
             List<T> list = JSON.parseArray(json,clz);
@@ -128,6 +131,9 @@ public abstract class BinaryStream {
         byte[] packetBytes = Base64.decodeBase64(data);
         packetBytes = Arrays.copyOf(packetBytes, Utils.getLen(packetBytes));
         String json = new String(packetBytes,properties.getProperty("decode"));
+        if(json.equals("null")){
+            return null;
+        }
         json = json.substring(json.indexOf("-")+1);
         if(json.contains("~")) {
             json = json.substring(0, json.indexOf("~"));
@@ -139,6 +145,7 @@ public abstract class BinaryStream {
     public <T> T dataObjectDecode(byte[] data,Class<T> clz){
         try{
             String json = getDefaultJson(data);
+            if(json == null)return null;
 
             //{main-object}|cn.jsmod2.player-xxx:xxx|cn.jsmod2.team-class:xxx
             String[] props = splitJson(json);
