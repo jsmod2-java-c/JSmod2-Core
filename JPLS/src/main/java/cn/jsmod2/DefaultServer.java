@@ -166,7 +166,7 @@ public class DefaultServer extends Server {
      */
     @Override
     public void close() {
-        if(ServerStarter.getInstance().getWebServer()!=null)
+        if(ServerStarter.getInstance()!=null)
             ServerStarter.getInstance().getWebServer().shutdown();
         super.close();
     }
