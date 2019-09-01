@@ -107,6 +107,7 @@ public class Register extends RegisterTemplate {
         nativeCommandMap.put("multi",new MultiCommand());
         nativeCommandMap.put("download",new DownloadPluginCommand());
         nativeCommandMap.put("register",new RegisterPanelCommand());
+        nativeCommandMap.put("server",new ServerCommand());
     }
 
 
