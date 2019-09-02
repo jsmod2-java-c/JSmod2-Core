@@ -3,9 +3,9 @@ package cn.jsmod2.core.plugin;
 import cn.jsmod2.core.log.ServerLogger;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * ConfigManager 最新的ConfigManager
@@ -20,15 +20,15 @@ public class ConfigManager {
         manager = new ConfigManager();
     }
 
-    private Map<Plugin, Map<String,ConfigSetting>> settings = new HashMap<>();//记录全部的
+    private Map<Plugin, Map<String,ConfigSetting>> settings = new ConcurrentHashMap<>();//记录全部的
 
-    private Map<String,Plugin> primarySettingsMap = new HashMap<>();//插件单一的
+    private Map<String,Plugin> primarySettingsMap = new ConcurrentHashMap<>();//插件单一的
 
-    private Map<String, List<Plugin>> secondary = new HashMap<>();//插件不单一的
+    private Map<String, List<Plugin>> secondary = new ConcurrentHashMap<>();//插件不单一的
 
     public boolean registerConfig(PluginBase plugin,ConfigSetting setting){
         if(!this.settings.containsKey(plugin)){
-            this.settings.put(plugin,new HashMap<>());
+            this.settings.put(plugin,new ConcurrentHashMap<>());
         }
 
         if(setting.isPrimary()){
