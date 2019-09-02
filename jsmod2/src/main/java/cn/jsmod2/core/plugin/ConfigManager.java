@@ -69,6 +69,7 @@ public class ConfigManager {
             ServerLogger.getLogger().multiWarn(getClass(),"Trying to access a cn.jsmod2.config setting that isn't registered to the plugin, this is bad practice.","","");
         }
         ConfigSetting setting = this.resolvePrimary(key);
+        if(setting == null)return null;
         return type.cast(setting.getValue());
     }
 
@@ -78,9 +79,8 @@ public class ConfigManager {
     }
 
     public ConfigSetting resolveSetting(Plugin plugin,String key){
-        ConfigSetting setting = null;
         Map<String,ConfigSetting> dic = this.settings.get(plugin);
-        return dic.get(key);
+        return dic==null?null:dic.get(key);
     }
 
     public boolean isRegistered(Plugin plugin,String key){

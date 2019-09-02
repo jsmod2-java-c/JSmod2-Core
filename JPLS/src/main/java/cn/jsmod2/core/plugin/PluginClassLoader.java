@@ -10,6 +10,7 @@ package cn.jsmod2.core.plugin;
 
 import cn.jsmod2.core.Server;
 import cn.jsmod2.core.annotations.EnableRegister;
+import cn.jsmod2.core.annotations.LoadBefore;
 import cn.jsmod2.core.annotations.Main;
 import cn.jsmod2.core.command.Command;
 import cn.jsmod2.core.command.NativeCommand;
@@ -47,7 +48,11 @@ public class PluginClassLoader implements IPluginClassLoader {
 
     private Map<String,String> name_file = new HashMap<>();//插件名 文件名
 
+    private Map<String,Plugin> name_plugins = new HashMap<>();
+
     private PluginManager manager;
+
+    private File[] files;
 
     private List<Plugin> plugins = new ArrayList<>();
 
@@ -73,7 +78,7 @@ public class PluginClassLoader implements IPluginClassLoader {
     }
 
     public List<Plugin> loadPlugins(File pluginDir){
-        File[] files = pluginDir.listFiles();//all jar files
+        files = pluginDir.listFiles();//all jar files
         loadFiles(files);
         for(File jar:jarFiles){
             plugins.add(loadPlugin(jar));
@@ -85,7 +90,12 @@ public class PluginClassLoader implements IPluginClassLoader {
         loadPlugin(new File(file));
     }
 
-    public Plugin loadPlugin(File jar) {
+    //可以加载指定名字的插件
+    private Plugin loadPlugin(File jar,String[] pName){
+        if(!jar.getName().endsWith(".jar"))return null;
+        if(plugin_name.containsKey(jar.getName())){
+            return name_plugins.get(plugin_name.get(jar.getName()));
+        }
         try{
             URL url = jar.toURI().toURL();
 
@@ -131,6 +141,12 @@ public class PluginClassLoader implements IPluginClassLoader {
                         Class<?> pluginClass = classLoader.loadClass(mainName);
                         Main main = pluginClass.getAnnotation(Main.class);
                         if(main!=null){
+                            if(pName!=null&&!Arrays.asList(pName).contains(main.name())){
+                                return null;
+                            }
+                            if(name_file.containsKey(main.name())){
+                                return name_plugins.get(main.name());
+                            }
                             plugin_info.put(jar.getName(),main.description());
                             name_file.put(main.name(),jar.getName());
                             plugin_name.put(jar.getName(),main.name());
@@ -146,6 +162,10 @@ public class PluginClassLoader implements IPluginClassLoader {
             Utils.printException(e);
         }
         return null;
+    }
+    public Plugin loadPlugin(File jar) {
+
+        return loadPlugin(jar,null);
     }
 
     public Map<String, String> getPlugin_info() {
@@ -181,7 +201,25 @@ public class PluginClassLoader implements IPluginClassLoader {
 
             Plugin pluginObject = ((PluginBase) plugin);
 
-            pluginObject.init(logger, server, vo.getPluginName(), server.getServerFolder(), vo.getDescription(), this, new File(server.getPluginDir() + "/" + vo.getPluginName()), vo.getVersion());
+            name_plugins.put(vo.getPluginName(),pluginObject);//放进去
+
+            //检测如果有loadBefore
+
+            LoadBefore before = pluginObject.getClass().getAnnotation(LoadBefore.class);
+            if(before != null){
+                //那么先判断loadBefore的内容
+                String[] args = before.pluginName();
+                for(File file:files){
+                    //如果发现了名字,则先加载改名字的插件
+                    loadPlugin(file,args);
+                }
+            }
+
+            File dataFolder = new File(server.getPluginDir() + "/" + vo.getPluginName());
+            if(!dataFolder.exists()){
+                dataFolder.mkdirs();
+            }
+            pluginObject.init(logger, server, vo.getPluginName(), server.getServerFolder(), vo.getDescription(), this, dataFolder, vo.getVersion());
 
             pluginObject.onLoad();
 
