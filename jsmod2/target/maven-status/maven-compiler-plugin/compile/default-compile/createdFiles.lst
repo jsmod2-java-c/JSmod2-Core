@@ -92,6 +92,7 @@ cn/jsmod2/api/event/environment/IScpDeathAnnouncementEvent.class
 cn/jsmod2/core/utils/core/config/oaml/exception/AmbiguousTypeException.class
 cn/jsmod2/api/server/IConnection.class
 cn/jsmod2/api/event/player/IPlayer079AddExpEvent.class
+cn/jsmod2/core/annotations/LoadBefore.class
 cn/jsmod2/core/Reloadable.class
 cn/jsmod2/core/utils/core/config/oaml/utils/OrderMap.class
 cn/jsmod2/api/map/IMap.class

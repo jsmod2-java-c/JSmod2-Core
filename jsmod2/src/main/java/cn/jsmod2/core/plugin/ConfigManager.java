@@ -20,36 +20,30 @@ public class ConfigManager {
         manager = new ConfigManager();
     }
 
-    private Map<Plugin, Map<String,ConfigSetting>> settings = new HashMap<>();
+    private Map<Plugin, Map<String,ConfigSetting>> settings = new HashMap<>();//记录全部的
 
-    private Map<String,Plugin> primarySettingsMap = new HashMap<>();
+    private Map<String,Plugin> primarySettingsMap = new HashMap<>();//插件单一的
 
-    private Map<String, List<Plugin>> secondary = new HashMap<>();
+    private Map<String, List<Plugin>> secondary = new HashMap<>();//插件不单一的
 
     public boolean registerConfig(PluginBase plugin,ConfigSetting setting){
         if(!this.settings.containsKey(plugin)){
-            plugin.error("Trying to register a cn.jsmod2.config setting before the plugin registered with cn.jsmod2.config manager");
-            return false;
+            this.settings.put(plugin,new HashMap<>());
         }
-        Map<String,ConfigSetting> setting1 = this.settings.get(plugin);
+
         if(setting.isPrimary()){
-            if(this.primarySettingsMap.containsKey(setting.getKey())){
-                if(!this.primarySettingsMap.get(setting.getKey()).equals(plugin)){
-                    plugin.info(plugin.getClass().getName()+" is trying to register as a primary cn.jsmod2.user of cn.jsmod2.config setting "+setting.getKey()+" this may cause some weird behaviour");
-                }
-            }else{
-                this.primarySettingsMap.put(setting.getKey(),plugin);
+            if(settings.containsKey(plugin)){
+                plugin.warn("the primary key is primary");
+                return false;
             }
+            settings.get(plugin).put(setting.getKey(),setting);
+            primarySettingsMap.put(setting.getKey(),plugin);
         }else{
-            if(!this.secondary.containsKey(setting.getKey())){
-                this.secondary.put(setting.getKey(),new ArrayList<>());
+            settings.get(plugin).put(setting.getKey(),setting);
+            if(!secondary.containsKey(setting.getKey())){
+                secondary.put(setting.getKey(),new ArrayList<>());
             }
-            this.secondary.get(setting.getKey()).add(plugin);
-        }
-        if(!setting1.containsKey(setting.getKey())){
-            setting1.put(setting.getKey(),setting);
-        }else{
-            plugin.warn(plugin.getClass().getName()+" is trying to register a duplicate setting: "+setting.getKey());
+            secondary.get(setting.getKey()).add(plugin);
         }
         return true;
     }
@@ -68,31 +62,14 @@ public class ConfigManager {
         if(!isRegistered(plugin,key)){
             ServerLogger.getLogger().multiWarn(getClass(),"Trying to access a cn.jsmod2.config setting that isn't registered to the plugin, this is bad practice.","","");
         }
-        ConfigSetting setting = this.resolvePrimary(key);
-        if(setting == null)return null;
-        return type.cast(setting.getValue());
+        Object r = settings.get(plugin).get(key);
+        if(r == null)return null;
+        return type.cast(r);
     }
 
-    public ConfigSetting resolvePrimary(String key){
-        Plugin plugin = this.primarySettingsMap.get(key);
-        return resolveSetting(plugin,key);
-    }
-
-    public ConfigSetting resolveSetting(Plugin plugin,String key){
-        Map<String,ConfigSetting> dic = this.settings.get(plugin);
-        return dic==null?null:dic.get(key);
-    }
 
     public boolean isRegistered(Plugin plugin,String key){
-        boolean flag = false;
-        if(this.primarySettingsMap.containsKey(key)){
-            if(this.secondary.get(key).equals(plugin)){
-                flag = true;
-            }else if(this.secondary.containsKey(key) && this.secondary.get(key).contains(plugin)){
-                flag = true;
-            }
-        }
-        return flag;
+        return settings.get(plugin).containsKey(key);
     }
 
     public static ConfigManager getManager() {
