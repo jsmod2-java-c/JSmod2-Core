@@ -27,18 +27,20 @@ public class ConfigManager {
     private Map<String, List<Plugin>> secondary = new ConcurrentHashMap<>();//插件不单一的
 
     public boolean registerConfig(PluginBase plugin,ConfigSetting setting){
-        if(!this.settings.containsKey(plugin)){
-            this.settings.put(plugin,new ConcurrentHashMap<>());
-        }
 
         if(setting.isPrimary()){
             if(settings.containsKey(plugin)){
                 plugin.warn("the primary key is primary");
                 return false;
+            }else{
+                this.settings.put(plugin,new ConcurrentHashMap<>());
             }
             settings.get(plugin).put(setting.getKey(),setting);
             primarySettingsMap.put(setting.getKey(),plugin);
         }else{
+            if(!this.settings.containsKey(plugin)){
+                this.settings.put(plugin,new ConcurrentHashMap<>());
+            }
             settings.get(plugin).put(setting.getKey(),setting);
             if(!secondary.containsKey(setting.getKey())){
                 secondary.put(setting.getKey(),new ArrayList<>());
@@ -58,13 +60,13 @@ public class ConfigManager {
         }
     }
 
-    public <T> T getConfig(Plugin plugin,String key,Class<T> type){
+    public ConfigSetting getConfig(Plugin plugin,String key){
         if(!isRegistered(plugin,key)){
             ServerLogger.getLogger().multiWarn(getClass(),"Trying to access a cn.jsmod2.config setting that isn't registered to the plugin, this is bad practice.","","");
         }
         Object r = settings.get(plugin).get(key);
         if(r == null)return null;
-        return type.cast(r);
+        return (ConfigSetting) r;
     }
 
 

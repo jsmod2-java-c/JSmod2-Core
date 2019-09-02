@@ -129,7 +129,7 @@ public abstract class PluginBase implements Plugin {
     }
 
     public <T> T getConfig(String key,Class<T> type){
-       return ConfigManager.getManager().getConfig(this,key,type);
+       return type.cast(ConfigManager.getManager().getConfig(this,key).getValue());
     }
 
 

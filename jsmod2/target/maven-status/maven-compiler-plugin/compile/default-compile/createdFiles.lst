@@ -6,6 +6,7 @@ cn/jsmod2/api/event/player/IPlayerPocketDimensionEnterEvent.class
 cn/jsmod2/api/event/player/IPlayerPickupItemEvent.class
 cn/jsmod2/core/plugin/PluginBase.class
 cn/jsmod2/api/team/Role.class
+cn/jsmod2/core/annotations/Auto.class
 cn/jsmod2/core/GameServer.class
 cn/jsmod2/api/server/AuthType.class
 cn/jsmod2/core/plugin/Plugin.class
@@ -196,6 +197,7 @@ cn/jsmod2/api/map/ElevatorType.class
 cn/jsmod2/core/utils/core/config/oaml/XEntry.class
 cn/jsmod2/api/event/server/IRoundReStartEvent.class
 cn/jsmod2/core/utils/core/config/oaml/exception/NoSuchNodeException.class
+cn/jsmod2/core/annotations/Assembly.class
 cn/jsmod2/api/event/server/IDisconnectEvent.class
 cn/jsmod2/api/team/Team.class
 cn/jsmod2/core/command/Command.class

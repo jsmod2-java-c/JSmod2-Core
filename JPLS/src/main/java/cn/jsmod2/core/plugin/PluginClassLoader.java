@@ -9,9 +9,7 @@ with the law, @Copyright Jsmod2 China,more can see <a href="http://jsmod2.cn">th
 package cn.jsmod2.core.plugin;
 
 import cn.jsmod2.core.Server;
-import cn.jsmod2.core.annotations.EnableRegister;
-import cn.jsmod2.core.annotations.LoadBefore;
-import cn.jsmod2.core.annotations.Main;
+import cn.jsmod2.core.annotations.*;
 import cn.jsmod2.core.command.Command;
 import cn.jsmod2.core.command.NativeCommand;
 import cn.jsmod2.core.event.Listener;
@@ -20,11 +18,13 @@ import cn.jsmod2.core.ex.PluginException;
 import cn.jsmod2.core.interapi.IServer;
 import cn.jsmod2.core.interapi.plugin.IPluginClassLoader;
 import cn.jsmod2.core.log.ILogger;
+import cn.jsmod2.core.log.ServerLogger;
 import cn.jsmod2.core.utils.PluginFileVO;
 import cn.jsmod2.core.utils.Utils;
 
 import java.io.File;
 import java.io.InputStream;
+import java.lang.reflect.Field;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.*;
@@ -41,6 +41,8 @@ import java.util.zip.ZipEntry;
 public class PluginClassLoader implements IPluginClassLoader {
 
     public static final String JSMOD2_PACKAGE = "cn.jsmod2";
+
+    private JSmod2ObjectContext context = new JSmod2ObjectContext();
 
     private Map<String,String> plugin_info = new HashMap<>();//文件名 介绍
 
@@ -139,6 +141,7 @@ public class PluginClassLoader implements IPluginClassLoader {
                             continue;
                         }
                         Class<?> pluginClass = classLoader.loadClass(mainName);
+
                         Main main = pluginClass.getAnnotation(Main.class);
                         if(main!=null){
                             if(pName!=null&&!Arrays.asList(pName).contains(main.name())){
@@ -162,6 +165,26 @@ public class PluginClassLoader implements IPluginClassLoader {
             Utils.printException(e);
         }
         return null;
+    }
+
+    //注册bean
+    //主类和监听器 指令直接放进去
+    //其他需要创建对象再放
+    //每个类都要读取字段有没有field
+    private void registerBean(Class<?> clz,Object obj){
+        try {
+            Assembly assembly = clz.getAnnotation(Assembly.class);
+            if (assembly != null) {
+                if (obj != null) {
+                    context.registerBean(assembly.value(), obj);
+                } else {
+                    if(clz.getAnnotation(Main.class)==null)
+                        context.registerBean(assembly.value(), clz.newInstance());
+                }
+            }
+        }catch (InstantiationException|IllegalAccessException e){
+            Utils.printException(e);
+        }
     }
     public Plugin loadPlugin(File jar) {
 
@@ -206,12 +229,23 @@ public class PluginClassLoader implements IPluginClassLoader {
             //检测如果有loadBefore
 
             LoadBefore before = pluginObject.getClass().getAnnotation(LoadBefore.class);
+
             if(before != null){
+                int dep = 0;
                 //那么先判断loadBefore的内容
                 String[] args = before.pluginName();
                 for(File file:files){
                     //如果发现了名字,则先加载改名字的插件
-                    loadPlugin(file,args);
+                    Plugin p = loadPlugin(file,args);
+                    if(p !=null){
+                        dep++;
+                    }
+                }
+                if(dep < args.length){
+                    ServerLogger.getLogger().multiError(getClass(),"you could not have the dependencies:","","");
+                    for(String d:args){
+                        ServerLogger.getLogger().multiError(getClass(),d,"","");
+                    }
                 }
             }
 
@@ -221,6 +255,7 @@ public class PluginClassLoader implements IPluginClassLoader {
             }
             pluginObject.init(logger, server, vo.getPluginName(), server.getServerFolder(), vo.getDescription(), this, dataFolder, vo.getVersion());
 
+            registerBean(pluginObject.getClass(),pluginObject);//注册插件bean
             pluginObject.onLoad();
 
             pluginObject.setEnabled(true);
@@ -240,27 +275,37 @@ public class PluginClassLoader implements IPluginClassLoader {
                     JarEntry entry = entries.nextElement();
                     String name = entry.getName();
                     if(name.endsWith(".class")){
+                        Object obj = null;
                         Class<?> clz = loader.loadClass(name.substring(0,name.lastIndexOf(".")).replace("/","."));
                         SpringContextUtil.loadBean(clz);
                         if(register.command()) {
                             if (mostSuperClass(clz).equals(NativeCommand.class) && !exclusionsCommand.contains(clz)) {
-                                Object obj = clz.getConstructor(Plugin.class).newInstance(pluginObject);
+                                obj = clz.getConstructor(Plugin.class).newInstance(pluginObject);
                                 manager.registerCommand((Command) obj);
                             }
                         }
                         if(register.listener()) {
                             if (Arrays.asList(mostSuperClass(clz).getInterfaces()).contains(Listener.class) && !exclusionsListener.contains(clz)) {
-                                Object obj = clz.newInstance();
+                                obj = clz.newInstance();
                                 logger.multiInfo(this.getClass(),"loading listener","","");
                                 manager.registerEvents((Listener) obj, pluginObject);
                             }
                         }
+                        registerBean(clz,obj);
                     }
                 }
                 jarFile.close();
-
+                Collection<Object> contexts = context.getBeans();
+                for(Object obj:contexts){
+                    Field[] fields = obj.getClass().getDeclaredFields();
+                    for(Field field:fields){
+                        field.setAccessible(true);
+                        if(field.getAnnotation(Auto.class)!=null){
+                            field.set(obj,context.getBean(field.getType()));
+                        }
+                    }
+                }
             }
-
             return pluginObject;
         } else {
 

@@ -6,6 +6,7 @@
 /Users/luchangcun/jsmod2/JSmod2-Core/jsmod2/src/main/java/cn/jsmod2/api/event/server/IWaitingForPlayersEvent.java
 /Users/luchangcun/jsmod2/JSmod2-Core/jsmod2/src/main/java/cn/jsmod2/api/event/player/IPlayer079LevelUpEvent.java
 /Users/luchangcun/jsmod2/JSmod2-Core/jsmod2/src/main/java/cn/jsmod2/api/event/player/IPlayerRecallZombieEvent.java
+/Users/luchangcun/jsmod2/JSmod2-Core/jsmod2/src/main/java/cn/jsmod2/core/annotations/LoadBefore.java
 /Users/luchangcun/jsmod2/JSmod2-Core/jsmod2/src/main/java/cn/jsmod2/core/interapi/plugin/IPluginManager.java
 /Users/luchangcun/jsmod2/JSmod2-Core/jsmod2/src/main/java/cn/jsmod2/core/log/IErrorLogger.java
 /Users/luchangcun/jsmod2/JSmod2-Core/jsmod2/src/main/java/cn/jsmod2/core/utils/core/config/oaml/annotations/Node.java
@@ -29,6 +30,7 @@
 /Users/luchangcun/jsmod2/JSmod2-Core/jsmod2/src/main/java/cn/jsmod2/api/event/player/IPlayerHurtEvent.java
 /Users/luchangcun/jsmod2/JSmod2-Core/jsmod2/src/main/java/cn/jsmod2/api/player/IScp079Data.java
 /Users/luchangcun/jsmod2/JSmod2-Core/jsmod2/src/main/java/cn/jsmod2/api/map/IElevator.java
+/Users/luchangcun/jsmod2/JSmod2-Core/jsmod2/src/main/java/cn/jsmod2/core/annotations/Assembly.java
 /Users/luchangcun/jsmod2/JSmod2-Core/jsmod2/src/main/java/cn/jsmod2/core/utils/Future.java
 /Users/luchangcun/jsmod2/JSmod2-Core/jsmod2/src/main/java/cn/jsmod2/api/event/player/IPlayerGrenadeExplosion.java
 /Users/luchangcun/jsmod2/JSmod2-Core/jsmod2/src/main/java/cn/jsmod2/api/team/Team.java
@@ -189,6 +191,7 @@
 /Users/luchangcun/jsmod2/JSmod2-Core/jsmod2/src/main/java/cn/jsmod2/api/event/player/IPlayer079LockdownEvent.java
 /Users/luchangcun/jsmod2/JSmod2-Core/jsmod2/src/main/java/cn/jsmod2/core/utils/core/config/oaml/OamlReader.java
 /Users/luchangcun/jsmod2/JSmod2-Core/jsmod2/src/main/java/cn/jsmod2/api/event/server/ILateDisconnectionEvent.java
+/Users/luchangcun/jsmod2/JSmod2-Core/jsmod2/src/main/java/cn/jsmod2/core/annotations/Auto.java
 /Users/luchangcun/jsmod2/JSmod2-Core/jsmod2/src/main/java/cn/jsmod2/core/utils/config/JsonConfig.java
 /Users/luchangcun/jsmod2/JSmod2-Core/jsmod2/src/main/java/cn/jsmod2/api/map/IPocketDimensionExit.java
 /Users/luchangcun/jsmod2/JSmod2-Core/jsmod2/src/main/java/cn/jsmod2/core/interapi/plugin/IPluginClassLoader.java
