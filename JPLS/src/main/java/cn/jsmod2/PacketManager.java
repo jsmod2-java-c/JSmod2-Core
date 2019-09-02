@@ -69,11 +69,11 @@ public class PacketManager extends Manager {
     public void manageMethod(String message, int id, Socket socket){
         try{
             //第一步,获取server的信息,解码规则:UTF-8
-            Properties properties = FileSystem.getFileSystem().serverProperties(Server.getSender().getServer());
+            Properties properties = FileSystem.getFileSystem().serverProperties(Server.getRuntime().running());
             byte[] bytes = message.getBytes(properties.getProperty("encode"));//通过utf-8形式获取byte字节数组
             //从注册机中找到注册的事件Register中的那些，然后放进去
             Map<Integer, Class<? extends Event>> events = new HashMap<>();
-            for(RegisterTemplate template:Server.getSender().getServer().getRegisters()){
+            for(RegisterTemplate template:Server.getRuntime().running().getRegisters()){
                 events.putAll(template.getEvents());
             }
             //然后如果存在这个id在事件里,那么就去执行事件
@@ -86,18 +86,18 @@ public class PacketManager extends Manager {
             /* 执行指令的部分 */
             if(vo_get instanceof ServerVO){
                 ServerVO vo = (ServerVO)vo_get;
-                //GameServer sender = vo.getServer();
+                //GameServer sender = vo.running();
                 String[] args = vo.getArgs();
                 String commandName = vo.getCommandName();
                 Console.getConsole().runConsoleCommand(commandName,args);
-                //Server.getSender().getServer().getGameServer().updateServer(sender);
+                //Server.getRuntime().running().getGameServer().updateServer(sender);
             }
             if(vo_get instanceof PlayerVO){
                 PlayerVO vo = (PlayerVO)vo_get;
                 Player player = vo.getPlayer();
                 String commandName = vo.getCommandName();
                 String[] args = vo.getArgs();
-                Server.getSender().getServer().getPluginManager().executeCommand(commandName,args,player);
+                Server.getRuntime().running().getPluginManager().executeCommand(commandName,args,player);
             }
             socket.getOutputStream().write(0xFF&1);
         }catch (Exception e){

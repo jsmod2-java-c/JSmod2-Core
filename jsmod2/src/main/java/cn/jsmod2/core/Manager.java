@@ -25,7 +25,7 @@ public abstract class Manager implements Cloneable{
 
     public Manager(){
         events = new HashMap<>();
-        for(RegisterTemplate template:Server.getSender().getServer().getRegisters()){
+        for(RegisterTemplate template:Server.getRuntime().running().getRegisters()){
             events.putAll(template.getEvents());
         }
     }
@@ -47,7 +47,7 @@ public abstract class Manager implements Cloneable{
         if(eventClass != null){
             Event event = stream.encode(eventClass,bytes);
             //ServerLogger.getLogger().multiDebug(getClass(),"EVENT_API_KEY:"+cn.jsmod2.event.getApiId(),"\n","");
-            Server.getSender().getServer().getPluginManager().callEvent(event);
+            Server.getRuntime().running().getPluginManager().callEvent(event);
         }else{
             throw new EventException("No such type of events");
         }
@@ -69,7 +69,7 @@ public abstract class Manager implements Cloneable{
      */
 
     public <S extends AbstractServerVO,P extends AbstractPlayerVO> CommandVO getCommandVO(int id, String message, int serverCommand, int playerCommand, Class<S> voServerClass,Class<P> voPlayerClass) throws UnsupportedEncodingException {
-        Properties properties = FileSystem.getFileSystem().serverProperties(Server.getSender().getServer());
+        Properties properties = FileSystem.getFileSystem().serverProperties(Server.getRuntime().running());
         byte[] bytes = message.getBytes(properties.getProperty("encode"));//通过utf-8形式获取byte字节数组
         if(id == serverCommand){
             ServerCommandPacket<S> serverCommandPacket = new ServerCommandPacket<>(voServerClass);

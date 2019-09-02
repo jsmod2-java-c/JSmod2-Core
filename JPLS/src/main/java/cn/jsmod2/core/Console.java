@@ -51,7 +51,7 @@ public class Console extends CommandSender{
     public void commandInput() throws IOException{
         //ConsoleReader reader = Server.getLineReader();
         //reader.addCompleter(new SimpleConsole());
-        String out = Server.getSender().getServer().serverfolder+"/out/";
+        String out = Server.getRuntime().running().serverfolder+"/out/";
         File outDir = new File(out);
         if (!outDir.exists()){
             outDir.mkdirs();
@@ -62,13 +62,13 @@ public class Console extends CommandSender{
         }
         PrintWriter stream = new PrintWriter(new FileOutputStream(outFile,true));
         while (true){
-            if(!Server.getSender().getServer().isConnected){
+            if(!Server.getRuntime().running().isConnected){
                 ServerLogger.getLogger().multiInfo(getClass(),"Exit the command input thread...","","");
                 break;
             }
             //@Deprecated
             String command;
-            if(Server.getSender().getServer().serverProp.getProperty(FileSystem.CONSOLE_LINE,"false").equals("false")) {
+            if(Server.getRuntime().running().serverProp.getProperty(FileSystem.CONSOLE_LINE,"false").equals("false")) {
                 Utils.getMessageSender().info("\n>");
                 command = Server.getScanner().nextLine();
             }else{
@@ -116,7 +116,7 @@ public class Console extends CommandSender{
                 }
             }
 
-            String method = Server.getSender().getServer().serverProp.getProperty(FileSystem.EMERALD_COMPILER,"java");
+            String method = Server.getRuntime().running().serverProp.getProperty(FileSystem.EMERALD_COMPILER,"java");
 
             //目前java版属于最稳定版本，其他不建议使用
             if(method.equals("c++")){
@@ -140,8 +140,8 @@ public class Console extends CommandSender{
         public int complete(String s, int i, List<CharSequence> list) {
             List<String> entries =
                     Server
-                            .getSender()
-                            .getServer()
+                            .getRuntime()
+                            .running()
                             .getPluginManager()
                             .getCommands()
                             .stream()
@@ -177,8 +177,8 @@ public class Console extends CommandSender{
         }
         List<INativeCommand> commands =
                 Server
-                        .getSender()
-                        .getServer()
+                        .getRuntime()
+                        .running()
                         .getPluginManager()
                         .getCommands();
         boolean find = false;

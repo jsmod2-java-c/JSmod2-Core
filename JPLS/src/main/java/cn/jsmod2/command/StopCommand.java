@@ -26,9 +26,9 @@ public class StopCommand extends NativeCommand {
     @Override
     public boolean execute(CommandSender commandSender, String[] args) {
         if(args.length==1&&args[0].equals("1")){
-            Server.getSender().getServer().close(false);
+            Server.getRuntime().running().close(false);
         }else{
-            Server.getSender().getServer().close();
+            Server.getRuntime().running().close();
         }
 
         return true;

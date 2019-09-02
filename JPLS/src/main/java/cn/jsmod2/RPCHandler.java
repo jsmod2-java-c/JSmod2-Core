@@ -67,7 +67,7 @@ public class RPCHandler{
      *          但发生异常几率几乎没有，除非发生 "玄学状态"
      */
     public String start(String sw){
-        if(Server.getSender() == null){
+        if(Server.getRuntime() == null){
             sw = sw.replace("1","-w")
                     .replace("2","-u")
                     .replace("3","-lr")
@@ -78,7 +78,7 @@ public class RPCHandler{
             final String args = sw;
             new Thread(()->ServerStarter.getInstance().startNow(new String[]{args})).start();
             new Thread(()->{
-                while (Server.getSender()!=null);
+                while (Server.getRuntime()!=null);
                 try {
                     Thread.sleep(2000);
                     while (true) {
@@ -102,8 +102,8 @@ public class RPCHandler{
      * @return 获取插件名称
      */
     public String get_plugin_name(String file){
-        if(Server.getSender()==null)return "Server has stopped";
-        return Server.getSender().getServer().getPluginManager().getPluginClassLoader().getPlugin_name().get(file);
+        if(Server.getRuntime()==null)return "Server has stopped";
+        return Server.getRuntime().running().getPluginManager().getPluginClassLoader().getPlugin_name().get(file);
     }
 
     /**
@@ -128,8 +128,8 @@ public class RPCHandler{
      */
     public String get_status(){
         times.set(0);
-        if(Server.getSender() == null)return "stop";
-        if(Server.getSender().getServer().isConnected)return "connected";
+        if(Server.getRuntime() == null)return "stop";
+        if(Server.getRuntime().running().isConnected)return "connected";
         return "disconnected";
     }
 
@@ -140,7 +140,7 @@ public class RPCHandler{
      * @return 命令的组合或者服务器关闭的消息
      */
     public String execute(String command){
-        if(Server.getSender()==null){
+        if(Server.getRuntime()==null){
             return "the server has stopped";
         }
         return Console.getConsole().runConsoleCommandWithEmerald(command)+"";
@@ -151,10 +151,10 @@ public class RPCHandler{
      * @return 启动的时间(ms)
      */
     public String get_uptime(){
-        if(Server.getSender()==null){
+        if(Server.getRuntime()==null){
             return "-1";
         }
-        return (System.currentTimeMillis()-Server.getSender().getServer().getStartTime())+"";
+        return (System.currentTimeMillis()-Server.getRuntime().running().getStartTime())+"";
     }
 
     /**
@@ -199,11 +199,11 @@ public class RPCHandler{
      * @return 服务器没启动过，返回false，启动了关闭就直接崩溃，没有返回值(理论上是true)
      */
     public boolean stop(){
-        if(Server.getSender() == null){
+        if(Server.getRuntime() == null){
             ServerLogger.getLogger().multiWarn(getClass(),"the server has stopped","","");
             return false;
         }
-        Server.getSender().getServer().close();
+        Server.getRuntime().running().close();
         return true;
     }
 
@@ -212,10 +212,10 @@ public class RPCHandler{
      * @return ip地址/已经关闭
      */
     public String get_ip(){
-        if(Server.getSender()==null||!Server.getSender().getServer().isConnected){
+        if(Server.getRuntime()==null||!Server.getRuntime().running().isConnected){
             return "the server has stopped";
         }
-        return Server.getSender().getServer().getGameServer().getIpAddress();
+        return Server.getRuntime().running().getGameServer().getIpAddress();
     }
 
     /**
@@ -223,10 +223,10 @@ public class RPCHandler{
      * @return 最大玩家数量
      */
     public int get_player_max(){
-        if(Server.getSender()==null||!Server.getSender().getServer().isConnected){
+        if(Server.getRuntime()==null||!Server.getRuntime().running().isConnected){
             return 0;
         }
-        return Server.getSender().getServer().getGameServer().getMaxPlayers();
+        return Server.getRuntime().running().getGameServer().getMaxPlayers();
     }
 
     /**
@@ -234,10 +234,10 @@ public class RPCHandler{
      * @return 在线玩家数量
      */
     public int get_player(){
-        if(Server.getSender()==null||!Server.getSender().getServer().isConnected){
+        if(Server.getRuntime()==null||!Server.getRuntime().running().isConnected){
             return 0;
         }
-        return Server.getSender().getServer().getGameServer().getPlayers().size();
+        return Server.getRuntime().running().getGameServer().getPlayers().size();
     }
 
     /**
@@ -246,8 +246,8 @@ public class RPCHandler{
      */
     public List<String> get_player_list(){
         List<String> list = new ArrayList<>();
-        if(Server.getSender()==null||!Server.getSender().getServer().isConnected)return list;
-        List<? extends IPlayer> players = Server.getSender().getServer().getGameServer().getPlayers();
+        if(Server.getRuntime()==null||!Server.getRuntime().running().isConnected)return list;
+        List<? extends IPlayer> players = Server.getRuntime().running().getGameServer().getPlayers();
         for(IPlayer p:players){
             list.add(p.getName());
         }
@@ -334,7 +334,7 @@ public class RPCHandler{
      * @return 玩家对象
      */
     private IPlayer getPlayer(String name){
-        List<? extends IPlayer> players = Server.getSender().getServer().getGameServer().getPlayers();
+        List<? extends IPlayer> players = Server.getRuntime().running().getGameServer().getPlayers();
         for(IPlayer player:players){
             if(player.getName().equals(name)){
                 return player;

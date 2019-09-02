@@ -101,7 +101,7 @@ public class FileSystem {
 
 
     public File jsmod2Db() throws IOException{
-        File file = new File(Server.getSender().getServer().getServerFolder(),".jsmod2.db");
+        File file = new File(Server.getRuntime().running().getServerFolder(),".jsmod2.db");
         if(!file.exists()){
             file.createNewFile();
         }

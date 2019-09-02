@@ -24,7 +24,7 @@ public class RuntimeServer {
         this.runtime = runtime;
     }
 
-    public Server getServer(){
+    public Server running(){
         return runtime;
     }
 

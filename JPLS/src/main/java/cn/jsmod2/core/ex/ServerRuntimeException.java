@@ -52,7 +52,7 @@ public class ServerRuntimeException extends RuntimeException {
 
     public void printServerError(){
         Map<Class<? extends Exception>,String>  exs = new HashMap<>();
-        for(RegisterTemplate template: Server.getSender().getServer().getRegisters()) {
+        for(RegisterTemplate template: Server.getRuntime().running().getRegisters()) {
             exs.putAll(template.getEx_methods());
         }
         initMethodToFixed(exs.get(this.getClass()));

@@ -25,7 +25,7 @@ public class PluginsCommand extends NativeCommand {
 
     @Override
     public boolean execute(CommandSender commandSender, String[] args) {
-        Server.getSender().getServer().getPluginManager().plugins();
+        Server.getRuntime().running().getPluginManager().plugins();
         return true;
     }
 }

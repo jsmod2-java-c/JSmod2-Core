@@ -7,10 +7,10 @@ public abstract class AbstractServerVO<T extends GameServer> extends CommandVO {
 
     @Deprecated
     public void setServer(T server){
-        //Server.getSender().getServer().getGameServer().updateServer(cn.jsmod2.server);
+        //Server.getRuntime().running().getGameServer().updateServer(cn.jsmod2.server);
     }
 
     public GameServer getServer(){
-        return Server.getSender().getServer().getGameServer();
+        return Server.getRuntime().running().getGameServer();
     }
 }

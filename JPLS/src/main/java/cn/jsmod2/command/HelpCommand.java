@@ -23,7 +23,7 @@ public class HelpCommand extends NativeCommand {
 
     @Override
     public boolean execute(CommandSender commandSender, String[] args) {
-        Server.getSender().getServer().help();
+        Server.getRuntime().running().help();
         return true;
     }
 }

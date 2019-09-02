@@ -125,7 +125,7 @@ public class NettyServer implements Runnable{
                         }
                     });
             // 启动netty
-            ChannelFuture cFuture = serverBootstrap.bind(Integer.parseInt(Server.getSender().getServer().serverProp.getProperty(Register.CLIENT_PORT,"20020"))).sync();
+            ChannelFuture cFuture = serverBootstrap.bind(Integer.parseInt(Server.getRuntime().running().serverProp.getProperty(Register.CLIENT_PORT,"20020"))).sync();
             // 关闭
             cFuture.channel().closeFuture().sync();
             pGroup.shutdownGracefully();

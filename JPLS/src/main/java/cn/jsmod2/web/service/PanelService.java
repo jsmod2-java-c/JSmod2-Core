@@ -1,11 +1,9 @@
 package cn.jsmod2.web.service;
 
 import cn.jsmod2.MethodInvoker;
-import cn.jsmod2.core.ApiId;
 import cn.jsmod2.core.RegisterTemplate;
 import cn.jsmod2.core.Server;
 import cn.jsmod2.core.ex.ServerRuntimeException;
-import cn.jsmod2.core.protocol.BinaryStream;
 import cn.jsmod2.core.protocol.DataPacket;
 import cn.jsmod2.core.protocol.GetPacket;
 import cn.jsmod2.core.protocol.Response;
@@ -27,7 +25,7 @@ public class PanelService {
     public Object api(String json) {
         int id = Utils.getResponsePacketId(new String(Base64.getEncoder().encode(json.getBytes())));
         Response response = new Response();
-        response.future = Server.getSender().getServer().sendPacketGetResult(new DataPacket(id) {
+        response.future = Server.getRuntime().running().sendPacketGetResult(new DataPacket(id) {
 
             @Override
             public byte[] encode() {
@@ -41,7 +39,7 @@ public class PanelService {
 
         Map<Integer, Class<? extends DataPacket>> map = new HashMap<>();
 
-        for (RegisterTemplate template : Server.getSender().getServer().getRegisters()) {
+        for (RegisterTemplate template : Server.getRuntime().running().getRegisters()) {
             map.putAll(template.getGetPackets());
         }
         try {
@@ -98,9 +96,9 @@ public class PanelService {
         Object obj = object.get(str);//json对象
         Object root;
         if("Server".equals(str)){
-            root = Server.getSender().getServer().getGameServer();
+            root = Server.getRuntime().running().getGameServer();
         }else{
-            root = Server.getSender().getServer().getGameServer().getMap();
+            root = Server.getRuntime().running().getGameServer().getMap();
         }//查找对象
         return parse(obj,root);
     }
@@ -189,9 +187,9 @@ public class PanelService {
                         String str = ((JSONObject) find).get("root").toString();
                         Object pRoot;
                         if("Server".equals(str)){
-                            pRoot = Server.getSender().getServer().getGameServer();
+                            pRoot = Server.getRuntime().running().getGameServer();
                         }else{
-                            pRoot = Server.getSender().getServer().getGameServer().getMap();
+                            pRoot = Server.getRuntime().running().getGameServer().getMap();
                         }//查找对象
                         Object returnValue = parse(((JSONObject) find).get(str), pRoot);//解析数组
                         objVals.add(returnValue);

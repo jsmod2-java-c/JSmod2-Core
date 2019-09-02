@@ -56,20 +56,20 @@ public abstract class BinaryStream {
 
     public BinaryStream(int id){
         dataPackets = new HashMap<>();
-        for(RegisterTemplate template:Server.getSender().getServer().getRegisters()){
+        for(RegisterTemplate template:Server.getRuntime().running().getRegisters()){
             dataPackets.putAll(template.getPackets());
         }
         this.id = id;
-        properties = FileSystem.getFileSystem().serverProperties(Server.getSender().getServer());
+        properties = FileSystem.getFileSystem().serverProperties(Server.getRuntime().running());
     }
 
     public BinaryStream(){
         dataPackets = new HashMap<>();
-        for(RegisterTemplate template:Server.getSender().getServer().getRegisters()){
+        for(RegisterTemplate template:Server.getRuntime().running().getRegisters()){
             dataPackets.putAll(template.getPackets());
         }
         this.id = dataPackets.get(this.getClass());
-        properties = FileSystem.getFileSystem().serverProperties(Server.getSender().getServer());
+        properties = FileSystem.getFileSystem().serverProperties(Server.getRuntime().running());
     }
 
     public int getId(){

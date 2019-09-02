@@ -195,7 +195,7 @@ public class PluginClassLoader implements IPluginClassLoader {
 
 
         if (plugin instanceof PluginBase) {
-            IServer server = Server.getSender().getServer();
+            IServer server = Server.getRuntime().running();
 
             ILogger logger = server.getLogger();
 
@@ -225,7 +225,7 @@ public class PluginClassLoader implements IPluginClassLoader {
 
             pluginObject.setEnabled(true);
 
-            Server.getSender().getServer().getLogger().multiInfo(this.getClass(),"the plugin named:" + vo.getPluginName() + " is loading.. version: " + vo.getVersion(),"","");
+            Server.getRuntime().running().getLogger().multiInfo(this.getClass(),"the plugin named:" + vo.getPluginName() + " is loading.. version: " + vo.getVersion(),"","");
 
             EnableRegister register = pluginObject.getClass().getAnnotation(EnableRegister.class);
 

@@ -16,7 +16,7 @@ public class ControlPacket extends DataPacket {
 
     public String _end;
 
-    protected final Server server = Server.getSender().getServer();
+    protected final Server server = Server.getRuntime().running();
 
     protected final Requester requester = server.getRequester(this)
             .with(ID,getId());

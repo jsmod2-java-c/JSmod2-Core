@@ -15,7 +15,7 @@ public class LoadPluginCommand extends NativeCommand {
     @Override
     public boolean execute(CommandSender commandSender, String[] strings) {
         for(String str:strings){
-            Server server = Server.getSender().getServer();
+            Server server = Server.getRuntime().running();
             PluginClassLoader loader = server.getPluginManager().getPluginClassLoader();
             String pluginFile = server.pluginDir.toString();
             loader.loadPlugin(pluginFile+"/"+str);

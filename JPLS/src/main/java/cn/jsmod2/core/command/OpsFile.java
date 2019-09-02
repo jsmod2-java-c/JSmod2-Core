@@ -50,7 +50,7 @@ public class OpsFile implements IOpsFile {
     }
 
     public List<String> getOps() throws IOException {
-       return FileUtils.readLines(new File(Server.getSender().getServer().serverfolder+OPS_FILE),System.getProperty("file.encoding"));
+       return FileUtils.readLines(new File(Server.getRuntime().running().serverfolder+OPS_FILE),System.getProperty("file.encoding"));
     }
 
     public static OpsFile getOpsFile(Server server) {

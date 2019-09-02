@@ -16,14 +16,14 @@ public abstract class ServerEvent extends Event implements IServerEvent{
 
 
     public ServerEvent(Smod2Server server) {
-        Server.getSender().getServer().getGameServer().updateServer(server);
+        Server.getRuntime().running().getGameServer().updateServer(server);
     }
     public ServerEvent(){
 
     }
 
     public Smod2Server getServer() {
-        return (Smod2Server) Server.getSender().getServer().getGameServer();
+        return (Smod2Server) Server.getRuntime().running().getGameServer();
     }
 
 }

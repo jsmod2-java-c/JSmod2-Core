@@ -29,7 +29,7 @@ object PowerPool {
 
   private val ops = OpsFile.getInstance().getOps
 
-  private val players = Server.getSender.getServer.getGameServer.getPlayers
+  private val players = Server.getRuntime.running.getGameServer.getPlayers
 
   //把全部权限加载进去
   for(p <- 0 until players.size){

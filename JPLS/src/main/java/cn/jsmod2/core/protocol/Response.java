@@ -47,7 +47,7 @@ public class Response implements IResponse {
             type = packet.getType();
         }
         List<Object> list = new ArrayList<>();
-        Properties properties =  Server.getSender().getServer().serverProp;
+        Properties properties =  Server.getRuntime().running().serverProp;
         //转化为base64解密后的，之后再加密 getBytes
         try {
             String message = new String(Base64.getDecoder().decode(future.get()), properties.getProperty(FileSystem.SERVER_DECODE));

@@ -16,9 +16,9 @@ public class SLineEnableFunction extends NativeFunction {
     public Object execute(String[] args, Object... objs) {
         if(args.length == 1){
             if(args[0].equals("false")){
-                return Server.getSender().getServer().serverProp.setProperty(FileSystem.CONSOLE_LINE,"false");
+                return Server.getRuntime().running().serverProp.setProperty(FileSystem.CONSOLE_LINE,"false");
             }
         }
-        return Server.getSender().getServer().serverProp.setProperty(FileSystem.CONSOLE_LINE,"true");
+        return Server.getRuntime().running().serverProp.setProperty(FileSystem.CONSOLE_LINE,"true");
     }
 }

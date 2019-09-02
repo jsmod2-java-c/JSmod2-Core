@@ -10,11 +10,11 @@ import cn.jsmod2.network.protocol.event.newstream.GetTypes;
 public class PacketSender {
 
     public static <T> T sendGetPacket(GetPacket p,Class<T> type){
-        return Server.getSender().getServer().sendGetPacket(p,type);
+        return Server.getRuntime().running().sendGetPacket(p,type);
     }
 
     public static void sendSetPacket(SetPacket packet){
-        Server.getSender().getServer().sendSetPacket(packet);
+        Server.getRuntime().running().sendSetPacket(packet);
     }
 
     public static <T> T sendEventGetPacket(String playerName,String key,Class<T> type){

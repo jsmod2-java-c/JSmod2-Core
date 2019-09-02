@@ -49,14 +49,14 @@ public class Smod2Server extends CommandSender implements GameServer {
     }
 
     public Server getRuntimeServer(){
-        return Server.getSender().getServer();
+        return Server.getRuntime().running();
     }
 
     @Deprecated
     public Smod2Server updateServer(GameServer server){
         if(server instanceof Smod2Server) {
             Smod2Server smod2Server = (Smod2Server)server;
-            Server.getSender().getServer().getLock().lock();
+            Server.getRuntime().running().getLock().lock();
             this.ipAddress = smod2Server.ipAddress;
             this.map = smod2Server.map;
             this.maxPlayers = smod2Server.maxPlayers;
@@ -64,7 +64,7 @@ public class Smod2Server extends CommandSender implements GameServer {
             this.name = smod2Server.name;
             this.round = smod2Server.round;
             this.port = smod2Server.port;
-            Server.getSender().getServer().getLock().unlock();
+            Server.getRuntime().running().getLock().unlock();
             return this;
         }
         return null;

@@ -173,7 +173,7 @@ public class Utils {
         try{
 
             byte[] decodes = Base64.decodeBase64(str);
-            Properties properties = FileSystem.getFileSystem().serverProperties(Server.getSender().getServer());
+            Properties properties = FileSystem.getFileSystem().serverProperties(Server.getRuntime().running());
             str = new String(decodes,properties.getProperty(FileSystem.SERVER_DECODE));
         }catch (Exception e){
             e.printStackTrace();

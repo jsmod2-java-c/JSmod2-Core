@@ -25,7 +25,7 @@ public class ReloadCommand extends NativeCommand {
 
     @Override
     public boolean execute(CommandSender commandSender, String[] args) {
-        Server.getSender().getServer().reload();
+        Server.getRuntime().running().reload();
         return true;
     }
 }

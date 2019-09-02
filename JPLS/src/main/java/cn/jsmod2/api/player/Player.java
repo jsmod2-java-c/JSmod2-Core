@@ -338,7 +338,7 @@ public class Player extends CommandSender implements IPlayer, Serializable,Clone
     }
 
     public boolean runCommand(String command,String[] args){
-       return Server.getSender().getServer().getPluginManager().executeCommand(command,args,this);
+       return Server.getRuntime().running().getPluginManager().executeCommand(command,args,this);
     }
 
     public boolean getGodmode(){

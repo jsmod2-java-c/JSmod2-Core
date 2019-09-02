@@ -30,15 +30,15 @@ public class DownloadPluginCommand extends NativeCommand {
     public boolean execute(CommandSender commandSender, String[] strings) {
         if(strings.length < 2)return false;
         String fileName = strings[0]+"-"+strings[1]+".jar";
-        String pluginFile = Server.getSender().getServer().pluginDir+"/"+fileName;
+        String pluginFile = Server.getRuntime().running().pluginDir+"/"+fileName;
         if(new File(pluginFile).exists()){
             ServerLogger.getLogger().multiInfo(getClass(),"the plugin has existed","","");
             return true;
         }
-        Server.getSender().getServer().getScheduler().executeRunnable(()->{
+        Server.getRuntime().running().getScheduler().executeRunnable(()->{
 
             Utils.TryCatch(()->{
-                URL url = new URL(Server.getSender().getServer().serverProp.getProperty(MIRROR)+"/"+fileName);
+                URL url = new URL(Server.getRuntime().running().serverProp.getProperty(MIRROR)+"/"+fileName);
                 URLConnection connection = url.openConnection();
                 InputStream stream = connection.getInputStream();
 
@@ -54,7 +54,7 @@ public class DownloadPluginCommand extends NativeCommand {
                 ServerLogger.getLogger().multiInfo(getClass(),"download success!","","");
                 if(strings.length == 3){
                     if(strings[2].equals("true")){
-                        Server.getSender().getServer().getPluginManager().getPluginClassLoader().loadPlugin(pluginFile);
+                        Server.getRuntime().running().getPluginManager().getPluginClassLoader().loadPlugin(pluginFile);
                     }
                 }
                 file.close();

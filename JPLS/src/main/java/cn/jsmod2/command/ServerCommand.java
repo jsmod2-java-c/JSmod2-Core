@@ -21,9 +21,9 @@ public class ServerCommand extends NativeCommand {
     @Override
     public boolean execute(CommandSender commandSender, String[] strings) {
         if(contains(strings,"-p")){
-            ServerLogger.getLogger().multiInfo(getClass(),Server.getSender().getServer().getGameServer().getPlayers()==null?"isNull":"notNull","","");
+            ServerLogger.getLogger().multiInfo(getClass(),Server.getRuntime().running().getGameServer().getPlayers()==null?"isNull":"notNull","","");
         }else if(contains(strings,"-ip")){
-            ServerLogger.getLogger().multiInfo(getClass(),Server.getSender().getServer().getGameServer().getIpAddress(),"","");
+            ServerLogger.getLogger().multiInfo(getClass(),Server.getRuntime().running().getGameServer().getIpAddress(),"","");
         }
         return true;
     }

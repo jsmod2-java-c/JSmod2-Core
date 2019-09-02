@@ -285,7 +285,7 @@ public abstract class Server implements IServer {
 
     private static ConsoleReader lineReader;
 
-    private static RuntimeServer sender;
+    private static RuntimeServer runtimeServer;
 
     protected ILogger log;
 
@@ -335,7 +335,7 @@ public abstract class Server implements IServer {
 
     public Server(GameServer gServer,boolean useUDP) {
 
-        Server.sender = new RuntimeServer(this);
+        Server.runtimeServer = new RuntimeServer(this);
 
         this.startTime =  new Date().getTime();
 
@@ -655,8 +655,8 @@ public abstract class Server implements IServer {
         return serverfolder;
     }
 
-    public static RuntimeServer getSender(){
-        return sender;
+    public static RuntimeServer getRuntime(){
+        return runtimeServer;
     }
 
     private void registerAll(){
@@ -881,7 +881,7 @@ public abstract class Server implements IServer {
                 //在未来版本可能会加入支持多个smod2连接一个服务器
                 serverSocket = getSocket(Integer.parseInt(serverProp.getProperty(FileSystem.THIS_PORT)));
                 while (true) {
-                    if(!Server.getSender().getServer().isConnected){
+                    if(!Server.getRuntime().running().isConnected){
                         ServerLogger.getLogger().multiInfo(getClass(),"the listener thread is closed","","");
                     }
                     DatagramPacket request = new DatagramPacket(new byte[MAX_LENGTH], MAX_LENGTH);
@@ -911,7 +911,7 @@ public abstract class Server implements IServer {
                 }
 
                 while (true) {
-                    if(!Server.getSender().getServer().isConnected){
+                    if(!Server.getRuntime().running().isConnected){
                         ServerLogger.getLogger().multiInfo(getClass(),"the listener thread is closed","","");
                     }
                     //getLogger().multiDebug(getClass(),"正在响应...","","");
@@ -1018,7 +1018,7 @@ public abstract class Server implements IServer {
             try {
                 int count = 0;
                 while (shouldIRun) {
-                    if(!Server.getSender().getServer().isConnected){
+                    if(!Server.getRuntime().running().isConnected){
                         ServerLogger.getLogger().multiInfo(getClass(),"the listener thread is closed","","");
                     }
                     Thread.sleep(crunchifyRunEveryNSeconds);
@@ -1078,7 +1078,7 @@ public abstract class Server implements IServer {
     }
 
     private void executeEmerald(String[] args){
-        server.serverLogInfo("this cn.jsmod2.server uses the Emerald "+ Server.getSender().getServer().serverProp.getProperty(EMERALD_COMPILER,"java")+" compiler v0.1 Engine By MagicLu550");
+        server.serverLogInfo("this cn.jsmod2.server uses the Emerald "+ Server.getRuntime().running().serverProp.getProperty(EMERALD_COMPILER,"java")+" compiler v0.1 Engine By MagicLu550");
         if(args.length!=0){
             for(String arg:args)
                 EmeraldScriptVM.getVM().parse(arg);

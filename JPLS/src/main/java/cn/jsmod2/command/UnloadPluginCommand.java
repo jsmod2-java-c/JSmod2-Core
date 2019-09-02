@@ -15,7 +15,7 @@ public class UnloadPluginCommand extends NativeCommand {
     public boolean execute(CommandSender commandSender, String[] strings) {
         if(strings.length>0) {
             for(String str:strings) {
-                Server.getSender().getServer().getPluginManager().getPluginClassLoader().unloadPlugin(str);
+                Server.getRuntime().running().getPluginManager().getPluginClassLoader().unloadPlugin(str);
             }
             return true;
         }
