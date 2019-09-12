@@ -179,7 +179,7 @@ import cn.jsmod2.core.event.Listener;
 public class TestListener implements Listener{
     //EventManager has a listener priority, see the note
     @EventManager
-    public void JoinEvent(PlayerJoinEvent e){
+    public void joinEvent(PlayerJoinEvent e){
         //Trigger corresponding event will run
     }
     
