@@ -35,6 +35,16 @@ with the law, @Copyright JSmod2 China,more can see <a href="http://jsmod2.cn">th
 
 README edited by YorokobiMaster And MagicLu
 
+> About Us
+
+This project is a purely public welfare project. Most of the project participants are high school programming enthusiasts, so avoid any omissions. If you have the willingness to participate in the project or provide valuable advice, there are three forms.
+1. Send to email: 843983728@qq.com Your opinion
+2. Release JDR (Jsmod2 Design Request) in the issues area
+3. Publish pr in the Pull Request area
+Thank you for your participation in the project. Most of the authors are unable to go online due to their coursework, so please wait a moment.
+
+And this project sincerely needs the developers of the website to provide strength and support for jsmod2.cn.
+
 > About JSmod2
 
 JSmod2 needs the following dependencies:
@@ -129,7 +139,10 @@ public class Main extends PluginBase{
     }
 }
 ```
+
 2. Create a Command:
+
+
 ```java
 package com.magiclu.plugin.command;
 
@@ -153,6 +166,8 @@ public class TestCommand extends Command{
 ```
 
 3. Create a Listener:
+
+
 ```java
 package com.magiclu.plugin.listener;
 
