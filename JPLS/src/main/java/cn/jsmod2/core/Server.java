@@ -360,7 +360,6 @@ public abstract class Server implements IServer {
 
         this.registerAll();
 
-
         this.opsFile = OpsFile.getOpsFile(this);
 
         this.gameServer = gServer;
@@ -392,7 +391,7 @@ public abstract class Server implements IServer {
         try {
             this.chooseLangOrStart();
 
-            ServerSocket socket = new ServerSocket(20003);
+            ServerSocket socket = new ServerSocket(Integer.parseInt(serverProp.getProperty(Register.JSMOD2_ACCEPT_PORT)));
 
             socket.accept();
 

@@ -217,6 +217,7 @@ public class Register extends RegisterTemplate {
     public static final String JSMOD2_JVM_ARGS = "jsmod2.option";
 
 
+    public static final String JSMOD2_ACCEPT_PORT = "accept.port";
 
 
     /**
@@ -240,6 +241,7 @@ public class Register extends RegisterTemplate {
         serverProperties.put(CONSOLE_LOG,"");
         serverProperties.put(CLIENT_PORT,"20020");
         serverProperties.put(JSMOD2_JVM_ARGS,"");
+        serverProperties.put(JSMOD2_ACCEPT_PORT,"20003");
     }
 
 
