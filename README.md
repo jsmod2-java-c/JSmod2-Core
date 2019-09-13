@@ -82,6 +82,23 @@ you can refer to [JSmod2-design](https://github.com/jsmod2-java-c/jsmod2-design)
 Welcome to our [discord](https://discord.gg/Qjzvb2a)
 
 > How to start?
+
+#### Installation
+* Download: [release](https://github.com/jsmod2-java-c/JSmod2-Core/releases)
+
+* We recommended you to set up in Windows Server 2008-2016 / Ubuntu Server 18.04.2 LTS
+
+* Python and pip are required
+
+If there's no problem, Enter the following text to the terminal:
+
+`cd /path/to/jsmod2 & python3 -m pip install requirement.txt`
+
+* And launch with:
+
+`cd /path/to/jsmod2 & python3 -m jsmod2manager.py`
+
+#### Manual installation
 * Download: [release](https://github.com/jsmod2-java-c/JSmod2-Core/releases)
 
 * We recommended you to set up in Windows Server 2008-2016 / Ubuntu Server 18.04.2 LTS
