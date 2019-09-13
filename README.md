@@ -83,7 +83,7 @@ Welcome to our [discord](https://discord.gg/Qjzvb2a)
 
 > How to start?
 
-#### Installation
+### Installation
 * Download: [release](https://github.com/jsmod2-java-c/JSmod2-Core/releases)
 
 * We recommended you to set up in Windows Server 2008-2016 / Ubuntu Server 18.04.2 LTS
@@ -94,11 +94,11 @@ If there's no problem, Enter the following text to the terminal:
 
 `cd /path/to/jsmod2 & python3 -m pip install requirement.txt`
 
-* And launch with:
+And launch with:
 
 `cd /path/to/jsmod2 & python3 -m jsmod2manager.py`
 
-#### Manual installation
+### Manual installation
 * Download: [release](https://github.com/jsmod2-java-c/JSmod2-Core/releases)
 
 * We recommended you to set up in Windows Server 2008-2016 / Ubuntu Server 18.04.2 LTS
