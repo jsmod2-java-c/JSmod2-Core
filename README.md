@@ -88,7 +88,7 @@ Welcome to our [discord](https://discord.gg/Qjzvb2a)
 
 * We recommended you to set up in Windows Server 2008-2016 / Ubuntu Server 18.04.2 LTS
 
-* Python and pip are required
+* Python and Pip are required
 
 If there's no problem, Enter the following text to the terminal:
 
