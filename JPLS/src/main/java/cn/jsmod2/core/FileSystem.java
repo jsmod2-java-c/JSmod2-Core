@@ -178,7 +178,7 @@ public class FileSystem {
     }
 
     private void createGithubInfo() throws IOException{
-        File file = new File(System.getProperty("cn.jsmod2.user.home"),".github");
+        File file = new File(System.getProperty("user.home"),".github");
         if(!file.exists()) {
             Properties githubProperties = new Properties();
             githubProperties.setProperty("oauth", "");
@@ -249,7 +249,7 @@ public class FileSystem {
                     }
                 }
 
-                properties.store(stream,"this is the cn.jsmod2.server's properties\n data.network.plugin.port is the jsmod2_dataNetwork plugin's port \n the this.port is java cn.jsmod2.server port \n it will support more ports");
+                properties.store(stream,"this is the server's properties\n data.network.plugin.port is the jsmod2_dataNetwork plugin's port \n the this.port is java server port \n it will support more ports");
                 stream.flush();
                 properties.load(new InputStreamReader(new FileInputStream(serverProp)));
                 return properties;

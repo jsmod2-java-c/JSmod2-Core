@@ -10,7 +10,6 @@ package cn.jsmod2.core.plugin;
 
 import cn.jsmod2.core.command.Command;
 import cn.jsmod2.core.event.Listener;
-import cn.jsmod2.core.ex.ServerRuntimeException;
 import cn.jsmod2.core.interapi.IServer;
 import cn.jsmod2.core.interapi.plugin.IPluginClassLoader;
 import cn.jsmod2.core.log.ILogger;
@@ -20,8 +19,7 @@ import cn.jsmod2.core.utils.config.ConfigQueryer;
 import cn.jsmod2.core.utils.config.ConfigType;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
+
 
 /**
  * all of the plugin main-classes must extend it
@@ -119,7 +117,7 @@ public abstract class PluginBase implements Plugin {
 
     public void initConfig(){
         Utils.TryCatch(()->{
-            Config config = ConfigQueryer.getInstance(this.dataFolder+"/cn.jsmod2.config.yml",false, ConfigType.YAML);
+            Config config = ConfigQueryer.getInstance(this.dataFolder+"/config.yml",false, ConfigType.YAML);
             config.save();
         });
     }
