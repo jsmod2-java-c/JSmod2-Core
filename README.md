@@ -1,27 +1,7 @@
-###### Note that we still don't know who the pic's author is. If you know or you are, please contact [@MagicLu550](https://github.com/MagicLu550).
-![BANNER](6DC1237F3087F7B13213246693E6B81E.jpg)
 # JSMod2    ![LICENSE](https://img.shields.io/badge/license-GPL-blue.svg)
-###### Smod2 Java Edition [based on Smod2] 
-###### JPLS: Java Plugin Loading System
-
-> 严正声明: Strict statement
-
-我们维护中华人民共和国主权，台湾，香港，澳门是中华人民共和国的一部分，
-反对港独暴动和台独分子，坚决打击分裂分子 禁止在issues区,discord区,pr区,发布反国家和平言论,
-禁止项目贡献过程中,commit信息带有分裂，煽动分裂的字样 如果发现，将以法律或者道德上驱逐
-
-We uphold the sovereignty of the People’s Republic of China. Taiwan, Hong Kong 
-and Macao are part of the People’s Republic of China. They oppose the riots of the 
-Hong Kong independence and the Taiwan independence elements. They are resolutely cracking 
-down on the separatists’ ban on issuing anti-state peace speeches and prohibiting projects in the issues,
- discord and pr districts. In the process of contribution, the commit information has a split, and the words 
- that incite splitting will be expelled legally or morally if found.
-
-私だちは中華人民共和国の主権を守る，台湾、香港、マカオは中華人民共和国の一部です.私たちは香港の単独暴動と台湾独立分子に反対します，だから、私達は断固として分子分裂を禁止します。ises区，discord区,pr区で反国家平和言論を発表します.プロジェクトの共有過程において、comitでの分裂発言を禁止する.以上の規則に違反すると、法律と道徳によって追放されます.
-
-우리는 중화 인민 공화국의 주권을지지합니다 대만, 홍콩, 마카오는 중화 인민 공화국의 일부이며 홍콩의 독립과 대만 독립 요소의 폭동에 반대하며, 분리 주의자들의 반 국가 평화 발언 금지, 반 국가 평화 발언 금지, 지구 문제에 대한 프로젝트 금지, 지구 문제에 대한 분쟁을 단호히 단속하고 있습니다. 기여 과정에서 커밋 정보는 분리되어 있으며 분리를 촉구하는 단어는 발견되면 합법적 또는 도덕적으로 추방됩니다.
 
 > Copyright: JSmod2 LICENSE 
+
 ```java
 /*
 JSmod2 is a java-based SCP: Secret Laboratory server initiated by jsmod2.cn.
@@ -33,9 +13,9 @@ with the law, @Copyright JSmod2 China,more can see <a href="http://jsmod2.cn">th
  */
 ```
 
-README edited by YorokobiMaster And MagicLu
 
-> About Us
+
+### About Us
 
 Hi mate! 
 
@@ -46,14 +26,13 @@ If you are willing to help this project, there are three ways that you can do:
 
 1. Send an email to: 843983728@qq.com (Advice, questions are welcomed)
 2. Create an issue!
+3. Join our Discord Server and......: [Hey, tap here! :P](https://discord.gg/Qjzvb2a)
 
 Thanks for your supporting!
 
-  -[@MagicLu550](https://github.com/MagicLu550).
-  
-  
 
-> "You're talking a lot! How to use it?"
+
+### How to use it?
 
 JSmod2 needs the dependencies below:
 
@@ -61,22 +40,22 @@ JSmod2 needs the dependencies below:
 
 * [Smod2](https://github.com/Grover-c13/Smod2)
 
-`JSmod2` is a java extension server 
-developed based on `Smod2` and [ProxyHandler](https://github.com/jsmod2-java-c/ProxyHandler)
+JSmod2 is a java extension server.
+It's based on Smod2 and [ProxyHandler](https://github.com/jsmod2-java-c/ProxyHandler)
 
-The role of JSmod2 is to extend the language of SCPSL
+The role of JSmod2 is to extend the language
 so that Java can also develop SCPSL plugins.
 
-Also, `JSmod2` is a Java server 
+Also, JSmod2 is a Java server 
 development framework, by the time it provides a lot of `APIs`,
-everyone can use `JSmod2` to develop plugins.
+everyone can use JSmod2 to develop plugins.
 
-`JSmod2` needs `Smod2`, and you need to install `ProxyHandler` 
-correctly(Grab it into \sm_plugins). In the future, `JSmod2` will support 
-connecting multiple `Smod2` servers to form a central cluster.
+JSmod2 needs Smod2, and you need to install ProxyHandler 
+correctly (Grab it into \sm_plugins). In the future, JSmod2 will support 
+connecting multiple Smod2 servers to form a central cluster.
 
 Welcome everyone to join us, 
-currently `JSmod2` is still in the development stage, 
+currently JSmod2 is still in the development stage, 
 Founder [@MagicLu550](https://github.com/MagicLu550) hopes everyone can contribute
 by sending issues ,Prs and suggestions.
 
