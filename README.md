@@ -35,6 +35,16 @@ with the law, @Copyright JSmod2 China,more can see <a href="http://jsmod2.cn">th
 
 README edited by YorokobiMaster And MagicLu
 
+> About Us
+
+This project is a purely public welfare project. Most of the project participants are high school programming enthusiasts, so avoid any omissions. If you have the willingness to participate in the project or provide valuable advice, there are three forms.
+1. Send to email: 843983728@qq.com Your opinion
+2. Release JDR (Jsmod2 Design Request) in the issues area
+3. Publish pr in the Pull Request area
+Thank you for your participation in the project. Most of the authors are unable to go online due to their coursework, so please wait a moment.
+
+And this project sincerely needs the developers of the website to provide strength and support for jsmod2.cn.
+
 > About JSmod2
 
 JSmod2 needs the following dependencies:
@@ -72,6 +82,23 @@ you can refer to [JSmod2-design](https://github.com/jsmod2-java-c/jsmod2-design)
 Welcome to our [discord](https://discord.gg/Qjzvb2a)
 
 > How to start?
+
+### Installation
+* Download: [release](https://github.com/jsmod2-java-c/JSmod2-Core/releases)
+
+* We recommended you to set up in Windows Server 2008-2016 / Ubuntu Server 18.04.2 LTS
+
+* Python and Pip are required
+
+If there's no problem, Enter the following text to the terminal:
+
+`cd /path/to/jsmod2 & python3 -m pip install requirement.txt`
+
+And launch with:
+
+`cd /path/to/jsmod2 & python3 -m jsmod2manager.py`
+
+### Manual installation
 * Download: [release](https://github.com/jsmod2-java-c/JSmod2-Core/releases)
 
 * We recommended you to set up in Windows Server 2008-2016 / Ubuntu Server 18.04.2 LTS
@@ -129,7 +156,10 @@ public class Main extends PluginBase{
     }
 }
 ```
+
 2. Create a Command:
+
+
 ```java
 package com.magiclu.plugin.command;
 
@@ -153,6 +183,8 @@ public class TestCommand extends Command{
 ```
 
 3. Create a Listener:
+
+
 ```java
 package com.magiclu.plugin.listener;
 
@@ -164,7 +196,7 @@ import cn.jsmod2.core.event.Listener;
 public class TestListener implements Listener{
     //EventManager has a listener priority, see the note
     @EventManager
-    public void JoinEvent(PlayerJoinEvent e){
+    public void joinEvent(PlayerJoinEvent e){
         //Trigger corresponding event will run
     }
     
