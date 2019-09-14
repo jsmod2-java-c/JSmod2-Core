@@ -1,4 +1,5 @@
-![avatar](github_info/jsmod2-banner.png)# JSMod2    
+# JSMod2    
+![avatar](github_info/jsmod2-banner.png)
 ![LICENSE](https://img.shields.io/badge/license-GPL-blue.svg)
 
 > Copyright: JSmod2 LICENSE 
