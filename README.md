@@ -1,4 +1,5 @@
-# JSMod2    ![LICENSE](https://img.shields.io/badge/license-GPL-blue.svg)
+![avatar](github_info/jsmod2-banner.png)# JSMod2    
+![LICENSE](https://img.shields.io/badge/license-GPL-blue.svg)
 
 > Copyright: JSmod2 LICENSE 
 
@@ -6,7 +7,7 @@
 /*
 JSmod2 is a java-based SCP: Secret Laboratory server initiated by jsmod2.cn.
 It needs to rely on Smod2 and the ProxyHandler. JSmod2 is an open source
-free plugin that is released under the GNU license. Please read
+free software that is released under the GNU license. Please read
 the GNU open source license before using the software. To understand
 the appropriateness, if infringement, will be handled in accordance
 with the law, @Copyright JSmod2 China,more can see <a href="http://jsmod2.cn">that<a>
@@ -15,16 +16,16 @@ with the law, @Copyright JSmod2 China,more can see <a href="http://jsmod2.cn">th
 
 
 
-### About Us
+## About Us
 
-Hi mate! 
+Hi there! 
 
 We are JSmod2 developing team. This project is pure, public....and in an sense, it's welfare. ;)
 Most of us are high school students, we don't have enough time to fix or find all of the bugs,
-please forget it and create an issue :P Feel free to indicate any omissions, thank you!
+please forget it and create an issue :P Feel free to point out any omissions, thank you!
 If you are willing to help this project, there are three ways that you can do:
 
-1. Send an email to: 843983728@qq.com (Advice, questions are welcomed)
+1. Send an email to: 843983728@qq.com (Advice, questions, anyway.)
 2. Create an issue!
 3. Join our Discord Server and......: [Hey, tap here! :P](https://discord.gg/Qjzvb2a)
 
@@ -32,70 +33,62 @@ Thanks for your supporting!
 
 
 
-### How to use it?
-
-JSmod2 needs the dependencies below:
-
-* [JSmod2 Protocol](https://github.com/jsmod2-java-c/Jsmod2_protocol.git)
-
-* [Smod2](https://github.com/Grover-c13/Smod2)
+## What is JSmod2?
 
 JSmod2 is a java extension server.
 It's based on Smod2 and [ProxyHandler](https://github.com/jsmod2-java-c/ProxyHandler)
 
-The role of JSmod2 is to extend the language
-so that Java can also develop SCPSL plugins.
+The aim of JSmod2 is to make Java developers develop in Java easily.
 
-Also, JSmod2 is a Java server 
-development framework, by the time it provides a lot of `APIs`,
-everyone can use JSmod2 to develop plugins.
+Also, it provides APIs that most of them are the same as Smod2.
 
-JSmod2 needs Smod2, and you need to install ProxyHandler 
-correctly (Grab it into \sm_plugins). In the future, JSmod2 will support 
-connecting multiple Smod2 servers to form a central cluster.
+JSmod2 needs Smod2, and you need to install ProxyHandler correctly 
+(Grab it into \sm_plugins). In the future, JSmod2 will support 
+connecting multiple Smod2 servers.
 
-Welcome everyone to join us, 
-currently JSmod2 is still in the development stage, 
-Founder [@MagicLu550](https://github.com/MagicLu550) hopes everyone can contribute
-by sending issues ,Prs and suggestions.
+## How's the project now?
+
+Currently JSmod2 is still developing,
+issues, prs, criticsim and suggestions are welcomed!
 
 If you want to participate in the development of JSmod2,
 you can refer to [JSmod2-design](https://github.com/jsmod2-java-c/jsmod2-design) for further information.
 
-![avatar](github_info/jsmod2-banner.png)
 
-> Discord
 
-Welcome to our [discord](https://discord.gg/Qjzvb2a)
+## How to get start it?
 
-> How to start?
+### Before you do it, please note that:
 
-### Installation
-* Download: [release](https://github.com/jsmod2-java-c/JSmod2-Core/releases)
-
-* We recommended you to set up in Windows Server 2008-2016 / Ubuntu Server 18.04.2 LTS
+* We recommend you to set up on Windows 2008 - the latest / Ubuntu Server 18.04.2 LTS
 
 * Python and Pip are required
 
-If there's no problem, Enter the following text to the terminal:
+
+
+> Automatically install JSmod2:
+
+* Download: [release](https://github.com/jsmod2-java-c/JSmod2-Core/releases)
+
+If there's no problem, then enter the following text in the terminal:
 
 `cd /path/to/jsmod2 & python3 -m pip install requirement.txt`
 
-And launch with:
+And launch:
 
 `cd /path/to/jsmod2 & python3 -m jsmod2manager.py`
 
-### Manual installation
+> Manually install JSmod2:
+
 * Download: [release](https://github.com/jsmod2-java-c/JSmod2-Core/releases)
 
-* We recommended you to set up in Windows Server 2008-2016 / Ubuntu Server 18.04.2 LTS
-
 * [Environment](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
+
 * [ProxyHandler](https://github.com/jsmod2-java-c/JSMod2-ProxyHandler)
 
 After finished installing JRE, you need to put ProxyHandler.dll into 
 (Where your server is)\sm_plugins, then start LocalAdmin.exe / MultiAdmin.exe.
-If there's no problem, launch JSmod2.jar:
+If there's no problem, then launch JSmod2.jar:
 `java -jar jsmod2.jar`
 
 > Import the DevelopmentKit
