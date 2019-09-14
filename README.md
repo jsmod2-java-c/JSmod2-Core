@@ -22,7 +22,7 @@ with the law, @Copyright JSmod2 China,more can see <a href="http://jsmod2.cn">th
 Hi there! 
 
 We are JSmod2 developing team. This project is pure, public....and in an sense, it's welfare. ;)
-Most of us are high school students, we don't have enough time to fix or find all of the bugs,
+Most of us are high school students, we don't have enough time to find and fix all of the bugs,
 please forget it and create an issue :P Feel free to point out any omissions, thank you!
 If you are willing to help this project, there are three ways that you can do:
 
