@@ -357,6 +357,16 @@ public class RPCHandler{
         return strings;
     }
 
+    /**
+     * 获得服务器每秒的处理速率
+     * @return
+     */
+    public double get_tps(){
+        if(Server.getRuntime()==null)return 0;
+        return Server.getRuntime().running().getTPS();
+    }
+
+
 //    private Sigar initSigar() {
 //        String os = System.getProperty("os.name");
 //        try {
