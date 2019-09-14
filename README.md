@@ -2,7 +2,7 @@
 ![BANNER](6DC1237F3087F7B13213246693E6B81E.jpg)
 # JSMod2    ![LICENSE](https://img.shields.io/badge/license-GPL-blue.svg)
 ###### Smod2 Java Edition [based on Smod2] 
-###### JPLS: Java plugin loading system
+###### JPLS: Java Plugin Loading System
 
 > 严正声明: Strict statement
 
@@ -37,17 +37,25 @@ README edited by YorokobiMaster And MagicLu
 
 > About Us
 
-This project is a purely public welfare project. Most of the project participants are high school programming enthusiasts, so avoid any omissions. If you have the willingness to participate in the project or provide valuable advice, there are three forms.
-1. Send to email: 843983728@qq.com Your opinion
-2. Release JDR (Jsmod2 Design Request) in the issues area
-3. Publish pr in the Pull Request area
-Thank you for your participation in the project. Most of the authors are unable to go online due to their coursework, so please wait a moment.
+Hi mate! 
 
-And this project sincerely needs the developers of the website to provide strength and support for jsmod2.cn.
+We are JSmod2 developing team. This project is pure, public....and in an sense, it's welfare. ;)
+Most of us are high school students, we don't have enough time to fix or find all of the bugs,
+please forget it and create an issue :P Feel free to indicate any omissions, thank you!
+If you are willing to help this project, there are three ways that you can do:
 
-> About JSmod2
+1. Send an email to: 843983728@qq.com (Advice, questions are welcomed)
+2. Create an issue!
 
-JSmod2 needs the following dependencies:
+Thanks for your supporting!
+
+  -[@MagicLu550](https://github.com/MagicLu550).
+  
+  
+
+> "You're talking a lot! How to use it?"
+
+JSmod2 needs the dependencies below:
 
 * [JSmod2 Protocol](https://github.com/jsmod2-java-c/Jsmod2_protocol.git)
 
