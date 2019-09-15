@@ -366,6 +366,25 @@ public class RPCHandler{
         return Server.getRuntime().running().getTPS();
     }
 
+    /**
+     * 获取输出和输入流量
+     * @return 输出和输入流量
+     */
+    public List<String> get_in_out(){
+        if(Server.getRuntime()==null)return new ArrayList<String>(){
+            {
+                add("0");
+                add("0");
+            }
+        };
+        return new ArrayList<String>(){
+            {
+             add(Server.getRuntime().running().getIn().get()+"");
+             add(Server.getRuntime().running().getOut().get()+"");
+            }
+        };
+    }
+
 
 //    private Sigar initSigar() {
 //        String os = System.getProperty("os.name");

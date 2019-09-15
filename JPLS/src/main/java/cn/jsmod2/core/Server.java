@@ -39,6 +39,7 @@ import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
@@ -333,6 +334,9 @@ public abstract class Server implements IServer {
 
     public volatile boolean isConnected;
 
+
+    private AtomicInteger out;
+
     public Server(GameServer gServer,boolean useUDP) {
 
         Server.runtimeServer = new RuntimeServer(this);
@@ -387,6 +391,8 @@ public abstract class Server implements IServer {
         this.isDebug = Boolean.parseBoolean(serverProp.getProperty(DEBUG));
 
         this.registerNativeEvents();
+
+        this.out = new AtomicInteger(0);
 
         try {
             this.chooseLangOrStart();
@@ -565,6 +571,7 @@ public abstract class Server implements IServer {
 
     public Future sendData(byte[] encode,String ip,int port,boolean result) {
         Future future = new Result();
+        out.addAndGet(1);
         try {
             if (useUDP) {
                 DatagramPacket pack = new DatagramPacket(encode, encode.length, InetAddress.getByName(ip), port);
@@ -610,7 +617,7 @@ public abstract class Server implements IServer {
     }
 
     public double getTPS(){
-        return (double)count/((double)(new Date().getTime()-startSuccessTime)/1000.0);
+        return (double)count.get()/((double)(new Date().getTime()-startSuccessTime)/1000.0);
     }
 
     public long getStartTime() {
@@ -733,6 +740,8 @@ public abstract class Server implements IServer {
         String[] alls = message.split(";");
         for(String all:alls) {
 
+            count.addAndGet(1);
+
             int id = Utils.getResponsePacketId(all);
 
             packetCommandManage(id, all);
@@ -748,7 +757,7 @@ public abstract class Server implements IServer {
                     manager.manageMethod(all, id,socket);
                 }
             }
-            count++;
+
         }
     }
     private void closeStream(){
@@ -871,7 +880,7 @@ public abstract class Server implements IServer {
         }
     }
 
-    private Integer count = 0;
+    private AtomicInteger count = new AtomicInteger(0);
     private class ListenerThread implements Runnable{
         @Override
         public void run() {
@@ -887,9 +896,7 @@ public abstract class Server implements IServer {
                     ((DatagramSocket)serverSocket).receive(request);
                     //manageMessage(request);
                     scheduler.executeRunnable(new PacketHandlerThread(request));
-                    lock.lock();
-                    count++;
-                    lock.unlock();
+                    count.addAndGet(1);
                     if(isDebug){
 
                         log.multiDebug(this.getClass(),"one/s:"+getTPS(),"","");
@@ -916,10 +923,11 @@ public abstract class Server implements IServer {
                     //getLogger().multiDebug(getClass(),"正在响应...","","");
                     Socket socket = ((ServerSocket)serverSocket).accept();
                     scheduler.executeRunnable(new SocketHandlerThread(socket));
+                    lock.lock();
+                    count.addAndGet(1);
+                    lock.unlock();
                     if (isDebug) {
-                        lock.lock();
-                        count++;
-                        lock.unlock();
+
                         log.multiDebug(getClass(),"one/s:" + getTPS(),"","");
                     }
                 }
@@ -1132,6 +1140,14 @@ public abstract class Server implements IServer {
             }
         }
         return null;
+    }
+
+    public AtomicInteger getIn() {
+        return count;
+    }
+
+    public AtomicInteger getOut() {
+        return out;
     }
 
     interface Max{
