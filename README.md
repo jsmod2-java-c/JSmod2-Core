@@ -63,15 +63,16 @@ you can refer to [JSmod2-design](https://github.com/jsmod2-java-c/jsmod2-design)
 
 * We recommend you to set up on Windows 2008 - the latest / Ubuntu Server 18.04.2 LTS
 
-* Python and Pip are required
+* If you want to install automatically, Python and Pip are required
 
 
 
-> Automatically install JSmod2:
+
+> Auto-install JSmod2:
 
 * Download: [release](https://github.com/jsmod2-java-c/JSmod2-Core/releases)
 
-If there's no problem, then enter the following text in the terminal:
+If there's no problem, please enter the following text in the terminal:
 
 `cd /path/to/jsmod2 & python3 -m pip install requirement.txt`
 
@@ -79,11 +80,14 @@ And launch:
 
 `cd /path/to/jsmod2 & python3 -m jsmod2manager.py`
 
-> Manually install JSmod2:
 
-* Download: [release](https://github.com/jsmod2-java-c/JSmod2-Core/releases)
 
-* [Environment](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
+
+> Manual install JSmod2:
+
+* Download: [The latest release](https://github.com/jsmod2-java-c/JSmod2-Core/releases)
+
+* [Java](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
 
 * [ProxyHandler](https://github.com/jsmod2-java-c/JSMod2-ProxyHandler)
 
@@ -91,6 +95,9 @@ After finished installing JRE, you need to put ProxyHandler.dll into
 (Where your server is)\sm_plugins, then start LocalAdmin.exe / MultiAdmin.exe.
 If there's no problem, then launch JSmod2.jar:
 `java -jar jsmod2.jar`
+
+
+
 
 > Import the DevelopmentKit
 
