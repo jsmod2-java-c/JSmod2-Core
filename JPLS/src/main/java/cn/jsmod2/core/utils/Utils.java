@@ -241,7 +241,8 @@ public class Utils {
             return;
         }
         ServerLogger.getLogger().error(t.toString());
-        for(StackTraceElement e : t.getStackTrace()){
+        StackTraceElement[] elements = t.getStackTrace();
+        for(StackTraceElement e : elements){
             ServerLogger.getLogger().error("\tat "+e);
         }
         ServerLogger.getLogger().error("\tFINISHED");

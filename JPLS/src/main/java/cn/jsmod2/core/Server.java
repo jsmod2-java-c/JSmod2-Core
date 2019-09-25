@@ -1087,10 +1087,14 @@ public abstract class Server implements IServer {
     private void executeEmerald(String[] args){
         server.serverLogInfo("this cn.jsmod2.server uses the Emerald "+ Server.getRuntime().running().serverProp.getProperty(EMERALD_COMPILER,"java")+" compiler v0.1 Engine By MagicLu550");
         if(args.length!=0){
-            for(String arg:args)
-                EmeraldScriptVM.getVM().parse(arg);
-            if(contains(args,"-emerald")){
-                System.exit(0);
+            try{
+                for(String arg:args)
+                    EmeraldScriptVM.getVM().importFile(arg);
+                if(contains(args,"-emerald")){
+                    System.exit(0);
+                }
+            }catch (Exception e){
+                Utils.printException(e);
             }
         }
     }
