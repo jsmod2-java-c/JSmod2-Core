@@ -123,6 +123,8 @@ Import Dependency
 
 > How to develop a plugin?
 
+you can study in [bilibili](https://www.bilibili.com/video/av66059130)
+
 1. New API can register the Listeners and Commands of JSmod2's；
 
 ```java
