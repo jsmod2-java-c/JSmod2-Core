@@ -72,6 +72,8 @@ public class ServerStarter {
         //有-rpc就不允许其他命令
 
         if(contains(args,"-rpc")){
+
+
             //"-w -u -lr -lm -github -n -a"
             try {
                 instance = this;
@@ -101,6 +103,7 @@ public class ServerStarter {
                 }
                 //
                 webServer.start();
+                if(args.length==3)new RPCHandler().start(args[2]);//直接启动
             }catch (IOException|XmlRpcException e){
                 Utils.printException(e);
             }
