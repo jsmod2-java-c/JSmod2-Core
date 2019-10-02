@@ -162,4 +162,8 @@ public class ServerStarter {
     public WebServer getWebServer() {
         return webServer;
     }
+
+    private ServerStarter(){
+        
+    }
 }

@@ -70,8 +70,7 @@ public class JavaMultiModStarterAdmin {
      *              -a 打开全部
      */
     public static void main(String[]args){
-        ServerStarter starter = new ServerStarter();
-        starter.start(args);
+        ServerStarter.getInstance().start(args);
     }
 
 
