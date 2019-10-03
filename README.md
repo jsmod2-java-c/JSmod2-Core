@@ -68,17 +68,17 @@ you can refer to [JSmod2-design](https://github.com/jsmod2-java-c/jsmod2-design)
 
 
 
-> Auto-install JSmod2:
+[del]> Auto-install JSmod2:
 
-* Download: [release](https://github.com/jsmod2-java-c/JSmod2-Core/releases)
+[del]* Download: [release](https://github.com/jsmod2-java-c/JSmod2-Core/releases)
 
-If there's no problem, please enter the following text in the terminal:
+[del]If there's no problem, please enter the following text in the terminal:
 
-`cd /path/to/jsmod2 & python3 -m pip install requirement.txt`
+[del]`cd /path/to/jsmod2 & python3 -m pip install requirement.txt`
 
-And launch:
+[del]And launch:
 
-`cd /path/to/jsmod2 & python3 -m jsmod2manager.py`
+[del]`cd /path/to/jsmod2 & python3 -m jsmod2manager.py`
 
 
 
