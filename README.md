@@ -2,6 +2,7 @@
 ![avatar](github_info/jsmod2-banner.png)
 ![LICENSE](https://img.shields.io/badge/license-GPL-blue.svg)
 
+[创客大赛项目]
 > Copyright: JSmod2 LICENSE 
 
 ```java
