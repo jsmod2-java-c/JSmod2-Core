@@ -2,7 +2,11 @@
 ![avatar](github_info/jsmod2-banner.png)
 ![LICENSE](https://img.shields.io/badge/license-GPL-blue.svg)
 
-[创客大赛项目]
+> JSmod2 Docs Writer Wanted!!!!
+
+```
+        We need a person who writes a document. If you are interested, you can contact us by email.
+```
 > Copyright: JSmod2 LICENSE 
 
 ```java
