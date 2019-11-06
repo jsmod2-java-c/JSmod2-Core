@@ -106,7 +106,7 @@ public interface IConfig extends Closeable,Cloneable, Serializable {
      * string type.
      *
      * @param key the node path
-     * @return the string array
+     * @return the object array
      * @throws IOException #{@link IOException}
      */
 
