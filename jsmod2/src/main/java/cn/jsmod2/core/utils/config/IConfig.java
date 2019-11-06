@@ -110,7 +110,7 @@ public interface IConfig extends Closeable,Cloneable, Serializable {
      * @throws IOException #{@link IOException}
      */
 
-    String[] getArray(String key) throws IOException;
+    Object[] getArray(String key) throws IOException;
 
     /**
      * You can convert the value of the node with the format

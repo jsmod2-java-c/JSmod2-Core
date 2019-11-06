@@ -96,12 +96,12 @@ public class YamlConfig extends Config {
     }
 
     @Override
-    public String[] getArray(String key) throws IOException {
+    public Object[] getArray(String key) throws IOException {
         Object obj = get(key);
 
         if(obj instanceof List){
             List object = ((List) obj);
-            return (String[])(object.toArray());
+            return object.toArray();
         }
         return new String[0];
     }
@@ -113,7 +113,7 @@ public class YamlConfig extends Config {
 
     @Override
     public String getArrayValue(String key, int index) throws IOException {
-        return getArray(key)[index];
+        return getArray(key)[index].toString();
     }
 
     @Override
